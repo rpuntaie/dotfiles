@@ -1,0 +1,8 @@
+- clean: ['~']
+
+- link:
+     ~/.tint3rc: 
+         path: config/tint3/tint3rc
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

@@ -1,0 +1,96 @@
+[[bar]]
+  fontcolor #ffffff
+  background #55000000
+  borderwidth 0
+  padding 5
+  margin 0
+  location top
+  options debug
+  left
+    desktops
+    spacera
+    active
+  center
+    date
+    spacerb
+    time
+  right 
+    ##gputext
+    ##gpustatus
+    ##spacera
+    loadavg
+    spacera
+    wlp3s0
+    ip
+    spacera
+    battery_usage
+    batteryone
+    batterytwo
+
+[gputext]
+  id text
+  source GPU
+
+[gpustatus]
+  id shell
+  source cat /proc/acpi/bbswitch
+
+[loadavg]
+  id shell
+  source  cat /proc/loadavg 
+
+[wlp3s0]
+  id text
+  source wlp3s0
+
+[ip]
+  id shell
+  source /sbin/ip -o -4 addr list wlp3s0 | awk '{print $4}' | cut -d/ -f1
+
+[active]
+  id active
+  source window_title
+
+[desktops]
+  id workspace
+  format %J %U
+  active:background_color #A0A0A0 
+# split time and date, looks better on a dual monitor system
+[time]
+  id clock
+  timeout 5
+  format %H:%M
+
+[date]
+  id clock
+  format %a %d
+
+[spacera]
+  id text
+  source //
+
+[spacerb]
+  id text
+  source -
+
+#dual battery system (x240)
+[batteryone]
+  id scale
+  source battery BAT1
+  high_font #00FF00
+  med_font #FF0000
+  low_font #222222
+  low_color #FF0000
+
+[batterytwo]
+  id scale
+  source battery BAT0
+  high_font #00FF00
+  med_font #FF0000
+  low_font #222222
+  low_color #FF0000
+
+[battery_usage]
+  id shell
+  source sh ~/.config/tint3/power.sh
+
