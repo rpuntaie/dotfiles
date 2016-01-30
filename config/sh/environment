@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
 # Environment set when logging into a shell.
 
-# ------------------------------------------------------------------------------
-# PATH {{{
+#--------#
+# {PATH} #
+#--------#
 
 # Adds directory to the PATH variable, with (hopefully) all necessary checks:
 add_to_path() {
@@ -28,9 +29,9 @@ add_to_path "$HOME/.gem/ruby/2.3.0/bin"
 unset -f add_to_path
 export PATH
 
-# }}}
-# ------------------------------------------------------------------------------
-# XDG {{{
+#-------#
+# {XDG} #
+#-------#
 
 # Set XDG variables:
 export XDG_CONFIG_HOME=~/.config
@@ -46,21 +47,18 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"           # pass
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"            # gimp
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0" # GTK+
 
-# }}}
-# ------------------------------------------------------------------------------
-# DEFAULT APPLICATIONS {{{
+#------------------------#
+# {Default Applications} #
+#------------------------#
 
 # Editor and pager:
 export EDITOR='/usr/bin/vim'
 #export VISUAL='/usr/bin/vim'
 export BROWSER="firefox"
 
-# }}}
-# ------------------------------------------------------------------------------
-# APPLICATION-SPECIFIC {{{
-# }}}
-# ------------------------------------------------------------------------------
-# LOOK {{{
+#--------#
+# {Look} #
+#--------#
 
 # Set colours for less, man:
 if [ "$TERM" = 'linux' ]; then
@@ -84,9 +82,9 @@ fi
 # Set colours for gcc:
 export GCC_COLORS='error=01;31:warning=33:note=36:caret=01;32:locus=37:quote=32'
 
-# }}}
-# ------------------------------------------------------------------------------
-# OPERATING SYSTEM {{{
+#--------------------#
+# {Operating System} #
+#--------------------#
 
 OS_RELEASE=''
 if [ -e /etc/lsb-release ]; then
@@ -100,16 +98,3 @@ elif [ -e /etc/gentoo-release ]; then
 	OS_RELEASE='gentoo'
 fi
 export OS_RELEASE
-
-# }}}
-# ------------------------------------------------------------------------------
-# RAINBOWDASH FUCK-AROUND {{{
-# GNU Generation server admin thinks it's funny to have a french locale.
-
-if [ "$(hostname)" = 'rainbowdash' ] && locale -a |grep 'en_GB\.utf8' >/dev/null
-then
-	export LANG=en_GB.utf8
-fi
-
-# }}}
-
