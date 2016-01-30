@@ -1,0 +1,64 @@
+#!/bin/sh
+# Xinit ressource file for starting dwm
+
+# First of all, make sure we are in the home directory, to avoid weird default
+# working directory paths when opening a shell under X:
+cd
+
+# SERVICES ---------------------------------------------------------------------
+
+# Load X resources:
+xrdb ~/.config/X11/Xresources
+
+# Set the wallpaper:
+nitrogen --restore
+
+# Load keybindings
+sxhkd &
+
+# Enable Japanese input:
+if [ -e /usr/bin/uim-xim ]; then
+	export GTK_IM_MODULE=uim
+	export QT_IM_MODULE=xim
+	uim-xim &
+	export XMODIFIERS='@im=anthy'
+fi
+
+# WM ---------------------------------------------------------------------------
+
+xsetroot -cursor_name left_ptr
+# Start the compositor
+compton &
+
+# Adapt the display's color to the time of the day
+xflux -l 46.5 -g 6.6
+
+# Launch WM
+exec bspwm -c /home/fnux/.config/bspwm/bspwmrc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
