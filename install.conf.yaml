@@ -1,8 +1,13 @@
 - clean: ['~']
 
 - link:
+     ~/.zshenv: zshenv
      ~/.tint3rc: config/tint3/tint3rc
      ~/.config/vim: config/vim
-
+     ~/.config/bspwm: config/bspwm
+     ~/.config/X11: config/X11
+     ~/.config/zsh: config/zsh
+     ~/.config/sxhkd: config/sxhkd
+     ~/.config/sh: config/sh
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

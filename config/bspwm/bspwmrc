@@ -1,0 +1,25 @@
+#! /bin/sh
+
+bspconf="/home/fnux/.config/bspwm/"
+
+# Kill the old tint3
+killall tint3
+
+# Load mode
+case "$1" in
+	"home" )
+		echo "bspwm : home"
+		command="home"
+		sh $bspconf$command 
+		;;
+	"gnu1" )
+		echo "bspwm : gnu1"
+		command="gnu1"
+		sh $bspconf$command
+		;;
+	* ) 
+		echo "bspwm : nomad"
+		command="nomad"
+		sh $bspconf$command
+		;;
+esac

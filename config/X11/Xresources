@@ -1,0 +1,93 @@
+! X resources file.
+! Written by ayekat a long time ago, updated on a sunny wednesday afternoon in
+! september 2014.
+
+! ------------------------------------------------------------------------------
+! COLOURS {{{
+
+! Colour palette:
+#define black        #222222
+#define red          #DD5544
+#define green        #00AA00
+#define yellow       #BDBD00
+#define blue         #2277BB
+#define magenta      #CC00CC
+#define cyan         #00C0C0
+#define white        #EEEEEE
+#define lightblack   #555555
+#define lightred     #FF5555
+#define lightgreen   #55FF55
+#define lightyellow  #FFFF55
+#define lightblue    #4499CC
+#define lightmagenta #FF55FF
+#define lightcyan    #55FFFF
+#define lightwhite   #FFFFFF
+
+! Black:
+*color0              : black
+*color8              : lightblack
+! Red:
+*color1              : red
+*color9              : lightred
+! Green:
+*color2              : green
+*color10             : lightgreen
+! Yellow:
+*color3              : yellow
+*color11             : lightyellow
+! Blue:
+*color4              : blue
+*color12             : lightblue
+! Magenta:
+*color5              : magenta
+*color13             : lightmagenta
+! Cyan:
+*color6              : cyan
+*color14             : lightcyan
+! White:
+*color7              : white
+*color15             : lightwhite
+
+! }}}
+
+!---!
+! {KaruiBbar} !
+!---!
+
+! #ifdef SRVR_ixh
+karuibar.modules : network, memory, cpu, \
+                   battery, battery_slice, alsa_out,  \
+                   time_date, time_time, capslock
+!#endif
+
+karuibar.foreground  : termfg
+karuibar.background  : black
+karuibar.wsep        : 1
+karuibar.wpad        : 7
+karuibar.bottom      : false
+karuibar.xgap        : 0
+
+karuibar.stdin.foreground     : #00D7FF
+karuibar.stdin.background     : #005F5F
+
+karuibar.mpd_gnu.host         : mpd.gnugen.ch
+
+karuibar.battery.acpi_use_real: true
+karuibar.battery_slice.id     : BAT1
+karuibar.battery_slice.acpi_use_real: true
+
+!karuibar.backlight.device     : intel_backlight
+karuibar.backlight.device     : acpi_video0
+
+
+karuibar.alsa_in.channel      : Capture
+karuibar.alsa_in.persistent   : false
+karuibar.alsa_in.capture      : true
+
+karuibar.time_date.format     : %Y-%m-%d
+karuibar.time_date.foreground : #EEEEEE
+karuibar.time_date.background : #555555
+karuibar.time_time.format     : %H:%M
+karuibar.time_time.foreground : #555555
+karuibar.time_time.background : #EEEEEE
+
