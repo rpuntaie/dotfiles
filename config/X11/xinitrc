@@ -3,7 +3,7 @@
 
 # First of all, make sure we are in the home directory, to avoid weird default
 # working directory paths when opening a shell under X:
-cd
+#cd
 
 # SERVICES ---------------------------------------------------------------------
 
@@ -15,6 +15,18 @@ nitrogen --restore
 
 # Load keybindings
 sxhkd &
+
+# Lanch GPG agent
+if which gpg-agent >/dev/null
+then
+	gpg-agent >/dev/null 2>&1
+	if [ ! "$?" = "0" ]
+	then
+		eval $(gpg-agent --daemon)
+	else
+		echo "GPG AGENT : already running.">&2
+	fi
+fi
 
 # Enable Japanese input:
 if [ -e /usr/bin/uim-xim ]; then
