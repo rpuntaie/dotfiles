@@ -44,9 +44,9 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-"------------------------"
-" {Common Configuration} "
-"------------------------"
+"--------"
+" {Misc} "
+"--------"
 
 cmap w!! w !sudo tee % >/dev/null 
 
@@ -55,7 +55,25 @@ set showcmd
 set backspace=2
 " set autoindent
 " set copyindent
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
 
+
+" Save the undo tree
+if v:version >= 703
+	if ! isdirectory($HOME . "/.vim/undo")
+		call mkdir($HOME . "/.vim/undo", "p")
+	endif
+	set undofile
+	" Save it in ~/.vim/undo/ if possible, otherwise same dir as edited file
+	set undodir=$HOME/.vim/undo,.
+endif
 
 "--------"
 " {Look} "
@@ -345,3 +363,4 @@ endif
 "-------"
 " {End} "
 "-------"
+

@@ -16,18 +16,6 @@ nitrogen --restore
 # Load keybindings
 sxhkd &
 
-# Lanch GPG agent
-if which gpg-agent >/dev/null
-then
-	gpg-agent >/dev/null 2>&1
-	if [ ! "$?" = "0" ]
-	then
-		eval $(gpg-agent --daemon)
-	else
-		echo "GPG AGENT : already running.">&2
-	fi
-fi
-
 # Enable Japanese input:
 if [ -e /usr/bin/uim-xim ]; then
 	export GTK_IM_MODULE=uim
@@ -47,30 +35,4 @@ xflux -l 46.5 -g 6.6
 
 # Launch WM
 exec bspwm -c /home/fnux/.config/bspwm/bspwmrc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
