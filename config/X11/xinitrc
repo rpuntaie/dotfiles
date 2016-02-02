@@ -13,6 +13,9 @@ xrdb ~/.config/X11/Xresources
 # Set the wallpaper:
 nitrogen --restore
 
+# Set SSH to use gpg-agent
+echo export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
+
 # Load keybindings
 sxhkd &
 
