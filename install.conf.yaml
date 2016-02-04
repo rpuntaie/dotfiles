@@ -9,6 +9,7 @@
      ~/.config/zsh: config/zsh
      ~/.config/sxhkd: config/sxhkd
      ~/.config/sh: config/sh
+     ~/.config/systemd: config/systemd
      ~/.local/bin: bin
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

@@ -1,0 +1,15 @@
+# place unit in /etc/systemd/system/gpg-agent@.service
+# start and enable with `systemctl start|enable gpg-agent@username`
+[Unit]
+Description=GnuPG private key agent for Fnux
+IgnoreOnIsolate=true
+
+[Service]
+User=%i
+Type=forking
+ExecStart=/usr/bin/gpg-agent --daemon --homedir /home/fnux/.config/gnupg
+ExecStop=/usr/bin/pkill gpg-agent
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
