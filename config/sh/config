@@ -9,6 +9,9 @@ cmd_exists()
 	done
 }
 
+# ssh agent
+
+eval $(keychain --eval --quiet)
 # ------------------------------------------------------------------------------
 # FUNCTIONS/ALIASES {{{
 

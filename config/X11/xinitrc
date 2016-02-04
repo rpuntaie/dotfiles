@@ -14,7 +14,7 @@ xrdb ~/.config/X11/Xresources
 nitrogen --restore
 
 # Set SSH to use gpg-agent
-echo export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
+#export SSH_AUTH_SOCK="${HOME}/.config/gnupg/S.gpg-agent.ssh"
 
 # Load keybindings
 sxhkd &

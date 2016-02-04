@@ -3,8 +3,9 @@
   background #55000000
   borderwidth 0
   padding 5
-  margin 0
+  #margin 0;
   location top
+  width 1920
   options debug
   left
     desktops

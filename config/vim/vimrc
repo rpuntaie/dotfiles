@@ -3,7 +3,7 @@
 " Written by Fnux. Inspired by ayekat's config.
 "
 "-----------------------"
-" {{NeoBundle Scripts}} "
+" {NeoBundle Scripts} "
 "-----------------------"
 
 if has('vim_starting')
@@ -68,6 +68,17 @@ map <right> <nop>
 "imap <left> <nop>
 "imap <right> <nop>
 
+" Remap HJKL
+
+vnoremap k h
+vnoremap l j
+vnoremap ö k
+vnoremap ä l
+ 
+nnoremap k h
+nnoremap l j
+nnoremap ö k
+nnoremap ä l
 
 " Save the undo tree
 if v:version >= 703
@@ -78,6 +89,11 @@ if v:version >= 703
 	" Save it in ~/.vim/undo/ if possible, otherwise same dir as edited file
 	set undodir=$HOME/.vim/undo,.
 endif
+
+" I wanna see tabs and trailing whitespaces:
+set list
+set listchars=tab:→\ ,eol:\ ,trail:·
+
 
 "--------"
 " {Look} "
