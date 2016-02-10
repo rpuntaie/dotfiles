@@ -1,0 +1,4 @@
+#! /bin/sh
+
+ps -ef > /tmp/stupid.txt
+exec /usr/bin/ssh-agent "$@"

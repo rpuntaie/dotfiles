@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 # Configuration for interactive shells.
 
-# Helper:
+###########
+# Helpers #
+###########
+
 cmd_exists()
 {
 	for c in $@; do
@@ -9,13 +12,10 @@ cmd_exists()
 	done
 }
 
-# ssh agent
+###########
+# Aliases #
+###########
 
-eval $(keychain --eval --quiet)
-# ------------------------------------------------------------------------------
-# FUNCTIONS/ALIASES {{{
-
-# Aliases:
 alias cp='cp -i'
 alias grep='grep --color=auto'
 alias info='info --vi-keys'
@@ -53,9 +53,9 @@ fi
 alias :e="$EDITOR"
 alias :q=exit
 
-# }}}
-# ------------------------------------------------------------------------------
-# PROMPT {{{
+##########
+# Prompt #
+##########
 
 # Prompt colours:
 pc_vcs_kernel=$(printf "\033[1;30m")
@@ -68,7 +68,3 @@ pc_host=$(printf "\033[35m")
 pc_pwd=$(printf "\033[34m")
 pc_prompt=$(printf "\033[1;31m")
 pc_jobs=$(printf "\033[47;30m")
-
-# }}}
-# ------------------------------------------------------------------------------
-

@@ -13,8 +13,13 @@ xrdb ~/.config/X11/Xresources
 # Set the wallpaper:
 nitrogen --restore
 
+# Start gpg-agent
+ gpg-connect-agent /bye >/dev/null 2>&1
 # Set SSH to use gpg-agent
-#export SSH_AUTH_SOCK="${HOME}/.config/gnupg/S.gpg-agent.ssh"
+export SSH_AUTH_SOCK="${HOME}/.config/gnupg/S.gpg-agent.ssh"
+# Set GPG TTY
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # Load keybindings
 sxhkd &
@@ -31,7 +36,7 @@ fi
 
 xsetroot -cursor_name left_ptr
 # Start the compositor
-compton &
+compton -D 0 --no-fading-openclose &
 
 # Adapt the display's color to the time of the day
 xflux -l 46.5 -g 6.6

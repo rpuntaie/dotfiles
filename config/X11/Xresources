@@ -48,46 +48,39 @@
 *color7              : white
 *color15             : lightwhite
 
-! }}}
+! Urxvt
 
-!---!
-! {KaruiBbar} !
-!---!
+URxvt.background: #1A1A1A
+URxvt.scrollBar: false
 
-! #ifdef SRVR_ixh
-karuibar.modules : network, memory, cpu, \
-                   battery, battery_slice, alsa_out,  \
-                   time_date, time_time, capslock
-!#endif
+! Font color
+URxvt*foreground: #808080
 
-karuibar.foreground  : termfg
-karuibar.background  : black
-karuibar.wsep        : 1
-karuibar.wpad        : 7
-karuibar.bottom      : false
-karuibar.xgap        : 0
+! Font
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=13
 
-karuibar.stdin.foreground     : #00D7FF
-karuibar.stdin.background     : #005F5F
+!  Other colors
+URxvt*color0: #1a1a1a
+URxvt*color1: #F35656
+URxvt*color2: #87af5f
+URxvt*color3: #ffaf5f
+URxvt*color4: #87afd7
+URxvt*color5: #8787af
+URxvt*color6: #5f8787
+URxvt*color7: #808080
+URxvt*color8: #404040
+URxvt*color9: #ea8484
+URxvt*color10: #c7f09f
+URxvt*color11: #ffcc9a
+URxvt*color12: #a5caef
+URxvt*color13: #a6a6de
+URxvt*color14: #69b2b2
+URxvt*color15: #d7d7d7
 
-karuibar.mpd_gnu.host         : mpd.gnugen.ch
-
-karuibar.battery.acpi_use_real: true
-karuibar.battery_slice.id     : BAT1
-karuibar.battery_slice.acpi_use_real: true
-
-!karuibar.backlight.device     : intel_backlight
-karuibar.backlight.device     : acpi_video0
-
-
-karuibar.alsa_in.channel      : Capture
-karuibar.alsa_in.persistent   : false
-karuibar.alsa_in.capture      : true
-
-karuibar.time_date.format     : %Y-%m-%d
-karuibar.time_date.foreground : #EEEEEE
-karuibar.time_date.background : #555555
-karuibar.time_time.format     : %H:%M
-karuibar.time_time.foreground : #555555
-karuibar.time_time.background : #EEEEEE
-
+! Xft settings ---------------------------------------------------------------
+!
+ Xft.dpi:        96
+ Xft.antialias:  true
+ Xft.rgba:       rgb
+ Xft.hinting:    true
+ Xft.hintstyle:  hintslight
