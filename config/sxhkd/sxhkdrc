@@ -99,7 +99,7 @@ super + m
 #
 
 super + Return
-    termite
+    urxvt
 
 super + a
     lock

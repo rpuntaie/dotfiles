@@ -11,5 +11,6 @@
      ~/.config/sh: config/sh
      ~/.config/systemd: config/systemd
      ~/.local/bin: bin
+     ~/.local/share/homepage: share/homepage
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

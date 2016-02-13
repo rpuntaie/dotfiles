@@ -77,10 +77,17 @@ URxvt*color13: #a6a6de
 URxvt*color14: #69b2b2
 URxvt*color15: #d7d7d7
 
+! Copy/Paste (kinda useful, hu) + clickable URLs
+URxvt.perl-ext-common: default,clipboard,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
 ! Xft settings ---------------------------------------------------------------
 !
- Xft.dpi:        96
- Xft.antialias:  true
- Xft.rgba:       rgb
- Xft.hinting:    true
- Xft.hintstyle:  hintslight
+  Xft.dpi:        92
+! Xft.antialias:  true
+! Xft.rgba:       rgb
+! Xft.hinting:    true
+! Xft.hintstyle:  hintslight

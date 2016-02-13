@@ -40,8 +40,8 @@ export PATH
 
 export VIMINIT="source ~/.config/vim/vimrc"        # vim
 export XINITRC="~/.config//X11/xinitrc"             # xinit (!startx)
-export XRESOURCES="~/.config/X11/Xresources"
-export XAUTHORITY="~/.config/X11/Xauthority"        # startx
+#export XRESOURCES="~/.config/X11/Xresources"
+#export XAUTHORITY="~/.config/X11/Xauthority"        # startx
 #export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"                 # gpg
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"           # pass
 #export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"            # gimp

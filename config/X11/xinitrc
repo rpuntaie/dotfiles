@@ -10,6 +10,9 @@
 # Load X resources:
 xrdb ~/.config/X11/Xresources
 
+# Set keymap
+
+setxkbmap ch
 # Set the wallpaper:
 nitrogen --restore
 
@@ -20,21 +23,23 @@ export SSH_AUTH_SOCK="${HOME}/.config/gnupg/S.gpg-agent.ssh"
 # Set GPG TTY
 GPG_TTY=$(tty)
 export GPG_TTY
-
+#
 # Load keybindings
 sxhkd &
 
 # Enable Japanese input:
-if [ -e /usr/bin/uim-xim ]; then
-	export GTK_IM_MODULE=uim
-	export QT_IM_MODULE=xim
-	uim-xim &
-	export XMODIFIERS='@im=anthy'
-fi
+#if [ -e /usr/bin/uim-xim ]; then
+#	export GTK_IM_MODULE=uim
+#	export QT_IM_MODULE=xim
+#	uim-xim &
+#	export XMODIFIERS='@im=anthy'
+#fi
 
 # WM ---------------------------------------------------------------------------
 
+# Cursor
 xsetroot -cursor_name left_ptr
+
 # Start the compositor
 compton -D 0 --no-fading-openclose &
 
@@ -43,4 +48,3 @@ xflux -l 46.5 -g 6.6
 
 # Launch WM
 exec bspwm -c /home/fnux/.config/bspwm/bspwmrc
-

@@ -1,0 +1,5 @@
+LIGHT="$(xbacklight -get)"
+xbacklight -set 0
+slock
+xbacklight -set $LIGHT
+
