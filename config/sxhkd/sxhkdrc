@@ -1,13 +1,18 @@
-#
-# bspwm hotkeys
-#
+#########
+# BSPWM #
+#########
+
+### BSPWM
 
 # Reload bspwm
 super + alt + Insert
     sh ~/.config/bspwm/bspwmrc
+
 # Quit  BSPWM
 super + alt + Escape
     bspc quit
+
+### Windows
 
 # Close the selected window
 super + c
@@ -17,130 +22,144 @@ super + c
 super + x
     bspc window -k
 
-# cool stuff
+# "False" fullscreen, respect padding/margin, etc. Kinda weird, but awesome
 super + t
     bspc desktop -l next
 
-# Adjust the split ratios of the tree of the selected desktop so that all windows occupy the same area.
+# Adjust the split ratios of the tree of the selected desktop so that all windows occupy the same area
 super + b
     bspc desktop -B
 
-# Set or toggle the given state for the selected window to floating
+# Set or toggle the given state for the selected window to floating.
 super + s
     bspc window -t floating
 
 # Set or toggle the given state for the selected window to fullscreen
 super + f
     bspc window -t fullscreen
+
 # Send the selected window to the biggest place
 super + m
     bspc window -s biggest
 
-# 
+# Kinda Useless
 super + {_,shift + }{h,j,k,l}
     bspc window -{f,s} {left,down,up,right}
-# 
+
+# Switch focus between the windows of the current desktop
 super + Tab
     bspc window -f {next,prev}
 
-#super + {comma,period}
-#    bspc desktop -C {backward,forward}
-
+# Weird
 super + bracket{left,right}
     bspc desktop -f {prev,next}
 
+# Select a part of the focused window in order to place a new window
 super + {Left,Down,Up,Right}
     bspc window -p {left,down,up,right}
 
+# Unset the command above
 super + ctrl + {_,shift + }space
     bspc {window -p cancel,desktop -c}
 
+# Resize a window using keyboard
 super + alt + {h,j,k,l}
     bspc window -e {left -10,down +10,up -10,right +10}
 
+# Resize a window using keyboard
 super + alt + shift + {h,j,k,l}
     bspc window -e {right -10,up +10,down -10,left +10}
 
+# No idea
 super + ctrl + {1-9}
     bspc window -r 0.{1-9}
-    
-# send the windows 
+
+# Send the focused window to the X° desktop
 super + {_,shift + }{1-9,0}
     bspc {desktop -f,window -d} ^{1-9,10}
 
-# Move the desktop
-#alt + {Left,Right} # ! issues 'cause weechat
-#    bspc desktop -f {prev,next}
+### Desktops/Monitors
+
+# Move between the desktops of a monitor
 super + {q,w}
     bspc desktop -f {prev,next}
 
-
-# *move*move*
-~button1
-    bspc pointer -g focus
-
-super + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
-
-super + !button{1-3}
-    bspc pointer -t %i %i
-
-super + @button{1-3}
-    bspc pointer -u
-
+# Invert the vertical alignment (Or something like that...)
 super + n
     bspc desktop -F vertical
 
+# Exchange the focused window with the largest window of the desktop (WTF --)
 super + m
-    bspc desktop -F horizontal
+    bspc desktop -F horizontal # (--> WTF)
 
-#
-# wm independent hotkeys 
-#
+#super + {q,w}
+#    bspc monitor -f {L,R}
 
+
+#super + {shift,alt} + {q,w}
+#    bspc {window,desktop} -m {L,R}
+
+### Pointer/Mouse
+
+# Set the focus with the mouse pointer
+~button1
+    bspc pointer -g focus
+
+# Resize a window using the mouse
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+# No idea
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+# No idea
+super + @button{1-3}
+    bspc pointer -u
+
+##########
+# Others #
+##########
+
+# Launch a terminal
 super + Return
     urxvt
 
+# Lock
 super + a
     lock
 
+# Rofi : Launcher
 super + d
      rofi -show run -font "snap 10" -fg "#eee8d5" -bg "#073642" -hlfg "#ffb964" -hlbg "#073642" -o 85 #-bordercolor "#fff"
-    
-     #rofi -show run -font "snap 10" -fg "#505050" -bg "#000000" -hlfg "#ffb964" -hlbg "#000000" -o 85
+
+# Rofi : Windows list/selector
 super + r
      rofi -show window -font "snap 10" -fg "#eee8d5" -bg "#073642" -hlfg "#ffb964" -hlbg "#073642" -o 85 
 
+# Rofi : pass
 super + e
      pass-menu
 
-# make sxhkd reload its configuration files:
-
+# Reload sxhkd
 super + Escape
     pkill -USR1 -x sxhkd
 
-# Media Keys (on F-stuff)
+# Media Key : Lower audio volume
 XF86AudioLowerVolume
     pactl set-sink-volume 1 -10%
-
+# Media Key : Raise audio volume
 XF86AudioRaiseVolume
     pactl set-sink-volume 1 +10%
 
+# Media Key : Mute card #1
 XF86AudioMute
     pactl set-sink-mute 1 toggle
 
+# Lower brightness
 XF86MonBrightnessDown
-    xbacklight -dec 10    
+    xbacklight -dec 10
 
+# Raise Brigtness
 XF86MonBrightnessUp
     xbacklight -inc 10
-
-# lock screen
-#super + l
-#    lock
-
-super + {q,w}
-    bspc monitor -f {L,R}
- 
-super + {shift,alt} + {q,w}
-    bspc {window,desktop} -m {L,R}

@@ -19,7 +19,7 @@ nitrogen --restore
 # Start gpg-agent
  gpg-connect-agent /bye >/dev/null 2>&1
 # Set SSH to use gpg-agent
-export SSH_AUTH_SOCK="${HOME}/.config/gnupg/S.gpg-agent.ssh"
+export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
 # Set GPG TTY
 GPG_TTY=$(tty)
 export GPG_TTY
