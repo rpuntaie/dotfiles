@@ -23,13 +23,15 @@ call neobundle#begin(expand('/home/fnux/.config/vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
-" NeoBundle 'Shougo/neosnippet.vim'
-" NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'ctrlpvim/ctrlp.vim'
 " NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'Shougo/unite.vim'
+
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
