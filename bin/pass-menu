@@ -2,7 +2,6 @@
 
 # Pass basic rofi integration
 # Maintained Timothée Floure <timothee.floure@fnux.ch>
-# Mostly based on rofi-pass by Rasmus Steinke
 
 # get all password files and create an array
 list_passwords() {
@@ -29,7 +28,7 @@ function _rofi () {
 }
 
 main () {
-   export root="$HOME/.local/share/pass"
+   export root="$HOME/.password-store"
    menu
 }
 main "$@"
