@@ -10,6 +10,7 @@
      ~/.config/sxhkd: config/sxhkd
      ~/.config/sh: config/sh
      ~/.config/systemd: config/systemd
+     ~/.config/ranger: config/ranger
      ~/.local/bin: bin
      ~/.local/share/homepage: share/homepage
 - shell:

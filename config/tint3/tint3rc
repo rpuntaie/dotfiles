@@ -9,8 +9,6 @@
   options debug
   left
     desktops
-    spacera
-    active
   center
     date
     spacerb
@@ -54,9 +52,10 @@
 
 [desktops]
   id workspace
-  format %J %U
-  active:background_color #A0A0A0 
-# split time and date, looks better on a dual monitor system
+  format %N
+  active:background #2002
+
+#split time and date, looks better on a dual monitor system
 [time]
   id clock
   timeout 5
