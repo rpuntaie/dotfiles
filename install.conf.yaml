@@ -11,6 +11,7 @@
      ~/.config/sh: config/sh
      ~/.config/systemd: config/systemd
      ~/.config/ranger: config/ranger
+     ~/.config/mpd: config/mpd
      ~/.local/bin: bin
      ~/.local/share/homepage: share/homepage
 - shell:
