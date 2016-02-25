@@ -1,0 +1,76 @@
+ 1456268059
+lftp -u seedbox ruri.fnux.ch
+ 1456268060
+ls
+ 1456268103
+exit
+ 1456268108
+lftp -u seedbox ruri.fnux.ch
+ 1456268111
+ls
+ 1456268122
+exit
+ 1456268136
+lftp -u seedbox ruri.fnux.ch
+ 1456268137
+ls
+ 1456268141
+cd complete/
+ 1456268141
+ls
+ 1456268151
+cd The.100.S03E05.720p.HDTV.x264-AVS[ettv]/
+ 1456268152
+ls
+ 1456268154
+help
+ 1456268161
+ls
+ 1456268171
+help get
+ 1456268183
+get The.100.S03E05.720p.HDTV.x264-AVS[ettv].mkv 
+ 1456320535
+lftp -u seedbox ruri.fnux.ch
+ 1456320536
+ls
+ 1456320540
+cd complete/
+ 1456320540
+ls
+ 1456320546
+get [HorribleSubs]\ Subete\ ga\ F\ ni\ Naru\ (01-11)\ [1080p]\ (Batch)/
+ 1456320591
+mget \[HorribleSubs\]\ Subete\ ga\ F\ ni\ Naru\ (01-11)\ \[1080p\]\ (Batch)/
+ 1456320674
+ls
+ 1456320676
+cd ..
+ 1456320676
+ls
+ 1456320688
+miror complete ~/Videos
+ 1456320691
+mirror complete/[ ~/Videos
+ 1456320745
+ls
+ 1456320747
+cd complete
+ 1456320796
+ls
+ 1456320814
+mirror  [HorribleSuexit 
+ 1456320817
+exit
+ 1456320821
+lftp -u seedbox ruri.fnux.ch
+ 1456320822
+ls
+ 1456320824
+cd complete/
+ 1456320824
+ls
+ 1456320878
+mirror [HorribleSubs]\ Subete\ ga\ F\ ni\ Naru\ (01-11)\ [1080p]\ (Batch)/ ~/Videos/SubeteGaFNiNaru_1080p_hs
+ 1456322677
+exit

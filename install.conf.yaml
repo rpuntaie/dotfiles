@@ -12,6 +12,7 @@
      ~/.config/systemd: config/systemd
      ~/.config/ranger: config/ranger
      ~/.config/mpd: config/mpd
+     ~/.config/lftp: config/lftp
      ~/.local/bin: bin
      ~/.local/share/homepage: share/homepage
 - shell:
