@@ -11,8 +11,9 @@
 xrdb ~/.config/X11/Xresources
 
 # Set keymap
-
 setxkbmap ch
+setxkbmap -model pc104 -layout ch -option caps:swapescape
+
 # Set the wallpaper:
 nitrogen --restore
 

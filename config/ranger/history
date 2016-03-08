@@ -7,3 +7,6 @@ shell cp -r .config/pass pass
 mkdir P2P
 open_with bomi
 open_with eom
+delete
+mkdir 1
+shell gnupqq
