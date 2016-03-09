@@ -5,7 +5,7 @@ TERM=xterm
 alias mpd='mpd ~/.config/mpd/mpd.conf'
 alias fuck='sudo $(history -p \!\!)' 
 alias clock='tty-clock -s -c -C 3'
-alias steam='STEAM_RUNTIME=0 steam'
+#alias steam='STEAM_RUNTIME=0 steam'
 alias yay='yaourt'
 
 # Path to your oh-my-zsh installation.
