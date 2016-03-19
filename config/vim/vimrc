@@ -72,15 +72,15 @@ map <right> <nop>
 
 " Remap HJKL
 
-vnoremap k h
-vnoremap l j
-vnoremap ö k
-vnoremap ä l
- 
-nnoremap k h
-nnoremap l j
-nnoremap ö k
-nnoremap ä l
+"vnoremap k h
+"vnoremap l j
+"vnoremap ö k
+"vnoremap ä l
+
+"nnoremap k h
+"nnoremap l j
+"nnoremap ö k
+"nnoremap ä l
 
 let mapleader=","
 
