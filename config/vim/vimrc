@@ -99,9 +99,8 @@ set list
 set listchars=tab:→\ ,eol:\ ,trail:·
 
 " Eclim
-" source ~/.config/vim/plugin/eclim.vim
 
-map <C-c> :JavaCorrect<cr>
+" map <C-c> :JavaCorrect<cr>
 " nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
 " nnoremap <silent> <buffer> <leader>p :JavaDocSearch -x declarations<cr>
 " nnoremap <silent> <buffer> <leader>o :JavaSearchContext<cr>
