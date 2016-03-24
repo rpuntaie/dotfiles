@@ -1,3 +1,5 @@
+#! /bin/bash
+
 LIGHT="$(xbacklight -get)"
 xbacklight -set 0
 slock
