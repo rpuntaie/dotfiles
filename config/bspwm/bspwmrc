@@ -18,8 +18,7 @@ xrandr --output eDP1 --mode 1600x900 --pos 680x1200
 bspc monitor eDP1 -d 1 2 3 4 5
 
 # Specific configuration
-command = $1
-sh $bspconf$command
+sh $bspconf$1
 
 # Background
 nitrogen --restore
