@@ -1,31 +1,14 @@
 #! /bin/sh
 
-#Configure screens
+# Screens
 xrandr --output DP2 --mode 1920x1200 --pos 0x0
 xrandr --output DP1 --mode 2560x1080 --pos 1920x120
 xrandr --output eDP1 --mode 1600x900 --pos 680x1200
 
-# Configure BSPCWM
-bspc config border_width        2
-bspc config window_gap         8
-
-bspc config -m DP2 top_padding		23
-bspc config -m eDP1 top_padding 0
-bspc config -m DP1 top_padding 0
-
-bspc config split_ratio         0.52
-bspc config borderless_monocle  true
-bspc config gapless_monocle     true
-bspc config focus_by_distance   true
-bspc config focus_follows_pointer	true
-bspc config focused_border_color    "#a6a28c"
-bspc config active_border_color     "#7d7a68"
-bspc config normal_border_color     "#6e6b5e"
-
-bspc monitor eDP1 -d 1 2 3 4 5
+# Workspaces
 bspc monitor DP1 -d 1 2 3 4 5
 bspc monitor DP2 -d 1 2 3 4 5
 
-# Background
-nitrogen --restore
-tint3 -c $HOME/.config/tint3/tint3rc_home
+# top bar
+bspc config -m DP2 top_padding 23
+tint3 -c $HOME/.config/tint3/tint3rc_home &
