@@ -2,6 +2,9 @@
 
 bspconf="/home/fnux/.config/bspwm/"
 
+# kill any previous tint3
+killall tint3
+
 # Basic Configuration
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
