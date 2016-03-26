@@ -1,9 +1,4 @@
 #!/bin/sh
-# Xinit ressource file for starting dwm
-
-# First of all, make sure we are in the home directory, to avoid weird default
-# working directory paths when opening a shell under X:
-#cd
 
 # SERVICES ---------------------------------------------------------------------
 
