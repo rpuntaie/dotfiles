@@ -5,7 +5,7 @@
   padding 5
   #margin 0;
   location top
-#  width 1920
+  width 1920
   options debug
   left
     desktops
@@ -53,7 +53,7 @@
 [desktops]
   id workspace
   format %N
-  active:background #2002
+  active:background #28545c
 
 #split time and date, looks better on a dual monitor system
 [time]
