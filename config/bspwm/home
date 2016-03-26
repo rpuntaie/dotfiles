@@ -12,4 +12,4 @@ bspc monitor DP2 -d 1 2 3 4 5
 # top bar
 bspc config -m eDP1 top_padding 0
 bspc config -m DP2 top_padding 23
-tint3 -c $HOME/.config/tint3/tint3rc_home
+tint3 -c $HOME/.config/tint3/tint3rc
