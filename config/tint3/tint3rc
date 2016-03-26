@@ -14,24 +14,14 @@
     spacerb
     time
   right
-    ##gputext
-    ##gpustatus
-    ##spacera
     loadavg
     spacera
     ip
     spacera
+    gpu
     battery_usage
     batteryone
     batterytwo
-
-[gputext]
-  id text
-  source GPU
-
-[gpustatus]
-  id shell
-  source cat /proc/acpi/bbswitch
 
 [loadavg]
   id shell
@@ -71,6 +61,9 @@
 #########
 # Power #
 #########
+[gpu]
+  id shell
+  source ~/.config/tint3/scripts/gpu.rb
 
 [battery_usage]
   id shell
