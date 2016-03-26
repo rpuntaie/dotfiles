@@ -19,7 +19,6 @@
     ##spacera
     loadavg
     spacera
-    wlp3s0
     ip
     spacera
     battery_usage
@@ -38,13 +37,9 @@
   id shell
   source  cat /proc/loadavg 
 
-[wlp3s0]
-  id text
-  source wlp3s0
-
 [ip]
   id shell
-  source /sbin/ip -o -4 addr list wlp3s0 | awk '{print $4}' | cut -d/ -f1
+  source ~/.config/tint3/scripts/network.rb
 
 [active]
   id active
@@ -73,7 +68,14 @@
   id text
   source -
 
-#dual battery system (x240)
+#########
+# Power #
+#########
+
+[battery_usage]
+  id shell
+  source ~/.config/tint3/scripts/power.sh
+
 [batteryone]
   id scale
   source battery BAT1
@@ -89,7 +91,3 @@
   med_font #FF0000
   low_font #222222
   low_color #FF0000
-
-[battery_usage]
-  id shell
-  source power_now
