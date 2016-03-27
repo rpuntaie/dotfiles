@@ -211,6 +211,10 @@ super + r
 super + e
      pass-menu
 
+# Scratchpad
+super + section
+    tdrop -a -w 1362 -y 14 -s dropdown urxvt
+
 ###########
 # F-stuff #
 ###########
