@@ -6,7 +6,7 @@ xrandr --output DP1 --off
 xrandr --output DP2 --off 
 
 # Workspaces
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10 
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 # top bar
 bspc config -m eDP1 top_padding          23

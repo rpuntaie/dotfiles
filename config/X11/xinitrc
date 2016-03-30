@@ -24,12 +24,12 @@ export GPG_TTY
 sxhkd &
 
 # Enable Japanese input:
-#if [ -e /usr/bin/uim-xim ]; then
-#	export GTK_IM_MODULE=uim
-#	export QT_IM_MODULE=xim
-#	uim-xim &
-#	export XMODIFIERS='@im=anthy'
-#fi
+if [ -e /usr/bin/uim-xim ]; then
+	export GTK_IM_MODULE=uim
+	export QT_IM_MODULE=xim
+	uim-xim &
+	export XMODIFIERS='@im=anthy'
+fi
 
 # WM ---------------------------------------------------------------------------
 
