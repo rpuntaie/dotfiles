@@ -5,8 +5,8 @@
   padding 5
   #margin 0;
 #  manual-margin-left 320;
+  width 1600
   location top
-#  width 1280
   options debug
   left
     desktops
