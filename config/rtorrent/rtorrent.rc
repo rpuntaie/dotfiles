@@ -23,7 +23,7 @@ directory = ~/P2P
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
-session = /tmp/rtorrent
+session = ~/.local/share/rtorrent
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
@@ -76,7 +76,7 @@ encryption = allow_incoming,try_outgoing,enable_retry
 # "auto" (start and stop DHT as needed), or "on" (start DHT immediately).
 # The default is "off". For DHT to work, a session directory must be defined.
 #
-dht = yes
+dht = on
 
 # UDP port to use for DHT. 
 #
