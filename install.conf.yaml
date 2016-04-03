@@ -3,6 +3,7 @@
 - link:
      ~/.zshenv: zshenv
      ~/.tint3rc: config/tint3/tint3rc
+     ~/.rtorrent.rc: config/rtorrent/rtorrent.rc
      ~/.config/tint3: config/tint3
      ~/.config/vim: config/vim
      ~/.config/bspwm: config/bspwm
