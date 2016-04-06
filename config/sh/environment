@@ -29,6 +29,10 @@ add_to_path "$HOME/.gem/ruby/2.3.0/bin/"
 unset -f add_to_path
 export PATH
 
+
+# Perl
+export PERL_CPANM_OPT="--prompt --reinstall -l ~/.local/lib/perl5 --mirror http://cpan.cpantesters.org"
+
 #-------#
 # {XDG} #
 #-------#
