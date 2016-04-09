@@ -15,6 +15,7 @@
      ~/.config/ranger: config/ranger
      ~/.config/mpd: config/mpd
      ~/.config/lftp: config/lfp
+     ~/.config/dunst: config/dunst
      ~/.config/compton: config/compton
      ~/.local/bin: bin
      ~/.local/share/homepage: share/homepage
