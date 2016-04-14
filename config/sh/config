@@ -27,6 +27,7 @@ alias mv='mv -i'
 alias ls='ls --color=auto'
 alias vim='vim -u ~/.config/vim/vimrc'
 alias scrot='scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png'
+alias wttr='curl wttr.in'
 
 # Application specific aliases:
 cmd_exists ncmpcpp && alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
