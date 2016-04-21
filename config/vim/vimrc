@@ -52,6 +52,10 @@ NeoBundleCheck
 
 cmap w!! w !sudo tee % >/dev/null 
 
+" SWP files path
+set backupdir=/tmp
+set directory=/tmp
+
 set mouse=a
 set showcmd  
 set backspace=2
@@ -69,18 +73,6 @@ map <right> <nop>
 "imap <down> <nop>
 "imap <left> <nop>
 "imap <right> <nop>
-
-" Remap HJKL
-
-"vnoremap k h
-"vnoremap l j
-"vnoremap ö k
-"vnoremap ä l
-
-"nnoremap k h
-"nnoremap l j
-"nnoremap ö k
-"nnoremap ä l
 
 let mapleader=","
 
