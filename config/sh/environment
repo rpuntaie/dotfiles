@@ -29,6 +29,11 @@ add_to_path "$HOME/.gem/ruby/2.3.0/bin/"
 unset -f add_to_path
 export PATH
 
+#-----#
+# ENV #
+#-----#
+
+TERM=xterm
 
 # Perl
 export PERL_CPANM_OPT="--prompt --reinstall -l ~/.local/lib/perl5 --mirror http://cpan.cpantesters.org"
@@ -83,20 +88,3 @@ else
 	export LESS_TERMCAP_ue=$(printf "\033[0m")
 	export LESS_TERMCAP_us=$(printf "\033[38;5;10m")
 fi
-
-#--------------------#
-# {Operating System} #
-#--------------------#
-
-#OS_RELEASE=''
-#if [ -e /etc/lsb-release ]; then
-#	OS_RELEASE="$(grep -e '^DISTRIB_ID=' /etc/lsb-release | cut -d '=' -f 2 | \
-#	              tr 'A-Z' 'a-z')"
-#elif [ -e /etc/os-release ]; then
-#	OS_RELEASE="$(grep -e '^ID=' /etc/os-release | cut -d '=' -f 2)"
-#elif [ "$(uname)" = 'Darwin' ]; then
-#	OS_RELEASE='darwin'
-#elif [ -e /etc/gentoo-release ]; then
-#	OS_RELEASE='gentoo'
-#fi
-#export OS_RELEASE

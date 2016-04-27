@@ -29,6 +29,10 @@ alias vim='vim -u ~/.config/vim/vimrc'
 alias scrot='scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png'
 alias wttr='curl wttr.in'
 alias moon='curl wttr.in/Moon'
+alias mpd='mpd ~/.config/mpd/mpd.conf'
+alias fuck='sudo $(history -p \!\!)' 
+alias clock='tty-clock -s -c -C 3'
+alias yay='yaourt'
 
 # Application specific aliases:
 cmd_exists ncmpcpp && alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
