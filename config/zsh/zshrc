@@ -1,0 +1,47 @@
+# Load environment
+. ~/.config/sh/config
+
+# Cache
+ZSH_CACHE_DIR="$ZSH/cache/"
+ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+
+# Various
+
+SHORT_HOST=${HOST/.*/}
+
+# vcs_info to get info about vcs
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git cvs svn
+zstyle ':vcs_info:*' formats " [%b]%u%c"
+zstyle ':vcs_info:*' actionformats "[%b|%a]%u%c "
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' get-revision true
+
+# Edit current command in editor
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Theme
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[white]%}["
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}●%{$fg[white]%}]%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_CLEAN="]%{$reset_color%} "
+ZSH_THEME_SVN_PROMPT_PREFIX=$ZSH_THEME_GIT_PROMPT_PREFIX
+ZSH_THEME_SVN_PROMPT_SUFFIX=$ZSH_THEME_GIT_PROMPT_SUFFIX
+ZSH_THEME_SVN_PROMPT_DIRTY=$ZSH_THEME_GIT_PROMPT_DIRTY
+ZSH_THEME_SVN_PROMPT_CLEAN=$ZSH_THEME_GIT_PROMPT_CLEAN
+ZSH_THEME_HG_PROMPT_PREFIX=$ZSH_THEME_GIT_PROMPT_PREFIX
+ZSH_THEME_HG_PROMPT_SUFFIX=$ZSH_THEME_GIT_PROMPT_SUFFIX
+ZSH_THEME_HG_PROMPT_DIRTY=$ZSH_THEME_GIT_PROMPT_DIRTY
+ZSH_THEME_HG_PROMPT_CLEAN=$ZSH_THEME_GIT_PROMPT_CLEAN
+
+#PROMPT="%2~ ${vcs_info_msg_0_}»%b "
+
+# Path to your oh-my-zsh installation.
+export ZSH=/home/fnux/.oh-my-zsh
+
+ZSH_THEME="minimal"
+
+source $ZSH/oh-my-zsh.sh
