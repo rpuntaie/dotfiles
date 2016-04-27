@@ -5,8 +5,7 @@
 # Load X resources:
 xrdb ~/.config/X11/Xresources
 
-# Set keymap
-setxkbmap -layout ch
+# swap escape and caps lock
 setxkbmap -model pc104 -layout ch -option caps:swapescape
 
 # Set the wallpaper:
