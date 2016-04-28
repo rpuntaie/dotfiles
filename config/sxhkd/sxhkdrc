@@ -167,9 +167,13 @@ super + {q,w}
 super + n
     bspc desktop -F vertical
 
-# Exchange the focused window with the largest window of the desktop (WTF --)
-super + m
-    bspc desktop -F horizontal # (--> WTF)
+# Rotate the desktop of 90°
+super + v
+    bspc node @focused:/ -R 90
+
+# Rotate the desktop of 180°
+super + shift + v
+    bspc node @focused:/ -R 180
 
 #super + {q,w}
 #    bspc monitor -f {L,R}
