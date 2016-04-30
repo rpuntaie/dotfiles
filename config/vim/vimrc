@@ -76,6 +76,8 @@ map <right> <nop>
 
 let mapleader=","
 
+set foldmethod=indent
+
 " Save the undo tree
 if v:version >= 703
 	if ! isdirectory($HOME . "/.vim/undo")

@@ -15,6 +15,7 @@
      ~/.config/ranger: config/ranger
      ~/.config/mpd: config/mpd
      ~/.config/lftp: config/lfp
+     ~/.vimperatorrc: config/vimperator/vimperatorrc
      ~/.config/dunst: config/dunst
      ~/.config/compton: config/compton
      ~/.local/bin: bin
