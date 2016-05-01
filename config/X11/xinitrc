@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Disable beep stuff
+xset -b
+
 # SERVICES ---------------------------------------------------------------------
 
 # Load X resources:
@@ -30,6 +33,9 @@ sxhkd &
 #	uim-xim &
 #	export XMODIFIERS='@im=anthy'
 #fi
+
+# Dunst notification daemon
+dunst &
 
 # WM ---------------------------------------------------------------------------
 
