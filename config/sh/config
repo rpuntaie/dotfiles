@@ -33,7 +33,8 @@ alias mpd='mpd ~/.config/mpd/mpd.conf'
 alias fuck='sudo $(history -p \!\!)' 
 alias clock='tty-clock -s -c -C 3'
 alias yay='yaourt'
-alias steam="LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam"
+#alias steam="LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam"
+alias mutt="mutt -F ~/.config/mutt/muttrc"
 
 # Application specific aliases:
 cmd_exists ncmpcpp && alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
