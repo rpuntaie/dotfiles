@@ -30,8 +30,6 @@ super + x
 super + bracket{left,right}
     bspc desktop -f {prev,next}
 
-
-
 ########################
 # States/Flags/Layouts #
 ########################
@@ -117,7 +115,6 @@ super + ctrl + space
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
 
 #################################
 # resize tiled/floating + move  #

@@ -1,3 +1,4 @@
-tagged
-history
-bookmarks
+# Ignore everyone
+*
+# Except the config file
+!rc.conf

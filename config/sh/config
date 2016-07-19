@@ -7,9 +7,9 @@
 
 cmd_exists()
 {
-	for c in $@; do
-		which $c >/dev/null 2>&1 || return -1
-	done
+    for c in $@; do
+        which $c >/dev/null 2>&1 || return -1
+    done
 }
 
 ###########
@@ -36,27 +36,25 @@ alias yay='yaourt'
 #alias steam="LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam"
 alias steam='STEAM_RUNTIME=0 steam'
 alias mutt="mutt -F ~/.config/mutt/muttrc"
-
-# Application specific aliases:
-cmd_exists ncmpcpp && alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
+alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
 cmd_exists startx && alias startx="startx $XINITRC"
 
 # Pass user environment when launching vim with sudo:
 if cmd_exists sudo; then
-	sudo()
-	{
-		if { [ "$1" = 'vim' ] || [ "$1" = 'vimdiff' ] || [ "$1" = 'visudo' ]; }\
-		&& cmd_exists "$1"; then
-			command sudo -E "$@"
-		else
-			command sudo "$@"
-		fi
-	}
+    sudo()
+    {
+        if { [ "$1" = 'vim' ] || [ "$1" = 'vimdiff' ] || [ "$1" = 'visudo' ]; }\
+        && cmd_exists "$1"; then
+            command sudo -E "$@"
+        else
+            command sudo "$@"
+        fi
+    }
 fi
 
 # Server only aliases (mostly additional security):
 if [ -n "$SSH_CONNECTION" ]; then
-	alias rm='rm -i'
+    alias rm='rm -i'
 fi
 
 # In zsh vim mode, I sometimes forget I'm not in vim:
@@ -67,7 +65,7 @@ alias :q=exit
 # Prompt #
 ##########
 
-# Prompt colours:
+# Prompt colors:
 pc_vcs_kernel=$(printf "\033[1;30m")
 pc_vcs_clean=$(printf "\033[32m")
 pc_vcs_ahead=$(printf "\033[36m")

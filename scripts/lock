@@ -1,7 +1,15 @@
 #! /bin/bash
+# This is a simple script used to lock my laptop.
 
+# Get and save the current backlight.
 LIGHT="$(xbacklight -get)"
+
+# Disable backlight (~ switch off the display)
 xbacklight -set 0
+
+# Lock the system
 slock
+
+# Restore the previous backlight (once the system is unlocked)
 xbacklight -set $LIGHT
 

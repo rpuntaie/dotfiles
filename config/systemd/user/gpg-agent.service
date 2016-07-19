@@ -1,7 +1,7 @@
 # place unit in /etc/systemd/system/gpg-agent@.service
 # start and enable with `systemctl start|enable gpg-agent@username`
 [Unit]
-Description=GnuPG private key agent for Fnux
+Description=GnuPG private key agent [fnux]
 IgnoreOnIsolate=true
 
 [Service]

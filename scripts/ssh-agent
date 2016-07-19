@@ -1,4 +1,4 @@
 #! /bin/sh
 
-ps -ef > /tmp/stupid.txt
+ps -ef > /tmp/sshagent.txt
 exec /usr/bin/ssh-agent "$@"

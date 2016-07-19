@@ -1,3 +1,4 @@
-cwd_history
-rl_history
-transfer_log
+# Ignore everyone
+*
+# Except the config file
+!rc
