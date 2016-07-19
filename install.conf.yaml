@@ -1,7 +1,7 @@
 - clean: ['~']
 
 - link:
-     ~/.zshenv: zshenv
+     ~/.zshenv: config/zsh/zshenv
      ~/.tint3rc: config/tint3/tint3rc
      ~/.rtorrent.rc: config/rtorrent/rtorrent.rc
      ~/.config/tint3: config/tint3
