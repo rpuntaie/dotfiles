@@ -1,5 +1,0 @@
-#! /bin/sh
-
-# sucks
-systemctl suspend &
-lock
