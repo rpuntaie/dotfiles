@@ -18,7 +18,7 @@
      ~/.vimperatorrc: config/vimperator/vimperatorrc
      ~/.config/dunst: config/dunst
      ~/.config/compton: config/compton
-     ~/.local/bin: bin
+     ~/.local/scripts: scripts
      ~/.local/share/homepage: share/homepage
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

@@ -22,6 +22,7 @@ add_to_path() {
 
 # User specific path:
 add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/.local/scripts"
 add_to_path "$HOME/.gem/ruby/2.3.0/bin/"
 # EPFL scripts:
 # add_to_path "$HOME/.local/epflscripts"
