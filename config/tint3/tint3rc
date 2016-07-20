@@ -1,10 +1,11 @@
 [[bar]]
   fontcolor #ffffff
+  fontname Sakamoto
   background #55000000
   borderwidth 0
   padding 5
   #margin 0;
-#  manual-margin-left 320;
+  #manual-margin-left 320;
   width 1600
   location top
   options debug
@@ -15,12 +16,7 @@
     spacerb
     time
   right
-    loadavg
-    spacera
-    ip
-    spacera
-    gpu
-    battery_usage
+    rbloc
     batteryone
     batterytwo
 
@@ -59,16 +55,13 @@
   id text
   source -
 
-#########
-# Power #
-#########
-[gpu]
-  id shell
-  source ~/.config/tint3/scripts/gpu.rb
-
 [battery_usage]
   id shell
   source ~/.config/tint3/scripts/power.sh
+
+[rbloc]
+  id shell
+  source ~/.config/tint3/scripts/rightPanel.rb
 
 [batteryone]
   id scale
