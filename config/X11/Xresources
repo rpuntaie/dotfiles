@@ -3,7 +3,7 @@
 ! september 2014.
 
 ! ------------------------------------------------------------------------------
-! COLOURS {{{
+! COLOURS
 
 ! Colour palette:
 #define black        #222222
@@ -62,6 +62,15 @@ rofi.terminal: urxvt
 
 URxvt.background: #1A1A1A
 URxvt.scrollBar: false
+
+! yeahconsole
+
+yeahconsole*term: urxvt
+yeahconsole*toggleKey: Alt+section
+yeahconsole*consoleHeight: 30
+yeahconsole*aniDelay: 0
+yeahconsole*stepSize: 5
+! yeahconsole*faceSize: 9
 
 ! Font color
 URxvt*foreground: #808080
