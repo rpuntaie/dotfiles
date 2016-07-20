@@ -33,6 +33,8 @@ fi
 sxhkd &
 
 # Launch yeahconsole
+yeahconsole &
+
 # Enable Japanese input:
 #if [ -e /usr/bin/uim-xim ]; then
 #	export GTK_IM_MODULE=uim
