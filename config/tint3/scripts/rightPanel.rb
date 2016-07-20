@@ -4,6 +4,21 @@
 # Monitoring #
 ##############
 
+# Load Average
+lavg = File.new("/proc/loadavg").gets
+print lavg.split[0]
+
+print " // "
+
+# Disk Usage
+VOLUMES = ["/dev/mapper/LVM0-rootvol","/dev/mapper/LVM0-homevol"]
+
+for v in VOLUMES
+  print `df #{v}`.split[11] + " "
+end
+
+print "// "
+
 # Network
 input= %x(ip -o -4 addr)
 data_array = Array.new
@@ -17,14 +32,14 @@ if data_array.length > 0
         print parsed[3].split('/')[0] + " "
     end
 else
-    print "Network Unavailable"
+    print "Network Unavailable "
 end
 
 #########
 # Power #
 #########
 
-print " // "
+print "// "
 
 # GPU Check
 input = %x(cat /proc/acpi/bbswitch)
@@ -39,3 +54,5 @@ bat0 = File.new("/sys/class/power_supply/BAT0/power_now", "r").gets.to_i
 bat1 = File.new("/sys/class/power_supply/BAT1/power_now", "r").gets.to_i
 usage = (bat0 + bat1) / 1000.0**2
 print "#{usage}W"
+
+print "\n"
