@@ -1,6 +1,8 @@
 # Load environment
 . ~/.config/sh/config
 
+export TERM=xterm
+
 # Cache
 ZSH_CACHE_DIR="$ZSH/cache/"
 ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"

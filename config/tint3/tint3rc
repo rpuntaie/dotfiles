@@ -16,7 +16,11 @@
     spacerb
     time
   right
-    rbloc
+    system
+    spacera
+    network
+    spacera
+    power
     batteryone
     batterytwo
 
@@ -59,9 +63,17 @@
   id shell
   source ~/.config/tint3/scripts/power.sh
 
-[rbloc]
+[system]
   id shell
-  source ~/.config/tint3/scripts/rightPanel.rb
+  source ~/.config/tint3/scripts/system.rb
+
+[network]
+  id shell
+  source ~/.config/tint3/scripts/network.rb
+
+[power]
+  id shell
+  source ~/.config/tint3/scripts/power.rb
 
 [batteryone]
   id scale
