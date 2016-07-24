@@ -212,6 +212,19 @@ super + r
 super + e
      pass-menu
 
+# Power status notification
+super + ISO_Level3_Shift
+    power-check.rb
+
+# Screenshot
+super + Print
+    scrot
+
+# Screenshot (select area) /!\ Broken /!\
+#~> giblib error: couldn't grab keyboard:Resource temporarily unavailable
+super + Control_R
+    scrot -s
+
 ###########
 # F-stuff #
 ###########
