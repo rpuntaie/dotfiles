@@ -45,7 +45,7 @@
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
-    show_age_threshold = 60
+    show_age_threshold = 30
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
@@ -76,7 +76,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 0
+    transparency = 10
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -140,7 +140,7 @@
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = false
+    startup_notification = true
 
     # dmenu path.
     dmenu = /usr/bin/dmenu -p dunst:
@@ -155,7 +155,7 @@
     icon_folders = /usr/share/icons/Adwaida/16x16/status/:/usr/share/icons/Adwaida/16x16/devices/:/usr/share/icons/Adwaida/16x16/apps/
 
 [frame]
-    width = 3
+    width = 2
     color = "#aaaaaa"
 
 [shortcuts]
