@@ -5,8 +5,9 @@
   borderwidth 0
   padding 5
   #margin 0;
-  #manual-margin-left 320;
+  #manual-margin-left 1600;
   width 1600
+  #width 1920
   location top
   options debug
   left
