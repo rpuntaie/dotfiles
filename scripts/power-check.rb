@@ -15,7 +15,7 @@ bat1Inst = File.new("/sys/class/power_supply/BAT1/power_now", "r").gets.to_i
 
 # Computations
 powerFull = bat0Full + bat1Full
-powerNow = bat0Now + bat0Now
+powerNow = bat0Now + bat1Now
 percentage = (powerNow.to_f / powerFull.to_f) * 100
 
 instUsage = (bat0Inst + bat1Inst) / 1000.0**2
@@ -27,7 +27,7 @@ end
 
 if powerSupply != 0
   powerSupplyText = "online"
-  level = "online"
+  level = "low"
 elsif percentage < 20
   level = "critical"
   powerSupplyText = "offline"
@@ -38,7 +38,7 @@ end
 
 system "
   notify-send -u #{level} '
-  Actual power state : #{percentage.to_i}%
+  Actual State : #{percentage.to_i}%
   Instantaneous : #{instUsage}W
   Power Supply : #{powerSupplyText}
   '
