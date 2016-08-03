@@ -4,7 +4,7 @@
 # GPU Check
 input = %x(cat /proc/acpi/bbswitch)
 if input.split(' ')[1].chomp == "ON"
-  print "GPU ON"
+  print "GPU ON "
 else
   ""
 end
