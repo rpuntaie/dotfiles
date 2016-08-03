@@ -14,7 +14,7 @@
      ~/.config/systemd: config/systemd
      ~/.config/ranger: config/ranger
      ~/.config/mpd: config/mpd
-     ~/.config/lftp: config/lfp
+     ~/.config/lftp: config/lftp
      ~/.vimperatorrc: config/vimperator/vimperatorrc
      ~/.config/dunst: config/dunst
      ~/.config/compton: config/compton
