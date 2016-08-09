@@ -1,0 +1,16 @@
+#!/bin/bash
+
+startx="/usr/bin/startx"
+
+bspwm="$HOME/.config/X11/bspwm"
+xfce="$HOME/.config/X11/xfce"
+
+if [ $# != 1 ]
+then
+  $startx $bspwm
+elif [ $1 == "xfce" ]
+then
+  $startx $xfce
+else
+  $startx $1
+fi
