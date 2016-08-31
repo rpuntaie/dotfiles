@@ -24,6 +24,7 @@ add_to_path() {
 add_to_path "$HOME/.local/bin"
 add_to_path "$HOME/.local/scripts"
 add_to_path "$HOME/.gem/ruby/2.3.0/bin/"
+add_to_path "$HOME/.local/lib/perl5/bin"
 
 unset -f add_to_path
 export PATH
