@@ -16,10 +16,6 @@ bspc config active_border_color     "#7d7a68"
 bspc config presel_feedback_color   "#6e6b5e"
 bspc config normal_border_color     "#6e6b5e"
 
-xrandr --output eDP1 --mode 1600x900 --pos 680x1200
-
-bspc monitor eDP1 -d 1 2 3 4 5
-
 # Specific configuration
 if (( $# != 1 )); then
     sh "${bspconf}laptop"
