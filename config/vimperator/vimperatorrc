@@ -30,3 +30,6 @@ EOF
 " Ctrl-a
 inoremap <C-a> <C-Home><C-S-End>
 map <silent> <C-S-c> <C-c>
+
+" smart completion hotfix ff 49
+js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
