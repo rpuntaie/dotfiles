@@ -5,11 +5,11 @@
   borderwidth 0
   padding 5
   #margin 0;
-  #manual-margin-left 1600;
+  manual-margin-left 1600
   #manual-margin-top 180
   #width 1600
   #width 1440
-  #width 2560
+  width 2560
   #width 1920
   #location top
   options debug
@@ -30,7 +30,7 @@
 
 [loadavg]
   id shell
-  source  cat /proc/loadavg
+  source  cat /proc/loadavg 
 
 [ip]
   id shell
