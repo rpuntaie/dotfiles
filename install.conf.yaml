@@ -18,6 +18,7 @@
      ~/.vimperatorrc: config/vimperator/vimperatorrc
      ~/.config/dunst: config/dunst
      ~/.config/compton: config/compton
+     ~/.config/git-annex: config/git-annex
      ~/.local/scripts: scripts
      ~/.local/share/homepage: share/homepage
 - shell:
