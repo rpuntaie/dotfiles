@@ -4,6 +4,7 @@ startx="/usr/bin/startx"
 
 bspwm="$HOME/.config/X11/bspwm"
 xfce="$HOME/.config/X11/xfce"
+xmonad="$HOME/.config/X11/xmonad"
 
 if [ $# != 1 ]
 then
@@ -11,6 +12,9 @@ then
 elif [ $1 == "xfce" ]
 then
   $startx $xfce
+elif [ $1 == "xmonad" ]
+  then
+      $startx $xmonad
 else
   $startx $1
 fi
