@@ -48,6 +48,8 @@ dunst &
 
 # WM ---------------------------------------------------------------------------
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # Cursor
 xsetroot -cursor_name left_ptr
 
