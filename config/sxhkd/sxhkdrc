@@ -129,8 +129,8 @@ super + alt + shift + {h,j,k,l}
     bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
 # move a floating window
-super + {Left,Down,Up,Right}
-    xdo move {-x -20,-y +20,-y -20,-x +20}
+super + alt + {h,j,k,l}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Resize a window using keyboard
 super + alt + {h,j,k,l}
