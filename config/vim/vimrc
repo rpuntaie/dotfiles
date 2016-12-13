@@ -26,13 +26,15 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'rust-lang/rust.vim'
 " NeoBundle 'ctrlpvim/ctrlp.vim'
 " NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'neomake/neomake'
+"NeoBundle 'slashmili/alchemist.vim'
+"NeoBundle 'Shougo/deoplete.vim'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }

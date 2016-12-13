@@ -3,20 +3,17 @@
 # Disable beep stuff
 xset -b
 
-# SERVICES ---------------------------------------------------------------------
-
 # Load X resources:
 xrdb ~/.config/X11/Xresources
 
 # swap escape and caps lock
-
 setxkbmap -model pc104 -layout ch -option caps:swapescape
 
 # Set the wallpaper:
 nitrogen --restore
 
 # Start gpg-agent
- gpg-connect-agent /bye >/dev/null 2>&1
+gpg-connect-agent /bye >/dev/null 2>&1
 # Set SSH to use gpg-agent
 export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
 # Set GPG TTY
@@ -46,8 +43,6 @@ yeahconsole &
 # Dunst notification daemon
 dunst &
 
-# WM ---------------------------------------------------------------------------
-
 # Cursor
 xsetroot -cursor_name left_ptr
 
@@ -56,6 +51,9 @@ compton -D 0 --no-fading-openclose --config ~/.config/compton/compton.conf -b &
 
 # Adapt the display's color to the time of the day
 xflux -l 46.5 -g 6.6
+
+# power management
+xfce4-power-manager
 
 # Launch WM
 exec bspwm -c /home/fnux/.config/bspwm/bspwmrc

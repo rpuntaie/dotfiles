@@ -11,5 +11,8 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 # top bar
 bspc config -m eDP1 top_padding          23
+nitrogen --restore
+killall tint3
 tint3
+
 

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Pass basic rofi integration
-# Maintained Timothée Floure <timothee.floure@fnux.ch>
-
-# get all password files and create an array
 list_passwords() {
    cd "${root}"
    passwords=$(find -iname '*.gpg')
@@ -14,7 +10,6 @@ list_passwords() {
    done
 }
 
-# menu
 menu () {
    unset selected_password
    list_passwords

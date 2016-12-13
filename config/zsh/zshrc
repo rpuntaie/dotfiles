@@ -3,6 +3,13 @@
 
 export TERM=xterm
 
+# ohmyzsh plugins
+plugins=(notify)
+
+# zsh-notify
+zstyle ':notify:*' notifier /usr/bin/notify-send
+zstyle ':notify:*' command-complete-timeout 1
+
 # Cache
 ZSH_CACHE_DIR="$ZSH/cache/"
 ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
