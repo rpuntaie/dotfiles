@@ -70,9 +70,6 @@ map <C-m> :NERDTreeToggle<CR>
 let g:neocomplete#enable_at_startup = 1
 
 " Neosnippet
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
 
 "--------"
 " {Maps} "
@@ -158,6 +155,9 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 
+" Disable spelling.
+set nospell
+
 "--------"
 " {Look} "
 "--------"
@@ -175,6 +175,11 @@ set encoding=utf8
 " Display tabs and trailing whitespaces.
 set list
 set listchars=tab:→\ ,eol:\ ,trail:·
+
+" Conceal
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " Without any syntax highlighting, programming is a pain:
 syntax on
@@ -205,8 +210,8 @@ hi cmd_mode              ctermfg=15  ctermbg=64
 hi cmd_info              ctermfg=48   ctermbg=0
 
 " default statusline:
-hi StatusLine            ctermfg=0   ctermbg=236 cterm=none
-hi StatusLineNC          ctermfg=8   ctermbg=236 cterm=none
+hi StatusLine            ctermfg=0   ctermbg=240 cterm=none
+hi StatusLineNC          ctermfg=8   ctermbg=240 cterm=none
 
 "---------------"
 " {Status Line} "
