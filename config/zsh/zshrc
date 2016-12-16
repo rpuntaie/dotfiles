@@ -1,41 +1,55 @@
-# Load environment
-. ~/.config/sh/config
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+COMP_DUMP=~/.zsh_completion
 
-export TERM=xterm
+[ -z "$VISUAL" ] && export VISUAL="vim"
 
-# ohmyzsh plugins
-plugins=(notify)
+# Load
+autoload colors compinit
 
-# zsh-notify
-zstyle ':notify:*' notifier /usr/bin/notify-send
-zstyle ':notify:*' command-complete-timeout 1
+for config_file ($ZDOTDIR/plugins/*); do
+  source $config_file
+done
 
-# Cache
-ZSH_CACHE_DIR="$ZSH/cache/"
-ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+# History
+setopt banghist
+setopt extendedhistory
+setopt histignoredups
+setopt histverify
+setopt incappendhistory
 
-# Various
+setopt correct
+setopt extendedglob
+setopt interactivecomments
+setopt promptsubst
 
-SHORT_HOST=${HOST/.*/}
+# Key bindings
+bindkey -v
+bindkey "^W" vi-backward-kill-word # sane word deletion
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^r" history-incremental-search-backward
 
-# vcs_info to get info about vcs
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git cvs svn
-zstyle ':vcs_info:*' formats " [%b]%u%c"
-zstyle ':vcs_info:*' actionformats "[%b|%a]%u%c "
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' get-revision true
+# Colors
+colors
+if (( $+commands[dircolors] ))
+then
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
 
-# Edit current command in editor
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
 
-# Theme
+# Completion
+compinit -d "${COMP_DUMP}"
 
+# VCS
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[white]%}["
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}●%{$fg[white]%}]%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ●%{$fg[white]%}]%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_CLEAN="]%{$reset_color%} "
 ZSH_THEME_SVN_PROMPT_PREFIX=$ZSH_THEME_GIT_PROMPT_PREFIX
 ZSH_THEME_SVN_PROMPT_SUFFIX=$ZSH_THEME_GIT_PROMPT_SUFFIX
@@ -46,11 +60,15 @@ ZSH_THEME_HG_PROMPT_SUFFIX=$ZSH_THEME_GIT_PROMPT_SUFFIX
 ZSH_THEME_HG_PROMPT_DIRTY=$ZSH_THEME_GIT_PROMPT_DIRTY
 ZSH_THEME_HG_PROMPT_CLEAN=$ZSH_THEME_GIT_PROMPT_CLEAN
 
-#PROMPT="%2~ ${vcs_info_msg_0_}»%b "
+vcs_status() {
+  if [[ $(whence in_svn) != "" ]] && in_svn; then
+    svn_prompt_info
+  elif [[ $(whence in_hg) != "" ]] && in_hg; then
+    hg_prompt_info
+  else
+    git_prompt_info
+  fi
+}
 
-# Path to your oh-my-zsh installation.
-export ZSH=/home/fnux/.oh-my-zsh
-
-ZSH_THEME="minimal"
-
-source $ZSH/oh-my-zsh.sh
+# Prompt
+PROMPT='%2~ $(vcs_status)»%b '
