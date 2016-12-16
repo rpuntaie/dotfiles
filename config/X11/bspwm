@@ -59,5 +59,8 @@ compton -D 0 --no-fading-openclose --config ~/.config/compton/compton.conf -b &
 # Adapt the display's color to the time of the day
 xflux -l 46.5 -g 6.6
 
+# power management
+xfce4-power-manager
+
 # Launch WM
 exec bspwm -c /home/fnux/.config/bspwm/bspwmrc
