@@ -5,7 +5,11 @@ COMP_DUMP=~/.zsh_completion
 
 [ -z "$VISUAL" ] && export VISUAL="vim"
 
-# Load
+# Environment/config
+source $HOME/.config/sh/environment
+source $HOME/.config/sh/config
+
+# Load/plugins
 autoload colors compinit
 
 for config_file ($ZDOTDIR/plugins/*); do
@@ -25,7 +29,7 @@ setopt interactivecomments
 setopt promptsubst
 
 # Key bindings
-bindkey -v
+bindkey -e
 bindkey "^W" vi-backward-kill-word # sane word deletion
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
@@ -41,7 +45,6 @@ then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 fi
-
 
 # Completion
 compinit -d "${COMP_DUMP}"
