@@ -1,5 +1,5 @@
 "
-" Vim: configuration file. Inspired by ayecat's config.
+" Vim: configuration file.
 "
 "-----------------------"
 " {NeoBundle Scripts} "
@@ -43,8 +43,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'sheerun/vim-polyglot'
 
 " Pandoc.
-NeoBundle 'vim-pandoc/vim-pandoc'
-NeoBundle 'vim-pandoc/vim-pandoc-syntax'
+"NeoBundle 'vim-pandoc/vim-pandoc'
+"NeoBundle 'vim-pandoc/vim-pandoc-syntax'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
