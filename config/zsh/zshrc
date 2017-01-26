@@ -5,6 +5,9 @@ COMP_DUMP=~/.zsh_completion
 
 [ -z "$VISUAL" ] && export VISUAL="vim"
 
+source $HOME/.config/sh/environment
+source $HOME/.config/sh/config
+
 # bgnotify
 function bgnotify_formatted { ## args: (exit_status, command, elapsed_seconds)
   elapsed="$(( $3 % 60 ))s"

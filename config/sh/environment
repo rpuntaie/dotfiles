@@ -23,7 +23,7 @@ add_to_path() {
 # User specific path:
 add_to_path "$HOME/.local/bin"
 add_to_path "$HOME/.local/scripts"
-add_to_path "$HOME/.gem/ruby/2.3.0/bin"
+add_to_path "$HOME/.gem/ruby/2.4.0/bin"
 add_to_path "$HOME/.local/lib/perl5/bin"
 add_to_path "$HOME/.local/opt/epfl-scripts/bin"
 
@@ -40,6 +40,10 @@ TERM=xterm
 # Perl-related stuff
 export PERL_CPANM_OPT="--prompt --reinstall -l ~/.local/lib/perl5 --mirror http://cpan.cpantesters.org"
 PERL5LIB=~/.local/lib/perl5/lib/perl5; export PERL5LIB
+
+# Ruby-related stuff
+export GEM_PATH=/home/fnux/.gem/ruby/2.4.0:/usr/lib/ruby/gems/2.4.0
+
 
 #-------#
 # {XDG} #
