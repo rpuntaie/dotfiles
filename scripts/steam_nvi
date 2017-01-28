@@ -1,4 +1,0 @@
-#! /bin/bash
-# Start steam using the discrete graphic card.
-
-LD_PRELOAD=/usr/lib32/nvidia/libGL.so __GLVND_DISALLOW_PATCHING=1 optirun steam

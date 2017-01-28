@@ -1,4 +1,0 @@
-#! /bin/sh
-
-ps -ef > /tmp/sshagent.txt
-exec /usr/bin/ssh-agent "$@"
