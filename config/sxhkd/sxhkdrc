@@ -206,7 +206,7 @@ super + d
 
 # Rofi : Windows list/selector
 super + r
-     rofi -show window -font "snap 10" -fg "#eee8d5" -bg "#073642" -hlfg "#ffb964" -hlbg "#073642" -o 85 
+     rofi -show window -font "snap 10" -fg "#eee8d5" -bg "#073642" -hlfg "#ffb964" -hlbg "#073642" -o 85
 
 # Rofi : pass
 super + e
@@ -232,6 +232,7 @@ super + Control_R
 # Media Key : Lower audio volume
 XF86AudioLowerVolume
     pactl set-sink-volume 0 -10%
+
 # Media Key : Raise audio volume
 XF86AudioRaiseVolume
     pactl set-sink-volume 0 +10%

@@ -1,9 +1,6 @@
 #! /bin/sh
 
-bspconf="/home/fnux/.config/bspwm/"
-
-# kill any previous tint3
-#killall tint3
+bspconf="/home/fnux/.config/bspwm/specific/"
 
 # Basic Configuration
 bspc config split_ratio         0.52

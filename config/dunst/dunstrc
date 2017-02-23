@@ -196,7 +196,6 @@
     foreground = "#ffffff"
     timeout = 0
 
-
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 # Messages can be matched by "appname", "summary", "body", "icon", "category",
