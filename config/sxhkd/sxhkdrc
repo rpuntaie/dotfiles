@@ -214,7 +214,7 @@ super + e
 
 # Power status notification
 super + ISO_Level3_Shift
-    power-check.rb
+    power-check-notify
 
 # Screenshot
 super + Print
