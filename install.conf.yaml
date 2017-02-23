@@ -19,9 +19,7 @@
      ~/.config/dunst: config/dunst
      ~/.config/compton: config/compton
      ~/.config/git-annex: config/git-annex
-     ~/.config/xfce4: config/xfce4
      ~/.ncmpcpp: config/ncmpcpp
-     ~/.local/scripts: scripts
      ~/.local/share/homepage: share/homepage
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

@@ -22,4 +22,3 @@ yaourt -S tint3
 
 # deploy config
 ./install
-
