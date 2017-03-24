@@ -4,7 +4,7 @@
 xset -b
 
 # Auto lock
-xss-lock -- slock &
+xss-lock -- xlock -mode blank &
 
 # Load X resources:
 xrdb ~/.config/X11/Xresources

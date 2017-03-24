@@ -10,7 +10,7 @@ xrdb ~/.config/X11/Xresources
 setxkbmap -model pc104 -layout ch -option caps:swapescape
 
 # Set the wallpaper:
-nitrogen --restore
+#nitrogen --restore
 
 # Start gpg-agent
 gpg-connect-agent /bye >/dev/null 2>&1
@@ -37,10 +37,13 @@ sxhkd &
 #fi
 
 # Cursor
-xsetroot -cursor_name left_ptr
+#xsetroot -cursor_name left_ptr
 
 # Adapt the display's color to the time of the day
 xflux -l 46.5 -g 6.6
+
+# top panel
+tint3 &
 
 # Launch
 exec startxfce4
