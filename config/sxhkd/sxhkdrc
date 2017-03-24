@@ -198,7 +198,8 @@ super + Return
 
 # Lock
 super + a
-    lock
+    xlock -mode blank -dpmssuspend 5
+    #lock
 
 # Rofi : Launcher
 super + d
@@ -217,12 +218,12 @@ super + ISO_Level3_Shift
     power-check-notify
 
 # Screenshot
-super + Print
-    scrot
+Print
+    scrot && notify-send "Sreenshot taken!"
 
 # Screenshot (select area) /!\ Broken /!\
 #~> giblib error: couldn't grab keyboard:Resource temporarily unavailable
-super + Control_R
+super + Print
     scrot -s
 
 ###########
@@ -231,15 +232,18 @@ super + Control_R
 
 # Media Key : Lower audio volume
 XF86AudioLowerVolume
-    pactl set-sink-volume 0 -10%
+    pavolume -10%
 
 # Media Key : Raise audio volume
 XF86AudioRaiseVolume
-    pactl set-sink-volume 0 +10%
+    pavolume +10%
 
 # Media Key : Mute card #1
 XF86AudioMute
-    pactl set-sink-mute 0 toggle
+    $(pavolume toggle)
+
+section
+    notify-send "PulseAudio Volume" "$(pavolume)"
 
 # Lower brightness
 XF86MonBrightnessDown
