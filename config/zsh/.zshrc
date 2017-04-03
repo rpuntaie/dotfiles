@@ -1,1 +1,0 @@
-/home/fnux/.config/zsh/zshrc

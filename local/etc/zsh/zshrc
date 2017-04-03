@@ -1,0 +1,85 @@
+HISTFILE=${XDG_DATA_HOME}/zsh/zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+COMP_DUMP=${ZSH_DATA_HOME}/zsh/zsh_completion
+
+[ -z "$VISUAL" ] && export VISUAL="vim"
+
+source $XDG_CONFIG_HOME/sh/environment
+source $XDG_CONFIG_HOME/sh/config
+
+# bgnotify
+function bgnotify_formatted { ## args: (exit_status, command, elapsed_seconds)
+  elapsed="$(( $3 % 60 ))s"
+  (( $3 >= 60 )) && elapsed="$((( $3 % 3600) / 60 ))m $elapsed"
+  (( $3 >= 3600 )) && elapsed="$(( $3 / 3600 ))h $elapsed"
+  [ $1 -eq 0 ] && notify-send "Completed in $elapsed" "$2" || \
+  notify-send -u critical "Failed after $elapsed" "$2"
+}
+
+# Load/plugins
+autoload colors compinit
+
+for config_file ($ZDOTDIR/plugins/*); do
+  source $config_file
+done
+
+# History
+setopt banghist
+setopt extendedhistory
+setopt histignoredups
+setopt histverify
+setopt incappendhistory
+
+setopt correct
+setopt extendedglob
+setopt interactivecomments
+setopt promptsubst
+
+# Key bindings
+bindkey -e
+bindkey "^W" vi-backward-kill-word # sane word deletion
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^r" history-incremental-search-backward
+
+# Colors
+colors
+if (( $+commands[dircolors] ))
+then
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
+# Completion
+compinit -d "${COMP_DUMP}"
+
+# VCS
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[white]%}["
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ●%{$fg[white]%}]%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_CLEAN="]%{$reset_color%} "
+ZSH_THEME_SVN_PROMPT_PREFIX=$ZSH_THEME_GIT_PROMPT_PREFIX
+ZSH_THEME_SVN_PROMPT_SUFFIX=$ZSH_THEME_GIT_PROMPT_SUFFIX
+ZSH_THEME_SVN_PROMPT_DIRTY=$ZSH_THEME_GIT_PROMPT_DIRTY
+ZSH_THEME_SVN_PROMPT_CLEAN=$ZSH_THEME_GIT_PROMPT_CLEAN
+ZSH_THEME_HG_PROMPT_PREFIX=$ZSH_THEME_GIT_PROMPT_PREFIX
+ZSH_THEME_HG_PROMPT_SUFFIX=$ZSH_THEME_GIT_PROMPT_SUFFIX
+ZSH_THEME_HG_PROMPT_DIRTY=$ZSH_THEME_GIT_PROMPT_DIRTY
+ZSH_THEME_HG_PROMPT_CLEAN=$ZSH_THEME_GIT_PROMPT_CLEAN
+
+vcs_status() {
+  if [[ $(whence in_svn) != "" ]] && in_svn; then
+    svn_prompt_info
+  elif [[ $(whence in_hg) != "" ]] && in_hg; then
+    hg_prompt_info
+  else
+    git_prompt_info
+  fi
+}
+
+# Prompt
+PROMPT='%2~ $(vcs_status)»%b '

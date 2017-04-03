@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Disable beep stuff
+xset -b
+
+# Auto lock
+xss-lock -- xlock -mode blank &
+
+# Load X resources:
+xrdb ${XDG_CONFIG_HOME}/X11/Xresources
+
+# swap escape and caps lock
+
+setxkbmap -model pc104 -layout ch -option caps:swapescape
+
+# Set the wallpaper:
+nitrogen --restore
+
+# Start gpg-agent
+gpg-connect-agent /bye >/dev/null 2>&1
+# Set SSH to use gpg-agent
+export SSH_AUTH_SOCK="${XDG_DATA_HOME}/gnupg/S.gpg-agent.ssh"
+# Set GPG TTY
+GPG_TTY=$(tty)
+export GPG_TTY
+
+#unset SSH_AGENT_PID
+#if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+#    export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+#fi
+
+# Load keybindings
+sxhkd &
+
+# Launch yeahconsole
+yeahconsole &
+
+# Enable Japanese input:
+#if [ -e /usr/bin/uim-xim ]; then
+#	export GTK_IM_MODULE=uim
+#	export QT_IM_MODULE=xim
+#	uim-xim &
+#	export XMODIFIERS='@im=anthy'
+#fi
+
+# Dunst notification daemon
+dunst &
+
+# WM ---------------------------------------------------------------------------
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Cursor
+xsetroot -cursor_name left_ptr
+
+# Start the compositor
+compton -D 0 --no-fading-openclose --config $XDG_CONFIG_HOME/compton/compton.conf -b &
+
+# Adapt the display's color to the time of the day
+xflux -l 46.5 -g 6.6
+
+# power management
+xfce4-power-manager
+
+# Launch WM
+exec bspwm -c ${XDG_CONFIG_HOME}/bspwm/bspwmrc
