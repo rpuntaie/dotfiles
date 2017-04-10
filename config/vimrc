@@ -51,6 +51,9 @@ set laststatus=2
 
 "Look--------------------------------------------------------------------------
 
+" 256 colors
+set t_Co=256
+
 " Colorscheme
 colorscheme jellybeans
 

@@ -116,7 +116,7 @@ super + shift + v
 
 # Launch a terminal
 super + Return
-    urxvt
+    urxvt256c
 
 # Lock
 super + a
