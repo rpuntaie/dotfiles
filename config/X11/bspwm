@@ -24,6 +24,9 @@ xflux -l 46.5 -g 6.6
 # Fix GUI for java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# SSH keys are managed by gpg-agent
+export SSH_AUTH_SOCK="/var/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
+
 # Keybindings
 sxhkd &
 
