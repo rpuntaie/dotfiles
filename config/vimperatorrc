@@ -1,4 +1,4 @@
-map <silent> <F2> :js toggle_navbar()<CR>
+map <silent> <C-v> :js toggle_navbar()<CR>
 :js << EOF
 function toggle_navbar() {
     var nb = document.getElementById('nav-bar');
@@ -12,8 +12,6 @@ EOF
 
 set "editor=urxvt -e vim"
 set hintchars=ASDFHJKL
-
-" vim: set ft=vimperator:
 
 map <silent> <C-F8> :js toggle_bottombar()<CR>
 
@@ -44,3 +42,5 @@ function extraTab(args) {
     liberator.open(args, liberator.NEW_TAB)
 }
 EOF
+
+" vim: set ft=vimperator:

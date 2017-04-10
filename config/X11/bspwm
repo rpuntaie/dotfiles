@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Cursor
+xsetroot -cursor_name left_ptr
+
+# Load X resources:
+xrdb ~/.config/X11/Xresources
+
+# swap escape and caps lock
+setxkbmap -model pc104 -layout ch -option caps:swapescape
+
+# Set the wallpaper:
+nitrogen --restore
+
+# Dunst notification daemon
+dunst &
+
+# Start the compositor
+compton -D 0 --no-fading-openclose --config ~/.config/compton/compton.conf -b &
+
+# Adapt the display's color to the time of the day
+xflux -l 46.5 -g 6.6
+
+# Fix GUI for java apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Keybindings
+sxhkd &
+
+# Launch WM
+exec bspwm

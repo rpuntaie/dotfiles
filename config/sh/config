@@ -18,10 +18,7 @@ cmd_exists()
 
 alias cp='cp -i'
 alias grep='grep --color=auto'
-alias info='info --vi-keys'
-alias la='ls -A'
-alias lah='ls -lAh'
-alias laht='ls -lAht'
+alias la='ls -lAh'
 alias ll='ls -lh'
 alias mv='mv -i'
 alias ls='ls --color=auto'
@@ -30,11 +27,7 @@ alias wttr='curl wttr.in'
 alias moon='curl wttr.in/Moon'
 alias fuck='sudo $(history -p \!\!)' 
 alias clock='tty-clock -s -c -C 3'
-alias yay='yaourt'
 alias ax='git annex'
-alias mutt="mutt -F ~/.config/mutt/muttrc"
-alias rtorrent="rtorrent -n -o import=${XDG_CONFIG_HOME}/rtorrent/rtorrent.rc"
-cmd_exists startx && alias startx="startx $XINITRC" && alias x="startx $XINITRC"
 
 # Pass user environment when launching vim with sudo:
 if cmd_exists sudo; then

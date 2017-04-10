@@ -1,12 +1,12 @@
-HISTFILE=${XDG_DATA_HOME}/zsh/zsh_history
+HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
-COMP_DUMP=${ZSH_DATA_HOME}/zsh/zsh_completion
+COMP_DUMP=~/.zsh_completion
 
 [ -z "$VISUAL" ] && export VISUAL="vim"
 
-source $XDG_CONFIG_HOME/sh/environment
-source $XDG_CONFIG_HOME/sh/config
+source ~/.config/sh/environment
+source ~/.config/sh/config
 
 # bgnotify
 function bgnotify_formatted { ## args: (exit_status, command, elapsed_seconds)

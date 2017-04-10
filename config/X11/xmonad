@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Cursor
+xsetroot -cursor_name left_ptr
+
+# Load X resources:
+xrdb ~/.config/X11/Xresources
+
+# swap escape and caps lock
+setxkbmap -model pc104 -layout ch -option caps:swapescape
+
+# Set the wallpaper:
+nitrogen --restore
+
+# Dunst notification daemon
+dunst &
+
+# Fix GUI for java apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Launch WM
+exec xmonad

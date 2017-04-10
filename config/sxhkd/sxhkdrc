@@ -3,11 +3,11 @@
 #########
 
 # Reload sxhkd
-super + Escape
+super + End
     pkill -USR1 -x sxhkd
 
 # Reload BSPWM
-super + alt + Insert
+super + Home
     sh ~/.config/bspwm/bspwmrc
 
 # Quit  BSPWM
@@ -22,14 +22,6 @@ super + c
 super + x
     bspc node -k
 
-# "False" fullscreen, respects padding/margin, etc. Kinda weird, but awesome
-#super + shift + t
-#    bspc desktop -l next
-
-# Weird
-super + bracket{left,right}
-    bspc desktop -f {prev,next}
-
 ########################
 # States/Flags/Layouts #
 ########################
@@ -38,18 +30,9 @@ super + bracket{left,right}
 super + {y,p,s,f}
     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# set the node flags
-super + ctrl + {x,y,z}
-    bspc node -g {locked,sticky,private}
-
-
 # alternate between the tiled and monocle layout
 super + t
    bspc desktop -l next
-
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-#super + y
-#    bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
 
 ##############
 # focus/swap #
@@ -59,31 +42,9 @@ super + t
 ~button1
     bspc pointer -g focus
 
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-    bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-super + {p,b,comma,period}
-    bspc node -f @{parent,brother,first,second}
-
 # focus the next/previous node
-super + {_,shift + }c
+super + {k,l}
     bspc node -f {next,prev}
-
-# focus the next/previous desktop
-super + bracket{left,right}
-    bspc desktop -f {prev,next}
-
-# focus the last node/desktop
-super + {grave,Tab}
-    bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-super + {o,i}
-    bspc wm -h off; \
-    bspc node {older,newer} -f; \
-    bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
@@ -100,6 +61,7 @@ super + g
 #############
 # Preselect #
 #############
+
 # Select a part of the focused window in order to place a new window
 super + {Left,Down,Up,Right}
     bspc node -p {west,south,north,east}
@@ -121,36 +83,16 @@ super + ctrl + shift + space
 #################################
 
 # expand the tiled space in the given direction
-super + alt + {h,j,k,l}
+super + shift + {h,j,k,l}
     bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
-
-# contract the tiled space in the given direction
-super + alt + shift + {h,j,k,l}
-    bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
-
-# move a floating window
-super + alt + {h,j,k,l}
-    bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Resize a window using keyboard
 super + alt + {h,j,k,l}
     bspc node -e {west -10,south +10,north -10,east +10}
 
-# Resize a window using keyboard
-super + alt + shift + {h,j,k,l}
-    bspc node -e {east -10,north +10,south -10,west +10}
-
 # Resize a window using the mouse
 super + button{1-3}
     bspc pointer -g {move,resize_side,resize_corner}
-
-# Adjust the split ratios of the tree of the selected desktop so that all windows occupy the same area
-super + b
-    bspc desktop -B
-
-# Send the focused window to the X° desktop
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} ^{1-9,10}
 
 #####################
 # Desktops/Monitors #
@@ -160,10 +102,6 @@ super + {_,shift + }{1-9,0}
 super + {q,w}
     bspc desktop -f {prev,next}
 
-# Invert the vertical alignment (Or something like that...)
-super + n
-    bspc desktop -F vertical
-
 # Rotate the desktop of 90°
 super + v
     bspc node @focused:/ -R 90
@@ -172,25 +110,9 @@ super + v
 super + shift + v
     bspc node @focused:/ -R 180
 
-#super + {q,w}
-#    bspc monitor -f {L,R}
-
-#super + {shift,alt} + {q,w}
-#    bspc {window,desktop} -m {L,R}
-
-### Pointer/Mouse
-
-# No idea
-#super + !button{1-3}
-#    bspc pointer -t %i %i
-
-# No idea
-#super + @button{1-3}
-#    bspc pointer -u
-
-##########
-# Others #
-##########
+########
+# Misc #
+########
 
 # Launch a terminal
 super + Return
@@ -198,28 +120,28 @@ super + Return
 
 # Lock
 super + a
-    xlock -mode blank -dpmssuspend 5
-    #lock
+    i3lock -i ~/Pictures/wallpaper.png
+    #xlock -mode blank -dpmssuspend 5
 
 # Rofi : Launcher
 super + d
-     rofi -show run -font "snap 10" -fg "#eee8d5" -bg "#073642" -hlfg "#ffb964" -hlbg "#073642" -o 85 #-bordercolor "#fff"
+    dmenu_run
 
 # Rofi : Windows list/selector
 super + r
-     rofi -show window -font "snap 10" -fg "#eee8d5" -bg "#073642" -hlfg "#ffb964" -hlbg "#073642" -o 85
+    dswitcher
 
 # Rofi : pass
 super + e
-     pass-menu
-
-# Power status notification
-super + ISO_Level3_Shift
-    power-check-notify
+    pass-menu
 
 # Screenshot
 Print
     scrot && notify-send "Sreenshot taken!"
+
+# Current audio volume
+section
+    notify-send "PulseAudio Volume" "$(pavolume)"
 
 # Screenshot (select area) /!\ Broken /!\
 #~> giblib error: couldn't grab keyboard:Resource temporarily unavailable
@@ -240,10 +162,7 @@ XF86AudioRaiseVolume
 
 # Media Key : Mute card #1
 XF86AudioMute
-    $(pavolume toggle)
-
-section
-    notify-send "PulseAudio Volume" "$(pavolume)"
+    pavolume toggle
 
 # Lower brightness
 XF86MonBrightnessDown
@@ -252,3 +171,7 @@ XF86MonBrightnessDown
 # Raise Brigtness
 XF86MonBrightnessUp
     xbacklight -inc 10
+
+# Multi-monitor management
+XF86Display
+    arandr

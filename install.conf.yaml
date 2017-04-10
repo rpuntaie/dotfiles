@@ -1,22 +1,24 @@
 - clean: ['~']
 
 - link:
-     $XDG_CONFIG_HOME/tint3: local/etc/tint3
-     $XDG_CONFIG_HOME/rtorrent/rtorrent.rc: local/etc/rtorrent/rtorrent.rc
-     $XDG_CONFIG_HOME/vim/vimrc: local/etc/vim/vimrc
-     $XDG_CONFIG_HOME/bspwm: local/etc/bspwm
-     $XDG_CONFIG_HOME/X11: local/etc/X11
-     $XDG_CONFIG_HOME/zsh: local/etc/zsh
-     $XDG_CONFIG_HOME/sxhkd: local/etc/sxhkd
-     $XDG_CONFIG_HOME/sh: local/etc/sh
-     $XDG_CONFIG_HOME/systemd: local/etc/systemd
-     $XDG_CONFIG_HOME/ranger/rc.conf: local/etc/ranger/rc.conf
-     $XDG_CONFIG_HOME/mpd/mpd.conf: local/etc/mpd/mpd.conf
-     $XDG_CONFIG_HOME/lftp/rc: local/etc/lftp/rc
-     $XDG_CONFIG_HOME/vimperator/vimperatorrc: local/etc/vimperator/vimperatorrc
-     $XDG_CONFIG_HOME/dunst: local/etc/dunst
-     $XDG_CONFIG_HOME/compton: local/etc/compton
-     $XDG_CONFIG_HOME/ncmpcpp/config: local/etc/ncmpcpp/config
-     ~/.local/share/homepage: local/share/homepage
+        ~/.config/X11: config/X11
+        ~/.xmonad/xmonad.hs: config/xmonad/xmonad.hs
+        ~/.config/bspwm: config/bspwm
+        ~/.config/sxhkd: config/sxhkd
+        ~/.config/tint3: config/tint3
+        ~/.config/dunst: config/dunst
+        ~/.config/compton: config/compton
+        ~/.config/lftp: config/lftp
+        ~/.config/ranger/rc.conf: config/ranger/rc.conf
+        ~/.config/sh: config/sh
+        ~/.config/zsh: config/zsh
+        ~/.config/mpd: config/mpd
+        ~/.ncmpcpp/config: config/ncmpcpp/config
+        ~/.vimperatorrc: config/vimperatorrc
+        ~/.zshenv: config/zshenv
+        ~/.xmobarrc: config/xmobarrc
+        ~/.vimrc: config/vimrc
+        ~/.rtorrent.rc: config/rtorrent.rc
+        ~/.local/share/homepage: share/homepage
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
