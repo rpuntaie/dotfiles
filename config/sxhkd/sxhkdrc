@@ -42,17 +42,13 @@ super + t
 ~button1
     bspc pointer -g focus
 
-# focus the next/previous node
-super + {k,l}
-    bspc node -f {next,prev}
-
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Switch focus between the windows of the current desktop
-super + Tab
-    bspc node -f {next,prev}
+super + {_,shift + } Tab
+    bspc node -f {next,prev}.local
 
 # swap the current node and the biggest node
 super + g
@@ -83,12 +79,12 @@ super + ctrl + shift + space
 #################################
 
 # expand the tiled space in the given direction
-super + shift + {h,j,k,l}
-    bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+super + {h,j,k,l}
+    bspc node {@west -r -20,@south -r +20,@north -r -20,@east -r +20}
 
 # Resize a window using keyboard
-super + alt + {h,j,k,l}
-    bspc node -e {west -10,south +10,north -10,east +10}
+super + shift + {h,j,k,l}
+    bspc node {@west -r +20,@south -r -20,@north -r +20,@east -r -20}
 
 # Resize a window using the mouse
 super + button{1-3}
@@ -120,7 +116,7 @@ super + Return
 
 # Lock
 super + a
-    i3lock -i ~/Pictures/wallpaper.png
+    i3lock -i ~/Pictures/wallpaper.png -t
     #xlock -mode blank -dpmssuspend 5
 
 # Rofi : Launcher
