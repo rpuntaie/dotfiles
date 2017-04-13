@@ -116,7 +116,7 @@ super + Return
 
 # Lock
 super + a
-    i3lock -i ~/Pictures/wallpaper.png -t
+    lock
     #xlock -mode blank -dpmssuspend 5
 
 # Rofi : Launcher
