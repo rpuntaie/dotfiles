@@ -51,3 +51,13 @@
 URxvt*foreground: #808080
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=13
 URxvt.scrollBar: false
+
+! Copy/Paste + clickable URLs
+URxvt.perl-ext-common: default,clipboard,matcher
+URxvt.url-launcher: /usr/bin/qutebrowser
+URxvt.matcher.button: 1
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.clipboard.copycmd:  xsel -ib
+URxvt.clipboard.pastecmd: xsel -ob
