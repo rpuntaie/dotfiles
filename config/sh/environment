@@ -28,6 +28,9 @@ add_to_path "$HOME/.local/opt/epfl-scripts/bin"
 unset -f add_to_path
 export PATH
 
+# Kiex
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
 #-------#
 # {ENV} #
 #-------#
