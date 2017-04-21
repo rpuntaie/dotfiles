@@ -10,6 +10,7 @@
         ~/.config/compton: config/compton
         ~/.config/lftp: config/lftp
         ~/.config/ranger/rc.conf: config/ranger/rc.conf
+        ~/.config/qutebrowser/keys.conf: config/qutebrowser/keys.conf
         ~/.config/sh: config/sh
         ~/.config/zsh: config/zsh
         ~/.config/mpd: config/mpd
