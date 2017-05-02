@@ -17,15 +17,15 @@ call neobundle#begin(expand('/home/fnux/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'Shougo/neocomplete.vim'
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/deoplete.nvim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
-
 
 " Required:
 call neobundle#end()
@@ -43,8 +43,9 @@ NeoBundleCheck
 " Nerdtree
 map <C-m> :NERDTreeToggle<CR>
 
-" NeoComplete
-let g:neocomplete#enable_at_startup = 1
+" NeoComplete -> deoplete
+"let g:neocomplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 " Vim-airline : display status bar
 set laststatus=2
