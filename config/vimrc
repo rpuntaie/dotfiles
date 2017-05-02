@@ -84,7 +84,7 @@ highlight ColorColumn ctermbg=255
 "Keybindings-------------------------------------------------------------------
 
 " Leader key
-let mapleader=","
+let mapleader=" "
 
 " Save using sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -94,6 +94,12 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+
+" Move between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Toggle 'paste' with ,p.
 nnoremap <leader>p :set invpaste paste?<CR>
@@ -121,7 +127,7 @@ function! g:ToggleColorColumn()
     setlocal colorcolumn=80
   endif
 endfunction
-nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<CR>
+nnoremap <silent> <leader>h :call g:ToggleColorColumn()<CR>
 
 "Misc--------------------------------------------------------------------------
 
@@ -156,3 +162,7 @@ set shiftwidth=2
 
 " Disable spelling.
 set nospell
+
+" More natural splits
+set splitbelow
+set splitright
