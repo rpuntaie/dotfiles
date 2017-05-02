@@ -101,6 +101,16 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Balance splits
+nnoremap  <silent><leader>w <c-w>=
+
+" Beginning/end of line
+nnoremap  <silent><leader>a ^
+nnoremap  <silent><leader>e $
+
+" Exit terminal (nvim)
+tnoremap <Esc> <C-\><C-n>
+
 " Toggle 'paste' with ,p.
 nnoremap <leader>p :set invpaste paste?<CR>
 imap <leader>p <C-O>:set invpaste paste?<CR>
