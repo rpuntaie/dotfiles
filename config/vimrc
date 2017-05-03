@@ -116,19 +116,6 @@ nnoremap <leader>p :set invpaste paste?<CR>
 imap <leader>p <C-O>:set invpaste paste?<CR>
 set pastetoggle=<leader>p
 
-" Neosnippet key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" Neosnippet superTab like snippets behavior.
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 " Toggle colorcolumn
 function! g:ToggleColorColumn()
   if &colorcolumn != 0
