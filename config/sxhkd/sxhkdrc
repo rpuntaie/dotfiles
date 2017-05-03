@@ -139,6 +139,10 @@ Print
 section
     notify-send "PulseAudio Volume" "$(pavolume)"
 
+# Dropdown
+super + section
+  tdrop -a -y 33 -w 1900 -x 10 -s dropdown urxvt
+
 # Screenshot (select area) /!\ Broken /!\
 #~> giblib error: couldn't grab keyboard:Resource temporarily unavailable
 super + Print

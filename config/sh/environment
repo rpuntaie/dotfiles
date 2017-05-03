@@ -44,6 +44,6 @@ PERL5LIB=~/.local/lib/perl5/lib/perl5; export PERL5LIB
 #------------------------#
 
 # Editor and pager:
-export EDITOR='/usr/bin/vim'
+export EDITOR='/usr/bin/nvim'
 export VISUAL='xvim'
-export BROWSER="firefox"
+export BROWSER="/usr/bin/qutebrowser"
