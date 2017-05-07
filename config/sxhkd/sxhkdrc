@@ -147,31 +147,3 @@ super + section
 #~> giblib error: couldn't grab keyboard:Resource temporarily unavailable
 super + Print
     scrot -s
-
-###########
-# F-stuff #
-###########
-
-# Media Key : Lower audio volume
-XF86AudioLowerVolume
-    pavolume -10%
-
-# Media Key : Raise audio volume
-XF86AudioRaiseVolume
-    pavolume +10%
-
-# Media Key : Mute card #1
-XF86AudioMute
-    pavolume toggle
-
-# Lower brightness
-XF86MonBrightnessDown
-    xbacklight -dec 10
-
-# Raise Brigtness
-XF86MonBrightnessUp
-    xbacklight -inc 10
-
-# Multi-monitor management
-XF86Display
-    arandr

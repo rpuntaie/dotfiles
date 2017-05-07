@@ -31,6 +31,9 @@ export SSH_AUTH_SOCK="/var/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 xset s 120 180
 xss-lock -n dim -- lock -n &
 
+# Handle ACPI events
+acpi-handle.pl
+
 # Keybindings
 sxhkd &
 
