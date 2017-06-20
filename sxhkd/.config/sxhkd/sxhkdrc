@@ -132,8 +132,8 @@ super + e
     pass-menu
 
 # Screenshot
-Print
-    scrot && notify-send "Sreenshot taken!"
+super + Print
+    sleep 0.2; scrot -q100 -m -s -z /tmp/export.png -e 'gupaste $f' | awk '{print $NF}' | xclip -selection clipboard; notify-send 'Screenshot taken!' "Available in /tmp/export.png and $(xclip -o -selection clipboard) (copied to clipboard)"
 
 # Current audio volume
 section

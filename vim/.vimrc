@@ -17,10 +17,9 @@ call neobundle#begin(expand('/home/fnux/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
-"NeoBundle 'Shougo/neocomplete.vim'
-"NeoBundle 'Shougo/neosnippet.vim'
-"NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/deoplete.nvim'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'sheerun/vim-polyglot'
@@ -44,8 +43,7 @@ NeoBundleCheck
 map <C-m> :NERDTreeToggle<CR>
 
 " NeoComplete -> deoplete
-"let g:neocomplete#enable_at_startup = 1
-let g:deoplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 
 " Vim-airline : display status bar
 set laststatus=2
@@ -84,7 +82,7 @@ highlight ColorColumn ctermbg=255
 "Keybindings-------------------------------------------------------------------
 
 " Leader key
-let mapleader=" "
+let mapleader=","
 
 " Save using sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -108,13 +106,23 @@ nnoremap  <silent><leader>w <c-w>=
 nnoremap  <silent><leader>a ^
 nnoremap  <silent><leader>e $
 
-" Exit terminal (nvim)
-tnoremap <Esc> <C-\><C-n>
-
 " Toggle 'paste' with ,p.
 nnoremap <leader>p :set invpaste paste?<CR>
 imap <leader>p <C-O>:set invpaste paste?<CR>
 set pastetoggle=<leader>p
+
+" Neosnippet key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" Neosnippet superTab like snippets behavior.
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " Toggle colorcolumn
 function! g:ToggleColorColumn()

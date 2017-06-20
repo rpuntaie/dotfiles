@@ -5,7 +5,7 @@ Config {
          font               = "xft:Deja Vu Sans Mono:pixelsize=11"
        , bgColor            = "black"
        , fgColor            = "grey"
-       , position           = Static { xpos = 0 , ypos = 0, width = 1920, height = 23 }
+       , position           = Static { xpos = 0, ypos = 0, width = 1920, height = 23 }
        , alpha              = 150
     -- general behavior
        , hideOnStart        = False
@@ -33,7 +33,7 @@ Config {
             -- Get current date
                 , Run Date      "%a %d - %H:%M" "date" 10
             -- Get the space left on / and /home
-                , Run DiskU     [("/", "/: <free>"), ("/home", "/home: <free>")]
+                , Run DiskU     [("/", "/: <free>"),("/var", "/var: <free>"),("/home", "/home: <free>")]
                                 [ "--Low"   , "10"
                                 , "--High"  , "50"
                                 , "--low"   , "red"

@@ -4,14 +4,7 @@
   background #55000000
   borderwidth 0
   padding 5
-  #margin 0;
-  manual-margin-left 1920
-  #manual-margin-top 180
-  #width 1600
-  #width 1440
-  width 2560
-  #width 1920
-  #location top
+  margin 0;
   options debug
   left
     desktops
@@ -30,11 +23,7 @@
 
 [loadavg]
   id shell
-  source  cat /proc/loadavg 
-
-[ip]
-  id shell
-  source ~/.config/tint3/scripts/network.rb
+  source  cat /proc/loadavg
 
 [active]
   id active
@@ -63,21 +52,17 @@
   id text
   source -
 
-[battery_usage]
-  id shell
-  source ~/.config/tint3/scripts/power.sh
-
 [system]
   id shell
-  source ~/.config/tint3/scripts/system.rb
+  source ${XDG_DATA_HOME}/tint3/system.rb
 
 [network]
   id shell
-  source ~/.config/tint3/scripts/network.rb
+  source ${XDG_DATA_HOME}/tint3/network.rb
 
 [power]
   id shell
-  source ~/.config/tint3/scripts/power.rb
+  source ${XDG_DATA_HOME}/tint3/power.rb
 
 [batteryone]
   id scale
