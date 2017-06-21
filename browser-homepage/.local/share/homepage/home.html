@@ -6,26 +6,6 @@
    <title>Home</title>
 </head>
 <body>
-   <h1 align="center" id="message"></h1>
-   <script type="text/javascript">
-   var d = new Date();
-   var n = d.getHours();
-
-   if ( n == 23 || n == 0) {
-      message = "<img src='goodnight.png'></img>";
-   } else if ( n >= 1 && n <= 4 ) {
-      message = "<img src='goodnight.png'></img>";
-   } else if ( n >= 5 && n <= 11 ) {
-      message = "<img src='goodmorning.png'></img>";
-   } else if ( n >= 12 && n <= 17 ) {
-      message = "<img src='goodafternoon.png'></img>";
-   } else if ( n >= 18 && n <= 22 ) {
-      message = "<img src='goodevening.png'></img>";
-   }
-
-   document.getElementById("message").innerHTML = message;
-   </script>
-
    <div class="boxed">
       <span>Media</span>
       <a style="padding-left:10px" href="http://www.youtube.com">youtube</a>

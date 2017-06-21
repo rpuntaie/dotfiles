@@ -14,7 +14,7 @@ body{
    font-family:"Segoe UI light";
    color:#c8c8c8;
    font-size:34px;
-   background:#FBFBFB;
+   background:#242424;
 }
 
 span{
@@ -30,13 +30,13 @@ a:hover { color:#A9BFA5}
    border: 1px solid #e6e6e6;
    padding: 5px;
    color: #494949;
-   background-color: #ffffff;
+   background-color: #505050;
    width: 760px;
    margin-left: -390px;
    margin-right: auto;
    position:absolute;
    left: 50%;
-   top: 40%;
+   top: 30%;
 }
 
 h1 {
