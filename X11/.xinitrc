@@ -4,7 +4,7 @@
 xsetroot -cursor_name left_ptr
 
 # Load X resources:
-xrdb ~/.config/X11/Xresources
+xrdb ~/.Xresources
 
 # swap escape and caps lock
 setxkbmap -model pc104 -layout ch -option caps:swapescape
