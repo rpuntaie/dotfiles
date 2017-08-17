@@ -31,7 +31,7 @@ super + {y,p,s,f}
     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # alternate between the tiled and monocle layout
-super + t
+super + {t,m}
    bspc desktop -l next
 
 ##############
@@ -47,12 +47,23 @@ super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Switch focus between the windows of the current desktop
-super + {_,shift + } Tab
+alt + {_,shift + } Tab
     bspc node -f {next,prev}.local
+
+# focus the last node/desktop
+super + {shift,Tab}
+  bspc {node,desktop} -f last
 
 # swap the current node and the biggest node
 super + g
     bspc node -s biggest
+
+# focus the node in the given direction
+alt + {_,shift + }{h,j,k,l}
+  bspc node -{f,s} {west,south,north,east}
+
+alt + {_,shift} + {Left,Down,Up,Right}
+  bspc node -{f,s} {west,south,north,east}
 
 #############
 # Preselect #
@@ -67,11 +78,11 @@ super + ctrl + {1-9}
     bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-super + ctrl + space
+super + space
     bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-super + ctrl + shift + space
+super + ctrl + space
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #################################
@@ -79,16 +90,20 @@ super + ctrl + shift + space
 #################################
 
 # expand the tiled space in the given direction
-super + {h,j,k,l}
+super + alt + {Left,Down,Up,Right}
     bspc node {@west -r -20,@south -r +20,@north -r -20,@east -r +20}
 
 # Resize a window using keyboard
-super + shift + {h,j,k,l}
+super + alt + shift + {Left,Down,Up,Right}
     bspc node {@west -r +20,@south -r -20,@north -r +20,@east -r -20}
 
 # Resize a window using the mouse
 super + button{1-3}
     bspc pointer -g {move,resize_side,resize_corner}
+
+# Balance
+super + b
+    bspc node @parent --balance
 
 #####################
 # Desktops/Monitors #
