@@ -27,12 +27,15 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # SSH keys are managed by gpg-agent
 export SSH_AUTH_SOCK="/var/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
+# GPG agent
+gpg-connect-agent /bye
+
 # Screen dim/lock : see man xss-lock for more informations
 xset s 120 180
 xss-lock -n dim -- lock -n &
 
 # Handle ACPI events
-acpi-handle.pl
+acpi-handle.pl -d
 
 # Keybindings
 sxhkd &
