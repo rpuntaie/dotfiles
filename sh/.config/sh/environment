@@ -22,8 +22,9 @@ add_to_path() {
 
 # User specific path:
 add_to_path "$HOME/.local/bin"
-add_to_path "$HOME/.local/opt/utils/bin"
+add_to_path "$HOME/.local/opt/desktop-utilities/bin"
 add_to_path "$HOME/.local/opt/epfl-scripts/bin"
+add_to_path "$HOME/.cargo/bin"
 
 unset -f add_to_path
 export PATH
