@@ -171,3 +171,7 @@ set nospell
 " More natural splits
 set splitbelow
 set splitright
+
+
+" Fix unrecognised file types:
+au BufRead,BufNewFile *.html.ecr setl filetype=html
