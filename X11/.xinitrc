@@ -19,7 +19,7 @@ dunst &
 compton -D 0 --no-fading-openclose --config ~/.config/compton/compton.conf -b &
 
 # Adapt the display's color to the time of the day
-xflux -l 46.5 -g 6.6
+#redshift
 
 # Fix GUI for java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -38,7 +38,9 @@ xss-lock -n dim -- lock -n &
 acpi-handle.pl -d
 
 # Keybindings
-sxhkd &
+#sxhkd &
 
 # Launch WM
-exec bspwm
+#exec bspwm
+#exec i3
+exec xmonad

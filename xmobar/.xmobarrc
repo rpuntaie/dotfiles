@@ -50,14 +50,13 @@ Config {
 --                                    , "-S"  , "><"
 --                                ] 10
                 , Run StdinReader
-	    -- Displays the status of Caps Lock, Num Lock and Scroll Lock.
-		, Run Locks
+            -- Displays the status of Caps Lock, Num Lock and Scroll Lock.
+                , Run Locks
             -- Get activated network interfaces + IP adress
-		, Run Com "network" [] "network" 10
-            -- Get workspaces 
-		, Run PipeReader "/tmp/xmobar-fifo" "workspaces"
+                , Run Com "network" [] "network" 10
+            -- Workspaces
+                , Run StdinReader
                 ]
        , alignSep = "}{"
-       , template = "%workspaces% }          %date% { <fc=darkred>%locks%</fc> %loadavg% | %disku% | %network% | Batt: %bat1% %bat0%"
+       , template = "%StdinReader% }          %date% { <fc=darkred>%locks%</fc> %loadavg% | %disku% | %network% | Batt: %bat1% %bat0%"
        }
-

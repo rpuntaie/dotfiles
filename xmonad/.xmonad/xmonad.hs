@@ -11,7 +11,10 @@ import XMonad.Layout.Reflect -- Turn layout by 180°.
 import XMonad.Layout.MultiToggle -- Toggle layout transformers.
 import XMonad.Layout.MultiToggle.Instances -- Layout transformers.
 import XMonad.Actions.WindowBringer
-import XMonad.Util.Run	(spawnPipe)
+import XMonad.StackSet as W
+import XMonad.ManageHook
+import XMonad.Util.NamedScratchpad
+import XMonad.Util.Run(spawnPipe)
 
 -- Haskell
 import Data.Monoid -- Add hooks together. (?)
