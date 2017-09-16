@@ -1,23 +1,24 @@
-###
-# General
+###################
+# Fnux's Sway setup
+
 # See `man 5 sway` for documentation.
 
-font Sans 8
+font pango:monospace 8
 output * bg /home/fnux/Pictures/wallpaper.jpg fill
 gaps inner 8
 default_border pixel
 
-# use super for $mod
+### External
+
+exec xrdb ~/.Xresources
+exec eventd
+
+### Variables
+
 set $mod Mod4
-# Vim-like directions
-set $left h
-set $down j
-set $up k
-set $right l
-# Terminal emulator
-set $term urxvt256c-ml
-# Launcher
+set $term urxvt256c
 set $menu dmenu_run
+set $lock swaylock
 
 ### Input/Ouput configuration
 
@@ -30,64 +31,74 @@ set $menu dmenu_run
        middle_emulation enabled
    }
 
-###
-# Key bindings
+### General Keybindings
 
-### Basics/Misc
-
-# start a terminal
 bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
 
-# kill focused window
-bindsym $mod+x kill
-
-# Drag floating windows by holding down $mod and left mouse button.
-# Resize them with right mouse button + $mod.
-# Despite the name, also works for non-floating windows.
-# Change normal to inverse to use left mouse button for resizing and right
-# mouse button for dragging.
-floating_modifier $mod normal
-
-# reload the configuration file
+bindsym $mod+c kill
 bindsym $mod+Shift+r reload
-
-# exit sway (logs you out of your wayland session)
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Mod1+r restart
+# Exit i3
 bindsym $mod+Shift+Delete exit
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod normal
+bindsym $mod+a exec $lock
 
 # Toggle window decorations
 bindsym $mod+p border toggle
 
-### Apps
+### Focus
 
-# LockScreen
-bindsym $mod+a exec swaylock
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
-# start your launcher
-bindsym $mod+d exec $menu
-
-### Moving around
-
-# Move your focus around
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-# or use $mod+[up|down|left|right]
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# _move_ the focused window with the same, but add Shift
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-# ditto, with arrow keys
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# focus the parent container
+bindsym $mod+o focus parent
+# focus the child container
+bindsym $mod+i focus child
+
+### Layout
+
+bindsym $mod+s split toggle
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+t layout stacking
+bindsym $mod+g layout tabbed
+bindsym $mod+v layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Sticky window
+bindsym $mod+u sticky toggle
 
 ### Workspaces
 
@@ -118,29 +129,6 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+q workspace prev
 bindsym $mod+w workspace next
 
-### Layout stuff
-
-bindsym $mod+v split toggle
-
-bindsym $mod+g layout stacking
-bindsym $mod+t layout tabbed
-#bindsym $mod+b layout toggle split
-bindsym $mod+b layout auto next
-
-bindsym $mod+f fullscreen
-
-# Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
-
-# Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
-
-# move focus to the parent container
-#bindsym $mod+a focus parent
-
-# Sticky!
-bindsym $mod+l sticky toggle
-
 ### Scratchpad
 
 # Move the currently focused window to the scratchpad
@@ -157,10 +145,10 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
     # ditto, with arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
@@ -181,11 +169,11 @@ bindsym $mod+r mode "resize"
 bar {
     position top
     font Deja Vu Sans Mono 8
-    height 20
+    height 23
     status_command i3status
     colors {
         statusline #ffffff
-        background #323232
+        background #32323296
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
