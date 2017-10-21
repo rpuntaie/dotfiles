@@ -6,8 +6,8 @@ xsetroot -cursor_name left_ptr
 # Load X resources:
 xrdb ~/.Xresources
 
-# swap escape and caps lock
-setxkbmap -model pc104 -layout ch -option caps:swapescape
+# set keymap + swap escape and caps lock
+setxkbmap -layout ch -variant fr -option caps:swapescape
 
 # Set the wallpaper:
 nitrogen --restore
