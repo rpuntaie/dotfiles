@@ -1,22 +1,24 @@
 " Vim configuration file.
 " Written by Fnux.
 
-"NeoBundle Scripts-------------------------------------------------------------
-if &compatible
-  set nocompatible               " Be iMproved
+"NeoBundle --------------------------------------------------------------------
+
+let g:bundledir=$HOME.'/.vim/neobundle'
+let g:bundleinit=0
+
+" Initialise and bootstrap NeoBundle (here goes my thanks to flor):
+if has('vim_starting')
+  if !isdirectory(g:bundledir)
+    let g:bundleinit=1
+    call mkdir(g:bundledir, 'p', 0700)
+    !git clone 'https://github.com/Shougo/neobundle.vim' $HOME/.vim/neobundle/neobundle.vim
+  endif
+  set runtimepath+=$HOME/.vim/neobundle/neobundle.vim
 endif
 
-" Required:
-set runtimepath+=/home/fnux/.vim/bundle/neobundle.vim/
-
-" Required:
-call neobundle#begin(expand('/home/fnux/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
+" List of bundles I use (including NeoBundle itself): "
+call neobundle#begin(g:bundledir)
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -25,17 +27,16 @@ NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
+NeoBundle 'kien/rainbow_parentheses.vim'
 
-" Required:
+" Initial run requires NeoBundleInstall, as a simple 'Check' won't suffice:
+if g:bundleinit
+  NeoBundleInstall
+else
+  NeoBundleCheck
+endif
+
 call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scriptsr--------------------------------------------------------
 
 "Plugins config----------------------------------------------------------------
 
@@ -136,6 +137,11 @@ nnoremap <silent> <leader>h :call g:ToggleColorColumn()<CR>
 
 "Misc--------------------------------------------------------------------------
 
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+filetype plugin indent on
+
 " Mouse support ("all")
 set mouse=a
 
@@ -171,7 +177,6 @@ set nospell
 " More natural splits
 set splitbelow
 set splitright
-
 
 " Fix unrecognised file types:
 au BufRead,BufNewFile *.html.ecr setl filetype=html
