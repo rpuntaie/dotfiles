@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Let's browse the web !
+
+/usr/bin/qutebrowser $@

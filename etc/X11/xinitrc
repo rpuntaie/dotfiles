@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Cursor
+xsetroot -cursor_name left_ptr
+
+# Load X resources:
+xrdb $XDG_CONFIG_HOME/X11/Xresources
+
+# set keymap + swap escape and caps lock
+setxkbmap -layout ch -variant fr -option caps:swapescape
+
+# Set the wallpaper:
+nitrogen --restore
+
+# Dunst notification daemon
+dunst &
+
+# Adapt the display's color to the time of the day
+pgrep redshift &> /dev/null || redshift &> /dev/null &
+
+# Fix GUI for java apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Screen dim/lock : see man xss-lock for more informations
+xset s 240 180
+xss-lock lock.sh &
+
+# Launch WM
+exec xmonad

@@ -1,0 +1,64 @@
+-- Xmobar configuration file, written by Fnux.
+-- vim: set filetype=haskell :
+Config {
+    -- Appearance
+         font               = "xft:Deja Vu Sans Mono:pixelsize=11"
+       , bgColor            = "black"
+       , fgColor            = "grey"
+       , position           = Static { xpos = 0, ypos = 0, width = 1919, height = 23 }
+       , alpha              = 150
+    -- general behavior
+       , hideOnStart        = False
+       , allDesktops        = True
+       , overrideRedirect   = True
+       , pickBroadest       = True
+       , persistent         = True
+    -- Commands
+       , commands =
+            -- Get battery information
+                [ Run Com "power-now.rb" ["--ac-with-sep"] "ac-status" 10
+                , Run Com "power-now.rb" ["--bat"] "power-now" 30
+                , Run BatteryN  ["BAT1"]
+                                [ "-t", "<left>"
+                                , "-L", "10", "-H", "80"
+                                , "-l", "red", "-n", "darkorange", "-h", "darkgreen"
+                                , "--", "-O", "<fc=darkgreen>On</fc> - ", "-i", ""
+                                ] 60 "bat1"
+                , Run BatteryN  ["BAT0"]
+                                [ "-t", "<left>"
+                                , "-L", "10", "-H", "80"
+                                , "-l", "red", "-n", "darkorange", "-h", "darkgreen"
+                                , "--", "-O", "<fc=darkgreen>On</fc> - ", "-i", ""
+                                ] 60 "bat0"
+            -- Get load average
+                , Run Com "sh" ["-c", "awk '{print $1, $2, $3 }' /proc/loadavg"] "loadavg" 10
+            -- Get current date
+                , Run Date      "%a %d - %H:%M" "date" 10
+            -- Get the space left on / and /home
+                , Run DiskU     [("/", "/: <free>"),("/home", "/h: <free>"),("/storage", "/str: <free>")]
+                                [ "--Low"   , "10"
+                                , "--High"  , "50"
+                                , "--low"   , "red"
+                                , "--high"  , "darkgreen"
+                                ] 60
+            -- Get unread emails in mailboxes/maildirs.
+            -- Get current memory consumption
+                , Run Memory    ["-t", "Mem: <usedratio>%"] 10
+            -- Get current song information in MPD
+--                , Run MPD       ["-t", "<statei> <fc=lightgrey><title></fc> by <fc=lightgrey><artist></fc>"
+--                                ,"--"
+--                                    , "-P"  , ">>"
+--                                    , "-Z"  , ",,"
+--                                    , "-S"  , "><"
+--                                ] 10
+                , Run StdinReader
+            -- Displays the status of Caps Lock, Num Lock and Scroll Lock.
+                , Run Locks
+            -- Get network interfaces and IP addresses
+                , Run Com "interfaces.rb" [] "network" 10
+            -- Workspaces
+                , Run StdinReader
+                ]
+       , alignSep = "}{"
+       , template = "%StdinReader% } %date% { <fc=darkred>%locks%</fc> %loadavg% | %disku% | %network% | %ac-status%%power-now% %bat1% %bat0%"
+       }

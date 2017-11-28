@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Opens weechat in an URxvt window.
+
+exec urxvt -e weechat "$@"

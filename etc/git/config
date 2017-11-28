@@ -1,0 +1,20 @@
+[alias]
+  st = status
+  unstage = reset HEAD --
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+[commit]
+  gpgsign = false
+  verbose = true
+[core]
+  editor = vim
+  autocrlf = input
+[diff]
+  tool = vimdiff
+[merge]
+  tool = vimdiff
+[user]
+  name = Timothée Floure
+  email = timothee.floure@epfl.ch

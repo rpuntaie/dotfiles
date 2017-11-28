@@ -1,0 +1,74 @@
+! Xresources config file.
+! Written by Fnux.
+!
+
+! -----------------------------------------------------------------------------
+! Colors : adaptation by CJD14 of the jellybean theme.
+!
+
+! special
+*.foreground:   #e8e8d3
+*.background:   #151515
+*.cursorColor:  #e8e8d3
+
+! black
+*.color0:       #3b3b3b
+*.color8:       #6c6c6c
+
+! red
+*.color1:       #cf6a4c
+*.color9:       #db8f78
+
+! green
+*.color2:       #99ad6a
+*.color10:      #b2c18f
+
+! yellow
+*.color3:       #d8ad4c
+*.color11:      #e1c178
+
+! blue
+!*.color4:       #597bc5
+*.color4:       #1F4493
+*.color12:      #829cd3
+
+! magenta
+*.color5:       #a037b0
+*.color13:      #b769c3
+
+! cyan
+*.color6:       #71b9f8
+*.color14:      #94caf9
+
+! white
+*.color7:       #adadad
+*.color15:      #c1c1c1
+
+! -----------------------------------------------------------------------------
+! URxvt.
+!
+
+URxvt*foreground: #808080
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=13
+URxvt.scrollBar: false
+
+! Perl extensions
+URxvt.perl-ext-common: default,clipboard,matcher,url-select
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
+! URL-select
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+URxvt.keysym.C-S-K :erl:url-select:select_next
+
+! Scrollback buffer
+URxvt.saveLines: 10000
+
+! Disable ISO 14755 unicode input so we can use Ctrl-Shift bindings
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
+! Bind Ctrl-Shift-c & Ctrl-Shift-v to copy and paste
+URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt.keysym.C-S-0x56: eval:paste_clipboard

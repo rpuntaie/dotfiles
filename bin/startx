@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Wrap `startx` to use $XINITRC (specified in ~/.pam_environment).
+
+[ -f "$XINITRC" ] ||
+    { echo  >&2 "XINITRC not found!"; exit 1; }
+
+/usr/bin/startx $XINITRC

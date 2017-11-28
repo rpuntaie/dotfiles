@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Wrap `sbt` to respect XDG.
+
+/opt/sbt/bin/sbt -ivy "$XDG_DATA_HOME"/ivy2 -sbt-dir "$XDG_DATA_HOME"/sbt

@@ -1,0 +1,35 @@
+# HOME/.pam_environment
+# Environment variables set byam(8) for a user session.
+# Written by Fnux, heavily inspired by `ayekat`'s dotfiles.
+
+# This file is used to fix whatever env variables are needed to get a reasonable
+# XDG-enable system.
+HOME                DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
+
+# XDG base directory specification
+XDG_CACHE_HOME      DEFAULT="${HOME}/.local/var/cache"
+XDG_CONFIG_HOME     DEFAULT="${HOME}/.local/etc"
+XDG_DATA_HOME       DEFAULT="${HOME}/.local/var/lib"
+XDG_DATA_DIRS       DEFAULT="/usr/local/share:/usr/share" OVERRIDE="${XDG_DATA_DIRS}"
+XDG_DATA_DIRS       DEFAULT="${HOME}/.local/share:${XDG_DATA_DIRS}"
+XDG_RUNTIME_DIR     DEFAULT="${HOME}/.local/run"
+
+# Non-standard
+XDG_LIB_HOME        DEFAULT="${HOME}/.local/lib"
+XDG_LOG_HOME        DEFAULT="${HOME}/.local/var/log"
+
+# Fixes for various applications to respect XDG
+CARGO_HOME          DEFAULT="${XDG_DATA_HOME}/cargo"
+GNUPGHOME           DEFAULT="${XDG_DATA_HOME}/gnupg"
+PASSWORD_STORE_DIR  DEFAULT="${XDG_DATA_HOME}/pass"
+RXVT_SOCKET         DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
+VIMINIT             DEFAULT="source \${XDG_CONFIG_HOME}/vim/vimrc"
+XAUTHORITY          DEFAULT="${XDG_RUNTIME_DIR}/Xauthority"
+XINITRC             DEFAULT="${XDG_CONFIG_HOME}/X11/xinitrc"
+ZDOTDIR             DEFAULT="${XDG_CONFIG_HOME}/zsh"
+ADOTDIR             DEFAULT="${XDG_DATA_HOME}/antigen"
+LESSHISTFILE        DEFAULT="${XDG_DATA_HOME}/lesshist"
+MIX_HOME            DEFAULT="${XDG_DATA_HOME}/mix"
+HEX_HOME            DEFAULT="${XDG_DATA_HOME}/hex"
+TASKDATA            DEFAULT="${XDG_DATA_HOME}/task"
+TASKRC              DEFAULT="${XDG_CONFIG_HOME}/task/taskrc"

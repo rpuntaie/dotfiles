@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Time to sleep !
+
+/usr/bin/systemctl suspend

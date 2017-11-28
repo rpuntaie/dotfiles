@@ -1,0 +1,5 @@
+# Maximize PDF to fit width (rather than height):
+set adjust-open "width"
+
+# Copy to clipboard
+set selection-clipboard clipboard

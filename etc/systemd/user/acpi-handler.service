@@ -1,0 +1,9 @@
+[Unit]
+Description=Handle ACPI events
+After=acpid.service
+
+[Service]
+ExecStart=/home/fnux/.local/bin/acpi-handler.pl
+
+[Install]
+WantedBy=default.target

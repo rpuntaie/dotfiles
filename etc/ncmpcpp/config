@@ -1,0 +1,4 @@
+# Directories
+mpd_music_dir = ~/Music
+ncmpcpp_directory = ~/.local/var/lib/ncmpcpp
+lyrics_directory = ~/.local/var/lib/ncmpcpp/lyrics
