@@ -35,7 +35,7 @@ Config {
             -- Get current date
                 , Run Date      "%a %d - %H:%M" "date" 10
             -- Get the space left on / and /home
-                , Run DiskU     [("/", "/: <free>"),("/home", "/h: <free>"),("/storage", "/str: <free>")]
+                , Run DiskU     [("/", "/: <free>"),("/home", "/h: <free>"),("/srv/storage", "/str: <free>")]
                                 [ "--Low"   , "10"
                                 , "--High"  , "50"
                                 , "--low"   , "red"
