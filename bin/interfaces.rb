@@ -6,7 +6,7 @@
 @ignored_interfaces = ["virbr0", "lo"]
 
 input = %x(ip -o -4 addr)
-regex = /^\d:\s(\w+)\s+inet\s(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/\d{1,2}\s.*$/
+regex = /^\d+:\s(\w+)\s+inet\s(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/\d{1,2}\s.*$/
 Interface = Struct.new(:device, :addr)
 interfaces = Array.new
 
