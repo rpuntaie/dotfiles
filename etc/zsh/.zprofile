@@ -4,6 +4,18 @@
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
 ###
+# Elixir, Erlang
+#
+
+if [[ -f $XDG_DATA_HOME/kerl/erlang/activate ]]; then
+  . $XDG_DATA_HOME/kerl/erlang/activate
+fi
+
+if [[ -f $XDG_DATA_HOME/kiex/elixirs/.default ]]; then
+  source $XDG_DATA_HOME/kiex/elixirs/.default
+fi
+
+###
 # PATH
 
 # Adds directory to the PATH variable, with (hopefully) all necessary checks:
