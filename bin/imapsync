@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $(/usr/bin/nm-online -q -t 15; echo $?) == 0 ]; then
+  /usr/bin/offlineimap $@
+else
+  echo "Network unreachable. Aborting."
+fi

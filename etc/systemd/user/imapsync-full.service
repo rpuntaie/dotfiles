@@ -1,0 +1,6 @@
+[Unit]
+Description=Offlineimap full synchronization
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/imapsync

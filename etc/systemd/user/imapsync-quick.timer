@@ -1,0 +1,10 @@
+[Unit]
+Description=Run imapsync-quick every 15 minutes
+After=network.target
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=15min
+
+[Install]
+WantedBy=timers.target

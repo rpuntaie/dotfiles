@@ -1,0 +1,10 @@
+[Unit]
+Description=Run imapsync-full every 5 hours
+After=network.target
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5h
+
+[Install]
+WantedBy=timers.target
