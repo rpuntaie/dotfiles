@@ -53,8 +53,11 @@ NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'tpope/vim-fugitive'
 
 " Initial run requires NeoBundleInstall, as a simple 'Check' won't suffice:
 if g:bundleinit
@@ -142,7 +145,6 @@ nnoremap  <silent><leader>e $
 
 " Toggle 'paste' with ,p.
 nnoremap <leader>p :set invpaste paste?<CR>
-set pastetoggle=<leader>p
 
 " Neosnippet key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -158,9 +160,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " Unite
-nmap <leader>b :Unite buffer -start-insert <CR>
-nmap <leader>e :Unite file_rec/async file_mru -start-insert <CR>
-nmap <leader>E :Unite file_mru -start-insert <CR>
+nmap <leader>b :Unite buffer <CR>
+nmap <leader>e :Unite file_rec/async -start-insert <CR>
+nmap <leader>E :Unite file_rec/async file_mru -start-insert <CR>
 nmap <leader>c :Unite change -start-insert <CR>
 nmap <leader>j :Unite jump -auto-preview <CR>
 nmap <Leader>t :Unite tag -start-insert <CR>
