@@ -58,13 +58,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ((modm,                       xK_Return   ), spawn $ XMonad.terminal conf)  -- Launch term
   , ((modm,                       xK_d        ), spawn myMenu)                  -- Launch menu
   , ((modm,                       xK_e        ), spawn myPassMenu)              -- Launch passwords menu
-  , ((mod1Mask,                   xK_section  ), spawn myLock)                  -- Lock screen
+  , ((modm .|. shiftMask,         xK_s        ), spawn myLock)                  -- Lock screen
   , ((modm,                       xK_c        ), kill)                          -- Close focused window
   , ((modm .|. shiftMask,         xK_Delete   ), io (exitWith ExitSuccess))     -- Quit xmonad
   , ((mod1Mask .|. shiftMask,     xK_r        ), spawn "xmonad --recompile; xmonad --restart") -- Restart xmonad
 
   -- Misc
-  , ((modm,                       xK_section  ), namedScratchpadAction myScratchpads "main") -- Scratchpad
+  , ((modm,                       xK_section  ), namedScratchpadAction myScratchpads "tmux-scratchpad") -- Scratchpad
   , ((modm,                       xK_r        ), gotoMenu)  -- Window switcher (goto)
   , ((modm .|. shiftMask,         xK_r        ), bringMenu) -- Window switcher (bring)
 
@@ -94,15 +94,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- resizing
   , ((modm,                       xK_h        ), sendMessage Shrink)
   , ((modm,                       xK_l        ), sendMessage Expand)
-  , ((modm .|. shiftMask,         xK_j        ), sendMessage MirrorShrink)
-  , ((modm .|. shiftMask,         xK_k        ), sendMessage MirrorExpand)
+  , ((modm .|. shiftMask,         xK_Up       ), sendMessage MirrorShrink)
+  , ((modm .|. shiftMask,         xK_Down     ), sendMessage MirrorExpand)
   , ((modm,                       xK_n        ), refresh) -- Resize viewed windows to the correct size
     ]
     ++
     -- Function keys
     [
       ((0, xK_XF86Display), spawn "arandr")
-    , ((0, xK_XF86Tools), spawn "setxkbmap -layout ch -variant fr -option caps:swapescape")
+    , ((0, xK_XF86Tools), spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock")
     ]
     ++
     -- mod-[1..9] %! Switch to workspace N
@@ -160,7 +160,7 @@ myLayout = avoidStruts $ mkToggle (single NBFULL) (tiled |||  Mirror tiled ||| r
 ---- Scratchpads ----
 
 myScratchpads = [
-    NS "main" "urxvt -e tmux -2" (title =? "tmux") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+    NS "tmux-scratchpad" "urxvt -e tmux-scratchpad" (title =? "tmux-scratchpad") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   ] where role = stringProperty "WM_WINDOW_ROLE"
 
 ---- ManageHook ----

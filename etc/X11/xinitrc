@@ -6,8 +6,8 @@ xsetroot -cursor_name left_ptr
 # Load X resources:
 xrdb $XDG_CONFIG_HOME/X11/Xresources
 
-# set keymap + swap escape and caps lock
-setxkbmap -layout ch -variant fr -option caps:swapescape
+# set keymap + set caps lock to escape + caps lock when pressing both shift keys
+setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock
 
 # Set the wallpaper:
 nitrogen --restore
