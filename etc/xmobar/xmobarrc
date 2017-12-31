@@ -5,11 +5,11 @@ Config {
          font               = "xft:Deja Vu Sans Mono:pixelsize=11"
        , bgColor            = "black"
        , fgColor            = "grey"
-       , position           = Static { xpos = 0, ypos = 0, width = 1919, height = 23 }
+       -- , position           = Static { xpos = 0, ypos = 0, width = 1919, height = 23 }
        , alpha              = 150
     -- general behavior
        , hideOnStart        = False
-       , allDesktops        = True
+       , allDesktops        = False
        , overrideRedirect   = True
        , pickBroadest       = True
        , persistent         = True
