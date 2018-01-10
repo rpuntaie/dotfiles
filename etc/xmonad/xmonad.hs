@@ -7,64 +7,60 @@
 -- XMonad
 import XMonad
 import XMonad.ManageHook
-import XMonad.Hooks.DynamicLog -- WS info for xmobar.
 import XMonad.Hooks.ManageDocks
+import qualified XMonad.StackSet as W
 -- Layouts
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.Reflect -- Turn layout by 180°.
-import XMonad.Layout.MultiToggle -- Toggle layout transformers.
-import XMonad.Layout.MultiToggle.Instances -- Layout transformers.
-
+import XMonad.Layout.Reflect                -- Turn layout by 180°.
+import XMonad.Layout.MultiToggle            -- Toggle layout transformers.
+import XMonad.Layout.MultiToggle.Instances  -- Layout transformers.
+-- Workspaces
+import XMonad.Hooks.DynamicLog              -- WS info for xmobar.
+import XMonad.Actions.CycleWS               -- Goto nex/previous WS.
 -- Misc
-import XMonad.Actions.CycleWS -- Goto nex/previous WS.
 import XMonad.Hooks.UrgencyHook
-import XMonad.Util.EZConfig
+import XMonad.Util.EZConfig                 -- Emacs style keybindings
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.WindowBringer
 import XMonad.Util.Run(spawnPipe)
-import System.Exit -- Quit Xmonad
-import qualified XMonad.StackSet as W -- Xmonad commands.
-import qualified Data.Map as M -- For keybindings.
+import qualified Data.Map as M
+import System.Exit
 import Data.Maybe
 
----- Variables ----
+---- Run XMonad ----
 
-myModMask             = mod4Mask
-myTerminal            = "urxvt256c"
-myLock                = "lock.sh"
-myMenu                = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
-myPassMenu            = "pass-menu"
-myWorkspaces          = ["1","2","3","4","5","6","7","8","9","0"]
-myNormalBorderColor   = "#6e6b5e"
-myFocusedBorderColor  = "#8e2803"
+main = xmonad =<< xmobar (
+  withUrgencyHook NoUrgencyHook $ myConfig `additionalKeys` legacyKeybindings
+                         )
 
--- Whether focus follows the mouse pointer.
-myFocusFollowsMouse   :: Bool
-myFocusFollowsMouse   = True
+myConfig = def { borderWidth        = 1
+               , focusFollowsMouse  = True
+               , normalBorderColor  = "#6e6b5e"
+               , focusedBorderColor = "#8e2803"
+               , terminal           = "urxvt256c"
+               , modMask            = mod4Mask
+               , keys               = myKeys
+               , mouseBindings      = myMouseBindings
+               , workspaces         = myWorkspaces
+               , layoutHook         = myLayout
+               , manageHook         = myManageHook
+               }
 
--- Width of the window border in pixels.
-myBorderWidth         = 1
 
 ---- Keybindings ----
 
-xmonadExit = io exitSuccess
-xmonadRestart = spawn "xmonad --recompile; xmonad --restart"
-toggleFullscreen = sequence_ [sendMessage $ Toggle NBFULL, sendMessage $ ToggleGaps]
-arandr = spawn "arandr"
-setKeyboard = spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock"
-
 myKeys conf = mkKeymap conf $
     -- Basics
-    [ ("M-<Return>"  , spawn $ XMonad.terminal conf) -- Open a new terminal
-    , ("M-d"         , spawn myMenu                ) -- Launcher
-    , ("M-e"         , spawn myPassMenu            ) -- Password menu
-    , ("M-S-s"       , spawn myLock                ) -- Lock screen
-    , ("M-c"         , kill                        ) -- Close focused window
-    , ("M-S-<Delete>", xmonadExit                  ) -- Quit XMonad
-    , ("M1-S-r"      , xmonadRestart               ) -- Restart XMonad
+    [ ("M-<Return>"  , spawn $ XMonad.terminal conf      ) -- Open a new terminal
+    , ("M-d"         , spawn programLauncher             ) -- Launcher
+    , ("M-e"         , spawn passMenu                    ) -- Password menu
+    , ("M-S-s"       , spawn lockScreen                  ) -- Lock screen
+    , ("M-c"         , kill                              ) -- Close focused window
+    , ("M-S-<Delete>", xmonadExit                        ) -- Quit XMonad
+    , ("M1-S-r"      , xmonadRestart                     ) -- Restart XMonad
     ] ++
     -- Layout(s)
     [ ("M-,"         , sendMessage (IncMasterN 1)         ) -- Increment the number of windows in the master area
@@ -130,7 +126,7 @@ legacyKeybindings =
   [((mod4Mask, xK_section), namedScratchpadAction myScratchpads "tmux-scratchpad")]
 
 ---- Mouse bindings ----
-myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
+
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
@@ -165,18 +161,6 @@ myLayout = avoidStruts $ mkToggle (single NBFULL) (tiled |||  Mirror tiled ||| r
     -- Gaps
     outer_gaps = gaps [(U,5), (R,5), (D,5), (L,5)]
 
----- WorkSpaces ----
-
-isHidden = do hs <- gets (map W.tag . W.hidden . windowset)
-              return (\w -> W.tag w `elem` hs)
-
-
-nonNSPNonEmptyHiddenWs = WSIs $ do
-                                hi <- isHidden
-                                return (\w -> nnsp w && ne w && hi w)
-                                    where nnsp (W.Workspace tag _ _) = tag /= "NSP"
-                                          ne = isJust . W.stack
-
 ---- Scratchpads ----
 
 myScratchpads = [
@@ -191,33 +175,25 @@ myManageHook = composeAll
    , manageDocks
    ]
 
----- Configure! -----
+---- Helpers ----
 
-defaults = def {
-    -- simple stuff
-    terminal           = myTerminal,
-    focusFollowsMouse  = myFocusFollowsMouse,
-    borderWidth        = myBorderWidth,
-    modMask            = myModMask,
-    workspaces         = myWorkspaces,
-    normalBorderColor  = myNormalBorderColor,
-    focusedBorderColor = myFocusedBorderColor,
+lockScreen       = "lock.sh"
+programLauncher  = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
+passMenu         = "pass-menu"
+xmonadExit       = io exitSuccess
+xmonadRestart    = spawn "xmonad --recompile; xmonad --restart"
+toggleFullscreen = sequence_ [sendMessage $ Toggle NBFULL, sendMessage $ ToggleGaps]
+arandr           = spawn "arandr"
+setKeyboard      = spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock"
 
-    -- key bindings
-    keys               = myKeys,
-    mouseBindings      = myMouseBindings,
+-- Workspace-related
 
-    -- hooks, layouts
-    layoutHook         = myLayout,
-    manageHook         = myManageHook
-    --handleEventHook    = myEventHook,
-    --logHook            = myLogHook,
-    --startupHook        = myStartupHook
-}
+myWorkspaces     = ["1","2","3","4","5","6","7","8","9","0"]
+isHidden         = do hs <- gets (map W.tag . W.hidden . windowset)
+                      return (\w -> W.tag w `elem` hs)
 
----- Run! ----
-
-main = xmonad =<< xmobar ( withUrgencyHook NoUrgencyHook $ defaults
-                                                           `additionalKeys`
-                                                           legacyKeybindings
-                         )
+nonNSPNonEmptyHiddenWs = WSIs $ do
+                                hi <- isHidden
+                                return (\w -> nnsp w && ne w && hi w)
+                                    where nnsp (W.Workspace tag _ _) = tag /= "NSP"
+                                          ne = isJust . W.stack
