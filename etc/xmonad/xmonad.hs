@@ -27,6 +27,8 @@ import XMonad.Util.Run(spawnPipe)
 import System.Exit -- Quit Xmonad
 import qualified XMonad.StackSet as W -- Xmonad commands.
 import qualified Data.Map as M -- For keybindings.
+import Data.Maybe
+
 
 ---- Variables ----
 
@@ -80,8 +82,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm,                       xK_g        ), withFocused $ float)
   -- Workspaces
   , ((modm,                       xK_Tab      ), toggleWS' ["NSP"]) --Toggle to the workspace displayed previously
-  , ((modm,                       xK_w        ), nextWS) -- Next workspace
-  , ((modm,                       xK_q        ), prevWS) -- Previous workspace
+  , ((modm,                       xK_w        ), moveTo Next nonNSPNonEmptyHiddenWs) -- Next workspace
+  , ((modm,                       xK_q        ), moveTo Prev nonNSPNonEmptyHiddenWs) -- Previous workspace
   -- Focus/Moving
   , ((modm,                       xK_j        ), windows W.focusDown) -- Move focus to the previous window
   , ((modm,                       xK_Down     ), windows W.focusDown)
@@ -156,6 +158,18 @@ myLayout = avoidStruts $ mkToggle (single NBFULL) (tiled |||  Mirror tiled ||| r
 
     -- Gaps
     outer_gaps = gaps [(U,5), (R,5), (D,5), (L,5)]
+
+---- WorkSpaces ----
+
+isHidden = do hs <- gets (map W.tag . W.hidden . windowset)
+              return (\w -> W.tag w `elem` hs)
+
+
+nonNSPNonEmptyHiddenWs = WSIs $ do
+                                hi <- isHidden
+                                return (\w -> nnsp w && ne w && hi w)
+                                    where nnsp (W.Workspace tag _ _) = tag /= "NSP"
+                                          ne = isJust . W.stack
 
 ---- Scratchpads ----
 
