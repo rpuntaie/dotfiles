@@ -21,6 +21,7 @@ import XMonad.Layout.MultiToggle.Instances -- Layout transformers.
 -- Misc
 import XMonad.Actions.CycleWS -- Goto nex/previous WS.
 import XMonad.Hooks.UrgencyHook
+import XMonad.Util.EZConfig
 import XMonad.Util.NamedScratchpad
 import XMonad.Actions.WindowBringer
 import XMonad.Util.Run(spawnPipe)
@@ -28,7 +29,6 @@ import System.Exit -- Quit Xmonad
 import qualified XMonad.StackSet as W -- Xmonad commands.
 import qualified Data.Map as M -- For keybindings.
 import Data.Maybe
-
 
 ---- Variables ----
 
@@ -50,78 +50,84 @@ myBorderWidth         = 1
 
 ---- Keybindings ----
 
--- Keycodes for weird keys.
-xK_XF86Display = 0x1008ff59
-xK_XF86Tools = 0x1008ff81
+xmonadExit = io exitSuccess
+xmonadRestart = spawn "xmonad --recompile; xmonad --restart"
+toggleFullscreen = sequence_ [sendMessage $ Toggle NBFULL, sendMessage $ ToggleGaps]
+arandr = spawn "arandr"
+setKeyboard = spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock"
 
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-  [
-  -- Basics
-    ((modm,                       xK_Return   ), spawn $ XMonad.terminal conf)  -- Launch term
-  , ((modm,                       xK_d        ), spawn myMenu)                  -- Launch menu
-  , ((modm,                       xK_e        ), spawn myPassMenu)              -- Launch passwords menu
-  , ((modm .|. shiftMask,         xK_s        ), spawn myLock)                  -- Lock screen
-  , ((modm,                       xK_c        ), kill)                          -- Close focused window
-  , ((modm .|. shiftMask,         xK_Delete   ), io (exitWith ExitSuccess))     -- Quit xmonad
-  , ((mod1Mask .|. shiftMask,     xK_r        ), spawn "xmonad --recompile; xmonad --restart") -- Restart xmonad
-
-  -- Misc
-  , ((modm,                       xK_section  ), namedScratchpadAction myScratchpads "tmux-scratchpad") -- Scratchpad
-  , ((modm,                       xK_r        ), gotoMenu)  -- Window switcher (goto)
-  , ((modm .|. shiftMask,         xK_r        ), bringMenu) -- Window switcher (bring)
-
-  -- Layout(s)
-  , ((modm,                       xK_comma    ), sendMessage (IncMasterN 1)) -- Increment the number of windows in the master area
-  , ((modm,                       xK_period   ), sendMessage (IncMasterN (-1))) -- Deincrement the number of windows in the master area
-  , ((modm,                       xK_f        ), sequence_ [sendMessage $ Toggle NBFULL, sendMessage $ ToggleGaps]) -- Fullscreen
-  , ((modm,                       xK_z        ), sendMessage ToggleStruts) -- Toggle top margin
-  , ((modm,                       xK_space    ), sendMessage NextLayout) -- Rotate through the available layout algorithms
-  , ((modm .|. shiftMask,         xK_space    ), setLayout $ XMonad.layoutHook conf) --  Reset the layouts on the current workspace to default
-  -- Floating stuff
-  , ((modm,                       xK_y        ), withFocused $ windows . W.sink)
-  , ((modm,                       xK_g        ), withFocused $ float)
-  -- Workspaces
-  , ((modm,                       xK_Tab      ), toggleWS' ["NSP"]) --Toggle to the workspace displayed previously
-  , ((modm,                       xK_w        ), moveTo Next nonNSPNonEmptyHiddenWs) -- Next workspace
-  , ((modm,                       xK_q        ), moveTo Prev nonNSPNonEmptyHiddenWs) -- Previous workspace
-  -- Focus/Moving
-  , ((modm,                       xK_j        ), windows W.focusDown) -- Move focus to the previous window
-  , ((modm,                       xK_Down     ), windows W.focusDown)
-  , ((modm,                       xK_k        ), windows W.focusUp) -- Move focus to the next window
-  , ((modm,                       xK_Up       ), windows W.focusUp)
-  , ((modm,                       xK_a        ), windows W.focusMaster) -- Swap the focused window and the master window
-  , ((modm .|. shiftMask,         xK_j        ), windows W.swapDown) -- Swap the focused window with the previous window
-  , ((modm .|. shiftMask,         xK_k        ), windows W.swapUp) -- Swap the focused window with the next window
-  , ((modm,                       xK_s        ), windows W.swapMaster) -- Swap the focused window and the master window
-  -- resizing
-  , ((modm,                       xK_h        ), sendMessage Shrink)
-  , ((modm,                       xK_l        ), sendMessage Expand)
-  , ((modm .|. shiftMask,         xK_Up       ), sendMessage MirrorShrink)
-  , ((modm .|. shiftMask,         xK_Down     ), sendMessage MirrorExpand)
-  , ((modm,                       xK_n        ), refresh) -- Resize viewed windows to the correct size
-    ]
-    ++
+myKeys conf = mkKeymap conf $
+    -- Basics
+    [ ("M-<Return>"  , spawn $ XMonad.terminal conf) -- Open a new terminal
+    , ("M-d"         , spawn myMenu                ) -- Launcher
+    , ("M-e"         , spawn myPassMenu            ) -- Password menu
+    , ("M-S-s"       , spawn myLock                ) -- Lock screen
+    , ("M-c"         , kill                        ) -- Close focused window
+    , ("M-S-<Delete>", xmonadExit                  ) -- Quit XMonad
+    , ("M1-S-r"      , xmonadRestart               ) -- Restart XMonad
+    ] ++
+    -- Layout(s)
+    [ ("M-,"         , sendMessage (IncMasterN 1)         ) -- Increment the number of windows in the master area
+    , ("M-."         , sendMessage (IncMasterN (-1))      ) -- Decrement the number of windows in the master area
+    , ("M-f"         , toggleFullscreen                   ) -- Toggle FullScreen
+    , ("M-z"         , sendMessage ToggleStruts           ) -- Toggle top margin (xmobar)
+    , ("M-<Space>"   , sendMessage NextLayout             ) -- Rotate through the available layout algorithms
+    , ("M-S-<Space>" , setLayout $ XMonad.layoutHook conf ) --  Reset the layouts on the current workspace to default
+    ] ++
+    -- WorkSpaces
+    [ ("M-q"         , moveTo Prev nonNSPNonEmptyHiddenWs ) -- Previous non-NSP and non-empty workspace
+    , ("M-w"         , moveTo Next nonNSPNonEmptyHiddenWs ) -- Next non-NSP and non-empty workspace
+    , ("M-<Tab>"     , toggleWS' ["NSP"]                  ) -- Go to the workspace displayed previously (except NSP)
+    -- I should learn Haskell in order to make this fit in 2-3 lines
+    , ("M-1"         , windows $ W.greedyView "1"         )
+    , ("M-S-l"       , windows $ W.shift "1"              )
+    , ("M-2"         , windows $ W.greedyView "2"         )
+    , ("M-S-2"       , windows $ W.shift "2"              )
+    , ("M-3"         , windows $ W.greedyView "3"         )
+    , ("M-S-3"       , windows $ W.shift "3"              )
+    , ("M-4"         , windows $ W.greedyView "4"         )
+    , ("M-S-4"       , windows $ W.shift "4"              )
+    , ("M-5"         , windows $ W.greedyView "5"         )
+    , ("M-S-5"       , windows $ W.shift "5"              )
+    , ("M-6"         , windows $ W.greedyView "6"         )
+    , ("M-S-6"       , windows $ W.shift "6"              )
+    , ("M-7"         , windows $ W.greedyView "7"         )
+    , ("M-S-7"       , windows $ W.shift "7"              )
+    , ("M-8"         , windows $ W.greedyView "8"         )
+    , ("M-S-8"       , windows $ W.shift "8"              )
+    , ("M-9"         , windows $ W.greedyView "9"         )
+    , ("M-S-9"       , windows $ W.shift "9"              )
+    , ("M-0"         , windows $ W.greedyView "0"         )
+    , ("M-S-0"       , windows $ W.shift "0"              )
+    ] ++
+    -- Focus/Moving
+    [ ("M-j"         , windows W.focusDown         ) -- Move focus to the previous window
+    , ("M-k"         , windows W.focusUp           ) -- Move focus to the next window
+    , ("M-S-j"       , windows W.swapDown          ) -- Swap the current window with the previous window
+    , ("M-S-k"       , windows W.swapUp            ) -- Swap the current window with the next window
+    , ("M-a"         , windows W.focusMaster       ) -- Focus the master window
+    , ("M-s"         , windows W.swapMaster        ) -- Swap the focused window and the master window
+    , ("M-r"         , gotoMenu                    )
+    , ("M-S-r"       , bringMenu                   )
+    ] ++
+    -- Resizing
+    [ ("M-h"         , sendMessage Shrink          ) -- Horizontally shrink the master pane
+    , ("M-l"         , sendMessage Expand          ) -- Horizontally expand the master pane
+    , ("M-<Down>"    , sendMessage MirrorShrink    ) -- Vertically expand the focused window
+    , ("M-<Up>"      , sendMessage MirrorExpand    ) -- Vertically shrink the focused window
+    ] ++
+    -- Floating
+    [ ("M-g"         , withFocused $ float            ) -- Switch the focused window to floating
+    , ("M-y"         , withFocused $ windows . W.sink ) -- Put back the focused window in tiling
+    ] ++
     -- Function keys
-    [
-      ((0, xK_XF86Display), spawn "arandr")
-    , ((0, xK_XF86Tools), spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock")
+    [ ("<XF86Display>" , arandr      ) -- Launch arandr
+    , ("<XF86Tools>"   , setKeyboard ) -- (Re)configure the kayboard's layout
     ]
-    ++
-    -- mod-[1..9] %! Switch to workspace N
-    -- mod-shift-[1..9] %! Move client to workspace N
-    [((m .|. modm, k), windows $ f i)
-      | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-     ++ [
-        ((modm, xK_0), (windows $ W.greedyView "0"))
-        , ((modm .|. shiftMask, xK_0), (windows $ W.shift "0"))
-      ]
-    -- ++
-    -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
-    --[((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-    --    | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-    --    , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+
+legacyKeybindings =
+  -- Scratchpad(s)
+  [((mod4Mask, xK_section), namedScratchpadAction myScratchpads "tmux-scratchpad")]
 
 ---- Mouse bindings ----
 myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
@@ -211,4 +217,7 @@ defaults = def {
 
 ---- Run! ----
 
-main = xmonad =<< xmobar ( withUrgencyHook NoUrgencyHook $ defaults )
+main = xmonad =<< xmobar ( withUrgencyHook NoUrgencyHook $ defaults
+                                                           `additionalKeys`
+                                                           legacyKeybindings
+                         )
