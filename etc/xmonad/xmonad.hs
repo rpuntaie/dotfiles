@@ -171,6 +171,7 @@ myScratchpads = [
 
 myManageHook = composeAll
    [ title =? "pinentry-gtk-2" --> doFloat
+   , title =? "Colour picker" --> doFloat
    , namedScratchpadManageHook myScratchpads
    , manageDocks
    ]
