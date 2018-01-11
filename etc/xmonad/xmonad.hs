@@ -19,24 +19,32 @@ import XMonad.Layout.MultiToggle            -- Toggle layout transformers.
 import XMonad.Layout.MultiToggle.Instances  -- Layout transformers.
 -- Workspaces
 import XMonad.Hooks.DynamicLog              -- WS info for xmobar.
+import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.CycleWS               -- Goto nex/previous WS.
+-- Prompt
+import XMonad.Prompt
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
+import Text.Regex.Base
+import Text.Regex.Posix
 -- Misc
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig                 -- Emacs style keybindings
 import XMonad.Util.NamedScratchpad
-import XMonad.Actions.WindowBringer
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Run
 import qualified Data.Map as M
 import System.Exit
 import Data.Maybe
 
 ---- Run XMonad ----
 
-main = xmonad =<< xmobar (
-  withUrgencyHook NoUrgencyHook $ myConfig `additionalKeys` legacyKeybindings
-                         )
+main = do
+  bar <- spawnPipe "xmobar"
+  xmonad $ withUrgencyHook NoUrgencyHook
+         $ myConfig bar `additionalKeys` legacyKeybindings
 
-myConfig = def { borderWidth        = 1
+myConfig bar = def { borderWidth        = 1
                , focusFollowsMouse  = True
                , normalBorderColor  = "#6e6b5e"
                , focusedBorderColor = "#8e2803"
@@ -47,8 +55,20 @@ myConfig = def { borderWidth        = 1
                , workspaces         = myWorkspaces
                , layoutHook         = myLayout
                , manageHook         = myManageHook
+               , handleEventHook = docksEventHook
+               , logHook            = dynamicLogWithPP $ myPP bar
                }
 
+---- Helpers ----
+
+lockScreen       = "lock.sh"
+programLauncher  = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
+passMenu         = "pass-menu"
+xmonadExit       = io exitSuccess
+xmonadRestart    = spawn "xmonad --recompile; xmonad --restart"
+toggleFullscreen = sequence_ [sendMessage $ Toggle NBFULL, sendMessage $ ToggleGaps]
+arandr           = spawn "arandr"
+setKeyboard      = spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock"
 
 ---- Keybindings ----
 
@@ -71,54 +91,46 @@ myKeys conf = mkKeymap conf $
     , ("M-S-<Space>" , setLayout $ XMonad.layoutHook conf ) --  Reset the layouts on the current workspace to default
     ] ++
     -- WorkSpaces
-    [ ("M-q"         , moveTo Prev nonNSPNonEmptyHiddenWs ) -- Previous non-NSP and non-empty workspace
-    , ("M-w"         , moveTo Next nonNSPNonEmptyHiddenWs ) -- Next non-NSP and non-empty workspace
-    , ("M-<Tab>"     , toggleWS' ["NSP"]                  ) -- Go to the workspace displayed previously (except NSP)
+    [ ("M-q"         , cleanWss $ moveTo Prev nonNSPHiddenWs                       )
+    , ("M-w"         , cleanWss $ moveTo Next nonNSPHiddenWs                       )
+    , ("M-<Tab>"     , toggleWS' ["NSP"]                                           )
+    , ("M-p"         , cleanWss $ selectWorkspace myPromptConfig                   )
+    , ("M-S-p"       , cleanWss $ withWorkspace myPromptConfig (windows . W.shift) )
+    , ("M-C-p"       , cleanWss $ renameWorkspace myPromptConfig                   )
+
     -- I should learn Haskell in order to make this fit in 2-3 lines
-    , ("M-1"         , windows $ W.greedyView "1"         )
-    , ("M-S-l"       , windows $ W.shift "1"              )
-    , ("M-2"         , windows $ W.greedyView "2"         )
-    , ("M-S-2"       , windows $ W.shift "2"              )
-    , ("M-3"         , windows $ W.greedyView "3"         )
-    , ("M-S-3"       , windows $ W.shift "3"              )
-    , ("M-4"         , windows $ W.greedyView "4"         )
-    , ("M-S-4"       , windows $ W.shift "4"              )
-    , ("M-5"         , windows $ W.greedyView "5"         )
-    , ("M-S-5"       , windows $ W.shift "5"              )
-    , ("M-6"         , windows $ W.greedyView "6"         )
-    , ("M-S-6"       , windows $ W.shift "6"              )
-    , ("M-7"         , windows $ W.greedyView "7"         )
-    , ("M-S-7"       , windows $ W.shift "7"              )
-    , ("M-8"         , windows $ W.greedyView "8"         )
-    , ("M-S-8"       , windows $ W.shift "8"              )
-    , ("M-9"         , windows $ W.greedyView "9"         )
-    , ("M-S-9"       , windows $ W.shift "9"              )
-    , ("M-0"         , windows $ W.greedyView "0"         )
-    , ("M-S-0"       , windows $ W.shift "0"              )
+    , ("M-1"         , windows $ W.greedyView "main"      )
+    , ("M-S-l"       , windows $ W.shift "main"           )
+    , ("M-2"         , windows $ W.greedyView "www"       )
+    , ("M-S-2"       , windows $ W.shift "www"            )
+    , ("M-3"         , windows $ W.greedyView "chat"      )
+    , ("M-S-3"       , windows $ W.shift "chat"           )
+    , ("M-4"         , windows $ W.greedyView "mail"      )
+    , ("M-S-4"       , windows $ W.shift "mail"           )
     ] ++
     -- Focus/Moving
-    [ ("M-j"         , windows W.focusDown         ) -- Move focus to the previous window
-    , ("M-k"         , windows W.focusUp           ) -- Move focus to the next window
-    , ("M-S-j"       , windows W.swapDown          ) -- Swap the current window with the previous window
-    , ("M-S-k"       , windows W.swapUp            ) -- Swap the current window with the next window
-    , ("M-a"         , windows W.focusMaster       ) -- Focus the master window
-    , ("M-s"         , windows W.swapMaster        ) -- Swap the focused window and the master window
-    , ("M-r"         , gotoMenu                    )
-    , ("M-S-r"       , bringMenu                   )
+    [ ("M-j"          , windows W.focusDown                                     ) -- Move focus to the previous window
+    , ("M-k"         , windows W.focusUp                                       ) -- Move focus to the next window
+    , ("M-S-j"       , windows W.swapDown                                      ) -- Swap the current window with the previous window
+    , ("M-S-k"       , windows W.swapUp                                        ) -- Swap the current window with the next window
+    , ("M-a"         , windows W.focusMaster                                   ) -- Focus the master window
+    , ("M-s"         , windows W.swapMaster                                    ) -- Swap the focused window and the master window
+    , ("M-S-r"       , cleanWss $ windowPrompt myPromptConfig Bring allWindows )
+    , ("M-r"         , cleanWss $ windowPrompt myPromptConfig Goto  allWindows )
     ] ++
     -- Resizing
-    [ ("M-h"         , sendMessage Shrink          ) -- Horizontally shrink the master pane
-    , ("M-l"         , sendMessage Expand          ) -- Horizontally expand the master pane
-    , ("M-<Down>"    , sendMessage MirrorShrink    ) -- Vertically expand the focused window
-    , ("M-<Up>"      , sendMessage MirrorExpand    ) -- Vertically shrink the focused window
+    [ ("M-h"         , sendMessage Shrink                 ) -- Horizontally shrink the master pane
+    , ("M-l"         , sendMessage Expand                 ) -- Horizontally expand the master pane
+    , ("M-<Down>"    , sendMessage MirrorShrink           ) -- Vertically expand the focused window
+    , ("M-<Up>"      , sendMessage MirrorExpand           ) -- Vertically shrink the focused window
     ] ++
     -- Floating
-    [ ("M-g"         , withFocused $ float            ) -- Switch the focused window to floating
-    , ("M-y"         , withFocused $ windows . W.sink ) -- Put back the focused window in tiling
+    [ ("M-g"         , withFocused $ float                ) -- Switch the focused window to floating
+    , ("M-y"         , withFocused $ windows . W.sink     ) -- Put back the focused window in tiling
     ] ++
     -- Function keys
-    [ ("<XF86Display>" , arandr      ) -- Launch arandr
-    , ("<XF86Tools>"   , setKeyboard ) -- (Re)configure the kayboard's layout
+    [ ("<XF86Display>" , arandr                           ) -- Launch arandr
+    , ("<XF86Tools>"   , setKeyboard                      ) -- (Re)configure the kayboard's layout
     ]
 
 legacyKeybindings =
@@ -170,31 +182,46 @@ myScratchpads = [
 ---- ManageHook ----
 
 myManageHook = composeAll
-   [ title =? "pinentry-gtk-2" --> doFloat
-   , title =? "Colour picker" --> doFloat
+   [ title =? "pinentry-gtk-2"      --> doFloat
+   , title =? "Colour picker"       --> doFloat
+   , className =? "Thunderbird"     --> doShift "mail"
+   , className =? "Riot"            --> doShift "chat"
+   , className =? "TelegramDesktop" --> doShift "chat"
    , namedScratchpadManageHook myScratchpads
    , manageDocks
    ]
 
----- Helpers ----
+---- PrettyPrinter for xmobar ----
 
-lockScreen       = "lock.sh"
-programLauncher  = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
-passMenu         = "pass-menu"
-xmonadExit       = io exitSuccess
-xmonadRestart    = spawn "xmonad --recompile; xmonad --restart"
-toggleFullscreen = sequence_ [sendMessage $ Toggle NBFULL, sendMessage $ ToggleGaps]
-arandr           = spawn "arandr"
-setKeyboard      = spawn "setxkbmap -layout ch -variant fr -option caps:escape -option shift:both_capslock"
+myPP bar = xmobarPP { ppHidden = wrap "[" "]"
+                    , ppHiddenNoWindows = pad
+                    , ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
+                    , ppOutput = hPutStrLn bar
+                    }
+
+-- Prompt
+
+myPromptConfig = def { font        = "xft:DejaVu Sans Mono:pixelsize=13"
+                     , position    = Top
+                     , fgColor     = "grey"
+                     , bgColor     = "black"
+                     , fgHLight    = "yellow"
+                     , bgHLight    = "black"
+                     , borderColor = "#6e6b5e"
+                     , searchPredicate = mySearchPredicate
+                     }
+
+mySearchPredicate :: String -> String -> Bool
+mySearchPredicate typed = (=~ typed)
 
 -- Workspace-related
 
-myWorkspaces     = ["1","2","3","4","5","6","7","8","9","0"]
+myWorkspaces     = ["main", "www", "chat", "mail"]
+cleanWss         = removeEmptyWorkspaceAfterExcept myWorkspaces
 isHidden         = do hs <- gets (map W.tag . W.hidden . windowset)
                       return (\w -> W.tag w `elem` hs)
 
-nonNSPNonEmptyHiddenWs = WSIs $ do
-                                hi <- isHidden
-                                return (\w -> nnsp w && ne w && hi w)
-                                    where nnsp (W.Workspace tag _ _) = tag /= "NSP"
-                                          ne = isJust . W.stack
+nonNSPHiddenWs = WSIs $ do
+                        hi <- isHidden
+                        return (\w -> nnsp w && hi w)
+                          where nnsp (W.Workspace tag _ _) = tag /= "NSP"
