@@ -8,6 +8,7 @@
 import XMonad
 import XMonad.ManageHook
 import XMonad.Hooks.ManageDocks
+import XMonad.Actions.WindowBringer
 import qualified XMonad.StackSet as W
 -- Layouts
 import XMonad.Layout.Spacing
@@ -115,8 +116,8 @@ myKeys conf = mkKeymap conf $
     , ("M-S-k"       , windows W.swapUp                                        ) -- Swap the current window with the next window
     , ("M-a"         , windows W.focusMaster                                   ) -- Focus the master window
     , ("M-s"         , windows W.swapMaster                                    ) -- Swap the focused window and the master window
-    , ("M-S-r"       , cleanWss $ windowPrompt myPromptConfig Bring allWindows )
-    , ("M-r"         , cleanWss $ windowPrompt myPromptConfig Goto  allWindows )
+    , ("M-S-r"       , bringMenu                          )
+    , ("M-r"         , gotoMenu                           )
     ] ++
     -- Resizing
     [ ("M-h"         , sendMessage Shrink                 ) -- Horizontally shrink the master pane
@@ -208,6 +209,7 @@ myPromptConfig = def { font        = "xft:DejaVu Sans Mono:pixelsize=13"
                      , fgHLight    = "yellow"
                      , bgHLight    = "black"
                      , borderColor = "#6e6b5e"
+                     , autoComplete = Nothing
                      , searchPredicate = mySearchPredicate
                      }
 
