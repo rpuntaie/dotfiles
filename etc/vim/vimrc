@@ -79,6 +79,16 @@ let g:neocomplete#enable_at_startup = 1
 " Vim-airline : display status bar
 set laststatus=2
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 " Look ------------------------------------------------------------------------
 
 " 256 colors
@@ -109,6 +119,15 @@ syntax on
 
 " Colorcolumn color
 highlight ColorColumn ctermbg=255
+
+" Gvim
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+set guioptions-=b  "remove bottom scroll bar
+set guioptions-=e
+set guiheadroom=0
 
 " Keybindings -----------------------------------------------------------------
 
@@ -178,6 +197,11 @@ function! g:ToggleColorColumn()
   endif
 endfunction
 nnoremap <silent> <leader>h :call g:ToggleColorColumn()<CR>
+
+" Ctrl+c/Ctrl+v to copy/paste (clipboard) in gvim
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
 
 " Misc ------------------------------------------------------------------------
 
