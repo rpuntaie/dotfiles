@@ -101,7 +101,7 @@ myKeys conf = mkKeymap conf $
 
     -- I should learn Haskell in order to make this fit in 2-3 lines
     , ("M-1"         , windows $ W.greedyView "main"      )
-    , ("M-S-l"       , windows $ W.shift "main"           )
+    , ("M-S-1"       , windows $ W.shift "main"           )
     , ("M-2"         , windows $ W.greedyView "www"       )
     , ("M-S-2"       , windows $ W.shift "www"            )
     , ("M-3"         , windows $ W.greedyView "chat"      )

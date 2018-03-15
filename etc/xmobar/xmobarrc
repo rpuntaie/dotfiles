@@ -33,9 +33,9 @@ Config {
             -- Get load average
                 , Run Com "sh" ["-c", "awk '{print $1, $2, $3 }' /proc/loadavg"] "loadavg" 10
             -- Get current date
-                , Run Date      "%a %d - %H:%M" "date" 10
+                , Run Date      "%a %d %H:%M" "date" 10
             -- Get the space left on / and /home
-                , Run DiskU     [("/", "/: <free>"),("/home", "/h: <free>"),("/srv/storage", "/str: <free>")]
+                , Run DiskU     [("/", "/: <free>"), ("/var", "/v: <free>"), ("/home", "/h: <free>")]
                                 [ "--Low"   , "10"
                                 , "--High"  , "50"
                                 , "--low"   , "red"
@@ -60,5 +60,5 @@ Config {
                 , Run StdinReader
                 ]
        , alignSep = "}{"
-       , template = "%StdinReader% } %date% { <fc=darkred>%locks%</fc> %loadavg% | %disku% | %network% | %ac-status%%power-now% %bat1% %bat0%"
+       , template = "%StdinReader% } { <fc=darkred>%locks%</fc> %loadavg% | %disku% | %network% | %date% | %ac-status%%power-now% %bat1% %bat0%"
        }
