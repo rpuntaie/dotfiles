@@ -55,10 +55,13 @@ def main()
     (puts "No battery detected."; exit(1)) if batteries.empty?
 
     batteries_power = batteries.collect do |battery|
-      File.new(@prefix + battery + "/power_now", "r").gets.to_i
+      path = @prefix + battery + "/power_now"
+      if File.exists?(path)
+        File.new(path, "r").gets.to_i
+      end
     end
 
-    power_now = batteries_power.reduce(:+)
+    power_now = batteries_power.reduce(:+).to_i
     power_now_w = (power_now / 10.0**6).round(2)
 
     output += "#{power_now_w}W"
