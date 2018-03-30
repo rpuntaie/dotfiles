@@ -188,6 +188,9 @@ nmap <Leader>t :Unite tag -start-insert <CR>
 nmap <Leader>T :Unite tag/include -start-insert <CR>
 nmap <Leader>l :Unite line -start-insert -auto-preview <CR>
 
+" Toggle Syntastic
+nmap <Leader>s :SyntasticToggle<CR>
+
 " Toggle colorcolumn
 function! g:ToggleColorColumn()
   if &colorcolumn != 0
