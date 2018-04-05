@@ -7,6 +7,11 @@ c.url.default_page = "file:///home/fnux/.local/var/lib/browser-homepage/home.htm
 c.content.default_encoding = "utf-8"
 c.editor.command = ['urxvt256c', '-e','vim', '{}']
 
+# Rendering
+import platform
+if platform.node() == 'hiln':
+    config.set('qt.force_software_rendering', True)
+
 # Tabs
 c.tabs.background = True
 c.tabs.select_on_remove = 'prev'
