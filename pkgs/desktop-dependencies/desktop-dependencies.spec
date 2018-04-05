@@ -20,7 +20,8 @@ Requires: desktop-dependencies-misc
 # base subpackage
 %package base
 Summary: Basic tools
-Requires: zsh vim git gnupg2 tmux stow
+Requires: zsh vim git gnupg2 tmux stow lvm2 htop iotop
+Requires: ruby sqlite pass
 
 %description base
 %{summary}.
@@ -32,7 +33,12 @@ Requires: zsh vim git gnupg2 tmux stow
 Summary: X server and graphical tools
 Requires: xorg-x11-server-Xorg xorg-x11-xinit xorg-x11-drv-evdev
 Requires: xorg-x11-drv-libinput
-Requires: xmonad dunst dmenu
+Requires: xmonad ghc-regex-base-devel ghc-regex-posix-devel xmobar
+Requires: rxvt-unicode-256color dejavu-sans-mono-fonts
+Requires: dunst dmenu nitrogen i3lock redshift ranger
+Requires: lxappearance adwaita-qt adwaita-gtk2-theme
+Requires: pulseaudio pavucontrol
+Requires: pinentry-gtk
 
 %description graphical
 %{summary}.
@@ -53,7 +59,8 @@ Requires: fedpkg rpm-build spectool
 # media subpackage
 %package media
 Summary: Media tools
-Requires: mpd mpv ncmpcpp zathura
+Requires: mpd mpv ncmpcpp zathura qutebrowser transmission-gtk
+Requires: hexchat telegram-desktop
 
 %description media
 %{summary}.
@@ -63,7 +70,7 @@ Requires: mpd mpv ncmpcpp zathura
 # misc subpackage
 %package misc
 Summary: Miscellaneous dependencies that don't fit in other packages
-Requires: acpid
+Requires: acpid offlineimap notmuch
 
 %description misc
 %{summary}.
