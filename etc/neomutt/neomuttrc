@@ -7,10 +7,19 @@ set my_name = "Timothée Floure"
 # Cache
 set header_cache = ~/.local/var/cache/mutt/
 set message_cachedir = ~/.local/var/cache/mutt/messages/
+set tmpdir = "$XDG_CACHE_HOME"/neomutt/tmp
 
 # Mails
 set mbox_type=Maildir
 set folder="~/.local/var/mail/"
+
+# Misc
+set alias_file = "$HOME"/.local/var/mail/aliases
+set mailcap_path = "$XDG_CONFIG_HOME"/mailcap
+
+# Sending
+set realname = 'Timothée Floure'
+set sendmail = msmtp
 
 #------------------------------------------------------------------------------
 # Accounts
@@ -18,10 +27,19 @@ set folder="~/.local/var/mail/"
 set mbox_type=Maildir
 set mask="*"
 
-mailboxes =fnux/INBOX \
-          =fnux/Fedora.Devel
-mailboxes =epfl/INBOX
+mailboxes "=Fnux ========================"
+source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
+mailboxes "=EPFL ========================"
+source $XDG_CONFIG_HOME/neomutt/accounts/epfl.muttrc
+mailboxes "=PolyJapan ==================="
 mailboxes =polyjapan/INBOX
+
+# Default folder
+source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
+
+# Account hooks (triggered when changing into a directory of that account):
+folder-hook fnux/* "source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc"
+folder-hook epfl/* "source $XDG_CONFIG_HOME/neomutt/accounts/epfl.muttrc"
 
 #------------------------------------------------------------------------------
 #View
@@ -37,6 +55,10 @@ set sort = reverse-threads
 
 # Sidebar
 set sidebar_visible
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_indent_string = "  "
+set sidebar_delim_chars = "/"
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats
 
@@ -102,7 +124,7 @@ macro index A \
 set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # Use GPG2 instead of gpg + PGP configuration
-source $XDG_CONFIG_HOME/neomutt/pgp
+source $XDG_CONFIG_HOME/neomutt/pgp.muttrc
 set pgp_use_gpg_agent = yes
 set pgp_sign_as = 331ED8E6
 set pgp_timeout = 3600

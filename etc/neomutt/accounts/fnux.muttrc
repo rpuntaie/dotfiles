@@ -1,0 +1,12 @@
+set from = "timothee.floure@fnux.ch"
+
+set spoolfile = "=fnux/INBOX"
+set record    = "=fnux/Sent"
+set postponed = "=fnux/Drafts"
+set trash     = "=fnux/Trasg"
+
+mailboxes =fnux/INBOX \
+          =fnux/Fedora.Devel \
+          =fnux/Monitoring.Fnux \
+          =fnux/Monitoring.GNU \
+          =fnux/Monitoring.Inipop
