@@ -20,8 +20,8 @@ Requires: desktop-dependencies-misc
 # base subpackage
 %package base
 Summary: Basic tools
-Requires: zsh vim git gnupg2 tmux stow lvm2 htop iotop
-Requires: ruby sqlite pass
+Requires: zsh vim git gnupg2 tmux stow lvm2 htop iotop rfkill
+Requires: ruby sqlite pass udisks2 perl-Switch perl-Proc-Daemon
 
 %description base
 %{summary}.
@@ -37,8 +37,8 @@ Requires: xmonad ghc-regex-base-devel ghc-regex-posix-devel xmobar
 Requires: rxvt-unicode-256color dejavu-sans-mono-fonts
 Requires: dunst dmenu nitrogen i3lock redshift ranger
 Requires: lxappearance adwaita-qt adwaita-gtk2-theme
-Requires: pulseaudio pavucontrol
-Requires: pinentry-gtk
+Requires: pulseaudio pavucontrol arandr
+Requires: pinentry-gtk brightnessctl xss-lock
 
 %description graphical
 %{summary}.
@@ -60,7 +60,7 @@ Requires: fedpkg rpm-build spectool
 %package media
 Summary: Media tools
 Requires: mpd mpv ncmpcpp zathura qutebrowser transmission-gtk
-Requires: hexchat telegram-desktop
+Requires: hexchat telegram-desktop eom feh w3m-img
 
 %description media
 %{summary}.
@@ -70,7 +70,7 @@ Requires: hexchat telegram-desktop
 # misc subpackage
 %package misc
 Summary: Miscellaneous dependencies that don't fit in other packages
-Requires: acpid offlineimap notmuch
+Requires: acpid offlineimap notmuch msmtp
 
 %description misc
 %{summary}.
