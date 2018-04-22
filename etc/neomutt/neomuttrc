@@ -117,6 +117,7 @@ macro index,pager c '<change-folder>?<toggle-mailboxes>' 'open a different folde
 macro index A \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" \
     "mark all old as read" 
+bind index,pager                r   group-reply
 #------------------------------------------------------------------------------
 # Misc
 

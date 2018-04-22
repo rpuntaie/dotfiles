@@ -3,6 +3,6 @@ set from = "timothee.floure@epfl.ch"
 set spoolfile = "=epfl/INBOX"
 set record    = "=epfl/Sent"
 set postponed = "=epfl/Drafts"
-set trash     = "=epfl/Trasg"
+set trash     = "=epfl/Trash"
 
 mailboxes =epfl/INBOX

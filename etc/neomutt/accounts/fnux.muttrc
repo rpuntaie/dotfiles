@@ -3,7 +3,7 @@ set from = "timothee.floure@fnux.ch"
 set spoolfile = "=fnux/INBOX"
 set record    = "=fnux/Sent"
 set postponed = "=fnux/Drafts"
-set trash     = "=fnux/Trasg"
+set trash     = "=fnux/Trash"
 
 mailboxes =fnux/INBOX \
           =fnux/Fedora.Devel \
