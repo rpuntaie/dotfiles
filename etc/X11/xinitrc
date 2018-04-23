@@ -26,4 +26,7 @@ xset s 240 180
 xss-lock lock.sh &
 
 # Launch WM
-exec xmonad
+if [ -z "$WM" ]; then
+  export WM=xmonad
+fi
+exec $WM
