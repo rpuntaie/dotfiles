@@ -231,6 +231,12 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 
+" Use 4 spaces with C
+autocmd FileType c :setlocal sw=4 ts=4
+
+" Use tabs with perl
+autocmd FileType perl :set noexpandtab
+
 " Disable spelling.
 set nospell
 
