@@ -1,8 +1,12 @@
 set from = "timothee.floure@epfl.ch"
+set sendmail="/usr/bin/msmtp -a epfl"
 
 set spoolfile = "=epfl/INBOX"
 set record    = "=epfl/Sent"
 set postponed = "=epfl/Drafts"
 set trash     = "=epfl/Trash"
 
-mailboxes =epfl/INBOX
+mailboxes =epfl/INBOX =epfl/Moodle =epfl/ServiceDesk
+
+subscribe achats@unipoly.ch
+subscribe membres@lists.gnugen.ch

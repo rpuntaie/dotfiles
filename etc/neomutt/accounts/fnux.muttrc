@@ -1,4 +1,5 @@
 set from = "timothee.floure@fnux.ch"
+set sendmail="/usr/bin/msmtp -a fnux"
 
 set spoolfile = "=fnux/INBOX"
 set record    = "=fnux/Sent"
@@ -7,6 +8,7 @@ set trash     = "=fnux/Trash"
 
 mailboxes =fnux/INBOX \
           =fnux/Fedora.Devel \
+          =fnux/Fedora.Infrastructure \
           =fnux/Monitoring.Fnux \
           =fnux/Monitoring.GNU \
           =fnux/Monitoring.Inipop

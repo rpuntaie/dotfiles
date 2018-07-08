@@ -19,7 +19,6 @@ set mailcap_path = "$XDG_CONFIG_HOME"/mailcap
 
 # Sending
 set realname = 'Timothée Floure'
-set sendmail = msmtp
 
 #------------------------------------------------------------------------------
 # Accounts
@@ -31,8 +30,8 @@ mailboxes "=Fnux ========================"
 source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
 mailboxes "=EPFL ========================"
 source $XDG_CONFIG_HOME/neomutt/accounts/epfl.muttrc
-mailboxes "=PolyJapan ==================="
-mailboxes =polyjapan/INBOX
+mailboxes "=Inilab ======================"
+source $XDG_CONFIG_HOME/neomutt/accounts/inilab.muttrc
 
 # Default folder
 source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
@@ -40,6 +39,7 @@ source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
 # Account hooks (triggered when changing into a directory of that account):
 folder-hook fnux/* "source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc"
 folder-hook epfl/* "source $XDG_CONFIG_HOME/neomutt/accounts/epfl.muttrc"
+folder-hook inilab/* "source $XDG_CONFIG_HOME/neomutt/accounts/inilab.muttrc"
 
 #------------------------------------------------------------------------------
 #View
@@ -122,7 +122,7 @@ bind index,pager                r   group-reply
 # Misc
 
 # Notification(s)
-set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
+# set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # Use GPG2 instead of gpg + PGP configuration
 source $XDG_CONFIG_HOME/neomutt/pgp.muttrc
