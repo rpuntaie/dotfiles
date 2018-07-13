@@ -56,7 +56,7 @@ myConfig bar = def { borderWidth        = 1
                , workspaces         = myWorkspaces
                , layoutHook         = myLayout
                , manageHook         = myManageHook
-               , handleEventHook = docksEventHook
+               , handleEventHook    = docksEventHook
                , logHook            = dynamicLogWithPP $ myPP bar
                }
 
@@ -187,6 +187,7 @@ myManageHook = composeAll
    , title =? "Colour picker"       --> doFloat
    , title =? "Dwarf Fortress"      --> doFloat
    , appName =? "Game"              --> doFloat -- CS211 Project
+   , className =? "File-roller"     --> doFloat
    , className =? "Thunderbird"     --> doShift "mail"
    , className =? "Riot"            --> doShift "chat"
    , className =? "TelegramDesktop" --> doShift "chat"
