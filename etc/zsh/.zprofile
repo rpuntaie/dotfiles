@@ -41,7 +41,9 @@ add_to_path "$HOME/.local/bin"
 add_to_path "$HOME/.local/opt/desktop-utilities/bin"
 add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/.local/opt/processing-3.3.7/bin"
+add_to_path "$HOME/.local/opt/sbt/bin"
 add_to_path "$XDG_DATA_HOME/gem/bin"
+add_to_path "$XDG_DATA_HOME/perl/bin"
 
 unset -f add_to_path
 export PATH
