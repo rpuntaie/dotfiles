@@ -5,3 +5,5 @@ etc/xmonad/xmonad.errors
 etc/xmonad/xmonad.hi
 etc/xmonad/xmonad.o
 etc/xmonad/xmonad.template.hs
+etc/zsh/.zcompdump
+etc/zsh/.zdirs
