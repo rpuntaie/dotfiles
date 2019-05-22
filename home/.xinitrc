@@ -1,0 +1,2 @@
+VBoxClient-all
+exec xmonad
