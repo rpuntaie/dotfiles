@@ -9,7 +9,7 @@ install: directory_structure links xmonad_xdg_workaround
 
 directory_structure:
 	mkdir -p $(HOME)/.local/etc
-	mkdir -p $(HOME)/.local/bien
+	mkdir -p $(HOME)/.local/bin
 	mkdir -p $(HOME)/.local/opt
 	mkdir -p $(HOME)/.local/run
 	mkdir -p $(HOME)/.local/var/log
