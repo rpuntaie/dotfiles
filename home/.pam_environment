@@ -1,6 +1,5 @@
 # HOME/.pam_environment
 # Environment variables set byam(8) for a user session.
-# Written by Fnux, heavily inspired by `ayekat`'s dotfiles.
 
 # This file is used to fix whatever env variables are needed to get a reasonable
 # XDG-enable system.

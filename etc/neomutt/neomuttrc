@@ -15,7 +15,7 @@ set folder="~/.local/var/mail/"
 
 # Misc
 set alias_file = "$HOME"/.local/var/mail/aliases
-set mailcap_path = "$XDG_CONFIG_HOME"/mailcap
+set mailcap_path = "$XDG_CONFIG_HOME"/neomutt/mailcap
 
 # Sending
 set realname = 'Timothée Floure'
