@@ -4,26 +4,30 @@
 xsetroot -cursor_name left_ptr
 
 # Load X resources:
-xrdb $XDG_CONFIG_HOME/X11/Xresources
+# xrdb $XDG_CONFIG_HOME/X11/Xresources
 
 # set keymap + set caps lock to escape + caps lock when pressing both shift keys
-chkb.sh
+# chkb.sh
 
 # Set the wallpaper:
-nitrogen --restore
+# nitrogen --restore
 
 # Dunst notification daemon
 dunst &
 
 # Adapt the display's color to the time of the day
-pgrep redshift &> /dev/null || redshift &> /dev/null &
+# pgrep redshift &> /dev/null || redshift &> /dev/null &
 
 # Fix GUI for java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Screen dim/lock : see man xss-lock for more informations
-xset s 240 180
-xss-lock lock.sh &
+# xset s 240 180
+# xss-lock lock.sh &
+
+if [[ -z $(grep -q "^flags.*\ hypervisor\ " /proc/cpuinfo) ]]; then
+  VBoxClient-all
+fi
 
 # Launch WM
 if [ -z "$WM" ]; then
