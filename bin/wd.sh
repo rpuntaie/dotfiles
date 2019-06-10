@@ -12,18 +12,15 @@ save_working_directory() {
 }
 
 restore_working_directory() {
-  if [ $(cat $STORE | wc -l) -eq 0 ]; then
-    echo "There is no saved directory. Exiting."
-    exit 1
-  fi
-
   wd=$(tail -n 1 $STORE)
-  cd $wd; sed -i '$ d' $STORE
-  echo "Restored $wd."
-}
 
-print_usage() {
-  echo "Usage: $(basename $0) [-r|-s]"
+  if [[ -n $wd ]]; then
+	cd $wd
+	if [[ -n $1 ]]; then
+	  sed -i '$ d' $STORE
+	  echo "Removed $wd."
+	fi
+  fi
 }
 
 main() {
@@ -33,11 +30,11 @@ main() {
       ;;
 
     "-r")
-      restore_working_directory
+      restore_working_directory 1
       ;;
 
     *)
-      print_usage
+      restore_working_directory
       ;;
 
   esac

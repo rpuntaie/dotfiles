@@ -8,7 +8,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import qualified Data.Map as M
 main = do
     xmonad $ defaultConfig {
-        terminal = "xterm -fa monaco -fs 10 -bg black -fg white",
+        terminal = "alacritty",
 	keys = myKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
         }

@@ -74,7 +74,7 @@ alias mv='mv -i'
 alias la='ls -lAh'
 alias ll='ls -lh'
 alias r='ranger'
-alias wd='. wd'
+alias wd='. wd.sh'
 
 alias wttr='curl wttr.in'
 alias moon='curl wttr.in/Moon'
