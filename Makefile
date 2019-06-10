@@ -2,7 +2,7 @@ all:
 	@echo "make install: run directory_structure, links and xmonad_xdg_workaround"
 	@echo "make directory_structure: create a FHS-like structure under ~/.local"
 	@echo "make links: use stow to install configuration and scripts"
-	@echo "make xmonad_xdg_workaround: link xmonad configuration folder to ~/.xmonad"
+	@echo "make xmonad_xdg_workaround: link xmonad configuration folder to ~/.xmonad and recompile"
 	@echo "make pamenv_selinux_fix: fix selinux context for ~/.pam_environment"
 
 install: directory_structure links xmonad_xdg_workaround
@@ -25,6 +25,21 @@ links:
 # Xmonad do not respect xdg yet
 xmonad_xdg_workaround:
 	ln -sf $(HOME)/.local/etc/xmonad $(HOME)/.xmonad
+	xmonad --recompile
 
 pam_env_selinux_fix:
 	./pam_env_selinux_fix.sh
+
+uninstall:
+	stow -D home
+	stow -D etc
+	stow -D bin
+	stow -D data
+	rm -rf $(HOME)/.local/etc
+	rm -rf $(HOME)/.local/bin
+	rm -rf $(HOME)/.local/opt
+	rm -rf $(HOME)/.local/run
+	rm -rf $(HOME)/.local/var/log
+	rm -rf $(HOME)/.local/var/lib
+	rm -rf $(HOME)/.local/var/cache
+	rm -rf $(HOME)/.xmonad
