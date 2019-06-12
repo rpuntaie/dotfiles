@@ -3,20 +3,8 @@
 # Cursor
 xsetroot -cursor_name left_ptr
 
-# Load X resources:
-# xrdb $XDG_CONFIG_HOME/X11/Xresources
-
-# set keymap + set caps lock to escape + caps lock when pressing both shift keys
-# chkb.sh
-
-# Set the wallpaper:
-# nitrogen --restore
-
 # Dunst notification daemon
 dunst &
-
-# Adapt the display's color to the time of the day
-# pgrep redshift &> /dev/null || redshift &> /dev/null &
 
 # Fix GUI for java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
