@@ -9,11 +9,12 @@ import qualified Data.Map as M
 main = do
     xmonad $ defaultConfig {
         terminal = "alacritty",
-	keys = myKeys,
+        keys = myKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
         }
 myKeys x = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys x = [
-	((modMask x, xK_p), spawn "dmenu_run")
+	((modMask x, xK_s), spawn "scrot")
+	,((modMask x, xK_u), spawn "scrot -u")
 	]
   

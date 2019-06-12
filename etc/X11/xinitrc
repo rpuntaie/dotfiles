@@ -9,10 +9,6 @@ dunst &
 # Fix GUI for java apps
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# Screen dim/lock : see man xss-lock for more informations
-# xset s 240 180
-# xss-lock lock.sh &
-
 if [[ -n $(grep "^flags.*\ hypervisor\ " /proc/cpuinfo) ]]; then
   VBoxClient-all &
 fi
