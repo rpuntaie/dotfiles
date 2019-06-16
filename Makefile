@@ -3,9 +3,9 @@ all:
 	@echo "make directory_structure: create a FHS-like structure under ~/.local"
 	@echo "make links: use stow to install configuration and scripts"
 	@echo "make xmonad_xdg_workaround: link xmonad configuration folder to ~/.xmonad and recompile"
-	@echo "make pamenv_selinux_fix: fix selinux context for ~/.pam_environment"
+	@echo "make keybase: start keybase service"
 
-install: directory_structure links xmonad_xdg_workaround
+install: directory_structure links xmonad_xdg_workaround keybase
 
 directory_structure:
 	mkdir -p $(HOME)/.local/etc
@@ -14,6 +14,8 @@ directory_structure:
 	mkdir -p $(HOME)/.local/run
 	mkdir -p $(HOME)/.local/var/log
 	mkdir -p $(HOME)/.local/var/lib
+	mkdir -p $(HOME)/.local/var/lib/gnupg
+	chmod 700 $(HOME)/.local/var/lib/gnupg
 	mkdir -p $(HOME)/.local/var/cache
 
 links:
@@ -27,19 +29,5 @@ xmonad_xdg_workaround:
 	ln -sf $(HOME)/.local/etc/xmonad $(HOME)/.xmonad
 	xmonad --recompile
 
-pam_env_selinux_fix:
-	./pam_env_selinux_fix.sh
-
-uninstall:
-	stow -D home
-	stow -D etc
-	stow -D bin
-	stow -D data
-	rm -rf $(HOME)/.local/etc
-	rm -rf $(HOME)/.local/bin
-	rm -rf $(HOME)/.local/opt
-	rm -rf $(HOME)/.local/run
-	rm -rf $(HOME)/.local/var/log
-	rm -rf $(HOME)/.local/var/lib
-	rm -rf $(HOME)/.local/var/cache
-	rm -rf $(HOME)/.xmonad
+keybase:
+	systemctl enable --user keybase

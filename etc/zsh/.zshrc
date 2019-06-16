@@ -1,25 +1,89 @@
-source $ZDOTDIR/antigen.zsh
-source $ZDOTDIR/bgnotify.zsh
-source $ZDOTDIR/completion.zsh
+export ZGEN_DIR="${ZDOTDIR:-$HOME}/.zgen/"
+if [[ ! -s "${ZDOTDIR:-$HOME}/.zgen/zgen.zsh" ]]; then
+  echo "Zgen not found, bootstrapping."
+  mkdir -p "${ZDOTDIR:-$HOME}/.zgen"
+  curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > "${ZDOTDIR:-$HOME}/.zgen/zgen.zsh"
+fi
+source "${ZDOTDIR:-$HOME}/.zgen/zgen.zsh"
 
-###
-# Antigen
+# if the init scipt doesn't exist
+if ! zgen saved; then
+  echo "Creating a zgen save"
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+  # Disable loading default Prezto modules
+  # This is necessary due to a quirk of zgen that will load these plugins after
+  # our custom plugins, overwriting our customizations
+  # https://github.com/tarjoilija/zgen/issues/74
+  export ZGEN_PREZTO_LOAD_DEFAULT=0
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle dnf
+  # prezto options
+  zgen prezto editor key-bindings 'vi'
+  zgen prezto prompt theme 'steeef'
 
-# Load the theme.
-antigen theme minimal
+  # prezto and modules
+  zgen prezto
 
-# Tell Antigen that you're done.
-antigen apply
+  zgen prezto
+  zgen prezto git
+  zgen prezto environment
+  zgen prezto terminal
+  zgen prezto editor
+  zgen prezto directory
+  zgen prezto spectrum
+  zgen prezto utility
+  zgen prezto prompt
+  zgen prezto archive
+  #zgen prezto ruby
 
-###
-# History
+  zgen prezto command-not-found
+  zgen prezto fasd
+  zgen prezto history-substring-search
+  zgen prezto syntax-highlighting
+
+  zgen load junegunn/fzf shell
+
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load tarruda/zsh-autosuggestions
+  zgen load eendroroy/zed-zsh
+
+  #     # Default plugins
+  #     zgen load sorin-ionescu/prezto modules/environment
+  #     zgen load sorin-ionescu/prezto modules/terminal
+  #     zgen load sorin-ionescu/prezto modules/editor
+  #     zgen load sorin-ionescu/prezto modules/history
+  #     zgen load sorin-ionescu/prezto modules/directory
+  #     zgen load sorin-ionescu/prezto modules/spectrum
+  #     zgen load sorin-ionescu/prezto modules/utility
+  #     zgen load sorin-ionescu/prezto modules/completion
+  #     # zgen load sorin-ionescu/prezto modules/prompt
+
+  #     # zgen load sorin-ionescu/prezto modules/git
+  #     # zgen load sorin-ionescu/prezto modules/fasd
+  #     zgen load sorin-ionescu/prezto modules/history-substring-search
+
+  #     zgen load robbyrussell/oh-my-zsh plugins/docker
+  #     zgen load robbyrussell/oh-my-zsh plugins/fasd
+  #     # zgen load zsh-users/zaw
+  #     zgen load zsh-users/zsh-autosuggestions
+  #     zgen load zsh-users/zsh-completions
+  #     zgen load chriskempson/base16-shell
+  #     zgen load martinlindhe/base16-iterm2
+
+  #     # zgen prezto homebrew
+  #     # zgen prezto archive
+  #     zgen prezto command-not-found
+  #     # zgen prezto osx
+  #     zgen prezto tmux
+  #     zgen prezto ssh
+
+  #     zgen load unixorn/autoupdate-zgen
+  #     zgen load zsh-users/zsh-syntax-highlighting
+
+  zgen save
+fi
+
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
 
 [[ -d "$XDG_DATA_HOME/zsh" ]] || mkdir -p "$XDG_DATA_HOME/zsh"
 
@@ -32,12 +96,6 @@ setopt histignoredups
 setopt histverify
 setopt incappendhistory
 
-###
-# Completion
-
-###
-# Look
-
 autoload colors
 
 colors
@@ -49,9 +107,6 @@ then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 fi
-
-###
-# Key bindings
 
 # Use vim mode, but keep handy emacs keys in insert mode:
 bindkey -v
@@ -66,9 +121,6 @@ bindkey -M viins '^R'    history-incremental-search-backward
 bindkey -M viins '^U'    backward-kill-line
 bindkey -M viins '^W'    backward-kill-word
 
-###
-# Command aliases
-
 alias cp='cp -i'
 alias mv='mv -i'
 alias la='ls -lAh'
@@ -80,24 +132,11 @@ alias wttr='curl wttr.in'
 alias moon='curl wttr.in/Moon'
 alias ax='git annex'
 
-# In zsh vim mode, I sometimes forget I'm not in vim:
 alias :e="$EDITOR"
 alias :q=exit
-
-###
-# Misc
 
 setopt correct
 setopt extendedglob
 setopt interactivecomments
 setopt promptsubst
-
-# Notify after some time
-function bgnotify_formatted { ## args: (exit_status, command, elapsed_seconds)
-  elapsed="$(( $3 % 60 ))s"
-  (( $3 >= 60 )) && elapsed="$((( $3 % 3600) / 60 ))m $elapsed"
-  (( $3 >= 3600 )) && elapsed="$(( $3 / 3600 ))h $elapsed"
-  [ $1 -eq 0 ] && notify-send "Completed in $elapsed" "$2" || \
-  notify-send -u critical "Failed after $elapsed" "$2"
-}
 

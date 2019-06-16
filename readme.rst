@@ -1,0 +1,81 @@
+********
+Dotfiles
+********
+
+Starting with 
+https://gitlab.gnugen.ch/floure/dotfiles, due to its usage of 
+`XGD <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__, I
+
+- removed things, I do not use, and 
+- integrated dotfiles of my own growing, but not well organized yet.
+
+Installation
+============
+
+I use these dotfiles together with this ArchLinux installation
+
+First prepare a local proxy as described in `rollarch <https://github.com/rpuntaie/rollarch>`__.
+
+Then:
+
+.. code:: sh
+
+    curl -OLs git://git.io/installarch
+    #replace u, p, up, 1.121 for local IP and 1.108 for proxy IP (192.168.x.y)
+    DSK=/dev/sda USR=u PW=p HST=up ZONE=Vienna IP2=1.121 AIP2=1.108 ./installarch rpuntaie-meta yay antigen-git
+
+    cd
+    git clone https://github.com/rpuntaie/dotfiles
+    cd dotfiles
+    make install
+    cd
+    startx
+
+``Makefile`` uses  `stow <https://www.gnu.org/software/stow/>`_ to simlink into ``dotfiles``.
+Therefore keep ``dotfiles``, also to adapt and push when needed.
+
+Tools
+=====
+
+CLI
+---
+
+- ``zsh`` as CLI
+- ``slock`` to lock screen via CLI
+- ``scrot`` to make screen shots via shortcuts ``M-s`` and ``M-u`` for current window.
+- ``feh`` for images
+- ``ranger`` for files
+- ``links`` for text mode browsing
+- ``fd`` to search for files
+- ``fzf`` fuzzy find files
+- ``rg`` (ripgrep) and ``ag`` (the_silver_searcher) to search for text in files
+- ``bc`` for ad-hoc CLI calculations, e.g echo 2+2 | bc
+- ``ncdu`` like ``du``, but with ncurses
+- ``keybase`` and ``gpg`` for private/public key encryption
+
+xmonad
+------
+
+I added little to the `defaults <https://xmonad.org/manpage.html>`__.
+See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmonad.hs>`__.
+
+- no `display manager <https://wiki.archlinux.org/index.php/Display_manager>`__
+- ``startx`` defaults to ``xmonad``, but you could do ``WM=qtile startx`` to change WM
+
+dunst
+-----
+
+Started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
+Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmonad/.config/dunst/dunstrc`__.
+
+vim
+---
+
+I tweaked my vimrc to work with both 
+`vim <https://www.vim.org/>`__
+and 
+`neovim <https://neovim.io/>`__.
+
+
+
+
