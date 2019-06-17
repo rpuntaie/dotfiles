@@ -1,4 +1,0 @@
-#!/bin/bash
-
-account=$([ -z $1 ] && echo "fnux" || echo $1)
-/usr/bin/neomutt -F $HOME/.local/etc/neomutt/account.$account

@@ -1,9 +1,6 @@
-# Fnux's configuration file for qutebrowser >=1.0
 # See http://qutebrowser.org/doc/help/settings.html for all available settings.
 
 # General
-c.url.start_pages = "file:///home/fnux/.local/var/lib/browser-homepage/home.html"
-c.url.default_page = "file:///home/fnux/.local/var/lib/browser-homepage/home.html"
 c.content.default_encoding = "utf-8"
 c.editor.command = ['urxvt256c', '-e','vim', '{}']
 

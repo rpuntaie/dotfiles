@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-#
-# Written by Fnux.
 
 require 'optparse'
 

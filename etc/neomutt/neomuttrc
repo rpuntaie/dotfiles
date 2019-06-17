@@ -26,20 +26,11 @@ set realname = 'Timothée Floure'
 set mbox_type=Maildir
 set mask="*"
 
-mailboxes "=Fnux ========================"
-source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
-mailboxes "=EPFL ========================"
-source $XDG_CONFIG_HOME/neomutt/accounts/epfl.muttrc
-mailboxes "=Inilab ======================"
-source $XDG_CONFIG_HOME/neomutt/accounts/inilab.muttrc
-
-# Default folder
-source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc
+mailboxes "=rp ========================"
+source $XDG_CONFIG_HOME/neomutt/accounts/rp.muttrc
 
 # Account hooks (triggered when changing into a directory of that account):
-folder-hook fnux/* "source $XDG_CONFIG_HOME/neomutt/accounts/fnux.muttrc"
-folder-hook epfl/* "source $XDG_CONFIG_HOME/neomutt/accounts/epfl.muttrc"
-folder-hook inilab/* "source $XDG_CONFIG_HOME/neomutt/accounts/inilab.muttrc"
+folder-hook rp/* "source $XDG_CONFIG_HOME/neomutt/accounts/rp.muttrc"
 
 #------------------------------------------------------------------------------
 #View

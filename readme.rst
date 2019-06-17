@@ -2,13 +2,6 @@
 Dotfiles
 ********
 
-Starting with 
-https://gitlab.gnugen.ch/floure/dotfiles, due to its usage of 
-`XGD <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__, I
-
-- removed things, I do not use, and 
-- integrated dotfiles of my own growing, but not well organized yet.
-
 Installation
 ============
 

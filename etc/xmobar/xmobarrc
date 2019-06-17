@@ -1,4 +1,4 @@
--- Xmobar configuration file, written by Fnux.
+-- Xmobar configuration file
 -- vim: set filetype=haskell :
 Config {
     -- Appearance
