@@ -1,5 +1,0 @@
-#!/bin/sh
-#
-# Opens ranger in an URxvt window.
-
-exec urxvt -e ranger "$@"

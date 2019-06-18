@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $(/usr/bin/nm-online -q -t 15; echo $?) == 0 ]; then
+if [[ $(networkctl status | grep routable) ]]; then
   /usr/bin/offlineimap $@
 else
   echo "Network unreachable. Aborting."

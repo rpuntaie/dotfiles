@@ -1,5 +1,5 @@
 #!/bin/sh
 #
-# Wrap weechat to (somewhat) respect XDG.
+# respect XDG.
 
 /usr/bin/weechat -d "$XDG_DATA_HOME"/weechat "$@"

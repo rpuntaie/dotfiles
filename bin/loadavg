@@ -1,9 +1,0 @@
-#!/bin/sh
-# Wrapper around an awk(1) program to get the system's load average.
-# Written by Sparrowhawk in the GNU Generation clubroom, anno domini 2017.
-# Public domain.
-
-command -v awk >/dev/null 2>&1 ||
-    { echo "You need awk to run this script!"; exit 127; }
-
-awk '{ print $1, $2, $3 }' /proc/loadavg
