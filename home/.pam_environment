@@ -1,9 +1,8 @@
 # HOME/.pam_environment
-# Environment variables set byam(8) for a user session.
+# See: https://wiki.archlinux.org/index.php/XDG_Base_Directory
 
-# This file is used to fix whatever env variables are needed to get a reasonable
-# XDG-enable system.
 HOME                DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
+MY                  DEFAULT="/home/@{PAM_USER}/my"
 
 # XDG base directory specification
 XDG_CACHE_HOME      DEFAULT="${HOME}/.local/var/cache"
@@ -26,15 +25,11 @@ VIMINIT             DEFAULT="source \${XDG_CONFIG_HOME}/vim/vimrc"
 XAUTHORITY          DEFAULT="${XDG_RUNTIME_DIR}/Xauthority"
 XINITRC             DEFAULT="${XDG_CONFIG_HOME}/X11/xinitrc"
 ZDOTDIR             DEFAULT="${XDG_CONFIG_HOME}/zsh"
-ADOTDIR             DEFAULT="${XDG_DATA_HOME}/antigen"
-LESSHISTFILE        DEFAULT="${XDG_DATA_HOME}/lesshist"
-MIX_HOME            DEFAULT="${XDG_DATA_HOME}/mix"
-HEX_HOME            DEFAULT="${XDG_DATA_HOME}/hex"
-TASKDATA            DEFAULT="${XDG_DATA_HOME}/task"
+LESSHISTFILE        DEFAULT="-"
+TASKDATA            DEFAULT="${MY}/task"
 TASKRC              DEFAULT="${XDG_CONFIG_HOME}/task/taskrc"
-KERL_BASE_DIR       DEFAULT="${XDG_DATA_HOME}/kerl"
-GEMRC               DEFAULT="${XDG_CONFIG_HOME}/gemrc"
-GEM_HOME            DEFAULT="${XDG_DATA_HOME}/gem"
-WINEPREFIX          DEFAULT="${XDG_DATA_HOME}/wine"
 PERL_CPANM_OPT      DEFAULT="--prompt --reinstall -l ${XDG_DATA_HOME}/perl"
 PERL5LIB            DEFAULT="${XDG_DATA_HOME}/perl/lib/perl5"
+
+# home contains dot files for programs not heeding XDG_Base_Directory
+# home/.ledgerrc

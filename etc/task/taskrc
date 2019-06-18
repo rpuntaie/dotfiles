@@ -1,0 +1,6 @@
+#task needs this file
+
+#TASKDATA is defined in ~/.pam_environment
+
+#``task show verbose`` without header to suppress the "override" messages
+verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait,recur

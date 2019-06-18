@@ -2,6 +2,8 @@
 Dotfiles
 ********
 
+Uses `XGD <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__.
+
 Installation
 ============
 
