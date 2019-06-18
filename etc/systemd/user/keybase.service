@@ -1,0 +1,9 @@
+[Unit]
+Description=Keybase core service
+
+[Service]
+ExecStart=/usr/bin/keybase --use-default-log-file --debug service
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -8,4 +8,3 @@ etc/xmonad/xmonad.template.hs
 etc/zsh/.zcompdump
 etc/zsh/.zdirs
 etc/zsh/.zgen
-etc/systemd/user/*.wants

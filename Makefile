@@ -3,9 +3,8 @@ all:
 	@echo "make directory_structure: create a FHS-like structure under ~/.local"
 	@echo "make links: use stow to install configuration and scripts"
 	@echo "make xmonad_xdg_workaround: link xmonad configuration folder to ~/.xmonad and recompile"
-	@echo "make keybase: start keybase service"
 
-install: directory_structure links xmonad_xdg_workaround keybase
+install: directory_structure links xmonad_xdg_workaround
 
 directory_structure:
 	mkdir -p $(HOME)/.local/etc
@@ -28,6 +27,3 @@ links:
 xmonad_xdg_workaround:
 	ln -sf $(HOME)/.local/etc/xmonad $(HOME)/.xmonad
 	xmonad --recompile
-
-keybase:
-	systemctl enable --user keybase
