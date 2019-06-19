@@ -1,0 +1,24 @@
+cd dotfiles
+stow -D data
+stow -D bin
+stow -D etc
+stow -D home
+cd ..
+rm -rf .xmonad
+rm -rf .local
+mkdir -p .local/etc
+mkdir -p .local/bin
+mkdir -p .local/opt
+mkdir -p .local/run
+mkdir -p .local/var/log
+mkdir -p .local/var/lib
+mkdir -p .local/var/lib/gnupg
+chmod 700 .local/var/lib/gnupg
+mkdir -p .local/var/cache
+cd dotfiles
+stow home
+stow etc
+stow bin
+stow data
+ln -sf ../.local/etc/xmonad ../.xmonad
+xmonad --recompile
