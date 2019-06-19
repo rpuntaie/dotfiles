@@ -15,18 +15,12 @@ Then:
 
 .. code:: sh
 
-    curl -OLs git://git.io/installarch
-    #replace u, p, up, 1.121 for local IP and 1.108 for proxy IP (192.168.x.y)
-    DSK=/dev/sda USR=u PW=p HST=up ZONE=Vienna IP2=1.121 AIP2=1.108 ./installarch rpuntaie-meta yay antigen-git
+    curl -OLs https://git.io/installarch
+    # replace all defines
+    DSK=/dev/sda USR=u PW=p HST=up121 ZONE=Vienna IP2=1.121 AIP2=1.108 bash DOTS=https://git.io/fjVcp installarch rpuntaie-meta yay
+    # log out and in
 
-    cd
-    git clone https://github.com/rpuntaie/dotfiles
-    cd dotfiles
-    make install
-    cd
-    startx
-
-``Makefile`` uses  `stow <https://www.gnu.org/software/stow/>`__ to simlink into ``dotfiles``.
+``install`` uses  `stow <https://www.gnu.org/software/stow/>`__ to simlink into ``dotfiles``.
 Therefore keep ``dotfiles``, also to adapt and push when needed.
 
 Tools
@@ -63,14 +57,14 @@ dunst
 Started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
 Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmonad/.config/dunst/dunstrc`__.
 
-vim
----
-
-I tweaked my vimrc to work with both 
-`vim <https://www.vim.org/>`__
-and 
-`neovim <https://neovim.io/>`__.
-
+.. TODO
+   vim
+   ---
+   
+   I tweaked my vimrc to work with both 
+   `vim <https://www.vim.org/>`__
+   and 
+   `neovim <https://neovim.io/>`__.
 
 
 
