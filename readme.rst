@@ -26,7 +26,7 @@ Then:
     cd
     startx
 
-``Makefile`` uses  `stow <https://www.gnu.org/software/stow/>`_ to simlink into ``dotfiles``.
+``Makefile`` uses  `stow <https://www.gnu.org/software/stow/>`__ to simlink into ``dotfiles``.
 Therefore keep ``dotfiles``, also to adapt and push when needed.
 
 Tools
