@@ -1,7 +1,7 @@
 rm -f .pam_environment
 rm -rf .xmonad
 rm -rf .local
-if [[ -e dotfiles ]]; then
+if [[ -d dotfiles ]]; then
     cd dotfiles
     stow -D varlib
     stow -D bin
