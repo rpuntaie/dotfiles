@@ -1,11 +1,7 @@
-cd dotfiles
-stow -D data
-stow -D bin
-stow -D etc
-stow -D home
-cd ..
+rm -f .pam_environment
 rm -rf .xmonad
 rm -rf .local
+git clone src/dotfiles .local
 mkdir -p .local/etc
 mkdir -p .local/bin
 mkdir -p .local/opt
@@ -17,8 +13,8 @@ chmod 700 .local/var/lib/gnupg
 mkdir -p .local/var/cache
 cd dotfiles
 stow home
-stow etc
-stow bin
-stow data
+stow -t ../.local/etc etc
+stow -t ../.local/bin bin
+stow -t ../.local/var/lib varlib
 ln -sf ../.local/etc/xmonad ../.xmonad
 xmonad --recompile
