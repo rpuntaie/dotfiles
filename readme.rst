@@ -17,7 +17,7 @@ Then:
 
     curl -OLs https://git.io/installarch
     # replace all defines
-    DSK=/dev/sda USR=u PW=p HST=up121 ZONE=Vienna IP2=1.121 AIP2=1.108 bash DOTS=https://git.io/fjVcp installarch rpuntaie-meta yay
+    DSK=/dev/sda USR=u PW=p HST=up121 ZONE=Vienna IP2=1.121 AIP2=1.108 DOTS=https://git.io/fjVcp bash installarch rpuntaie-meta yay
     # log out and in
 
 ``install`` uses  `stow <https://www.gnu.org/software/stow/>`__ to simlink into ``dotfiles``.
