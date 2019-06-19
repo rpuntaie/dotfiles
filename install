@@ -1,7 +1,16 @@
 rm -f .pam_environment
 rm -rf .xmonad
 rm -rf .local
-git clone src/dotfiles .local
+if [[ -e dotfiles ]]; then
+    cd dotfiles
+    stow -D varlib
+    stow -D bin
+    stow -D etc
+    stow -D home
+    cd ..
+    rm -rf dotfiles
+fi
+git clone https://github.com/rpuntaie/dotfiles
 mkdir -p .local/etc
 mkdir -p .local/bin
 mkdir -p .local/opt
@@ -16,5 +25,7 @@ stow home
 stow -t ../.local/etc etc
 stow -t ../.local/bin bin
 stow -t ../.local/var/lib varlib
-ln -sf ../.local/etc/xmonad ../.xmonad
+cd ..
+ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
+echo -e "\033[0;31mPlease log out and in, to activate the environment."
