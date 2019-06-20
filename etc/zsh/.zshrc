@@ -18,7 +18,7 @@ if ! zgen saved; then
 
   # prezto options
   zgen prezto editor key-bindings 'vi'
-  zgen prezto prompt theme 'steeef'
+  zgen prezto prompt theme 'rpuntaie'
 
   # prezto and modules
   zgen prezto
