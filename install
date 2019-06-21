@@ -1,16 +1,31 @@
-rm -f .pam_environment
-rm -rf .xmonad
-rm -rf .local
-if [[ -d dotfiles ]]; then
-    cd dotfiles
-    stow -D varlib
-    stow -D bin
-    stow -D etc
-    stow -D home
-    cd ..
-    rm -rf dotfiles
+#!/usr/bin/bash
+
+url=https://github.com/rpuntaie/dotfiles
+from_url=true
+if [[ "$0" =~ .*install ]]; then
+  from_url=false
 fi
-git clone https://github.com/rpuntaie/dotfiles
+cd ~
+if [[ from_url ]]; then
+  rm -f .pam_environment
+  rm -rf .xmonad
+  rm -rf .local
+fi
+if [[ -d dotfiles ]]; then
+  cd dotfiles
+  if [[ ! "$(git config --get remote.origin.url)"=="$url" ]]
+    exit 1
+  fi
+  stow -D varlib
+  stow -D bin
+  stow -D etc
+  stow -D home
+  cd ..
+  if [[ from_url ]]; then
+    rm -rf dotfiles
+    git clone $url
+  fi
+fi
 mkdir -p .local/etc
 mkdir -p .local/bin
 mkdir -p .local/opt

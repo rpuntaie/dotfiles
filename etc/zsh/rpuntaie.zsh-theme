@@ -1,3 +1,4 @@
+# vim: syntax=zsh
 #based on http://aperiodic.net/phil/prompt/
 
 function precmd {
@@ -91,36 +92,31 @@ setprompt () {
     
     ###
     # Finally, the prompt.
-    local C0=$PR_NO_COLOUR
-    local C1=$PR_CYAN
-    local C2=$PR_GREEN
-    local C3=$PR_LIGHT_RED
-    local C4=$PR_MAGENTA
-    local C5=$PR_YELLOW
 
     PS1='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
-$C1($C2%(!.%SROOT%s.%n)$C2@%m:%l$C1)\
+$PR_CYAN%L($PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l$PR_CYAN)\
 $PR_SHIFT_IN$PR_HBAR$PR_HBAR$PR_SHIFT_OUT\
-($C5%D{%Y%m%d %H:%M}$C1)\
+($PR_YELLOW%D{%Y%m%d %H:%M}$PR_CYAN)\
 $PR_SHIFT_IN$PR_HBAR${(e)PR_FILLBAR}$PR_HBAR$PR_SHIFT_OUT\
-(%(!.$C3.$C4)%$PR_PWDLEN<...<%~%<<$C1)\
+(%(!.$PR_LIGHT_RED.$PR_MAGENTA)%$PR_PWDLEN<...<%~%<<$PR_CYAN)\
 
-% $C0'
+% $PR_NO_COLOUR'
 
-    RPS1='%(?..$C3(%?%))$C1(${(e)$(battery_pct_prompt)}$C1)$(git_prompt_info)$(svn_prompt_info)$(hg_prompt_info)$C0'
+    RPS1='$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))$PR_CYAN(${(e)$(battery_pct_prompt)}$PR_CYAN)$(git_prompt_info)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
     PS2=''
-    RPS2='$C1($C2%_$C1)$C0 '
+    RPS2='$PR_CYAN($PR_GREEN%_$PR_CYAN)$PR_NO_COLOUR '
 
 
-    ZSH_THEME_GIT_PROMPT_PREFIX="$C1(%(!.$C3.$C4)git:"
-    ZSH_THEME_GIT_PROMPT_SUFFIX="$C1)"
+    ZSH_THEME_GIT_PROMPT_PREFIX="$PR_CYAN(%(!.$PR_LIGHT_RED.$PR_MAGENTA)git:"
+    ZSH_THEME_GIT_PROMPT_SUFFIX="$PR_CYAN)"
 
-    ZSH_THEME_SVN_PROMPT_PREFIX="$C1(%(!.$C3.$C4)svn:"
-    ZSH_THEME_SVN_PROMPT_SUFFIX="$C1)"
+    ZSH_THEME_SVN_PROMPT_PREFIX="$PR_CYAN(%(!.$PR_LIGHT_RED.$PR_MAGENTA)svn:"
+    ZSH_THEME_SVN_PROMPT_SUFFIX="$PR_CYAN)"
 
-    ZSH_THEME_HG_PROMPT_PREFIX="$C1(%(!.$C3.$C4)hg:"
-    ZSH_THEME_HG_PROMPT_SUFFIX="$C1)"
+    ZSH_THEME_HG_PROMPT_PREFIX="$PR_CYAN(%(!.$PR_LIGHT_RED.$PR_MAGENTA)hg:"
+    ZSH_THEME_HG_PROMPT_SUFFIX="$PR_CYAN)"
 
 }
 
 setprompt
+
