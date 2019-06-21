@@ -43,4 +43,4 @@ stow -t ../.local/var/lib varlib
 cd ..
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
-echo -e "\033[0;31mPlease log out and in, to activate the environment."
+echo -e "\033[0;32mPlease log out and in, to activate the environment."
