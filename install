@@ -6,7 +6,7 @@ if [[ "$0" =~ .*install ]]; then
   from_url=false
 fi
 cd ~
-if [[ from_url ]]; then
+if $from_url; then
   rm -f .pam_environment
   rm -rf .xmonad
   rm -rf .local
@@ -21,7 +21,7 @@ if [[ -d dotfiles ]]; then
   stow -D etc
   stow -D home
   cd ..
-  if [[ from_url ]]; then
+  if $from_url; then
     rm -rf dotfiles
     git clone $url
   fi
