@@ -13,7 +13,7 @@ if [[ from_url ]]; then
 fi
 if [[ -d dotfiles ]]; then
   cd dotfiles
-  if [[ ! "$(git config --get remote.origin.url)"=="$url" ]]
+  if [[ ! "$(git config --get remote.origin.url)"=="$url" ]]; then
     exit 1
   fi
   stow -D varlib

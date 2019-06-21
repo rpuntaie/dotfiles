@@ -7,10 +7,14 @@ Uses `XGD <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__.
 Installation
 ============
 
-I use these dotfiles together with this ArchLinux installation
+On an installed machine do:
 
+.. code:: sh
+
+   curl -Ls https://git.io/fjVcp | bash
+
+I use these dotfiles together with this ArchLinux installation.
 First prepare a local proxy as described in `rollarch <https://github.com/rpuntaie/rollarch>`__.
-
 Then:
 
 .. code:: sh
