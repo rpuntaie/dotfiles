@@ -16,7 +16,7 @@ if [[ "$0" =~ .*install ]]; then
 fi
 cd ~
 check_dots
-if ! $from_url && [[ -d dotfiles ]]; then
+if ! $from_url && [[ ! -d .local ]] && [[ -d dotfiles ]]; then
   echo "moving dotfiles to .local"
   mv dotfiles .local || echo "remove .local first" && exit 1
 fi
