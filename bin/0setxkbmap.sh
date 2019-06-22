@@ -1,7 +1,5 @@
-# switch between us, de layouts
+# switch between us, de layouts or the one provided
  
-# If an explicit layout is provided as an argument, use it. Otherwise, select the next layout from
-# the set [us, de].
 if [[ -n "$1" ]]; then
     setxkbmap $1
 else
@@ -16,6 +14,6 @@ else
     esac
 fi
  
-xmodmap ~/.Xmodmap
+xmodmap $XMODMAP
 
 exit 0

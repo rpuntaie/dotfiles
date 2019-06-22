@@ -80,7 +80,8 @@ alias ax='git annex'
 alias :e="$EDITOR"
 alias :q=exit
 
-setopt correct
+#setopt correct
+unsetopt correct
 setopt extendedglob
 setopt interactivecomments
 setopt promptsubst

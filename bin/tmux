@@ -4,4 +4,4 @@
 [ -f "$XDG_CONFIG_HOME"/tmux/tmux.conf ] ||
     { echo  >&2 "tmux configuration not found in XDG_CONFIG_HOME"; exit 1; }
 
-/usr/bin/tmux -2 -f "$XDG_CONFIG_HOME"/ tmux/tmux.conf "$@"
+/usr/bin/tmux -2 -f "$XDG_CONFIG_HOME"/tmux/tmux.conf "$@"

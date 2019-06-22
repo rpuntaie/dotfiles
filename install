@@ -1,46 +1,38 @@
 #!/usr/bin/bash
 
-url=https://github.com/rpuntaie/dotfiles
+check_dots() {
+  if (cd dotfiles || cd .local) && [[ ! "$(git config --get remote.origin.url)"=="$dotfilesurl" ]]; then
+    echo "This install script is for a different dotfiles" >&2
+    cd ..
+    exit 1
+  fi
+}
+
+dotfilesurl=https://github.com/rpuntaie/dotfiles
+#... cloned to .local
 from_url=true
 if [[ "$0" =~ .*install ]]; then
   from_url=false
 fi
 cd ~
-if $from_url; then
-  rm -f .pam_environment
-  rm -rf .xmonad
-  rm -rf .local
+check_dots
+if ! $from_url && [[ -d dotfiles ]]; then
+  echo "moving dotfiles to .local"
+  mv dotfiles .local || echo "remove .local first" && exit 1
 fi
-if [[ -d dotfiles ]]; then
-  cd dotfiles
-  if [[ ! "$(git config --get remote.origin.url)"=="$url" ]]; then
-    exit 1
-  fi
-  stow -D varlib
-  stow -D bin
-  stow -D etc
-  stow -D home
-  cd ..
+if [[ -d .local ]]; then
   if $from_url; then
-    rm -rf dotfiles
-    git clone $url
+    echo "replacing .local with $dotfilesurl"
+    for A in $(ls -A .local/home); do
+      rm -f "$A"
+    done
+    rm -rf .local
+    git clone $dotfilesurl .local
   fi
 fi
-mkdir -p .local/etc
-mkdir -p .local/bin
-mkdir -p .local/opt
-mkdir -p .local/run
-mkdir -p .local/var/log
-mkdir -p .local/var/lib
-mkdir -p .local/var/lib/gnupg
-chmod 700 .local/var/lib/gnupg
-mkdir -p .local/var/cache
-cd dotfiles
-stow home
-stow -t ../.local/etc etc
-stow -t ../.local/bin bin
-stow -t ../.local/var/lib varlib
-cd ..
+for A in $(ls -A .local/home); do
+  ln -sf ".local/home/$A" "$A"
+done
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
-echo -e "\033[0;32mPlease log out and in, to activate the environment."
+echo -e "\033[0;32mLog out and in, to activate the environment."

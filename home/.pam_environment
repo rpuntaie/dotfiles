@@ -1,35 +1,50 @@
-# HOME/.pam_environment
-# See: https://wiki.archlinux.org/index.php/XDG_Base_Directory
+# Environment variables set by pam(8) for a user session.
+# See: 
+# https://wiki.archlinux.org/index.php/XDG_Base_Directory
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
-HOME                DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
-MY                  DEFAULT="/home/@{PAM_USER}/my"
+# Ugly workaround for Debian (as they ship an ancient version of PAM)
+HOME                  DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
 
-# XDG base directory specification
-XDG_CACHE_HOME      DEFAULT="${HOME}/.local/var/cache"
-XDG_CONFIG_HOME     DEFAULT="${HOME}/.local/etc"
-XDG_DATA_HOME       DEFAULT="${HOME}/.local/var/lib"
-XDG_DATA_DIRS       DEFAULT="/usr/local/share:/usr/share" OVERRIDE="${XDG_DATA_DIRS}"
-XDG_DATA_DIRS       DEFAULT="${HOME}/.local/share:${XDG_DATA_DIRS}"
-XDG_RUNTIME_DIR     DEFAULT="${HOME}/.local/run"
+# personal stuff I have in a separate directory
+MY                    DEFAULT="/home/@{PAM_USER}/my"
 
+# XDG base directory specification (same as https://github.com/ayekat/dotfiles)
+XDG_CACHE_HOME        DEFAULT="${HOME}/.local/var/cache"
+XDG_CONFIG_HOME       DEFAULT="${HOME}/.local/etc"
+XDG_DATA_HOME         DEFAULT="${HOME}/.local/share"
+XDG_DATA_DIRS         DEFAULT="/usr/local/share:/usr/share" OVERRIDE="${XDG_DATA_DIRS}"
+XDG_DATA_DIRS         DEFAULT="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
 # Non-standard
-XDG_LIB_HOME        DEFAULT="${HOME}/.local/lib"
-XDG_LOG_HOME        DEFAULT="${HOME}/.local/var/log"
+XDG_LOG_HOME          DEFAULT="${HOME}/.local/var/log"
+XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
+XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
+LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
-# Fixes for various applications to respect XDG
-CARGO_HOME          DEFAULT="${XDG_DATA_HOME}/cargo"
-GNUPGHOME           DEFAULT="${XDG_DATA_HOME}/gnupg"
-PASSWORD_STORE_DIR  DEFAULT="${XDG_DATA_HOME}/pass"
-RXVT_SOCKET         DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
-VIMINIT             DEFAULT="source \${XDG_CONFIG_HOME}/vim/vimrc"
-XAUTHORITY          DEFAULT="${XDG_RUNTIME_DIR}/Xauthority"
-XINITRC             DEFAULT="${XDG_CONFIG_HOME}/X11/xinitrc"
-ZDOTDIR             DEFAULT="${XDG_CONFIG_HOME}/zsh"
-LESSHISTFILE        DEFAULT="-"
-TASKDATA            DEFAULT="${MY}/task"
-TASKRC              DEFAULT="${XDG_CONFIG_HOME}/task/taskrc"
-PERL_CPANM_OPT      DEFAULT="--prompt --reinstall -l ${XDG_DATA_HOME}/perl"
-PERL5LIB            DEFAULT="${XDG_DATA_HOME}/perl/lib/perl5"
+# dot files for programs not heeding XDG_Base_Directory are symlinked to home
+# dotfiles/lib/dotfiles/.ledgerrc
+# dotfiles/lib/dotfiles/.pam_environment
 
-# home contains dot files for programs not heeding XDG_Base_Directory
-# home/.ledgerrc
+# fix various applications to respect XDG
+# https://wiki.archlinux.org/index.php/XDG_Base_Directory
+VIMINIT               DEFAULT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+ZDOTDIR               DEFAULT="${XDG_CONFIG_HOME}/zsh"
+LESSHISTFILE          DEFAULT="-"
+GNUPGHOME             DEFAULT="${XDG_STATE_HOME}/gnupg"
+PGPPATH               DEFAULT="${GNUPGHOME}"
+PASSWORD_STORE_DIR    DEFAULT="${XDG_STATE_HOME}/pass"
+PYTHONSTARTUP         DEFAULT="${XDG_LIB_HOME}/python/startup.py"
+NLTK_DATA             DEFAULT="${XDG_STATE_HOME}/nltk"
+XAUTHORITY            DEFAULT="${XDG_RUNTIME_DIR}/Xauthority"
+XINITRC               DEFAULT="${XDG_CONFIG_HOME}/X11/xinitrc"
+XMODMAP               DEFAULT="${XDG_CONFIG_HOME}/X11/.Xmodmap"
+RANDFILE              DEFAULT="${XDG_CACHE_HOME}/rnd"
+SQLITE_HISTORY        DEFAULT="${XDG_STATE_HOME}/sqlite_history"
+TASKDATA              DEFAULT="${MY}/task"
+TASKRC                DEFAULT="${XDG_CONFIG_HOME}/task/taskrc"
+WINEPREFIX            DEFAULT="${XDG_STATE_HOME}/wine/default"
+TMUX_TMPDIR           DEFAULT="${XDG_RUNTIME_DIR}"
+RXVT_SOCKET           DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
+
+
+

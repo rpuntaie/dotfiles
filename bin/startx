@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Wrap `startx` to use $XINITRC (specified in ~/.pam_environment).
+# Wrap `startx` to use $XINITRC, specified in ~/.pam_environment->dotfiles/home/.pam_environment
 
 [ -f "$XINITRC" ] ||
     { echo  >&2 "XINITRC not found!"; exit 1; }
