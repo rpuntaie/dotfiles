@@ -17,3 +17,7 @@ if os.path.exists(python_history):
     readline.read_history_file(python_history)
 atexit.unregister(readline.write_history_file)
 atexit.register(readline.write_history_file, python_history)
+
+#useful when executing a line via vim
+class self:
+    pass

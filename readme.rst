@@ -13,9 +13,10 @@ On an installed machine do:
 
    curl -Ls https://git.io/fjVcp | bash
 
-I use these dotfiles together with this ArchLinux installation.
-First prepare a local proxy as described in `rollarch <https://github.com/rpuntaie/rollarch>`__.
-Then:
+I use these dotfiles together with the ArchLinux installation at
+`rollarch <https://github.com/rpuntaie/rollarch>`__.
+First prepare a local proxy, as described there,
+then:
 
 .. code:: sh
 
@@ -23,9 +24,6 @@ Then:
     # replace all defines
     DSK=/dev/sda USR=u PW=p HST=up121 ZONE=Vienna IP2=1.121 AIP2=1.108 DOTS=https://git.io/fjVcp bash installarch rpuntaie-meta yay
     # log out and in
-
-``install`` uses  `stow <https://www.gnu.org/software/stow/>`__ to simlink into ``dotfiles``.
-Therefore keep ``dotfiles``, also to adapt and push when needed.
 
 Tools
 =====

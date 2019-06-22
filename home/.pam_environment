@@ -27,7 +27,7 @@ LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
 # fix various applications to respect XDG
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
-VIMINIT               DEFAULT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+VIMINIT               DEFAULT="let \$MYVIMRC='$XDG_CONFIG_HOME/vim/vimrc' | source \$MYVIMRC"
 ZDOTDIR               DEFAULT="${XDG_CONFIG_HOME}/zsh"
 LESSHISTFILE          DEFAULT="-"
 GNUPGHOME             DEFAULT="${XDG_STATE_HOME}/gnupg"

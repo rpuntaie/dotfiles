@@ -8,7 +8,9 @@ import XMonad.Util.EZConfig(additionalKeys)
 import qualified Data.Map as M
 main = do
     xmonad $ defaultConfig {
-        modMask = mod4Mask, -- Win key, as ranger uses alt+number
+        -- modMask = mod4Mask, 
+        -- -- use default Alt keys, as Win-L would lock Windows
+        -- -- ranger modified to g1,g2,...
         terminal = "alacritty",
         keys = myKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
