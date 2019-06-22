@@ -18,9 +18,14 @@ cd ~
 check_dots
 if ! $from_url && [[ ! -d .local ]] && [[ -d dotfiles ]]; then
   echo "moving dotfiles to .local"
-  mv dotfiles .local || echo "remove .local first" && exit 1
+  mv dotfiles .local
 fi
 if [[ -d .local ]]; then
+  if ! $from_url && [[ -d dotfiles ]]; then
+    echo "replacing .local with dotfiles"
+    rm -rf .local
+    mv dotfiles .local
+  fi
   if $from_url; then
     echo "replacing .local with $dotfilesurl"
     for A in $(ls -A .local/home); do
