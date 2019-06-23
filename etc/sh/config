@@ -1,8 +1,16 @@
+# vim: syntax=zsh
+
+OS_NAME=''
+if [ -e /etc/os-release ]; then
+	OS_NAME="$(. /etc/os-release && echo "$ID")"
+else
+	OS_NAME="$(uname)"
+fi
+export OS_NAME
+
 if [ "$TERM" = "rxvt-unicode-256color" ]; then
   export TERM="rxvt-unicode"
 fi
-
-HISTFILE="$XDG_STATE_HOME/.bash_history"
 
 # Default:
 export EDITOR='/usr/bin/vim'
@@ -20,3 +28,6 @@ LESS_TERMCAP_mb="$(printf '\033[34m')"
 LESS_TERMCAP_md="$(printf '\033[31m')"
 export LESS_TERMCAP_mb LESS_TERMCAP_md LESS_TERMCAP_me LESS_TERMCAP_se \
        LESS_TERMCAP_so LESS_TERMCAP_ue LESS_TERMCAP_us
+
+
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"

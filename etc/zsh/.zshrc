@@ -1,3 +1,5 @@
+#order: [.zshenv] [.zprofile if login] [.zshrc if interactive] [.zlogin if login]
+
 . $XDG_CONFIG_HOME/sh/interactive
 HISTFILE="${XDG_STATE_HOME:-$HOME}/.zsh_history"
 

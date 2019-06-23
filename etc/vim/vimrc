@@ -173,18 +173,19 @@ else
 endif
 let g:bundleinit=0
 if has('vim_starting')
-    if !isdirectory(g:bundledir.'/repos')
+    if isdirectory(g:bundledir.'/repos')
         let g:bundleinit=1
     endif
-    if g:bundleinit!=1
+    if g:bundleinit==0
         let g:bundleinit=2
         call mkdir(g:bundledir, 'p', 0700)
         execute '!git clone https://github.com/Shougo/dein.vim '.g:bundledir.'/repos/github.com/Shougo/dein.vim'
     endif
-    set runtimepath+=g:bundledir.'repos/github.com/Shougo/dein.vim'
+    let g:dein_path=g:bundledir.'/repos/github.com/Shougo/dein.vim'
+    let &runtimepath=&runtimepath.','.g:dein_path
     if dein#load_state(g:bundledir)
         call dein#begin(g:bundledir)
-        call dein#add(g:bundledir.'repos/github.com/Shougo/dein.vim')
+        call dein#add(g:dein_path)
 
         call Deinplugins()
 
@@ -802,7 +803,7 @@ let g:trans_has_python=3 "webapi.vim instead
 let use_py3 = has('python3')
 "
 set tags=./.tags;,.tags;
-set tags+=$HOME/my/.tags
+set tags+=$MY/.tags
 "
 if use_py3
 py3 << EOF
@@ -886,7 +887,7 @@ endif
 "
 "if !has('win32')
 "" it works on msys and rst2pdf is available for windows python
-vnoremap <leader>lt <ESC>:!echo .. default-role:: math > ~/my/tmp89227.rst<CR><CR>gv:w! >> ~/my/tmp89227.rst<CR>:!rst2pdf ~/my/tmp89227.rst<CR><CR>
+vnoremap <leader>lt <ESC>:!echo .. default-role:: math > $MY/tmp89227.rst<CR><CR>gv:w! >> $MY/tmp89227.rst<CR>:!rst2pdf $MY/tmp89227.rst<CR><CR>
 "endif
 
 ":CS ==> sphinx search formated query string, like "@title my profile"
@@ -1086,7 +1087,9 @@ iab iF <C-R>=py3eval("iF()")<CR>
 ".. {other}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-cd $HOME/my
+if isdirectory($MY)
+    cd $MY
+endif
 
 "autocmd FileType cpp setlocal noeol binary fileformat=dos
 " Vim configuration file.

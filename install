@@ -28,9 +28,6 @@ if [[ -d .local ]]; then
   fi
   if $from_url; then
     echo "replacing .local with $dotfilesurl"
-    for A in $(ls -A .local/home); do
-      rm -f "$A"
-    done
     rm -rf .local
     git clone $dotfilesurl .local
   fi
@@ -40,4 +37,8 @@ for A in $(ls -A .local/home); do
 done
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
+
+echo "Installing used AUR packages now"
+yay -S --noconfirm wordnet-cli
+
 echo -e "\033[0;32mLog out and in, to activate the environment."

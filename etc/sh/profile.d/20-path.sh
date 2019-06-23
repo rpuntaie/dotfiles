@@ -8,5 +8,3 @@ path append "$(readlink -f /sbin)"
 # Add user path:
 path prepend "$(readlink -f "$HOME/.local/bin")"
 
-# XXX
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
