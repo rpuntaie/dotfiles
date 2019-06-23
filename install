@@ -1,45 +1,39 @@
 #!/usr/bin/bash
 
-check_dots() {
-  if (cd dotfiles || cd .local) && [[ ! "$(git config --get remote.origin.url)"=="$dotfilesurl" ]]; then
-    echo "This install script is for a different dotfiles" >&2
-    cd ..
-    exit 1
-  fi
-}
+#according rpuntaie-meta on https://github.com/rpuntaie/rollarch
 
 dotfilesurl=https://github.com/rpuntaie/dotfiles
-#... cloned to .local
-from_url=true
-if [[ "$0" =~ .*install ]]; then
-  from_url=false
-fi
 cd ~
-check_dots
-if ! $from_url && [[ ! -d .local ]] && [[ -d dotfiles ]]; then
-  echo "moving dotfiles to .local"
-  mv dotfiles .local
+
+if [[ -d dotfiles ]]; then
+  cd dotfiles
+  if [[ ! "$(git config --get remote.origin.url)"=="$dotfilesurl" ]]; then
+    echo "This install script is for a different dotfiles" >&2
+    exit 1
+  fi
+  cd ..
+else
+  git clone $dotfilesurl
 fi
+
 if [[ -d .local ]]; then
-  if ! $from_url && [[ -d dotfiles ]]; then
-    echo "replacing .local with dotfiles"
-    rm -rf .local
-    mv dotfiles .local
-  fi
-  if $from_url; then
-    echo "replacing .local with $dotfilesurl"
-    rm -rf .local
-    git clone $dotfilesurl .local
-  fi
+  stow --no-folding -R -t .local dotfiles 
+else
+  mkdir .local
+  stow --no-folding -S -t .local dotfiles 
 fi
-for A in $(ls -A .local/home); do
-  ln -sf ".local/home/$A" "$A"
-done
+cd dotfiles
+stow home
+cd ..
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
 
+if [[ -x /usr/bin/yay ]]; then
 echo "Installing used AUR packages now"
-yay -S --noconfirm wordnet-cli
-yay -S --noconfirm waf-git
+yay -S --needed --noconfirm wordnet-cli
+yay -S --needed --noconfirm waf-git
+else
+echo "No yay to install some used AUR packages"
+fi
 
 echo -e "\033[0;32mLog out and in, to activate the environment."

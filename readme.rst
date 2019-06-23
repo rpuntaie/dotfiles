@@ -23,12 +23,15 @@ Non-standard `XDG_LIB_HOME`, `XDG_LOG_HOME` and `XDG_STATE_HOME` are for FHS com
 
 Inspired by `ayekat <https://github.com/ayekat/dotfiles>`__ and
 `floure <https://gitlab.gnugen.ch/floure/dotfiles>`__.
+
+Installation
+============
+
+Installation is handle by the ``install`` script according `rollarch`_.
 I chose
 `gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__
 ``--no-folding`` to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS.
 
-Installation
-============
 
 I install these my dotfiles on an installed machine:
 

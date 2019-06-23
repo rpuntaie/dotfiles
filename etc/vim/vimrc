@@ -23,7 +23,7 @@ set nocompatible
 if has('win32')
   let g:vimfiles=$VIM.'/vimfiles'
 else
-  let g:vimfiles=$XDG_CACHE_HOME.'/vim'
+  let g:vimfiles=$XDG_STATE_HOME.'/vim'
 end
 set undofile
 if has('win32')
