@@ -31,7 +31,12 @@ Installation is handle by the ``install`` script according `rollarch`_.
 I chose
 `gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__
 ``--no-folding`` to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS.
+When I grep through it those files are a nuisance.
+Occationally one can check whether files in .local should be moved to .dotfiles, using
 
+.. code:: sh
+
+    diff -r .local dotfiles
 
 I install these my dotfiles on an installed machine:
 

@@ -2,7 +2,7 @@
 
 . $XDG_CONFIG_HOME/sh/interactive
 
-export ZGEN_DIR="${XDG_CACHE_HOME:-$HOME}/.zgen/"
+export ZGEN_DIR="${XDG_STATE_HOME:-$HOME}/.zgen/"
 if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then
   echo "Zgen not found, bootstrapping."
   mkdir -p "$ZGEN_DIR"
