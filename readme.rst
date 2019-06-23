@@ -2,11 +2,24 @@
 Dotfiles
 ********
 
-Uses `XGD <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__,
+Uses `XDG <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__,
 reproducing `FHS <http://linux.die.net/man/7/hier>`__ under ``~/.local``.
 See 
 `.pam_environment <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/home/.pam_environment>`__.
 Non-standard `XDG_LIB_HOME`, `XDG_LOG_HOME` and `XDG_STATE_HOME` are for FHS compliance.
+
+:etc:       ``XDG_CONFIG_HOME``, app configurations
+:share:     ``XDG_DATA_HOME``, user data needed by app
+:lib:       ``XDG_LIB_HOME``, libs for user
+:var/cache: ``XDG_CACHE_HOME``, tmp and cache needed by app
+:var/lib:   ``XDG_STATE_HOME``, libraries for app not tracked  
+:var/log:   ``XDG_LOG_HOME``, app generated logs
+:opt: for not well integrated apps, 
+      e.g https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh
+:bin: user scripts
+:home: files symlinked from ``~`` for apps not honoring XDG
+:install: installation script according `rollarch`_
+:readme.rst: this file
 
 Inspired by `ayekat <https://github.com/ayekat/dotfiles>`__ and
 `floure <https://gitlab.gnugen.ch/floure/dotfiles>`__.
@@ -28,7 +41,7 @@ The install script also installs packages from AUR using
 `yay <https://github.com/Jguer/yay>`__.
 
 I use these dotfiles together with the ArchLinux installation at
-`rollarch <https://github.com/rpuntaie/rollarch>`__.
+`rollarch <https://github.com/rpuntaie/rollarch>`_.
 First prepare a local proxy, as described there,
 then:
 
@@ -83,26 +96,3 @@ Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmon
    `neovim <https://neovim.io/>`__.
 
 
-Tree
-====
-
-::
-
-   ~/.local
-   ├── bin
-   │   #... scripts
-   ├── etc
-   │   #... configs
-   ├── home
-   │   #... files symlinked from ~
-   ├── install #script
-   ├── readme.rst
-   ├── lib
-   │   ├── python
-   │   │   └── startup.py
-   │   └── tmux
-   │       └── tmux-view
-   ├── opt
-   │   # ... not well integrated apps
-   |   # ... e.g https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh
-   ├── share

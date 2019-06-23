@@ -3,6 +3,9 @@
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
+# $XDG_RUNTIME_DIR is automatically created, e.g.
+# drwx------ ... /run/user/1000
+
 # Ugly workaround for Debian (as they ship an ancient version of PAM)
 HOME                  DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
 
