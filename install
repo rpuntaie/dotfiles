@@ -40,5 +40,6 @@ xmonad --recompile
 
 echo "Installing used AUR packages now"
 yay -S --noconfirm wordnet-cli
+yay -S --noconfirm waf-git
 
 echo -e "\033[0;32mLog out and in, to activate the environment."

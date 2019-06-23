@@ -1,7 +1,6 @@
 #order: [.zshenv] [.zprofile if login] [.zshrc if interactive] [.zlogin if login]
 
 . $XDG_CONFIG_HOME/sh/interactive
-HISTFILE="${XDG_STATE_HOME:-$HOME}/.zsh_history"
 
 export ZGEN_DIR="${XDG_CACHE_HOME:-$HOME}/.zgen/"
 if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then

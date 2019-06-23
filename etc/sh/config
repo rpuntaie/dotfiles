@@ -1,5 +1,7 @@
 # vim: syntax=zsh
 
+HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
+
 OS_NAME=''
 if [ -e /etc/os-release ]; then
 	OS_NAME="$(. /etc/os-release && echo "$ID")"

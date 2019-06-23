@@ -8,7 +8,11 @@ See
 `.pam_environment <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/home/.pam_environment>`__.
 Non-standard `XDG_LIB_HOME`, `XDG_LOG_HOME` and `XDG_STATE_HOME` are for FHS compliance.
 
-Inspired by `ayekat <https://github.com/ayekat/dotfiles>`__.
+Inspired by `ayekat <https://github.com/ayekat/dotfiles>`__ and
+`floure <https://gitlab.gnugen.ch/floure/dotfiles>`__.
+I chose
+`gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__
+``--no-folding`` to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS.
 
 Installation
 ============
@@ -79,5 +83,26 @@ Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmon
    `neovim <https://neovim.io/>`__.
 
 
+Tree
+====
 
+::
 
+   ~/.local
+   ├── bin
+   │   #... scripts
+   ├── etc
+   │   #... configs
+   ├── home
+   │   #... files symlinked from ~
+   ├── install #script
+   ├── readme.rst
+   ├── lib
+   │   ├── python
+   │   │   └── startup.py
+   │   └── tmux
+   │       └── tmux-view
+   ├── opt
+   │   # ... not well integrated apps
+   |   # ... e.g https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh
+   ├── share

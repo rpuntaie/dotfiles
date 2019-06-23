@@ -1,30 +1,33 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" this needs python 3.x
+" build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope --enable-gui=gtk2 --with-features=big --enable-netbeans --with-tlib=ncurses
 "
 " pacman --noconfirm -S vim-spell-en vim-spell-de vim-spell-it vim-spell-fr vim-spell-ru vim-spell-es
-" mkdir ~/.vim/dein
-" curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-" sh ./installer.sh ~/.vim/dein
-" #in vim
-" :call dein#install()
 " 
-" the system must have
-" - python with docutils (rst2html)
-" - cscope
-" - gdb 7.3
-" - pyclewn
-" - wordnet
+" system:
+"   https://github.com/rpuntaie/rollarch
+"   https://github.com/rpuntaie/dotfiles
+"   - python with vim_py3_rst
+"   - cscope
+"   - wordnet
+"   - rst2confluence
+"   - waf
 "
 " <ESC> mapped to <CAPSLOCK> in the OS
+"
 " find all maps: <leader> command!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible
 
 if has('win32')
-  set undofile
-  set undodir=~/.vim/undo
+  let g:vimfiles=$VIM.'/vimfiles'
+else
+  let g:vimfiles=$XDG_CACHE_HOME.'/vim'
+end
+set undofile
+if has('win32')
+  let &undodir=g.vimfiles.'/undo'
 else
   " XDG Environment
   " https://tlvince.com/vim-respect-xdg
@@ -33,34 +36,14 @@ else
   set viminfo+=n$XDG_STATE_HOME/vim/viminfo
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
   let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
-  set undofile
   set undodir=$XDG_STATE_HOME/vim/undo
 endif
 
-set errorformat=%f:%l:%c:%m
-"set errorformat=\|\|\ %f:%l:\ %m
-"set errorformat=%f:%l:\ %m
-"waf set errorformat=%f(%l)\ :\ %m
-"doxygen
-"set errorformat=%f:%l:%m
-"works with waf and builds into subfolder
-if has('win32')
-  set makeprg=waf\ --targets=%:t:r\ 2>&1\ \\\\|\ sed\ 's/^\\.\\.\\\\\\\\//'\ 
-  set shellpipe=2>&1\ \|tee
-  set makeef=
-else
-  "works with waf and builds into subfolder
-  set makeprg=./waf\ --targets=%:t:r\ 2>&1\ \\\|\ tee\ teeerrors.err\ \\\|\ sed\ 's/^\.\.\\\///'\ \\\|\ 
-  "if file in subfolder:
-  "set makeprg=./waf\ --targets=%:h%:t:r\ 2>&1\ \\\|\ tee\ teeerrors.err\ \\\|\ sed\ 's/^\.\.\\\///'\ \\\|\ 
-endif
-"
 "surround plugin does not check selection option: 
 ""so $VIMRUNTIME/mswin.vim
 "instead:
 set keymodel=startsel,stopsel
 set selection=exclusive
-
 
 "dein
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -130,9 +113,8 @@ function Deinplugins()
     "hex
     "call dein#add('vim-scripts/hexman.vim')
     "terminal in vim
-    "call dein#add('vim-scripts/Conque-Shell') "Conque-GDB contains ConqueTerm and is newer
+    call dein#add('sakhnik/nvim-gdb')
     call dein#add('vim-scripts/Conque-GDB')
-    call dein#add('Shougo/vimshell')
     "symbols of a language in sidebar
     "call dein#add('http://www.vim.org/scripts/download_script.php?src_id=19574')
     call dein#add('vim-scripts/taglist.vim')
@@ -162,15 +144,13 @@ function Deinplugins()
     "call dein#add('tomtom/viki_vim')
     "call dein#add('lepture/vim-jinja')
     "
+    "dictionary
     call dein#add('mattn/webapi-vim')
     call dein#add('rpuntaie/trans.vim')
+    call dein#add('farconics/victionary')
     call dein#add('Rykka/mathematic.vim')
 endfunction
-if has('win32')
-  let g:bundledir=$VIM.'/vimfiles/dein'
-else
-  let g:bundledir=$XDG_CACHE_HOME.'/vim/dein'
-endif
+let g:bundledir=g:vimfiles.'/dein'
 let g:bundleinit=0
 if has('vim_starting')
     if isdirectory(g:bundledir.'/repos')
@@ -200,32 +180,17 @@ endif
 "call dein#update()
 "call dein#install()
 
-
-filetype plugin indent on     " Required!
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {general}
+" settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set noswapfile
+filetype plugin indent on     " Required!
 
-" Ctrl+c/Ctrl+v to copy/paste (clipboard) in gvim
-nmap <C-V> "+gP
-imap <C-V> <ESC><C-V>i
-vmap <C-C> "+y
-
-" Move around windows
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
-
-
-"
 " Sets how many lines of history VIM has to remember
 set history=700
-"
+
 " Set to auto read when a file is changed from the outside
 set autoread
-"
+
 " With a map leader it's possible to do extra key combinations
 let mapleader = ","
 let maplocalleader = ","
@@ -240,9 +205,8 @@ set isfname-=:
 "128 vim iskeyword...
 set iskeyword=@,48-57,_,180-255
 "set iskeyword=a-z,A-Z,48-57,_,.,-,>
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {interface}
+
+" UI
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
 try
@@ -379,14 +343,6 @@ set tm=500
 " Hide the mouse when typing text
 set mousehide
 "
-" Enable syntax highlighting
-noremap <F10> <Esc>:syntax sync fromstart<CR>
-inoremap <F10> <C-o>:syntax sync fromstart<CR>
-syntax enable 
-if has("autocmd")
-    autocmd BufEnter * :syntax sync fromstart
-endif
-"
 function! ShowUtf8Sequence()
   if (mode()=='i' && exists('b:thch'))
       return nr2char(b:thch)
@@ -404,13 +360,7 @@ set statusline=%n%m%r%h%w\ %04v,%04l=%p%%(%L)\ 0x%B[%{ShowUtf8Sequence()}]%{getc
 set laststatus=2
 "
 set nowrap
-" Treat long lines as break lines when wrap on
-map j gj
-map k gk
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {encoding file backup}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 "
@@ -432,37 +382,13 @@ set nobackup
 set nowb
 set autowriteall
 "
-" Don't close window, when deleting a buffer
-"function! BufcloseCloseIt()
-"   let l:currentBufNum = bufnr("%")
-"   let l:alternateBufNum = bufnr("#")
-"   if buflisted(l:alternateBufNum)
-"     buffer #
-"   else
-"     bnext
-"   endif
-"   if bufnr("%") == l:currentBufNum
-"     new
-"   endif
-"   if buflisted(l:currentBufNum)
-"     execute("bdelete ".l:currentBufNum)
-"   endif
-"endfunction
-"command! Bclose call BufcloseCloseIt() 
-"map <leader>bd :Bclose<cr> 
-map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
-"
-"
-" Return to last edit position when opening files (You want this!)
-if has("autocmd")
-    autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal! g'\"" |
-        \ endif
-endif
+" Return to last edit position when opening files
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {tab}
+" tab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
@@ -479,8 +405,7 @@ set softtabstop=4
 "
 set clipboard=unnamed
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {XML}
+" XML
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! DoPrettyXML()
   " save the filetype so we can restore it later
@@ -511,8 +436,7 @@ function! DoPrettyXML()
 endfunction
 command! PrettyXML call DoPrettyXML()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {search vimgrep}
+" search vimgrep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:filter = ' `ack -f --ignore-dir=sympy --ignore-dir=bottle --ignore-dir=simpleauth`'
 let g:filter = ' **/*'
@@ -541,8 +465,7 @@ nnoremap <leader>gg :vimgrep // <C-R>=g:filter<CR><C-B><S-right><right><right>
 nnoremap <leader>gp ?\.\. {<CR>
 nnoremap <leader>gn /\.\. {<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {search git-grep}
+" search git-grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 func! GitGrep(...)
   let save = &grepprg
@@ -570,51 +493,57 @@ vnoremap <leader>gg :call VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR>
 " Search and replace the selected text
 vnoremap <leader>gr :call VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
 "
-" buffer local search
-"""if has("autocmd")
-"""    augroup save_search
-"""    autocmd!
-"""    autocmd BufEnter * if exists("b:saved_search") && b:saved_search!="" | let @/=b:saved_search | endif
-"""    autocmd BufLeave * let b:saved_search=@/
-"""    augroup END
-"""endif
 
+" useful maps
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {dictionary, thesaurus, english}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" i_CTRL-X_CTRL-K
-set dictionary=/usr/share/dict/american-english
-" i_CTRL-X_CTRL-T
-set thesaurus=/usr/share/dict/mthesaur.txt
-"
-" wordnet
+
+" Treat long lines as break lines when wrap on
+map j gj
+map k gk
+
+" Enable syntax highlighting
+noremap <F10> <Esc>:syntax sync fromstart<CR>
+inoremap <F10> <C-o>:syntax sync fromstart<CR>
+syntax enable 
+autocmd BufEnter * :syntax sync fromstart
+
+" Ctrl+c/Ctrl+v to copy/paste (clipboard) in gvim
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
+
+" Move around windows
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-l> :wincmd l<CR>
+
+" Don't close window, when deleting a buffer
+map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+
 " look up in wordnet (wn)
 nmap <leader>ww :!wn <C-R><C-W> -over<CR>
 " remember word at beginning of text file
 nmap <leader>we mwywggO<ESC>p0*'wn:!wn <C-R><C-W> -over<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {map}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " No middle mouse button
 map <middlemouse> <nop>
 imap <middlemouse> <nop>
 nnoremap <X1Mouse> <C-O>
 nnoremap <X2Mouse> <C-I>
 nnoremap Y y$
+
 " Replace without loosing register
 vnoremap R "_c<C-R>"<esc>
 nnoremap R "_ciw<C-R>"<esc>
+
 " Insert empty line
 nnoremap <silent> s <nop>
 nnoremap <silent> S <nop>
 nnoremap <silent> ss o<ESC>k
-nnoremap <silent> SS O<ESC>j
-"CD to path of current file
-command! CD cd %:p:h
+
 " Language used in insert mode
-"
-let g:mathematic_user_dir = "~/.vim/dein/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim"
+let g:mathematic_user_dir = g:bundledir.'/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
 nmap <leader>lr :set keymap=russian-jcukenwin<cr>
 nmap <leader>la :set keymap=accents<cr>
 nmap <leader>lm :set keymap=mathematic<cr>
@@ -625,10 +554,9 @@ nmap <leader>ls :setlocal spell spelllang=
 
 "edit
 nmap <leader>ee :e $MYVIMRC<cr>
-nnoremap <silent> <leader>etf :call ReformatTable()<CR>
-nnoremap <silent> <leader>etr :call ReflowTable()<CR>
 map <leader>aa :Tab/
-vnoremap <leader>ec :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\d/let c=c+1\|s/\d/\=c<cr>
+"renumber 1., ... visual area
+vnoremap <leader>ec :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
 
 "yank current file full path
 noremap <silent> cp :let @* = expand("%")<CR>
@@ -638,9 +566,10 @@ onoremap <silent>m //e<CR>
 vnoremap <silent>m //e<CR>
 nnoremap <silent>n //<CR>
 
+"CD to path of current file
+command! CD cd %:p:h
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {plugin}
+" plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_user_command = [
     \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
@@ -780,11 +709,7 @@ nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
-"
-".. vimshell
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 
 ".. trans.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -796,16 +721,14 @@ let g:trans_replace=0
 let g:trans_has_python=3 "webapi.vim instead
 
 
+" my vim python
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {my vim python}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-let use_py3 = has('python3')
 "
 set tags=./.tags;,.tags;
-set tags+=$MY/.tags
-"
-if use_py3
+if filereadable($MY.'/.tags')
+  set tags+=$MY/.tags
+endif
+
 py3 << EOF
 import uuid
 from math import * 
@@ -841,61 +764,40 @@ except: pass
 def tojira():
   vim.current.range[:]=publish_string(vim_current_range()[0],writer=confluence.Writer()).splitlines()
 EOF
-
-if has("autocmd")
-    autocmd filetype python setlocal makeprg=python3\ %
-    autocmd filetype python setlocal formatprg=autopep8\ -
-    "autocmd BufEnter *.py setlocal makeprg=doit
-    "
-    "autocmd BufEnter *.py setlocal makeprg=pylint\ --rcfile=.pylintrc\ --reports=n\ --output-format=parseable\ %:p
-    "autocmd BufEnter *.py setlocal errorformat=%f:%l:\ %m
-endif
-
 map <leader>j2 :py3 tojira()<CR>
 
-else
-
-python << EOF
-import uuid
-from math import *
-import sys 
-sys.path.remove('_vim_path_')
-EOF
-
-map <leader>jj :py vim_print_current_range()<CR>
-map <leader>jk :py vim_eval_current_range()<CR>
-map <leader>jd :py vim_doctest_current_range()<CR>
-map <leader>jt :py print(timeit(vim_current_range(),'\n'.join([l for l in vim.current.buffer]),number=1000))<CR>
-
-if has("autocmd")
-    autocmd filetype python setlocal makeprg=python\ %
-    autocmd filetype python setlocal formatprg=autopep8\ -
-    "autocmd BufEnter *.py setlocal makeprg=doit
-    "
-    "autocmd BufEnter *.py setlocal makeprg=pylint\ --rcfile=.pylintrc\ --reports=n\ --output-format=parseable\ %:p
-    "autocmd BufEnter *.py setlocal errorformat=%f:%l:\ %m
-endif
-
-
-endif
-
-
+" errorformat, makeprg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {my rest, rst, Restructured text}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ... to pdf
+set errorformat=%f:%l:%c:%m
+"set errorformat=\|\|\ %f:%l:\ %m
+"set errorformat=%f:%l:\ %m
+"waf:
+"set errorformat=%f(%l)\ :\ %m
+"doxygen:
+"set errorformat=%f:%l:%m
+"autocmd filetype python setlocal makeprg=python3\ %
+"autocmd filetype python setlocal formatprg=autopep8\ -
+"autocmd BufEnter *.py setlocal makeprg=doit
+"autocmd BufEnter *.py setlocal makeprg=pylint\ --rcfile=.pylintrc\ --reports=n\ --output-format=parseable\ %:p
+"autocmd BufEnter *.py setlocal errorformat=%f:%l:\ %m
 "
-"if !has('win32')
-"" it works on msys and rst2pdf is available for windows python
-vnoremap <leader>lt <ESC>:!echo .. default-role:: math > $MY/tmp89227.rst<CR><CR>gv:w! >> $MY/tmp89227.rst<CR>:!rst2pdf $MY/tmp89227.rst<CR><CR>
-"endif
+"use waf and build into subfolder
+if has('win32')
+  set makeprg=waf\ --targets=%:t:r\ 2>&1\ \\\\|\ sed\ 's/^\\.\\.\\\\\\\\//'\ 
+  set shellpipe=2>&1\ \|tee
+  set makeef=
+else
+  set makeprg=waf\ --targets=%:t:r\ 2>&1\ \\\|\ tee\ teeerrors.err\ \\\|\ sed\ 's/^\.\.\\\///'\ \\\|\ 
+  "if file in subfolder:
+  "set makeprg=waf\ --targets=%:h%:t:r\ 2>&1\ \\\|\ tee\ teeerrors.err\ \\\|\ sed\ 's/^\.\.\\\///'\ \\\|\ 
+endif
 
-":CS ==> sphinx search formated query string, like "@title my profile"
-"command! -narg=* CS py3 vim_dosphinxsearch(<f-args>)
-
-
+" to pdf, similar to <leader>lh from vim_py3_rst for html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {my vim shell}
+vnoremap <leader>lt :py3 Show('pdf')
+"vnoremap <leader>lt <ESC>:!echo .. default-role:: math > $XDG_RUNTIME_DIR/vim_lt_map.rst<CR><CR>gv:w! >> $XDG_RUNTIME_DIR/vim_lt_map.rst<CR>:!rst2pdf $XDG_RUNTIME_DIR/vim_lt_map.rst<CR><CR>
+
+" shell and system open
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open a (visually) selected file in the shell (pdf, images, ...)
 let g:netrw_shq="'"
@@ -920,7 +822,7 @@ nnoremap <silent> <leader>sp :exe ':silent !chromium "http://docs.python.org/py3
 nnoremap <silent> <leader>sw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
 "
-" :Sh(ell) 
+" read from a shell command into a new buffer
 function! s:RunShellCommand(cmdline)
     botright new
     setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
@@ -961,8 +863,7 @@ vnoremap <leader>sm o<esc>O#!env sh<esc>gvk:w! ~/y.sh<cr>u
 ":'<'>!cat -n
 ":'<,'>s/^\S/\=printf("%d.\t", line(".") - line("'<") + 1)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"digraph
+" digraph
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! GDigraph(arg)
     let old=@a
@@ -1013,8 +914,7 @@ dig @R 641 "ʁ vd uvular fricative
 dig @X 967 "χ vl uvular fricative
 dig @l 654 "ʎ italian gli, castillian ll
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {diff}
+" diff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tells vim not to automatically reload changed files
 set noautoread 
@@ -1026,9 +926,7 @@ function! DiffWithSaved()
   diffthis
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-
 " sets up mappings to function
-
 com! DiffSaved call DiffWithSaved()
 map <Leader>ds :DiffSaved<CR>
 
@@ -1070,8 +968,7 @@ if has('win32')
   endfunction
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {abbreviation}
+" abbreviation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab FENV #!/usr/bin/env 
 iab FENC # encoding: utf-8
@@ -1083,8 +980,7 @@ iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
 iab iC <C-R>=py3eval("iC()")<CR>
 iab iF <C-R>=py3eval("iF()")<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-".. {other}
+" ...
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if isdirectory($MY)

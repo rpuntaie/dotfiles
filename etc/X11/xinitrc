@@ -18,3 +18,5 @@ if [ -z "$WM" ]; then
   export WM=xmonad
 fi
 exec $WM
+
+dex --environment xmonad --autostart --search-paths $XDG_CONFIG_HOME/autostart
