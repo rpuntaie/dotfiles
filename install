@@ -42,5 +42,6 @@ pip install --user pymunk #2D physics engine
 yay -S --needed --noconfirm plantuml #for rstdoc
 yay -S --needed --noconfirm wordnet-cli #used in vim
 yay -S --needed --noconfirm waf-git #to build
+yay -S --needed --noconfirm rstudio-desktop-bin #for R: rstudio-bin
 
 echo -e "\033[0;32mLog out and in, to activate the environment."

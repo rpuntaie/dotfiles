@@ -1,8 +1,3 @@
-[alias]
-  st = status
-  unstage = reset HEAD --
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [color]
   status = auto
   diff = auto
@@ -27,3 +22,128 @@
   default = simple
 [gpg]
   program = gpg2
+[alias]
+  a        = add
+  aa       = add --all
+  ap       = apply
+  apa      = add --patch
+  au       = add --update
+  av       = add --verbose
+  b        = branch
+  bD       = branch -D
+  ba       = branch -a
+  bd       = branch -d
+  bl       = blame -b -w
+  bnm      = branch --no-merged
+  br       = branch --remote
+  bs       = bisect
+  bsb      = bisect bad
+  bsg      = bisect good
+  bsr      = bisect reset
+  bss      = bisect start
+  c        = commit -v
+  ca       = commit -v -a
+  cam      = commit -a -m
+  cb       = checkout -b
+  cd       = checkout develop
+  cf       = config --list
+  cl       = clone --recurse-submodules
+  clean    = clean -id
+  cm       = checkout master
+  cmsg     = commit -m
+  co       = checkout
+  count    = shortlog -sn
+  cp       = cherry-pick
+  cpa      = cherry-pick --abort
+  cpc      = cherry-pick --continue
+  cs       = commit -S
+  csm      = commit -s -m
+  d        = diff
+  dca      = diff --cached
+  dct      = describe --tags $(git rev-list --tags --max-count=1)
+  dcw      = diff --cached --word-diff
+  ds       = diff --staged
+  dt       = diff-tree --no-commit-id --name-only -r
+  dw       = diff --word-diff
+  f        = fetch
+  fa       = fetch --all --prune
+  fo       = fetch origin
+  g        = gui citool
+  ga       = gui citool --amend
+  gpull    = pull origin "$(git_current_branch)"
+  gpush    = push origin "$(git_current_branch)"
+  gsup     = branch --set-upstream-to=origin/$(git_current_branch)
+  hh       = help
+  ignore   = update-index --assume-unchanged
+  l        = pull
+  lg       = log --stat
+  lgg      = log --graph
+  lgga     = log --graph --decorate --all
+  lgm      = log --graph --max-count=10
+  lgp      = log --stat -p
+  lo       = log --oneline --decorate
+  lod      = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
+  lods     = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date  =  short
+  log      = log --oneline --decorate --graph
+  loga     = log --oneline --decorate --graph --all
+  lol      = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  lola     = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
+  lols     = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
+  lum      = pull upstream master
+  m        = merge
+  ma       = merge --abort
+  mom      = merge origin/master
+  mt       = mergetool --no-prompt
+  mtvim    = mergetool --no-prompt --tool=vimdiff
+  mum      = merge upstream/master
+  p        = push
+  pd       = push --dry-run
+  pf       = push --force-with-lease
+  psup     = push --set-upstream origin $(git_current_branch)
+  pu       = push upstream
+  pv       = push -v
+  r        = remote
+  ra       = remote add
+  rb       = rebase
+  rba      = rebase --abort
+  rbc      = rebase --continue
+  rbd      = rebase develop
+  rbi      = rebase -i
+  rbm      = rebase master
+  rbs      = rebase --skip
+  rev      = revert
+  rh       = reset
+  rhh      = reset --hard
+  rm       = rm
+  rmc      = rm --cached
+  rmv      = remote rename
+  roh      = reset origin/$(git_current_branch) --hard
+  rrm      = remote remove
+  rset     = remote set-url
+  ru       = reset --
+  rup      = remote update
+  rv       = remote -v
+  sb       = status -sb
+  sd       = svn dcommit
+  sh       = show
+  si       = submodule init
+  sps      = show --pretty=short --show-signature
+  sr       = svn rebase
+  ss       = status -s
+  st       = status
+  sta      = stash push
+  staa     = stash apply
+  stall    = stash --all
+  stc      = stash clear
+  std      = stash drop
+  stl      = stash list
+  stp      = stash pop
+  sts      = stash show --text
+  su       = submodule update
+  ts       = tag -s
+  unignore = update-index --no-assume-unchanged
+  up       = pull --rebase
+  upa      = pull --rebase --autostash
+  upav     = pull --rebase --autostash -v
+  upv      = pull --rebase -v
+  wch      = whatchanged -p --abbrev-commit --pretty=medium

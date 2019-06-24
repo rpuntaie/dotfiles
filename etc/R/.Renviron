@@ -1,0 +1,7 @@
+R_HOME_USER=${HOME}
+R_LIBS_USER=${HOME}/.local/lib/R
+R_PROFILE_USER=${HOME}/.local/etc/.Rprofile
+R_HISTFILE=${HOME}/.local/var/lib/.Rhistory
+R_HISTSIZE=65535
+LANG=C
+LC_CTYPE=en_US.UTF-8

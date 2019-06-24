@@ -53,8 +53,10 @@ then:
 .. code:: sh
 
     curl -OLs https://git.io/installarch
-    # replace all defines
-    DSK=/dev/sda USR=u PW=p HST=up121 ZONE=Vienna IP2=1.121 AIP2=1.108 DOTS=https://git.io/fjVcp bash installarch rpuntaie-meta yay
+    # replace the defines in the first line
+    DSK=/dev/sda USR=u PW=p HST=up121 IP2=1.121 AIP2=1.108 \
+    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=https://git.io/fjVcp \
+    bash installarch rpuntaie-meta yay
     # log out and in
 
 Occasionally one can check whether files in ``.local`` should be moved to ``dotfiles``, using

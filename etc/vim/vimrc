@@ -49,7 +49,6 @@ set selection=exclusive
 
 "dein
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 function Deinplugins()
     " My Bundles here:
     "vimproc
@@ -136,7 +135,7 @@ function Deinplugins()
     call dein#add('tpope/vim-fugitive')
     "other vcs
     call dein#add('vim-scripts/vcscommand.vim')
-    "todo test these
+    "todo test these (nvim-r alternative)
     "call dein#add('jcfaria/Vim-R-plugin')
     "call dein#add('vim-ipython')
     "wiki

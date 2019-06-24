@@ -1,0 +1,23 @@
+[ui]
+username = Roland Puntaier <roland.puntaier@chello.at>
+editor = vim
+ignore = ~/.hgignore
+
+[alias]
+a='add'
+b='branch'
+ba='branches'
+bk='bookmarks'
+c='commit'
+ca='commit --amend'
+co='checkout'
+d='diff'
+ed='diffmerge'
+i='incoming'
+l='pull -u'
+lr='pull --rebase'
+o='outgoing'
+p='push'
+s='status'
+sl='log --limit 20 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n" '
+un='resolve --list'
