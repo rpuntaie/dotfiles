@@ -1,10 +1,13 @@
 [alias]
   st = status
   unstage = reset HEAD --
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [color]
   status = auto
   diff = auto
   branch = auto
+  interactive = auto
 [commit]
   gpgsign = false
   verbose = true
@@ -20,3 +23,7 @@
 [user]
   name = Roland Puntaier
   email = roland.puntaier@gmail.com
+[push]
+  default = simple
+[gpg]
+  program = gpg2

@@ -6,7 +6,7 @@ Uses `XDG <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__,
 reproducing `FHS <http://linux.die.net/man/7/hier>`__ under ``~/.local``.
 See 
 `.pam_environment <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/home/.pam_environment>`__.
-Non-standard `XDG_LIB_HOME`, `XDG_LOG_HOME` and `XDG_STATE_HOME` are for FHS compliance.
+Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for FHS compliance.
 
 :etc:       ``XDG_CONFIG_HOME``, app configurations
 :share:     ``XDG_DATA_HOME``, user data needed by app
@@ -15,7 +15,7 @@ Non-standard `XDG_LIB_HOME`, `XDG_LOG_HOME` and `XDG_STATE_HOME` are for FHS com
 :var/lib:   ``XDG_STATE_HOME``, libraries for app not tracked  
 :var/log:   ``XDG_LOG_HOME``, app generated logs
 :opt: for not well integrated apps, 
-      e.g https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh
+      e.g for `altera <https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh>`__
 :bin: user scripts
 :home: files symlinked from ``~`` for apps not honoring XDG
 :install: installation script according `rollarch`_
@@ -27,28 +27,25 @@ Inspired by `ayekat <https://github.com/ayekat/dotfiles>`__ and
 Installation
 ============
 
-Installation is handle by the ``install`` script according `rollarch`_.
+Installation is handled by the ``install`` script according `rollarch`_.
 I chose
 `gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__
-``--no-folding`` to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS.
-When I grep through it those files are a nuisance.
-Occationally one can check whether files in .local should be moved to .dotfiles, using
+``--no-folding`` to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
+a nuisance when grep'ing.
 
-.. code:: sh
-
-    diff -r .local dotfiles
-
-I install these my dotfiles on an installed machine:
+I install these my ``dotfiles`` on an set-up machine via:
 
 .. code:: sh
 
    curl -Ls https://git.io/fjVcp | bash
-   #or with cloned already: ~/dotfiles/install
+   #or if cloned already: ~/dotfiles/install
 
-The install script also installs packages from AUR using
+The 
+`install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
+script also installs packages from AUR using
 `yay <https://github.com/Jguer/yay>`__.
 
-I use these dotfiles together with the ArchLinux installation at
+I use these ``dotfiles`` together with the ArchLinux installation at
 `rollarch <https://github.com/rpuntaie/rollarch>`_.
 First prepare a local proxy, as described there,
 then:
@@ -60,8 +57,30 @@ then:
     DSK=/dev/sda USR=u PW=p HST=up121 ZONE=Vienna IP2=1.121 AIP2=1.108 DOTS=https://git.io/fjVcp bash installarch rpuntaie-meta yay
     # log out and in
 
-Tools
+Occasionally one can check whether files in ``.local`` should be moved to ``dotfiles``, using
+
+.. code:: sh
+
+    diff -r .local dotfiles
+
+After adding a file to ``dotfiles`` one must do:
+
+.. code:: sh
+
+    cd ~ && stow --no-folding -R -t .local dotfiles
+
+When adding to ``dotfiles/home`` do:
+
+.. code:: sh
+
+    cd ~/dotfiles && stow home
+
+``restowdots`` does both.
+
+Usage
 =====
+
+.. note:: Work in progress.
 
 CLI
 ---
@@ -93,7 +112,7 @@ dunst
 
 Started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
 Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmonad/.config/dunst/dunstrc>`__.
-
+https://bitbucket.org/philexander/tikz
 .. TODO
    vim
    ---
@@ -102,5 +121,4 @@ Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmon
    `vim <https://www.vim.org/>`__
    and 
    `neovim <https://neovim.io/>`__.
-
 

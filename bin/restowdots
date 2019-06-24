@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+cd ~
+stow --no-folding -R -t .local dotfiles
+cd dotfiles 
+stow home

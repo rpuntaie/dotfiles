@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #
 # Wrap `startx` to use $XINITRC, specified in ~/.pam_environment->dotfiles/home/.pam_environment
 

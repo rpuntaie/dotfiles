@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+if [[ -z $1 ]]; then
+    echo "usage: ${0##*/} <infile> [<outfile>]"
+    echo "default outfile: <infile>.ut.mkv"
+    echo "outfile extension determins encoding: mkv or mp4"
+    exit
+fi
+
+ytoutput="${1%.*}.yt.mkv"
+
+if [[ -n $2 ]];then
+    ytoutput="$2"
+fi
+
+if [[ $ytoutput =~ .*\.mp4 ]]; then
+ffmpeg -i $1 -vf yadif,format=yuv420p -force_key_frames expr:gte\(t\,n_forced/2\) -c:v libx264 -crf 18 -bf 2 -c:a aac -q:a 1 -ac 2 -ar 48000 -use_editlist 0 -movflags +faststart "$ytoutput"
+else
+ffmpeg -i $1 -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -c:a aac -b:a 192k "$ytoutput"
+fi

@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+if [[ -z $1 ]]; then
+    echo "sphinx on one file"
+    echo "usage: ${0##*/} <infile> [<outdir>|-] [-b xxx]"
+    echo "default out dir: $XDG_DATA_HOME/sphinx/<infile>.out"
+    exit
+fi
+
+infile="$1"
+instem=${infile%.*}
+inbase=${instem##*/}
+inext=${infile##*.}
+srcdir=${instem%/*}
+if [[ "$srcdir" == "$inbase" ]]; then
+    srcdir="."
+fi
+outdir="$XDG_DATA_HOME/sphinx/$inbase.out"
+
+if [[ -n $2 && "$2" != "-" ]]; then
+    outdir="$2"
+fi
+
+[ $# == 0 ] || shift
+[ $# == 0 ] || shift
+
+sphinx-build $@ -c ~ -D source_suffix="."$inext -D master_doc=$inbase -D project=$inbase $srcdir $outdir

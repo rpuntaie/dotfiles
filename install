@@ -28,12 +28,19 @@ cd ..
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
 
-if [[ -x /usr/bin/yay ]]; then
-echo "Installing used AUR packages now"
-yay -S --needed --noconfirm wordnet-cli
-yay -S --needed --noconfirm waf-git
-else
-echo "No yay to install some used AUR packages"
-fi
+pip install --user rstdoc #documentation
+#pip install --user sphinxcontrib-tikz #documentation
+##pip install --user git+https://bitbucket.org/philexander/tikz\#egg=sphinxcontrib-tikz
+#pip install --user sphinxcontrib-texfigure #documentation
+#pip install --user sphinxcontrib-thm #documentation
+pip install --user when-changed #... file/dir -c command
+pip install --user astropy #science
+pip install --user pygame #graphics
+pip install --user bottle #web framework
+pip install --user cookiecutter #template projects
+pip install --user pymunk #2D physics engine
+yay -S --needed --noconfirm plantuml #for rstdoc
+yay -S --needed --noconfirm wordnet-cli #used in vim
+yay -S --needed --noconfirm waf-git #to build
 
 echo -e "\033[0;32mLog out and in, to activate the environment."
