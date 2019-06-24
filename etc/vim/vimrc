@@ -115,7 +115,7 @@ function Deinplugins()
     "call dein#add('vim-scripts/hexman.vim')
     "terminal in vim
     call dein#add('sakhnik/nvim-gdb')
-    call dein#add('vim-scripts/Conque-GDB')
+    "has bug: call dein#add('vim-scripts/Conque-GDB')
     "symbols of a language in sidebar
     "call dein#add('http://www.vim.org/scripts/download_script.php?src_id=19574')
     call dein#add('vim-scripts/taglist.vim')
