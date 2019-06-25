@@ -35,7 +35,11 @@ else
   " https://tlvince.com/vim-respect-xdg
   set directory=$XDG_STATE_HOME/vim,~/,/tmp
   set backupdir=$XDG_STATE_HOME/vim,~/,/tmp
-  set viminfo+=n$XDG_STATE_HOME/vim/viminfo
+  if has('nvim')
+    set viminfo+=n$XDG_STATE_HOME/vim/nviminfo
+  else
+    set viminfo+=n$XDG_STATE_HOME/vim/viminfo
+  endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
   let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
   set undodir=$XDG_STATE_HOME/vim/undo
@@ -83,7 +87,7 @@ function Deinplugins()
     call dein#add('vim-scripts/matchit.zip')
     "completion TODO use deoplete (remove neo...)
     "call dein#add('davidhalter/jedi-vim')
-    "call dein#add('johnsyweb/vim-makeshift')
+    call dein#add('johnsyweb/vim-makeshift')
     "call dein#add('vim-scripts/javacomplete')
     "call dein#add('vim-scripts/pythoncomplete')
     "call dein#add('Shougo/neocomplete.vim')
@@ -135,7 +139,7 @@ function Deinplugins()
     call dein#add('tpope/vim-fugitive')
     "other vcs
     call dein#add('vim-scripts/vcscommand.vim')
-    "todo test these (nvim-r alternative)
+    " TODO test these (nvim-r alternative)
     "call dein#add('jcfaria/Vim-R-plugin')
     "call dein#add('vim-ipython')
     "wiki
@@ -202,7 +206,7 @@ noremap \ ,
 set isfname-=:
 "
 "word delimiters
-"todo why rst wrong iskeyword: syntax/rst.vim:
+" TODO why rst wrong iskeyword: syntax/rst.vim:
 "set iskeyword=@,48-57,_,192-255
 "this includes IEC_8859-1 characters to have 128 of them for IDs
 "128 vim iskeyword...
@@ -282,7 +286,6 @@ set wildmenu
 "
 " Ignore compiled files for vimgrep
 set wildignore=
-"set wildignore-=**/temp/**/*
 set wildignore+=**/build/**/*
 set wildignore+=**/dist/**/*
 set wildignore+=**/*egg-info/**/*
@@ -290,7 +293,7 @@ set wildignore+=**/_links*
 set wildignore+=**/_build/**/*
 set wildignore+=**/_static/**/*
 set wildignore+=**/*doctree*
-set wildignore+=**/temp/**/*
+"set wildignore+=**/temp/**/*
 set wildignore+=**/.git/**/*
 set wildignore+=**/*.csv
 set wildignore+=**/.hg/**/*
@@ -318,7 +321,6 @@ set wildignore+=**/*.tlog
 set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 "set wildignore+=**/Doxyfile
-set wildignore+=**/MSVSproj/**/*
 "
 " Height of the command bar
 set cmdheight=2
@@ -601,6 +603,24 @@ let g:ctrlp_user_command = [
 "let g:pymode_folding = 0
 "let g:pymode_lint_write = 0
 "
+"vim-makeshift
+let g:makeshift_on_startup = 0
+let g:makeshift_on_bufread = 0
+let g:makeshift_on_bufnewfile = 0
+let g:makeshift_on_bufenter = 0
+let g:makeshift_systems = {
+    \'CMakeList.txt': 'cmake',
+    \'meson.build': 'meson',
+    \'build.sbt ': 'sbt',
+    \'dodo.py ': 'doit',
+    \'boost-build.jam ': 'b2',
+    \}
+function! s:BuildFun(what2build)
+    execute 'Makeshift'
+    execute 'MakeshiftBuild '.a:what2build
+endfunction
+command! -nargs=* MM :call s:BuildFun(<q-args>)
+
 "vcscommand
 let g:VCSCommandMapPrefix = "<leader>z"
 "
@@ -724,9 +744,9 @@ nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nnoremap <silent> sr     :FufRenewCache<CR>
 "
 " haskell
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+autocmd FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+autocmd FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+autocmd FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
 
 
 ".. trans.vim
@@ -747,6 +767,7 @@ if filereadable($MY.'/.tags')
   set tags+=$MY/.tags
 endif
 
+autocmd filetype python setlocal formatprg=autopep8\ -
 py3 << EOF
 import uuid
 from math import *
@@ -787,28 +808,11 @@ map <leader>j2 :py3 tojira()<CR>
 " errorformat, makeprg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set errorformat=%f:%l:%c:%m
-"set errorformat=\|\|\ %f:%l:\ %m
-"set errorformat=%f:%l:\ %m
-"waf:
-"set errorformat=%f(%l)\ :\ %m
-"doxygen:
-"set errorformat=%f:%l:%m
-"autocmd filetype python setlocal makeprg=python3\ %
-"autocmd filetype python setlocal formatprg=autopep8\ -
-"autocmd BufEnter *.py setlocal makeprg=doit
-"autocmd BufEnter *.py setlocal makeprg=pylint\ --rcfile=.pylintrc\ --reports=n\ --output-format=parseable\ %:p
-"autocmd BufEnter *.py setlocal errorformat=%f:%l:\ %m
-"
-"use waf and build into subfolder
-if has('win32')
-  set makeprg=waf\ --targets=%:t:r\ 2>&1\ \\\\|\ sed\ 's/^\\.\\.\\\\\\\\//'\
-  set shellpipe=2>&1\ \|tee
-  set makeef=
-else
-  set makeprg=waf\ --targets=%:t:r\ 2>&1\ \\\|\ tee\ teeerrors.err\ \\\|\ sed\ 's/^\.\.\\\///'\ \\\|\
-  "if file in subfolder:
-  "set makeprg=waf\ --targets=%:h%:t:r\ 2>&1\ \\\|\ tee\ teeerrors.err\ \\\|\ sed\ 's/^\.\.\\\///'\ \\\|\
-endif
+set errorformat+=%f:%l:%m
+set errorformat+=%f(%l)\ :\ %m
+set errorformat+=%f:%l\\,\ E:%n:\ %m
+set errorformat+=\|\|\ %f:%l:%m
+"makeprg set by vim-makeshift
 
 " to pdf, similar to <leader>lh from vim_py3_rst for html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -818,12 +822,15 @@ vnoremap <leader>lt :py3 Show('pdf')
 " shell and system open
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open a (visually) selected file in the shell (pdf, images, ...)
+
+set shellcmdflag=-ic
+
+" some shortcuts
 let g:netrw_shq="'"
 vnoremap <silent> <leader>sl "cy:call netrw#BrowseX("<C-R>=expand("%:p:h")<CR>/<C-R>c",0)<CR><CR>
 vnoremap <silent> <leader>sn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
 nnoremap <silent> <leader>sl :call netrw#BrowseX('<C-R>=expand("%:p:h")<CR>/<C-R>=expand("<cWORD>")<CR>',0)<CR>
 nnoremap <silent> <leader>sn :call netrw#BrowseX('<C-R>=expand("<cWORD>")<CR>',0)<CR>
-
 if has("win32")
 vnoremap <silent> <leader>sg "cy:!start /b cmd /c chromium "www.google.com/search?q=<C-R>c"<CR><CR>
 vnoremap <silent> <leader>sp "cy:!start /b cmd /c chromium "http://docs.python.org/py3k/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR><CR>
@@ -839,7 +846,6 @@ nnoremap <silent> <leader>sg :exe ':silent !chromium "http://www.google.com/sear
 nnoremap <silent> <leader>sp :exe ':silent !chromium "http://docs.python.org/py3k/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> <leader>sw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
-"
 " read from a shell command into a new buffer
 function! s:RunShellCommand(cmdline)
     botright new
@@ -1005,5 +1011,4 @@ if isdirectory($MY)
     cd $MY
 endif
 
-"autocmd FileType cpp setlocal noeol binary fileformat=dos
-" Vim configuration file.
+command! TD :cexpr system('todo')

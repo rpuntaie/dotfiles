@@ -10,10 +10,6 @@ if [ -n "$SSH_CONNECTION" ] \
 	"$XDG_LIB_HOME"/tmux/tmux-view SSH && exit
 fi
 
-# }}}
-# ------------------------------------------------------------------------------
-# LOGO {{{
-
 printlogo() (
 	osname="$(uname -s -r)"
 	hostname="$(uname -n)"
@@ -85,14 +81,8 @@ printlogo() (
 )
 printlogo "$OS_NAME"
 
-# }}}
-# ------------------------------------------------------------------------------
-# TODO {{{
-
 # Display the todo file in the home directory:
 if [ -e "$HOME"/TODO ]; then
 	echo; cat "$HOME"/TODO; echo
 fi
 
-# }}}
-# ------------------------------------------------------------------------------

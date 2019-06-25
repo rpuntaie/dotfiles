@@ -25,6 +25,10 @@ zgen oh-my-zsh plugins/z
 zgen oh-my-zsh plugins/fzf
 
 zgen oh-my-zsh plugins/git
+ORPROMPT=$RPS1
+zgen oh-my-zsh plugins/git-prompt
+RPROMPT=$ORPROMPT
+
 zgen oh-my-zsh plugins/mercurial
 zgen oh-my-zsh plugins/svn
 

@@ -12,7 +12,9 @@ if [[ -d dotfiles ]]; then
     exit 1
   fi
   cd ..
+  new_install=false
 else
+  new_install=true
   git clone $dotfilesurl
 fi
 
@@ -28,20 +30,24 @@ cd ..
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
 
-pip install --user rstdoc #documentation
-#pip install --user sphinxcontrib-tikz #documentation
-##pip install --user git+https://bitbucket.org/philexander/tikz\#egg=sphinxcontrib-tikz
-#pip install --user sphinxcontrib-texfigure #documentation
-#pip install --user sphinxcontrib-thm #documentation
-pip install --user when-changed #... file/dir -c command
-pip install --user astropy #science
-pip install --user pygame #graphics
-pip install --user bottle #web framework
-pip install --user cookiecutter #template projects
-pip install --user pymunk #2D physics engine
-yay -S --needed --noconfirm plantuml #for rstdoc
-yay -S --needed --noconfirm wordnet-cli #used in vim
-yay -S --needed --noconfirm waf-git #to build
-yay -S --needed --noconfirm rstudio-desktop-bin #for R: rstudio-bin
+if $new_install; then
+  pip install --user rstdoc #documentation
+  #pip install --user sphinxcontrib-tikz #documentation
+  ##pip install --user git+https://bitbucket.org/philexander/tikz\#egg=sphinxcontrib-tikz
+  #pip install --user sphinxcontrib-texfigure #documentation
+  #pip install --user sphinxcontrib-thm #documentation
+  pip install --user autopep8 #used in vim to reformat
+  pip install --user doit #automate using dodo.py file
+  pip install --user when-changed #... file/dir -c command
+  pip install --user astropy #science
+  pip install --user pygame #graphics
+  pip install --user bottle #web framework
+  pip install --user cookiecutter #template projects
+  pip install --user pymunk #2D physics engine
+  yay -S --needed --noconfirm plantuml #for rstdoc
+  yay -S --needed --noconfirm wordnet-cli #used in vim
+  yay -S --needed --noconfirm waf-git #to build
+  yay -S --needed --noconfirm rstudio-desktop-bin #for R: rstudio-bin
+fi
 
 echo -e "\033[0;32mLog out and in, to activate the environment."

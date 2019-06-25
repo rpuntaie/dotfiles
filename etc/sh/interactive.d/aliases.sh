@@ -22,7 +22,6 @@ fi
 # Random other aliases:
 alias cc='gcc -std=c11 -pedantic -Wall -Wextra -Wbad-function-cast -Wcast-align -Wcast-qual -Wconversion -Wfloat-equal -Wformat=2 -Wlogical-op -Wmissing-declarations -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes -Wwrite-strings'
 alias poscc='gcc -std=c11 -pedantic -Wall -Wextra'
-alias todo='grep -n -R "TODO\|FIXME\|XXX" .'
 
 alias ax='git annex'
 
