@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+git rev-parse --short HEAD &> /dev/null && \
+grep -n -R "TODO\|FIXME\| XXX" . || \
+cat ./TODO 2> /dev/null || cat ~/TODO 2> /dev/null
+

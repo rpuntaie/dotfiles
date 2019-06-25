@@ -1,5 +1,9 @@
 # vim: syntax=zsh
 
+export MYTERM=alacritty
+#export MYTERM=xterm -fa monaco -fs 10 -bg black -fg white
+#export MYTERM=urxvt -fa monaco -fs 10 -bg black -fg white
+
 HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
 
 OS_NAME=''

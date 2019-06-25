@@ -18,15 +18,9 @@ else
   git clone $dotfilesurl
 fi
 
-if [[ -d .local ]]; then
-  stow --no-folding -R -t .local dotfiles 
-else
-  mkdir .local
-  stow --no-folding -S -t .local dotfiles 
-fi
-cd dotfiles
-stow home
-cd ..
+bash dotfiles/bin/restowdots
+#mkdir -p $HOME/.ssh
+#chmod 700 $HOME/.ssh
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
 
@@ -48,6 +42,13 @@ if $new_install; then
   yay -S --needed --noconfirm wordnet-cli #used in vim
   yay -S --needed --noconfirm waf-git #to build
   yay -S --needed --noconfirm rstudio-desktop-bin #for R: rstudio-bin
+  yay -S --needed --noconfirm texlive-localmanager-git #for special tex packages
+  yay -S --needed --noconfirm mimeo #default file opening besides rifle and xdg-open
+  #FAILS with out of memory compiling: yay -S --needed --noconfirm nextpnr-git #FPGA place and route 
+  #these depend on 32 bit packages
+  #yay -S --needed --noconfirm openmodelica-git #modelica language
+  #yay -S --needed --noconfirm quartus-free #for Altera FPGA's
+  #yay -S --needed --noconfirm intel-sde #Intel Software Development Emulator
 fi
 
 echo -e "\033[0;32mLog out and in, to activate the environment."

@@ -1,5 +1,8 @@
 # Interactive shell aliases
 
+alias urxvt='urxvt -bg black -fg white'
+alias xterm='xterm -fa monaco -fs 10 -bg black -fg white'
+
 # Generic aliases:
 alias r='ranger'
 alias cp='cp -i'
@@ -24,6 +27,13 @@ alias cc='gcc -std=c11 -pedantic -Wall -Wextra -Wbad-function-cast -Wcast-align 
 alias poscc='gcc -std=c11 -pedantic -Wall -Wextra'
 
 alias ax='git annex'
+
+#. <name>/bin/activate and deactivate to exit
+alias venv='python -m venv --system-site-packages --symlinks'
+
+alias xtex='xelatex -interaction=nonstopmode'
+
+alias spac='sudo pacman -S'
 
 alias :e="$EDITOR"
 alias :q=exit

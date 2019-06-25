@@ -264,8 +264,8 @@ endif
 "set number
 
 "check width
-set colorcolumn=+1
-hi ColorColumn ctermbg=232 guibg=#080808
+"set colorcolumn=+1
+"hi ColorColumn ctermbg=232 guibg=#080808
 
 " trailing whitespaces:
 set list
@@ -620,7 +620,7 @@ function! s:BuildFun(what2build)
     execute 'MakeshiftBuild '.a:what2build
 endfunction
 command! -nargs=* MM :call s:BuildFun(<q-args>)
-
+"
 "vcscommand
 let g:VCSCommandMapPrefix = "<leader>z"
 "
@@ -747,8 +747,7 @@ nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
 autocmd FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 autocmd FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 autocmd FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
-
-
+"
 ".. trans.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:trans_default_api='google'
@@ -766,7 +765,7 @@ set tags=./.tags;,.tags;
 if filereadable($MY.'/.tags')
   set tags+=$MY/.tags
 endif
-
+"
 autocmd filetype python setlocal formatprg=autopep8\ -
 py3 << EOF
 import uuid

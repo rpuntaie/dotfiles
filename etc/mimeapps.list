@@ -1,0 +1,23 @@
+[Default Applications]
+application/pdf=org.pwmt.zathura.desktop;
+image/x-ms-bmp=feh.desktop;
+image/jpeg=feh.desktop
+image/png=feh.desktop
+image/bmp=feh.desktop
+image/gif=feh.desktop
+image/tiff=feh.desktop
+text/html=qutebrowser.desktop;
+x-scheme-handler/http=qutebrowser.desktop;
+x-scheme-handler/https=qutebrowser.desktop;
+x-scheme-handler/about=qutebrowser.desktop;
+x-scheme-handler/unknown=qutebrowser.desktop;
+inode/x-empty=gvim.desktop
+text/plain=gvim.desktop
+image/svg+xml=inkscape.desktop
+image/svg=inkscape.desktop
+application/msword=writer.desktop
+text/csv=calc.desktop
+application/vnd.ms-excel=calc.desktop
+message/rfc822=thunderbird.desktop
+video/mp4=vlc.desktop
+audio/mp3=vlc.desktop

@@ -86,28 +86,28 @@ setprompt () {
     ###
     # Finally, the prompt.
     PS1='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
-$PR_CYAN%L($PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l$PR_CYAN)\
+$PR_MAGENTA%L($PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l$PR_MAGENTA)\
 $PR_SHIFT_IN$PR_HBAR$PR_HBAR$PR_SHIFT_OUT\
-($PR_YELLOW%D{%Y%m%d %H:%M}$PR_CYAN)\
+($PR_YELLOW%D{%Y%m%d %H:%M}$PR_MAGENTA)\
 $PR_SHIFT_IN$PR_HBAR${(e)PR_FILLBAR}$PR_HBAR$PR_SHIFT_OUT\
-(%(!.$PR_LIGHT_RED.$PR_WHITE)%$PR_PWDLEN<...<%~%<<$PR_CYAN)\
+(%(!.$PR_LIGHT_RED.$PR_WHITE)%$PR_PWDLEN<...<%~%<<$PR_MAGENTA)\
 
 % $PR_NO_COLOUR'
 
-    #GITSUPER: RPS1='$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))$PR_CYAN(${(e)$(battery_pct_prompt)}$PR_CYAN)$(git_prompt_info)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
-    RPS1='$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))$PR_CYAN(${(e)$(battery_pct_prompt)}$PR_CYAN)$(git_super_status)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
+    #GITSUPER: RPS1='%j$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))$PR_MAGENTA(${(e)$(battery_pct_prompt)}$PR_MAGENTA)$(git_prompt_info)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
+    RPS1='%j$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))$PR_MAGENTA(${(e)$(battery_pct_prompt)}$PR_MAGENTA)$(git_super_status)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
 
     PS2=''
-    RPS2='$PR_CYAN($PR_GREEN%_$PR_CYAN)$PR_NO_COLOUR '
+    RPS2='$PR_MAGENTA($PR_GREEN%_$PR_MAGENTA)$PR_NO_COLOUR '
 
-    #GITSUPER: ZSH_THEME_GIT_PROMPT_PREFIX="$PR_CYAN(%(!.$PR_LIGHT_RED.$PR_MAGENTA)git:"
-    #GITSUPER: ZSH_THEME_GIT_PROMPT_SUFFIX="$PR_CYAN)"
+    #GITSUPER: ZSH_THEME_GIT_PROMPT_PREFIX="$PR_MAGENTA(%(!.$PR_LIGHT_RED.$PR_WHITE)git:"
+    #GITSUPER: ZSH_THEME_GIT_PROMPT_SUFFIX="$PR_MAGENTA)"
 
-    ZSH_THEME_SVN_PROMPT_PREFIX="$PR_CYAN(%(!.$PR_LIGHT_RED.$PR_MAGENTA)svn:"
-    ZSH_THEME_SVN_PROMPT_SUFFIX="$PR_CYAN)"
+    ZSH_THEME_SVN_PROMPT_PREFIX="$PR_MAGENTA(%(!.$PR_LIGHT_RED.$PR_WHITE)svn:"
+    ZSH_THEME_SVN_PROMPT_SUFFIX="$PR_MAGENTA)"
 
-    ZSH_THEME_HG_PROMPT_PREFIX="$PR_CYAN(%(!.$PR_LIGHT_RED.$PR_MAGENTA)hg:"
-    ZSH_THEME_HG_PROMPT_SUFFIX="$PR_CYAN)"
+    ZSH_THEME_HG_PROMPT_PREFIX="$PR_MAGENTA(%(!.$PR_LIGHT_RED.$PR_WHITE)hg:"
+    ZSH_THEME_HG_PROMPT_SUFFIX="$PR_MAGENTA)"
 
 }
 

@@ -21,8 +21,9 @@ Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for F
 :install: installation script according `rollarch`_
 :readme.rst: this file
 
-Inspired by `ayekat <https://github.com/ayekat/dotfiles>`__ and
-`floure <https://gitlab.gnugen.ch/floure/dotfiles>`__.
+Inspired by and thanks to:
+`ayekat <https://github.com/ayekat/dotfiles>`__,
+`floure <https://gitlab.gnugen.ch/floure/dotfiles>`__ and others.
 
 Installation
 ============
