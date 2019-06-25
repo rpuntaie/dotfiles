@@ -25,6 +25,7 @@ ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
 
 if $new_install; then
+  fc-cache -fv
   pip install --user rstdoc #documentation
   #pip install --user sphinxcontrib-tikz #documentation
   ##pip install --user git+https://bitbucket.org/philexander/tikz\#egg=sphinxcontrib-tikz
