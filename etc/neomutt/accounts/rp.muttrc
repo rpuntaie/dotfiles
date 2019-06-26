@@ -1,9 +1,0 @@
-set from = "roland.puntaier@gmail.com"
-set sendmail="/usr/bin/msmtp -a rp"
-
-set spoolfile = "=rp/INBOX"
-set record    = "=rp/Sent"
-set postponed = "=rp/Drafts"
-set trash     = "=rp/Trash"
-
-mailboxes =rp/INBOX
