@@ -54,7 +54,7 @@ set selection=exclusive
 "dein
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function Deinplugins()
-    " My Bundles here:
+    call dein#add('git@localhost:/home/u/dotfiles/share/fntvim')
     "vimproc
     call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
     "mediawiki
@@ -251,7 +251,7 @@ if has("gui_running")
             "set guifont=Lucida_Console:h10:b:cANSI
         endif
     else
-        if filereadable($HOME."/.fonts/FreeMonoBoldFO4.ttf")
+        if filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
           set guifont=FreeMonoFO4\ Bold\ 11
         else
           set guifont=FreeMono\ Bold\ 11
