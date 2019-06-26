@@ -12,8 +12,8 @@ if [[ -d dotfiles ]]; then
     exit 1
   fi
   cd ..
-  new_install=false
 else
+  #if .dotfiles exits: $new_install=true ~/dotfiles/install
   new_install=true
   git clone $dotfilesurl
 fi
