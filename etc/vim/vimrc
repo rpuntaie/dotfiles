@@ -54,7 +54,6 @@ set selection=exclusive
 "dein
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function Deinplugins()
-    call dein#add('git@localhost:/home/u/dotfiles/share/fntvim')
     "vimproc
     call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
     "mediawiki

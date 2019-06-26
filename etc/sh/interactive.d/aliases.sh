@@ -38,3 +38,7 @@ alias spac='sudo pacman -S'
 alias :e="$EDITOR"
 alias :q=exit
 
+#background open and disown
+function open () {
+    xdg-open "$*" &!
+}
