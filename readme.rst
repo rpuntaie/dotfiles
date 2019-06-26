@@ -55,7 +55,7 @@ then:
 
     curl -OLs https://git.io/installarch
     # replace the defines in the first line
-    DSK=/dev/sda USR=u PW=p HST=up121 IP2=1.121 AIP2=1.108 \
+    DSK=/dev/sda USR=u PW=p HST=up121 IP2=1.121 AIP2=1.108 KM=US\
     LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=https://git.io/fjVcp \
     bash installarch rpuntaie-meta yay
     # log out and in
