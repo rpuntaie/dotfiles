@@ -1,13 +1,17 @@
 -- after change: xmonad --recompile
+
 import XMonad
 import XMonad.Core
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
 import qualified Data.Map as M
 
+import XMonad.Util.Dmenu
+import System.Exit
+import System.IO
+import Control.Monad
 quitWithWarning :: X ()
 quitWithWarning = do
     let m = "confirm quit"
@@ -25,8 +29,8 @@ main = do
         }
 myKeys x = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys x = [
-	((modMask x, xK_s), spawn "scrot")
-	,((modMask x, xK_u), spawn "scrot -u")
-        , ((modMask .|. shiftMask,   xK_q), spawn quitWithWarning)
-	]
+        ((modMask x, xK_s), spawn "scrot")
+        , ((modMask x, xK_u), spawn "scrot -u")
+        , ((modMask x .|. shiftMask,   xK_q), quitWithWarning)
+        ]
 

@@ -24,7 +24,7 @@ bash dotfiles/bin/restowdots
 ln -sf .local/etc/xmonad .xmonad
 xmonad --recompile
 
-if $new_install; then
+if [[ -n $new_install ]] && $new_install; then
   fc-cache -fv
   pip install --user rstdoc #documentation
   #pip install --user sphinxcontrib-tikz #documentation
