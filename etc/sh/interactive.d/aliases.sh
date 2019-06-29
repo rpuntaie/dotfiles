@@ -1,7 +1,8 @@
 # Interactive shell aliases
 
-alias urxvt='urxvt -bg black -fg white'
-alias xterm='xterm -fa monaco -fs 10 -bg black -fg white'
+#colors set via X11/Xresources
+#alias urxvt='urxvt -bg black -fg white'
+#alias xterm='xterm -fa monaco -fs 10 -bg black -fg white'
 
 # Generic aliases:
 alias r='ranger'

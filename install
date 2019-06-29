@@ -328,6 +328,7 @@ echo -e "\033[0;32mLog out and in, to activate the environment. First time vim a
 #PKG: xorg-xwininfo
 #PKG: xorg-xwud
 #PKG: xorg-server
+#PKG: xdg-user-dirs
 #PKG: openssh-askpass
 #PKG: xmonad
 #PKG: xmonad-contrib
@@ -336,6 +337,7 @@ echo -e "\033[0;32mLog out and in, to activate the environment. First time vim a
 #PKG: xterm
 #PKG: alacritty
 #PKG: rxvt-unicode
+#PKG: urxvt-perls
 #PKG: xorg-xinit
 #PKG: dmenu
 #PKG: gmrun

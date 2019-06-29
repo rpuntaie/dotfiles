@@ -15,13 +15,22 @@ fi
 
 setxkbmap -option terminate:ctrl_alt_bksp
 
+userresources=$XDG_CONFIG_HOME/X11/Xresources
+if [ -f "$userresources" ]; then
+    xrdb -load "$userresources"
+fi
+usermodmap=$XDG_CONFIG_HOME/X11/Xmodmap
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+#needs to go before WM
+dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
+
 # Launch WM
 if [ -z "$WM" ]; then
   export WM=xmonad
 fi
-
 exec $WM
-
-dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
 
 

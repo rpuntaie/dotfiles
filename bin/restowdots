@@ -11,3 +11,4 @@ cd ~
 for adir in $(sed -n -e 's,^X.*/\(.*\)",\1,p' .local/etc/user-dirs.dirs); do
     mkdir -p $HOME/$adir
 done
+xdg-user-dirs-update #sets non-existing dirs to homedir
