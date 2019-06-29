@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 cd ~
-stow --ignore=home --no-folding -R -t .local dotfiles
+stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
 chmod 700 .local/var/lib/gnupg
 cd dotfiles
 stow home

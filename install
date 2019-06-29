@@ -18,7 +18,7 @@ else
   git clone $dotfilesurl
 fi
 
-bash dotfiles/bin/restowdots
+bash ~/dotfiles/bin/restowdots -S
 #mkdir -p $HOME/.ssh
 #chmod 700 $HOME/.ssh
 ln -sf .local/etc/xmonad .xmonad
