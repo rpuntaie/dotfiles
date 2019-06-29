@@ -4,8 +4,17 @@ import XMonad.Core
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
 import qualified Data.Map as M
+
+quitWithWarning :: X ()
+quitWithWarning = do
+    let m = "confirm quit"
+    s <- dmenu [m]
+    when (m == s) (io exitSuccess)
+
+
 main = do
     xmonad $ defaultConfig {
         -- modMask = mod4Mask, -- win-L would lock Windows, ranger modified to g1,g2,...
@@ -18,5 +27,6 @@ myKeys x = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys x = [
 	((modMask x, xK_s), spawn "scrot")
 	,((modMask x, xK_u), spawn "scrot -u")
+        , ((modMask .|. shiftMask,   xK_q), spawn quitWithWarning)
 	]
-  
+

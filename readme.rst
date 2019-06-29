@@ -56,7 +56,7 @@ then:
     curl -OLs https://git.io/installarch
     # replace the defines in the first line
     DSK=/dev/sda USR=u PW=p HST=up121 IP2=1.121 AIP2=1.108 KM=US\
-    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=https://git.io/fjVcp \
+    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=fjVcp \
     bash installarch rpuntaie-meta yay
     # log out and in
 
@@ -90,10 +90,10 @@ CLI
 
 - ``zsh`` as CLI
 - ``slock`` to lock screen via CLI
-- ``scrot`` to make screen shots via shortcuts ``M-s`` and ``M-u`` for current window.
+- ``scrot`` to make screen shots via shortcuts ``M-s``, and ``M-u`` for current window.
 - ``feh`` for images
 - ``ranger`` for files
-- ``links`` for text mode browsing
+- ``links -dump <url>`` for text from URL
 - ``fd`` to search for files
 - ``fzf`` fuzzy find files
 - ``rg`` (ripgrep) and ``ag`` (the_silver_searcher) to search for text in files
@@ -115,7 +115,7 @@ dunst
 
 Started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
 Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmonad/.config/dunst/dunstrc>`__.
-https://bitbucket.org/philexander/tikz
+
 .. TODO
    vim
    ---
