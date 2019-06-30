@@ -24,18 +24,14 @@ XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
 XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
-# dot files for programs not heeding XDG_Base_Directory are symlinked to home
-# dotfiles/lib/dotfiles/.ledgerrc
-# dotfiles/lib/dotfiles/.pam_environment
-
 # fix various applications to respect XDG
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
 VIMINIT               DEFAULT="let \$MYVIMRC='$XDG_CONFIG_HOME/vim/vimrc' | source \$MYVIMRC"
 ZDOTDIR               DEFAULT="${XDG_CONFIG_HOME}/zsh"
 LESSHISTFILE          DEFAULT="-"
-GNUPGHOME             DEFAULT="${XDG_STATE_HOME}/gnupg"
+GNUPGHOME             DEFAULT="${HOME}/.gnupg"
 PGPPATH               DEFAULT="${GNUPGHOME}"
-PASSWORD_STORE_DIR    DEFAULT="${XDG_STATE_HOME}/pass"
+PASSWORD_STORE_DIR    DEFAULT="${MY}/pass"
 PYTHONSTARTUP         DEFAULT="${XDG_LIB_HOME}/python/startup.py"
 NLTK_DATA             DEFAULT="${XDG_STATE_HOME}/nltk"
 XAUTHORITY            DEFAULT="${XDG_RUNTIME_DIR}/Xauthority"
@@ -49,6 +45,4 @@ WINEPREFIX            DEFAULT="${XDG_STATE_HOME}/wine/default"
 TMUX_TMPDIR           DEFAULT="${XDG_RUNTIME_DIR}"
 RXVT_SOCKET           DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
 R_ENVIRON_USER        DEFAULT="${XDG_CONFIG_HOME}/R/.Renviron"
-
-
 

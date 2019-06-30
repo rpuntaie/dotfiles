@@ -1,11 +1,27 @@
 #!/usr/bin/env sh
 
+#~/my/pass and ~/my/task are separate
+mkdir -p $HOME/my
+mkdir -p $HOME/my/pass
+mkdir -p $HOME/my/task
+
+#keep ~/.gnupg separate, just link the config file
+ln -sf ~/dotfiles/etc/gnupg/gpg.conf ~/.gnupg/gpg.conf
+
 cd ~
+
 stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
-chmod 700 .local/var/lib/gnupg
 cd dotfiles
+
+# dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
+# ~/.ledgerrc
+# ~/.pam_environment
 stow home
+
 cd ~
+
+ln -sf ~/.local/etc/xmonad .xmonad
+xmonad --recompile
 
 #see ~/dotfiles/etc/user-dirs.dirs
 for adir in $(sed -n -e 's,^X.*/\(.*\)",\1,p' .local/etc/user-dirs.dirs); do

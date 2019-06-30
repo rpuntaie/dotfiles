@@ -11,18 +11,14 @@ if [[ -d dotfiles ]]; then
     echo "This install script is for a different dotfiles" >&2
     exit 1
   fi
-  cd ..
+  cd ~
+  bash ~/dotfiles/bin/restowdots
 else
   #if .dotfiles exits: $new_install=true ~/dotfiles/install
   new_install=true
   git clone $dotfilesurl
+  bash ~/dotfiles/bin/restowdots -S
 fi
-
-bash ~/dotfiles/bin/restowdots -S
-#mkdir -p $HOME/.ssh
-#chmod 700 $HOME/.ssh
-ln -sf .local/etc/xmonad .xmonad
-xmonad --recompile
 
 if [[ -n $new_install ]] && $new_install; then
   fc-cache -fv
@@ -53,6 +49,9 @@ if [[ -n $new_install ]] && $new_install; then
 fi
 
 echo -e "\033[0;32mLog out and in, to activate the environment. First time vim and zsh will install plugins."
+
+##TODO instead
+##PKG: rpuntaie-meta
 
 #the following lines are recognized by rollarch via "^#PKG: " and "^#REPO: "
 #PKG: bash
@@ -123,6 +122,7 @@ echo -e "\033[0;32mLog out and in, to activate the environment. First time vim a
 #PKG: tmux
 #PKG: wget
 #PKG: fzf
+#PKG: udisks2
 #PKG: unzip
 #PKG: pacman-contrib
 #PKG: bat

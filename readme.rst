@@ -39,56 +39,67 @@ I install these my ``dotfiles`` on an set-up machine via:
 .. code:: sh
 
    curl -Ls https://git.io/fjVcp | bash
-   #or if cloned already: ~/dotfiles/install
+
+or if cloned already:
+
+.. code:: sh
+
+    ~/dotfiles/install
 
 The 
 `install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
-script also installs packages from AUR using
-`yay <https://github.com/Jguer/yay>`__.
+script also installs user packages:
+python ``pip --user`` and from AUR using `yay <https://github.com/Jguer/yay>`__
 
-I use these ``dotfiles`` together with the ArchLinux installation at
-`rollarch <https://github.com/rpuntaie/rollarch>`_.
-First prepare a local proxy, as described there,
-then:
+A whole ArchLinux system, including these ``dotfiles``, can be installed with `rollarch`_.
+If AIP2 is used, a local proxy must be prepared as described there.
 
 .. code:: sh
 
     curl -OLs https://git.io/installarch
     # replace the defines in the first line
     DSK=/dev/sda USR=u PW=p HST=up121 IP2=1.121 AIP2=1.108 KM=US\
-    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=fjVcp \
-    bash installarch rpuntaie-meta yay
+    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=fjVcp bash installarch
     # log out and in
 
-Occasionally one can check whether files in ``.local`` should be moved to ``dotfiles``, using
+After changing or adding a file to the ``dotfiles`` one must run
 
 .. code:: sh
 
-    diff -r .local dotfiles
+   restowdots
+   #or ~/dotfiles/install
 
-After adding a file to ``dotfiles`` one must do:
-
-.. code:: sh
-
-    cd ~ && stow --no-folding -R -t .local dotfiles
-
-When adding to ``dotfiles/home`` do:
-
-.. code:: sh
-
-    cd ~/dotfiles && stow home
-
-``restowdots`` does both.
-
-Usage
-=====
+System Description
+==================
 
 .. note:: Work in progress.
+
+Editor
+------
+
+``vim`` is used as TUI to the system.
+It embeds Python and others and it has
+``:term``:
+
+- ``[CTRL-w N]`` normal mode
+- ``[CTRL-w CTRL-w]`` switch window
+- ``[CTRL-w ""]`` paste ``"`` into term
+
+For ``restructuredText`` (RST) I need
+
+- ``pip install --user rstdoc``
+
+For Python and RST I need
+
+- ``vim_py3_rst`` vim plugin
 
 CLI
 ---
 
-- ``zsh`` as CLI
+``zsh`` through vim ``:term`` or ``alacritty``.
+
+CLI tools:
+
 - ``slock`` to lock screen via CLI
 - ``scrot`` to make screen shots via shortcuts ``M-s``, and ``M-u`` for current window.
 - ``feh`` for images
@@ -99,7 +110,48 @@ CLI
 - ``rg`` (ripgrep) and ``ag`` (the_silver_searcher) to search for text in files
 - ``bc`` for ad-hoc CLI calculations, e.g echo 2+2 | bc
 - ``ncdu`` like ``du``, but with ncurses
-- ``keybase`` and ``gpg`` for private/public key encryption
+
+Security
+========
+
+
+``gpg`` for private/public key encryption::
+
+   gpg2 --full-gen-key
+   gpg2 --list-keys --with-colons
+   gpg2 --edit-key <email>
+   gpg2 --armor --output my-secret-key.asc --export-secret-keys <email>
+   gpg2 --delete-secret-key <email>
+   gpg2 --armor --output my-secret-key.asc --export-secret-subkeys <email>
+   gpg2 --import my-secret-subkeys.asc
+   gpg2 --recv-keys
+   gpg2 --sign-key <keyid>
+   gpg2 --send-key <keyid>
+
+   gpg2 --encrypt <file>
+   gpg2 --encrypt <file> --recipient <receiver>
+   gpg2 --decrypt <file>.gpg
+
+   gpg2 --sign <file>
+   gpg2 --sign --encrypt <file> -r <receiver>
+   gpg2 --detached-sign <file>
+   gpg2 --verify <file>.asc
+
+``~/dotfiles/bin/gpg-offline-master`` works with the separate offline master key.
+``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
+
+``pass`` for password management, stored under ``~/my/pass``
+
+``keybase``
+
+Data
+====
+
+My data is separate under ``~/my``.
+
+- ``~/my/task`` is maintained with ``task``
+- ``~/my/pass`` is maintained with ``pass``
+- ``~/my/finance`` is maintained with ``ledger``
 
 xmonad
 ------
@@ -125,3 +177,4 @@ Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmon
    and 
    `neovim <https://neovim.io/>`__.
 
+.. _`rollarch`: https://github.com/rpuntaie/rollarch
