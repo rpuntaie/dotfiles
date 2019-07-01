@@ -25,13 +25,23 @@ Inspired by and thanks to:
 `ayekat <https://github.com/ayekat/dotfiles>`__,
 `floure <https://gitlab.gnugen.ch/floure/dotfiles>`__ and others.
 
+Some files in these dotfiles reference separately managed directories:
+
+``~/.password-store``
+``~/.gnupg``
+``~/my/task``
+``~/my/finance``
+
+There are according environment variables in ``.pam_environment``.
+
 Installation
 ============
 
 Installation is handled by the ``install`` script according `rollarch`_.
 I chose
-`gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__
-``--no-folding`` to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
+`gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__ ``--no-folding``
+over directly cloning into ``.local`` 
+to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
 a nuisance when grep'ing.
 
 I install these my ``dotfiles`` on an set-up machine via:
@@ -140,18 +150,9 @@ Security
 ``~/dotfiles/bin/gpg-offline-master`` works with the separate offline master key.
 ``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
 
-``pass`` for password management, stored under ``~/my/pass``
+``pass`` for password management, stored and managed separately in the default ``~/.password-store``
 
-``keybase``
-
-Data
-====
-
-My data is separate under ``~/my``.
-
-- ``~/my/task`` is maintained with ``task``
-- ``~/my/pass`` is maintained with ``pass``
-- ``~/my/finance`` is maintained with ``ledger``
+``keybase`` for secure chat and file exchange (KBFS).
 
 xmonad
 ------

@@ -1,6 +1,10 @@
+; --args-only to ignore the following options
 --date-format %Y%m%d
 --sort date
 ; Using the --strict option will cause Ledger to complain if any accounts are not previously defined
 --strict
 ; Set the start of the week on Mondays instead of the default Sunday
 --start-of-week=1
+; THE MAIN FILE; USE include otherfileX to include other files
+--file $FINANCE/ledger.journal
+--price-db $FINANCE/ledger.pricedb

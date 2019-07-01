@@ -2,7 +2,7 @@
 # General
 
 # Personal
-set my_name = "Timothée Floure"
+set my_name = "$MYNAME"
 
 # Cache
 set header_cache = ~/.local/var/cache/mutt/
@@ -18,7 +18,7 @@ set alias_file = "$HOME"/.local/var/mail/aliases
 set mailcap_path = "$XDG_CONFIG_HOME"/neomutt/mailcap
 
 # Sending
-set realname = 'Timothée Floure'
+set realname = "$MYNAME"
 
 #------------------------------------------------------------------------------
 # Accounts

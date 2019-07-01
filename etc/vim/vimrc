@@ -41,7 +41,6 @@ else
     set viminfo+=n$XDG_STATE_HOME/vim/viminfo
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-  let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
   set undodir=$XDG_STATE_HOME/vim/undo
 endif
 

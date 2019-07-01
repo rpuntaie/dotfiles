@@ -9,9 +9,6 @@
 # Ugly workaround for Debian (as they ship an ancient version of PAM)
 HOME                  DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
 
-# personal stuff I have in a separate directory
-MY                    DEFAULT="/home/@{PAM_USER}/my"
-
 # XDG base directory specification (same as https://github.com/ayekat/dotfiles)
 XDG_CACHE_HOME        DEFAULT="${HOME}/.local/var/cache"
 XDG_CONFIG_HOME       DEFAULT="${HOME}/.local/etc"
@@ -24,14 +21,28 @@ XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
 XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
+# Personal stuff I have in a separate directories
+# ~/.gnupg, ~/.password-store, ~/my and these ~/dotfiles
+MY                    DEFAULT="${HOME}/my"
+MYNAME                DEFAULT="Roland Puntaier"
+TASKDATA              DEFAULT="${MY}/task" #using task too
+FINANCE               DEFAULT="${MY}/finance" #see .ledgerrc
+PASSWORD_STORE_DIR    DEFAULT="${HOME}/.password-store" #default for pass tool
+
+# Personal environment variables
+MYGPG                 DEFAULT="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
+MYTERM                DEFAULT="alacritty"
+MYVIMRC               DEFAULT="$XDG_CONFIG_HOME/vim/vimrc"
+
 # fix various applications to respect XDG
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
-VIMINIT               DEFAULT="let \$MYVIMRC='$XDG_CONFIG_HOME/vim/vimrc' | source \$MYVIMRC"
+VIMINIT               DEFAULT="let \$MYVIMRC='$MYVIMRC' | source \$MYVIMRC"
 ZDOTDIR               DEFAULT="${XDG_CONFIG_HOME}/zsh"
 LESSHISTFILE          DEFAULT="-"
-GNUPGHOME             DEFAULT="${HOME}/.gnupg"
+GNUPGHOME             DEFAULT="${HOME}/.gnupg" #default
 PGPPATH               DEFAULT="${GNUPGHOME}"
-PASSWORD_STORE_DIR    DEFAULT="${MY}/pass"
+SSH_AGENT_PID         DEFAULT=
+SSH_AUTH_SOCK         DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 PYTHONSTARTUP         DEFAULT="${XDG_LIB_HOME}/python/startup.py"
 NLTK_DATA             DEFAULT="${XDG_STATE_HOME}/nltk"
 XAUTHORITY            DEFAULT="${XDG_RUNTIME_DIR}/Xauthority"
@@ -39,7 +50,6 @@ XINITRC               DEFAULT="${XDG_CONFIG_HOME}/X11/xinitrc"
 XMODMAP               DEFAULT="${XDG_CONFIG_HOME}/X11/.Xmodmap"
 RANDFILE              DEFAULT="${XDG_CACHE_HOME}/rnd"
 SQLITE_HISTORY        DEFAULT="${XDG_STATE_HOME}/sqlite_history"
-TASKDATA              DEFAULT="${MY}/task"
 TASKRC                DEFAULT="${XDG_CONFIG_HOME}/task/taskrc"
 WINEPREFIX            DEFAULT="${XDG_STATE_HOME}/wine/default"
 TMUX_TMPDIR           DEFAULT="${XDG_RUNTIME_DIR}"

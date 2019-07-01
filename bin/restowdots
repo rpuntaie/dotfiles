@@ -1,14 +1,15 @@
 #!/usr/bin/env sh
 
-#~/my/pass and ~/my/task are separate
 mkdir -p $HOME/my
-mkdir -p $HOME/my/pass
-mkdir -p $HOME/my/task
-
-#keep ~/.gnupg separate, just link the config file
-ln -sf ~/dotfiles/etc/gnupg/gpg.conf ~/.gnupg/gpg.conf
+mkdir -p $TASKDATA
+mkdir -p $FINANCE
 
 cd ~
+
+#keep ~/.gnupg separate, just link the config file
+for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
+    ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
+done
 
 stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
 cd dotfiles
