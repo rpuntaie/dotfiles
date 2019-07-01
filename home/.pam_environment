@@ -21,22 +21,23 @@ XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
 XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
-# Personal stuff I have in a separate directories
+# Personal stuff I have in separate directories
 # ~/.gnupg, ~/.password-store, ~/my and these ~/dotfiles
-MY                    DEFAULT="${HOME}/my"
-MYNAME                DEFAULT="Roland Puntaier"
-TASKDATA              DEFAULT="${MY}/task" #using task too
-FINANCE               DEFAULT="${MY}/finance" #see .ledgerrc
-PASSWORD_STORE_DIR    DEFAULT="${HOME}/.password-store" #default for pass tool
+MY                    OVERRIDE=${HOME}/my
+MYNAME                OVERRIDE="Roland Puntaier"
+TASKDATA              OVERRIDE=${MY}/task
+FINANCE               OVERRIDE=${MY}/finance
+PASSWORD_STORE_DIR    OVERRIDE=${HOME}/.password-store
 
 # Personal environment variables
-MYGPG                 DEFAULT="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
-MYTERM                DEFAULT="alacritty"
-MYVIMRC               DEFAULT="$XDG_CONFIG_HOME/vim/vimrc"
+MYGPG                 OVERRIDE="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
+MYTERM                OVERRIDE=alacritty
+MYVIMRC               OVERRIDE=${XDG_CONFIG_HOME}/vim/vimrc
+
 
 # fix various applications to respect XDG
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
-VIMINIT               DEFAULT="let \$MYVIMRC='$MYVIMRC' | source \$MYVIMRC"
+VIMINIT               DEFAULT="let \$MYVIMRC='${MYVIMRC}' | source \$MYVIMRC"
 ZDOTDIR               DEFAULT="${XDG_CONFIG_HOME}/zsh"
 LESSHISTFILE          DEFAULT="-"
 GNUPGHOME             DEFAULT="${HOME}/.gnupg" #default

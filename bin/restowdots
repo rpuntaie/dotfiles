@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
+# Note, the variable in .pam_environment cannot be used here
+
 mkdir -p $HOME/my
-mkdir -p $TASKDATA
-mkdir -p $FINANCE
+mkdir -p $HOME/my/task
+mkdir -p $HOME/my/finance
 
 cd ~
 
