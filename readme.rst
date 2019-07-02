@@ -171,13 +171,3 @@ dunst
 Started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
 Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmonad/.config/dunst/dunstrc>`__.
 
-.. TODO
-   vim
-   ---
-   
-   I tweaked my vimrc to work with both 
-   `vim <https://www.vim.org/>`__
-   and 
-   `neovim <https://neovim.io/>`__.
-
-.. _`rollarch`: https://github.com/rpuntaie/rollarch

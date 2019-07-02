@@ -2,9 +2,12 @@
 
 # Note, the variable in .pam_environment cannot be used here
 
+umask 077
 mkdir -p $HOME/my
 mkdir -p $HOME/my/task
 mkdir -p $HOME/my/finance
+mkdir -p $HOME/.gnupg
+mkdir -p $HOME/.password-store
 
 cd ~
 

@@ -879,8 +879,9 @@ vnoremap <leader>sb "cy:silent !<C-R>c&<CR>
 vnoremap <leader>ss "cy:!<C-R>c<CR>
 " Execute current line in shell and read result into scratch buffer
 vnoremap <leader>sr "cy:Shell <C-R>c<CR>
-" Write more lines (visual from top to bottom) into ~/y.sh to be executed from a shell
-vnoremap <leader>sm o<esc>O#!env sh<esc>gvk:w! ~/y.sh<cr>u
+" With two windows, one term, run the current line or visual area in term
+nnoremap <leader>sm yy<C-W><C-W><C-W>""<C-W><C-W>j
+vnoremap <leader>sm y<C-W><C-W><C-W>""<C-W><C-W>gv<ESC>
 
 "line numbers
 ":'<'>!cat -n

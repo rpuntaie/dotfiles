@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-#sphinx config file to used in ../bin/sphinxbuild1
+#sphinx config file used in ../bin/sphinxbuild1
+
+# Deprecation
+# The sphinxcontrib packages lag behind sphinx.
+# I use rstdoc now, which keeps tikz and the like in separate files.
 
 import re,os.path
 
