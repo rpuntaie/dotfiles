@@ -15,14 +15,9 @@ fi
 
 setxkbmap -option terminate:ctrl_alt_bksp
 
-userresources=$XDG_CONFIG_HOME/X11/Xresources
-if [ -f "$userresources" ]; then
-    xrdb -load "$userresources"
-fi
-usermodmap=$XDG_CONFIG_HOME/X11/Xmodmap
-if [ -f "$usermodmap" ]; then
-    xmodmap "$usermodmap"
-fi
+xrdb -load $XDG_CONFIG_HOME/X11/Xresources
+#Caps_Lock to Print
+xmodmap -e "keysym Print = Caps_Lock"
 
 #needs to go before WM
 dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart

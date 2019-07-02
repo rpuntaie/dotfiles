@@ -67,9 +67,11 @@ If AIP2 is used, a local proxy must be prepared as described there.
 .. code:: sh
 
     curl -OLs https://git.io/installarch
-    # replace the defines in the first line
-    DSK=/dev/sda USR=u PW=p HST=up121 IP2=1.121 AIP2=1.108 KM=US\
-    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna DOTS=fjVcp bash installarch
+    # replace the defines at least in the first line
+    USR=u PW=p HST=u121 IP2=1.121 \
+    AIP2=1.108 DSK=/dev/sda KM=us CL=99 \
+    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna \
+    DOTS=fjVcp bash installarch
     # log out and in
 
 After changing or adding a file to the ``dotfiles`` one must run

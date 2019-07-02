@@ -4,7 +4,6 @@ import XMonad
 import XMonad.Core
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import qualified Data.Map as M
 
@@ -32,5 +31,6 @@ newKeys x = [
         ((modMask x, xK_s), spawn "scrot")
         , ((modMask x, xK_u), spawn "scrot -u")
         , ((modMask x .|. shiftMask,   xK_q), quitWithWarning)
+        , ((modMask x .|. shiftMask,   xK_p), spawn "passmenu --type")
         ]
 
