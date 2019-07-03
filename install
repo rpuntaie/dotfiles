@@ -2,6 +2,15 @@
 
 #according rpuntaie-meta on https://github.com/rpuntaie/rollarch
 
+if [[ ! -f /usr/bin/stow ]]; then
+    echo "you need to do: sudo pacman -S stow" >&2 && exit
+fi
+
+if [[ ! -f /usr/bin/xdg-user-dirs-update ]]; then
+    echo "you need to do: sudo pacman -S xdg-user-dirs" >&2 && exit
+fi
+
+
 dotfilesurl=https://github.com/rpuntaie/dotfiles
 cd ~
 
