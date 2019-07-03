@@ -13,6 +13,8 @@ source "$ZGEN_DIR/zgen.zsh"
 DISABLE_AUTO_TITLE=true
 DISABLE_AUTO_UPDATE=true
 
+export KEYTIMEOUT=1
+
 ZSH_THEME="rpuntaie"
 ZSH_CUSTOM="${ZDOTDIR:-$HOME}"
 

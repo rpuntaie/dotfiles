@@ -228,6 +228,7 @@ catch
 endtry
 "
 if has("gui_running")
+    set guicursor=n-c:block-Cursor/lCursor-blinkon0,i-ci:ver30-Cursor/lCursor-blinkon0,r-cr:hor20-Cursor/lCursor,v:ver50-Cursor/lCursor-blinkon0
     set lines=999
     set columns=175
     winpos 0 0

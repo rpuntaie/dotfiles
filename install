@@ -26,7 +26,6 @@ else
   #if .dotfiles exits: $new_install=true ~/dotfiles/install
   new_install=true
   git clone $dotfilesurl
-  rm -rf .local
   bash ~/dotfiles/bin/restowdots -S
 fi
 

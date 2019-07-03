@@ -1,5 +1,6 @@
 # Login shell configuration (sourced BEFORE interactive configuration)
 
+
 path() {
 	test -d "$2" || return
 	case ":$PATH:" in
@@ -25,3 +26,4 @@ fi
 
 unset -f path
 export PATH
+

@@ -52,7 +52,7 @@ I install these my ``dotfiles`` on an set-up machine via:
 
 or if cloned already:
 
-.. code:: sh
+.. code:: shï
 
     ~/dotfiles/install
 
@@ -108,7 +108,14 @@ For Python and RST I need
 CLI
 ---
 
-``zsh`` through vim ``:term`` or ``urxvt``
+``zsh`` through vim ``:term`` or ``urxvt``.
+``urxvt`` depends on a proper ``/etc/locale.conf``.
+``alacritty`` is nice, too, but for more easy navigation in previous output
+
+- ``urxvt-vim-scrollback``: ``C-v`` to enter. 
+  To paste the cursor must not be in ``vi-mode``.
+
+- ``v, vvsp, vvhs`` integrate with a running ``gVim``
 
 CLI tools:
 
@@ -122,6 +129,21 @@ CLI tools:
 - ``rg`` (ripgrep) and ``ag`` (the_silver_searcher) to search for text in files
 - ``bc`` for ad-hoc CLI calculations, e.g echo 2+2 | bc
 - ``ncdu`` like ``du``, but with ncurses
+
+window manager: xmonad
+----------------------
+
+I added little to the `defaults <https://xmonad.org/manpage.html>`__.
+See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmonad.hs>`__.
+
+``M-s`` screenshot
+``M-u`` screenshot allowing seleection
+``C-S-p`` passmenu
+
+- no `display manager <https://wiki.archlinux.org/index.php/Display_manager>`__
+- ``startx`` defaults to ``xmonad``, but you could do ``WM=qtile startx`` to change WM
+
+**dunst** is started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
 
 Security
 ========
@@ -152,22 +174,8 @@ Security
 ``~/dotfiles/bin/gpg-offline-master`` works with the separate offline master key.
 ``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
 
-``pass`` for password management, stored and managed separately in the default ``~/.password-store``
+``pass`` for password management, stored and managed separately in the default ``~/.password-store``.
+``browserpass`` uses that to serve ``browserpass-chromium`` and ``browserpass-firefox``.
 
 ``keybase`` for secure chat and file exchange (KBFS).
-
-xmonad
-------
-
-I added little to the `defaults <https://xmonad.org/manpage.html>`__.
-See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmonad.hs>`__.
-
-- no `display manager <https://wiki.archlinux.org/index.php/Display_manager>`__
-- ``startx`` defaults to ``xmonad``, but you could do ``WM=qtile startx`` to change WM
-
-dunst
------
-
-Started via `xinitrc <https://github.com/rpuntaie/dotfiles/blob/master/etc/X11/xinitrc.hs>`__.
-Config from `arximboldi <https://github.com/arximboldi/dotfiles/blob/master/xmonad/.config/dunst/dunstrc>`__.
 

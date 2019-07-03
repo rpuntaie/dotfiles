@@ -21,8 +21,8 @@ quitWithWarning = do
 main = do
     xmonad $ defaultConfig {
         -- modMask = mod4Mask, -- win-L would lock Windows, ranger modified to g1,g2,...
-        -- terminal = "alacritty",
         -- terminal = "xterm -fa monaco -fs 10 -bg black -fg white",
+        -- terminal = "alacritty",
         terminal = "urxvt",
         keys = mixKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
