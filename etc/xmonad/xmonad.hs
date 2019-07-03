@@ -10,6 +10,7 @@ import qualified Data.Map as M
 import XMonad.Util.Dmenu
 import System.Exit
 import System.IO
+import System.Environment (getEnv)
 import Control.Monad
 quitWithWarning :: X ()
 quitWithWarning = do
@@ -17,12 +18,12 @@ quitWithWarning = do
     s <- dmenu [m]
     when (m == s) (io exitSuccess)
 
-
 main = do
     xmonad $ defaultConfig {
         -- modMask = mod4Mask, -- win-L would lock Windows, ranger modified to g1,g2,...
-        terminal = "alacritty",
+        -- terminal = "alacritty",
         -- terminal = "xterm -fa monaco -fs 10 -bg black -fg white",
+        terminal = "urxvt",
         keys = mixKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
         }
