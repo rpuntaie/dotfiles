@@ -2,6 +2,14 @@
 
 # Note, the variable in .pam_environment cannot be used here
 
+if [[ -f /usr/bin/stow ]]; then
+    echo "you need to do: sudo pacman -S stow" >&2 && exit
+end
+
+if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
+    echo "you need to do: sudo pacman -S xdg-user-dirs" >&2 && exit
+end
+
 umask 077
 mkdir -p $HOME/my
 mkdir -p $HOME/my/task
@@ -26,6 +34,7 @@ stow home
 
 cd ~
 
+rm -rf .xmonad
 ln -sf ~/.local/etc/xmonad .xmonad
 xmonad --recompile
 

@@ -108,7 +108,7 @@ For Python and RST I need
 CLI
 ---
 
-``zsh`` through vim ``:term`` or ``alacritty``.
+``zsh`` through vim ``:term`` or ``urxvt``
 
 CLI tools:
 

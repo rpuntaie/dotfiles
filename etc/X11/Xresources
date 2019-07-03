@@ -1,7 +1,7 @@
 ! URxvt
 
 ! General settings
-URxvt.saveLines: 2000
+URxvt.saveLines: 32767
 URxvt.scrollBar: False
 URxvt.scrollstyle: rxvt
 URxvt.termName: xterm-256color
@@ -9,7 +9,9 @@ URxvt.urgentOnBell: True
 URxvt.cursorBlink: False
 
 ! Extensions
-URxvt.perl-ext-common: default,clipboard,url-select
+URxvt.perl-ext-common: default,clipboard,url-select,selection,vim-scrollback
+urxvt.vim-scrollback: C-v
+! M-v pastes
 URxvt.urlLauncher: xdg-open
 URxvt.urlButton: 1
 URxvt.underlineURLs: True
@@ -25,10 +27,11 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.C-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-u: perl:url-select:select_next
 
-!Inconsolata
-URxvt.font: xft:Inconsolata-12
-URxvt.boldFont: xft:Inconsolata-12
-URxvt.letterSpace: -1
+URxvt.allow_bold:           false
+URxvt.font:                 xft:DejaVu Sans Mono:autohint=true:size=12
+URxvt.boldFont:             xft:DejaVu Sans Mono:autohint=true:bold:size=12
+URxvt.italicFont:           xft:DejaVu Sans Mono:autohint=true:italic:size=12
+URxvt.boldItalicFont:       xft:DejaVu Sans Mono:autohint=true:bold:italic:size=12
 
 ! Tango theme
 URxvt.background: #000000
@@ -76,7 +79,7 @@ XTerm*utf8Title: True
 XTerm*renderFont: True
 XTerm*preeditType: Root
 XTerm*xftAntialias: true
-XTerm*faceName: xft:Inconsolata-12
+XTerm*faceName: xft:DejaVu Sans Mono:autohint=true:size=12
 
 ! Trim trailing spaces
 XTerm*trimSelection: true
