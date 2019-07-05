@@ -2,7 +2,9 @@
 
 . $XDG_CONFIG_HOME/sh/interactive
 
-export ZGEN_DIR="${XDG_STATE_HOME:-$HOME}/.zgen/"
+. $XDG_CONFIG_HOME/zsh/fzf_options.zsh
+
+export ZGEN_DIR="$XDG_STATE_HOME/.zgen"
 if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then
   echo "Zgen not found, bootstrapping."
   mkdir -p "$ZGEN_DIR"
@@ -18,8 +20,13 @@ export KEYTIMEOUT=1
 ZSH_THEME="rpuntaie"
 ZSH_CUSTOM="${ZDOTDIR:-$HOME}"
 
+_Z_DATA=$XDG_CACHE_HOME/z
+
 # after a change do: $ zgen reset
 zgen oh-my-zsh
+
+zgen oh-my-zsh plugins/vi-mode
+zgen oh-my-zsh plugins/vim-interaction
 
 zgen oh-my-zsh plugins/history-substring-search
 zgen oh-my-zsh plugins/history
@@ -36,8 +43,6 @@ zgen oh-my-zsh plugins/svn
 
 zgen oh-my-zsh plugins/battery
 zgen oh-my-zsh plugins/bgnotify
-zgen oh-my-zsh plugins/vi-mode
-zgen oh-my-zsh plugins/vim-interaction
 
 zgen load zsh-users/zsh-autosuggestions
 zgen load zsh-users/zsh-completions
@@ -56,3 +61,5 @@ bindkey -M viins '^U'    backward-kill-line
 bindkey -M viins '^W'    backward-kill-word
 
 unsetopt correct
+
+

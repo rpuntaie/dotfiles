@@ -23,14 +23,13 @@
 set nocompatible
 
 if has('win32')
-  let g:vimfiles=$VIM.'/vimfiles'
+  let g:localvimfiles=$VIM.'/vimfiles'
 else
-  let g:vimfiles=$XDG_STATE_HOME.'/vim'
-end
+  let g:localvimfiles=$XDG_STATE_HOME.'/vim'
+endif
 set undofile
-if has('win32')
-  let &undodir=g.vimfiles.'/undo'
-else
+let &undodir=g:localvimfiles.'/undo'
+if !has('win32')
   " XDG Environment
   " https://tlvince.com/vim-respect-xdg
   set directory=$XDG_STATE_HOME/vim,~/,/tmp
@@ -40,8 +39,7 @@ else
   else
     set viminfo+=n$XDG_STATE_HOME/vim/viminfo
   endif
-  set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-  set undodir=$XDG_STATE_HOME/vim/undo
+  set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
 "surround plugin does not check selection option:
@@ -65,13 +63,10 @@ function Deinplugins()
     "call dein#add('L9') "needed by FuzzyFinder
     call dein#add('tomtom/tlib_vim') "TScratch TBrowseOutput
     "buffers
-    call dein#add('vim-scripts/bufexplorer.zip')
-    call dein#add('vim-scripts/buffergrep')
+    call dein#add('vim-scripts/bufexplorer.zip') "depreated by fzf: but https://github.com/junegunn/fzf.vim/pull/733
     "find
-    "call dein#add('wincent/Command-T.git') "files
-    "call dein#add('FuzzyFinder') "files tags ...
     "call dein#add('mru.vim') "most recently used
-    call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('junegunn/fzf.vim')
     call dein#add('bogado/file-line')
     "editing help
     call dein#add('tpope/vim-sleuth') "detect tab settings heuristically
@@ -154,7 +149,7 @@ function Deinplugins()
     "call dein#add('farconics/victionary') "nvim: mapping ,s already exists
     call dein#add('Rykka/mathematic.vim')
 endfunction
-let g:bundledir=g:vimfiles.'/dein'
+let g:bundledir=g:localvimfiles.'/dein'
 let g:bundleinit=0
 if has('vim_starting')
     if isdirectory(g:bundledir.'/repos')
@@ -459,9 +454,7 @@ command! PrettyXML call DoPrettyXML()
 
 " search vimgrep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:filter = ' `ack -f --ignore-dir=sympy --ignore-dir=bottle --ignore-dir=simpleauth`'
-let g:filter = ' **/*'
-function! VisualSelection(direction, extra_filter) range
+function! VisualSelection(direction, ffilter) range
     let l:saved_reg = @"
     execute "normal! vgvy"
     let l:pattern = escape(@", '\\/.*$^~[]')
@@ -471,7 +464,19 @@ function! VisualSelection(direction, extra_filter) range
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
     elseif a:direction == 'gv'
-        let @g="vimgrep " . '/'. l:pattern . '/' . g:filter . a:extra_filter
+        if a:ffilter == ''
+          let allbufs = range(0, bufnr('$'))
+          let res = []
+          for b in allbufs
+            if buflisted(b)
+              call add(res, bufname(b))
+            endif
+          endfor
+          let l:ffilter = join(res)
+        else
+          let l:ffilter = a:ffilter
+        endif
+        let @g="vimgrep " . '/'. l:pattern . '/ ' . l:ffilter
     elseif a:direction == 'replace'
         let @g="%s" . '/'. l:pattern . '/'
     endif
@@ -482,9 +487,14 @@ endfunction
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 " Open vimgrep and put the cursor in the right position
-nnoremap <leader>gg :vimgrep // <C-R>=g:filter<CR><C-B><S-right><right><right>
-nnoremap <leader>gp ?\.\. {<CR>
-nnoremap <leader>gn /\.\. {<CR>
+nnoremap <leader>gg :vimgrep // **/*<C-B><S-right><right><right>
+" vimgrep after the selected text
+vnoremap <leader>gg :call VisualSelection('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
+" .. in buffers
+vnoremap <leader>gb :call VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR>
+" Search and replace the selected text
+vnoremap <leader>gr :call VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
+"
 
 " search git-grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -509,11 +519,6 @@ nnoremap <kPlus>      :cnext<CR>
 nnoremap <kMinus>     :cprev<CR>
 nnoremap <kMultiply>  :cc<CR>
 
-" vimgrep after the selected text
-vnoremap <leader>gg :call VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR>
-" Search and replace the selected text
-vnoremap <leader>gr :call VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
-"
 
 " useful maps
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -817,7 +822,6 @@ set errorformat+=\|\|\ %f:%l:%m
 " to pdf, similar to <leader>lh from vim_py3_rst for html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap <leader>lt :py3 Show('pdf')
-"vnoremap <leader>lt <ESC>:!echo .. default-role:: math > $XDG_RUNTIME_DIR/vim_lt_map.rst<CR><CR>gv:w! >> $XDG_RUNTIME_DIR/vim_lt_map.rst<CR>:!rst2pdf $XDG_RUNTIME_DIR/vim_lt_map.rst<CR><CR>
 
 " shell and system open
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

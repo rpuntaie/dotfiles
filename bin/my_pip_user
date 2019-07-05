@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+pip install --user rstdoc #documentation
+pip install --user autopep8 #used in vim to reformat
+pip install --user doit #automate using dodo.py file
+pip install --user when-changed #... file/dir -c command
+pip install --user astropy #science
+pip install --user pygame #graphics
+pip install --user bottle #web framework
+pip install --user cookiecutter #template projects
+pip install --user pymunk #2D physics engine
+pip install --user python-gantt
+pip install --user plotly #charting with html/js
+pip install --user flask #micro web framework
+pip install --user nikola #static html generator

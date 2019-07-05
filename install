@@ -31,15 +31,7 @@ fi
 
 if [[ -n $new_install ]] && $new_install; then
   fc-cache -fv
-  pip install --user rstdoc #documentation
-  pip install --user autopep8 #used in vim to reformat
-  pip install --user doit #automate using dodo.py file
-  pip install --user when-changed #... file/dir -c command
-  pip install --user astropy #science
-  pip install --user pygame #graphics
-  pip install --user bottle #web framework
-  pip install --user cookiecutter #template projects
-  pip install --user pymunk #2D physics engine
+  my_pip_user
 fi
 
 echo -e "\033[0;32mLog out and in, to activate the environment. First time vim and zsh will install plugins."

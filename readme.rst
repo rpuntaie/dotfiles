@@ -112,10 +112,19 @@ CLI
 ``urxvt`` depends on a proper ``/etc/locale.conf``.
 ``alacritty`` is nice, too, but for more easy navigation in previous output
 
+Plugins:
+
 - ``urxvt-vim-scrollback``: ``C-v`` to enter. 
   To paste the cursor must not be in ``vi-mode``.
 
+- ``z <substring>`` jumps to a file in history
+
+- history-search based on what typed already
+
 - ``v, vvsp, vvhs`` integrate with a running ``gVim``
+
+- ``CTRL-T`` for **fzf**, no need for ``cd``,
+  ``CTRL-g[f b t r h]`` `for git <https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236>`__
 
 CLI tools:
 
