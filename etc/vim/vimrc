@@ -597,9 +597,7 @@ command! CD cd %:p:h
 
 " plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_user_command = [
-    \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
-    \ 'find %s -type f']
+map <C-p> :Files<CR>
 "latex-suite
 "let g:Tex_DefaultTargetFormat='pdf'
 "let g:Tex_UseMakefile = 1
