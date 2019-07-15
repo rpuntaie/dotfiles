@@ -2,8 +2,6 @@
 
 . $XDG_CONFIG_HOME/sh/interactive
 
-. $XDG_CONFIG_HOME/zsh/fzf_options.zsh
-
 export ZGEN_DIR="$XDG_STATE_HOME/.zgen"
 if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then
   echo "Zgen not found, bootstrapping."
@@ -62,4 +60,5 @@ bindkey -M viins '^W'    backward-kill-word
 
 unsetopt correct
 
+. $XDG_CONFIG_HOME/zsh/fzf_options.zsh
 

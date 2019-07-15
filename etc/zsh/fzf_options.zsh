@@ -21,12 +21,12 @@ fzf_gb() {
   sed 's/^..//' | cut -d' ' -f1 |
   sed 's#^remotes/##'
 }
-fzf_gt() {
-  is_in_git_repo || return
-  git tag --sort -version:refname |
-  fzf-down --multi --preview-window right:70% \
-    --preview 'git show --color=always {} | head -'$LINES
-}
+# fzf_gt() {
+#   is_in_git_repo || return
+#   git tag --sort -version:refname |
+#   fzf-down --multi --preview-window right:70% \
+#     --preview 'git show --color=always {} | head -'$LINES
+# }
 fzf_gh() {
   is_in_git_repo || return
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
@@ -35,13 +35,13 @@ fzf_gh() {
     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | head -1 | xargs git show --color=always | head -'$LINES |
   grep -o "[a-f0-9]\{7,\}" | head -1
 }
-fzf_gr() {
-  is_in_git_repo || return
-  git remote -v | awk '{print $1 "\t" $2}' | uniq |
-  fzf-down --tac \
-    --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" --remotes={1} | head -200' |
-  cut -d$'\t' -f1
-}
+# fzf_gr() {
+#   is_in_git_repo || return
+#   git remote -v | awk '{print $1 "\t" $2}' | uniq |
+#   fzf-down --tac \
+#     --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" --remotes={1} | head -200' |
+#   cut -d$'\t' -f1
+# }
 join-lines() {
   local item
   while read item; do
@@ -53,10 +53,10 @@ bind-git-helper() {
   for c in $@; do
     eval "fzf-g$c-widget() { local result=\$(fzf_g$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
     eval "zle -N fzf-g$c-widget"
-    eval "bindkey '^g^$c' fzf-g$c-widget"
+    eval "bindkey '^$c' fzf-g$c-widget"
   done
 }
-bind-git-helper f h b t r
+bind-git-helper f h b
 unset -f bind-git-helper
 
 # https://github.com/junegunn/fzf#Settings

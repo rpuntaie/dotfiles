@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
+pip install --user pynvim #nvim plugin
 pip install --user rstdoc #documentation
+pip install --user rst2confluence #for jira
 pip install --user autopep8 #used in vim to reformat
 pip install --user doit #automate using dodo.py file
 pip install --user when-changed #... file/dir -c command
@@ -13,3 +15,6 @@ pip install --user python-gantt
 pip install --user plotly #charting with html/js
 pip install --user flask #micro web framework
 pip install --user nikola #static html generator
+pip install --user black #code formatter
+pip install --user git+https://github.com/google/vimdoc #vim help for plugin
+pip install --user git+https://github.com/pre-commit/pre-commit #add hooks to git repo

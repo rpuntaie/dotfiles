@@ -1,4 +1,6 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim: syntax=vim
+
+""
 " build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
 " --enable-gui=gtk2 --with-features=big --enable-netbeans --with-tlib=ncurses
@@ -16,9 +18,7 @@
 "   - waf
 "
 " <ESC> mapped to <CAPSLOCK> in the OS
-"
-" find all maps: <leader> command!
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""
 
 set nocompatible
 
@@ -27,6 +27,7 @@ if has('win32')
 else
   let g:localvimfiles=$XDG_STATE_HOME.'/vim'
 endif
+let g:bundledir=g:localvimfiles.'/dein'
 set undofile
 let &undodir=g:localvimfiles.'/undo'
 if !has('win32')
@@ -42,114 +43,149 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-"surround plugin does not check selection option:
-""so $VIMRUNTIME/mswin.vim
-"instead:
-set keymodel=startsel,stopsel
-set selection=exclusive
-
-"dein
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"ctrlpvim/ctrlp.vim
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|temp|tmp|build)$',
+  \ 'file': '\v\.(exe|so|dll)$'
+  \ }
+"junegunn/fzf.vim
+map <C-g> :GFiles<CR>
+map <C-t> :Files<CR>
+map <C-b> :Buffers<CR>
+map <C-n> :History<CR>
+map <leader>. :BTags<CR>
+map <leader>; :Tags<CR>
+map <leader>: :History:<CR>
+map <leader>/ :History/<CR>
+"godlygeek/tabular
+map <leader>aa :Tabular/
+"machakann/vim-sandwich
+"literal
+nmap sl saiw`.
+"bold
+nmap sb saiw*.
+"Shougo/deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+"SirVer/ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"sheerun/vim-polyglot
+let g:polyglot_disabled = ['latex'] "https://github.com/sheerun/vim-polyglot/issues/204
+"w0rp/ale
+let g:ale_enabled=0 " :ALEToggle
+"python-mode/python-mode
+let g:pymode_lint = 0
+let g:pymode_folding = 0
+let g:pymode_lint_write = 0
+"lervag/vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+"johnsyweb/vim-makeshift
+let g:makeshift_on_startup = 0
+let g:makeshift_on_bufread = 0
+let g:makeshift_on_bufnewfile = 0
+let g:makeshift_on_bufenter = 0
+let g:makeshift_systems = {
+    \'CMakeList.txt': 'cmake',
+    \'meson.build': 'meson',
+    \'build.sbt ': 'sbt',
+    \'dodo.py ': 'doit',
+    \'boost-build.jam ': 'b2',
+    \}
+function! s:BuildFun(what2build)
+    execute 'Makeshift'
+    execute 'MakeshiftBuild '.a:what2build
+endfunction
+command! -nargs=* MM :call s:BuildFun(<q-args>)
+"scrooloose/nerdtree
+let g:NERDTreeNodeDelimiter = "\u00a0"
+let g:NERDTreeShowHidden=1
+map <C-m> :NERDTreeToggle<CR>
+let g:netrw_shq="'"
+let g:netrw_browsex_viewer= "xdg-open"
+let g:netrw_nogx=1 " disable netrw's gx mapping.
+let g:netrw_altv = 1
+let g:netrw_preview = 1
+let g:netrw_list_hide = "^\\..*"
+let g:netrw_home = $XDG_STATE_HOME.'/vim'
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+"vim-scripts/vcscommand.vim
+let g:VCSCommandMapPrefix = "<leader>z"
+"rpuntaie/trans.vim
+let g:trans_default_api='google'
+let g:trans_default_lang='ru'
+let g:trans_set_reg='*'
+let g:trans_set_echo=1
+let g:trans_replace=0
+let g:trans_has_python=3 "webapi.vim instead
+"Rykka/mathematic.vim
+let g:mathematic_user_dir = g:bundledir.'/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
 function Deinplugins()
-    "vimproc
-    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-    "mediawiki
-    call dein#add('chikamichi/mediawiki.vim')
-    "colors
-    call dein#add('vim-scripts/wombat256.vim')
-    call dein#add('tomasr/molokai')
-    "general utilities for script developers
-    call dein#add('vim-scripts/genutils')
-    "call dein#add('L9') "needed by FuzzyFinder
-    call dein#add('tomtom/tlib_vim') "TScratch TBrowseOutput
-    "buffers
-    call dein#add('vim-scripts/bufexplorer.zip') "depreated by fzf: but https://github.com/junegunn/fzf.vim/pull/733
-    "find
-    "call dein#add('mru.vim') "most recently used
+    call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
+    call dein#add('tomtom/tlib_vim') " TScratch TBrowseOutput
+    call dein#add('jlanzarotta/bufexplorer')
+    call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('junegunn/fzf.vim')
-    call dein#add('bogado/file-line')
-    "editing help
-    call dein#add('tpope/vim-sleuth') "detect tab settings heuristically
-    call dein#add('godlygeek/tabular')
-    call dein#add('tpope/vim-surround')
-    "call dein#add('jcf/vim-latex')
-    call dein#add('LaTeX-Box-Team/LaTeX-Box')
-    "call dein#add('terryma/vim-multiple-cursors')
-    "moving around
-    call dein#add('Lokaltog/vim-easymotion')
-    call dein#add('vim-scripts/matchit.zip')
-    "completion TODO use deoplete (remove neo...)
-    "call dein#add('davidhalter/jedi-vim')
-    call dein#add('johnsyweb/vim-makeshift')
-    "call dein#add('vim-scripts/javacomplete')
-    "call dein#add('vim-scripts/pythoncomplete')
-    "call dein#add('Shougo/neocomplete.vim')
-    "call dein#add('Shougo/neocomplcache')
-    "call dein#add('Rip-Rip/clang_complete') "parser based complete
-    "call dein#add('garbas/vim-snipmate')
-    "call dein#add('honza/snipmate-snippets')
-    "call dein#add('Shougo/neosnippet')
-    "call dein#add('Shougo/neosnippet-snippets')
-    "js xml css
-    "call dein#add('michalliu/jsruntime.vim')
-    "call dein#add('vim-scripts/if_v8')
-    call dein#add('joestelmach/lint.vim')
-    "call dein#add('jsbeautify')
-    "call dein#add('xml.vim')
-    "call dein#add('css_color.vim')"strange <C-K> to <t_<fd>`> expansion
-    "html
-    "call dein#add('rstacruz/sparkup')
-    call dein#add('tpope/vim-unimpaired')
+    call dein#add('bogado/file-line') " open <file>:<line>
+    call dein#add('tpope/vim-sleuth') " detect tab settings heuristically
+    call dein#add('godlygeek/tabular') " <leader>aa :Tabular
+    call dein#add('machakann/vim-sandwich') " sa,sd,sr
+    call dein#add('Lokaltog/vim-easymotion') " <leader><leader>f
+    call dein#add('andymass/vim-matchup') " %, g%
+    call dein#add('Shougo/deoplete.nvim')
+    if !has('nvim')
+      call dein#add('roxma/nvim-yarp')
+      call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
+    "deoplete sources
+    call dein#add('prabirshrestha/vim-lsp')
+    call dein#add('lighttiger2505/deoplete-vim-lsp')
+    call dein#add('tbodt/deoplete-tabnine')
+    call dein#add('Shougo/neoinclude.vim')
+    call dein#add('Shougo/deoplete-clangx')
+    call dein#add('davidhalter/jedi')
+    call dein#add('deoplete-plugins/deoplete-jedi')
+    "snippets
+    call dein#add('SirVer/ultisnips')
+    call dein#add('honza/vim-snippets')
+    "languages
+    call dein#add('sheerun/vim-polyglot')
+    call dein#add('Chiel92/vim-autoformat') " :Autoformat
+    call dein#add('metakirby5/codi.vim') " :Codi :Codi!
+    call dein#add('w0rp/ale')
     "python
-    call dein#add('hdima/python-syntax')
-    "call dein#add('klen/python-mode')
-    "call dein#add('https://bitbucket.org/tartley/vim_run_python_tests')
-    "haskell
-    "call dein#add('bitc/vim-hdevtools.git')
-    "coffee
-    call dein#add('kchmck/vim-coffee-script')
-    "hex
-    "call dein#add('vim-scripts/hexman.vim')
-    "terminal in vim
-    call dein#add('sakhnik/nvim-gdb')
-    "has bug: call dein#add('vim-scripts/Conque-GDB')
-    "symbols of a language in sidebar
-    "call dein#add('http://www.vim.org/scripts/download_script.php?src_id=19574')
-    call dein#add('vim-scripts/taglist.vim')
-    call dein#add('majutsushi/tagbar')
-    "call dein#add('int3/vim-taglist-plus')
-    "syntax checking for many languages
-    "call dein#add('scrooloose/syntastic')
-    "file browsing
+    call dein#add('rpuntaie/vim_py3_rst')
+    "call dein#add('python-mode/python-mode')
+    "R
+    call dein#add('jalvesaq/Nvim-R')
+    "debug
+    call dein#add('Shougo/vimproc.vim')
+    call dein#add('idanarye/vim-vebugger')
+    call dein#add('vim-vdebug/vdebug')
+    "latex
+    call dein#add('lervag/vimtex')
+    "building
+    call dein#add('johnsyweb/vim-makeshift') " Build
     call dein#add('scrooloose/nerdtree')
-    call dein#add('vim-scripts/open-browser.vim')
+    call dein#add('tyru/open-browser.vim')
     "commenting
     call dein#add('scrooloose/nerdcommenter')
-    "call dein#add('vim-scripts/DoxygenToolkit.vim')
     "git tools
-    call dein#add('gregsexton/gitv')
-    call dein#add('sjl/splice.vim')
     call dein#add('tpope/vim-fugitive')
+    call dein#add('gregsexton/gitv') " needs fugitive
     "other vcs
     call dein#add('vim-scripts/vcscommand.vim')
-    " TODO test these (nvim-r alternative)
-    "call dein#add('jcfaria/Vim-R-plugin')
-    "call dein#add('vim-ipython')
-    "wiki
-    "call dein#add('rpuntaie/vim-rst-tables') 
-    "pip install git+https://github.com/rpuntaie/vim_bridge.git
-    call dein#add('rpuntaie/vim_py3_rst')
-    "call dein#add('Rykka/riv.vim.git')
-    "call dein#add('tomtom/viki_vim')
-    "call dein#add('lepture/vim-jinja')
-    "
     "dictionary
     call dein#add('mattn/webapi-vim')
     call dein#add('rpuntaie/trans.vim')
-    "call dein#add('farconics/victionary') "nvim: mapping ,s already exists
     call dein#add('Rykka/mathematic.vim')
+    call dein#add('chrisbra/unicode.vim')
 endfunction
-let g:bundledir=g:localvimfiles.'/dein'
 let g:bundleinit=0
 if has('vim_starting')
     if isdirectory(g:bundledir.'/repos')
@@ -180,838 +216,7 @@ endif
 "call dein#update()
 "call dein#install()
 
-" settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set noswapfile
-filetype plugin indent on     " Required!
-
-" Sets how many lines of history VIM has to remember
-set history=700
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-" With a map leader it's possible to do extra key combinations
-let mapleader = ","
-let maplocalleader = ","
-noremap \ ,
-" gF to open at line
-set isfname-=:
-"
-"word delimiters
-" TODO why rst wrong iskeyword: syntax/rst.vim:
-"set iskeyword=@,48-57,_,192-255
-"this includes IEC_8859-1 characters to have 128 of them for IDs
-"128 vim iskeyword...
-set iskeyword=@,48-57,_,180-255
-"set iskeyword=a-z,A-Z,48-57,_,.,-,>
-
-" UI
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set background=dark
-try
-    colorscheme murphy
-    "colorscheme wombat256
-    "if has("gui_running")
-        "colorscheme molokai
-    "else
-        "set t_Co=256
-        "colorscheme molokaiterm
-    "endif
-catch
-    colorscheme murphy
-endtry
-"
-if has("gui_running")
-    set guicursor=n-c:block-Cursor/lCursor-blinkon0,i-ci:ver30-Cursor/lCursor-blinkon0,r-cr:hor20-Cursor/lCursor,v:ver50-Cursor/lCursor-blinkon0
-    set lines=999
-    set columns=175
-    winpos 0 0
-    set guiheadroom=0
-    set guioptions=a
-    "set guifont=Fixed\ Medium\ Semi-Condensed\ 10
-    "set guifont=DejaVu\ Sans\ MonoFNT
-    "set guifont=FreeMono\ Bold
-
-    if has("win32")
-        "set guifont=DejaVu\ Sans\ Mono:h9:cANSI
-        "set guifont=Everson\ Mono:h9:cANSI
-        "set guifont=DejaVu_Sans_MonoFO4:h9:cANSI
-
-        if filereadable("C:/Windows/Fonts/FreeMonoBoldFO4.ttf")
-            set guifont=FreeMonoFO4:h10:b:cANSI
-        else
-            set guifont=FreeMono:h10:b:cANSI
-            "set guifont=Lucida_Console:h10:b:cANSI
-        endif
-    else
-        if filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
-          set guifont=FreeMonoFO4\ Bold\ 11
-        else
-          set guifont=FreeMono\ Bold\ 11
-          "set guifont=Inconsolata\ Bold\ 10
-        endif
-    endif
-endif
-
-let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a", "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782", "#42cf89", "#cfcfb0", "#78c2ff", "#ae81ff", "#85dc85", "#e2637f" ]
-
-""show numbers
-"set number
-
-"check width
-"set colorcolumn=+1
-"hi ColorColumn ctermbg=232 guibg=#080808
-
-" trailing whitespaces:
-set list
-set listchars=tab:→\ ,eol:\ ,trail:·
-
-" Fold fill characters:
-set fillchars+="fold: "
-
-"set foldmethod=marker
-"
-set showtabline=0
-"
-" Scroll from top/bottom - when moving vertically using j/k
-set scrolloff=1
-"
-" Turn on the Wild menu
-set wildmenu
-"
-" Ignore compiled files for vimgrep
-set wildignore=
-set wildignore+=**/build/**/*
-set wildignore+=**/dist/**/*
-set wildignore+=**/*egg-info/**/*
-set wildignore+=**/_links*
-set wildignore+=**/_build/**/*
-set wildignore+=**/_static/**/*
-set wildignore+=**/*doctree*
-"set wildignore+=**/temp/**/*
-set wildignore+=**/.git/**/*
-set wildignore+=**/*.csv
-set wildignore+=**/.hg/**/*
-set wildignore+=**/.svn/**/*
-set wildignore+=**/.vs/**/*
-set wildignore+=**/.lock-waf*
-set wildignore+=**/__pycache__/**/*
-set wildignore+=**/*.o
-set wildignore+=**/*.i
-set wildignore+=**/*.s
-set wildignore+=**/*.pyc
-set wildignore+=**/*.sdf
-set wildignore+=**/*.suo
-set wildignore+=**/*.iobj
-set wildignore+=**/*.dll
-set wildignore+=**/*.exe
-set wildignore+=**/*.ilk
-set wildignore+=**/*.pdb
-set wildignore+=**/*.opendb
-set wildignore+=**/*.ipdb
-set wildignore+=**/*.obj
-set wildignore+=**/*.pch
-set wildignore+=**/*.cache
-set wildignore+=**/*.tlog
-set wildignore+=**/*.VC.db
-set wildignore+=**/cscope.out
-"set wildignore+=**/Doxyfile
-"
-" Height of the command bar
-set cmdheight=2
-"
-" A buffer becomes hidden when it is abandoned
-set hid
-"
-" Configure backspace so it acts as it should act
-set backspace=indent,eol,start
-"
-" Ignore case when searching
-set ignorecase
-"
-" When searching try to be smart about cases
-set smartcase
-"
-" Highlight search results
-set hlsearch
-"
-" Makes search act like search in modern browsers
-set incsearch
-"
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-"
-" For regular expressions turn magic on
-set magic
-"
-" Show matching brackets when text indicator is over them
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
-"
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-"
-" Hide the mouse when typing text
-set mousehide
-"
-function! ShowUtf8Sequence()
-  if (mode()=='i' && exists('b:thch'))
-      return nr2char(b:thch)
-  endif
-  let p = getpos('.')
-  redir => utfseq
-  silent normal! g8
-  redir End
-  call setpos('.', p)
-  return substitute(matchstr(utfseq, '\x\+ .*\x'), '\<\x', '0x&', 'g')
-endfunction
-"
-" Status Line
-set statusline=%n%m%r%h%w\ %04v,%04l=%p%%(%L)\ 0x%B[%{ShowUtf8Sequence()}]%{getcwd()}>%f\ %=\[%{&ff}\ %{&fenc==\"\"?&enc:&fenc}]
-set laststatus=2
-"
-set nowrap
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-"
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-"
-" Use 8g8 to find illegal utf8
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1,cp1251
-endif
-"
-set nobackup
-set nowb
-set autowriteall
-"
-" Return to last edit position when opening files
-autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g'\"" |
-    \ endif
-
-" tab
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
-"
-" Be smart when using tabs ;)
-set smarttab
-"set smartindent
-set autoindent
-"
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-"
-set clipboard=unnamed
-
-" XML
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! DoPrettyXML()
-  " save the filetype so we can restore it later
-  let l:origft = &ft
-  set ft=
-  " delete the xml header if it exists. This will
-  " permit us to surround the document with fake tags
-  " without creating invalid xml.
-  1s/<?xml .*?>//e
-  " insert fake tags around the entire document.
-  " This will permit us to pretty-format excerpts of
-  " XML that may contain multiple top-level elements.
-  0put ='<PrettyXML>'
-  $put ='</PrettyXML>'
-  silent %!xmllint --format -
-  " xmllint will insert an <?xml?> header. it's easy enough to delete
-  " if you don't want it.
-  " delete the fake tags
-  2d
-  $d
-  " restore the 'normal' indentation, which is one extra level
-  " too deep due to the extra tags we wrapped around the document.
-  silent %<
-  " back to home
-  1
-  " restore the filetype
-  exe "set ft=" . l:origft
-endfunction
-command! PrettyXML call DoPrettyXML()
-
-" search vimgrep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! VisualSelection(direction, ffilter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        if a:ffilter == ''
-          let allbufs = range(0, bufnr('$'))
-          let res = []
-          for b in allbufs
-            if buflisted(b)
-              call add(res, bufname(b))
-            endif
-          endfor
-          let l:ffilter = join(res)
-        else
-          let l:ffilter = a:ffilter
-        endif
-        let @g="vimgrep " . '/'. l:pattern . '/ ' . l:ffilter
-    elseif a:direction == 'replace'
-        let @g="%s" . '/'. l:pattern . '/'
-    endif
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-" Visual mode pressing * or # searches for the current region
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
-" Open vimgrep and put the cursor in the right position
-nnoremap <leader>gg :vimgrep // **/*<C-B><S-right><right><right>
-" vimgrep after the selected text
-vnoremap <leader>gg :call VisualSelection('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
-" .. in buffers
-vnoremap <leader>gb :call VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR>
-" Search and replace the selected text
-vnoremap <leader>gr :call VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
-"
-
-" search git-grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-func! GitGrep(...)
-  let save = &grepprg
-  set grepprg=git\ grep\ -n\ $*
-  let s = 'grep'
-  for i in a:000
-    let s = s . ' ' . i
-  endfor
-  exe s
-  let &grepprg = save
-endfun
-command! -nargs=? G call GitGrep(<f-args>)
-func! GitGrepWord()
-  normal! "zyiw
-  call GitGrep('-w -e ', getreg('z'))
-endf
-nmap <C-x>G :call GitGrepWord()<CR>
-
-nnoremap <kPlus>      :cnext<CR>
-nnoremap <kMinus>     :cprev<CR>
-nnoremap <kMultiply>  :cc<CR>
-
-
-" useful maps
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Treat long lines as break lines when wrap on
-map j gj
-map k gk
-
-" Enable syntax highlighting
-noremap <F10> <Esc>:syntax sync fromstart<CR>
-inoremap <F10> <C-o>:syntax sync fromstart<CR>
-syntax on
-autocmd BufEnter * :syntax sync fromstart
-
-" Ctrl+c/Ctrl+v to copy/paste (clipboard) in gvim
-nmap <C-V> "+gP
-imap <C-V> <ESC><C-V>i
-vmap <C-C> "+y
-
-" Move around windows
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
-
-" Don't close window, when deleting a buffer
-map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
-
-" look up in wordnet (wn)
-nmap <leader>ww :!wn <C-R><C-W> -over<CR>
-" remember word at beginning of text file
-nmap <leader>we mwywggO<ESC>p0*'wn:!wn <C-R><C-W> -over<CR>
-
-" No middle mouse button
-map <middlemouse> <nop>
-imap <middlemouse> <nop>
-nnoremap <X1Mouse> <C-O>
-nnoremap <X2Mouse> <C-I>
-nnoremap Y y$
-
-" Replace without loosing register
-vnoremap R "_c<C-R>"<esc>
-nnoremap R "_ciw<C-R>"<esc>
-
-" Insert empty line
-nnoremap <silent> s <nop>
-nnoremap <silent> S <nop>
-nnoremap <silent> ss o<ESC>k
-
-" Language used in insert mode
-let g:mathematic_user_dir = g:bundledir.'/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
-nmap <leader>lr :set keymap=russian-jcukenwin<cr>
-nmap <leader>la :set keymap=accents<cr>
-nmap <leader>lm :set keymap=mathematic<cr>
-nmap <leader>lj :set keymap=<cr>
-nmap <leader>lk :set keymap=fntc<cr>
-
-nmap <leader>ls :setlocal spell spelllang=
-
-"edit
-nmap <leader>ee :e $MYVIMRC<cr>
-map <leader>aa :Tab/
-"renumber 1., ... visual area
-vnoremap <leader>ec :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
-
-"yank current file full path
-noremap <silent> cp :let @* = expand("%")<CR>
-
-"match move
-onoremap <silent>m //e<CR>
-vnoremap <silent>m //e<CR>
-nnoremap <silent>n //<CR>
-
-"CD to path of current file
-command! CD cd %:p:h
-
-" plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-p> :Files<CR>
-"latex-suite
-"let g:Tex_DefaultTargetFormat='pdf'
-"let g:Tex_UseMakefile = 1
-"
-"pymode
-"let g:pymode_lint = 0
-"let g:pymode_folding = 0
-"let g:pymode_lint_write = 0
-"
-"vim-makeshift
-let g:makeshift_on_startup = 0
-let g:makeshift_on_bufread = 0
-let g:makeshift_on_bufnewfile = 0
-let g:makeshift_on_bufenter = 0
-let g:makeshift_systems = {
-    \'CMakeList.txt': 'cmake',
-    \'meson.build': 'meson',
-    \'build.sbt ': 'sbt',
-    \'dodo.py ': 'doit',
-    \'boost-build.jam ': 'b2',
-    \}
-function! s:BuildFun(what2build)
-    execute 'Makeshift'
-    execute 'MakeshiftBuild '.a:what2build
-endfunction
-command! -nargs=* MM :call s:BuildFun(<q-args>)
-"
-"vcscommand
-let g:VCSCommandMapPrefix = "<leader>z"
-"
-"netrw
-let g:netrw_browsex_viewer= "xdg-open"
-"open-browser
-let g:netrw_nogx=1 " disable netrw's gx mapping.
-let g:netrw_altv = 1
-let g:netrw_preview = 1
-let g:netrw_list_hide = "^\\..*"
-let g:netrw_home = $XDG_STATE_HOME.'/vim'
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-"
-"nerdtree
-let g:NERDTreeNodeDelimiter = "\u00a0"
-let g:NERDTreeShowHidden=1
-map <C-m> :NERDTreeToggle<CR>
-"
-" conque
-let g:ConqueTerm_PyVersion = 3
-nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
-nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
-"
-" vim-r
-let g:vimrplugin_conqueplugin = 1
-let g:vimrplugin_routnotab = 1
-"
-" cscope
-set cscopetag
-if has("cscope")
-        set csprg=cscope
-        set csto=0
-        set cst
-        set nocsverb
-        " add any database in current directory
-        if filereadable("cscope.out")
-            cs add cscope.out
-        " else add database pointed to by environment
-        elseif $CSCOPE_DB != ""
-            cs add $CSCOPE_DB
-        endif
-        set csverb
-endif
-nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
-"
-""Doxygen
-"let g:DoxygenToolkit_authorName="Roland Puntaier"
-"
-""syntastic
-"let g:syntastic_check_on_open=0
-"let g:syntastic_enable_signs=1
-"let g:syntastic_auto_loc_list=1
-"let g:syntastic_mode_map = { 'mode': 'passive' }
-"
-""Neocomplcache
-"let g:neocomplcache_enable_at_startup = 0
-"nnoremap <leader>lc :NeoComplCacheEnable<cr>
-"nnoremap <leader>ld :NeoComplCacheDisable<cr>
-"
-""vim-rst-tables
-"let g:no_rst_table_maps = 1
-"riv
-"let g:riv_fold_level = 0
-"let g:riv_fold_auto_update = 0
-"
-"command-t
-"nnoremap <silent> <Leader>t :CommandT<CR>
-"nnoremap <silent> <Leader>v :CommandTBuffer<CR>
-""
-""fuzzyFinder
-"let g:fuf_modesDisable = []
-"let g:fuf_mrufile_maxItem = 400
-"let g:fuf_mrucmd_maxItem = 400
-"nnoremap <silent> sj     :FufBuffer<CR>
-"nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
-"nnoremap <silent> sK     :FufFileWithFullCwd<CR>
-"nnoremap <silent> s<C-k> :FufFile<CR>
-"nnoremap <silent> sl     :FufCoverageFileChange<CR>
-"nnoremap <silent> sL     :FufCoverageFileChange<CR>
-"nnoremap <silent> s<C-l> :FufCoverageFileRegister<CR>
-"nnoremap <silent> sd     :FufDirWithCurrentBufferDir<CR>
-"nnoremap <silent> sD     :FufDirWithFullCwd<CR>
-"nnoremap <silent> s<C-d> :FufDir<CR>
-"nnoremap <silent> sn     :FufMruFile<CR>
-"nnoremap <silent> sN     :FufMruFileInCwd<CR>
-"nnoremap <silent> sm     :FufMruCmd<CR>
-"nnoremap <silent> su     :FufBookmarkFile<CR>
-"nnoremap <silent> s<C-u> :FufBookmarkFileAdd<CR>
-"vnoremap <silent> s<C-u> :FufBookmarkFileAddAsSelectedText<CR>
-"nnoremap <silent> si     :FufBookmarkDir<CR>
-"nnoremap <silent> s<C-i> :FufBookmarkDirAdd<CR>
-"nnoremap <silent> st     :FufTag<CR>
-"nnoremap <silent> sT     :FufTag!<CR>
-"nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
-"nnoremap <silent> s,     :FufBufferTag<CR>
-"nnoremap <silent> s<     :FufBufferTag!<CR>
-"vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
-"vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
-"nnoremap <silent> s}     :FufBufferTagWithCursorWord!<CR>
-"nnoremap <silent> s.     :FufBufferTagAll<CR>
-"nnoremap <silent> s>     :FufBufferTagAll!<CR>
-"vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>
-"vnoremap <silent> s>     :FufBufferTagAllWithSelectedText<CR>
-"nnoremap <silent> s]     :FufBufferTagAllWithCursorWord!<CR>
-"nnoremap <silent> sg     :FufTaggedFile<CR>
-"nnoremap <silent> sG     :FufTaggedFile!<CR>
-"nnoremap <silent> so     :FufJumpList<CR>
-"nnoremap <silent> sp     :FufChangeList<CR>
-"nnoremap <silent> sq     :FufQuickfix<CR>
-"nnoremap <silent> sy     :FufLine<CR>
-"nnoremap <silent> sh     :FufHelp<CR>
-"nnoremap <silent> se     :FufEditDataFile<CR>
-"nnoremap <silent> sr     :FufRenewCache<CR>
-"
-" haskell
-autocmd FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-autocmd FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-autocmd FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
-"
-".. trans.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:trans_default_api='google'
-let g:trans_default_lang='ru'
-let g:trans_set_reg='*'
-let g:trans_set_echo=1
-let g:trans_replace=0
-let g:trans_has_python=3 "webapi.vim instead
-
-
-" my vim python
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-set tags=./.tags;,.tags;
-if filereadable($MY.'/.tags')
-  set tags+=$MY/.tags
-endif
-"
-autocmd filetype python setlocal formatprg=autopep8\ -
-py3 << EOF
-import uuid
-from math import *
-import sys
-import time
-import random
-import numpy as np
-def iC():
-    mt=int(time.time()-time.mktime((2017,12,31,24,0,0,0,0,0)))
-    Id=''.join(list(reversed(np.base_repr(mt,36)))).lower()
-    if Id[0] <= '9':
-        Id = 'x'+Id
-    vim.eval("setreg('i','%s')"%Id)
-    return Id
-def iF():
-    Idint=random.randint(0,36**2)
-    Id=np.base_repr(Idint,36).lower()
-    if len(Id)<2:
-        Id='0'+Id
-    _,nm = os.path.split(vim.current.buffer.name)
-    for x in nm:
-        if x!='_':
-            Id = x.lower()+Id
-            break
-    vim.eval("setreg('i','%s')"%Id)
-    return Id
-import locale
-locale.setlocale(locale.LC_ALL, '')
-from docutils.core import publish_string
-try:
-    from rst2confluence import confluence
-except: pass
-def tojira():
-  vim.current.range[:]=publish_string(vim_current_range()[0],writer=confluence.Writer()).splitlines()
-EOF
-map <leader>j2 :py3 tojira()<CR>
-
-" errorformat, makeprg
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set errorformat=%f:%l:%c:%m
-set errorformat+=%f:%l:%m
-set errorformat+=%f(%l)\ :\ %m
-set errorformat+=%f:%l\\,\ E:%n:\ %m
-set errorformat+=\|\|\ %f:%l:%m
-"makeprg set by vim-makeshift
-
-" to pdf, similar to <leader>lh from vim_py3_rst for html
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap <leader>lt :py3 Show('pdf')
-
-" shell and system open
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Open a (visually) selected file in the shell (pdf, images, ...)
-
-set shellcmdflag=-ic
-
-" some shortcuts
-let g:netrw_shq="'"
-vnoremap <silent> <leader>sl "cy:call netrw#BrowseX("<C-R>=expand("%:p:h")<CR>/<C-R>c",0)<CR><CR>
-vnoremap <silent> <leader>sn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
-nnoremap <silent> <leader>sl :call netrw#BrowseX('<C-R>=expand("%:p:h")<CR>/<C-R>=expand("<cWORD>")<CR>',0)<CR>
-nnoremap <silent> <leader>sn :call netrw#BrowseX('<C-R>=expand("<cWORD>")<CR>',0)<CR>
-if has("win32")
-vnoremap <silent> <leader>sg "cy:!start /b cmd /c chromium "www.google.com/search?q=<C-R>c"<CR><CR>
-vnoremap <silent> <leader>sp "cy:!start /b cmd /c chromium "http://docs.python.org/py3k/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR><CR>
-vnoremap <silent> <leader>sw "cy:!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"<CR><CR>
-nnoremap <silent> <leader>sg :!start /b cmd /c chromium "http://www.google.com/search?q=<cword>"<CR>
-nnoremap <silent> <leader>sp :!start /b cmd /c chromium "http://docs.python.org/py3k/search.html?q=<cword>&check_keywords=yes&area=default"<CR>
-nnoremap <silent> <leader>sw :!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"<CR>
-else
-vnoremap <silent> <leader>sg "cy:exe ':silent !chromium "www.google.com/search?q=<C-R>c"&'<CR><CR>
-vnoremap <silent> <leader>sp "cy:exe ':silent !chromium "http://docs.python.org/py3k/search.html?q=<C-R>c&check_keywords=yes&area=default"&'<CR><CR>
-vnoremap <silent> <leader>sw "cy:exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"&'<CR><CR>
-nnoremap <silent> <leader>sg :exe ':silent !chromium "http://www.google.com/search?q=<cword>"&'<CR>
-nnoremap <silent> <leader>sp :exe ':silent !chromium "http://docs.python.org/py3k/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
-nnoremap <silent> <leader>sw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
-endif
-" read from a shell command into a new buffer
-function! s:RunShellCommand(cmdline)
-    botright new
-    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
-    setlocal nowrap
-    call setline(1,a:cmdline)
-    call setline(2,substitute(a:cmdline,'.','=','g'))
-    call setpos('.',[0,2,1,0])
-    execute 'silent read !'.escape(a:cmdline,'%#')
-    setlocal nomodifiable
-    1 "goes to first line
-endfunction
-command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-if &selection == "exclusive"
-    " Execute current line as background shell command
-    nnoremap <leader>sb 0v$"cy:silent !><C-R>c&<CR>
-    " Execute current line shell command
-    nnoremap <leader>ss 0v$"cy:!<C-R>c<CR>
-    " Execute current line in shell and read result into scratch buffer
-    nnoremap <leader>sr 0v$"cy:Shell <C-R>c<CR>
-else
-    " Execute current line as background shell command
-    nnoremap <leader>sb 0v$h"cy:silent !<C-R>c&<CR>
-    " Execute current line shell command
-    nnoremap <leader>ss 0v$h"cy:!<C-R>c<CR>
-    " Execute current line in shell and read result into scratch buffer
-    nnoremap <leader>sr 0v$h"cy:Shell <C-R>c<CR>
-endif
-" Execute current line as background shell command
-vnoremap <leader>sb "cy:silent !<C-R>c&<CR>
-" Execute current line shell command
-vnoremap <leader>ss "cy:!<C-R>c<CR>
-" Execute current line in shell and read result into scratch buffer
-vnoremap <leader>sr "cy:Shell <C-R>c<CR>
-" With two windows, one term, run the current line or visual area in term
-nnoremap <leader>sm yy<C-W><C-W><C-W>""<C-W><C-W>j
-vnoremap <leader>sm y<C-W><C-W><C-W>""<C-W><C-W>gv<ESC>
-
-"line numbers
-":'<'>!cat -n
-":'<,'>s/^\S/\=printf("%d.\t", line(".") - line("'<") + 1)
-
-" digraph
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! GDigraph(arg)
-    let old=@a
-    redir @a
-    silent digraphs
-    redir end
-    let list = split(@a, '..\s\+.\{1,2}\s\+\d\+\zs\(\s\+\|\n\)')
-    let @a=old
-    "if (strlen(substitute(a:arg, ".", "x", "g")) == 1)
-    "    let search=char2nr(a:arg)
-    "else
-    "    let search=a:arg
-    "endif
-    "let pat = '\<' . search . '\>$'
-    "let pat = search
-    let pat = a:arg
-    let i=1
-    let idx=match(list,pat)
-    while ( idx >= 0)
-        if (exists("b"))
-            let b.="\n" . list[idx]
-        else
-            let b=list[idx]
-        endif
-        let i+=1
-        let idx=match(list,pat,0,i)
-    endwhile
-    redraw
-    return exists("b")?printf("%s",b):"nothing found!"
-    "return list
-endfu
-command! -nargs=1 GDigraph :echo GDigraph(<q-args>)
-
-dig ll 2113
-
-dig II 120129
-dig NN 8469
-dig ZZ 8484
-dig QQ 8474
-dig RR 8477
-dig CC 8450
-
-dig @e 601 "ə schwa
-dig @a 592 "ɐ open-mid schwa
-dig @C 643 "ʃ vl postalveolar fricative
-dig @c 658 "ʒ vd postalveolar fricative
-dig @R 641 "ʁ vd uvular fricative
-dig @X 967 "χ vl uvular fricative
-dig @l 654 "ʎ italian gli, castillian ll
-
-" diff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tells vim not to automatically reload changed files
-set noautoread
-
-function! DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-" sets up mappings to function
-com! DiffSaved call DiffWithSaved()
-map <Leader>ds :DiffSaved<CR>
-
-" ignore white space
-if &diff
-    " diff mode
-    set diffopt+=iwhite
-endif
-
-if has('win32')
-  set diffexpr=MyDiff()
-  function MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    if $VIMRUNTIME =~ ' '
-      if &sh =~ '\<cmd'
-        if empty(&shellxquote)
-      let l:shxq_sav = ''
-      set shellxquote&
-        endif
-        let cmd = '"' . $VIMRUNTIME . '\diff"'
-      else
-        let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-      endif
-    else
-      let cmd = $VIMRUNTIME . '\diff'
-    endif
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-    if exists('l:shxq_sav')
-      let &shellxquote=l:shxq_sav
-    endif
-  endfunction
-endif
-
-" abbreviation
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab FENV #!/usr/bin/env
-iab FENC # encoding: utf-8
-iab Ydate <C-R>=strftime("%Y-%m-%d")<CR>
-iab YY <C-R>=strftime("%Y%m%d")<CR>
-iab YYY <C-R>=strftime("%Y%m%d%a")[:-2]<CR>
-iab iGU <C-R>=py3eval("str(uuid.uuid4()).upper()")<CR>
-iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
-iab iC <C-R>=py3eval("iC()")<CR>
-iab iF <C-R>=py3eval("iF()")<CR>
-
-" ...
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 if isdirectory($MY)
     cd $MY
 endif
 
-command! TD :cexpr system('todo')

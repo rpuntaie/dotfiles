@@ -50,7 +50,7 @@ I install these my ``dotfiles`` on an set-up machine via:
 
    curl -Ls https://git.io/fjVcp | bash
 
-or if cloned already:
+or, if cloned already:
 
 .. code:: shï
 
@@ -58,8 +58,10 @@ or if cloned already:
 
 The 
 `install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
-script also installs user packages:
-python ``pip --user`` and from AUR using `yay <https://github.com/Jguer/yay>`__
+script also installs user packages for python and nodejs or possibly 
+AUR packages using `yay <https://github.com/Jguer/yay>`__,
+but the latter I have integrate into the ``rpuntaie-meta`` package (end of file),
+which I serve via a local archlinux proxy.
 
 A whole ArchLinux system, including these ``dotfiles``, can be installed with `rollarch`_.
 If AIP2 is used, a local proxy must be prepared as described there.
@@ -84,12 +86,10 @@ After changing or adding a file to the ``dotfiles`` one must run
 System Description
 ==================
 
-.. note:: Work in progress.
+Editor: Vim
+-----------
 
-Editor
-------
-
-``vim`` is used as TUI to the system.
+I use ``vim`` as TUI to the system.
 It embeds Python and others and it has
 ``:term``:
 
@@ -97,13 +97,13 @@ It embeds Python and others and it has
 - ``[CTRL-w CTRL-w]`` switch window
 - ``[CTRL-w ""]`` paste ``"`` into term
 
-For ``restructuredText`` (RST) I need
+Plugins:
 
-- ``pip install --user rstdoc``
+- For Python and ``restructuredText`` (RST) I use
+  `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__ vim plugin,
+  which uses `rstdoc <https://github.com/rpuntaie/rstdoc>`__.
 
-For Python and RST I need
 
-- ``vim_py3_rst`` vim plugin
 
 CLI
 ---

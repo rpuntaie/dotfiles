@@ -3,13 +3,15 @@
 # Note, the variable in .pam_environment cannot be used here
 
 umask 077
-mkdir -p $HOME/my
-mkdir -p $HOME/my/task
-mkdir -p $HOME/my/finance
-mkdir -p $HOME/.gnupg
-mkdir -p $HOME/.password-store
 
 cd ~
+
+mkdir -p ~/my
+mkdir -p ~/my/task
+mkdir -p ~/my/finance
+mkdir -p ~/.gnupg
+mkdir -p ~/.password-store
+
 
 #keep ~/.gnupg separate, just link the config file
 for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
@@ -17,6 +19,7 @@ for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
 done
 
 rm -rf .local/etc/user-dirs*
+mkdir -p ~/my
 stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
 cd dotfiles
 
@@ -33,6 +36,6 @@ xmonad --recompile
 
 #see ~/dotfiles/etc/user-dirs.dirs
 for adir in $(sed -n -e 's,^X.*/\(.*\)",\1,p' .local/etc/user-dirs.dirs); do
-    mkdir -p $HOME/$adir
+    mkdir -p ~/$adir
 done
 xdg-user-dirs-update #sets non-existing dirs to homedir

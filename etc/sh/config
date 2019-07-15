@@ -1,6 +1,7 @@
 # vim: syntax=zsh
 
-HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
+export HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
+export NPM_CONFIG_PREFIX="${XDG_STATE_HOME:-$HOME}/npm" #"npm -g install ..."
 
 OS_NAME=''
 if [ -e /etc/os-release ]; then

@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+npm -g install express
+npm -g install express-session
+npm -g install express-generator
+npm -g install formidable
+npm -g install nodemailer
+npm -g install mysql
+npm -g install js-beautify
+#npm -g install @okta/oidc-middleware
+#npm -g install @okta/okta-sdk-nodej
