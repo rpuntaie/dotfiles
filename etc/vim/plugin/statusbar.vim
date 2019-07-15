@@ -11,5 +11,6 @@ function! ShowUtf8Sequence()
 endfunction
 "
 " Status Line
-set statusline=%n%m%r%h%w\ %04v,%04l=%p%%(%L)\ 0x%B[%{ShowUtf8Sequence()}]%{getcwd()}>%f\ %=\[%{&ff}\ %{&fenc==\"\"?&enc:&fenc}]
+set statusline=%n%m%r%h%w\ %04v,%04l=%p%%(%L)\ 0x%B[%{ShowUtf8Sequence()}]
+set statusline+=%{getcwd()}>%f\ %=\[%{&ff}\ %{&fenc==\"\"?&enc:&fenc}]
 set laststatus=2

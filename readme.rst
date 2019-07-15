@@ -90,7 +90,14 @@ Editor: Vim
 -----------
 
 I use ``vim`` as TUI to the system.
-It embeds Python and others and it has
+
+Note, with::
+
+  bash dotfiles/bin/restowdots
+
+the vim config can be used also for Windows.
+
+Vim embeds Python and others and it has
 ``:term``:
 
 - ``[CTRL-w N]`` normal mode
@@ -110,7 +117,6 @@ CLI
 
 ``zsh`` through vim ``:term`` or ``urxvt``.
 ``urxvt`` depends on a proper ``/etc/locale.conf``.
-``alacritty`` is nice, too, but for more easy navigation in previous output
 
 Plugins:
 
@@ -139,7 +145,7 @@ CLI tools:
 - ``bc`` for ad-hoc CLI calculations, e.g echo 2+2 | bc
 - ``ncdu`` like ``du``, but with ncurses
 
-window manager: xmonad
+Window Manager: xmonad
 ----------------------
 
 I added little to the `defaults <https://xmonad.org/manpage.html>`__.

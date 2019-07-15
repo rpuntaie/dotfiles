@@ -12,6 +12,8 @@ mkdir -p ~/my/finance
 mkdir -p ~/.gnupg
 mkdir -p ~/.password-store
 
+#at least the vim config for Windows:
+#bash dotfiles/bin/restowdots
 if [[ ! $(uname) =~ "Linux" ]]; then
     rsync -av dotfiles/etc/vim/ vimfiles/
     exit 0

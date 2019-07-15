@@ -31,5 +31,6 @@ try:
     from rst2confluence import confluence
 except: pass
 def tojira():
-  vim.current.range[:]=publish_string(vim_current_range()[0],writer=confluence.Writer()).splitlines()
+  vim.current.range[:]=publish_string(
+    vim_current_range()[0],writer=confluence.Writer()).splitlines()
 EOF

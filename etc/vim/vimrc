@@ -133,7 +133,8 @@ let g:trans_set_echo=1
 let g:trans_replace=0
 let g:trans_has_python=3 "webapi.vim instead
 "Rykka/mathematic.vim
-let g:mathematic_user_dir = g:bundledir.'/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
+let g:mathematic_user_dir = g:bundledir.
+  \ '/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
 function Deinplugins()
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
     call dein#add('tomtom/tlib_vim') " TScratch TBrowseOutput

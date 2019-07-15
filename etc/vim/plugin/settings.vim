@@ -93,8 +93,10 @@ if has("gui_running")
           set guifont=FreeMono\ Bold\ 11
         endif
     endif
-endif
-let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a", "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782", "#42cf89", "#cfcfb0", "#78c2ff", "#ae81ff", "#85dc85", "#e2637f" ]
+  endif
+let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
+  \ "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782",
+  \ "#42cf89", "#cfcfb0", "#78c2ff", "#ae81ff", "#85dc85", "#e2637f" ]
 "check width
 set colorcolumn=+1
 hi ColorColumn ctermbg=232 guibg=#080808

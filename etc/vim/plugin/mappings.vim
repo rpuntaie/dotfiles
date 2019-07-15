@@ -6,8 +6,7 @@ nnoremap <kMultiply>  :cc<CR>
 map j gj
 map k gk
 " Redo syntax fromstart
-noremap <F10> <Esc>:syntax sync fromstart<CR>
-inoremap <F10> <C-o>:syntax sync fromstart<CR>
+noremap <leader>sx <Esc>:syntax sync fromstart<CR>
 " Ctrl+c/Ctrl+v to copy/paste (clipboard) in gvim
 nmap <C-V> "+gP
 imap <C-V> <ESC><C-V>i
