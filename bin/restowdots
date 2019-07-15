@@ -12,16 +12,15 @@ mkdir -p ~/my/finance
 mkdir -p ~/.gnupg
 mkdir -p ~/.password-store
 
+if [[ ! $(uname) =~ "Linux" ]]; then
+    rsync -av dotfiles/etc/vim/ vimfiles/
+    exit 0
+fi
 
 #keep ~/.gnupg separate, just link the config file
 for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
     ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
 done
-
-if [[ ! $(uname) =~ "Linux" ]]; then
-    rsync -av dotfiles/etc/vim/ vimfiles/
-    exit 0
-fi
 
 rm -rf .local/etc/user-dirs*
 stow --ignore=home --no-folding ${1:--R} -t .local dotfiles

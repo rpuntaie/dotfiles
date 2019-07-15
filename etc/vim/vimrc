@@ -25,6 +25,10 @@ scriptencoding utf-8 " else listchars problem on Windows
 
 set nocompatible
 
+let mapleader = ","
+let maplocalleader = ","
+noremap \ ,
+
 if has('win32')
   let g:localvimfiles=$HOME.'/vimfiles'
   let $MYVIMRC=g:localvimfiles.'/vimrc'

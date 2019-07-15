@@ -1,6 +1,3 @@
-let mapleader = ","
-let maplocalleader = ","
-noremap \ ,
 set keymodel=startsel,stopsel
 set selection=exclusive
 set noswapfile
@@ -34,7 +31,6 @@ set t_vb=
 set tm=500
 set mousehide
 set nowrap
-set encoding=utf8
 set ffs=unix,dos,mac
 if has("multi_byte") " type '8g8' to find illegal utf8
   if &termencoding == ""
