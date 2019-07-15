@@ -20,11 +20,16 @@
 " <ESC> mapped to <CAPSLOCK> in the OS
 ""
 
+set encoding=utf-8
+scriptencoding utf-8 " else listchars problem on Windows
+
 set nocompatible
 
 if has('win32')
-  let g:localvimfiles=$VIM.'/vimfiles'
+  let g:localvimfiles=$HOME.'/vimfiles'
+  let $MYVIMRC=g:localvimfiles.'/vimrc'
 else
+  let $MYVIMRC=$XDG_CONFIG_HOME.'/vim/vimrc'
   let g:localvimfiles=$XDG_STATE_HOME.'/vim'
 endif
 let g:bundledir=g:localvimfiles.'/dein'
