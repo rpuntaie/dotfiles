@@ -40,6 +40,8 @@ if has("multi_byte") " type '8g8' to find illegal utf8
   setglobal fileencoding=utf-8
   set fileencodings=ucs-bom,utf-8,latin1,cp1251
 endif
+set list
+set listchars=tab:→\ ,eol:\ ,trail:·
 set expandtab
 set smarttab
 set autoindent
@@ -100,4 +102,5 @@ let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
 "check width
 set colorcolumn=+1
 hi ColorColumn ctermbg=232 guibg=#080808
-
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m

@@ -14,6 +14,9 @@ alias ls='ls -A --color=auto --quoting-style=literal'
 alias lt='ll -t'
 alias mv='mv -i'
 
+alias pipiu='pip install --user'
+alias pipui='sudo pip uninstall'
+
 #weather
 alias wttr='curl wttr.in'
 alias moon='curl wttr.in/Moon'
