@@ -1,0 +1,79 @@
+==============================================================================
+MY VIM RC                                                            *myvimrc*
+
+Generated:
+`stpl ~/dotfiles/etc/vim/doc/myvimrc.txt.stpl ~/dotfiles/etc/vim/doc/myvimrc.txt`
+
+
+==============================================================================
+MAPPINGS                                                           *myvimmaps*
+
+`*#`: search down|up on visual region
+`+-*`: numberpad quickfix move
+`,aa`: :Tabular
+`,bd`: close buffer, but not window
+`,ec[c]`: (re)number
+`,e{ep}`: edit vimrc | dein repos
+`,f{sgctefid}`: cscope find
+`,gb`: vimgrep in buffers
+`,gg`: vimgrep specify or visual region
+`,gr`: specify replace for visual region
+`,hh`: vim help for word under cursor
+`,j2`: to jira (pip rst2confluence needed}
+`,ls`: load spelling
+`,l{ramkj}`: load russian accents mathematic fntc english
+`,m`: run in term (two windows, one term)
+`,ww`: look up in wordnet (wn needed)
+`<C-V>|<C-C>`: copy|paste clipboard in gvim
+`<C-{kjhl}>`: go to window
+`SD`: cd to current symlinked file
+`SR`: Replace from default register without loosing it
+`Y`: yank till end of line, like D
+`gx`: open browser and search
+`gx{lngpw}`: open local, nonlocal; google,python,wikipedia
+`m`: match in o v n mode
+`s`: <nop>, free for other mappings
+`sb`: fzf Buffers
+`sf` : fzf Files GFiles
+`sg` : fzf GFiles
+`sh`: fzf History
+`sn`: NERDTreeToggle
+`sp`: yank current file full path
+`sx`: syntax fromstart
+`s{.;:/}`: fzf Buffer tags, tags, : or / history
+`{jk}=g{jk}`: treat as break lines when wrap on
+`{ss SS}`: Insert empty line below|above
+
+==============================================================================
+COMMANDS                                                       *myvimcommands*
+
+`:MM` build using Makeshift
+`:PrettyXML` format XML
+`:Redir` either shell or vim command
+`:SD` cd to current file
+`:TD` execute .local/bin/todo to quickfix list
+`:TrimSpaces` accepts range
+
+==============================================================================
+PLUGINS                                                            *myplugins*
+
+Links to plugin mappings::
+|:Tabularize| format
+|AleToggle| linting
+|Nvim-R-use| R
+|UltiSnips| snippets
+|deoplete-functions| complete using |deoplete-sources|
+|easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
+|fugitive-commands| :Gxxx like :Gdiffsplit
+|fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
+|gitv-usage| :Gitv[!]
+|matchup-default-mappings|  % {gv[]zai(ds)(cs}%
+|plugin/02tlib.vim|  TScratch TBrowseOutput
+|sandwich-keymappings| sa sd sr
+|sleuth| detect tab settings heuristically, :Sleuth
+|trans-usage| ,tt,
+|unicode-plugin| :UnicodeTable i: <C-X><C-G>
+|vcscommand-mappings| works not only for git
+|vim_py3_rst| python and rst helpers
+
+ vim:tw=78:sw=4:ts=4:et:ft=help:norl:

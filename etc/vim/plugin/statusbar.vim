@@ -26,17 +26,19 @@ function! GitInfo()
     return ''
 endfunction
 set statusline= " --------- left side ---------
-set statusline+=%8*[%n] " buffer number
+set statusline+=%1*[%n] " buffer number
 set statusline+=%m " modified
-set statusline+=%0*%{GitInfo()}
-set statusline+=%{getcwd()}\> " dir
-set statusline+=%8*%f " file
+set statusline+=%2*%{GitInfo()}
+set statusline+=%0*%{getcwd()}\> " dir
+set statusline+=%1*%f " file
 set statusline+=%= " --------- right side ---------
 set statusline+=%0*\[%{&ff}] " fileformat
 set statusline+=\[%{&fenc==\"\"?&enc:&fenc}] " (file) encoding
 set statusline+=%y " filetype
 set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
-set statusline+=\ %04v,%04l=%p%%(%L) " c, l = % (total lines)
-set statusline+=\ %{ShowUtf8Sequence()} " utf-8
+set statusline+=%2*\ %04v,%04l=%p%%(%L) " c, l = % (total lines)
+set statusline+=%1*\ %{ShowUtf8Sequence()} " utf-8
+:hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red guibg=DarkRed guifg=Black
+:hi User2 term=inverse,bold cterm=inverse,bold ctermfg=blue guibg=DarkGreen guifg=Black
 set laststatus=2

@@ -177,16 +177,19 @@ function Deinplugins()
     "commenting
     call dein#add('scrooloose/nerdcommenter')
     "git tools
-""| |fugitive-commands|
+""| |fugitive-commands| :Gxxx like :Gdiffsplit
     call dein#add('tpope/vim-fugitive')
+""| |gitv-usage| :Gitv[!]
     call dein#add('gregsexton/gitv') " needs fugitive
     "other vcs
-""| |vcscommand-mappings| git svn bzr
+""| |vcscommand-mappings| works not only for git
     call dein#add('vim-scripts/vcscommand.vim')
     "dictionary
     call dein#add('mattn/webapi-vim')
+""| |trans-usage| ,tt,
     call dein#add('rpuntaie/trans.vim')
     call dein#add('Rykka/mathematic.vim')
+""| |unicode-plugin| :UnicodeTable i: <C-X><C-G>
     call dein#add('chrisbra/unicode.vim')
 endfunction
 let g:bundleinit=0

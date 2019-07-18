@@ -104,13 +104,12 @@ Vim embeds Python and others and it has
 - ``[CTRL-w CTRL-w]`` switch window
 - ``[CTRL-w ""]`` paste ``"`` into term
 
-Plugins:
+For Python and ``restructuredText`` (RST) I use
 
-- For Python and ``restructuredText`` (RST) I use
-  `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__ vim plugin,
-  which uses `rstdoc <https://github.com/rpuntaie/rstdoc>`__.
+- vim plugin: `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__
+- python package `rstdoc <https://github.com/rpuntaie/rstdoc>`__
 
-
+See further mappings and `Plugins <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/vim/doc/myvimrc.txt>`__.
 
 CLI
 ---
