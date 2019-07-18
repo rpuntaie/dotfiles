@@ -1,5 +1,7 @@
 " vim: syntax=vim
 
+"TODO: improve gxX
+"TODO: do without md char replacement
 ""
 " build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
@@ -19,13 +21,10 @@
 "
 " <ESC> mapped to <CAPSLOCK> in the OS
 "
-" doc/myvimrc.txt.stpl uses """, "": and """ lines
+" doc/myvimrc.txt.stpl uses """, "": and ""| lines
 ""
 
-
-""|
 ""| Links to plugin mappings::
-""| 
 
 set encoding=utf-8
 scriptencoding utf-8 " else listchars problem on Windows
@@ -59,31 +58,6 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-"ctrlpvim/ctrlp.vim
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|temp|tmp|build)$',
-  \ 'file': '\v\.(exe|so|dll)$'
-  \ }
-"junegunn/fzf.vim
-""" `<C-{fg}>`: fzf Files GFiles
-map <C-f> :Files<CR>
-map <C-g> :GFiles<CR>
-""" `,bb`: fzf Buffers
-map <leader>bb :Buffers<CR>
-""" `,hh`: fzf History
-map <leader>hh :History<CR>
-""" `,{.;:/}`: fzf Buffer tags, tags, : or / history
-map <leader>. :BTags<CR>
-map <leader>; :Tags<CR>
-map <leader>: :History:<CR>
-map <leader>/ :History/<CR>
-"godlygeek/tabular
-""" `,aa`: :Tabular
-map <leader>aa :Tab/
-"machakann/vim-sandwich
-""" `s{bl}`: make rst bold|literal
-nmap sl saiw`.
-nmap sb saiw*.
 "Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 "SirVer/ultisnips
@@ -122,13 +96,9 @@ function! s:BuildFun(what2build)
     execute 'Makeshift'
     execute 'MakeshiftBuild '.a:what2build
 endfunction
-"": `:MM` build using Makeshift
-command! -nargs=* MM :call s:BuildFun(<q-args>)
 "scrooloose/nerdtree
 let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeShowHidden=1
-""" `sn`: NERDTreeToggle
-nmap sn :NERDTreeToggle<CR>
 let g:netrw_shq="'"
 let g:netrw_browsex_viewer= "xdg-open"
 let g:netrw_nogx=1 " disable netrw's gx mapping.
@@ -136,9 +106,6 @@ let g:netrw_altv = 1
 let g:netrw_preview = 1
 let g:netrw_list_hide = "^\\..*"
 let g:netrw_home = $XDG_STATE_HOME.'/vim'
-""" `gx`: open browser and search
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
 "vim-scripts/vcscommand.vim
 let g:VCSCommandMapPrefix = "<leader>z"
 "rpuntaie/trans.vim
@@ -154,12 +121,8 @@ let g:mathematic_user_dir = g:bundledir.
 function Deinplugins()
     call dein#add('bogado/file-line') " open <file>:<line>
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
-""| |tlib|  TScratch TBrowseOutput
+""| |plugin/02tlib.vim|  TScratch TBrowseOutput
     call dein#add('tomtom/tlib_vim')
-""| |bufexplorer-usage|  ,bt
-    call dein#add('jlanzarotta/bufexplorer')
-""| |ctrlp-mappings| <c-p>
-    call dein#add('ctrlpvim/ctrlp.vim')
 ""| |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
     call dein#add('junegunn/fzf.vim')
 ""| |sleuth| detect tab settings heuristically, :Sleuth
@@ -218,7 +181,7 @@ function Deinplugins()
     call dein#add('tpope/vim-fugitive')
     call dein#add('gregsexton/gitv') " needs fugitive
     "other vcs
-""| |vcscommand-mappings|
+""| |vcscommand-mappings| git svn bzr
     call dein#add('vim-scripts/vcscommand.vim')
     "dictionary
     call dein#add('mattn/webapi-vim')

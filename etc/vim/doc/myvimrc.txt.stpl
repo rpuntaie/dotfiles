@@ -2,7 +2,6 @@
 MY VIM RC                                                            *myvimrc*
 
 Generated from `dotfiles/etc/vim/doc/myvimrc.txt.stpl`
-
 <%
 from os.path import dirname as d, join as j
 lns=[]
@@ -23,12 +22,10 @@ plugin/mappings.vim
 end
 
 %>
-
 %def collect(lnstartswith):
-%    for ln in lns:
-%        if ln.startswith(lnstartswith):
-{{ln[3:].strip()}}
-%        end
+%    for aln in sorted(ln[3:].strip() for
+%       ln in lns if ln.startswith(lnstartswith)):
+{{aln}}
 %    end
 %end
 

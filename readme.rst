@@ -52,7 +52,7 @@ I install these my ``dotfiles`` on an set-up machine via:
 
 or, if cloned already:
 
-.. code:: shï
+.. code:: sh
 
     ~/dotfiles/install
 

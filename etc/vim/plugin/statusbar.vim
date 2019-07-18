@@ -1,13 +1,10 @@
 function! ShowUtf8Sequence()
-  if (mode()=='i' && exists('b:thch'))
-      return nr2char(b:thch)
-  endif
   let p = getpos('.')
   redir => utfseq
   silent normal! g8
   redir End
-  call setpos('.', p)
-  return substitute(matchstr(utfseq, '\x\+ .*\x'), '\<\x', '0x&', 'g')
+  call setpos('.',p)
+  return '['.trim(utfseq).']'
 endfunction
 function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
@@ -24,20 +21,22 @@ endfunction
 function! GitInfo()
   let git = fugitive#head()
   if git != ''
-    return ' '.fugitive#head()
+    return ''.fugitive#head().''
   else
     return ''
 endfunction
-set statusline=
-set statusline+=%8*\ %n
-set statusline+=%0*%m
-set statusline+=%r
-set statusline+=%h
-set statusline+=%w
-set statusline+=\ %04v,%04l=%p%%(%L)
-set statusline+=\ 0x%B[%{ShowUtf8Sequence()}]
-set statusline+=\ %{getcwd()}\>%8*%f%=
-set statusline+=%0*\[%{&ff}\ %{&fenc==\"\"?&enc:&fenc}]
-set statusline+=%y
-set statusline+=\ %{GitInfo()}
+set statusline= " --------- left side ---------
+set statusline+=%8*[%n] " buffer number
+set statusline+=%m " modified
+set statusline+=%0*%{GitInfo()}
+set statusline+=%{getcwd()}\> " dir
+set statusline+=%8*%f " file
+set statusline+=%= " --------- right side ---------
+set statusline+=%0*\[%{&ff}] " fileformat
+set statusline+=\[%{&fenc==\"\"?&enc:&fenc}] " (file) encoding
+set statusline+=%y " filetype
+set statusline+=%r " readonly flag
+set statusline+=%w " preview flag
+set statusline+=\ %04v,%04l=%p%%(%L) " c, l = % (total lines)
+set statusline+=\ %{ShowUtf8Sequence()} " utf-8
 set laststatus=2

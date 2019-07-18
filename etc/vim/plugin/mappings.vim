@@ -1,16 +1,17 @@
 """ `Y`: yank till end of line, like D
 nnoremap Y y$
-""" `R`: Replace from default register without loosing it
-vnoremap R "_c<C-R>"<esc>
-nnoremap R "_ciw<C-R>"<esc>
+""" `s`: <nop>, free for other mappings
+map <silent> s <nop>
+map <silent> S <nop>
+""" `{ss SS}`: Insert empty line below|above
+nnoremap <silent> ss o<ESC>k
+nnoremap <silent> SS O<ESC>j
+""" `SR`: Replace from default register without loosing it
+vnoremap SR "_c<C-R>"<esc>
+nnoremap SR "_ciw<C-R>"<esc>
 """ `{jk}=g{jk}`: treat as break lines when wrap on
 map j gj
 map k gk
-""" {ss SS} " Insert empty line below|above
-map <silent> s <nop>
-map <silent> S <nop>
-nnoremap <silent> ss o<ESC>k
-nnoremap <silent> SS O<ESC>j
 """ `+-*`: numberpad quickfix move
 nnoremap <kPlus>      :cnext<CR>
 nnoremap <kMinus>     :cprev<CR>
@@ -26,6 +27,8 @@ nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
+""" `,hh`: vim help for word under cursor
+nmap <leader>hh :help <C-R><C-W><CR>
 """ `,bd`: close buffer, but not window
 map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 """ `,ww`: look up in wordnet (wn needed)
@@ -44,16 +47,16 @@ nmap <leader>ep :e <C-R>=g:dein_path<cr>/../..<cr>
 """ `,ec[c]`: (re)number
 vnoremap <leader>ecc :'<'>!cat -n<cr>
 vnoremap <leader>ec :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
-""" `cp`: yank current file full path
-noremap <silent> cp :let @* = expand("%:p")<CR>
+""" `sp`: yank current file full path
+noremap <silent> sp :let @* = expand("%:p")<CR>
 """ `m`: match in o v n mode
 onoremap <silent>m //e<CR>
 vnoremap <silent>m //e<CR>
 nnoremap <silent>n //<CR>
-"": `:CD`: cd to current file
-command! CD cd %:p:h
-""" `CD`: cd to current symlinked file
-nnoremap <silent> CD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR>
+"": `:SD` cd to current file
+command! SD cd %:p:h
+""" `SD`: cd to current symlinked file
+nnoremap <silent> SD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR>
 "": `:TD` execute .local/bin/todo to quickfix list
 command! TD :cexpr system('~/.local/bin/todo')
 " cscope
@@ -81,8 +84,6 @@ nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
-""" `,j2`: to jira (pip rst2confluence needed}
-map <leader>j2 :py3 tojira()<CR>
 """ `gx{lngpw}`: open local, nonlocal; google,python,wikipedia
 vnoremap <silent> gxl "cy:call netrw#BrowseX("<C-R>=expand("%:p:h")<CR>/<C-R>c",0)<CR><CR>
 vnoremap <silent> gxn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
@@ -103,7 +104,37 @@ nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<c
 nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/py3k/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
-""" `sm`: run in term (two windows, one term)
-nnoremap sm yy<C-W><C-W><C-W>""<C-W><C-W>j
-vnoremap sm y<C-W><C-W><C-W>""<C-W><C-W>gv<ESC>
+""" `,m`: run in term (two windows, one term)
+nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
+vnoremap <leader>m y<C-W><C-W><C-W>""<C-W><C-W>gv<ESC>
+""" `,j2`: to jira (pip rst2confluence needed}
+map <leader>j2 :py3 tojira()<CR>
 
+"" plugins
+"junegunn/fzf.vim
+""" `sf` : fzf Files GFiles
+map <silent> sf :Files<CR>
+""" `sg` : fzf GFiles
+map <silent> sg SD:GFiles<CR>
+""" `sh`: fzf History
+map <silent> sh :History<CR>
+""" `sb`: fzf Buffers
+map <silent> sb :Buffers<CR>
+""" `s{.;:/}`: fzf Buffer tags, tags, : or / history
+map <silent> s. :BTags<CR>
+map <silent> s; :Tags<CR>
+map <silent> s: :History:<CR>
+map <silent> s/ :History/<CR>
+map <silent> s/ :History/<CR>
+map <silent> sw :Ag <C-R><C-W><CR>
+"godlygeek/tabular
+""" `,aa`: :Tabular
+map <leader>aa :Tab/
+"scrooloose/nerdtree
+""" `sn`: NERDTreeToggle
+nmap sn :NERDTreeToggle<CR>
+""" `gx`: open browser and search
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+"": `:MM` build using Makeshift
+command! -nargs=* MM :call s:BuildFun(<q-args>)
