@@ -1,6 +1,4 @@
 #!/usr/bin/env sh
-
-pip install --user pynvim #nvim plugin
 pip install --user rstdoc #documentation
 pip install --user rst2confluence #for jira
 pip install --user autopep8 #used in vim to reformat
@@ -17,5 +15,9 @@ pip install --user flask #micro web framework
 pip install --user nikola #static html generator
 pip install --user coloredlogs #color in python logging
 pip install --user black #code formatter
-pip install --user git+https://github.com/google/vimdoc #vim help for plugin
+pip install --user pybtex #citations for Rnoweb
 pip install --user git+https://github.com/pre-commit/pre-commit #add hooks to git repo
+pip install --user komodo-python3-dbgp
+#nvim
+pip install --user pynvim
+pip install --user neovim-remote

@@ -1,5 +1,6 @@
 " vim: syntax=vim
 
+"TODO: check out Nvim-R
 "TODO: improve gxX
 "TODO: do without md char replacement
 ""
@@ -32,8 +33,8 @@ scriptencoding utf-8 " else listchars problem on Windows
 set nocompatible
 
 let mapleader = ","
-let maplocalleader = ","
-noremap \ ,
+let maplocalleader = '\'
+noremap ` ,
 
 if has('win32')
   let g:localvimfiles=$HOME.'/vimfiles'
@@ -118,6 +119,10 @@ let g:trans_has_python=3 "webapi.vim instead
 "Rykka/mathematic.vim
 let g:mathematic_user_dir = g:bundledir.
   \ '/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
+"idanarye/vim-vebugger
+let g:vebugger_leader='`'
+let g:vebugger_view_source_cmd='edit'
+
 function Deinplugins()
     call dein#add('bogado/file-line') " open <file>:<line>
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
@@ -156,25 +161,29 @@ function Deinplugins()
     call dein#add('sheerun/vim-polyglot')
     call dein#add('Chiel92/vim-autoformat') " :Autoformat
     call dein#add('metakirby5/codi.vim') " :Codi :Codi!
-""| |AleToggle| linting
+""| |AleToggle| linting (:ALEToggle)
     call dein#add('w0rp/ale')
     "python
 ""| |vim_py3_rst| python and rst helpers
     call dein#add('rpuntaie/vim_py3_rst')
     "call dein#add('python-mode/python-mode')
-""| |Nvim-R-use| R
+""| |Nvim-R-use| \rf \rq \d ... in R file
     call dein#add('jalvesaq/Nvim-R')
-    "debug
-    call dein#add('Shougo/vimproc.vim')
+""| |vimproc-commands| asynchronous execution
+    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+""| |vebugger-gdb| :VBGstartGDB and others
     call dein#add('idanarye/vim-vebugger')
+""| |VdebugStart| <F5>pydbg -d localhost:9000 x.py<F2><F3><F10><F6>
     call dein#add('vim-vdebug/vdebug')
-    "latex
+""| |vimtex-default-mappings| for latex
     call dein#add('lervag/vimtex')
-    "building
+""| |makeshift| [:MM] builds the current project
     call dein#add('johnsyweb/vim-makeshift') " Build
+""| |NERDTreeMappings| [sn] file browser
     call dein#add('scrooloose/nerdtree')
     call dein#add('tyru/open-browser.vim')
     "commenting
+""| |NERDCommenterFunctionality| ,c{ cnmisy$Aalbu}
     call dein#add('scrooloose/nerdcommenter')
     "git tools
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit

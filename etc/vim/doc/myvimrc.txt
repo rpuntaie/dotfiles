@@ -59,14 +59,18 @@ PLUGINS                                                            *myplugins*
 
 Links to plugin mappings::
 |:Tabularize| format
-|AleToggle| linting
-|Nvim-R-use| R
+|AleToggle| linting (:ALEToggle)
+|NERDCommenterFunctionality| ,c{ cnmisy$Aalbu}
+|NERDTreeMappings| [sn] file browser
+|Nvim-R-use| \rf \rq \d ... in R file
 |UltiSnips| snippets
+|VdebugStart| <F5>pydbg -d localhost:9000 x.py<F2><F3><F10><F6>
 |deoplete-functions| complete using |deoplete-sources|
 |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
 |fugitive-commands| :Gxxx like :Gdiffsplit
 |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
 |gitv-usage| :Gitv[!]
+|makeshift| [:MM] builds the current project
 |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
 |plugin/02tlib.vim|  TScratch TBrowseOutput
 |sandwich-keymappings| sa sd sr
@@ -74,6 +78,9 @@ Links to plugin mappings::
 |trans-usage| ,tt,
 |unicode-plugin| :UnicodeTable i: <C-X><C-G>
 |vcscommand-mappings| works not only for git
+|vebugger-gdb| :VBGstartGDB and others
 |vim_py3_rst| python and rst helpers
+|vimproc-commands| asynchronous execution
+|vimtex-default-mappings| for latex
 
  vim:tw=78:sw=4:ts=4:et:ft=help:norl:

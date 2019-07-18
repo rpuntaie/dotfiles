@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Core
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.EZConfig(additionalKeys)
 import qualified Data.Map as M
 
@@ -27,6 +28,8 @@ main = do
         keys = mixKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
         }
+    xmonad $ ewmh def{
+        handleEventHook = handleEventHook def <+> fullscreenEventHook }
 mixKeys x = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys x = [
         ((modMask x, xK_s), spawn "scrot")

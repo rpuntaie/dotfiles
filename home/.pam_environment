@@ -56,4 +56,4 @@ WINEPREFIX            DEFAULT="${XDG_STATE_HOME}/wine/default"
 TMUX_TMPDIR           DEFAULT="${XDG_RUNTIME_DIR}"
 RXVT_SOCKET           DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
 R_ENVIRON_USER        DEFAULT="${XDG_CONFIG_HOME}/R/.Renviron"
-
+R_LIBS_USER           DEFAULT="${XDG_LIB_HOME}/R"

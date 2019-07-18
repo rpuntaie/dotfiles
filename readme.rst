@@ -106,16 +106,20 @@ Vim embeds Python and others and it has
 
 For Python and ``restructuredText`` (RST) I use
 
-- vim plugin: `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__
+- vim plugin `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__
 - python package `rstdoc <https://github.com/rpuntaie/rstdoc>`__
 
-See further mappings and `Plugins <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/vim/doc/myvimrc.txt>`__.
+See further mappings and plugins see 
+`myvimrc <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/vim/doc/myvimrc.txt>`__.
 
 CLI
 ---
 
 ``zsh`` through vim ``:term`` or ``urxvt``.
 ``urxvt`` depends on a proper ``/etc/locale.conf``.
+
+- ``v`` open a file in ``gvim``.
+- ``nvr`` open a file in nvr-opened ``nvim``.
 
 Plugins:
 
@@ -192,4 +196,31 @@ Security
 ``browserpass`` uses that to serve ``browserpass-chromium`` and ``browserpass-firefox``.
 
 ``keybase`` for secure chat and file exchange (KBFS).
+
+Programming
+===========
+
+Python
+------
+
+`rollarch`_/pkg/rpuntaie installs all Arch python packages.
+Additionally `my_python <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_python>`__.
+
+C/C++
+-----
+
+nodejs
+------
+
+`my_nodejs <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_nodejs>`__.
+
+R
+---
+
+`rollarch`_/pkg/rpuntaie includes `R <https://www.r-project.org/>`_.
+
+Octave
+------
+
+`rollarch`_/pkg/rpuntaie includes `octave <https://hg.savannah.gnu.org/hgweb/octave/file/>`_.
 

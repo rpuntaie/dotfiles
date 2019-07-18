@@ -33,10 +33,10 @@ if [[ -n $new_install ]] && $new_install; then
   fc-cache -fv
   my_python
   my_nodejs
-  stpl ~/.local/etc/vim/doc/myvimrc.txt.stpl ~/.local/etc/vim/doc/myvimrc.txt
 fi
 
-echo -e "\033[0;32mLog out and in, to activate the environment. First time vim and zsh will install plugins."
+echo -e "\033[0;32mLog out and in, to activate the environment.
+First time vim and zsh will install plugins."
 
 #rollarch interprets lines starting with "^#PKG: " or "^#REPO: "
 #rollarch rpuntaie-meta is served from another Arch on the LAN via AIP2
