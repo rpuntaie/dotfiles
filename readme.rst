@@ -86,6 +86,18 @@ After changing or adding a file to the ``dotfiles`` one must run
 System Description
 ==================
 
+Cleaning
+--------
+
+.. code:: sh
+
+  pacman -Rns $(pacman -Qtdq) #orphans
+  paccache -ruk0
+  paccache -rk1
+  ncdu
+  rmlint #produces rmlint.sh
+
+
 Editor: Vim
 -----------
 

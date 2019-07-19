@@ -17,7 +17,9 @@ pip install --user coloredlogs #color in python logging
 pip install --user black #code formatter
 pip install --user pybtex #citations for Rnoweb
 pip install --user git+https://github.com/pre-commit/pre-commit #add hooks to git repo
-pip install --user komodo-python3-dbgp
+pip install --user komodo-python3-dbgp #debugging protocol for vim vdebug
+pip install --user nltk #Natural language toolkit
+pip install --user aws-sam-cli #AWS Serverless Application Model
 #nvim
-pip install --user pynvim
-pip install --user neovim-remote
+pip install --user pynvim #neovim-python
+pip install --user neovim-remote #nvr to start and use nvim server
