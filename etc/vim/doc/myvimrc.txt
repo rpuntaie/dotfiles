@@ -9,7 +9,8 @@ Generated:
 MAPPINGS                                                           *myvimmaps*
 
 `*#`: search down|up on visual region
-`+-*`: numberpad quickfix move
+`*:`: numberpad tags move
+`+-`: numberpad quickfix move
 `,aa`: :Tabular
 `,bd`: close buffer, but not window
 `,ec[c]`: (re)number
@@ -28,6 +29,7 @@ MAPPINGS                                                           *myvimmaps*
 `<C-{kjhl}>`: go to window
 `SD`: cd to current symlinked file
 `SR`: Replace from default register without loosing it
+`SW`: fzf search for word under cursor
 `Y`: yank till end of line, like D
 `gx`: open browser and search
 `gx{lngpw}`: open local, nonlocal; google,python,wikipedia
@@ -51,6 +53,7 @@ COMMANDS                                                       *myvimcommands*
 `:PrettyXML` format XML
 `:Redir` either shell or vim command
 `:SD` cd to current file
+`:SW` search for word under cursor and place into quickfix list
 `:TD` execute .local/bin/todo to quickfix list
 `:TrimSpaces` accepts range
 
@@ -73,12 +76,12 @@ Links to plugin mappings::
 |makeshift| [:MM] builds the current project
 |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
 |plugin/02tlib.vim|  TScratch TBrowseOutput
-|sandwich-keymappings| sa sd sr
+|sandwich-keymappings| s{adr} dasX da<wait>s (https://github.com/machakann/vim-sandwich/issues/62)
 |sleuth| detect tab settings heuristically, :Sleuth
 |trans-usage| ,tt,
 |unicode-plugin| :UnicodeTable i: <C-X><C-G>
 |vcscommand-mappings| works not only for git
-|vebugger-gdb| :VBGstartGDB and others
+|vebugger-gdb| :VBGstartGDB, ` for leader
 |vim_py3_rst| python and rst helpers
 |vimproc-commands| asynchronous execution
 |vimtex-default-mappings| for latex

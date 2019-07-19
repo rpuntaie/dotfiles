@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 
-git rev-parse --short HEAD &> /dev/null && \
-grep -n -R "TODO\|FIXME\| XXX" . || \
-cat ./TODO 2> /dev/null || cat ~/TODO 2> /dev/null
+# $1 optionally --vimgrep
+
+cat ~/TODO 2> /dev/null
+cat ./TODO 2> /dev/null
+reporoot=$(git rev-parse --show-toplevel 2> /dev/null)
+if [[ -n $reporoot ]]; then
+    cd $reporoot
+    rg $1 -n "TODO|FIXME| XXX" --glob !*etc/sh/login --glob !*bin/todo `pwd`
+    cd - &> /dev/null
+fi
 

@@ -12,10 +12,12 @@ nnoremap SR "_ciw<C-R>"<esc>
 """ `{jk}=g{jk}`: treat as break lines when wrap on
 map j gj
 map k gk
-""" `+-*`: numberpad quickfix move
+""" `+-`: numberpad quickfix move
 nnoremap <kPlus>      :cnext<CR>
 nnoremap <kMinus>     :cprev<CR>
-nnoremap <kMultiply>  :cc<CR>
+""" `*:`: numberpad tags move
+nnoremap <kMultiply>  :tn<CR>
+nnoremap <kDivide>    :tp<CR>
 """ `sx`: syntax fromstart
 noremap sx <Esc>:syntax sync fromstart<CR>
 """ `<C-V>|<C-C>`: copy|paste clipboard in gvim
@@ -58,7 +60,11 @@ command! SD cd %:p:h
 """ `SD`: cd to current symlinked file
 nnoremap <silent> SD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR>
 "": `:TD` execute .local/bin/todo to quickfix list
-command! TD :cexpr system('~/.local/bin/todo')
+command! TD :cexpr system('~/.local/bin/todo --vimgrep')
+""" `SW`: fzf search for word under cursor
+map <silent> SW :Rg <C-R><C-W><CR>
+"": `:SW` search for word under cursor and place into quickfix list
+command! SW :cexpr system('rg --vimgrep <C-R><C-W>')<CR>
 " cscope
 set cscopetag
 if has("cscope")
@@ -90,18 +96,18 @@ vnoremap <silent> gxn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
 nnoremap <silent> gxl :call netrw#BrowseX('<C-R>=expand("%:p:h")<CR>/<C-R>=expand("<cWORD>")<CR>',0)<CR>
 nnoremap <silent> gxn :call netrw#BrowseX('<C-R>=expand("<cWORD>")<CR>',0)<CR>
 if has("win32")
-vnoremap <silent> gxg "cy:!start /b cmd /c chromium "www.google.com/search?q=<C-R>c"<CR><CR>
-vnoremap <silent> gxp "cy:!start /b cmd /c chromium "http://docs.python.org/py3k/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR><CR>
-vnoremap <silent> gxw "cy:!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"<CR><CR>
+vnoremap <silent> gxg "cy:!start /b cmd /c chromium "www.google.com/search?q=<C-R>c"<CR>
+vnoremap <silent> gxp "cy:!start /b cmd /c chromium "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR>
+vnoremap <silent> gxw "cy:!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"<CR>
 nnoremap <silent> gxg :!start /b cmd /c chromium "http://www.google.com/search?q=<cword>"<CR>
-nnoremap <silent> gxp :!start /b cmd /c chromium "http://docs.python.org/py3k/search.html?q=<cword>&check_keywords=yes&area=default"<CR>
+nnoremap <silent> gxp :!start /b cmd /c chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"<CR>
 nnoremap <silent> gxw :!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"<CR>
 else
-vnoremap <silent> gxg "cy:exe ':silent !chromium "www.google.com/search?q=<C-R>c"&'<CR><CR>
-vnoremap <silent> gxp "cy:exe ':silent !chromium "http://docs.python.org/py3k/search.html?q=<C-R>c&check_keywords=yes&area=default"&'<CR><CR>
-vnoremap <silent> gxw "cy:exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"&'<CR><CR>
+vnoremap <silent> gxg "cy:exe ':silent !chromium "www.google.com/search?q=<C-R>c"&'<CR>
+vnoremap <silent> gxp "cy:exe ':silent !chromium "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"&'<CR>
+vnoremap <silent> gxw "cy:exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"&'<CR>
 nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<cword>"&'<CR>
-nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/py3k/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
+nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
 """ `,m`: run in term (two windows, one term)
@@ -126,7 +132,6 @@ map <silent> s; :Tags<CR>
 map <silent> s: :History:<CR>
 map <silent> s/ :History/<CR>
 map <silent> s/ :History/<CR>
-map <silent> sw :Ag <C-R><C-W><CR>
 "godlygeek/tabular
 """ `,aa`: :Tabular
 map <leader>aa :Tab/

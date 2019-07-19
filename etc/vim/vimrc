@@ -1,8 +1,5 @@
 " vim: syntax=vim
 
-"TODO: check out Nvim-R
-"TODO: improve gxX
-"TODO: do without md char replacement
 ""
 " build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
@@ -134,7 +131,7 @@ function Deinplugins()
     call dein#add('tpope/vim-sleuth') 
 ""| |:Tabularize| format
     call dein#add('godlygeek/tabular')
-""| |sandwich-keymappings| sa sd sr
+""| |sandwich-keymappings| s{adr} dasX da<wait>s (https://github.com/machakann/vim-sandwich/issues/62)
     call dein#add('machakann/vim-sandwich') 
 ""| |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
     call dein#add('Lokaltog/vim-easymotion') " <leader><leader>f
@@ -171,7 +168,7 @@ function Deinplugins()
     call dein#add('jalvesaq/Nvim-R')
 ""| |vimproc-commands| asynchronous execution
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-""| |vebugger-gdb| :VBGstartGDB and others
+""| |vebugger-gdb| :VBGstartGDB, ` for leader
     call dein#add('idanarye/vim-vebugger')
 ""| |VdebugStart| <F5>pydbg -d localhost:9000 x.py<F2><F3><F10><F6>
     call dein#add('vim-vdebug/vdebug')

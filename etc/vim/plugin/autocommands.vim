@@ -4,5 +4,5 @@ autocmd BufReadPost *
     \   exe "normal! g'\"" |
     \ endif
 " redo syntax on entering a buffer
+autocmd bufreadpre *.rest setlocal syntax=rst
 autocmd BufEnter * :syntax sync fromstart
-
