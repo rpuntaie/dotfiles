@@ -33,6 +33,9 @@ if [[ -n $new_install ]] && $new_install; then
   fc-cache -fv
   my_python
   my_nodejs
+  mkdir -p ~/.local/share/weechat/ssl
+  cd ~/.local/share/weechat/ssl
+  openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem
 fi
 
 echo -e "\033[0;32mLog out and in, to activate the environment.
