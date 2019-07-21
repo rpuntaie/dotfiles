@@ -15,7 +15,7 @@ mkdir -p ~/.password-store
 #at least the vim config for Windows:
 #bash dotfiles/bin/restowdots
 if [[ ! $(uname) =~ "Linux" ]]; then
-    rsync -av dotfiles/etc/vim/ vimfiles/
+    rsync -av ~/dotfiles/etc/vim/ ~/vimfiles/
     exit 0
 fi
 
@@ -24,18 +24,17 @@ for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
     ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
 done
 
-rm -rf .local/etc/user-dirs*
-stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
-cd dotfiles
+rm -rf ~/.local/etc/user-dirs*
+stow --ignore=home --no-folding ${1:--R} -t ~/.local ~/dotfiles
 
 # dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
 # ~/.ledgerrc
 # ~/.pam_environment
+cd ~/dotfiles
 stow home
-
 cd ~
 
-rm -rf .xmonad
+rm -rf ~/.xmonad
 ln -sf ~/.local/etc/xmonad .xmonad
 xmonad --recompile
 
