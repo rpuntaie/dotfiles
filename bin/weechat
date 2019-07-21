@@ -2,4 +2,4 @@
 #
 # respect XDG.
 
-/usr/bin/weechat -d "$XDG_DATA_HOME"/weechat "$@"
+/usr/bin/weechat -d "$XDG_STATE_HOME"/weechat "$@"
