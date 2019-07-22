@@ -9,6 +9,7 @@ cd ~
 mkdir -p ~/my
 mkdir -p ~/my/task
 mkdir -p ~/my/finance
+mkdir -p ~/.local
 mkdir -p ~/.gnupg
 mkdir -p ~/.password-store
 
