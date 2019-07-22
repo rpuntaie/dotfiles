@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+#https://git.io/fjVcp
+#rpuntaie-meta needs about 40GB disk space
 #according rpuntaie-meta on https://github.com/rpuntaie/rollarch
 
 if [[ ! -f /usr/bin/stow ]]; then
