@@ -25,7 +25,7 @@ for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
 done
 
 rm -rf ~/.local/etc/user-dirs*
-stow --ignore=home --no-folding ${1:--R} -t ~/.local ~/dotfiles
+stow --ignore=home --no-folding ${1:--R} -t ~/.local dotfiles
 
 # dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
 # ~/.ledgerrc
