@@ -32,7 +32,7 @@ fi
 if [[ -n $new_install ]] && $new_install; then
   fc-cache -fv
   bash ~/dotfiles/bin/my_python
-  bash ~/dotfiles/bin/my_nodejs
+  NPM_CONFIG_PREFIX=~/.local/var/lib/npm bash ~/dotfiles/bin/my_nodejs
   rsync -a ~/dotfiles/etc/weechat/ ~/.local/var/lib/weechat/
   mkdir -p ~/.local/var/lib/weechat/ssl
   cd ~/.local/var/lib/weechat/ssl
