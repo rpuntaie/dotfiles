@@ -56,6 +56,7 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
+let g:powerline_pycmd = "py3"
 "Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 "SirVer/ultisnips
