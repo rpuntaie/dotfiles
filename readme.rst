@@ -103,11 +103,7 @@ Editor: Vim
 
 I use ``vim`` as TUI to the system.
 
-Note, with::
-
-  bash dotfiles/bin/restowdots
-
-the vim config can be used also for Windows.
+Note for Windows: ``bash dotfiles/bin/restowdots`` only sets up vimfiles.
 
 Vim embeds Python and others and it has
 ``:term``:
@@ -168,7 +164,7 @@ See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmon
 
 ``M-s`` screenshot
 ``M-u`` screenshot allowing seleection
-``C-S-p`` passmenu
+``M-S-p`` passmenu
 
 - no `display manager <https://wiki.archlinux.org/index.php/Display_manager>`__
 - ``startx`` defaults to ``xmonad``, but you could do ``WM=qtile startx`` to change WM
@@ -215,7 +211,7 @@ Programming
 Python
 ------
 
-`rollarch`_/pkg/rpuntaie installs all Arch python packages.
+`rollarch`_/pkg/rpuntaie installs Arch python packages.
 Additionally `my_python <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_python>`__.
 
 C/C++
