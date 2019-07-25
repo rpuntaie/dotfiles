@@ -27,6 +27,7 @@ done
 AUTHKEYGRIP=$(gpg -K --with-keygrip | sed -n -e "/\[A]/{n;n;p;q}" | sed -n -e "s/^\s*Keygrip = //p")
 if [[ -n $AUTHKEYGRIP ]]; then
     echo $AUTHKEYGRIP > ~/.gnupg/sshcontrol
+    gpg-connect-agent updatestartuptty /bye
 else
     echo "No GPG authentication key for SSH"
 fi

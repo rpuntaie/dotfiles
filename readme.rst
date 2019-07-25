@@ -174,12 +174,13 @@ See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmon
 Security
 ========
 
-
 ``gpg`` for private/public key encryption::
 
    gpg2 --full-gen-key
    gpg2 --list-keys --with-colons
    gpg2 --edit-key <email>
+   passwd
+   save
    gpg2 --armor --output my-secret-key.asc --export-secret-keys <email>
    gpg2 --delete-secret-key <email>
    gpg2 --armor --output my-secret-key.asc --export-secret-subkeys <email>
@@ -198,10 +199,17 @@ Security
    gpg2 --verify <file>.asc
 
 ``~/dotfiles/bin/gpg-offline-master`` works with the separate offline master key.
-``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
 
-``pass`` for password management, stored and managed separately in the default ``~/.password-store``.
-``browserpass`` uses that to serve ``browserpass-chromium`` and ``browserpass-firefox``.
+
+``~/.gnupg``:
+``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
+Set it up before ``dotfiles``, as ``restowdots`` will 
+`use it for ssh <https://wiki.archlinux.org/index.php/GnuPG#SSH_agent>`__.
+Else, just ``restowdots`` again.
+
+``~/.password-store``:
+``pass`` for password management, managed separately.
+``browserpass`` uses it to serve ``browserpass-chromium`` and ``browserpass-firefox``.
 
 ``keybase`` for secure chat and file exchange (KBFS).
 
