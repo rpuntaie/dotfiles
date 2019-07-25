@@ -6,10 +6,9 @@ KEYFILE=$USER/my-secret-key.asc
 device=$(findfs LABEL=$LABEL)
 if [ -n "$device" ]; then
     udisksctl mount --block-device $device
-    tmpdir=$(mktemp -d -p $XDG_RUNTIME_DIR gpg.XXXXXX)
-    gpg2 --homedir $tmpdir --import /run/media/$USER/$LABEL/$KEYFILE
+    gpg2 --import /run/media/$USER/$LABEL/$KEYFILE
     udisksctl unmount --block-device $device
-    gpg2 --homedir $tmpdir --keyring ${GNUPGHOME:-$HOME/.gnupg}/pubring.kbx $@
-    [ -f $tmpdir/S.gpg-agent ] && gpg-connect-agent --homedir $tmpdir KILLAGENT /bye
-    rm -rf $tmpdir
+    gpg2 --keyring ${GNUPGHOME:-$HOME/.gnupg}/pubring.kbx $@
+    KEYGRIP=$(gpg2 -K --with-keygrip | sed -n -e "/Keygrip = /{p;q}" | sed -n -e "s/^\s*Keygrip = //p")
+    gpg-connect-agent "DELETE_KEY $KEYGRIP" /bye
 fi
