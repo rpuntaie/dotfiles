@@ -25,8 +25,10 @@ for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
     ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
 done
 AUTHKEYGRIP=$(gpg -K --with-keygrip | sed -n -e "/\[A]/{n;n;p;q}" | sed -n -e "s/^\s*Keygrip = //p")
-if [[ -n $AUTHKEYGRIP ]]; then
+if [[ -n $AUTHKEYGRIP ]] && [[ ! $(cat ~/.gnupg/sshcontrol) =~ $AUTHKEYGRIP ]] ; then
     echo $AUTHKEYGRIP > ~/.gnupg/sshcontrol
+    ssh-add -L >> ~/.ssh/authorized_keys
+    #for other machines: ssh-copy-id 192.168.X.Y
     gpg-connect-agent updatestartuptty /bye
 else
     echo "No GPG authentication key for SSH"
