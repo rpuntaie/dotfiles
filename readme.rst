@@ -83,8 +83,13 @@ After changing or adding a file to the ``dotfiles`` one must run
    restowdots
    #or ~/dotfiles/install
 
+to update ``~/.local``.
+The variables can be sourced from a file, of course.
+
 System Description
 ==================
+
+``wiki-search``: Help for Archlinux at command line.
 
 Cleaning
 --------
