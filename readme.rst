@@ -131,22 +131,22 @@ CLI
 ``zsh`` through vim ``:term`` or ``urxvt``.
 ``urxvt`` depends on a proper ``/etc/locale.conf``.
 
-- ``v`` open a file in ``gvim``.
-- ``nvr`` open a file in nvr-opened ``nvim``.
+No need for ``cd``.
 
-Plugins:
+Settings in ``Xresources``, ``xrdb -load <pth>`` for re-loading.
 
-- ``urxvt-vim-scrollback``: ``C-v`` to enter. 
-  To paste the cursor must not be in ``vi-mode``.
+Shortcuts: 
 
-- ``z <substring>`` jumps to a file in history
-
-- history-search based on what typed already
-
-- ``v, vvsp, vvhs`` integrate with a running ``gVim``
-
-- ``CTRL-T`` for **fzf**, no need for ``cd``,
+- copy/paste: ``C-M-c/v`` or ``C-M-x`` to enter ``urxvt-vim-scrollback``
+- search:
+  ``CTRL-T`` for **fzf** 
   ``CTRL-g[f b t r h]`` `for git <https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236>`__
+
+Commands:
+
+- ``v, vvsp, vvhs`` open a file in ``gvim``.
+- ``nvr`` open a file in nvr-opened ``nvim``.
+- ``z <substring>`` jumps to a file in history
 
 CLI tools:
 

@@ -104,3 +104,4 @@ set colorcolumn=+1
 hi ColorColumn ctermbg=232 guibg=#080808
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
+highlight Pmenu ctermbg=Black ctermfg=Green guibg=black

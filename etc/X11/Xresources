@@ -9,23 +9,16 @@ URxvt.urgentOnBell: True
 URxvt.cursorBlink: False
 
 ! Extensions
-URxvt.perl-ext-common: default,clipboard,url-select,selection,vim-scrollback
-urxvt.vim-scrollback: C-v
-! M-v pastes
+URxvt.perl-ext-common: default,url-select,selection,vim-scrollback
+urxvt.vim-scrollback: C-M-x
+URxvt.keysym.M-u: perl:url-select:select_next
+
 URxvt.urlLauncher: xdg-open
 URxvt.urlButton: 1
 URxvt.underlineURLs: True
 
 URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
-
-! Keybindings
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-v: perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.C-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-u: perl:url-select:select_next
 
 URxvt.allow_bold:           false
 URxvt.font:                 xft:DejaVu Sans Mono:autohint=true:size=12

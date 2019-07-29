@@ -20,10 +20,10 @@ nnoremap <kMultiply>  :tn<CR>
 nnoremap <kDivide>    :tp<CR>
 """ `sx`: syntax fromstart
 noremap sx <Esc>:syntax sync fromstart<CR>
-""" `<C-V>|<C-C>`: copy|paste clipboard in gvim
-nmap <C-V> "+gP
-imap <C-V> <ESC><C-V>i
-vmap <C-C> "+y
+""" `<M-V>|<M-C>`: copy|paste clipboard
+nmap <M-v> "+gP
+imap <M-v> <ESC><M-v>i
+vmap <M-c> "+y
 """ `<C-{kjhl}>`: go to window
 nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-j> :wincmd j<CR>
