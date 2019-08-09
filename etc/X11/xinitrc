@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+  eval `dbus-launch --sh-syntax`
+fi
+
 # Cursor
 xsetroot -cursor_name left_ptr
 
@@ -22,6 +26,11 @@ xmodmap -e "keysym Print = Caps_Lock"
 
 #needs to go before WM
 dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
+
+ibus-daemon --xim -d -r &
+#switch with (works with pluma)
+#ibus engine libpinyin
+#ibus engine xkb:us::eng
 
 # Launch WM
 if [ -z "$WM" ]; then

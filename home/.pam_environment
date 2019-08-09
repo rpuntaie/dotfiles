@@ -34,6 +34,10 @@ MYGPG                 OVERRIDE="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
 MYTERM                OVERRIDE=urxvt
 MYVIMRC               OVERRIDE=${XDG_CONFIG_HOME}/vim/vimrc
 
+# ibus-setup
+GTK_IM_MODULE=ibus
+QT_IM_MODULE=ibus
+XMODIFIERS=@im=ibus
 
 # fix various applications to respect XDG
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
@@ -57,4 +61,5 @@ TMUX_TMPDIR           DEFAULT="${XDG_RUNTIME_DIR}"
 RXVT_SOCKET           DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
 R_ENVIRON_USER        DEFAULT="${XDG_CONFIG_HOME}/R/.Renviron"
 R_LIBS_USER           DEFAULT="${XDG_LIB_HOME}/R"
-NPM_CONFIG_USERCONFIG DEFAUTL="${XDG_CONFIG_HOME}/npm/npmrc"
+NPM_CONFIG_USERCONFIG DEFAULT="${XDG_CONFIG_HOME}/npm/npmrc"
+

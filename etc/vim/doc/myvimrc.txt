@@ -25,8 +25,8 @@ MAPPINGS                                                           *myvimmaps*
 `,l{ramkj}`: load russian accents mathematic fntc english
 `,m`: run in term (two windows, one term)
 `,ww`: look up in wordnet (wn needed)
-`<C-V>|<C-C>`: copy|paste clipboard in gvim
 `<C-{kjhl}>`: go to window
+`<M-V>|<M-C>`: copy|paste clipboard
 `SD`: cd to current symlinked file
 `SR`: Replace from default register without loosing it
 `SW`: fzf search for word under cursor
@@ -49,6 +49,7 @@ MAPPINGS                                                           *myvimmaps*
 ==============================================================================
 COMMANDS                                                       *myvimcommands*
 
+`:F{Ff}` font size
 `:MM` build using Makeshift
 `:PrettyXML` format XML
 `:Redir` either shell or vim command
@@ -68,6 +69,7 @@ Links to plugin mappings::
 |Nvim-R-use| \rf \rq \d ... in R file
 |UltiSnips| snippets
 |VdebugStart| <F5>pydbg -d localhost:9000 x.py<F2><F3><F10><F6>
+|barbaric-functions| (ibus) input method only in insert mode
 |deoplete-functions| complete using |deoplete-sources|
 |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
 |fugitive-commands| :Gxxx like :Gdiffsplit
