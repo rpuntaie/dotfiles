@@ -113,7 +113,7 @@ nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<c
 nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
-""" `,m`: run in term (two windows, one term)
+""" `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
 vnoremap <leader>m y<C-W><C-W><C-W>""<CR><C-W><C-W>gv<ESC>
 vnoremap <leader>mm y<C-W><C-W>echo <C-W>""<CR><C-W><C-W>gv<ESC>

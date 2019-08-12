@@ -23,7 +23,7 @@ MAPPINGS                                                           *myvimmaps*
 `,j2`: to jira (pip rst2confluence needed}
 `,ls`: load spelling
 `,l{ramkj}`: load russian accents mathematic fntc english
-`,m`: run in term (two windows, one term)
+`,m[m]`: run[echo] in term (two windows: one of them term)
 `,ww`: look up in wordnet (wn needed)
 `<C-{kjhl}>`: go to window
 `<M-V>|<M-C>`: copy|paste clipboard
