@@ -133,4 +133,7 @@ First time vim and zsh will install plugins."
 ##PKG: zathura-djvu
 ##PKG: zathura-pdf-mupdf
 ##PKG: gvim
+##PKG: boost
+##PKG: cmake
+##PKG: meson
 
