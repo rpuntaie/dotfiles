@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
-# Note, the variable in .pam_environment cannot be used here
+# Note, the variables in .pam_environment cannot be used here
 
-umask 077
 
 cd ~
 
+echo paths
+umask 077
 mkdir -p ~/my
 mkdir -p ~/my/task
 mkdir -p ~/my/finance
-mkdir -p ~/.local
 mkdir -p ~/.gnupg
 mkdir -p ~/.password-store
 
@@ -20,6 +20,7 @@ if [[ ! $(uname) =~ "Linux" ]]; then
     exit 0
 fi
 
+echo "gnupg (patience: migh take some time)"
 #keep ~/.gnupg separate, just link the config file
 for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
     ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
@@ -30,10 +31,11 @@ if [[ -n $AUTHKEYGRIP ]] && [[ ! $(cat ~/.gnupg/sshcontrol) =~ $AUTHKEYGRIP ]] ;
     ssh-add -L >> ~/.ssh/authorized_keys
     #for other machines: ssh-copy-id 192.168.X.Y
     gpg-connect-agent updatestartuptty /bye
-else
-    echo "No GPG authentication key for SSH"
 fi
 
+echo stow
+umask 022
+mkdir -p ~/.local
 rm -rf ~/.local/etc/user-dirs*
 stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
 
@@ -44,6 +46,7 @@ cd ~/dotfiles
 stow home
 cd ~
 
+echo xmonad
 rm -rf ~/.xmonad
 ln -sf ~/.local/etc/xmonad .xmonad
 xmonad --recompile

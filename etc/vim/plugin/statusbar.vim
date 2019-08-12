@@ -19,11 +19,15 @@ function! ChangeStatuslineColor()
   return ''
 endfunction
 function! GitInfo()
+  if !exists('fugitive#head')
+    return ''
+  endif
   let git = fugitive#head()
   if git != ''
     return ''.fugitive#head().''
   else
     return ''
+  endif
 endfunction
 set statusline= " --------- left side ---------
 set statusline+=%1*[%n] " buffer number

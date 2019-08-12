@@ -37,6 +37,14 @@ if has('win32')
   let g:localvimfiles=$HOME.'/vimfiles'
   let $MYVIMRC=g:localvimfiles.'/vimrc'
 else
+  " mkdir dotfiles && mount -t nfs 192.168.1.108:/home/roland/dotfiles dotfiles
+  " VIMINIT="so dotfiles/etc/vim/vimrc" vim
+  if empty($XDG_CONFIG_HOME)
+    let $XDG_CONFIG_HOME=expand('~').'/dotfiles/etc'
+  endif
+  if empty($XDG_STATE_HOME)
+    let $XDG_STATE_HOME=expand('~').'/.cache/vim'
+  endif
   let $MYVIMRC=$XDG_CONFIG_HOME.'/vim/vimrc'
   let g:localvimfiles=$XDG_STATE_HOME.'/vim'
 endif
@@ -204,7 +212,7 @@ function Deinplugins()
     call dein#add('rpuntaie/vim-barbaric')
 endfunction
 let g:bundleinit=0
-if has('vim_starting')
+if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
     if isdirectory(g:bundledir.'/repos')
         let g:bundleinit=1
     endif
