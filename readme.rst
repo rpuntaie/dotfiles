@@ -138,6 +138,7 @@ Settings in ``Xresources``, ``xrdb -load <pth>`` for re-loading.
 Shortcuts: 
 
 - copy/paste: ``C-M-c/v`` or ``C-M-x`` to enter ``urxvt-vim-scrollback``
+- edit command line with vim: ``ESC-v`` and ``ESC-:``
 - search:
   ``CTRL-T`` for **fzf** 
   ``CTRL-g[f b t r h]`` `for git <https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236>`__

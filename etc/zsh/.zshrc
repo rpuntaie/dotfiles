@@ -58,6 +58,9 @@ bindkey -M viins '^R'    history-incremental-search-backward
 bindkey -M viins '^U'    backward-kill-line
 bindkey -M viins '^W'    backward-kill-word
 
+# avoid ZLE command line
+bindkey -M vicmd : edit-command-line
+
 unsetopt correct
 
 . $XDG_CONFIG_HOME/zsh/fzf_options.zsh
