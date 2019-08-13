@@ -70,11 +70,11 @@ If AIP2 is used, a local proxy must be prepared as described there.
 
     curl -OLs https://git.io/installarch
     # replace the defines at least in the first line
-    USR=u PW=p HST=u121 IP2=1.121 \
-    AIP2=1.108 DSK=/dev/sda KM=us CL=99 \
-    LA_NG="de_DE es_ES fr_FR it_IT ru_RU" ZONE=Vienna \
+    USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda \
     DOTS=fjVcp bash installarch
     # log out and in
+
+My DOTS repo provides these defines in ``install``: KM CL LA_NG ZONE AIP2
 
 After changing or adding a file to the ``dotfiles`` one must run
 

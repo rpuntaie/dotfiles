@@ -20,9 +20,9 @@ fi
 setxkbmap -option terminate:ctrl_alt_bksp
 
 xrdb -load $XDG_CONFIG_HOME/X11/Xresources
+
 #Caps_Lock to Print
-xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-xmodmap -e "keysym Print = Caps_Lock"
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' -e 'keysym Print = Caps_Lock'
 
 #needs to go before WM
 dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart

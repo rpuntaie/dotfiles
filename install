@@ -1,8 +1,7 @@
 #!/usr/bin/bash
 
+#URL of this file
 #https://git.io/fjVcp
-#rpuntaie-meta needs about 40GB disk space
-#according rpuntaie-meta on https://github.com/rpuntaie/rollarch
 
 if [[ ! -f /usr/bin/stow ]]; then
     echo "you need to do: sudo pacman -S stow" >&2 && exit
@@ -11,7 +10,6 @@ fi
 if [[ ! -f /usr/bin/xdg-user-dirs-update ]]; then
     echo "you need to do: sudo pacman -S xdg-user-dirs" >&2 && exit
 fi
-
 
 dotfilesurl=https://github.com/rpuntaie/dotfiles
 cd ~
@@ -44,7 +42,16 @@ fi
 echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."
 
-#rollarch interprets lines starting with "^#PKG: " or "^#REPO: "
+#rollarch interprets lines starting with "^#PKG: ", "^#REPO: " and "^#DFN: ".
+
+#DFN: KM=us
+#DFN: CL=99
+#DFN: LA_NG="de_DE ru_RU"
+#DFN: ZONE=Vienna
+#DFN: AIP2=1.108
+
+#rpuntaie-meta needs about 40GB disk space
+#rpuntaie-meta on https://github.com/rpuntaie/rollarch
 #rollarch rpuntaie-meta is served from another Arch on the LAN via AIP2
 #PKG: rpuntaie-meta
 
@@ -112,6 +119,8 @@ First time vim and zsh will install plugins."
 ##PKG: xf86-video-intel
 ##PKG: xorg-server
 ##PKG: xorg-apps
+##PKG: ibus-libpinyin
+##PKG: ibus-m17n
 ##PKG: xdg-user-dirs
 ##PKG: wmctrl
 ##PKG: xmonad-contrib
