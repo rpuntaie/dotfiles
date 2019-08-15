@@ -44,7 +44,7 @@ over directly cloning into ``.local``
 to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
 a nuisance when grep'ing.
 
-I install these my ``dotfiles`` on an set-up machine via:
+I install these my ``dotfiles`` on a set-up machine via:
 
 .. code:: sh
 
@@ -75,6 +75,16 @@ If AIP2 is used, a local proxy must be prepared as described there.
     # log out and in
 
 My DOTS repo provides these defines in ``install``: KM CL LA_NG ZONE AIP2
+
+Alternatively
+
+.. code:: sh
+
+   mkdir r
+   mount -t nfs 192.168.1.108:/home/roland/mine/rollarch r
+   cd r
+   USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda DOTS=fjVcp bash rollarch
+
 
 After changing or adding a file to the ``dotfiles`` one must run
 
