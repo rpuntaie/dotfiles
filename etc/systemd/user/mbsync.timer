@@ -1,10 +1,11 @@
 [Unit]
-Description=Run imapsync-quick every 15 minutes
+Description=Run mbsync 5 minutes
 After=network.target
 
 [Timer]
 OnBootSec=30s
-OnCalendar=*:0/10
+OnUnitActiveSec=5m
+Unit=mbsync.service
 Persistent=true
 
 [Install]

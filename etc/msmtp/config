@@ -2,13 +2,15 @@ defaults
 auth            on
 tls             on
 tls_starttls    on
-tls_trust_file  SSL_CERTS
+tls_trust_file  /etc/ssl/certs/ca-certificates.crt
 logfile         ~/.local/var/log/msmtp.log
 
-account         rp
+account         gmail
 host            smtp.gmail.com
 port            587
 from            roland.puntaier@gmail.com
 user            roland.puntaier@gmail.com
-passwordeval    "pass show mail/roland.puntaier@gmail.com | head -n 1"
+passwordeval    "pass show gmail/roland.puntaier@gmail.com | head -n 1"
+
+account default : gmail
 

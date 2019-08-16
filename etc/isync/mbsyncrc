@@ -1,0 +1,63 @@
+CopyArrivalDate yes
+SyncState *
+Create Both
+Expunge Both
+
+IMAPAccount gmail
+Host imap.gmail.com
+User roland.puntaier@gmail.com
+PassCmd "pass gmail/roland.puntaier@gmail.com"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Path ~/.local/var/mail/gmail/
+Inbox ~/.local/var/mail/gmail/INBOX
+
+Channel gmail-default
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns INBOX
+
+Channel gmail-drafts
+Master :gmail-remote:"[Gmail]/Drafts"
+Slave :gmail-local:Drafts
+Create Slave
+
+Channel gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:Sent
+Create Slave
+
+Channel gmail-starred
+Master :gmail-remote:"[Gmail]/Starred"
+Slave :gmail-local:Starred
+Create Slave
+
+Channel gmail-important
+Master :gmail-remote:"[Gmail]/Important"
+Slave :gmail-local:Important
+Create Slave
+
+Channel gmail-spam
+Master :gmail-remote:"[Gmail]/Spam"
+Slave :gmail-local:Spam
+Create Slave
+
+Channel gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:Trash
+Create Slave
+
+Group gmail
+Channel gmail-default
+Channel gmail-drafts
+Channel gmail-sent
+Channel gmail-starred
+Channel gmail-important
+Channel gmail-spam
+Channel gmail-trash
+

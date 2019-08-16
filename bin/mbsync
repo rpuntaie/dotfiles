@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+/usr/bin/mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc $@

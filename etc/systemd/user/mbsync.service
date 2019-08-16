@@ -1,0 +1,7 @@
+[Unit]
+Description=Quick mail synchronization
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/mbsync -Va
+ExecStartPost=/usr/bin/notmuch new

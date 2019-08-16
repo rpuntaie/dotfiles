@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-if [[ $(networkctl status | grep routable) ]]; then
-  /usr/bin/offlineimap $@
-else
-  echo "Network unreachable. Aborting."
-fi

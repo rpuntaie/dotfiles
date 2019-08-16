@@ -37,7 +37,7 @@ alias venv='python -m venv --system-site-packages --symlinks'
 
 alias xtex='xelatex -interaction=nonstopmode'
 
-alias spac='sudo pacman -S'
+alias sp='sudo pacman'
 
 alias :e="$EDITOR"
 alias :q=exit

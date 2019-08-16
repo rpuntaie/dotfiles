@@ -1,9 +1,33 @@
+# vim: filetype=neomuttrc
+# muttrc file for account roland.puntaier@gmail.com
+
+set realname = "$MYNAME"
+alias me Roland Puntaier <roland.puntaier@gmail.com>
+set folder = "/home/roland/.local/var/mail/gmail"
+set mbox_type = Maildir
+
 set from = "roland.puntaier@gmail.com"
-set sendmail="/usr/bin/msmtp -a rp"
+set sendmail="/usr/bin/msmtp -a gmail"
 
-set spoolfile = "=rp/INBOX"
-set record    = "=rp/Sent"
-set postponed = "=rp/Drafts"
-set trash     = "=rp/Trash"
+bind index,pager gg noop
+bind index,pager g noop
+bind index,pager M noop
+bind index,pager C noop
+bind index gg first-entry
+macro index o "<shell-escape>mbsync gmail<enter>" "run mbsync to sync gmail"
+unmailboxes *
 
-mailboxes =rp/INBOX
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+mailboxes  "+-- gmail ----------------" \
+            +INBOX \
+            +Drafts \
+            +Sent \
+            +Starred \
+            +Important \
+            +Spam \
+            +Trash \
+

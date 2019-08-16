@@ -5,32 +5,26 @@
 set my_name = "$MYNAME"
 
 # Cache
-set header_cache = ~/.local/var/cache/mutt/
-set message_cachedir = ~/.local/var/cache/mutt/messages/
-set tmpdir = "$XDG_CACHE_HOME"/neomutt/tmp
+set header_cache = "$XDG_CACHE_HOME"/mutt/
+set message_cachedir = "$XDG_CACHE_HOME"/mutt/messages/
+set tmpdir = "$XDG_CACHE_HOME"/mutt/tmp
 
 # Mails
 set mbox_type=Maildir
-set folder="~/.local/var/mail/"
 
 # Misc
 set alias_file = "$HOME"/.local/var/mail/aliases
-set mailcap_path = "$XDG_CONFIG_HOME"/neomutt/mailcap
-
-# Sending
-set realname = "$MYNAME"
+set mailcap_path = "$XDG_CONFIG_HOME"/mutt/mailcap
 
 #------------------------------------------------------------------------------
 # Accounts
 
-set mbox_type=Maildir
 set mask="*"
 
-mailboxes "=rp ========================"
-source $XDG_CONFIG_HOME/neomutt/accounts/rp.muttrc
+source $XDG_CONFIG_HOME/mutt/accounts/gmail.muttrc
 
 # Account hooks (triggered when changing into a directory of that account):
-folder-hook rp/* "source $XDG_CONFIG_HOME/neomutt/accounts/rp.muttrc"
+folder-hook gmail/* "source $XDG_CONFIG_HOME/mutt/accounts/gmail.muttrc"
 
 #------------------------------------------------------------------------------
 #View
@@ -53,23 +47,14 @@ set sidebar_delim_chars = "/"
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats
 
-# General
-color indicator         yellow default
+source $XDG_CONFIG_HOME/mutt/colors.muttrc
 
-# Pager
-color header            brightgreen default ^From:
-color header            brightblue default ^To:
-color header            cyan default ^Reply-To:
-color header            cyan default ^Cc:
-color header            brightwhite default ^Subject:
+#------------------------------------------------------------------------------
+# Subscriptions
 
-color body              red default [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
-color body              cyan default (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+
-
-# Index
-color index_flags       yellow default '.*'
-color index_author      white default '.*'
-color index_subject     white default '.*'
+# https://kdecherf.com/blog/2017/04/11/neomutt-gmail-and-the-mailing-lists/
+set index_format = "%4C (%4c) %Z %?GI?%GI& ? %[%d/%b]  %-20.19F %?K?%15.14K&               ? %?M?(%3M)&     ? %?X?¤& ? %s %> %?g?%g?"
+# TODO: source $XDG_CONFIG_HOME/mutt/subscriptions.muttrc
 
 #------------------------------------------------------------------------------
 # Keybindings
@@ -116,7 +101,7 @@ bind index,pager                r   group-reply
 # set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # Use GPG2 instead of gpg + PGP configuration
-source $XDG_CONFIG_HOME/neomutt/pgp.muttrc
+source $XDG_CONFIG_HOME/mutt/pgp.muttrc
 set pgp_use_gpg_agent = yes
 set pgp_sign_as = $MYGPG
 set pgp_timeout = 3600

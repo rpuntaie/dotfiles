@@ -1,0 +1,30 @@
+# for all possible options, see:
+# https://github.com/OfflineIMAP/offlineimap/blob/master/offlineimap.conf
+
+[general]
+ui = ttyui
+accounts = gmail
+pythonfile=$XDG_CONFIG_HOME/offlineimap/offlineimap.py
+fsync = False
+metadata = $XDG_CACHE_HOME/offlineimap
+
+[Account gmail]
+localrepository = gmail-Local
+remoterepository = gmail-Remote
+postsynchook = notmuch new
+
+[Repository gmail-Local]
+type = Maildir
+localfolders = ~/.local/var/mail/gmail
+
+[Repository gmail-Remote]
+remotehost = imap.gmail.com
+maxconnections = 1
+type = Gmail
+ssl_version = tls1_2
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remoteuser = user@email2.com
+remotepasseval = get_pass("gmail/roland.puntaier@gmail.com")
+realdelete = no
+auth_mechanisms = LOGIN
+

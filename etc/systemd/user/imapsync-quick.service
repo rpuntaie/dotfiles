@@ -1,6 +1,0 @@
-[Unit]
-Description=Offlineimap quick synchronization
-
-[Service]
-Type=simple
-ExecStart=%h/.local/bin/imapsync -q

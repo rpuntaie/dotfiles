@@ -18,6 +18,7 @@ XDG_DATA_DIRS         DEFAULT="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
 # Non-standard
 XDG_LOG_HOME          DEFAULT="${HOME}/.local/var/log"
 XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
+XDG_MAIL_HOME         DEFAULT="${HOME}/.local/var/mail"
 XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
@@ -62,4 +63,6 @@ RXVT_SOCKET           DEFAULT="${XDG_RUNTIME_DIR}/urxvtd.sock"
 R_ENVIRON_USER        DEFAULT="${XDG_CONFIG_HOME}/R/.Renviron"
 R_LIBS_USER           DEFAULT="${XDG_LIB_HOME}/R"
 NPM_CONFIG_USERCONFIG DEFAULT="${XDG_CONFIG_HOME}/npm/npmrc"
+NMBGIT                DEFAULT="${XDG_STATE_HOME}/notmuch/nmbug"
+NOTMUCH_CONFIG        DEFAULT="${XDG_CONFIG_HOME}/notmuch/notmuchrc"
 

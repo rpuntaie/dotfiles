@@ -1,12 +1,11 @@
-application/pdf;    zathura '%s'
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s'
-image/jpeg;         feh '%s'
-image/png;          feh '%s'
-image/tiff;         feh '%s'
-image/x-ms-bmp;     feh '%s'
-image/gif;          feh '%s'
-text/html;          qutebrowser '' && qutebrowser '%s'
-text/plain;         gvim '%s'
-text/x-diff;        gvim '%s'
-text/x-shellscript; gvim '%s'
+text/plain; $EDITOR %s ;
+text/x-diff;        $EDITOR '%s'
+text/x-shellscript; $EDITOR '%s'
+text/html; openfile %s ; nametemplate=%s.html
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
 application/zip;    file-roller '%s'
+image/*; feh %s ; copiousoutput
+video/*; setsid mpv --quiet %s &; copiousoutput
+application/pdf; openfile %s ;
+application/pgp-encrypted; gpg -d '%s'; copiousoutput;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s'
