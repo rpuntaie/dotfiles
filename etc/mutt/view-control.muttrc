@@ -1,0 +1,173 @@
+# vim: syntax=muttrc
+
+# View
+###############################################################################
+
+# Basic Options
+set assumed_charset   = "utf-8"
+set send_charset      = "utf-8"
+set charset           = "utf-8"
+set wait_key          = no
+set timeout           = 3
+set mail_check        = 0
+set move              = no
+set delete            = yes
+set confirmappend     = no
+set quit              = no
+set mark_old          = no
+set pipe_decode       = yes
+set thorough_search   = yes
+
+# Sidebar config
+set mail_check_stats      = yes
+set sidebar_divider_char  = ' │ '
+set sidebar_format        = '%B%*┈%?F?[%F]?%?N?(%N)?'
+set sidebar_new_mail_only = yes
+set sidebar_short_path    = yes
+set sidebar_visible       = yes
+set sidebar_width         = 36
+bind index,pager B        sidebar-toggle-visible
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
+macro index,pager <left>  "<change-folder>+Inbox<enter>" "go to inbox"
+
+# Status Bar
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Index View Options
+set attach_format   = "[%D %t] %2n %T[%-7.7m/%10.10M] (%Q%I) %.40d %> [%s] "
+set date_format     = "!%a, %d %b %Y at %H:%M"
+set folder_format   = "%2C %t %N %8s %f"
+set index_format    = "[%Z]  %D  %-20.20F  %?M?[+]&   ? %s%?X? 📎& ?"
+## https://kdecherf.com/blog/2017/04/11/neomutt-gmail-and-the-mailing-lists/
+#set index_format = "%4C (%4c) %Z %?GI?%GI& ? %[%d/%b/%Y %H:%M]  %-20.19F %?K?%15.14K&               ? %?M?(%3M)&     ? %?X?¤& ? %s %> %?g?%g?"
+set sort            = threads                     # like gmail
+set sort_aux        = reverse-last-date-received  # like gmail
+set sort_browser    = reverse-date                # like gmail
+set uncollapse_jump = yes                         # don't collapse on an unread message 
+set collapse_unread = no
+set sort_re         = yes                         # thread based on regex
+set reply_regexp    = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+folder-hook . "exec collapse-all"          # collapse by default
+
+# Pager View Options
+set pager_index_lines = 10    # number of index lines to show
+set pager_context     = 3     # number of context lines to show
+set pager_stop        = yes   # don't go to next message automatically
+set wrap              = 156   # 120 + sidebar_width (=36)
+set menu_scroll       = yes   # scroll in menus
+set tilde             = yes   # show tildes like in vim
+set markers           = no    # no ugly plus signs
+set quote_regexp      = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/calendar text/plain text/enriched text/html text/*
+auto_view text/html text/calendar
+
+# Compose View Options
+set envelope_from   = yes                 # which from?
+set sig_dashes      = no                  # dashes before sig
+set edit_headers    = yes                 # show headers when composing
+set fast_reply      = yes                 # skip to compose when replying
+set askcc           = yes                 # ask for CC:
+set fcc_attach      = yes                 # save attachments with the body
+set mime_forward    = ask-no              # forward attachments as part of body
+set forward_format  = "Fwd: %s"           # format of subject when forwarding
+set forward_decode  = yes                 # decode when forwarding
+set attribution     = "On %d, %n wrote:"  # format of quoting header
+set reply_to        = yes                 # reply to Reply to: field
+set reverse_name    = yes                 # reply as whomever it was to
+set include         = yes                 # include message in replies
+set forward_quote   = yes                 # include message in forwards
+
+# Attachment View Options
+attachments +A message/.* multipart/.*
+attachments +I message/.* multipart/.*
+
+# Headers
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# neomutt options
+set abort_noattach = ask-yes
+set attach_keyword = "\\<attach(|ed|ments?)\\>"
+
+
+# Control
+###############################################################################
+
+# vim keys
+source $XDG_CONFIG_HOME/mutt/vim-keys.rc
+
+# Editor
+set editor = "vim -c 'normal! }' -c 'redraw' -c'setl ft=mail spell tw=100 cc=101 fo=ajqrw1'"
+set text_flowed
+set reflow_text
+set reflow_space_quotes
+
+# Sync email
+macro index <tab> \
+  "<sync-mailbox>\
+  <enter-command>set old_pipe_decode=\$pipe_decode old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <shell-escape>notmuch new<enter>\
+  <enter-command>set pipe_decode=\$old_pipe_decode wait_key=\$old_wait_key<enter>" \
+  "sync mail and call notmuch-new"
+macro index o     "<shell-escape>mbsync inbox; notmuch new<enter>" "run mbsync to sync inbox"
+macro index O     "<shell-escape>mbsync other; notmuch new<enter>" "run mbsync to sync all mail"
+
+# Save as draft
+bind compose p postpone-message
+bind index   p recall-message
+
+# Quickly view attachments
+bind attach <return> view-mailcap
+
+# Show all other directories
+set mask="*"
+
+# Gmail-style archive and delete
+macro pager d "<exit>d" "trash"
+macro index D "<tag-thread><tag-prefix>d" "trash thread"
+macro index e "<save-message>+Archive<enter>" "archive"
+macro pager e "<exit>e" "archive"
+macro index E "<tag-thread><tag-prefix>e" "archive thread"
+macro index q "<sync-mailbox><quit>"
+
+# Gmail-style move dialog (whole thread)
+macro index M "<tag-thread><tag-prefix><save-message>?/" "move thread to mailbox"
+
+macro index \Cr "<tag-pattern>~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Quickly change mailboxes (consider using gmail shortcuts (gi, etc.))
+macro index c  "<change-folder>?"     "change folder"
+macro index gi "<change-folder>+Inbox<enter>"   "go to inbox"
+macro pager gi "<exit>gi"                       "go to inbox"
+macro index,pager \' "gi"                       "go to inbox"
+
+# Search with notmuch
+macro index S \
+  "<enter-command>set old_pipe_decode=\$pipe_decode old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <shell-escape>$XDG_CONFIG_HOME/mutt/mnm.py search<enter>\
+  <change-folder-readonly>$MAILDIR/+search<enter>\
+  <enter-command>set pipe_decode=\$old_pipe_decode wait_key=\$old_wait_key<enter>" \
+  "search mail (using notmuch)"
+macro index,pager \` \
+  "<enter-command>set old_pipe_decode=\$pipe_decode old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <pipe-message>$XDG_CONFIG_HOME/mutt/mnm.py thread<enter>\
+  <change-folder-readonly>$MAILDIR/+search<enter>\
+  <enter-command>set pipe_decode=\$old_pipe_decode wait_key=\$old_wait_key<enter>" \
+  "reconstruct thread (using notmuch)"
+
+# Unlimit (show [a]ll)
+macro index a "<limit>all\n" "show all messages (undo limit)"
+
+macro pager U "|urlview<enter>" "call urlview to open links"
+
+bind index - collapse-thread
+bind index _ collapse-all
+
+bind index,pager R        group-reply
+macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>" "open in vim"
+

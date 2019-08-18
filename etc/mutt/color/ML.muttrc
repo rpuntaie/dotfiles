@@ -1,7 +1,3 @@
-###
-# mutt colors file
-###
-
 # set default
 color normal     white         default
 
@@ -11,9 +7,6 @@ color indicator  brightwhite   default
 color tree       blue          default
 color error      brightred     default
 color message    brightyellow  default
-
-# color all ML mails
-#  color index      blue          default "~u"
 
 # uncolor certain messages
 uncolor index "~P"

@@ -10,7 +10,7 @@ host            smtp.gmail.com
 port            587
 from            roland.puntaier@gmail.com
 user            roland.puntaier@gmail.com
-passwordeval    "pass show gmail/roland.puntaier@gmail.com | head -n 1"
+passwordeval    "pass gmail/roland.puntaier@gmail.com"
 
 account default : gmail
 
