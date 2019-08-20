@@ -13,10 +13,7 @@ LOCALSTORES=$(cat $MBSYNCRC | sed -ne "s/Path\s*//p")
 function _maildirs()
 {
     for store in $LOCALSTORES; do
-        #for accounts this should not create cur,new,tmp
-        #but leaving them as they do no harm
-        #`afew --move-mails` needs them for local target mailboxes
-        mkdir -p ${store/#\~/$HOME}/{cur,new,tmp}
+        mkdir -p ${store/#\~/$HOME}
     done
 }
 

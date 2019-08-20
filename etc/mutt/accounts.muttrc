@@ -5,14 +5,18 @@ macro index,pager <F2> '<sync-mailbox><enter-command>source $my_accounts/gmail.m
 macro index,pager <F3> '<sync-mailbox><enter-command>source $my_accounts/chello.muttrc<enter><change-folder>!<enter>'
 macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 
-source $my_accounts/gmail_mbsynced.muttrc
-folder-hook $folder 'source $my_accounts/gmail_mbsynced.muttrc'
+#source $my_accounts/gmail_mbsynced.muttrc
+#folder-hook $folder 'source $my_accounts/gmail_mbsynced.muttrc'
 
 #source $my_accounts/gmail.muttrc
 #folder-hook $folder 'source $my_accounts/gmail.muttrc'
+source $my_accounts/gmail_pop.muttrc
+folder-hook $folder 'source $my_accounts/gmail_pop.muttrc'
 
 ##source $my_accounts/chello.muttrc
 #folder-hook roland.puntaier@imap.chello.at 'source $my_accounts/chello.muttrc'
 
 # source $my_accounts/gmail.muttrc
 # folder-hook gmail/* "source $my_accounts/gmail.muttrc"
+
+# vim: ft=muttrc

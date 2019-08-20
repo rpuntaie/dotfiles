@@ -3,5 +3,5 @@ Description=Mail synchronization
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/bin/mbsync -Va
+ExecStart=%h/.local/bin/mymailsync
 ExecStartPost=/usr/bin/notmuch new

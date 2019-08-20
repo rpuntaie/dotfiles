@@ -1,8 +1,17 @@
-# vim: syntax=muttrc
+# vim: filetype=neomuttrc
+# muttrc file for account roland.puntaier@gmail.com
 
-macro index gm "<shell-escape>mymailsync" "my script to sync all mail with mbsync"
+bind index gm fetch-mail
 
 set from = "roland.puntaier@gmail.com"
+alias me Roland Puntaier <roland.puntaier@gmail.com>
+
+# pop
+set pop_user = "roland.puntaier@gmail.com"
+set pop_pass = `pass gmail/roland.puntaier@gmail.com`
+set pop_host = pops://pop.gmail.com:995
+set pop_delete = yes
+
 set sendmail="/usr/bin/msmtp -a gmail"
 set folder = "$MAILDIR"/gmail
 set spoolfile = "+INBOX"
@@ -19,5 +28,10 @@ mailboxes  "+-- gmail ----------------" \
             +Spam \
             +Trash \
 
+# smtp
+set smtp_pass    = `pass gmail/roland.puntaier@gmail.com`
+set smtp_url     = "smtp://roland.puntaier@smtp.gmail.com:587"
+
 # differentiate mailboxes in statusline:
 color   status          black            yellow
+

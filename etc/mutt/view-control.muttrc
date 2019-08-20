@@ -226,4 +226,3 @@ macro index,pager \` \
 macro index ga "<limit>all\n" "show all messages (undo limit)"
 
 macro pager U "|urlscan<enter>" "call urlscan to open links"
-
