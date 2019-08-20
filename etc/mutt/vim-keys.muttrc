@@ -1,4 +1,8 @@
+# vim: syntax=muttrc
+#
 # https://raw.githubusercontent.com/neomutt/neomutt/master/contrib/vim-keys/vim-keys.rc
+# https://gitlab.gnugen.ch/floure/dotfiles/blob/6d1208fa9f2714220d69a26d7adc73f761a860ea/etc/neomutt/neomuttrc
+#
 #------------------------------------------------------------
 # Vi Key Bindings
 #------------------------------------------------------------
@@ -12,6 +16,11 @@ bind pager                      gg  top
 bind pager                      G   bottom
 bind pager                      k   previous-line
 bind pager                      j   next-line
+bind index                      l   display-message
+macro browser                   l   '<enter>' 'Change to selected folder'
+bind index                      h   noop
+bind pager                      h   exit
+bind pager                      t   display-toggle-weed
 
 # Scrolling
 bind attach,browser,pager,index \CF next-page
@@ -37,3 +46,24 @@ bind pager,index                gt  next-thread
 bind pager,index                gT  previous-thread
 bind index                      za  collapse-thread
 bind index                      zA  collapse-all # Missing :folddisable/foldenable
+bind index                      -   collapse-thread
+bind index                      _   collapse-all
+
+
+# Sidebar
+bind index,pager                B   sidebar-toggle-visible
+bind index,pager                K   sidebar-prev
+bind index,pager                J   sidebar-next
+bind index,pager                L   sidebar-open
+# bind index,pager                <up>    sidebar-prev
+# bind index,pager                <down>  sidebar-next
+# bind index,pager                <right> sidebar-open
+
+bind index,pager               gr   group-reply
+
+# Quickly view attachments
+bind attach <return> view-mailcap
+
+#view in vim
+macro index,pager,attach V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>" "open in vim"
+

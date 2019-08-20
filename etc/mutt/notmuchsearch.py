@@ -16,8 +16,10 @@ import sys
 import traceback
 
 def digest(path):
-    with open(path) as f:
-        return hashlib.sha1(f.read()).hexdigest()
+    with open(path,'rb') as f:
+        m=hashlib.sha1()
+        m.update(f.read())
+        return m.hexdigest()
 
 
 def empty_maildir(dir):
@@ -32,7 +34,7 @@ def search(query, output_mbox):
 
     files = subprocess.check_output([
         "notmuch", "search", "--duplicate=1",
-        "--output=files", query]).split("\n")
+        "--output=files", query]).decode().split("\n")
 
     data = collections.defaultdict(list)
     messages = []
@@ -61,15 +63,17 @@ def thread(message, output_mbox):
         sys.stderr.write("Cannot find message ID")
         sys.exit(1)
     message_id = message["message-id"].strip("<>")
-    thread_id = subprocess.check_output([
-        "notmuch", "search", "--output=threads",
-        "id:{}".format(message_id)]).strip()
-    search(thread_id, output_mbox)
+    if message_id:
+        thread_id = subprocess.check_output([
+            "notmuch", "search", "--output=threads",
+            "id:{}".format(message_id)]).decode().strip()
+        search(thread_id, output_mbox)
 
 
 def search_command(args):
-    query = raw_input('Query: ')
-    search(query, args.output_mbox)
+    query = input('Query: ')
+    if query:
+        search(query, args.output_mbox)
 
 
 def thread_command(args):
@@ -83,7 +87,7 @@ def parse_args_or_exit(argv=None):
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     # common arguments
     parser.add_argument("-o", "--output-mbox", 
-        default=os.path.join(os.environ.get('MAILDIR','~/mail'),'+search')
+        default=os.path.join(os.environ.get('MAILDIR','~/mail'),'+search'),
         help="Output dir for results")
     parser.add_argument("--backtrace", action="store_true",
                         help="Print backtrace on error")

@@ -229,6 +229,50 @@ Else, just ``restowdots`` again.
 
 ``keybase`` for secure chat and file exchange (KBFS).
 
+
+Email
+=====
+
+The easiest ``mutt`` setup is via an ``folder=imaps://..``.
+All ``mutt`` operations are remoted (slow),
+locally using only the cache dir.
+
+For different accounts switch folder and
+have a ``folder-hook`` source the account settings file
+which applies::
+
+  account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
+
+A setup independent from ``mutt`` is better though,
+as it opens mail access via ``mutt`` as well as other mail tools.
+
+``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
+(or `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__)
+sync between remote and local mailboxes (see ``mbsyncrc``),
+via a ``systemd`` user service (``mbsync.service``).
+
+A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox`` 
+is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
+It can be used by programming languages and tools:
+
+- ``mutt``: set ``folder`` to the already *existing* local account path
+
+- ``notmuch [new]`` indexes (new) mails, then
+  ``notmuch address|count|dump|reply|search|show|tag`` can be `used <https://notmuchmail.org/manpages/>`__.
+
+- Vim can be used as a MUA
+  `via notmuch <https://github.com/notmuch/notmuch/blob/master/vim/notmuch.vim>`__.
+
+- `alot <https://www.archlinux.org/packages/community/any/alot/>`__ also uses ``notmuch``.
+
+- `afew <https://github.com/afewmail/afew>`__ is a python wrapper on ``notmuch`` for tagging and
+  `moving <https://github.com/afewmail/afew/blob/master/docs/move_mode.rst>`__ mails.
+  See `query format <https://xapian.org/docs/queryparser.html>`__.
+
+- `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts
+
+Since the messages are text, they can be search with ``ag``, ``rg`, ``vimgrep``, ...
+
 Programming
 ===========
 

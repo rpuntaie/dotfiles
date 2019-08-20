@@ -1,15 +1,8 @@
 # vim: filetype=neomuttrc
 # muttrc file for account roland.puntaier@gmail.com
 
-set mbox_type = Maildir
-
 set from = "roland.puntaier@gmail.com"
-set realname = "$NAME"
 alias me Roland Puntaier <roland.puntaier@gmail.com>
-
-# auth
-set ssl_starttls = yes
-set ssl_force_tls = yes
 
 # pop
 set pop_host = pops://pop.gmail.com:995
@@ -21,33 +14,15 @@ set pop_user = "roland.puntaier@gmail.com"
 set imap_user   = "roland.puntaier@gmail.com"
 set imap_pass   = `pass gmail/roland.puntaier@gmail.com`
 set folder      = "imaps://roland.puntaier@imap.gmail.com:993/"
+account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
 set spoolfile   = "+INBOX"
-set postponed   = "+[Google Mail]/Drafts"
-set record      = "+[Google Mail]/Sent Mail"
+set postponed   = "+Drafts"
+set record      = "+Sent"
 
 # smtp
 set smtp_pass    = `pass gmail/roland.puntaier@gmail.com`
 set smtp_url     = "smtp://roland.puntaier@smtp.gmail.com:587"
 
-exec collapse-all
-
 # differentiate mailboxes in statusline:
 color   status          black            yellow
-
-#set sendmail="/usr/bin/msmtp -a gmail"
-#macro index o "<shell-escape>mbsync gmail<enter>" "run mbsync to sync gmail"
-#set folder = "/home/roland/.local/var/mail/gmail"
-#set spoolfile = "+INBOX"
-#set record = "+Sent"
-#set postponed = "+Drafts"
-#set trash = "+Trash"
-#unmailboxes *
-#mailboxes  "+-- gmail ----------------" \
-#            +INBOX \
-#            +Drafts \
-#            +Sent \
-#            +Starred \
-#            +Important \
-#            +Spam \
-#            +Trash \
 

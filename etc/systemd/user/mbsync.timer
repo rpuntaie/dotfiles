@@ -1,5 +1,6 @@
 [Unit]
-Description=Run mbsync 5 minutes
+Description=Run mbsync every 5 minutes
+Wants=network.target
 After=network.target
 
 [Timer]

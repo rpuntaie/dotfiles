@@ -3,46 +3,142 @@
 # View
 ###############################################################################
 
-# Basic Options
-set assumed_charset   = "utf-8"
-set send_charset      = "utf-8"
-set charset           = "utf-8"
-set wait_key          = no
-set timeout           = 3
-set mail_check        = 0
-set move              = no
-set delete            = yes
-set confirmappend     = no
-set quit              = no
-set mark_old          = no
-set pipe_decode       = yes
-set thorough_search   = yes
-
 # Sidebar config
+set sidebar_folder_indent = yes
+set sidebar_indent_string = "  "
+set sidebar_delim_chars = "/"
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats      = yes
 set sidebar_divider_char  = ' │ '
-set sidebar_format        = '%B%*┈%?F?[%F]?%?N?(%N)?'
 set sidebar_new_mail_only = yes
 set sidebar_short_path    = yes
-set sidebar_visible       = yes
+set sidebar_visible       = no
 set sidebar_width         = 36
-bind index,pager B        sidebar-toggle-visible
-bind index,pager <down>   sidebar-next
-bind index,pager <up>     sidebar-prev
-bind index,pager <right>  sidebar-open
-macro index,pager <left>  "<change-folder>+Inbox<enter>" "go to inbox"
 
-# Status Bar
+## status_format - format of summary on the current folder in the index
+## meta strings:
+##  -----f-h---lmn-p-rst-v----  lower case letters (10)
+##  ------------M----------X--  upper case letters (02)
+## %d      the number of messages with the flag 'delete'  (v64)
+## %f      the full pathname of the current mailbox
+## %h      local hostname
+## %l      size (in bytes) of the current mailbox
+## %m      the number of messages in the mailbox
+## %M      the number of messages shown (i.e., which match the current limit)
+## %n      number of new messages in the mailbox
+## %p      number of postponed messages
+## %s      current sorting mode
+## %r      modified/read-only/won't-write/attach-message indicator-status_chars
+## %t      number of tagged messages
+## %v      Mutt version string
+## %>X     right justify the rest of the string and pad with "X"
+## %|X     pad to the end of the line with "X"
+##
+## %?<sequence_char>?<optional_string>? optionally print string, if>0
+
+# set status_format = "Folder: %f : %r%n new (%m messages)%?d? (%d to delete)?%?t? (%t tagged)? %>-%?p?( %p postponed )? : "
+# set status_format="%v: (%s) [%M/%m] [flags:%?02n new?,t:%t]"
+# set status_format=" $from Messages: %M (%m) [Unread: %n] %> %r (%P) [%l] (%s/%S) (%v) "
+# set status_format=" $my_acct : %m messages, %n unread  %> (%P) [%l] (%v) "
 set status_chars  = " *%A"
-set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+set status_format = "───[ %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Index View Options
 set attach_format   = "[%D %t] %2n %T[%-7.7m/%10.10M] (%Q%I) %.40d %> [%s] "
 set date_format     = "!%a, %d %b %Y at %H:%M"
 set folder_format   = "%2C %t %N %8s %f"
-set index_format    = "[%Z]  %D  %-20.20F  %?M?[+]&   ? %s%?X? 📎& ?"
-## https://kdecherf.com/blog/2017/04/11/neomutt-gmail-and-the-mailing-lists/
-#set index_format = "%4C (%4c) %Z %?GI?%GI& ? %[%d/%b/%Y %H:%M]  %-20.19F %?K?%15.14K&               ? %?M?(%3M)&     ? %?X?¤& ? %s %> %?g?%g?"
+#set index_format    = "[%Z]  %D  %-20.20F  %?M?[+]&   ? %s%?X? 📎& ?"
+
+## %a   Address of the author
+## %A   Reply-to address (if present; otherwise: address of author)
+## %b   Filename of the original message folder (think mailbox)
+## %B   The list to which the letter was sent, or else the folder name (%b).
+## %C   Current message number
+## %c   Number of characters (bytes) in the message
+## %D   Date and time of message using date_format and local timezone
+## %d   Date and time of message using date_format and sender's timezone
+## %e   Current message number in thread
+## %E   Number of messages in current thread
+## %F   Author name, or recipient name if the message is from you
+## %f   Sender (address + real name), either From: or Return-Path:
+## %g   Newsgroup name (if compiled with NNTP support)
+## %g   Message tags (e.g. notmuch tags/imap flags)
+## %Gx  Individual message tag (e.g. notmuch tags/imap flags)
+## %H   Spam attribute(s) of this message
+## %I   Initials of author
+## %i   Message-id of the current message
+## %J   Message tags (if present, tree unfolded, and != parent's tags)
+## %K   The list to which the letter was sent (if any; otherwise: empty)
+##      If an address in the “To:” or “Cc:” header field matches an address
+## %L   Defined by the users “subscribe” command, this displays "To <list-name>
+##      ", otherwise the same as %F
+## %l   Number of lines in the message (does not work with maildir, Mh, and
+##      possibly IMAP folders)
+## %M   Number of hidden messages if the thread is collapsed
+## %m   Total number of message in the mailbox
+## %N   Message score
+## %n   Author's real name (or address if missing)
+## %O   Original save folder where NeoMutt would formerly have Stashed the
+##      message: list name or recipient name If not sent to a list
+## %P   Progress indicator for the built-in pager (how much of the file has
+##      been displayed)
+## %q   Newsgroup name (if compiled with NNTP support)
+## %R   Comma separated list of “Cc:” recipients
+## %r   Comma separated list of “To:” recipients
+## %S   Single character status of the message (“N”/“O”/“D”/“d”/“!”/“r”/“*”)
+## %s   Subject of the message
+## %T   The appropriate character from the $to_chars string
+## %t   “To:” field (recipients)
+## %u   User (login) name of the author
+## %v   First name of the author, or the recipient if the message is from you
+## %W   Name of organization of author (“Organization:” field)
+## %x   “X-Comment-To:” field (if present and compiled with NNTP support)
+## %X   Number of MIME attachments (please see the “attachments” section for
+##      possible speed effects)
+##      “X-Label:” field, if present, and (1) not at part of a thread tree, (2)
+## %Y   at the top of a thread, or (3) “X-Label:” is different from Preceding
+##      message's “X-Label:”
+## %y   “X-Label:” field, if present
+##      A three character set of message status flags. The first character is
+## %Z   new/read/replied flags (“n”/“o”/“r”/“O”/“N”). The second is deleted or
+##      encryption flags (“D”/“d”/“S”/“P”/“s”/“K”). The third is either tagged/
+##      flagged (“*”/“!”), or one of the characters Listed in $to_chars.
+##      D   message is deleted (is marked for deletion)
+##      d   message has attachments marked for deletion
+##      K   contains a PGP public key
+##      N   message is new
+##      O   message is old
+##      P   message is PGP encrypted
+##      r   message has been replied to
+##      S   message is signed, and the signature is successfully verified
+##      s   message is signed
+##      !   message is flagged
+##      *   message is tagged
+##      n   thread contains new messages (only if collapsed)
+##      o   thread contains old messages (only if collapsed)
+##      +   message is to you and you only
+##      T   message is to you, but also to or CC'ed to others
+##      C   message is CC'ed to you
+##      F   message is from you
+##      L   message is sent to a subscribed mailing list
+## %zc  Message crypto flags
+## %zs  Message status flags
+## %zt  Message tag flags
+## %    the date and time of the message is converted to sender's time zone,
+## {fmt}and “fmt” is expanded by the library function strftime(3); a leading
+##      bang disables locales
+## %    the date and time of the message is converted to the local time zone,
+## [fmt]and “fmt” is expanded by the library function strftime(3); a leading
+##      bang disables locales
+## %    the local date and time when the message was received. “fmt” is
+## (fmt)expanded by the library function strftime(3); a leading bang disables
+##      locales
+## %>X  right justify the rest of the string and pad with character “X”
+## %|X  pad to the end of the line with character “X”
+## %*X  soft-fill with character “X” as pad
+
+# https://kdecherf.com/blog/2017/04/11/neomutt-gmail-and-the-mailing-lists/
+set index_format = "%4C (%4c) %Z %?GI?%GI& ? %[%d/%b/%Y %H:%M]  %-20.19F %?K?%15.14K&               ? %?M?(%3M)&     ? %?X?¤& ? %s %> %?g?%g?"
 set sort            = threads                     # like gmail
 set sort_aux        = reverse-last-date-received  # like gmail
 set sort_browser    = reverse-date                # like gmail
@@ -94,12 +190,11 @@ hdr_order from: to: cc: date: subject:  # and in this order
 set abort_noattach = ask-yes
 set attach_keyword = "\\<attach(|ed|ments?)\\>"
 
-
 # Control
 ###############################################################################
 
 # vim keys
-source $XDG_CONFIG_HOME/mutt/vim-keys.rc
+source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
 
 # Editor
 set editor = "vim -c 'normal! }' -c 'redraw' -c'setl ft=mail spell tw=100 cc=101 fo=ajqrw1'"
@@ -107,67 +202,28 @@ set text_flowed
 set reflow_text
 set reflow_space_quotes
 
-# Sync email
-macro index <tab> \
-  "<sync-mailbox>\
-  <enter-command>set old_pipe_decode=\$pipe_decode old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-  <shell-escape>notmuch new<enter>\
-  <enter-command>set pipe_decode=\$old_pipe_decode wait_key=\$old_wait_key<enter>" \
-  "sync mail and call notmuch-new"
-macro index o     "<shell-escape>mbsync inbox; notmuch new<enter>" "run mbsync to sync inbox"
-macro index O     "<shell-escape>mbsync other; notmuch new<enter>" "run mbsync to sync all mail"
-
-# Save as draft
-bind compose p postpone-message
-bind index   p recall-message
-
-# Quickly view attachments
-bind attach <return> view-mailcap
-
 # Show all other directories
 set mask="*"
 
-# Gmail-style archive and delete
-macro pager d "<exit>d" "trash"
-macro index D "<tag-thread><tag-prefix>d" "trash thread"
-macro index e "<save-message>+Archive<enter>" "archive"
-macro pager e "<exit>e" "archive"
-macro index E "<tag-thread><tag-prefix>e" "archive thread"
-macro index q "<sync-mailbox><quit>"
+macro index \Cr "<tag-pattern>~U<enter>\
+  <tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+  "mark all messages as read"
 
-# Gmail-style move dialog (whole thread)
-macro index M "<tag-thread><tag-prefix><save-message>?/" "move thread to mailbox"
-
-macro index \Cr "<tag-pattern>~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
-
-# Quickly change mailboxes (consider using gmail shortcuts (gi, etc.))
-macro index c  "<change-folder>?"     "change folder"
-macro index gi "<change-folder>+Inbox<enter>"   "go to inbox"
-macro pager gi "<exit>gi"                       "go to inbox"
-macro index,pager \' "gi"                       "go to inbox"
-
-# Search with notmuch
 macro index S \
-  "<enter-command>set old_pipe_decode=\$pipe_decode old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-  <shell-escape>$XDG_CONFIG_HOME/mutt/mnm.py search<enter>\
+  "<enter-command><enter>\
+  <shell-escape>$XDG_CONFIG_HOME/mutt/notmuchsearch.py search<enter>\
   <change-folder-readonly>$MAILDIR/+search<enter>\
-  <enter-command>set pipe_decode=\$old_pipe_decode wait_key=\$old_wait_key<enter>" \
+  <enter-command><enter>" \
   "search mail (using notmuch)"
 macro index,pager \` \
-  "<enter-command>set old_pipe_decode=\$pipe_decode old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-  <pipe-message>$XDG_CONFIG_HOME/mutt/mnm.py thread<enter>\
+  "<enter-command><enter>\
+  <pipe-message>$XDG_CONFIG_HOME/mutt/notmuchsearch.py thread<enter>\
   <change-folder-readonly>$MAILDIR/+search<enter>\
-  <enter-command>set pipe_decode=\$old_pipe_decode wait_key=\$old_wait_key<enter>" \
+  <enter-command><enter>" \
   "reconstruct thread (using notmuch)"
 
 # Unlimit (show [a]ll)
-macro index a "<limit>all\n" "show all messages (undo limit)"
+macro index ga "<limit>all\n" "show all messages (undo limit)"
 
-macro pager U "|urlview<enter>" "call urlview to open links"
-
-bind index - collapse-thread
-bind index _ collapse-all
-
-bind index,pager R        group-reply
-macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<enter>" "open in vim"
+macro pager U "|urlscan<enter>" "call urlscan to open links"
 

@@ -1,0 +1,58 @@
+#[DKIMValidityFilter]
+#[DMARCReportInspectionFilter]
+
+[MeFilter]
+
+[SpamFilter]
+
+[KillThreadsFilter]
+
+[ListMailsFilter]
+
+#[SentMailsFilter]
+[ArchiveSentMailsFilter]
+sent_tag = sent
+#to_transform = user@domain[:tag1;tag2]
+
+#[InboxFilter]
+
+[MailMover]
+folders = gmail/INBOX
+rename = True
+gmail/INBOX = 'from:roland AND subject:test':xyzdir
+
+#[MailMover]
+#folders = gmail/INBOX gmail/spam
+#rename = True
+#inbox = 'tag:spam':spam 'NOT tag:inbox AND NOT tag:spam':archive
+#archive = 'tag:spam':spam
+#spam = 'NOT tag:spam AND tag:inbox':inbox 'NOT tag:spam AND NOT tag:inbox':archive
+
+[FolderNameFilter]
+maildir_separator = /
+folder_lowercases = true
+#folder_explicit_list = folder1 folder2/sub2
+#folder_blacklist = chello/INBOX gmail/INBOX
+#folder_transform = folder1:tag1 folder2:tag2
+
+[Filter.1]
+message = untag new for xyzdir
+query = "tag:xyzdir"
+tags = -new
+
+#[HeaderMatchingFilter.1]
+#header = Subject
+#pattern = (^Perforce change .*)
+#tags = -new;-unread;+archive;+perforce
+#
+#[HeaderMatchingFilter.2]
+#header = From
+#pattern = (^Perforce change .*)
+#tags = -new;-unread;+archive;+perforce
+#
+#[Filter.1]
+#message = Tag calendar invites
+#query = "BEGIN:VCALENDAR"
+#tags = +invites
+
+# vim: ft=conf

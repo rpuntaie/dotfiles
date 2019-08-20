@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+_MBSYNCRC_="$(cat `which mbsync` | sed -ne 's/.*mbsync -c \([^ ]*\) .*/\1/p')"
+MBSYNCRC=`eval echo $_MBSYNCRC_`
+
+CHANNEL=$(cat $MBSYNCRC | sed -ne "s/Group\s*//p")
+if [[ -z $CHANNEL ]]; then
+    CHANNEL=$(cat $MBSYNCRC | sed -ne "s/Channel\s*//p" | sort -u)
+fi
+
+LOCALSTORES=$(cat $MBSYNCRC | sed -ne "s/Path\s*//p")
+
+function _maildirs()
+{
+    for store in $LOCALSTORES; do
+        #for accounts this should not create cur,new,tmp
+        #but leaving them as they do no harm
+        #`afew --move-mails` needs them for local target mailboxes
+        mkdir -p ${store/#\~/$HOME}/{cur,new,tmp}
+    done
+}
+
+function _sync()
+{
+    for account in $CHANNEL; do
+        mbsync $account
+    done
+    notmuch new
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if [[ ! -f $MAILDIR/aliases ]]; then
+        touch $MAILDIR/aliases
+    fi
+    _maildirs
+    _sync
+fi

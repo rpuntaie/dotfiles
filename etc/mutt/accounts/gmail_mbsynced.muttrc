@@ -1,0 +1,23 @@
+# vim: syntax=muttrc
+
+set from = "roland.puntaier@gmail.com"
+
+set sendmail="/usr/bin/msmtp -a gmail"
+macro index o "<shell-escape>mbsync gmail<enter>" "run mbsync to sync gmail"
+set folder = "$MAILDIR"/gmail
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+mailboxes  "+-- gmail ----------------" \
+            +INBOX \
+            +Drafts \
+            +Sent \
+            +Starred \
+            +Important \
+            +Spam \
+            +Trash \
+
+# differentiate mailboxes in statusline:
+color   status          black            yellow

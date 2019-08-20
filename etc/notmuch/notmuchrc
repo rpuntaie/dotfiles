@@ -1,15 +1,22 @@
 [database]
 path=/home/roland/.local/var/mail
+
 [user]
 name=Roland Puntaier
 primary_email=roland.puntaier@gmail.com
 other_email=roland.puntaier@chello.at
+
 [new]
-tags=unread;inbox;
+tags=new
 ignore=
+
 [search]
 exclude_tags=deleted;spam;
+
 [maildir]
 synchronize_flags=true
+
 [crypto]
 gpg_path=gpg
+
+# vim: ft=conf

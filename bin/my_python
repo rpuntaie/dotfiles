@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 pip install --user rstdoc #documentation
 pip install --user rst2confluence #for jira
+pip install --user click-man #man pages for click apps
 pip install --user autopep8 #used in vim to reformat
 pip install --user when-changed #... file/dir -c command
 pip install --user pygame #graphics

@@ -1,5 +1,5 @@
 [Unit]
-Description=Quick mail synchronization
+Description=Mail synchronization
 
 [Service]
 Type=oneshot

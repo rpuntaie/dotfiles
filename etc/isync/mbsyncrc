@@ -61,3 +61,5 @@ Channel gmail-important
 Channel gmail-spam
 Channel gmail-trash
 
+MaildirStore local-xyzdir
+Path ~/.local/var/mail/xyzdir/

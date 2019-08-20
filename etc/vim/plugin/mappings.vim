@@ -115,7 +115,8 @@ nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-
 endif
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
-vnoremap <leader>m y<C-W><C-W><C-W>""<CR><C-W><C-W>gv<ESC>
+nnoremap <leader>mm yiw<C-W><C-W>echo $<C-W>""<CR><C-W><C-W>
+vnoremap <leader>m y<C-W><C-W><C-W>""<CR><C-W><C-W>gv<ESC>j
 vnoremap <leader>mm y<C-W><C-W>echo <C-W>""<CR><C-W><C-W>gv<ESC>
 """ `,j2`: to jira (pip rst2confluence needed}
 map <leader>j2 :py3 tojira()<CR>

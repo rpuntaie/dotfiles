@@ -1,9 +1,12 @@
-#------------------------------------------------------------------------------
-# General
+set realname = "$NAME"
 
-set my_pass_gmail = `pass gmail/roland.puntaier@gmail.com`
-set my_pass_chello = `pass magenta.at/roland.puntaier@chello.at`
-set my_accounts = "$XDG_CONFIG_HOME"/mutt/accounts
+# override defaults
+set assumed_charset = "utf-8"
+set send_charset = "utf-8"
+set charset = "utf-8"
+set imap_check_subscribed = yes
+set ssl_force_tls = yes
+set mbox_type = Maildir
 
 # Cache
 set header_cache = "$XDG_CACHE_HOME"/mutt/
@@ -16,7 +19,7 @@ set alias_file = "$MAILDIR"/aliases
 set mailcap_path = "$XDG_CONFIG_HOME"/mutt/mailcap
 
 #Notification
-set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
+#set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # Use GPG2 instead of gpg + PGP configuration
 source $XDG_CONFIG_HOME/mutt/pgp.muttrc
@@ -26,21 +29,20 @@ set pgp_timeout = 3600
 set crypt_autosign = no
 set crypt_replyencrypt = yes
 
+# accounts
+source $XDG_CONFIG_HOME/mutt/accounts.muttrc
+
 # view control
-#source $XDG_CONFIG_HOME/mutt/view-control.muttrc
+source $XDG_CONFIG_HOME/mutt/view-control.muttrc
+#source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
 
 # color
-#source $XDG_CONFIG_HOME/mutt/color/mutt-colors-neonwolf-256.muttrc
-source $XDG_CONFIG_HOME/mutt/color/ML.muttrc
+source $XDG_CONFIG_HOME/mutt/color/neonwolf-256.muttrc
+uncolor index "~N ~u"
+uncolor index "~N !~u"
+color index      brightcyan    default "~N ~u"  # new mailing list
+color index      brightyellow  default "~N !~u" # new non-mailing list
+#source $XDG_CONFIG_HOME/mutt/color/ML.muttrc
 
-# accounts
-# source $XDG_CONFIG_HOME/mutt/accounts/gmail.muttrc
-# folder-hook gmail/* "source $XDG_CONFIG_HOME/mutt/accounts/gmail.muttrc"
 
-account-hook . 'unset imap_user imap_pass'
-account-hook roland.puntaier@imap.gmail.com 'set imap_user="roland.puntaier@gmail.com" imap_pass=$my_pass_gmail'
-account-hook roland.puntaier@imap.gmail.at 'set imap_user="roland.puntaier@chello.at" imap_pass=$my_pass_chello'
-
-folder-hook roland.puntaier@imap.gmail.com 'source $my_accounts/gmail.muttrc'
-folder-hook roland.puntaier@imap.chello.at 'source $my_accounts/chello.muttrc'
 

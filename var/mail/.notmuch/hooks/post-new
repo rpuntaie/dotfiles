@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+afew -mn
+afew -tn
