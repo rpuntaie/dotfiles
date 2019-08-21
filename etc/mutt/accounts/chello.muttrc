@@ -1,7 +1,0 @@
-
-# Subscriptions
-# TODO: source $XDG_CONFIG_HOME/mutt/subscriptions.muttrc
-#
-#
-#account-hook roland.puntaier@imap.chello.at 'set imap_user="roland.puntaier@chello.at" imap_pass=$my_pass_chello'
-

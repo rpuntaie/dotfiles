@@ -236,26 +236,32 @@ Email
 The easiest ``mutt`` setup is via an ``folder=imaps://..``.
 All ``mutt`` operations are remoted (slow),
 locally using only the cache dir.
-
 For different accounts switch folder and
 have a ``folder-hook`` source the account settings file
 which applies::
 
   account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
 
+With POP ``folder`` is a local directory.
+
 A setup independent from ``mutt`` is better though,
 as it opens mail access via ``mutt`` as well as other mail tools.
-
-``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
-(or `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__)
-sync between remote and local mailboxes (see ``mbsyncrc``),
-via a ``systemd`` user service (``mbsync.service``).
 
 A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox`` 
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
 It can be used by programming languages and tools:
 
-- ``mutt``: set ``folder`` to the already *existing* local account path
+- ``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
+  (or `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__)
+  sync between remote and local mailboxes (see ``mbsyncrc``),
+  via a ``systemd`` user service (``mbsync.service``).
+
+- ``msmtp`` sends mails, not just for ``mutt``,
+  but also for the ``mail`` command (``s-nail`` and ``msmtp-mta`` packages)
+
+- ``mutt``: ``folder`` points to the already *existing* local account path.
+  Account specific mutt settings are generated from ``mbsyncrc``,
+  using ``Path``, which ends with the email address.
 
 - ``notmuch [new]`` indexes (new) mails, then
   ``notmuch address|count|dump|reply|search|show|tag`` can be `used <https://notmuchmail.org/manpages/>`__.

@@ -1,0 +1,11 @@
+subscribe stg@mur.at
+subscribe lfs-dev@linuxfromscratch.org
+subscribe python-doit@google-groups.com
+subscribe vim-dev@google-groups.com
+subscribe vim-use@google-groups.com
+subscribe sphinx-dev@google-groups.com
+subscribe arch-general@archlinux.org
+subscribe arch-dev-public@archlinux.org
+subscribe boost@lists.boost.org
+send-hook ~u my_hdr from: roland.puntaier@chello.at
+#send-hook ~C'^user@domain\.tld$' my_hdr from: roland.puntaier@chello.at

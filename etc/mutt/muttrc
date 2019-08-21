@@ -33,9 +33,6 @@ set crypt_replyencrypt = yes
 source $XDG_CONFIG_HOME/mutt/view-control.muttrc
 #source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
 
-# accounts
-source $XDG_CONFIG_HOME/mutt/accounts.muttrc
-
 # color
 source $XDG_CONFIG_HOME/mutt/color/neonwolf-256.muttrc
 uncolor index "~N ~u"
@@ -43,6 +40,13 @@ uncolor index "~N !~u"
 color index      brightcyan    default "~N ~u"  # new mailing list
 color index      brightyellow  default "~N !~u" # new non-mailing list
 #source $XDG_CONFIG_HOME/mutt/color/ML.muttrc
+
+# accounts
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+macro index,pager gm "<shell-escape>mymailsync" "script to sync, tag, sort all mail"
+source $MAILDIR/accounts.muttrc
+source $XDG_CONFIG_HOME/mutt/lists.muttrc
+
 
 
 

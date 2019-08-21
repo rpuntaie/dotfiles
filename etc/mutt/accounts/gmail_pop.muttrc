@@ -1,10 +1,12 @@
 # vim: filetype=neomuttrc
-# muttrc file for account roland.puntaier@gmail.com
 
-bind index gm fetch-mail
+# This is a sample POP mutt account without using msmtp and mbsync
+# This is not used!
 
 set from = "roland.puntaier@gmail.com"
 alias me Roland Puntaier <roland.puntaier@gmail.com>
+
+bind index gm fetch-mail
 
 # pop
 set pop_user = "roland.puntaier@gmail.com"
@@ -12,26 +14,12 @@ set pop_pass = `pass gmail/roland.puntaier@gmail.com`
 set pop_host = pops://pop.gmail.com:995
 set pop_delete = yes
 
-set sendmail="/usr/bin/msmtp -a gmail"
-set folder = "$MAILDIR"/gmail
+set folder = "$MAILDIR"/roland.puntaier@gmail.com
 set spoolfile = "+INBOX"
 set record = "+Sent"
 set postponed = "+Drafts"
 set trash = "+Trash"
 
-mailboxes  "+-- gmail ----------------" \
-            +INBOX \
-            +Drafts \
-            +Sent \
-            +Starred \
-            +Important \
-            +Spam \
-            +Trash \
-
 # smtp
-set smtp_pass    = `pass gmail/roland.puntaier@gmail.com`
+set smtp_pass    = $pop_pass
 set smtp_url     = "smtp://roland.puntaier@smtp.gmail.com:587"
-
-# differentiate mailboxes in statusline:
-color   status          black            yellow
-

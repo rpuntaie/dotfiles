@@ -17,27 +17,23 @@ sent_tag = sent
 #[InboxFilter]
 
 [MailMover]
-folders = gmail/INBOX
+folders = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
 rename = True
-gmail/INBOX = 'from:roland AND subject:test':xyzdir
-
-#[MailMover]
-#folders = gmail/INBOX gmail/spam
-#rename = True
-#inbox = 'tag:spam':spam 'NOT tag:inbox AND NOT tag:spam':archive
-#archive = 'tag:spam':spam
-#spam = 'NOT tag:spam AND tag:inbox':inbox 'NOT tag:spam AND NOT tag:inbox':archive
+roland.puntaier@chello.at/INBOX = 'from:linkedin':linkedin 'from:facebook':facebook 'from:tripadvisor':tripadvisor 'from:couchsurfing.com':couchsurfing 'to:stg@mur.at':stg 'from:bitbucket OR from:github':git 'to:python-':python 'to:sphinx-':sphinx 'to:vim-':vim 'to:arch-':arch 'to:boost.org':boost 'lfs-':LFS
+roland.puntaier@gmail.com/INBOX = 'from:flixbus':flixbus 'from:freenode':freenode 'from:europeregistry':europeregistry 'from:google':google 'from:apple':apple 'from:gitlab':git 'from:booking':booking
+puntaier.roland@gmail.com/INBOX = 'from:google':google 'from:quora':quora
+dontbite71@gmail.com/INBOX = 'from:ryanairmail':ryanair 'from:apple':apple 'from:google':google 'from:quora':quora
 
 [FolderNameFilter]
 maildir_separator = /
 folder_lowercases = true
 #folder_explicit_list = folder1 folder2/sub2
-#folder_blacklist = chello/INBOX gmail/INBOX
+folder_blacklist = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
 #folder_transform = folder1:tag1 folder2:tag2
 
 [Filter.1]
-message = untag new for xyzdir
-query = "tag:xyzdir"
+message = untag new local mailboxes
+query = "tag:apple OR tag:arch OR tag:booking OR tag:boost OR tag:couchsurfing OR tag:europeregistry OR tag:facebook OR tag:flixbus OR tag:freenode OR tag:git OR tag:google OR tag:LFS OR tag:linkedin OR tag:python OR tag:quora OR tag:ryanair OR tag:sphinx OR tag:stg OR tag:tripadvisor OR tag:vim"
 tags = -new
 
 #[HeaderMatchingFilter.1]
@@ -45,12 +41,7 @@ tags = -new
 #pattern = (^Perforce change .*)
 #tags = -new;-unread;+archive;+perforce
 #
-#[HeaderMatchingFilter.2]
-#header = From
-#pattern = (^Perforce change .*)
-#tags = -new;-unread;+archive;+perforce
-#
-#[Filter.1]
+#[Filter.2]
 #message = Tag calendar invites
 #query = "BEGIN:VCALENDAR"
 #tags = +invites

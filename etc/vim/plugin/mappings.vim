@@ -34,8 +34,9 @@ command! FF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submat
 command! Ff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-2)','g')
 """ `,hh`: vim help for word under cursor
 nmap <leader>hh :help <C-R><C-W><CR>
-""" `,bd`: close buffer, but not window
+""" `,b{d w}`: delete/wipe buffer, but not window
 map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+map <leader>bw :bp<bar>sp<bar>bn<bar>bw<CR>
 """ `,ww`: look up in wordnet (wn needed)
 nmap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `,l{ramkj}`: load russian accents mathematic fntc english

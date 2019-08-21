@@ -3,60 +3,254 @@ SyncState *
 Create Both
 Expunge Both
 
-IMAPAccount gmail
+
+
+
+
+IMAPAccount roland_puntaier_at_gmail
 Host imap.gmail.com
 User roland.puntaier@gmail.com
 PassCmd "pass gmail/roland.puntaier@gmail.com"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-IMAPStore gmail-remote
-Account gmail
+IMAPStore roland_puntaier_at_gmail-remote
+Account roland_puntaier_at_gmail
 
-MaildirStore gmail-local
-Path ~/.local/var/mail/gmail/
-Inbox ~/.local/var/mail/gmail/INBOX
+MaildirStore roland_puntaier_at_gmail-local
+Path ~/.local/var/mail/roland.puntaier@gmail.com/
+Inbox ~/.local/var/mail/roland.puntaier@gmail.com/INBOX
 
-Channel gmail-default
-Master :gmail-remote:
-Slave :gmail-local:
+Channel roland_puntaier_at_gmail-default
+Master :roland_puntaier_at_gmail-remote:
+Slave :roland_puntaier_at_gmail-local:
 Patterns INBOX
 
-Channel gmail-drafts
-Master :gmail-remote:"[Gmail]/Drafts"
-Slave :gmail-local:Drafts
+Channel roland_puntaier_at_gmail-drafts
+Master :roland_puntaier_at_gmail-remote:"[Gmail]/Drafts"
+Slave :roland_puntaier_at_gmail-local:Drafts
 Create Slave
 
-Channel gmail-sent
-Master :gmail-remote:"[Gmail]/Sent Mail"
-Slave :gmail-local:Sent
+Channel roland_puntaier_at_gmail-sent
+Master :roland_puntaier_at_gmail-remote:"[Gmail]/Sent Mail"
+Slave :roland_puntaier_at_gmail-local:Sent
 Create Slave
 
-Channel gmail-starred
-Master :gmail-remote:"[Gmail]/Starred"
-Slave :gmail-local:Starred
+Channel roland_puntaier_at_gmail-starred
+Master :roland_puntaier_at_gmail-remote:"[Gmail]/Starred"
+Slave :roland_puntaier_at_gmail-local:Starred
 Create Slave
 
-Channel gmail-important
-Master :gmail-remote:"[Gmail]/Important"
-Slave :gmail-local:Important
+Channel roland_puntaier_at_gmail-important
+Master :roland_puntaier_at_gmail-remote:"[Gmail]/Important"
+Slave :roland_puntaier_at_gmail-local:Important
 Create Slave
 
-Channel gmail-spam
-Master :gmail-remote:"[Gmail]/Spam"
-Slave :gmail-local:Spam
+Channel roland_puntaier_at_gmail-spam
+Master :roland_puntaier_at_gmail-remote:"[Gmail]/Spam"
+Slave :roland_puntaier_at_gmail-local:Spam
 Create Slave
 
-Channel gmail-trash
-Master :gmail-remote:"[Gmail]/Trash"
-Slave :gmail-local:Trash
+Channel roland_puntaier_at_gmail-trash
+Master :roland_puntaier_at_gmail-remote:"[Gmail]/Trash"
+Slave :roland_puntaier_at_gmail-local:Trash
 Create Slave
 
-Group gmail
-Channel gmail-default
-Channel gmail-drafts
-Channel gmail-sent
-Channel gmail-starred
-Channel gmail-important
-Channel gmail-spam
-Channel gmail-trash
+Group roland_puntaier_at_gmail
+Channel roland_puntaier_at_gmail-default
+Channel roland_puntaier_at_gmail-drafts
+Channel roland_puntaier_at_gmail-sent
+Channel roland_puntaier_at_gmail-starred
+Channel roland_puntaier_at_gmail-important
+Channel roland_puntaier_at_gmail-spam
+Channel roland_puntaier_at_gmail-trash
+
+
+
+
+
+IMAPAccount puntaier_roland_at_gmail
+Host imap.gmail.com
+User puntaier.roland@gmail.com
+PassCmd "pass gmail/puntaier.roland@gmail.com"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore puntaier_roland_at_gmail-remote
+Account puntaier_roland_at_gmail
+
+MaildirStore puntaier_roland_at_gmail-local
+Path ~/.local/var/mail/puntaier.roland@gmail.com/
+Inbox ~/.local/var/mail/puntaier.roland@gmail.com/INBOX
+
+Channel puntaier_roland_at_gmail-default
+Master :puntaier_roland_at_gmail-remote:
+Slave :puntaier_roland_at_gmail-local:
+Patterns INBOX
+
+Channel puntaier_roland_at_gmail-drafts
+Master :puntaier_roland_at_gmail-remote:"[Gmail]/Drafts"
+Slave :puntaier_roland_at_gmail-local:Drafts
+Create Slave
+
+Channel puntaier_roland_at_gmail-sent
+Master :puntaier_roland_at_gmail-remote:"[Gmail]/Sent Mail"
+Slave :puntaier_roland_at_gmail-local:Sent
+Create Slave
+
+Channel puntaier_roland_at_gmail-starred
+Master :puntaier_roland_at_gmail-remote:"[Gmail]/Starred"
+Slave :puntaier_roland_at_gmail-local:Starred
+Create Slave
+
+Channel puntaier_roland_at_gmail-important
+Master :puntaier_roland_at_gmail-remote:"[Gmail]/Important"
+Slave :puntaier_roland_at_gmail-local:Important
+Create Slave
+
+Channel puntaier_roland_at_gmail-spam
+Master :puntaier_roland_at_gmail-remote:"[Gmail]/Spam"
+Slave :puntaier_roland_at_gmail-local:Spam
+Create Slave
+
+Channel puntaier_roland_at_gmail-trash
+Master :puntaier_roland_at_gmail-remote:"[Gmail]/Trash"
+Slave :puntaier_roland_at_gmail-local:Trash
+Create Slave
+
+Group puntaier_roland_at_gmail
+Channel puntaier_roland_at_gmail-default
+Channel puntaier_roland_at_gmail-drafts
+Channel puntaier_roland_at_gmail-sent
+Channel puntaier_roland_at_gmail-starred
+Channel puntaier_roland_at_gmail-important
+Channel puntaier_roland_at_gmail-spam
+Channel puntaier_roland_at_gmail-trash
+
+
+
+
+
+
+IMAPAccount dontbite71_at_gmail
+Host imap.gmail.com
+User dontbite71@gmail.com
+PassCmd "pass gmail/dontbite71@gmail.com"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore dontbite71_at_gmail-remote
+Account dontbite71_at_gmail
+
+MaildirStore dontbite71_at_gmail-local
+Path ~/.local/var/mail/dontbite71@gmail.com/
+Inbox ~/.local/var/mail/dontbite71@gmail.com/INBOX
+
+Channel dontbite71_at_gmail-default
+Master :dontbite71_at_gmail-remote:
+Slave :dontbite71_at_gmail-local:
+Patterns INBOX
+
+Channel dontbite71_at_gmail-drafts
+Master :dontbite71_at_gmail-remote:"[Gmail]/Drafts"
+Slave :dontbite71_at_gmail-local:Drafts
+Create Slave
+
+Channel dontbite71_at_gmail-sent
+Master :dontbite71_at_gmail-remote:"[Gmail]/Sent Mail"
+Slave :dontbite71_at_gmail-local:Sent
+Create Slave
+
+Channel dontbite71_at_gmail-starred
+Master :dontbite71_at_gmail-remote:"[Gmail]/Starred"
+Slave :dontbite71_at_gmail-local:Starred
+Create Slave
+
+Channel dontbite71_at_gmail-important
+Master :dontbite71_at_gmail-remote:"[Gmail]/Important"
+Slave :dontbite71_at_gmail-local:Important
+Create Slave
+
+Channel dontbite71_at_gmail-spam
+Master :dontbite71_at_gmail-remote:"[Gmail]/Spam"
+Slave :dontbite71_at_gmail-local:Spam
+Create Slave
+
+Channel dontbite71_at_gmail-trash
+Master :dontbite71_at_gmail-remote:"[Gmail]/Trash"
+Slave :dontbite71_at_gmail-local:Trash
+Create Slave
+
+Group dontbite71_at_gmail
+Channel dontbite71_at_gmail-default
+Channel dontbite71_at_gmail-drafts
+Channel dontbite71_at_gmail-sent
+Channel dontbite71_at_gmail-starred
+Channel dontbite71_at_gmail-important
+Channel dontbite71_at_gmail-spam
+Channel dontbite71_at_gmail-trash
+
+
+
+
+
+
+
+IMAPAccount roland.puntaier_at_chello
+Host mail.upcmail.at
+User roland.puntaier@chello.at
+PassCmd "pass chello/roland.puntaier@chello.at"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore roland.puntaier_at_chello-remote
+Account roland.puntaier_at_chello
+
+MaildirStore roland.puntaier_at_chello-local
+Path ~/.local/var/mail/roland.puntaier@chello.at/
+Inbox ~/.local/var/mail/roland.puntaier@chello.at/INBOX
+
+Channel roland.puntaier_at_chello-default
+Master :roland.puntaier_at_chello-remote:
+Slave :roland.puntaier_at_chello-local:
+Patterns INBOX
+
+Channel roland.puntaier_at_chello-drafts
+Master :roland.puntaier_at_chello-remote:"[chello]/Drafts"
+Slave :roland.puntaier_at_chello-local:Drafts
+Create Slave
+
+Channel roland.puntaier_at_chello-sent
+Master :roland.puntaier_at_chello-remote:"[chello]/Sent Mail"
+Slave :roland.puntaier_at_chello-local:Sent
+Create Slave
+
+Channel roland.puntaier_at_chello-starred
+Master :roland.puntaier_at_chello-remote:"[chello]/Starred"
+Slave :roland.puntaier_at_chello-local:Starred
+Create Slave
+
+Channel roland.puntaier_at_chello-important
+Master :roland.puntaier_at_chello-remote:"[chello]/Important"
+Slave :roland.puntaier_at_chello-local:Important
+Create Slave
+
+Channel roland.puntaier_at_chello-spam
+Master :roland.puntaier_at_chello-remote:"[chello]/Spam"
+Slave :roland.puntaier_at_chello-local:Spam
+Create Slave
+
+Channel roland.puntaier_at_chello-trash
+Master :roland.puntaier_at_chello-remote:"[chello]/Trash"
+Slave :roland.puntaier_at_chello-local:Trash
+Create Slave
+
+Group roland.puntaier_at_chello
+Channel roland.puntaier_at_chello-default
+Channel roland.puntaier_at_chello-drafts
+Channel roland.puntaier_at_chello-sent
+Channel roland.puntaier_at_chello-starred
+Channel roland.puntaier_at_chello-important
+Channel roland.puntaier_at_chello-spam
+Channel roland.puntaier_at_chello-trash
+
