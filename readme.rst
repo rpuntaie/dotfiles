@@ -233,28 +233,34 @@ Else, just ``restowdots`` again.
 Email
 =====
 
+My mail config is in ``etc/getmail/*`` as well as ``etc/isync/mbsyncrc``.
+``mutt`` account settings are generated from them by ``mymailsync``.
+
 The easiest ``mutt`` setup is via an ``folder=imaps://..``.
 All ``mutt`` operations are remoted (slow),
 locally using only the cache dir.
-For different accounts switch folder and
-have a ``folder-hook`` source the account settings file
+For different accounts, switch folder and
+have a ``folder-hook`` source the account settings file,
 which applies::
 
   account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
 
 With POP ``folder`` is a local directory.
 
-A setup independent from ``mutt`` is better though,
-as it opens mail access via ``mutt`` as well as other mail tools.
+A setup independent from ``mutt``,
+using ``Maildir`` format,
+allows using more tools.
+Syncing is done via a ``systemd`` user service (``mailsync.service``).
 
 A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox`` 
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
 It can be used by programming languages and tools:
 
-- ``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
-  (or `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__)
-  sync between remote and local mailboxes (see ``mbsyncrc``),
-  via a ``systemd`` user service (``mbsync.service``).
+- for IMAP, ``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
+  syncs between remote and local mailboxes (see ``mbsyncrc``).
+  An alternative would have been `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__
+
+- for POP mailboxes I use `getmail <https://wiki.archlinux.org/index.php/Getmail>`__
 
 - ``msmtp`` sends mails, not just for ``mutt``,
   but also for the ``mail`` command (``s-nail`` and ``msmtp-mta`` packages)
@@ -275,7 +281,9 @@ It can be used by programming languages and tools:
   `moving <https://github.com/afewmail/afew/blob/master/docs/move_mode.rst>`__ mails.
   See `query format <https://xapian.org/docs/queryparser.html>`__.
 
-- `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts
+- `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts.
+
+- ``mailx``: ``echo 'message body test' | mailx -s "test with mailx" <email>``
 
 Since the messages are text, they can be search with ``ag``, ``rg`, ``vimgrep``, ...
 

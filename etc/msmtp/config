@@ -3,7 +3,7 @@ auth            on
 tls             on
 tls_starttls    on
 tls_trust_file  /etc/ssl/certs/ca-certificates.crt
-logfile         ~/.local/var/log/msmtp.log
+#logfile         ~/.local/var/log/msmtp.log
 
 account         roland.puntaier@gmail.com
 host            smtp.gmail.com

@@ -12,6 +12,6 @@ path = ~/.local/var/mail/roland.puntaier@chello.at/INBOX/
 [options]
 read_all = true
 delete = true
-#message_log = ~/.local/var/mail /roland.puntaier@chello.at/log
+#message_log = ~/.local/var/log/getmail.log
 
 # vim: ft=conf
