@@ -6,8 +6,6 @@
 set from = "roland.puntaier@gmail.com"
 alias me Roland Puntaier <roland.puntaier@gmail.com>
 
-bind index gm fetch-mail
-
 # pop
 set pop_user = "roland.puntaier@gmail.com"
 set pop_pass = `pass gmail/roland.puntaier@gmail.com`

@@ -1,0 +1,17 @@
+[retriever]
+type = SimplePOP3SSLRetriever
+server = mail.upcmail.at
+username = roland.puntaier@chello.at
+port = 995
+password_command = ("pass", "magenta.at/roland.puntaier@chello.at")
+
+[destination]
+type = Maildir
+path = ~/.local/var/mail/roland.puntaier@chello.at/INBOX/
+
+[options]
+read_all = true
+delete = true
+#message_log = ~/.local/var/mail /roland.puntaier@chello.at/log
+
+# vim: ft=conf

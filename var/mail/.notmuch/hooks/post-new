@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 AFEWRC=$XDG_CONFIG_HOME/afew/config
-FOLDERS=$(sed -ne "s/^[A-z0-9\/]\+ = \('[^']\+':\w\+.*\)\>/\1/p" $AFEWRC | sed -e "s/ '/\n'/g" | sed -ne "s/.*'://p" | sort -u)
+FOLDERS=$(sed -ne "s/^[A-z0-9\.@\/]\+ = \('[^']\+':\w\+.*\)\>/\1/p" $AFEWRC | sed -e "s/ '/\n'/g" | sed -ne "s/.*'://p" | sort -u)
 for fldr in $FOLDERS; do
     mkdir -p $MAILDIR/$fldr/{cur,new,tmp}
 done

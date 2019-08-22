@@ -27,11 +27,11 @@ user            dontbite71@gmail.com
 passwordeval    "pass gmail/dontbite71@gmail.com"
 
 account         roland.puntaier@chello.at
-host            mail.upc.at
+host            mail.upcmail.at
 port            465
 from            roland.puntaier@chello.at
 user            roland.puntaier@chello.at
-passwordeval    "pass chello/roland.puntaier@chello.at"
+passwordeval    "pass magenta.at/roland.puntaier@chello.at"
 
 account default : roland.puntaier@gmail.com
 

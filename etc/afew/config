@@ -19,10 +19,10 @@ sent_tag = sent
 [MailMover]
 folders = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
 rename = True
-roland.puntaier@chello.at/INBOX = 'from:linkedin':linkedin 'from:facebook':facebook 'from:tripadvisor':tripadvisor 'from:couchsurfing.com':couchsurfing 'to:stg@mur.at':stg 'from:bitbucket OR from:github':git 'to:python-':python 'to:sphinx-':sphinx 'to:vim-':vim 'to:arch-':arch 'to:boost.org':boost 'lfs-':LFS
-roland.puntaier@gmail.com/INBOX = 'from:flixbus':flixbus 'from:freenode':freenode 'from:europeregistry':europeregistry 'from:google':google 'from:apple':apple 'from:gitlab':git 'from:booking':booking
-puntaier.roland@gmail.com/INBOX = 'from:google':google 'from:quora':quora
-dontbite71@gmail.com/INBOX = 'from:ryanairmail':ryanair 'from:apple':apple 'from:google':google 'from:quora':quora
+roland.puntaier@chello.at/INBOX = 'from:linkedin':_/linkedin 'from:facebook':_/facebook 'from:tripadvisor':_/tripadvisor 'from:couchsurfing.com':_/couchsurfing 'to:stg@mur.at':_/stg 'from:bitbucket OR from:github':_/git 'to:python-':_/python 'to:sphinx-':_/sphinx 'to:vim-':_/vim 'to:arch-':_/arch 'to:boost.org':_/boost 'lfs-':_/LFS
+roland.puntaier@gmail.com/INBOX = 'from:flixbus':_/flixbus 'from:freenode':_/freenode 'from:europeregistry':_/europeregistry 'from:google':_/google 'from:apple':_/apple 'from:gitlab':_/git 'from:booking':_/booking
+puntaier.roland@gmail.com/INBOX = 'from:google':_/google 'from:quora':_/quora
+dontbite71@gmail.com/INBOX = 'from:ryanairmail':_/ryanair 'from:apple':_/apple 'from:google':_/google 'from:quora':_/quora
 
 [FolderNameFilter]
 maildir_separator = /

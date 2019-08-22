@@ -1,5 +1,6 @@
 CopyArrivalDate yes
 SyncState *
+Sync All
 Create Both
 Expunge Both
 
@@ -56,12 +57,10 @@ Master :roland_puntaier_at_gmail-remote:"[Gmail]/Trash"
 Slave :roland_puntaier_at_gmail-local:Trash
 Create Slave
 
-Group roland_puntaier_at_gmail
+Group roland.puntaier@gmail.com
 Channel roland_puntaier_at_gmail-default
 Channel roland_puntaier_at_gmail-drafts
 Channel roland_puntaier_at_gmail-sent
-Channel roland_puntaier_at_gmail-starred
-Channel roland_puntaier_at_gmail-important
 Channel roland_puntaier_at_gmail-spam
 Channel roland_puntaier_at_gmail-trash
 
@@ -118,7 +117,7 @@ Master :puntaier_roland_at_gmail-remote:"[Gmail]/Trash"
 Slave :puntaier_roland_at_gmail-local:Trash
 Create Slave
 
-Group puntaier_roland_at_gmail
+Group puntaier.roland@gmail.com
 Channel puntaier_roland_at_gmail-default
 Channel puntaier_roland_at_gmail-drafts
 Channel puntaier_roland_at_gmail-sent
@@ -181,7 +180,7 @@ Master :dontbite71_at_gmail-remote:"[Gmail]/Trash"
 Slave :dontbite71_at_gmail-local:Trash
 Create Slave
 
-Group dontbite71_at_gmail
+Group dontbite71@gmail.com
 Channel dontbite71_at_gmail-default
 Channel dontbite71_at_gmail-drafts
 Channel dontbite71_at_gmail-sent
@@ -190,67 +189,4 @@ Channel dontbite71_at_gmail-important
 Channel dontbite71_at_gmail-spam
 Channel dontbite71_at_gmail-trash
 
-
-
-
-
-
-
-IMAPAccount roland.puntaier_at_chello
-Host mail.upcmail.at
-User roland.puntaier@chello.at
-PassCmd "pass chello/roland.puntaier@chello.at"
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore roland.puntaier_at_chello-remote
-Account roland.puntaier_at_chello
-
-MaildirStore roland.puntaier_at_chello-local
-Path ~/.local/var/mail/roland.puntaier@chello.at/
-Inbox ~/.local/var/mail/roland.puntaier@chello.at/INBOX
-
-Channel roland.puntaier_at_chello-default
-Master :roland.puntaier_at_chello-remote:
-Slave :roland.puntaier_at_chello-local:
-Patterns INBOX
-
-Channel roland.puntaier_at_chello-drafts
-Master :roland.puntaier_at_chello-remote:"[chello]/Drafts"
-Slave :roland.puntaier_at_chello-local:Drafts
-Create Slave
-
-Channel roland.puntaier_at_chello-sent
-Master :roland.puntaier_at_chello-remote:"[chello]/Sent Mail"
-Slave :roland.puntaier_at_chello-local:Sent
-Create Slave
-
-Channel roland.puntaier_at_chello-starred
-Master :roland.puntaier_at_chello-remote:"[chello]/Starred"
-Slave :roland.puntaier_at_chello-local:Starred
-Create Slave
-
-Channel roland.puntaier_at_chello-important
-Master :roland.puntaier_at_chello-remote:"[chello]/Important"
-Slave :roland.puntaier_at_chello-local:Important
-Create Slave
-
-Channel roland.puntaier_at_chello-spam
-Master :roland.puntaier_at_chello-remote:"[chello]/Spam"
-Slave :roland.puntaier_at_chello-local:Spam
-Create Slave
-
-Channel roland.puntaier_at_chello-trash
-Master :roland.puntaier_at_chello-remote:"[chello]/Trash"
-Slave :roland.puntaier_at_chello-local:Trash
-Create Slave
-
-Group roland.puntaier_at_chello
-Channel roland.puntaier_at_chello-default
-Channel roland.puntaier_at_chello-drafts
-Channel roland.puntaier_at_chello-sent
-Channel roland.puntaier_at_chello-starred
-Channel roland.puntaier_at_chello-important
-Channel roland.puntaier_at_chello-spam
-Channel roland.puntaier_at_chello-trash
 

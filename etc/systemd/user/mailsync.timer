@@ -1,12 +1,12 @@
 [Unit]
-Description=Run mbsync every 5 minutes
+Description=Run mailsync every 5 minutes
 Wants=network.target
 After=network.target
 
 [Timer]
 OnBootSec=30s
 OnUnitActiveSec=5m
-Unit=mbsync.service
+Unit=mailsync.service
 Persistent=true
 
 [Install]
