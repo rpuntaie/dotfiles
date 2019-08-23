@@ -4,7 +4,7 @@ Dotfiles
 
 Uses `XDG <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__,
 reproducing `FHS <http://linux.die.net/man/7/hier>`__ under ``~/.local``.
-See 
+See
 `.pam_environment <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/home/.pam_environment>`__.
 Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for FHS compliance.
 
@@ -12,9 +12,9 @@ Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for F
 :share:     ``XDG_DATA_HOME``, user data needed by app
 :lib:       ``XDG_LIB_HOME``, libs for user
 :var/cache: ``XDG_CACHE_HOME``, tmp and cache needed by app
-:var/lib:   ``XDG_STATE_HOME``, libraries for app not tracked  
+:var/lib:   ``XDG_STATE_HOME``, libraries for app not tracked
 :var/log:   ``XDG_LOG_HOME``, app generated logs
-:opt: for not well integrated apps, 
+:opt: for not well integrated apps,
       e.g for `altera <https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh>`__
 :bin: user scripts
 :home: files symlinked from ``~`` for apps not honoring XDG
@@ -40,7 +40,7 @@ Installation
 Installation is handled by the ``install`` script according `rollarch`_.
 I chose
 `gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__ ``--no-folding``
-over directly cloning into ``.local`` 
+over directly cloning into ``.local``
 to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
 a nuisance when grep'ing.
 
@@ -56,9 +56,9 @@ or, if cloned already:
 
     ~/dotfiles/install
 
-The 
+The
 `install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
-script also installs user packages for python and nodejs or possibly 
+script also installs user packages for python and nodejs or possibly
 AUR packages using `yay <https://github.com/Jguer/yay>`__,
 but the latter I have integrate into the ``rpuntaie-meta`` package (end of file),
 which I serve via a local archlinux proxy.
@@ -132,7 +132,7 @@ For Python and ``restructuredText`` (RST) I use
 - vim plugin `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__
 - python package `rstdoc <https://github.com/rpuntaie/rstdoc>`__
 
-See further mappings and plugins see 
+See further mappings and plugins see
 `myvimrc <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/vim/doc/myvimrc.txt>`__.
 
 CLI
@@ -145,12 +145,12 @@ No need for ``cd``.
 
 Settings in ``Xresources``, ``xrdb -load <pth>`` for re-loading.
 
-Shortcuts: 
+Shortcuts:
 
 - copy/paste: ``C-M-c/v`` or ``C-M-x`` to enter ``urxvt-vim-scrollback``
 - edit command line with vim: ``ESC-v`` and ``ESC-:``
 - search:
-  ``CTRL-T`` for **fzf** 
+  ``CTRL-T`` for **fzf**
   ``CTRL-g[f b t r h]`` `for git <https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236>`__
 
 Commands:
@@ -219,7 +219,7 @@ Security
 
 ``~/.gnupg``:
 ``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
-Set it up before ``dotfiles``, as ``restowdots`` will 
+Set it up before ``dotfiles``, as ``restowdots`` will
 `use it for ssh <https://wiki.archlinux.org/index.php/GnuPG#SSH_agent>`__.
 Else, just ``restowdots`` again.
 
@@ -229,12 +229,27 @@ Else, just ``restowdots`` again.
 
 ``keybase`` for secure chat and file exchange (KBFS).
 
+Systemd User Services
+=====================
+
+``mpd`` and ``keybase`` are not enabled by default.
+Do e.g.::
+
+  systemctl --user enable --now mpd.service
 
 Email
 =====
 
 My mail config is in ``etc/getmail/*`` as well as ``etc/isync/mbsyncrc``.
 ``mutt`` account settings are generated from them by ``mymailsync``.
+
+To enable automatic syncing::
+
+  systemctl --user enable mailsync.timer --now
+
+else manually in mutt with ``gm`` or on CLI::
+
+  mymailsync
 
 The easiest ``mutt`` setup is via an ``folder=imaps://..``.
 All ``mutt`` operations are remoted (slow),
@@ -252,7 +267,7 @@ using ``Maildir`` format,
 allows using more tools.
 Syncing is done via a ``systemd`` user service (``mailsync.service``).
 
-A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox`` 
+A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox``
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
 It can be used by programming languages and tools:
 

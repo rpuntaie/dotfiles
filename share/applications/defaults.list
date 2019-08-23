@@ -18,6 +18,5 @@ image/svg=inkscape.desktop
 application/msword=writer.desktop
 text/csv=calc.desktop
 application/vnd.ms-excel=calc.desktop
-message/rfc822=thunderbird.desktop
 video/mp4=vlc.desktop
 audio/mp3=vlc.desktop

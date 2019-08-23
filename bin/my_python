@@ -6,17 +6,17 @@ pip install --user autopep8 #used in vim to reformat
 pip install --user when-changed #... file/dir -c command
 pip install --user pygame #graphics
 pip install --user cookiecutter #template projects
-pip install --user pymunk #2D physics engine
-pip install --user python-gantt
-pip install --user plotly #charting with html/js
+#pip install --user pymunk #2D physics engine
+#pip install --user python-gantt
+#pip install --user plotly #charting with html/js
 pip install --user nikola #static html generator
 pip install --user coloredlogs #color in python logging
-pip install --user pybtex #citations for Rnoweb
+#pip install --user pybtex #citations for Rnoweb
 pip install --user git+https://github.com/pre-commit/pre-commit #add hooks to git repo
 pip install --user komodo-python3-dbgp #debugging protocol for vim vdebug
-pip install --user aws-sam-cli #AWS Serverless Application Model
+#pip install --user aws-sam-cli #AWS Serverless Application Model
 pip install --user pint #physical units
-pip install --user face_recognition
+#pip install --user face_recognition
 #nvim
 pip install --user --no-binary :all: pynvim #neovim-python
 pip install --user neovim-remote #nvr to start and use nvim server

@@ -2,7 +2,6 @@ text/plain; $EDITOR %s ;
 text/x-diff;        $EDITOR '%s'
 text/x-shellscript; $EDITOR '%s'
 text/html; openfile %s ; nametemplate=%s.html
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
 application/zip;    file-roller '%s'
 image/*; feh %s ; copiousoutput
 video/*; setsid mpv --quiet %s &; copiousoutput
