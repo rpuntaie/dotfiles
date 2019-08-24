@@ -83,19 +83,15 @@ function _sync()
         fi
     else
         if [[ -f $MBSYNCRC ]]; then
-            CHANNEL=$(cat $MBSYNCRC | sed -ne "s/Group\s*//p")
-            if [[ -z $CHANNEL ]]; then
-                CHANNEL=$(cat $MBSYNCRC | sed -ne "s/Channel\s*//p" | sort -u)
-            fi
-            for account in $CHANNEL; do
-                /usr/bin/mbsync -c $MBSYNCRC $account
-            done
+            /usr/bin/mbsync -c $MBSYNCRC -a
         fi
         for gmrc in $GETMAILRCS; do
             /usr/bin/getmail --rcfile=${gmrc##*/} --getmaildir=$XDG_CONFIG_HOME/getmail
         done
     fi
-    notmuch new > /dev/null
+    echo notmuch ...
+    notmuch new &>/dev/null
+    echo done
     #notmuch also created afew MailMover target mailboxes
 }
 
