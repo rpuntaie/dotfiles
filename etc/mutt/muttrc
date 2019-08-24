@@ -34,7 +34,8 @@ source $XDG_CONFIG_HOME/mutt/view-control.muttrc
 #source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
 
 # color
-source $XDG_CONFIG_HOME/mutt/color/neonwolf-256.muttrc
+#source $XDG_CONFIG_HOME/mutt/color/solarized-dark-16.muttrc
+source $XDG_CONFIG_HOME/mutt/color/ML.muttrc
 uncolor index "~N ~u"
 uncolor index "~N !~u"
 color index      brightcyan    default "~N ~u"  # new mailing list
