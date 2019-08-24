@@ -95,7 +95,7 @@ function _sync()
             /usr/bin/getmail --rcfile=${gmrc##*/} --getmaildir=$XDG_CONFIG_HOME/getmail
         done
     fi
-    notmuch new
+    notmuch new > /dev/null
     #notmuch also created afew MailMover target mailboxes
 }
 

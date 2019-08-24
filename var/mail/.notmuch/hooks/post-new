@@ -6,5 +6,5 @@ for fldr in $FOLDERS; do
     mkdir -p $MAILDIR/$fldr/{cur,new,tmp}
 done
 
-afew -mn
-afew -tn
+afew -mn &>/dev/null
+afew -tn &>/dev/null
