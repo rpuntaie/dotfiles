@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+if ! systemctl --type service | grep net | grep active > /dev/null; then
+    echo no network
+fi
+
 # Optional parameter: email address
 # Without parameter: all emails
 WANT_EMAIL=$1

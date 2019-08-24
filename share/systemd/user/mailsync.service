@@ -1,0 +1,6 @@
+[Unit]
+Description=Mail synchronization
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/mymailsync
