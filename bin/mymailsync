@@ -2,6 +2,7 @@
 
 if ! systemctl --type service | grep net | grep active > /dev/null; then
     echo no network
+    exit 1
 fi
 
 # Optional parameter: email address

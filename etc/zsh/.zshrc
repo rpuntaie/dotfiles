@@ -1,7 +1,5 @@
 #order: [.zshenv] [.zprofile if login] [.zshrc if interactive] [.zlogin if login]
 
-. $XDG_CONFIG_HOME/sh/interactive
-
 export ZGEN_DIR="$XDG_STATE_HOME/.zgen"
 if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then
   echo "Zgen not found, bootstrapping."
@@ -64,4 +62,6 @@ bindkey -M vicmd : edit-command-line
 unsetopt correct
 
 . $XDG_CONFIG_HOME/zsh/fzf_options.zsh
+
+. $XDG_CONFIG_HOME/sh/interactive
 

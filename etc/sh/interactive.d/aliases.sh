@@ -39,6 +39,7 @@ alias xtex='xelatex -interaction=nonstopmode'
 
 alias sp='sudo pacman'
 alias mutt='neomutt'
+alias gm='mymailsync'
 
 alias :e="$EDITOR"
 alias :q=exit
