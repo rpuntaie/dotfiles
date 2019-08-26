@@ -165,7 +165,7 @@ CLI tools:
 - ``scrot`` to make screen shots via shortcuts ``M-s``, and ``M-u`` for current window.
 - ``feh`` for images
 - ``ranger`` for files
-- ``links -dump <url>`` for text from URL
+- ``w3m -dump <url>`` for text from URL
 - ``fd`` to search for files
 - ``fzf`` fuzzy find files
 - ``rg`` (ripgrep) and ``ag`` (the_silver_searcher) to search for text in files
@@ -249,23 +249,23 @@ To enable automatic syncing::
 
 else manually in mutt with ``gm`` or on CLI::
 
-  mymailsync
+  gm
 
-The easiest ``mutt`` setup is via an ``folder=imaps://..``.
-All ``mutt`` operations are remoted (slow),
-locally using only the cache dir.
-For different accounts, switch folder and
-have a ``folder-hook`` source the account settings file,
-which applies::
+.. note:: mutt directly to imap is slow
 
-  account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
+  The easiest ``mutt`` setup is via an ``folder=imaps://..``.
+  All ``mutt`` operations are remoted (slow),
+  locally using only the cache dir.
+  For different accounts, switch folder and
+  have a ``folder-hook`` source the account settings file,
+  which applies::
 
-With POP ``folder`` is a local directory.
+    account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
 
-A setup independent from ``mutt``,
-using ``Maildir`` format,
-allows using more tools.
-Syncing is done via a ``systemd`` user service (``mailsync.service``).
+  With POP ``folder`` is a local directory.
+
+My setup uses ``mutt`` only as viewer to the local ``Maildir`` folders,
+independent of whether created via POP or IMAP.
 
 A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox``
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
@@ -280,21 +280,28 @@ It can be used by programming languages and tools:
 - ``msmtp`` sends mails, not just for ``mutt``,
   but also for the ``mail`` command (``s-nail`` and ``msmtp-mta`` packages)
 
-- ``mutt``: ``folder`` points to the already *existing* local account path.
-  Account specific mutt settings are generated from ``mbsyncrc``,
-  using ``Path``, which ends with the email address.
-
 - ``notmuch [new]`` indexes (new) mails, then
-  ``notmuch address|count|dump|reply|search|show|tag`` can be `used <https://notmuchmail.org/manpages/>`__.
+  ``notmuch address|count|dump|reply|search|show|tag``
+  can be `used <https://notmuchmail.org/manpages/>`__.
+
+- ``mutt``: ``folder`` points to the already *existing* maildir folders.
+  ``mymailsync`` generates ``mutt`` settings for folders representing accounts
+  using ``Path`` in ``mbsyncrc`` (that must end with an email address).
+
+- `alot <https://www.archlinux.org/packages/community/any/alot/>`__
+  shows mails based on tags using ``notmuch``.
+  While in ``mutt`` a mail is in only one ``Maildir`` folder,
+  in ``alot`` it can figure in more listing.
 
 - Vim can be used as a MUA
   `via notmuch <https://github.com/notmuch/notmuch/blob/master/vim/notmuch.vim>`__.
 
-- `alot <https://www.archlinux.org/packages/community/any/alot/>`__ also uses ``notmuch``.
-
 - `afew <https://github.com/afewmail/afew>`__ is a python wrapper on ``notmuch`` for tagging and
   `moving <https://github.com/afewmail/afew/blob/master/docs/move_mode.rst>`__ mails.
-  See `query format <https://xapian.org/docs/queryparser.html>`__.
+  Note, that the `query format <https://xapian.org/docs/queryparser.html>`__
+  is not generally regular expressions: ``notmuch search <test your search pattern>``.
+  Specifically ``to:`` means ``To:`` and ``Cc:`` and accepts only
+  `names or email addresses <https://notmuchmail.org/manpages/notmuch-search-terms-7/>`__.
 
 - `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts.
 

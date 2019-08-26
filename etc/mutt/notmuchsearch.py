@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Notmuch search for mutt
+notmuchsearch: Notmuch search for mutt
 """
 
 import argparse

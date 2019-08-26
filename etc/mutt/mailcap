@@ -3,8 +3,8 @@ text/x-diff;        $EDITOR '%s'
 text/x-shellscript; $EDITOR '%s'
 text/html; openfile %s ; nametemplate=%s.html
 application/zip;    file-roller '%s'
-image/*; feh %s ; copiousoutput
-video/*; setsid mpv --quiet %s &; copiousoutput
+image/*; feh %s ;
+video/*; setsid mpv --quiet %s &;
 application/pdf; openfile %s ;
-application/pgp-encrypted; gpg -d '%s'; copiousoutput;
+application/pgp-encrypted; gpg -d '%s';
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s'

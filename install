@@ -135,7 +135,7 @@ First time vim and zsh will install plugins."
 ##PKG: inkscape
 ##PKG: vlc
 ##PKG: firefox
-##PKG: links
+##PKG: w3m
 ##PKG: browserpass-firefox
 ##PKG: eom
 ##PKG: feh

@@ -6,8 +6,6 @@ Expunge Both
 
 
 
-
-
 IMAPAccount roland_puntaier_at_gmail
 Host imap.gmail.com
 User roland.puntaier@gmail.com
@@ -35,16 +33,6 @@ Create Slave
 Channel roland_puntaier_at_gmail-sent
 Master :roland_puntaier_at_gmail-remote:"[Gmail]/Sent Mail"
 Slave :roland_puntaier_at_gmail-local:Sent
-Create Slave
-
-Channel roland_puntaier_at_gmail-starred
-Master :roland_puntaier_at_gmail-remote:"[Gmail]/Starred"
-Slave :roland_puntaier_at_gmail-local:Starred
-Create Slave
-
-Channel roland_puntaier_at_gmail-important
-Master :roland_puntaier_at_gmail-remote:"[Gmail]/Important"
-Slave :roland_puntaier_at_gmail-local:Important
 Create Slave
 
 Channel roland_puntaier_at_gmail-spam
@@ -97,16 +85,6 @@ Master :puntaier_roland_at_gmail-remote:"[Gmail]/Sent Mail"
 Slave :puntaier_roland_at_gmail-local:Sent
 Create Slave
 
-Channel puntaier_roland_at_gmail-starred
-Master :puntaier_roland_at_gmail-remote:"[Gmail]/Starred"
-Slave :puntaier_roland_at_gmail-local:Starred
-Create Slave
-
-Channel puntaier_roland_at_gmail-important
-Master :puntaier_roland_at_gmail-remote:"[Gmail]/Important"
-Slave :puntaier_roland_at_gmail-local:Important
-Create Slave
-
 Channel puntaier_roland_at_gmail-spam
 Master :puntaier_roland_at_gmail-remote:"[Gmail]/Spam"
 Slave :puntaier_roland_at_gmail-local:Spam
@@ -121,11 +99,8 @@ Group puntaier.roland@gmail.com
 Channel puntaier_roland_at_gmail-default
 Channel puntaier_roland_at_gmail-drafts
 Channel puntaier_roland_at_gmail-sent
-Channel puntaier_roland_at_gmail-starred
-Channel puntaier_roland_at_gmail-important
 Channel puntaier_roland_at_gmail-spam
 Channel puntaier_roland_at_gmail-trash
-
 
 
 
@@ -160,16 +135,6 @@ Master :dontbite71_at_gmail-remote:"[Gmail]/Sent Mail"
 Slave :dontbite71_at_gmail-local:Sent
 Create Slave
 
-Channel dontbite71_at_gmail-starred
-Master :dontbite71_at_gmail-remote:"[Gmail]/Starred"
-Slave :dontbite71_at_gmail-local:Starred
-Create Slave
-
-Channel dontbite71_at_gmail-important
-Master :dontbite71_at_gmail-remote:"[Gmail]/Important"
-Slave :dontbite71_at_gmail-local:Important
-Create Slave
-
 Channel dontbite71_at_gmail-spam
 Master :dontbite71_at_gmail-remote:"[Gmail]/Spam"
 Slave :dontbite71_at_gmail-local:Spam
@@ -184,8 +149,6 @@ Group dontbite71@gmail.com
 Channel dontbite71_at_gmail-default
 Channel dontbite71_at_gmail-drafts
 Channel dontbite71_at_gmail-sent
-Channel dontbite71_at_gmail-starred
-Channel dontbite71_at_gmail-important
 Channel dontbite71_at_gmail-spam
 Channel dontbite71_at_gmail-trash
 

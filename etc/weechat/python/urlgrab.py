@@ -166,7 +166,7 @@ SCRIPT_AUTHOR  = "David Rubin <drubin [At] smartcube [dot] co [dot] za>"
 SCRIPT_VERSION = "2.7"
 SCRIPT_LICENSE = "GPL"
 SCRIPT_DESC    = "Url functionality Loggin, opening of browser, selectable links"
-CONFIG_FILE_NAME= "urlgrab"
+CONFIG_FILE_NAME = "urlgrab"
 SCRIPT_COMMAND = "url"
 
 
