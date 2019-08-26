@@ -44,7 +44,3 @@ alias gm='mymailsync'
 alias :e="$EDITOR"
 alias :q=exit
 
-#background open and disown
-function open () {
-    xdg-open "$*" &!
-}
