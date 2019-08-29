@@ -4,17 +4,13 @@ Sync All
 Create Both
 Expunge Both
 
-
-
-IMAPAccount roland_puntaier_at_gmail
+IMAPStore roland_puntaier_at_gmail-remote
 Host imap.gmail.com
+Port 993
 User roland.puntaier@gmail.com
 PassCmd "pass gmail/roland.puntaier@gmail.com"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore roland_puntaier_at_gmail-remote
-Account roland_puntaier_at_gmail
 
 MaildirStore roland_puntaier_at_gmail-local
 Path ~/.local/var/mail/roland.puntaier@gmail.com/
@@ -51,20 +47,17 @@ Channel roland_puntaier_at_gmail-drafts
 Channel roland_puntaier_at_gmail-sent
 Channel roland_puntaier_at_gmail-spam
 Channel roland_puntaier_at_gmail-trash
+# End profile
 
 
 
-
-
-IMAPAccount puntaier_roland_at_gmail
+IMAPStore puntaier_roland_at_gmail-remote
 Host imap.gmail.com
+Port 993
 User puntaier.roland@gmail.com
 PassCmd "pass gmail/puntaier.roland@gmail.com"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore puntaier_roland_at_gmail-remote
-Account puntaier_roland_at_gmail
 
 MaildirStore puntaier_roland_at_gmail-local
 Path ~/.local/var/mail/puntaier.roland@gmail.com/
@@ -101,20 +94,16 @@ Channel puntaier_roland_at_gmail-drafts
 Channel puntaier_roland_at_gmail-sent
 Channel puntaier_roland_at_gmail-spam
 Channel puntaier_roland_at_gmail-trash
+# End profile
 
 
-
-
-
-IMAPAccount dontbite71_at_gmail
+IMAPStore dontbite71_at_gmail-remote
 Host imap.gmail.com
+Port 993
 User dontbite71@gmail.com
 PassCmd "pass gmail/dontbite71@gmail.com"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore dontbite71_at_gmail-remote
-Account dontbite71_at_gmail
 
 MaildirStore dontbite71_at_gmail-local
 Path ~/.local/var/mail/dontbite71@gmail.com/
@@ -151,5 +140,5 @@ Channel dontbite71_at_gmail-drafts
 Channel dontbite71_at_gmail-sent
 Channel dontbite71_at_gmail-spam
 Channel dontbite71_at_gmail-trash
-
+# End profile
 

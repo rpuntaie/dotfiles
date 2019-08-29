@@ -19,10 +19,10 @@ sent_tag = sent
 [MailMover]
 folders = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
 rename = True
-roland.puntaier@chello.at/INBOX = 'from:linkedin':_/linkedin 'from:facebook':_/facebook 'from:tripadvisor':_/tripadvisor 'from:couchsurfing.com':_/couchsurfing 'to:stg@mur.at':_/stg 'to:python-':_/python 'to:sphinx-':_/sphinx 'to:vim_dev or to:vim_use':_/vim 'to:arch-general or to:arch-dev-public':_/arch 'to:boost':_/boost 'to:lfs-dev':_/LFS 'from:bitbucket or from:github':_/git 
-roland.puntaier@gmail.com/INBOX = 'from:flixbus':_/flixbus 'from:freenode':_/freenode 'from:europeregistry':_/europeregistry 'from:google':_/google 'from:apple':_/apple 'from:gitlab':_/git 'from:booking':_/booking
-puntaier.roland@gmail.com/INBOX = 'from:google':_/google 'from:quora':_/quora
-dontbite71@gmail.com/INBOX = 'from:ryanairmail':_/ryanair 'from:apple':_/apple 'from:google':_/google 'from:quora':_/quora
+roland.puntaier@chello.at/INBOX = 'from:linkedin':roland.puntaier@chello.at/linkedin 'from:facebook':roland.puntaier@chello.at/facebook 'from:tripadvisor':roland.puntaier@chello.at/tripadvisor 'from:couchsurfing.com':roland.puntaier@chello.at/couchsurfing 'to:stg@mur.at':roland.puntaier@chello.at/stg 'to:python-':roland.puntaier@chello.at/python 'to:sphinx-':roland.puntaier@chello.at/sphinx 'to:vim_dev or to:vim_use':roland.puntaier@chello.at/vim 'to:arch-general or to:arch-dev-public':roland.puntaier@chello.at/arch 'to:boost':roland.puntaier@chello.at/boost 'to:lfs-dev':roland.puntaier@chello.at/LFS 'from:bitbucket or from:github':roland.puntaier@chello.at/git 
+roland.puntaier@gmail.com/INBOX = 'from:flixbus':roland.puntaier@gmail.com/flixbus 'from:freenode':roland.puntaier@gmail.com/freenode 'from:europeregistry':roland.puntaier@gmail.com/europeregistry 'from:google':roland.puntaier@gmail.com/google 'from:apple':roland.puntaier@gmail.com/apple 'from:gitlab':roland.puntaier@gmail.com/git 'from:booking':roland.puntaier@gmail.com/booking
+puntaier.roland@gmail.com/INBOX = 'from:google':puntaier.roland@gmail.com/google 'from:quora':puntaier.roland@gmail.com/quora
+dontbite71@gmail.com/INBOX = 'from:ryanairmail':dontbite71@gmail.com/ryanair 'from:apple':dontbite71@gmail.com/apple 'from:google':dontbite71@gmail.com/google 'from:quora':dontbite71@gmail.com/quora
 
 [FolderNameFilter]
 maildir_separator = /

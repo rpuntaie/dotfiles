@@ -289,9 +289,9 @@ It can be used by programming languages and tools:
   using ``Path`` in ``mbsyncrc`` (that must end with an email address).
 
 - `alot <https://www.archlinux.org/packages/community/any/alot/>`__
-  shows mails based on tags using ``notmuch``.
+  shows mails based on tags using ``notmuch`` (``alot taglist``).
   While in ``mutt`` a mail is in only one ``Maildir`` folder,
-  in ``alot`` it can figure in more listing.
+  in ``alot`` it can occur in more listing.
 
 - Vim can be used as a MUA
   `via notmuch <https://github.com/notmuch/notmuch/blob/master/vim/notmuch.vim>`__.

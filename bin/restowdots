@@ -45,6 +45,7 @@ stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
 # dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
 # ~/.ledgerrc
 # ~/.pam_environment
+mv -f ~/.bashrc ~/org.bashrc
 cd ~/dotfiles
 stow home
 cd ~

@@ -1,38 +1,36 @@
 defaults
-auth            on
-tls             on
-tls_starttls    on
-tls_trust_file  /etc/ssl/certs/ca-certificates.crt
-#logfile         ~/.local/var/log/msmtp.log
+auth on
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+#logfile ~/.local/var/log/msmtp.log
 
-account         roland.puntaier@gmail.com
-host            smtp.gmail.com
-port            587
-from            roland.puntaier@gmail.com
-user            roland.puntaier@gmail.com
-passwordeval    "pass gmail/roland.puntaier@gmail.com"
+account roland.puntaier@gmail.com
+host smtp.gmail.com
+port 587
+from roland.puntaier@gmail.com
+user roland.puntaier@gmail.com
+passwordeval "pass gmail/roland.puntaier@gmail.com"
 
-account         puntaier.roland@gmail.com
-host            smtp.gmail.com
-port            587
-from            puntaier.roland@gmail.com
-user            puntaier.roland@gmail.com
-passwordeval    "pass gmail/puntaier.roland@gmail.com"
+account puntaier.roland@gmail.com
+host smtp.gmail.com
+port 587
+from puntaier.roland@gmail.com
+user puntaier.roland@gmail.com
+passwordeval "pass gmail/puntaier.roland@gmail.com"
 
-account         dontbite71@gmail.com
-host            smtp.gmail.com
-port            587
-from            dontbite71@gmail.com
-user            dontbite71@gmail.com
-passwordeval    "pass gmail/dontbite71@gmail.com"
+account dontbite71@gmail.com
+host smtp.gmail.com
+port 587
+from dontbite71@gmail.com
+user dontbite71@gmail.com
+passwordeval "pass gmail/dontbite71@gmail.com"
 
-account         roland.puntaier@chello.at
-host            mail.upcmail.at
-port            465
-from            roland.puntaier@chello.at
-user            roland.puntaier@chello.at
-passwordeval    "pass magenta.at/roland.puntaier@chello.at"
+account roland.puntaier@chello.at
+host mail.upcmail.at
+port 465
+from roland.puntaier@chello.at
+user roland.puntaier@chello.at
+passwordeval "pass magenta.at/roland.puntaier@chello.at"
 
 account default : roland.puntaier@gmail.com
-
-

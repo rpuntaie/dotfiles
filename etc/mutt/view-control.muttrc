@@ -9,8 +9,7 @@ set sidebar_indent_string = "  "
 set sidebar_delim_chars = "/"
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats      = yes
-set sidebar_divider_char  = ' │ '
-set sidebar_new_mail_only = yes
+set sidebar_new_mail_only = no
 set sidebar_short_path    = yes
 set sidebar_visible       = no
 set sidebar_width         = 36
@@ -44,10 +43,13 @@ set status_chars  = " *%A"
 set status_format = "───[ %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Index View Options
+#
+# Index View Options
 set attach_format   = "[%D %t] %2n %T[%-7.7m/%10.10M] (%Q%I) %.40d %> [%s] "
-set date_format     = "!%a, %d %b %Y at %H:%M"
+# http://www.cplusplus.com/reference/ctime/strftime/
+set date_format     = "!%a %y%b%d %H:%M"
 set folder_format   = "%2C %t %N %8s %f"
-#set index_format    = "[%Z]  %D  %-20.20F  %?M?[+]&   ? %s%?X? 📎& ?"
+set index_format    = "[%Z](%4c) %D %-20.19F %?X?¤& ? %s %> %?M?(%2M)&  ? %g"
 
 ## %a   Address of the author
 ## %A   Reply-to address (if present; otherwise: address of author)
@@ -137,26 +139,29 @@ set folder_format   = "%2C %t %N %8s %f"
 ## %|X  pad to the end of the line with character “X”
 ## %*X  soft-fill with character “X” as pad
 
-# https://kdecherf.com/blog/2017/04/11/neomutt-gmail-and-the-mailing-lists/
-set index_format = "%4C (%4c) %Z %?GI?%GI& ? %[%d/%b/%Y %H:%M]  %-20.19F %?K?%15.14K&               ? %?M?(%3M)&     ? %?X?¤& ? %s %> %?g?%g?"
-set sort            = threads                     # like gmail
-set sort_aux        = reverse-last-date-received  # like gmail
-set sort_browser    = reverse-date                # like gmail
-set uncollapse_jump = yes                         # don't collapse on an unread message 
+set sort            = threads
+set sort_aux        = reverse-last-date-received
+set sort_browser    = reverse-date
 set collapse_unread = no
 set sort_re         = yes                         # thread based on regex
 set reply_regexp    = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 folder-hook . "exec collapse-all"          # collapse by default
 
 # Pager View Options
-set pager_index_lines = 10    # number of index lines to show
-set pager_context     = 3     # number of context lines to show
-set pager_stop        = yes   # don't go to next message automatically
-set wrap              = 156   # 120 + sidebar_width (=36)
-set menu_scroll       = yes   # scroll in menus
-set tilde             = yes   # show tildes like in vim
-set markers           = no    # no ugly plus signs
-set quote_regexp      = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set pager_index_lines  = 10    # number of index lines to show
+set pager_context      = 3     # number of context lines to show
+set pager_stop         = yes   # don't go to next message automatically
+set wrap               = 156   # 120 + sidebar_width (36)
+set menu_scroll        = yes   # scroll in menus
+set tilde              = yes   # show tildes like in vim
+set markers            = no    # no ugly plus signs
+set quote_regexp       = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set rfc2047_parameters = yes
+set sleep_time         = 0     # Pause 0 seconds for informational messages
+set mark_old           = no    # Unread mail stay unread until read
+set mime_forward       = yes   # attachments are forwarded with mail
+set wait_key           = no    # mutt won't ask "press key to continue"
+set mail_check         = 60    # to avoid lags using IMAP with some email providers (yahoo for example)
 alternative_order text/calendar text/plain text/enriched text/html text/*
 auto_view text/html text/calendar
 
@@ -167,7 +172,6 @@ set edit_headers    = yes                 # show headers when composing
 set fast_reply      = yes                 # skip to compose when replying
 set askcc           = yes                 # ask for CC:
 set fcc_attach      = yes                 # save attachments with the body
-set mime_forward    = ask-no              # forward attachments as part of body
 set forward_format  = "Fwd: %s"           # format of subject when forwarding
 set forward_decode  = yes                 # decode when forwarding
 set attribution     = "On %d, %n wrote:"  # format of quoting header
@@ -175,6 +179,8 @@ set reply_to        = yes                 # reply to Reply to: field
 set reverse_name    = yes                 # reply as whomever it was to
 set include         = yes                 # include message in replies
 set forward_quote   = yes                 # include message in forwards
+
+set query_command = "abook --mutt-query '%s'"
 
 # Attachment View Options
 attachments +A message/.* multipart/.*
@@ -190,12 +196,6 @@ hdr_order from: to: cc: date: subject:  # and in this order
 set abort_noattach = ask-yes
 set attach_keyword = "\\<attach(|ed|ments?)\\>"
 
-# Control
-###############################################################################
-
-# vim keys
-source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
-
 # Editor
 set editor = "vim -c 'normal! }' -c 'redraw' -c'setl ft=mail spell tw=100 cc=101 fo=ajqrw1'"
 set text_flowed
@@ -205,25 +205,7 @@ set reflow_space_quotes
 # Show all other directories
 set mask="*"
 
-macro index \Cr "<tag-pattern>~U<enter>\
-  <tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-  "mark all messages as read"
+# Control
+###############################################################################
+source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
 
-macro index S \
-  "<enter-command><enter>\
-  <shell-escape>$XDG_CONFIG_HOME/mutt/notmuchsearch.py search<enter>\
-  <change-folder-readonly>$MAILDIR/+search<enter>\
-  <enter-command><enter>" \
-  "search mail (using notmuch)"
-macro index,pager \` \
-  "<enter-command><enter>\
-  <pipe-message>$XDG_CONFIG_HOME/mutt/notmuchsearch.py thread<enter>\
-  <change-folder-readonly>$MAILDIR/+search<enter>\
-  <enter-command><enter>" \
-  "reconstruct thread (using notmuch)"
-
-# Unlimit (show [a]ll)
-macro index ga "<limit>all\n" "show all messages (undo limit)"
-
-macro pager U "|urlscan<enter>" "call urlscan to open links"
-macro index,pager  gm "<shell-escape>mymailsync" "my script to sync all mail"

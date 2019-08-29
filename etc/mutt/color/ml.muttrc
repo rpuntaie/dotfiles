@@ -4,7 +4,7 @@ color normal     white         default
 # main colors
 color status     green         default
 color indicator  brightwhite   default
-color tree       blue          default
+color tree       magenta          default
 color error      brightred     default
 color message    brightyellow  default
 
@@ -28,14 +28,14 @@ color index      brightred     default "~D"
 color header     brightyellow  default "^from:"
 color header     yellow        default "^to:"
 color header     yellow        default "^cc:"
-color header     blue          default "^date:"
+color header     magenta       default "^date:"
 color header     brightblue    default "^subject:"
 
 # message bodies
 color attachment brightblack   default
 color search     red           brightblack
 color signature  cyan          default
-color tilde      blue          default
+color tilde      magenta        default
 
 # urls
 color body       brightblue    default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
