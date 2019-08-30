@@ -296,6 +296,10 @@ It can be used by programming languages and tools:
 - Vim can be used as a MUA
   `via notmuch <https://github.com/notmuch/notmuch/blob/master/vim/notmuch.vim>`__.
 
+- `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts.
+
+- ``mailx``: ``echo 'message body test' | mailx -s "test with mailx" <email>``
+
 - `afew <https://github.com/afewmail/afew>`__ is a python wrapper on ``notmuch`` for tagging and
   `moving <https://github.com/afewmail/afew/blob/master/docs/move_mode.rst>`__ mails.
   Note, that the `query format <https://xapian.org/docs/queryparser.html>`__
@@ -303,9 +307,9 @@ It can be used by programming languages and tools:
   Specifically ``to:`` means ``To:`` and ``Cc:`` and accepts only
   `names or email addresses <https://notmuchmail.org/manpages/notmuch-search-terms-7/>`__.
 
-- `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts.
-
-- ``mailx``: ``echo 'message body test' | mailx -s "test with mailx" <email>``
+  My `afew setup <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/afew/config>`__
+  folders similar mails into email subfolders with same name accross emails.
+  Via `FolderNameFilter` they get the same tag and can be viewed/searched accross emails with ``alot``/``notmuch``.
 
 Since the messages are text, they can be search with ``ag``, ``rg`, ``vimgrep``, ...
 

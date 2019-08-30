@@ -9,27 +9,32 @@
 
 [ListMailsFilter]
 
-#[SentMailsFilter]
+#derived from [SentMailsFilter]
+# -new, _sent
 [ArchiveSentMailsFilter]
 sent_tag = sent
 #to_transform = user@domain[:tag1;tag2]
 
+#initial tag is new by notmuch, leave it there
 #[InboxFilter]
 
+#only one MailMover section possible
+#target folders are not automatically created (my notmuch post-new hook does it before calling afew)
+#rules must be XOR, else, if more rules apply, the SAME mail will end in MORE targets
 [MailMover]
 folders = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
 rename = True
-roland.puntaier@chello.at/INBOX = 'from:linkedin':roland.puntaier@chello.at/linkedin 'from:facebook':roland.puntaier@chello.at/facebook 'from:tripadvisor':roland.puntaier@chello.at/tripadvisor 'from:couchsurfing.com':roland.puntaier@chello.at/couchsurfing 'to:stg@mur.at':roland.puntaier@chello.at/stg 'to:python-':roland.puntaier@chello.at/python 'to:sphinx-':roland.puntaier@chello.at/sphinx 'to:vim_dev or to:vim_use':roland.puntaier@chello.at/vim 'to:arch-general or to:arch-dev-public':roland.puntaier@chello.at/arch 'to:boost':roland.puntaier@chello.at/boost 'to:lfs-dev':roland.puntaier@chello.at/LFS 'from:bitbucket or from:github':roland.puntaier@chello.at/git 
-roland.puntaier@gmail.com/INBOX = 'from:flixbus':roland.puntaier@gmail.com/flixbus 'from:freenode':roland.puntaier@gmail.com/freenode 'from:europeregistry':roland.puntaier@gmail.com/europeregistry 'from:google':roland.puntaier@gmail.com/google 'from:apple':roland.puntaier@gmail.com/apple 'from:gitlab':roland.puntaier@gmail.com/git 'from:booking':roland.puntaier@gmail.com/booking
-puntaier.roland@gmail.com/INBOX = 'from:google':puntaier.roland@gmail.com/google 'from:quora':puntaier.roland@gmail.com/quora
-dontbite71@gmail.com/INBOX = 'from:ryanairmail':dontbite71@gmail.com/ryanair 'from:apple':dontbite71@gmail.com/apple 'from:google':dontbite71@gmail.com/google 'from:quora':dontbite71@gmail.com/quora
+roland.puntaier@chello.at/INBOX = 'from:linkedin':roland.puntaier@chello.at/_/linkedin 'from:facebook':roland.puntaier@chello.at/_/facebook 'from:tripadvisor':roland.puntaier@chello.at/_/tripadvisor 'from:couchsurfing.com':roland.puntaier@chello.at/_/couchsurfing 'to:stg@mur.at':roland.puntaier@chello.at/_/stg 'to:python-':roland.puntaier@chello.at/_/python 'to:sphinx-':roland.puntaier@chello.at/_/sphinx 'to:vim_dev or to:vim_use':roland.puntaier@chello.at/_/vim 'to:arch-general or to:arch-dev-public':roland.puntaier@chello.at/_/arch 'to:boost':roland.puntaier@chello.at/_/boost 'to:lfs-dev':roland.puntaier@chello.at/_/LFS '(from:bitbucket or from:github) and not (to:vim_dev and not to:vim_use)':roland.puntaier@chello.at/_/git
+roland.puntaier@gmail.com/INBOX = 'from:flixbus':roland.puntaier@gmail.com/_/flixbus 'from:freenode':roland.puntaier@gmail.com/_/freenode 'from:europeregistry':roland.puntaier@gmail.com/_/europeregistry 'from:google':roland.puntaier@gmail.com/_/google 'from:apple':roland.puntaier@gmail.com/_/apple 'from:gitlab':roland.puntaier@gmail.com/_/git 'from:booking':roland.puntaier@gmail.com/_/booking
+puntaier.roland@gmail.com/INBOX = 'from:google':puntaier.roland@gmail.com/_/google 'from:quora':puntaier.roland@gmail.com/_/quora
+dontbite71@gmail.com/INBOX = 'from:ryanairmail':dontbite71@gmail.com/_/ryanair 'from:apple':dontbite71@gmail.com/_/apple 'from:google':dontbite71@gmail.com/_/google 'from:quora':dontbite71@gmail.com/_/quora
 
 [FolderNameFilter]
 maildir_separator = /
 folder_lowercases = true
 #folder_explicit_list = folder1 folder2/sub2
 folder_blacklist = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
-#folder_transform = folder1:tag1 folder2:tag2
+folder_transform = roland.puntaier@chello.at:chello roland.puntaier@gmail.com:gmail1 puntaier.roland@gmail.com:gmail2 dontbite71@gmail.com:gmail3
 
 [Filter.1]
 message = untag new local mailboxes
