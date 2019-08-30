@@ -71,7 +71,7 @@ macro index,pager i$idnum '$muttsync' "switch to $email"
 mailboxes =$accmutt ===================== $(echo "$boxes" | sed -e "s/ //g;s/.*/\"=\0\"/g" | tr "\n" " ")
 EOF
     for eqbox in $boxes; do
-        box=${eqbox#*/}
+        box=${eqbox##*/}
         boxi=${box::2}
         boxi=${boxi,,}
         cat >> $accmuttrc <<EOF
