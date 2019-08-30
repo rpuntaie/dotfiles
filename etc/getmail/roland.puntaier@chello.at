@@ -7,7 +7,7 @@ password_command = ("pass", "magenta.at/roland.puntaier@chello.at")
 
 [destination]
 type = Maildir
-path = ~/.local/var/mail/roland.puntaier@chello.at/INBOX/
+path = ~/.local/share/mail/roland.puntaier@chello.at/INBOX/
 
 [options]
 read_all = true

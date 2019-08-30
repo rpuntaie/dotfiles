@@ -34,7 +34,7 @@ maildir_separator = /
 folder_lowercases = true
 #folder_explicit_list = folder1 folder2/sub2
 folder_blacklist = roland.puntaier@chello.at/INBOX roland.puntaier@gmail.com/INBOX puntaier.roland@gmail.com/INBOX dontbite71@gmail.com/INBOX
-folder_transform = roland.puntaier@chello.at:chello roland.puntaier@gmail.com:gmail1 puntaier.roland@gmail.com:gmail2 dontbite71@gmail.com:gmail3
+folder_transforms = roland.puntaier@chello.at:chello roland.puntaier@gmail.com:gmail1 puntaier.roland@gmail.com:gmail2 dontbite71@gmail.com:gmail3
 
 [Filter.1]
 message = untag new local mailboxes

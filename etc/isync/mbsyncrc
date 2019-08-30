@@ -13,8 +13,8 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore roland_puntaier_at_gmail-local
-Path ~/.local/var/mail/roland.puntaier@gmail.com/
-Inbox ~/.local/var/mail/roland.puntaier@gmail.com/INBOX
+Path ~/.local/share/mail/roland.puntaier@gmail.com/
+Inbox ~/.local/share/mail/roland.puntaier@gmail.com/INBOX
 
 Channel roland_puntaier_at_gmail-default
 Master :roland_puntaier_at_gmail-remote:
@@ -60,8 +60,8 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore puntaier_roland_at_gmail-local
-Path ~/.local/var/mail/puntaier.roland@gmail.com/
-Inbox ~/.local/var/mail/puntaier.roland@gmail.com/INBOX
+Path ~/.local/share/mail/puntaier.roland@gmail.com/
+Inbox ~/.local/share/mail/puntaier.roland@gmail.com/INBOX
 
 Channel puntaier_roland_at_gmail-default
 Master :puntaier_roland_at_gmail-remote:
@@ -106,8 +106,8 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore dontbite71_at_gmail-local
-Path ~/.local/var/mail/dontbite71@gmail.com/
-Inbox ~/.local/var/mail/dontbite71@gmail.com/INBOX
+Path ~/.local/share/mail/dontbite71@gmail.com/
+Inbox ~/.local/share/mail/dontbite71@gmail.com/INBOX
 
 Channel dontbite71_at_gmail-default
 Master :dontbite71_at_gmail-remote:
