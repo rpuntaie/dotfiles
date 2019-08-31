@@ -31,6 +31,8 @@ alias cc='gcc -std=c11 -pedantic -Wall -Wextra -Wbad-function-cast -Wcast-align 
 alias poscc='gcc -std=c11 -pedantic -Wall -Wextra'
 
 alias ax='git annex'
+alias gmm='git merge'
+alias gms='git merge --squash'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'

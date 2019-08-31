@@ -39,7 +39,7 @@ function _accmuttrc()
     mailfolder="$MAILDIR/$email"
     echo "source $accmuttrc" >> $genmuttaccs # no need to check if there, because new file
     boxes="$(find "$mailfolder/" -name cur | sed "s,$mailfolder/,,g;s,/cur,,")"
-    [[ "$boxes" =~ ^[[:space:]]*$ ]] && return
+    [[ "$boxes" =~ ^[[:space:]]*$ ]] && echo "no mailboxes" && return
     spoolfile=$(echo "$boxes" | grep -i -m 1 inbox | sed -ne 's/.*/+\0/p')
     [[ "$spoolfile" =~ ^[[:space:]]*$ ]] && return
     record=$(echo "$boxes" | grep -i -m 1 sent | sed -ne 's/.*/+\0/p')
@@ -72,6 +72,7 @@ mailboxes =$accmutt ===================== $(echo "$boxes" | sed -e "s/ //g;s/.*/
 EOF
     for eqbox in $boxes; do
         box=${eqbox##*/}
+        box=${box##*.}
         boxi=${box::2}
         boxi=${boxi,,}
         cat >> $accmuttrc <<EOF

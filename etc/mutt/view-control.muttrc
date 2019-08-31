@@ -4,9 +4,6 @@
 ###############################################################################
 
 # Sidebar config
-set sidebar_folder_indent = yes
-set sidebar_indent_string = "  "
-set sidebar_delim_chars = "/"
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
 set mail_check_stats      = yes
 set sidebar_new_mail_only = no
@@ -43,12 +40,8 @@ set status_chars  = " *%A"
 set status_format = "───[ %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Index View Options
-#
-# Index View Options
-set attach_format   = "[%D %t] %2n %T[%-7.7m/%10.10M] (%Q%I) %.40d %> [%s] "
 # http://www.cplusplus.com/reference/ctime/strftime/
 set date_format     = "!%a %y%b%d %H:%M"
-set folder_format   = "%2C %t %N %8s %f"
 set index_format    = "[%Z](%4c) %D %-20.19F %?X?¤& ? %s %> %?M?(%2M)&  ? %g"
 
 ## %a   Address of the author
@@ -148,7 +141,7 @@ set reply_regexp    = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 folder-hook . "exec collapse-all"          # collapse by default
 
 # Pager View Options
-set pager_index_lines  = 10    # number of index lines to show
+set pager_index_lines  = 0     # number of index lines to show
 set pager_context      = 3     # number of context lines to show
 set pager_stop         = yes   # don't go to next message automatically
 set wrap               = 156   # 120 + sidebar_width (36)
