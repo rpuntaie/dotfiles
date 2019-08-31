@@ -64,73 +64,6 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-let g:powerline_pycmd = "py3"
-"Shougo/deoplete.nvim
-let g:deoplete#enable_at_startup = 1
-"SirVer/ultisnips
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsListSnippets = '<c-tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-"sheerun/vim-polyglot
-"https://github.com/sheerun/vim-polyglot/issues/204
-let g:polyglot_disabled = ['latex']
-"w0rp/ale
-let g:ale_enabled=0 " :ALEToggle
-"python-mode/python-mode
-let g:pymode_lint = 0
-let g:pymode_folding = 0
-let g:pymode_lint_write = 0
-"lervag/vimtex
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-"johnsyweb/vim-makeshift
-let g:makeshift_on_startup = 0
-let g:makeshift_on_bufread = 0
-let g:makeshift_on_bufnewfile = 0
-let g:makeshift_on_bufenter = 0
-let g:makeshift_systems = {
-    \'CMakeList.txt': 'cmake',
-    \'meson.build': 'meson',
-    \'build.sbt ': 'sbt',
-    \'dodo.py ': 'doit',
-    \'boost-build.jam ': 'b2',
-    \}
-function! s:BuildFun(what2build)
-    execute 'Makeshift'
-    execute 'MakeshiftBuild '.a:what2build
-endfunction
-"scrooloose/nerdtree
-let g:NERDTreeNodeDelimiter = "\u00a0"
-let g:NERDTreeShowHidden=1
-let g:netrw_shq="'"
-let g:netrw_browsex_viewer= "xdg-open"
-let g:netrw_nogx=1 " disable netrw's gx mapping.
-let g:netrw_altv = 1
-let g:netrw_preview = 1
-let g:netrw_list_hide = "^\\..*"
-let g:netrw_home = $XDG_STATE_HOME.'/vim'
-"vim-scripts/vcscommand.vim
-let g:VCSCommandMapPrefix = "<leader>z"
-"rpuntaie/trans.vim
-let g:trans_default_api='google'
-let g:trans_default_lang='ru'
-let g:trans_set_reg='*'
-let g:trans_set_echo=1
-let g:trans_replace=0
-let g:trans_has_python=3 "webapi.vim instead
-"Rykka/mathematic.vim
-let g:mathematic_user_dir = g:bundledir.
-  \ '/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
-"idanarye/vim-vebugger
-let g:vebugger_leader='`'
-let g:vebugger_view_source_cmd='edit'
-"rpuntaie/vim-barbaric
-let g:barbaric_default = 'xkb:us::eng'
-
 function Deinplugins()
     call dein#add('bogado/file-line') " open <file>:<line>
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
@@ -243,6 +176,83 @@ endif
 "call dein#check_clean()
 "call dein#update()
 "call dein#install()
+
+let g:powerline_pycmd = "py3"
+"Shougo/deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#manual_complete()
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+"SirVer/ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsListSnippets = '<c-tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+"sheerun/vim-polyglot
+"https://github.com/sheerun/vim-polyglot/issues/204
+let g:polyglot_disabled = ['latex']
+"w0rp/ale
+let g:ale_enabled=0 " :ALEToggle
+"python-mode/python-mode
+let g:pymode_lint = 0
+let g:pymode_folding = 0
+let g:pymode_lint_write = 0
+"lervag/vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+"johnsyweb/vim-makeshift
+let g:makeshift_on_startup = 0
+let g:makeshift_on_bufread = 0
+let g:makeshift_on_bufnewfile = 0
+let g:makeshift_on_bufenter = 0
+let g:makeshift_systems = {
+    \'CMakeList.txt': 'cmake',
+    \'meson.build': 'meson',
+    \'build.sbt ': 'sbt',
+    \'dodo.py ': 'doit',
+    \'boost-build.jam ': 'b2',
+    \}
+function! s:BuildFun(what2build)
+    execute 'Makeshift'
+    execute 'MakeshiftBuild '.a:what2build
+endfunction
+"scrooloose/nerdtree
+let g:NERDTreeNodeDelimiter = "\u00a0"
+let g:NERDTreeShowHidden=1
+let g:netrw_shq="'"
+let g:netrw_browsex_viewer= "xdg-open"
+let g:netrw_nogx=1 " disable netrw's gx mapping.
+let g:netrw_altv = 1
+let g:netrw_preview = 1
+let g:netrw_list_hide = "^\\..*"
+let g:netrw_home = $XDG_STATE_HOME.'/vim'
+"vim-scripts/vcscommand.vim
+let g:VCSCommandMapPrefix = "<leader>z"
+"rpuntaie/trans.vim
+let g:trans_default_api='google'
+let g:trans_default_lang='ru'
+let g:trans_set_reg='*'
+let g:trans_set_echo=1
+let g:trans_replace=0
+let g:trans_has_python=3 "webapi.vim instead
+"Rykka/mathematic.vim
+let g:mathematic_user_dir = g:bundledir.
+  \ '/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
+"idanarye/vim-vebugger
+let g:vebugger_leader='`'
+let g:vebugger_view_source_cmd='edit'
+"rpuntaie/vim-barbaric
+let g:barbaric_default = 'xkb:us::eng'
+
 
 if isdirectory($MY)
     cd $MY

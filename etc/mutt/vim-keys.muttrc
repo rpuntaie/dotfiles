@@ -127,5 +127,4 @@ macro index gS "<enter-command>unset wait_key<enter><shell-escape>$XDG_CONFIG_HO
 macro index,pager gs "<enter-command>unset wait_key<enter><pipe-message>$XDG_CONFIG_HOME/mutt/notmuchsearch.py thread<enter><change-folder-readonly>$MAILDIR/+search<enter><enter-command><enter>"  \
     "reconstruct thread into search mailbox (using notmuch)"
 macro pager gu "|urlscan<enter>" "call urlscan to open links"
-macro index,pager  gm "<shell-escape>mymailsync" "my script to sync all mail"
 

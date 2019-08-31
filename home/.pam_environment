@@ -66,5 +66,5 @@ R_LIBS_USER           DEFAULT="${XDG_LIB_HOME}/R"
 NPM_CONFIG_USERCONFIG DEFAULT="${XDG_CONFIG_HOME}/npm/npmrc"
 NMBGIT                DEFAULT="${XDG_CACHE_HOME}/notmuch/nmbug"
 NOTMUCH_CONFIG        DEFAULT="${XDG_CONFIG_HOME}/notmuch/notmuchrc"
-MAILDIR               DEFAULT="${XDG_DATA_HOME}/mail"
+MAILDIR               DEFAULT="${HOME}/mail"
 
