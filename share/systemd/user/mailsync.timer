@@ -1,11 +1,11 @@
 [Unit]
-Description=Run mailsync every 5 minutes
+Description=Run mailsync.service every 11 minutes
 Wants=network.target
 After=network.target
 
 [Timer]
-OnBootSec=30s
-OnUnitActiveSec=5m
+OnBootSec=11m
+OnUnitActiveSec=11m
 Unit=mailsync.service
 Persistent=true
 

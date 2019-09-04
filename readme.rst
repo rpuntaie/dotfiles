@@ -85,7 +85,6 @@ Alternatively
    cd r
    USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda DOTS=fjVcp bash rollarch
 
-
 After changing or adding a file to the ``dotfiles`` one must run
 
 .. code:: sh
@@ -240,8 +239,17 @@ Do e.g.::
 Email
 =====
 
-My mail config is in ``etc/getmail/*`` as well as ``etc/isync/mbsyncrc``.
-``mutt`` account settings are generated from them by ``mymailsync``.
+``install`` downloads
+`my version of mw <https://github.com/rpuntaie/mutt-wizard>`__
+and uses it to generate email settings in
+
+- ``~/.local/etc/getmail/*``
+- ``~/.local/etc/isync/mbsyncrc``
+- ``~/.local/etc/msmtp/config``
+- ``~/.local/etc/mutt/*``
+
+``mw`` is also used to sync those accounts.
+On every sync the ``mw`` account muttrc's are recreated.
 
 To enable automatic syncing::
 
@@ -251,29 +259,14 @@ else manually in mutt with ``gm`` or on CLI::
 
   gm
 
-.. note:: mutt directly to imap is slow
-
-  The easiest ``mutt`` setup is via an ``folder=imaps://..``.
-  All ``mutt`` operations are remoted (slow),
-  locally using only the cache dir.
-  For different accounts, switch folder and
-  have a ``folder-hook`` source the account settings file,
-  which applies::
-
-    account-hook $folder 'set imap_user=$imap_user imap_pass=$my_pass_gmail'
-
-  With POP ``folder`` is a local directory.
-
-My setup uses ``mutt`` only as viewer to the local ``Maildir`` folders,
-independent of whether created via POP or IMAP.
-
 A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox``
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
 It can be used by programming languages and tools:
 
 - for IMAP, ``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
-  syncs between remote and local mailboxes (see ``mbsyncrc``).
-  An alternative would have been `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__
+  syncs between remote and local mailboxes.
+  (Alternative to `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__,
+  which still uses python2)
 
 - for POP mailboxes I use `getmail <https://wiki.archlinux.org/index.php/Getmail>`__
 
@@ -284,19 +277,14 @@ It can be used by programming languages and tools:
   ``notmuch address|count|dump|reply|search|show|tag``
   can be `used <https://notmuchmail.org/manpages/>`__.
 
-- ``mutt``: ``folder`` points to the already *existing* maildir folders.
-  ``mymailsync`` generates ``mutt`` settings for folders representing accounts
-  using ``Path`` in ``mbsyncrc`` (that must end with an email address).
+- ``mutt`` lists messages in already *existing* maildir folders,
+  independent of whether created via POP or IMAP.
 
 - `alot <https://www.archlinux.org/packages/community/any/alot/>`__
   shows mails based on tags using ``notmuch`` (``alot taglist``).
-  While in ``mutt`` a mail is in only one ``Maildir`` folder,
-  in ``alot`` it can occur in more listing.
 
 - Vim can be used as a MUA
   `via notmuch <https://github.com/notmuch/notmuch/blob/master/vim/notmuch.vim>`__.
-
-- `mutt-wizard <https://github.com/rpuntaie/mutt-wizard>`__ can be used to manage email accounts.
 
 - ``mailx``: ``echo 'message body test' | mailx -s "test with mailx" <email>``
 
@@ -308,7 +296,7 @@ It can be used by programming languages and tools:
   `names or email addresses <https://notmuchmail.org/manpages/notmuch-search-terms-7/>`__.
 
   My `afew setup <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/afew/config>`__
-  folders similar mails into email subfolders with same name accross emails.
+  folders similar mails into mailboxes with same name accross emails.
   Via `FolderNameFilter` they get the same tag and can be viewed/searched accross emails with ``alot``/``notmuch``.
 
 Since the messages are text, they can be search with ``ag``, ``rg`, ``vimgrep``, ...

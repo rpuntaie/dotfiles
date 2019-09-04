@@ -2,51 +2,7 @@
 #
 # https://raw.githubusercontent.com/neomutt/neomutt/master/contrib/vim-keys/vim-keys.rc
 # https://gitlab.gnugen.ch/floure/dotfiles/blob/6d1208fa9f2714220d69a26d7adc73f761a860ea/etc/neomutt/neomuttrc
-#
-# TODO: for mutt-wizard
-# I propose a more vi-like default key mapping
-#
-# - Currently u/d do half-up/half-down. In vim you instead do::
-#
-#     \Cd half-down
-#     \Cu half-up
-#     \Cf next-page
-#     \Cb previous-page
-#     \Ce next-line
-#     \Cy previous-line
-#
-#   This means reserving `d` for `dX` bindings.
-#
-#   - So `dd` for delete message instead of `D`, which means `delete pattern` in mutt.
-#     One should also leave `u/U` as mutt has it: Undelete message/pattern.
-#
-#   - gf for next page: use `S` for search instead
-#
-# - i, g, d, M, C can be used for xY bindings
-#
-#     i is for i[1-9]
-#     iXY (2 mailbox letters) to go to mailbox
-#
-#     Cxy, Mxy similarly
-#
-#     gX,dX combine with one latter
-#
-#     gu for view via urlview/urlscan (urlscan should be supported automatically)
-#     gM/gm to fetch all/mail
-#
-#     dT  delete-thread
-#     dt  delete-subthrea
-#     gt  next-thread
-#     gT  previous-thread
-#
-#     gr  for group-reply, since `R` has useful binding already
-#
-#     gl/gL instead of L and A, as these also have mutt binding
-#
-#     V instead of H for view-raw-message, as H has binding already
-#
-# Here the binds and macros
-# (no gs,gS as that needs a tool)
+# https://github.com/rpuntaie/mutt-wizard
 
 # Moving around
 bind index h noop

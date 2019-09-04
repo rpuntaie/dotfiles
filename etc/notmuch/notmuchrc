@@ -1,5 +1,5 @@
 [database]
-path=.local/share/mail
+path=Mail
 
 [user]
 name=Roland Puntaier

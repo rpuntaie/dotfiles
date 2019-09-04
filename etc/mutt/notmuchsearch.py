@@ -87,7 +87,7 @@ def parse_args_or_exit(argv=None):
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     # common arguments
     parser.add_argument("-o", "--output-mbox", 
-        default=os.path.join(os.environ.get('MAILDIR','~/mail'),'+search'),
+        default=os.path.join(os.environ.get('MAILDIR','~/Mail'),'+search'),
         help="Output dir for results")
     parser.add_argument("--backtrace", action="store_true",
                         help="Print backtrace on error")

@@ -7,7 +7,7 @@
 # drwx------ ... /run/user/1000
 
 # Ugly workaround for Debian (as they ship an ancient version of PAM)
-HOME                  DEFAULT="/home/@{PAM_USER}" OVERRIDE="@{HOME}"
+HOME                  DEFAULT="/home/@{PAM_USER}" DEFAULT="@{HOME}"
 
 # XDG base directory specification (same as https://github.com/ayekat/dotfiles)
 XDG_CACHE_HOME        DEFAULT="${HOME}/.local/var/cache"
@@ -23,17 +23,17 @@ LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
 # Personal stuff I have in separate directories
 # ~/.gnupg, ~/.password-store, ~/my and these ~/dotfiles
-MY                    OVERRIDE="${HOME}/my"
-TASKDATA              OVERRIDE="${MY}/task"
-FINANCE               OVERRIDE="${MY}/finance"
-PASSWORD_STORE_DIR    OVERRIDE="${HOME}/.password-store"
+MY                    DEFAULT="${HOME}/my"
+TASKDATA              DEFAULT="${MY}/task"
+FINANCE               DEFAULT="${MY}/finance"
+PASSWORD_STORE_DIR    DEFAULT="${HOME}/.password-store"
 
 # Personal environment variables
-NAME                  OVERRIDE="Roland Puntaier"
-EMAIL                 OVERRIDE="roland.puntaier\@gmail.com"
-MYGPG                 OVERRIDE="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
-MYTERM                OVERRIDE=urxvt
-MYVIMRC               OVERRIDE="${XDG_CONFIG_HOME}/vim/vimrc"
+NAME                  DEFAULT="Roland Puntaier"
+EMAIL                 DEFAULT="roland.puntaier\@gmail.com"
+MYGPG                 DEFAULT="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
+MYTERM                DEFAULT=urxvt
+MYVIMRC               DEFAULT="${XDG_CONFIG_HOME}/vim/vimrc"
 
 # ibus-setup
 GTK_IM_MODULE=ibus
@@ -66,5 +66,7 @@ R_LIBS_USER           DEFAULT="${XDG_LIB_HOME}/R"
 NPM_CONFIG_USERCONFIG DEFAULT="${XDG_CONFIG_HOME}/npm/npmrc"
 NMBGIT                DEFAULT="${XDG_CACHE_HOME}/notmuch/nmbug"
 NOTMUCH_CONFIG        DEFAULT="${XDG_CONFIG_HOME}/notmuch/notmuchrc"
-MAILDIR               DEFAULT="${HOME}/mail"
+MAIL                  DEFAULT="${HOME}/Mail"
+MAILDIR               DEFAULT="${HOME}/Mail"
+NPM_CONFIG_PREFIX     DEFAULT="${XDG_STATE_HOME}/npm"
 

@@ -3,4 +3,4 @@ Description=Mail synchronization
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/bin/mymailsync
+ExecStart=%h/.local/bin/mw

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 
 #Usage: [NOGDB=1] restowdots [-S]
 
@@ -27,9 +27,9 @@ if [[ -z "$NOGDB" ]]; then
     for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
         ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
     done
-    AUTHKEYGRIP=$(gpg -K --with-keygrip | sed -n -e "/\[A]/{n;n;p;q}" | sed -n -e "s/^\s*Keygrip = //p")
-    if [[ -n $AUTHKEYGRIP ]] && [[ ! $(cat ~/.gnupg/sshcontrol) =~ $AUTHKEYGRIP ]] ; then
-        echo $AUTHKEYGRIP > ~/.gnupg/sshcontrol
+    authkeygrip=$(gpg -K --with-keygrip | sed -n -e "/\[A]/{n;n;p;q}" | sed -n -e "s/^\s*Keygrip = //p")
+    if [ -n $authkeygrip ] && [ ! "$(sed -ne "/$authkeygrip/p" ~/.gnupg/sshcontrol)" = "$authkeygrip" ]; then
+        echo $authkeygrip > ~/.gnupg/sshcontrol
         ssh-add -L >> ~/.ssh/authorized_keys
         #for other machines: ssh-copy-id 192.168.X.Y
         gpg-connect-agent updatestartuptty /bye
@@ -40,7 +40,7 @@ echo stow
 umask 022
 mkdir -p ~/.local
 rm -rf ~/.local/etc/user-dirs*
-stow --ignore=home --no-folding ${1:--R} -t .local dotfiles
+stow --ignore=home --ignore=etc/weechat --no-folding ${1:--R} -t .local dotfiles
 
 # dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
 # ~/.ledgerrc
