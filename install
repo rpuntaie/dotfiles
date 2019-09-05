@@ -62,7 +62,7 @@ _dotfiles_email(){
   # wm into ~/.local/bin
   ~/.local/bin/ghi rpuntaie/mutt-wizard ~/.local
   #setup email
-  rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/muttrc,mutt/mw_*}
+  rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
   a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
   a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
   a=puntaier.roland@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add

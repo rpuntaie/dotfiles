@@ -4,12 +4,12 @@
 ###############################################################################
 
 # Sidebar config
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
-set mail_check_stats      = yes
+#MW set sidebar_format = "%B%?F? [%F]?%* %?N?%N?"
+#MW set mail_check_stats      = yes
 set sidebar_new_mail_only = no
-set sidebar_short_path    = yes
-set sidebar_visible       = no
-set sidebar_width         = 36
+#MW set sidebar_short_path    = yes
+#MW set sidebar_visible       = no
+#MW set sidebar_width         = 36
 
 ## status_format - format of summary on the current folder in the index
 ## meta strings:
@@ -42,7 +42,7 @@ set status_format = "───[ %f ]───[%r%m messages%?n? (%n new)?%?d? (%
 # Index View Options
 # http://www.cplusplus.com/reference/ctime/strftime/
 set date_format     = "!%a %y%b%d %H:%M"
-set index_format    = "[%Z](%4c) %D %-20.19F %?X?¤& ? %s %> %?M?(%2M)&  ? %g"
+set index_format    = "[%Z](%4c) %D %-15.15F %?X?¤& ? %s %> %?M?(%2M)&  ? %g"
 
 ## %a   Address of the author
 ## %A   Reply-to address (if present; otherwise: address of author)
@@ -173,7 +173,7 @@ set reverse_name    = yes                 # reply as whomever it was to
 set include         = yes                 # include message in replies
 set forward_quote   = yes                 # include message in forwards
 
-set query_command = "abook --mutt-query '%s'"
+#MW set query_command = "abook --mutt-query '%s'"
 
 # Attachment View Options
 attachments +A message/.* multipart/.*
@@ -198,7 +198,4 @@ set reflow_space_quotes
 # Show all other directories
 set mask="*"
 
-# Control
-###############################################################################
-source $XDG_CONFIG_HOME/mutt/vim-keys.muttrc
 
