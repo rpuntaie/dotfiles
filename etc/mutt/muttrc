@@ -71,8 +71,8 @@ set pgp_timeout = 3600
 set crypt_autosign = no
 set crypt_replyencrypt = yes
 
-#MW #view
-#MW source $XDG_CONFIG_HOME/mutt/view.muttrc
+#view
+source $XDG_CONFIG_HOME/mutt/view.muttrc
 #MW #control
 #MW source $XDG_CONFIG_HOME/mutt/vimkeys.muttrc
 #MW #color
