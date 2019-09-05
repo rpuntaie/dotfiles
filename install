@@ -60,22 +60,21 @@ _dotfiles_weechat(){
 
 _dotfiles_email(){
   # wm into ~/.local/bin
-  cd ~/.local/bin
-  curl -OLs https://raw.githubusercontent.com/rpuntaie/mutt-wizard/master/bin/mw
-  chmod +x mw
-  rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
+  ~/.local/bin/ghi rpuntaie/mutt-wizard ~/.local
   #setup email
-  a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ./mw add
-  a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ./mw add
-  a=puntaier.roland@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ./mw add
-  a=dontbite71@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ./mw add
+  rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/muttrc,mutt/mw_*}
+  a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
+  a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
+  a=puntaier.roland@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add
+  a=dontbite71@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
 }
 
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
-  _dotfiles_pam_environment
   _dotfiles_restowdots
+  cd ~
+  _dotfiles_pam_environment
   if [ -n "$dotfiles_new_install" ] && $dotfiles_new_install; then
     _dotfiles_fonts
     _dotfiles_python

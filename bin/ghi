@@ -1,0 +1,26 @@
+#!/usr/bin/sh
+
+# e.g.
+# ghi rpuntaie/mutt-wizard ~/.local
+
+[ -n ${1} ] && [ -n ${2} ] || echo "'ghi x/y dest' with https://github.com/x/y"
+
+repo="${1}"
+dest="${2}"
+
+repo="rpuntaie/mutt-wizard"
+dest=~/.local
+
+Repo="https://github.com/$repo"
+
+tmpdir=$(mktemp -d)
+cd $tmpdir
+git clone $Repo $repo
+cd $repo
+
+if [ "$(sed -ne "s/^install:.*/install/p" Makefile)" = "install" ]; then
+    PREFIX=$dest prefix=$dest make install
+fi
+
+cd $CD
+
