@@ -8,11 +8,11 @@ See
 `.pam_environment <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/home/.pam_environment>`__.
 Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for FHS compliance.
 
-:etc:       ``XDG_CONFIG_HOME``, app configurations
-:share:     ``XDG_DATA_HOME``, user data needed by app
-:lib:       ``XDG_LIB_HOME``, libs for user
-:var/cache: ``XDG_CACHE_HOME``, tmp and cache needed by app
-:var/lib:   ``XDG_STATE_HOME``, libraries for app not tracked
+:etc:       ``XDG_CONFIG_HOME``, configurations for apps
+:share:     ``XDG_DATA_HOME``, data for apps and user scripts
+:lib:       ``XDG_LIB_HOME``, user libs
+:var/cache: ``XDG_CACHE_HOME``, cache for apps
+:var/lib:   ``XDG_STATE_HOME``, non-tracked automatically downloaded libraries for apps
 :var/log:   ``XDG_LOG_HOME``, app generated logs
 :opt: for not well integrated apps,
       e.g for `altera <https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh>`__
@@ -25,14 +25,16 @@ Inspired by and thanks to:
 `ayekat <https://github.com/ayekat/dotfiles>`__,
 `floure <https://gitlab.gnugen.ch/floure/dotfiles>`__ and others.
 
-Some files in these dotfiles reference separately managed directories:
+Some files in these dotfiles reference separately managed directories,
+because they are actual user data.
+There are according environment variables in ``.pam_environment``.
 
 ``~/.password-store``
 ``~/.gnupg``
 ``~/my/task``
 ``~/my/finance``
+``~/Mail``
 
-There are according environment variables in ``.pam_environment``.
 
 Installation
 ============
@@ -44,13 +46,13 @@ over directly cloning into ``.local``
 to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
 a nuisance when grep'ing.
 
-I install these my ``dotfiles`` on a set-up machine via:
+I install these my ``dotfiles`` on a machine already set-up, via:
 
 .. code:: sh
 
    curl -Ls https://git.io/fjVcp | bash
 
-or, if cloned already:
+or, if cloned already, via:
 
 .. code:: sh
 
@@ -64,7 +66,7 @@ but the latter I have integrate into the ``rpuntaie-meta`` package (end of file)
 which I serve via a local archlinux proxy.
 
 A whole ArchLinux system, including these ``dotfiles``, can be installed with `rollarch`_.
-If AIP2 is used, a local proxy must be prepared as described there.
+If AIP2 is used, a local proxy must be prepared as described in `rollarch`_.
 
 .. code:: sh
 
@@ -85,6 +87,8 @@ Alternatively
    cd r
    USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda DOTS=fjVcp bash rollarch
 
+The variables can be sourced from a file, of course.
+
 After changing or adding a file to the ``dotfiles`` one must run
 
 .. code:: sh
@@ -93,7 +97,6 @@ After changing or adding a file to the ``dotfiles`` one must run
    #or ~/dotfiles/install
 
 to update ``~/.local``.
-The variables can be sourced from a file, of course.
 
 System Description
 ==================
@@ -109,8 +112,12 @@ Cleaning
   paccache -ruk0
   paccache -rk1
   ncdu
-  rmlint #produces rmlint.sh
+  rmlint
 
+`rmlint` reduces space by making files share disk blocks with same data
+using a `linux feature <http://man7.org/linux/man-pages/man2/ioctl_fideduperange.2.html>`__.
+And it produces ``rmlint.sh`` to show you file duplications,
+which you may clean up selectively by editing the script.
 
 Editor: Vim
 -----------
@@ -131,7 +138,7 @@ For Python and ``restructuredText`` (RST) I use
 - vim plugin `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__
 - python package `rstdoc <https://github.com/rpuntaie/rstdoc>`__
 
-See further mappings and plugins see
+For further mappings and plugins see
 `myvimrc <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/vim/doc/myvimrc.txt>`__.
 
 CLI
@@ -140,9 +147,11 @@ CLI
 ``zsh`` through vim ``:term`` or ``urxvt``.
 ``urxvt`` depends on a proper ``/etc/locale.conf``.
 
-No need for ``cd``.
+For shell scripting I use ``bash`` instead of ``zsh``.
+They are not the same.
+Therefore I use ``:term bash`` in vim to try solutions.
 
-Settings in ``Xresources``, ``xrdb -load <pth>`` for re-loading.
+``urxvt`` settings in ``Xresources``, ``xrdb -load <pth>`` for re-loading.
 
 Shortcuts:
 
@@ -170,6 +179,7 @@ CLI tools:
 - ``rg`` (ripgrep) and ``ag`` (the_silver_searcher) to search for text in files
 - ``bc`` for ad-hoc CLI calculations, e.g echo 2+2 | bc
 - ``ncdu`` like ``du``, but with ncurses
+- ``top`` and ``htop`` to view processes
 
 Window Manager: xmonad
 ----------------------
@@ -215,7 +225,6 @@ Security
 
 ``~/dotfiles/bin/gpg-offline-master`` works with the separate offline master key.
 
-
 ``~/.gnupg``:
 ``GNUPGHOME`` is kept at the default location, to be managed separately and offline.
 Set it up before ``dotfiles``, as ``restowdots`` will
@@ -231,7 +240,7 @@ Else, just ``restowdots`` again.
 Systemd User Services
 =====================
 
-``mpd`` and ``keybase`` are not enabled by default.
+Local ``mpd.service``, ``keybase.service`` and ``mailsync.timer`` are not enabled by default.
 Do e.g.::
 
   systemctl --user enable --now mpd.service
@@ -253,11 +262,11 @@ On every sync the ``mw`` account muttrc's are recreated.
 
 To enable automatic syncing::
 
-  systemctl --user enable mailsync.timer --now
+  systemctl --user enable --now mailsync.timer
 
 else manually in mutt with ``gm`` or on CLI::
 
-  gm
+  gm  # or mw
 
 A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox``
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
@@ -304,27 +313,56 @@ Since the messages are text, they can be search with ``ag``, ``rg`, ``vimgrep``,
 Programming
 ===========
 
-Python
-------
+My local arch package `rpuntaie <https://github.com/rpuntaie/rollarch/blob/master/pkg/rpuntaie/PKGBUILD>`__
+contains packages for languages I worked with so far
 
-`rollarch`_/pkg/rpuntaie installs Arch python packages.
-Additionally `my_python <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_python>`__.
+Native:
 
-C/C++
------
+- C/C++: gcc, clang
+- Pascal: fpc
 
-nodejs
-------
+.NET:
 
-`my_nodejs <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_nodejs>`__.
+- C#: mono dotnet-sdk
 
-R
----
+JVM:
 
-`rollarch`_/pkg/rpuntaie includes `R <https://www.r-project.org/>`_.
+- Java: jdk-openjdk
 
-Octave
-------
+Interpreted:
 
-`rollarch`_/pkg/rpuntaie includes `octave <https://hg.savannah.gnu.org/hgweb/octave/file/>`_.
+- `Python <https://docs.python.org/3.8/>`__.
+  Packages not arch repos: `my_python <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_python>`__.
+- `R <https://www.r-project.org/>`_ (maths)
+- `octave <https://hg.savannah.gnu.org/hgweb/octave/file/>`_ (matlab alternative)
+- SQL: `sqlite <https://www.sqlite.org/cli.html>`__ `mariadb <https://devhints.io/mysql>`__
+- `JavaScript <https://github.com/mbeaudru/modern-js-cheatsheet>`__: `nodejs <https://gist.github.com/LeCoupa/985b82968d8285987dc3>`__
+  Packages not in arch repos:
+  `my_nodejs <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/bin/my_nodejs>`__.
 
+These I fiddled around with or intend to or rather not:
+
+- Native:
+  `haskell <https://learnxinyminutes.com/docs/haskell/>`__ (ghc),
+  `go <https://gobyexample.com/>`__,
+  `rust <https://doc.rust-lang.org/rust-by-example/>`__,
+  `apple <https://developer.apple.com/documentation>`__: objc and `swift <https://docs.swift.org/swift-book/LanguageGuide/Functions.html>`__,
+  D
+- Interpreted: 
+  `julia <https://julialang.org/learning/>`__,
+  `examples <https://juliabyexample.helpmanual.io/>`__,
+  `ruby <https://ruby-doc.org/>`__,
+  `lua <https://www.lua.org/manual/5.3/>`__,
+  `php <https://www.php.net/manual/en/index.php>`__,
+  `ocaml <https://ocaml.org/learn/taste.html>`__
+- JVM:
+  `clojure <https://kimh.github.io/clojure-by-example/#about>`__,
+  `kotlin <https://kotlinlang.org/docs/reference/>`__,
+  `groovy <https://groovy-lang.org/documentation.html>`__,
+  `scala <https://docs.scala-lang.org/cheatsheets/index.html>`__
+- Erlang:
+  `elixir <https://elixir-lang.org/crash-course.html>`__
+
+
+
+.. _`rollarch`: https://github.com/rpuntaie/rollarch
