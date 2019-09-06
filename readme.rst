@@ -98,13 +98,13 @@ After changing or adding a file to the ``dotfiles`` one must run
 
 to update ``~/.local``.
 
-System Description
-==================
+Help
+====
 
 ``wiki-search``: Help for Archlinux at command line.
 
 Cleaning
---------
+========
 
 .. code:: sh
 
@@ -120,7 +120,7 @@ And it produces ``rmlint.sh`` to show you file duplications,
 which you may clean up selectively by editing the script.
 
 Editor: Vim
------------
+===========
 
 I use ``vim`` as TUI to the system.
 
@@ -138,11 +138,11 @@ For Python and ``restructuredText`` (RST) I use
 - vim plugin `vim_py3_rst <https://github.com/rpuntaie/vim_py3_rst>`__
 - python package `rstdoc <https://github.com/rpuntaie/rstdoc>`__
 
-For further mappings and plugins see
+For mappings and plugins see
 `myvimrc <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/vim/doc/myvimrc.txt>`__.
 
 CLI
----
+===
 
 ``zsh`` through vim ``:term`` or ``urxvt``.
 ``urxvt`` depends on a proper ``/etc/locale.conf``.
@@ -181,8 +181,8 @@ CLI tools:
 - ``ncdu`` like ``du``, but with ncurses
 - ``top`` and ``htop`` to view processes
 
-Window Manager: xmonad
-----------------------
+Window Manager: Xmonad
+======================
 
 I added little to the `defaults <https://xmonad.org/manpage.html>`__.
 See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmonad.hs>`__.
@@ -318,7 +318,7 @@ contains packages for languages I worked with so far
 
 Native:
 
-- C/C++: gcc, clang
+- C/C++: gcc, clang, cling
 - Pascal: fpc
 
 .NET:
@@ -362,6 +362,147 @@ These I fiddled around with or intend to or rather not:
   `scala <https://docs.scala-lang.org/cheatsheets/index.html>`__
 - Erlang:
   `elixir <https://elixir-lang.org/crash-course.html>`__
+
+Languages are not important. Libraries are important, as they represent actual concepts.
+It is the same with natural languages: So many words for the same things.
+Languages just fragmentize concepts. References do not work accross language boundaries.
+
+**C++** is very expressive and has
+
+- `standard library <http://www.cplusplus.com/reference/>`__
+- `boost <https://www.boost.org/>`__ 
+- and can call any C system libraries without glue code
+  (`glibc <https://sourceware.org/git/?p=glibc.git>`__, `libusb <https://github.com/libusb/libusb>`__, ...)
+
+but as a compiled language, the *code-test* cycle is cumbersome,
+although `cling <https://github.com/root-project/cling>`__ helps:
+
+.. code:: cpp
+
+    #include "myfile.hpp"
+    #pragma cling load("myfile.so.9.220.0")
+
+
+**Python** is interpreted by design and has an amazing standard library.
+A lot of things are getting implemented in Python.
+But these efforts are not accessible to other languages.
+Therefore at least the **basic functionality should be implemented in a C API**,
+in order not to restrict the potential community.
+
+Virtual platforms
+like `JVM <https://en.wikipedia.org/wiki/Java_virtual_machine>`__ and
+`.NET <https://en.wikipedia.org/wiki/.NET_Framework>`__
+have mechanisms in place to interoperate with native code
+(
+`InteropServices <https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices?view=netframework-4.8>`__,
+`JNI <https://en.wikipedia.org/wiki/Java_Native_Interface>`__
+).
+They can be seen as interpreters, like Python or Ruby,
+just that they interpret an intermediate code representation
+(
+`CIL <https://en.wikipedia.org/wiki/List_of_CIL_instructions>`__,
+`java byte code <https://en.wikipedia.org/wiki/Java_bytecode>`__,
+),
+but so does Python and Ruby.
+
+In a utopia,
+all of the languages would
+`interoperate <https://en.wikipedia.org/wiki/Language_interoperability>`__
+on the lowest, i.e. machine code level,
+by producing compatible metadata,
+(
+`1 <https://en.wikipedia.org/wiki/JAR_(file_format)>`__
+`2 <https://en.wikipedia.org/wiki/Metadata_(CLI)>`__
+)
+which makes
+`ahead-of-time compiled <https://en.wikipedia.org/wiki/Ahead-of-time_compilation>`__
+functions addressable in each high language level,
+just like the JVM and .NET languages do already within their platforms.
+Note, that 
+`gcc-bridge to JVM <https://github.com/bedatadriven/renjin/tree/master/tools/gcc-bridge>`__
+or
+`python to native <https://stackoverflow.com/questions/138521/is-it-feasible-to-compile-python-to-machine-code>`__
+is not interoperation.
+
+VM platforms tried to mediate between hardware platforms,
+but they produced yet another platform, i.e. more fragmentation.
+
+`Interactive languages <https://en.wikipedia.org/wiki/List_of_programming_languages_by_type#Interactive_mode_languages>`__,
+like **Python**,
+are a step forward from a `CLI <https://en.wikipedia.org/wiki/Command-line_interface>`__,
+because they augment the concept space of processes, files and pipes with
+those of threads and data structures and APIs, without the need to compile in between
+(`REPL <https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop>`__).
+
+Applications
+============
+
+Generally I've moved away from GUIs, as they are not easily automated.
+Languages can be automated and are more flexible and trackable.
+Every application area has its `DSL <https://en.wikipedia.org/wiki/Domain-specific_language>`__.
+I prefer an imlementation in a general REPL language, specifically Python, though.
+
+:Typesetting:
+
+  I prefer `light markup <https://en.wikipedia.org/wiki/Lightweight_markup_language>`__,
+  specifically `rst <https://en.wikipedia.org/wiki/ReStructuredText>`__,
+  for which I made `rstdoc <https://github.com/rpuntaie/rstdoc>`__.
+
+  `html <https://github.com/diegocard/awesome-html5>`__
+
+  `latex <https://github.com/egeerardyn/awesome-LaTeX>`__
+
+  `libreoffice <https://github.com/LibreOffice/core>`__
+
+:Graphics:
+
+  Basically those supported by `rstdoc <https://github.com/rpuntaie/rstdoc>`__:
+  `svg <https://learn-the-web.algonquindesign.ca/topics/svg-cheat-sheet/>`__,
+  `eps <https://staff.science.uva.nl/a.j.p.heck/Courses/Mastercourse2005/tutorial.pdf>`__,
+  `dot <https://www.graphviz.org/doc/info/lang.html>`__,
+  `tikz <https://github.com/xiaohanyu/awesome-tikz>`__,
+  `plantuml <http://plantuml.com/command-line>`__,
+  `matplotlib <https://matplotlib.org/gallery/index.html>`__,
+  `pillow <https://pillow.readthedocs.io/en/stable/>`__,
+  `imagemagick <https://github.com/ImageMagick/ImageMagick>`__,
+  `pyx <https://pyx-project.org/>`__,
+  `pygal <http://pygal.org/en/stable/>`__
+
+  `Fontforge <https://github.com/fontforge/fontforge>`__
+
+  `Inkscape <https://gitlab.com/inkscape/inkscape>`__
+
+  `Gimp <https://gitlab.gnome.org/GNOME/gimp>`__
+
+  `Blender <https://github.com/sobotka/blender>`__
+
+:CAD:
+
+  `OpenScad <https://www.openscad.org/cheatsheet/>`__
+
+  Python: 
+  `PythonOCC <https://cdn.rawgit.com/tpaviot/pythonocc-core/804f7f3/doc/apidoc/0.18.1/>`__,
+  `pyOCCT <https://github.com/LaughlinResearch/pyOCCT>`__
+
+  `librecad <https://github.com/LibreCAD/LibreCAD>`__
+
+:Mathematics:
+
+  `Sagemath <http://doc.sagemath.org/html/en/tutorial/tour_algebra.html>`_
+
+  Python:
+  `sympy <https://docs.sympy.org/latest/index.html>`__
+
+:Electronics:
+
+  `ngspice <https://github.com/imr/ngspice>`__
+  (`doc <http://ngspice.sourceforge.net/docs/ngspice-manual.pdf>`__)
+
+  Python:
+  `pyspice <https://github.com/FabriceSalvaire/PySpice>`__
+
+  `kicad <http://docs.kicad-pcb.org/>`__
+
 
 
 
