@@ -363,10 +363,6 @@ These I fiddled around with or intend to or rather not:
 - Erlang:
   `elixir <https://elixir-lang.org/crash-course.html>`__
 
-Languages are not important. Libraries are important, as they represent actual concepts.
-It is the same with natural languages: So many words for the same things.
-Languages just fragmentize concepts. References do not work accross language boundaries.
-
 **C++** is very expressive and has
 
 - `standard library <http://www.cplusplus.com/reference/>`__
@@ -382,50 +378,7 @@ although `cling <https://github.com/root-project/cling>`__ helps:
     #include "myfile.hpp"
     #pragma cling load("myfile.so.9.220.0")
 
-
 **Python** is interpreted by design and has an amazing standard library.
-A lot of things are getting implemented in Python.
-But these efforts are not accessible to other languages.
-Therefore at least the **basic functionality should be implemented in a C API**,
-in order not to restrict the potential community.
-
-Virtual platforms
-like `JVM <https://en.wikipedia.org/wiki/Java_virtual_machine>`__ and
-`.NET <https://en.wikipedia.org/wiki/.NET_Framework>`__
-have mechanisms in place to interoperate with native code
-(
-`InteropServices <https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices?view=netframework-4.8>`__,
-`JNI <https://en.wikipedia.org/wiki/Java_Native_Interface>`__
-).
-They can be seen as interpreters, like Python or Ruby,
-just that they interpret an intermediate code representation
-(
-`CIL <https://en.wikipedia.org/wiki/List_of_CIL_instructions>`__,
-`java byte code <https://en.wikipedia.org/wiki/Java_bytecode>`__,
-),
-but so does Python and Ruby.
-
-In a utopia,
-all of the languages would
-`interoperate <https://en.wikipedia.org/wiki/Language_interoperability>`__
-on the lowest, i.e. machine code level,
-by producing compatible metadata,
-(
-`1 <https://en.wikipedia.org/wiki/JAR_(file_format)>`__
-`2 <https://en.wikipedia.org/wiki/Metadata_(CLI)>`__
-)
-which makes
-`ahead-of-time compiled <https://en.wikipedia.org/wiki/Ahead-of-time_compilation>`__
-functions addressable in each high language level,
-just like the JVM and .NET languages do already within their platforms.
-Note, that 
-`gcc-bridge to JVM <https://github.com/bedatadriven/renjin/tree/master/tools/gcc-bridge>`__
-or
-`python to native <https://stackoverflow.com/questions/138521/is-it-feasible-to-compile-python-to-machine-code>`__
-is not interoperation.
-
-VM platforms tried to mediate between hardware platforms,
-but they produced yet another platform, i.e. more fragmentation.
 
 `Interactive languages <https://en.wikipedia.org/wiki/List_of_programming_languages_by_type#Interactive_mode_languages>`__,
 like **Python**,
