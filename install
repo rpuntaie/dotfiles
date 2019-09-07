@@ -3,7 +3,7 @@
 # URL of this file
 # https://git.io/fjVcp
 
-dotfiles_url="https://github.com/rpuntaie/dotfiles"
+dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
@@ -53,6 +53,7 @@ _dotfiles_nodejs(){
 _dotfiles_weechat(){
   # weechat: no symlink, because it changes the files
   rsync -a ~/dotfiles/etc/weechat/ ~/.local/var/lib/weechat/
+  sed -i "s/WEENAME/rpuntaie/g" ~/.local/var/lib/weechat/irc.conf # usrstuff line
   mkdir -p ~/.local/var/lib/weechat/ssl
   cd ~/.local/var/lib/weechat/ssl
   openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem -subj "/C=AT/ST=AT/L=AT/O=ME/OU=IT/CN=me.org"
@@ -61,7 +62,7 @@ _dotfiles_weechat(){
 _dotfiles_email(){
   # wm into ~/.local/bin
   ~/.local/bin/ghi rpuntaie/mutt-wizard ~/.local
-  #setup email
+  #setup email usrstuff:
   rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
   a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
   a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add

@@ -27,7 +27,6 @@ Inspired by and thanks to:
 
 Some files in these dotfiles reference separately managed directories,
 because they are actual user data.
-There are according environment variables in ``.pam_environment``.
 
 ``~/.password-store``
 ``~/.gnupg``
@@ -35,6 +34,7 @@ There are according environment variables in ``.pam_environment``.
 ``~/my/finance``
 ``~/Mail``
 
+.. note:: To free these dotfiles from user-specific things, grep for ``usrstuff``.
 
 Installation
 ============
@@ -83,7 +83,7 @@ Alternatively
 .. code:: sh
 
    mkdir r
-   mount -t nfs 192.168.1.108:/home/roland/mine/rollarch r
+   mount -t nfs 192.168.1.108:/home/example/mine/rollarch r
    cd r
    USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda DOTS=fjVcp bash rollarch
 
@@ -223,7 +223,7 @@ Security
    gpg2 --detached-sign <file>
    gpg2 --verify <file>.asc
 
-``~/dotfiles/bin/gpg-offline-master`` works with the separate offline master key.
+``~/dotfiles/bin/gpgofflinemaster`` works with the separate offline master key.
 
 ``~/.gnupg``:
 ``GNUPGHOME`` is kept at the default location, to be managed separately and offline.

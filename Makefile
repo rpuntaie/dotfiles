@@ -1,4 +1,4 @@
-default: all
-all:
+.PHONY: install
+default: install
+install:
 	./install
-

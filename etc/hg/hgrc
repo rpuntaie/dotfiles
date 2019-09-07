@@ -1,7 +1,9 @@
 [ui]
-username = Roland Puntaier <roland.puntaier@chello.at>
-editor = vim
 ignore = ~/.hgignore
+editor = vim
+
+# usrstuff:
+username = Roland Puntaier <roland.puntaier@chello.at>
 
 [alias]
 a='add'

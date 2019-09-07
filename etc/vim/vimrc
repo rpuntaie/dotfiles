@@ -37,7 +37,7 @@ if has('win32')
   let g:localvimfiles=$HOME.'/vimfiles'
   let $MYVIMRC=g:localvimfiles.'/vimrc'
 else
-  " mkdir dotfiles && mount -t nfs 192.168.1.108:/home/roland/dotfiles dotfiles
+  " to use vimrc in unconfigured system:
   " VIMINIT="so dotfiles/etc/vim/vimrc" vim
   if empty($XDG_CONFIG_HOME)
     let $XDG_CONFIG_HOME=expand('~').'/dotfiles/etc'

@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-$MYTERM --class Gvim -e vim "$@" &
+urxvt --class Gvim -e vim "$@" &
 

@@ -21,6 +21,20 @@ XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
 XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
+# Personal stuff I have in separate directories
+# ~/.gnupg, ~/.password-store, ~/my and these ~/dotfiles
+MY                    DEFAULT="${HOME}/my"
+TASKDATA              DEFAULT="${MY}/task"
+FINANCE               DEFAULT="${MY}/finance"
+PASSWORD_STORE_DIR    DEFAULT="${HOME}/.password-store"
+
+# Personal environment variables
+NAME                  DEFAULT="full_name"
+EMAIL                 DEFAULT="escaped_email"
+MYGPG                 DEFAULT="gpg_public_key"
+MYTERM                DEFAULT=urxvt
+MYVIMRC               DEFAULT="${XDG_CONFIG_HOME}/vim/vimrc"
+
 # ibus-setup
 GTK_IM_MODULE=ibus
 QT_IM_MODULE=ibus
@@ -28,7 +42,6 @@ XMODIFIERS=@im=ibus
 
 # fix various applications to respect XDG
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
-MYVIMRC               DEFAULT="${XDG_CONFIG_HOME}/vim/vimrc"
 VIMINIT               DEFAULT="let \$MYVIMRC='${MYVIMRC}' | source \$MYVIMRC"
 ZDOTDIR               DEFAULT="${XDG_CONFIG_HOME}/zsh"
 LESSHISTFILE          DEFAULT="-"
@@ -56,4 +69,4 @@ NOTMUCH_CONFIG        DEFAULT="${XDG_CONFIG_HOME}/notmuch/notmuchrc"
 MAIL                  DEFAULT="${HOME}/Mail"
 MAILDIR               DEFAULT="${HOME}/Mail"
 NPM_CONFIG_PREFIX     DEFAULT="${XDG_STATE_HOME}/npm"
-PASSWORD_STORE_DIR    DEFAULT="${HOME}/.password-store"
+

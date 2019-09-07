@@ -16,6 +16,7 @@
 [pull]
   ff = only
 [user]
+  # usrstuff:
   name = Roland Puntaier
   email = roland.puntaier@gmail.com
 [push]
@@ -147,3 +148,5 @@
   upav     = pull --rebase --autostash -v
   upv      = pull --rebase -v
   wch      = whatchanged -p --abbrev-commit --pretty=medium
+
+# vim: ft=conf

@@ -35,9 +35,11 @@ tikz_proc_suite = 'ImageMagick'
 tikz_tikzlibraries = 'arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,intersections'
 project = 'Project'
 exclude_patterns = ['_build']
-copyright = '2019, Roland Puntaier'
-latex_show_urls = 'footnote'
 latex_engine = 'xelatex'
+latex_show_urls = 'footnote'
+
+# usrstuff:
+copyright = '2019, Roland Puntaier'
 
 thm_use_environment = True
 thm_use_textcolor = True

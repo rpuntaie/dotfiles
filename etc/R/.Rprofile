@@ -213,10 +213,11 @@ utils::rc.settings(ipck = TRUE)
 }
 
 options(
-  devtools.name = "Roland Puntaier",
-  devtools.desc.author = 'person("Roland", "Puntaier", email = "roland.puntaier@gmail.com", role = c("aut", "cre"))',
   devtools.desc.license = "GPL-3",
   covr.gcov = Sys.which("gcov")
+  # usrstuff:
+  devtools.name = "Roland Puntaier",
+  devtools.desc.author = 'person("Roland", "Puntaier", email = "roland.puntaier@gmail.com", role = c("aut", "cre"))',
 )
 
 if(interactive()){

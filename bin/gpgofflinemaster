@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
 # https://incenp.org/notes/2015/using-an-offline-gnupg-master-key.html
+# usrstuff:
 LABEL=${SECRET_KEY_DEVICE_LABEL:-ARCH_201512}
 KEYFILE=$USER/my-secret-key.asc
+
 device=$(findfs LABEL=$LABEL)
 if [ -n "$device" ]; then
     udisksctl mount --block-device $device

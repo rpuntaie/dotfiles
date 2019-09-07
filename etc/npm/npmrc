@@ -3,7 +3,11 @@ cache=${XDG_CACHE_HOME}/npm
 tmp=${XDG_RUNTIME_DIR}/npm
 init-module=${XDG_CONFIG_HOME}/npm/npm-init.js
 
+init-license=MIT
+init-version=0.1.0
+
+# usrstuff:
 init-author-name=Roland Puntaier
 init-author-email=roland.puntaier@gmail.com
-init-license = MIT
-init-version=0.1.0
+
+# vim: ft=conf
