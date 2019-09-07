@@ -61,7 +61,7 @@ _dotfiles_weechat(){
 
 _dotfiles_email(){
   # wm into ~/.local/bin
-  ~/.local/bin/ghi rpuntaie/mutt-wizard ~/.local
+  ~/.local/bin/ghi rpuntaie/mailwizard ~/.local
   #setup email usrstuff:
   rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
   a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add

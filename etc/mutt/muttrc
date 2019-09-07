@@ -1,8 +1,8 @@
 set realname = "$NAME"
 
-# keep this line to avoid mutt-wizard from adding a new one
+# keep this line to avoid mailwizard from adding a new one
 # usrstuff: but change the home directory
-source /home/roland/.local/share/mutt-wizard/mutt-wizard.muttrc
+source /home/roland/.local/share/mailwizard/mailwizard.muttrc
 
 # override defaults
 set assumed_charset = "utf-8"
@@ -40,4 +40,4 @@ macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 source $XDG_CONFIG_HOME/mutt/lists.muttrc
 
 # usrstuff: change home directory
-source /home/roland/.local/etc/mutt/mw_gen_mutt_accounts.muttrc # mutt-wizard-generated
+source /home/roland/.local/etc/mutt/mw_gen_mutt_accounts.muttrc # mailwizard-generated

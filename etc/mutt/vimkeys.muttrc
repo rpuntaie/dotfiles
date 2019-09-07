@@ -2,7 +2,7 @@
 #
 # https://raw.githubusercontent.com/neomutt/neomutt/master/contrib/vim-keys/vim-keys.rc
 # https://gitlab.gnugen.ch/floure/dotfiles/blob/6d1208fa9f2714220d69a26d7adc73f761a860ea/etc/neomutt/neomuttrc
-# https://github.com/rpuntaie/mutt-wizard
+# https://github.com/rpuntaie/mailwizard
 
 # Moving around
 bind index h noop

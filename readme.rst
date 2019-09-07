@@ -248,8 +248,7 @@ Do e.g.::
 Email
 =====
 
-``install`` downloads
-`my version of mw <https://github.com/rpuntaie/mutt-wizard>`__
+``install`` downloads `mw <https://github.com/rpuntaie/mailwizard>`__
 and uses it to generate email settings in
 
 - ``~/.local/etc/getmail/*``

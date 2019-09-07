@@ -1,15 +1,12 @@
 #!/usr/bin/sh
 
 # e.g.
-# ghi rpuntaie/mutt-wizard ~/.local
+# ghi rpuntaie/mailwizard ~/.local
 
 [ -n ${1} ] && [ -n ${2} ] || echo "'ghi x/y dest' with https://github.com/x/y"
 
 repo="${1}"
 dest="${2}"
-
-repo="rpuntaie/mutt-wizard"
-dest=~/.local
 
 Repo="https://github.com/$repo"
 
