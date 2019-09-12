@@ -2,6 +2,9 @@
 Dotfiles
 ********
 
+:Author: roland.puntaier@gmail.com
+:License: https://opensource.org/licenses/GPL-3.0
+
 Uses `XDG <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__,
 reproducing `FHS <http://linux.die.net/man/7/hier>`__ under ``~/.local``.
 See

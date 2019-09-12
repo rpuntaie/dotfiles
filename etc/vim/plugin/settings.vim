@@ -42,12 +42,13 @@ if has("multi_byte") " type '8g8' to find illegal utf8
 endif
 set list
 set listchars=tab:→\ ,eol:\ ,trail:·
-set expandtab
-set smarttab
-set autoindent
+set nosmarttab
+set noautoindent
+set nosmartindent
 set shiftwidth=4
 set tabstop=4
-set softtabstop=4
+set softtabstop=0
+set expandtab
 set clipboard=unnamed
 map <middlemouse> <nop>
 imap <middlemouse> <nop>
