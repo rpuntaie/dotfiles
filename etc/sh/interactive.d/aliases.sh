@@ -43,6 +43,9 @@ alias sp='sudo pacman'
 alias mutt='neomutt'
 alias gm='mw'
 
+#black background
+alias xpdf='xpdf -rv'
+
 alias :e="$EDITOR"
 alias :q=exit
 

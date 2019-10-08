@@ -41,6 +41,7 @@ umask 022
 mkdir -p ~/.local
 rm -rf ~/.local/etc/user-dirs*
 stow --ignore=home --ignore=etc/weechat --no-folding ${1:--R} -t .local dotfiles
+vim --cmd "mkspell! ~/.local/etc/vim/spell/en.utf-8.add" --cmd q
 
 # dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
 # ~/.ledgerrc

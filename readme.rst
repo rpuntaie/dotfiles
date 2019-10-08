@@ -86,11 +86,12 @@ Alternatively
 .. code:: sh
 
    mkdir r
-   mount -t nfs 192.168.1.108:/home/example/mine/rollarch r
+   mount -t nfs 192.168.1.108:/home/roland/mine/rollarch r
    cd r
    USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda DOTS=fjVcp bash rollarch
 
 The variables can be sourced from a file, of course.
+``PW`` will be asked if omitted.
 
 After changing or adding a file to the ``dotfiles`` one must run
 

@@ -26,7 +26,6 @@ _dotfiles_restowdots(){
     cd ~
     bash ~/dotfiles/bin/restowdots
   else
-    # if .dotfiles exits: $dotfiles_new_install=true ~/dotfiles/install
     dotfiles_new_install=true
     git clone $dotfiles_url
     bash ~/dotfiles/bin/restowdots -S

@@ -63,8 +63,8 @@ if !has('win32')
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
-
 function Deinplugins()
+    "download
     call dein#add('bogado/file-line') " open <file>:<line>
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
 ""| |plugin/02tlib.vim|  TScratch TBrowseOutput
