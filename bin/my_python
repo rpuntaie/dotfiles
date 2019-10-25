@@ -20,4 +20,5 @@ pip install --user pint #physical units
 #nvim
 #pip install --user --no-binary :all: pynvim #neovim-python
 pip install --user neovim-remote #nvr to start and use nvim server
+pip install --user solidpython
 
