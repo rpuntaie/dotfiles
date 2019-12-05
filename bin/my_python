@@ -1,8 +1,12 @@
 #!/usr/bin/env sh
+#mine
 pip install --user rstdoc #documentation
 pip install --user rst2confluence #for jira
+pip install --user txdir #create directory tree from text file
+pip install --user remdups
+pip install --user base128
+#other
 pip install --user click-man #man pages for click apps
-pip install --user autopep8 #used in vim to reformat
 pip install --user when-changed #... file/dir -c command
 pip install --user pygame #graphics
 pip install --user cookiecutter #template projects
@@ -20,5 +24,10 @@ pip install --user pint #physical units
 #nvim
 #pip install --user --no-binary :all: pynvim #neovim-python
 pip install --user neovim-remote #nvr to start and use nvim server
-pip install --user solidpython
-
+pip install --user solidpython #3d modelling (alternative: https://aur.archlinux.org/packages/blender-as-py-module/)
+pip install --user autopilot #easy package skeleton
+pip install --user fs #pyfilesystem
+pip install --user path #https://pypi.org/project/path/
+pip install --user cookiecutter #directory templates (see txdir)
+pip install --user doit #task automation
+pip install --user urlfetch #http client

@@ -117,7 +117,7 @@ function Deinplugins()
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 ""| |vebugger-gdb| :VBGstartGDB, ` for leader
     call dein#add('idanarye/vim-vebugger')
-""| |VdebugStart| <F5>pydbg -d localhost:9000 x.py<F2><F3><F10><F6>
+""| |VdebugStart| <F5>pydbgp -d localhost:9000 x.py<F2><F3><F10><F6>
     call dein#add('vim-vdebug/vdebug')
 ""| |vimtex-default-mappings| for latex
     call dein#add('lervag/vimtex')
@@ -146,6 +146,15 @@ function Deinplugins()
     call dein#add('chrisbra/unicode.vim')
 ""| |barbaric-functions| (ibus) input method only in insert mode
     call dein#add('rpuntaie/vim-barbaric')
+"'airblade/vim-gitgutter'
+"'editorconfig/editorconfig-vim'
+"'itchyny/lightline.vim'
+"'mattn/emmet-vim'
+"'terryma/vim-multiple-cursors'
+"'tpope/vim-eunuch'
+"'severin-lemaignan/vim-minimap'
+"ctags based 'majutsushi/tagbar'
+"LSP based 'liuchengxu/vista.vim'
 endfunction
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')

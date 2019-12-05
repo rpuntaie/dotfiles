@@ -1,7 +1,7 @@
 set keymodel=startsel,stopsel
 set selection=exclusive
 set noswapfile
-filetype plugin indent on
+filetype plugin indent off
 set history=700
 set autoread
 set isfname-=: " to make gF open file:line 
@@ -45,6 +45,7 @@ set listchars=tab:→\ ,eol:\ ,trail:·
 set nosmarttab
 set noautoindent
 set nosmartindent
+set indentexpr=
 set shiftwidth=4
 set tabstop=4
 set softtabstop=0

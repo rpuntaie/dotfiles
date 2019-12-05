@@ -164,6 +164,7 @@ except: pass
 EOF
 iab FENV #!/usr/bin/env
 iab FENC # encoding: utf-8
+iab VIML # vim: ts=4 sw=4 sts=4 et noai nocin nosi inde=
 iab Ydate <C-R>=strftime("%Y-%m-%d")<CR>
 iab YY <C-R>=strftime("%Y%m%d")<CR>
 iab YYY <C-R>=strftime("%Y%m%d%a")[:-2]<CR>

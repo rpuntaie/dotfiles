@@ -65,3 +65,9 @@ unsetopt correct
 
 . $XDG_CONFIG_HOME/sh/interactive
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/roland/.local/opt/google-cloud-sdk/path.zsh.inc' ]; then . '/home/roland/.local/opt/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/roland/.local/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/roland/.local/opt/google-cloud-sdk/completion.zsh.inc'; fi

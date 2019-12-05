@@ -4,5 +4,6 @@ autocmd BufReadPost *
     \   exe "normal! g'\"" |
     \ endif
 
-autocmd bufreadpre *.rest setlocal syntax=rst
+autocmd BufReadPre *.rest setlocal syntax=rst
 autocmd BufEnter * :syntax sync fromstart
+autocmd BufEnter *.py :set equalprg=autopep8\ -

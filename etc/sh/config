@@ -18,7 +18,7 @@ fi
 export EDITOR='/usr/bin/vim'
 export VISUAL='/usr/bin/vim'
 export PAGER='/usr/bin/less'
-export BROWSER='/usr/bin/w3m'
+export BROWSER='/usr/bin/firefox'
 export MANPAGER='nvim +Man!'
 
 # Colours for less:
