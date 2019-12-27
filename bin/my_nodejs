@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+#installs to .local/var/npm
+
 npm -g install express
 npm -g install express-session
 npm -g install express-generator

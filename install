@@ -69,6 +69,10 @@ _dotfiles_email(){
   a=dontbite71@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
 }
 
+_clone_github_mine(){ #usrstuff
+  bash ~/dotfiles/bin/githubmine
+}
+
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
@@ -81,6 +85,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _dotfiles_nodejs
     _dotfiles_weechat
     _dotfiles_email
+    _clone_github_mine
   fi
   echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."

@@ -8,4 +8,5 @@ path append "$(readlink -f /sbin)"
 # Add user path:
 path prepend "$(readlink -f "$HOME/.local/bin")"
 path prepend "$(readlink -f "$HOME/.local/lib/python")"
+path append "$(readlink -f "$HOME/.local/var/lib/npm/bin")"
 
