@@ -1,0 +1,36 @@
+mkdir -p ~/mine
+
+_mine_one() {
+    url="$1"
+    name="$2"
+    cd ~/mine
+    if [ -d "$name" ]; then
+        cd "$name"
+        git pull
+        git submodule update --init --recursive
+    else
+        git clone "$url$name"
+    fi
+    cd ~/mine
+}
+
+_mine_one https://github.com/rpuntaie/ base128
+_mine_one https://github.com/rpuntaie/ blog
+_mine_one https://github.com/chcko/ chcko
+_mine_one https://github.com/rpuntaie/ econ
+_mine_one https://github.com/rpuntaie/ mailwizard
+_mine_one https://github.com/rpuntaie/ pdfformulas
+_mine_one https://github.com/rpuntaie/ pdt
+_mine_one https://github.com/pyfca/ pyfca
+_mine_one https://github.com/rpuntaie/ remdups
+_mine_one https://github.com/rpuntaie/ resume
+_mine_one https://github.com/rpuntaie/ rollarch
+_mine_one https://github.com/rpuntaie/ rstdoc
+_mine_one https://github.com/rpuntaie/ sphinxcontrib-thm
+_mine_one https://github.com/rpuntaie/ stpl
+_mine_one https://github.com/rpuntaie/ trans.vim
+_mine_one https://github.com/rpuntaie/ txdir
+_mine_one https://github.com/rpuntaie/ vim_py3_rst
+_mine_one https://github.com/mamchecker/ mamchecker
+
+cd ~
