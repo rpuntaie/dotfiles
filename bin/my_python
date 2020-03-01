@@ -6,6 +6,7 @@ pip install --user txdir #create directory tree from text file
 pip install --user remdups
 pip install --user base128
 #other
+pip install --user restview
 pip install --user click-man #man pages for click apps
 pip install --user when-changed #... file/dir -c command
 pip install --user pygame #graphics
@@ -31,3 +32,4 @@ pip install --user path #https://pypi.org/project/path/
 pip install --user cookiecutter #directory templates (see txdir)
 pip install --user doit #task automation
 pip install --user urlfetch #http client
+pip install --user tuna #.prof viewer

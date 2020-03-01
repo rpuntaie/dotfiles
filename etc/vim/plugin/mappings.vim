@@ -151,9 +151,14 @@ vmap gx <Plug>(openbrowser-smart-search)
 command! -nargs=* MM :call s:BuildFun(<q-args>)
 py3 << EOF
 import uuid
+import sys
+import os
+from unittest import mock
 from math import *
 import locale
 locale.setlocale(locale.LC_ALL, '')
+if sys.path[0]!='.':
+    sys.path.insert(0,'.')
 try:
     from docutils.core import publish_string
     from rst2confluence import confluence

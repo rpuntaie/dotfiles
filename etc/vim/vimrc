@@ -267,3 +267,7 @@ if isdirectory($MY)
     cd $MY
 endif
 
+runtime ftplugin/man.vim
+if has("gui_running")
+    nnoremap K :<C-U>exe "Man" v:count "<C-R><C-W>"<CR><CR>
+endif
