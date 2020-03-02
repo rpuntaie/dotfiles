@@ -17,6 +17,7 @@ _mine_one() {
 _mine_one https://github.com/rpuntaie/ base128
 _mine_one https://github.com/rpuntaie/ blog
 _mine_one https://github.com/chcko/ chcko
+_mine_one https://github.com/chcko/ chcko-r
 _mine_one https://github.com/rpuntaie/ econ
 _mine_one https://github.com/rpuntaie/ mailwizard
 _mine_one https://github.com/rpuntaie/ pdfformulas
