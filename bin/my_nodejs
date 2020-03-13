@@ -10,5 +10,6 @@ npm -g install nodemailer
 npm -g install mysql
 npm -g install js-beautify
 npm -g install komodo-debug
+#npm -g install auto-changelog
 #npm -g install @okta/oidc-middleware
 #npm -g install @okta/okta-sdk-nodej

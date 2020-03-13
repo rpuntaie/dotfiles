@@ -32,6 +32,8 @@ nmap <silent> <C-l> :wincmd l<CR>
 "": `:F{Ff}` font size
 command! FF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+2)','g')
 command! Ff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-2)','g')
+""" `,s`: quickly save current buffer
+noremap <leader>s :update<CR>
 """ `,hh`: vim help for word under cursor
 nmap <leader>hh :help <C-R><C-W><CR>
 """ `,b{d w}`: delete/wipe buffer, but not window
