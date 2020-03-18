@@ -196,6 +196,6 @@ set reflow_text
 set reflow_space_quotes
 
 # Show all other directories
-set mask="*"
+set mask=".*"
 
 
