@@ -69,7 +69,8 @@ function Deinplugins()
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
 ""| |plugin/02tlib.vim|  TScratch TBrowseOutput
     call dein#add('tomtom/tlib_vim')
-
+""| |quickfix-reflector| enable editing the quickfix to change more files
+    call dein#add('stefandtw/quickfix-reflector.vim')
 ""| |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
     call dein#add('junegunn/fzf.vim')
 ""| |bufexplorer| still needed to delete/copy
