@@ -35,7 +35,7 @@ if [[ -z "$NOGDB" ]]; then
     done
     authkeygrip=$(gpg -K --with-keygrip | sed -n -e "/\[A]/{n;n;p;q}" | sed -n -e "s/^\s*Keygrip = //p")
     if [ -n $authkeygrip ]; then
-        if [ ! -f ~/.gnupg/sshcontrol] || [ "$(sed -n -e "/$authkeygrip/p" ~/.gnupg/sshcontrol)" != "$authkeygrip" ]; then
+        if [ ! -f ~/.gnupg/sshcontrol ] || [ "$(sed -n -e "/$authkeygrip/p" ~/.gnupg/sshcontrol)" != "$authkeygrip" ]; then
             echo $authkeygrip > ~/.gnupg/sshcontrol
             ssh-add -L >> ~/.ssh/authorized_keys
             #for other machines: ssh-copy-id 192.168.X.Y
