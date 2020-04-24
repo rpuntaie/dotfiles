@@ -51,10 +51,11 @@ cd ~/dotfiles
 stow home
 cd ~
 
-echo xmonad
-rm -rf ~/.xmonad
-ln -sf ~/.local/etc/xmonad .xmonad
-xmonad --recompile
+if which xmonad; then
+    rm -rf ~/.xmonad
+    ln -sf ~/.local/etc/xmonad .xmonad
+    xmonad --recompile
+fi
 
 #see ~/dotfiles/etc/user-dirs.dirs
 for adir in $(sed -n -e 's,^X.*/\(.*\)",\1,p' .local/etc/user-dirs.dirs); do
