@@ -4,6 +4,7 @@
 # https://git.io/fjVcp
 
 dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
+DOTDIR=".dotfiles"
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
@@ -17,24 +18,24 @@ _dotfiles_check_packages(){
 
 _dotfiles_restowdots(){
   cd ~
-  if [ -d dotfiles ]; then
-    cd dotfiles
+  if [ -d $DOTDIR ]; then
+    cd $DOTDIR
     if [ ! "$(git config --get remote.origin.url)" = "$dotfiles_url" ]; then
       echo "This install script is for a different dotfiles" >&2
       exit 1
     fi
     cd ~
-    bash ~/dotfiles/bin/restowdots
+    bash $DOTDIR/bin/restowdots
   else
     dotfiles_new_install=true
-    git clone $dotfiles_url
-    bash ~/dotfiles/bin/restowdots -S
+    git clone $dotfiles_url $DOTDIR
+    bash $DOTDIR/bin/restowdots -S
   fi
 }
 
 #activate the variable defined in .pam_environment
 _dotfiles_pam_environment(){
-  eval "$(sed -ne "s/DEFAULT=/=/p" .pam_environment | sed -ne '/OVERRIDE\|@{\|:/!p' | sed "s/ //g" | sed "s/^.*/export \0/")"
+  eval "$(sed -n -e "s/DEFAULT=/=/p" .pam_environment | sed -n -e '/OVERRIDE\|@{\|:/!p' | sed "s/ //g" | sed "s/^.*/export \0/")"
 }
 
 _dotfiles_fonts(){
@@ -42,35 +43,39 @@ _dotfiles_fonts(){
 }
 
 _dotfiles_python(){
-  bash ~/dotfiles/bin/my_python
+  bash ~/$DOTDIR/bin/my_python
 }
 
 _dotfiles_nodejs(){
-  bash ~/dotfiles/bin/my_nodejs
+  bash ~/$DOTDIR/bin/my_nodejs
 }
 
 _dotfiles_weechat(){
   # weechat: no symlink, because it changes the files
-  rsync -a ~/dotfiles/etc/weechat/ ~/.local/var/lib/weechat/
-  sed -i "s/WEENAME/rpuntaie/g" ~/.local/var/lib/weechat/irc.conf # usrstuff line
-  mkdir -p ~/.local/var/lib/weechat/ssl
-  cd ~/.local/var/lib/weechat/ssl
-  openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem -subj "/C=AT/ST=AT/L=AT/O=ME/OU=IT/CN=me.org"
+  if which weechat; then
+    rsync -a ~/$DOTDIR/etc/weechat/ ~/.local/var/lib/weechat/
+    sed -i "s/WEENAME/rpuntaie/g" ~/.local/var/lib/weechat/irc.conf # usrstuff line
+    mkdir -p ~/.local/var/lib/weechat/ssl
+    cd ~/.local/var/lib/weechat/ssl
+    openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem -subj "/C=AT/ST=AT/L=AT/O=ME/OU=IT/CN=me.org"
+  fi
 }
 
 _dotfiles_email(){
-  # wm into ~/.local/bin
-  ~/.local/bin/ghi rpuntaie/mailwizard ~/.local
-  #setup email usrstuff:
-  rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
-  a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
-  a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
-  a=puntaier.roland@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add
-  a=dontbite71@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
+  if which mutt; then
+    # mw into ~/.local/bin
+    ~/.local/bin/ghi rpuntaie/mailwizard ~/.local
+    #setup email usrstuff:
+    rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
+    a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
+    a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
+    a=puntaier.roland@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add
+    a=dontbite71@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
+  fi
 }
 
 _clone_github_mine(){ #usrstuff
-  bash ~/dotfiles/bin/githubmine
+  bash ~/$DOTDIR/bin/githubmine
 }
 
 #main

@@ -14,18 +14,24 @@ mkdir -p ~/my/finance
 mkdir -p ~/.gnupg
 mkdir -p ~/.password-store
 
+if [[ -d ~/.dotfiles ]]; then
+    DOTDIR=".dotfiles"
+else
+    DOTDIR="dotfiles"
+fi
+
 #at least the vim config for Windows:
 #bash dotfiles/bin/restowdots
 if [[ ! $(uname) =~ "Linux" ]]; then
-    rsync -av ~/dotfiles/etc/vim/ ~/vimfiles/
+    rsync -av ~/$DOTDIR/etc/vim/ ~/vimfiles/
     exit 0
 fi
 
 if [[ -z "$NOGDB" ]]; then
     echo "gnupg (patience: migh take some time)"
     #keep ~/.gnupg separate, just link the config file
-    for gpgfile in $(ls ~/dotfiles/etc/gnupg); do
-        ln -sf ~/dotfiles/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
+    for gpgfile in $(ls ~/$DOTDIR/etc/gnupg); do
+        ln -sf ~/$DOTDIR/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile
     done
     authkeygrip=$(gpg -K --with-keygrip | sed -n -e "/\[A]/{n;n;p;q}" | sed -n -e "s/^\s*Keygrip = //p")
     if [ -n $authkeygrip ] && [ ! "$(sed -ne "/$authkeygrip/p" ~/.gnupg/sshcontrol)" = "$authkeygrip" ]; then
@@ -40,14 +46,14 @@ echo stow
 umask 022
 mkdir -p ~/.local
 rm -rf ~/.local/etc/user-dirs*
-stow --ignore=home --ignore=etc/weechat --no-folding ${1:--R} -t .local dotfiles
+stow --ignore=home --ignore=etc/weechat --no-folding ${1:--R} -t .local $DOTDIR
 vim --cmd "mkspell! ~/.local/etc/vim/spell/en.utf-8.add" --cmd q
 
-# dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/dotfiles/home``
+# dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/$DOTDIR/home``
 # ~/.ledgerrc
 # ~/.pam_environment
 mv -f ~/.bashrc ~/org.bashrc
-cd ~/dotfiles
+cd ~/$DOTDIR
 stow home
 cd ~
 
@@ -57,7 +63,7 @@ if which xmonad; then
     xmonad --recompile
 fi
 
-#see ~/dotfiles/etc/user-dirs.dirs
+#see ~/$DOTDIR/etc/user-dirs.dirs
 for adir in $(sed -n -e 's,^X.*/\(.*\)",\1,p' .local/etc/user-dirs.dirs); do
     mkdir -p ~/$adir
 done
