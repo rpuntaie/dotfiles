@@ -86,8 +86,7 @@ Then
 
     curl -OLs https://git.io/installarch
     # replace the defines at least in the first line
-    USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda \
-    DOTS=fjVcp bash installarch
+    DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash installarch
     # log out and in
 
 Alternatively
@@ -97,7 +96,11 @@ Alternatively
    mkdir r
    mount -t nfs 192.168.1.108:/home/roland/mine/rollarch r
    cd r
-   USR=u PW=p HST=u121 IP2=1.121 DSK=/dev/sda DOTS=fjVcp bash rollarch
+   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash rollarch
+
+DSK IS FORMATTED. DON'T CHOOSE THE WRONG ONE.
+
+``-o nfsvers=3`` might be necessary for the ``mount`` command.
 
 The variables can be sourced from a file, of course.
 ``PW`` will be asked if omitted.
