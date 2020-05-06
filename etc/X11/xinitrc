@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+if [ -z "$WM" ]; then
+  export WM=xmonad
+fi
 
 if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
   eval `dbus-launch --sh-syntax`
@@ -14,29 +18,35 @@ dunst &
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 if [[ -n $(grep "^flags.*\ hypervisor\ " /proc/cpuinfo) ]]; then
-  VBoxClient-all &
+  /usr/bin/VBoxClient-all &
+  # /usr/bin/VBoxClient --clipboard
+  # /usr/bin/VBoxClient --autoresize
 fi
 
 setxkbmap -option terminate:ctrl_alt_bksp
 
 xrdb -load $XDG_CONFIG_HOME/X11/Xresources
 
-#Caps_Lock to Print
-#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' -e 'keysym Print = Caps_Lock'
-xmodmap ~/.Xmodmap
-
 #needs to go before WM
-dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
+# dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
 
 ibus-daemon --xim -d -r &
 #switch with (works with pluma)
 #ibus engine libpinyin
 #ibus engine xkb:us::eng
 
-# Launch WM
-if [ -z "$WM" ]; then
-  export WM=xmonad
-fi
-exec $WM
+#Caps_Lock to Print
+#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' -e 'keysym Print = Caps_Lock'
+xmodmap $HOME/.Xmodmap
 
+if [[ -x $HOME/.screenlayout/$HOST.sh ]]; then
+  $HOME/.screenlayout/$HOST.sh
+  #xrandr --output DisplayPort-0 --off --output HDMI-0 --primary --mode 1920x1080 --rate 60.00 --pos 1920x1080 --rotate normal --output DVI-0 --mode 1920x1080 --rate 59.93 --pos 0x0 --rotate normal --output DVI-1 --mode 1920x1080 --rate 60.00 --pos 0x1080 --rotate normal
+fi
+
+if [[ $WM == xmonad ]]; then
+  feh --bg-scale /usr/share/backgrounds/gnome/Wood.jpg &
+fi
+
+exec $WM
 
