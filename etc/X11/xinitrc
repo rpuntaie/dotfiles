@@ -35,9 +35,8 @@ ibus-daemon --xim -d -r &
 #ibus engine libpinyin
 #ibus engine xkb:us::eng
 
-#Caps_Lock to Print
-#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' -e 'keysym Print = Caps_Lock'
-xmodmap $HOME/.Xmodmap
+#setxkbmap -option caps:escape
+setxkbmap -option caps:swapescape
 
 if [[ -x $HOME/.screenlayout/$HOST.sh ]]; then
   $HOME/.screenlayout/$HOST.sh

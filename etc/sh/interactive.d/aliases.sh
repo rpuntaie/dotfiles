@@ -10,6 +10,7 @@ alias cp='cp -i'
 alias grep='grep --color=auto'
 alias la='ls -lAh'
 alias ll='ls -lh --time-style=long-iso'
+alias lsd='ls -d'
 alias ls='ls -A --color=auto --quoting-style=literal'
 alias lt='ll -t'
 alias mv='mv -i'
@@ -18,8 +19,8 @@ alias pipiu='pip install --user'
 alias pipui='sudo pip uninstall'
 
 #weather
-alias wttr='curl wttr.in'
-alias moon='curl wttr.in/Moon'
+alias wttr='curl https://wttr.in'
+alias moon='curl https://wttr.in/Moon'
 
 # Server only aliases (mostly additional safety):
 if [ -n "$SSH_CONNECTION" ]; then
