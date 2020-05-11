@@ -1,0 +1,4 @@
+*
+!.gitignore
+!.notmuch/hooks/post-new
+!aliases
