@@ -19,6 +19,7 @@ XDG_DATA_DIRS         DEFAULT="${XDG_DATA_HOME}:${XDG_DATA_DIRS}"
 XDG_LOG_HOME          DEFAULT="${HOME}/.local/var/log"
 XDG_STATE_HOME        DEFAULT="${HOME}/.local/var/lib"
 XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
+XDG_BIN_HOME          DEFAULT="${HOME}/.local/bin"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
 # ibus-setup

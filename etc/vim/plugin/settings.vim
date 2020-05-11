@@ -92,7 +92,7 @@ if has("gui_running")
         endif
     else
         if filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
-          set guifont=FreeMonoFO4\ Bold\ 16
+          set guifont=FreeMonoFO4\ Bold\ 11
         else
           set guifont=FreeMono\ Bold\ 11
         endif
