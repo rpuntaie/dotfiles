@@ -9,4 +9,5 @@ path append "$(readlink -f /sbin)"
 path prepend "$(readlink -f "$HOME/.local/bin")"
 path prepend "$(readlink -f "$HOME/.local/lib/python")"
 path append "$(readlink -f "$HOME/.local/var/lib/npm/bin")"
+path append "$(ruby -e 'puts Gem.user_dir')/bin"
 
