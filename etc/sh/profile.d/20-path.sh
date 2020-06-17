@@ -5,6 +5,9 @@ path append "$(readlink -f /usr/local/sbin)"
 path append "$(readlink -f /usr/sbin)"
 path append "$(readlink -f /sbin)"
 
+# jshell
+path append "/usr/lib/jvm/java-11-openjdk/bin"
+
 # Add user path:
 path prepend "$(readlink -f "$HOME/.local/bin")"
 path prepend "$(readlink -f "$HOME/.local/lib/python")"

@@ -14,6 +14,7 @@ _mine_one() {
     cd ~/mine
 }
 
+_mine_one https://github.com/rpuntaie/ getmail
 _mine_one https://github.com/rpuntaie/ base128
 _mine_one https://github.com/rpuntaie/ blog
 _mine_one https://github.com/chcko/ chcko && git checkout develop
