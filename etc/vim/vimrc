@@ -57,9 +57,9 @@ if !has('win32')
   set directory=$XDG_STATE_HOME/vim,~/,/tmp
   set backupdir=$XDG_STATE_HOME/vim,~/,/tmp
   if has('nvim')
-    set viminfo+=n$XDG_STATE_HOME/vim/nviminfo
+    set viminfofile=$XDG_STATE_HOME/vim/nviminfo
   else
-    set viminfo+=n$XDG_STATE_HOME/vim/viminfo
+    set viminfofile=$XDG_STATE_HOME/vim/viminfo
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif

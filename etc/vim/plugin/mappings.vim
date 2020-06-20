@@ -98,6 +98,8 @@ nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+""" `<C-n>`: NERDTreeToggle
+map <C-n> :NERDTreeToggle<CR>
 """ `gx{lngpw}`: open local, nonlocal; google,python,wikipedia
 vnoremap <silent> gxl "cy:call netrw#BrowseX("<C-R>=expand("%:p:h")<CR>/<C-R>c",0)<CR><CR>
 vnoremap <silent> gxn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
