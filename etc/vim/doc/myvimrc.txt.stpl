@@ -2,21 +2,19 @@
 MY VIM RC                                                            *myvimrc*
 
 Generated:
-`stpl ~/dotfiles/etc/vim/doc/myvimrc.txt.stpl ~/dotfiles/etc/vim/doc/myvimrc.txt`
+`stpl myvimrc.txt.stpl myvimrc.txt`
 
 <%
 from os.path import dirname as d, join as j
 lns=[]
 for filename in """vimrc
-plugin/abbreviations.vim
 plugin/autocommands.vim
 plugin/digraphs.vim
 plugin/functions.vim
-plugin/python3vim.vim
+plugin/mappings.vim
 plugin/settings.vim
 plugin/statusbar.vim
 plugin/wildignore.vim
-plugin/mappings.vim
 """.splitlines():
     with open(j(d(d(__file__)),filename)) as f:
         lns += f.readlines()
@@ -34,6 +32,11 @@ end
 MAPPINGS                                                           *myvimmaps*
 
 %collect('"""')
+
+==============================================================================
+ABBREVIATIONS                                                       *myplugins*
+
+%collect('""i')
 
 ==============================================================================
 COMMANDS                                                       *myvimcommands*

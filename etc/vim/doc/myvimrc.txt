@@ -2,40 +2,51 @@
 MY VIM RC                                                            *myvimrc*
 
 Generated:
-`stpl ~/dotfiles/etc/vim/doc/myvimrc.txt.stpl ~/dotfiles/etc/vim/doc/myvimrc.txt`
+`stpl myvimrc.txt.stpl myvimrc.txt`
 
 
 ==============================================================================
 MAPPINGS                                                           *myvimmaps*
 
-`*#`: search down|up on visual region
+`*#`: search down|up for visual region
 `*:`: numberpad tags move
 `+-`: numberpad quickfix move
+`,S`: commit current buffer to git
 `,aa`: :Tabular
-`,bd`: close buffer, but not window
-`,ec[c]`: (re)number
+`,b{d w}`: delete/wipe buffer, but not window
 `,e{ep}`: edit vimrc | dein repos
 `,f{sgctefid}`: cscope find
 `,gb`: vimgrep in buffers
 `,gg`: vimgrep specify or visual region
 `,gr`: specify replace for visual region
 `,hh`: vim help for word under cursor
-`,j2`: to jira (pip rst2confluence needed}
+`,j2`: to jira ("pip install rst2jira" needed}
 `,ls`: load spelling
 `,l{ramkj}`: load russian accents mathematic fntc english
 `,m[m]`: run[echo] in term (two windows: one of them term)
+`,s`: save current buffer
 `,ww`: look up in wordnet (wn needed)
+`<C-n>`: NERDTreeToggle
+`<C-s>` select next range
 `<C-{kjhl}>`: go to window
 `<M-V>|<M-C>`: copy|paste clipboard
+`<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
+`KK` coc documentation (K is man page)
 `SD`: cd to current symlinked file
 `SR`: Replace from default register without loosing it
 `SW`: fzf search for word under cursor
 `Y`: yank till end of line, like D
-`gx`: open browser and search
-`gx{lngpw}`: open local, nonlocal; google,python,wikipedia
+`gx`: open browser (normally firefox) and search
+`gx{lngpw}`: open local, nonlocal; chromium google,python,wikipedia
+`g{dyir}` coc go to definition/type/implementation/reference
+`lc` coc fix current
+`lf` format
+`l{ac}` coc load codeaction for selected (a) or all (c)ode
 `m`: match in o v n mode
+`rn` rename
 `s`: <nop>, free for other mappings
 `sb`: fzf Buffers
+`sc[c]`: (re)number
 `sf` : fzf Files GFiles
 `sg` : fzf GFiles
 `sh`: fzf History
@@ -43,14 +54,32 @@ MAPPINGS                                                           *myvimmaps*
 `sp`: yank current file full path
 `sx`: syntax fromstart
 `s{.;:/}`: fzf Buffer tags, tags, : or / history
+`{[]}g` coc diagnostic next/prev
+`{ia}{fc}` coc select inside/outside function/class
 `{jk}=g{jk}`: treat as break lines when wrap on
-`{ss SS}`: Insert empty line below|above
+`{sj sk}`: Insert empty line below|above
+`{ss SS}`: n insert char before|after
+
+==============================================================================
+ABBREVIATIONS                                                       *myplugins*
+
+`FENC # encoding: utf-8`
+`FENV #!/usr/bin/env`
+`VIML # vim: ts=4 sw=4 sts=4 et noai nocin nosi inde=`
+`YY 20200711`
+`YYY 20200711Sa`
+`Ydate 2020-07-11`
+`iGU B6785F62-0A3B-4AFF-A5AA-0AFB2FEEF9F3`
+`iT t50282011072020`
 
 ==============================================================================
 COMMANDS                                                       *myvimcommands*
 
+`:Fold` coc fold
+`:Format` coc format
 `:F{Ff}` font size
 `:MM` build using Makeshift
+`:OR` coc organize import
 `:PrettyXML` format XML
 `:Redir` either shell or vim command
 `:SD` cd to current file
@@ -62,15 +91,17 @@ COMMANDS                                                       *myvimcommands*
 PLUGINS                                                            *myplugins*
 
 Links to plugin mappings::
-|:Tabularize| format
+mathematic.vim (<leader>lm)
+|:Tabularize| format (,aa)
 |AleToggle| linting (:ALEToggle)
 |NERDCommenterFunctionality| ,c{ cnmisy$Aalbu}
 |NERDTreeMappings| [sn] file browser
 |Nvim-R-use| \rf \rq \d ... in R file
 |UltiSnips| snippets
-|VdebugStart| <F5>pydbg -d localhost:9000 x.py<F2><F3><F10><F6>
+|VdebugStart| <F5>pydbgp -d localhost:9000 x.py<F2><F3><F10><F6>
 |barbaric-functions| (ibus) input method only in insert mode
-|deoplete-functions| complete using |deoplete-sources|
+|bufexplorer| still needed to delete/copy
+|coc| intellisense using language server protocol
 |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
 |fugitive-commands| :Gxxx like :Gdiffsplit
 |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
@@ -78,11 +109,12 @@ Links to plugin mappings::
 |makeshift| [:MM] builds the current project
 |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
 |plugin/02tlib.vim|  TScratch TBrowseOutput
+|quickfix-reflector| enable editing the quickfix to change more files
 |sandwich-keymappings| s{adr} dasX da<wait>s (https://github.com/machakann/vim-sandwich/issues/62)
 |sleuth| detect tab settings heuristically, :Sleuth
-|trans-usage| ,tt,
+|trans-usage| ,tt
 |unicode-plugin| :UnicodeTable i: <C-X><C-G>
-|vcscommand-mappings| works not only for git
+|vcscommand-mappings| works not only for git (<leader>z)
 |vebugger-gdb| :VBGstartGDB, ` for leader
 |vim_py3_rst| python and rst helpers
 |vimproc-commands| asynchronous execution

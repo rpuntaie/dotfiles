@@ -43,6 +43,7 @@ set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 set statusline+=%1*%{ShowUtf8Sequence()} " utf-8
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 :hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red guibg=DarkRed guifg=Black
 :hi User2 term=inverse,bold cterm=inverse,bold ctermfg=blue guibg=DarkGreen guifg=Black
 set laststatus=2

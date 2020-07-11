@@ -3,9 +3,12 @@ nnoremap Y y$
 """ `s`: <nop>, free for other mappings
 map <silent> s <nop>
 map <silent> S <nop>
-""" `{ss SS}`: Insert empty line below|above
-nnoremap <silent> ss o<ESC>k
-nnoremap <silent> SS O<ESC>j
+""" `{ss SS}`: n insert char before|after
+nnoremap ss :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap SS :exec "normal a".nr2char(getchar())."\e"<CR>
+""" `{sj sk}`: Insert empty line below|above
+nnoremap <silent> sj o<ESC>k
+nnoremap <silent> sk O<ESC>j
 """ `SR`: Replace from default register without loosing it
 vnoremap SR "_c<C-R>"<esc>
 nnoremap SR "_ciw<C-R>"<esc>
@@ -19,7 +22,7 @@ nnoremap <kMinus>     :cprev<CR>
 nnoremap <kMultiply>  :tn<CR>
 nnoremap <kDivide>    :tp<CR>
 """ `sx`: syntax fromstart
-noremap sx <Esc>:syntax sync fromstart<CR>
+nnoremap sx <Esc>:syntax sync fromstart<CR>
 """ `<M-V>|<M-C>`: copy|paste clipboard
 nmap <M-v> "+gP
 imap <M-v> <ESC><M-v>i
@@ -33,9 +36,9 @@ nmap <silent> <C-l> :wincmd l<CR>
 command! FF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+2)','g')
 command! Ff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-2)','g')
 """ `,s`: save current buffer
-noremap <leader>s :update<CR>
+nnoremap <leader>s :update<CR>
 """ `,S`: commit current buffer to git
-noremap <leader>S :Gw<CR>:Gcommit<CR>
+nnoremap <leader>S :Gw<CR>:Gcommit<CR>
 """ `,hh`: vim help for word under cursor
 nmap <leader>hh :help <C-R><C-W><CR>
 """ `,b{d w}`: delete/wipe buffer, but not window
@@ -54,11 +57,11 @@ nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos
 nmap <leader>ee :e $MYVIMRC<cr>
 nmap <leader>ep :e <C-R>=g:dein_path<cr>/../..<cr>
-""" `,ec[c]`: (re)number
-vnoremap <leader>ecc :'<'>!cat -n<cr>
-vnoremap <leader>ec :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
+""" `sc[c]`: (re)number
+vnoremap scc :'<'>!cat -n<cr>
+vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
 """ `sp`: yank current file full path
-noremap <silent> sp :let @* = expand("%:p")<CR>
+nnoremap <silent> sp :let @* = expand("%:p")<CR>
 """ `m`: match in o v n mode
 onoremap <silent>m //e<CR>
 vnoremap <silent>m //e<CR>
@@ -100,7 +103,7 @@ nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
 """ `<C-n>`: NERDTreeToggle
 map <C-n> :NERDTreeToggle<CR>
-""" `gx{lngpw}`: open local, nonlocal; google,python,wikipedia
+""" `gx{lngpw}`: open local, nonlocal; chromium google,python,wikipedia
 vnoremap <silent> gxl "cy:call netrw#BrowseX("<C-R>=expand("%:p:h")<CR>/<C-R>c",0)<CR><CR>
 vnoremap <silent> gxn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
 nnoremap <silent> gxl :call netrw#BrowseX('<C-R>=expand("%:p:h")<CR>/<C-R>=expand("<cWORD>")<CR>',0)<CR>
@@ -120,12 +123,15 @@ nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<c
 nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
+""" `gx`: open browser (normally firefox) and search
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
 nnoremap <leader>mm yiw<C-W><C-W>echo $<C-W>""<CR><C-W><C-W>
 vnoremap <leader>m y<C-W><C-W><C-W>""<CR><C-W><C-W>gv<ESC>j
 vnoremap <leader>mm y<C-W><C-W>echo <C-W>""<CR><C-W><C-W>gv<ESC>
-""" `,j2`: to jira (pip rst2confluence needed}
+""" `,j2`: to jira ("pip install rst2jira" needed}
 map <leader>j2 :py3 tojira()<CR>
 
 "" plugins
@@ -143,18 +149,97 @@ map <silent> s. :BTags<CR>
 map <silent> s; :Tags<CR>
 map <silent> s: :History:<CR>
 map <silent> s/ :History/<CR>
-map <silent> s/ :History/<CR>
 "godlygeek/tabular
 """ `,aa`: :Tabular
 map <leader>aa :Tab/
 "scrooloose/nerdtree
 """ `sn`: NERDTreeToggle
 nmap sn :NERDTreeToggle<CR>
-""" `gx`: open browser and search
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
+"coc
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-space> coc#refresh()
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+""" `{[]}g` coc diagnostic next/prev
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+""" `g{dyir}` coc go to definition/type/implementation/reference
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+""" `KK` coc documentation (K is man page)
+nnoremap <silent> KK :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+autocmd CursorHold * silent call CocActionAsync('highlight')
+""" `rn` rename
+nmap <leader>rn <Plug>(coc-rename)
+""" `lf` format
+xmap <leader>lf  <Plug>(coc-format-selected)
+nmap <leader>lf  <Plug>(coc-format-selected)
+augroup mygroup
+  autocmd!
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+""" `l{ac}` coc load codeaction for selected (a) or all (c)ode
+xmap <leader>la  <Plug>(coc-codeaction-selected)
+nmap <leader>la  <Plug>(coc-codeaction-selected)
+nmap <leader>lc  <Plug>(coc-codeaction)
+""" `lc` coc fix current
+nmap <leader>qf  <Plug>(coc-fix-current)
+""" `{ia}{fc}` coc select inside/outside function/class
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+""" `<C-s>` select next range
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+"": `:Format` coc format
+command! -nargs=0 Format :call CocAction('format')
+"": `:Fold` coc fold
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"": `:OR` coc organize import
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+""" `<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+"end coc
+
 "": `:MM` build using Makeshift
-command! -nargs=* MM :call s:BuildFun(<q-args>)
+function! s:BuildFun(what2build)
+    execute 'Makeshift'
+    execute 'MakeshiftBuild '.a:what2build
+endfunction
+command! -nargs=* MM :call <SID>BuildFun(<q-args>)
 py3 << EOF
 import uuid
 import sys
@@ -173,11 +258,20 @@ try:
         vim_current_range()[0],writer=confluence.Writer()).splitlines()
 except: pass
 EOF
+""i `FENV #!/usr/bin/env`
 iab FENV #!/usr/bin/env
+""i `FENC # encoding: utf-8`
 iab FENC # encoding: utf-8
+""i `VIML # vim: ts=4 sw=4 sts=4 et noai nocin nosi inde=`
 iab VIML # vim: ts=4 sw=4 sts=4 et noai nocin nosi inde=
+""i `Ydate 2020-07-11`
 iab Ydate <C-R>=strftime("%Y-%m-%d")<CR>
+""i `YY 20200711`
 iab YY <C-R>=strftime("%Y%m%d")<CR>
+""i `YYY 20200711Sa`
 iab YYY <C-R>=strftime("%Y%m%d%a")[:-2]<CR>
+""i `iGU B6785F62-0A3B-4AFF-A5AA-0AFB2FEEF9F3`
 iab iGU <C-R>=py3eval("str(uuid.uuid4()).upper()")<CR>
+""i `iT t50282011072020`
 iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
+

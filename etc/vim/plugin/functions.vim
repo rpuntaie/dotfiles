@@ -1,5 +1,5 @@
 " trailing whitespaces:
-function! TrimSpaces() range
+function! s:TrimSpaces() range
   let @/='\v(\s+$)|( +\ze\t)'
   let oldhlsearch=&hlsearch
   let &hlsearch=1
@@ -7,9 +7,9 @@ function! TrimSpaces() range
   let &hlsearch=oldhlsearch
 endfunction
 "": `:TrimSpaces` accepts range
-command! -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+command! -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call <SID>TrimSpaces()
 
-function! DoPrettyXML()
+function! s:DoPrettyXML()
   let l:origft = &ft
   set ft=
   1s/<?xml .*?>//e
@@ -23,9 +23,9 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 "": `:PrettyXML` format XML
-command! PrettyXML call DoPrettyXML()
+command! PrettyXML call <SID>DoPrettyXML()
 
-function! VisualSelection(direction, ffilter) range
+function! s:VisualSelection(direction, ffilter) range
   let l:saved_reg = @"
   execute "normal! vgvy"
   let l:pattern = escape(@", '\\/.*$^~[]')
@@ -54,20 +54,20 @@ function! VisualSelection(direction, ffilter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
-""" `*#`: search down|up on visual region
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
+""" `*#`: search down|up for visual region
+vnoremap <silent> * :call <SID>VisualSelection('f', '')<CR>
+vnoremap <silent> # :call <SID>VisualSelection('b', '')<CR>
 """ `,gr`: specify replace for visual region
-vnoremap <leader>gr :call VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
+vnoremap <leader>gr :call <SID>VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
 """ `,gg`: vimgrep specify or visual region
 """ `,gb`: vimgrep in buffers
 nnoremap <leader>gg :vimgrep // **/*<C-B><S-right><right><right>
-vnoremap <leader>gg :call VisualSelection('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
-vnoremap <leader>gb :call VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR><CR>
+vnoremap <leader>gg :call <SID>VisualSelection('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
+vnoremap <leader>gb :call <SID>VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR><CR>
 
 
 " read from a ex or shell command into a new scratch buffer
-function! Redir(cmd)
+function! s:Redir(cmd)
   for win in range(1, winnr('$'))
     if getwinvar(win, 'scratch')
       execute win . 'windo close'
@@ -86,20 +86,20 @@ function! Redir(cmd)
   call setline(1, split(output, "\n"))
 endfunction
 "": `:Redir` either shell or vim command
-command! -nargs=+ -complete=command Redir silent call Redir(<q-args>)
+command! -nargs=+ -complete=command Redir silent call <SID>Redir(<q-args>)
 
-function! DiffWithSaved()
+function! s:DiffWithSaved()
   let filetype=&ft
   diffthis
   vnew | r # | normal! 1Gdd
   diffthis
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-com! DiffSaved call DiffWithSaved()
+com! DiffSaved call <SID>DiffWithSaved()
 
 if has('win32')
-  set diffexpr=MyDiff()
-  function MyDiff()
+  set diffexpr=<SID>MyDiff()
+  function s:MyDiff()
     let opt = '-a --binary '
     if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
     if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif

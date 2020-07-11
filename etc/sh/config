@@ -19,7 +19,7 @@ export EDITOR='/usr/bin/vim'
 export VISUAL='/usr/bin/vim'
 export PAGER='/usr/bin/less'
 export BROWSER='/usr/bin/firefox'
-export MANPAGER='nvim +Man!'
+export MANPAGER='nvim +Man! -u /dev/null'
 
 # Colours for less:
 LESS_TERMCAP_me="$(printf '\033[0m')"

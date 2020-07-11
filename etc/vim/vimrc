@@ -1,5 +1,6 @@
 " vim: syntax=vim
 
+
 ""
 " build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
@@ -14,7 +15,7 @@
 "   - python with vim_py3_rst
 "   - cscope
 "   - wordnet
-"   - rst2confluence
+"   - rst2jira
 "   - waf
 "
 " <ESC> mapped to <CAPSLOCK> in the OS
@@ -56,14 +57,12 @@ if !has('win32')
   " https://tlvince.com/vim-respect-xdg
   set directory=$XDG_STATE_HOME/vim,~/,/tmp
   set backupdir=$XDG_STATE_HOME/vim,~/,/tmp
-  if has('nvim')
-    set viminfofile=$XDG_STATE_HOME/vim/nviminfo
-  else
+  if !has('nvim')
     set viminfofile=$XDG_STATE_HOME/vim/viminfo
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
-function Deinplugins()
+function! s:Deinplugins()
     "download
     call dein#add('bogado/file-line') " open <file>:<line>
     call dein#add('chikamichi/mediawiki.vim') " syntax .mw .wiki .mediawiki
@@ -72,12 +71,13 @@ function Deinplugins()
 ""| |quickfix-reflector| enable editing the quickfix to change more files
     call dein#add('stefandtw/quickfix-reflector.vim')
 ""| |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
-    call dein#add('junegunn/fzf.vim')
+    call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+    call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 ""| |bufexplorer| still needed to delete/copy
     call dein#add('jlanzarotta/bufexplorer')
 ""| |sleuth| detect tab settings heuristically, :Sleuth
     call dein#add('tpope/vim-sleuth')
-""| |:Tabularize| format
+""| |:Tabularize| format (,aa)
     call dein#add('godlygeek/tabular')
 ""| |sandwich-keymappings| s{adr} dasX da<wait>s (https://github.com/machakann/vim-sandwich/issues/62)
     call dein#add('machakann/vim-sandwich')
@@ -85,25 +85,15 @@ function Deinplugins()
     call dein#add('Lokaltog/vim-easymotion') " <leader><leader>f
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
     call dein#add('andymass/vim-matchup')
-""| |deoplete-functions| complete using |deoplete-sources|
-    call dein#add('Shougo/deoplete.nvim')
-    if !has('nvim')
-      call dein#add('roxma/nvim-yarp')
-      call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
-    "deoplete sources
-    call dein#add('prabirshrestha/vim-lsp')
-    call dein#add('lighttiger2505/deoplete-vim-lsp')
-    call dein#add('Shougo/neoinclude.vim')
-    call dein#add('Shougo/deoplete-clangx')
-    call dein#add('davidhalter/jedi')
-    call dein#add('deoplete-plugins/deoplete-jedi')
+""| |coc| intellisense using language server protocol
+    call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
     "snippets
 ""| |UltiSnips| snippets
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
     "languages
     call dein#add('sheerun/vim-polyglot')
+    call dein#add('neovimhaskell/haskell-vim')
     call dein#add('Chiel92/vim-autoformat') " :Autoformat
     call dein#add('metakirby5/codi.vim') " :Codi :Codi!
 ""| |AleToggle| linting (:ALEToggle)
@@ -136,12 +126,13 @@ function Deinplugins()
 ""| |gitv-usage| :Gitv[!]
     call dein#add('gregsexton/gitv') " needs fugitive
     "other vcs
-""| |vcscommand-mappings| works not only for git
+""| |vcscommand-mappings| works not only for git (<leader>z)
     call dein#add('vim-scripts/vcscommand.vim')
     "dictionary
     call dein#add('mattn/webapi-vim')
-""| |trans-usage| ,tt,
+""| |trans-usage| ,tt
     call dein#add('rpuntaie/trans.vim')
+""| mathematic.vim (<leader>lm)
     call dein#add('Rykka/mathematic.vim')
 ""| |unicode-plugin| :UnicodeTable i: <C-X><C-G>
     call dein#add('chrisbra/unicode.vim')
@@ -174,7 +165,7 @@ if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
         call dein#begin(g:bundledir)
         call dein#add(g:dein_path)
 
-        call Deinplugins()
+        call <SID>Deinplugins()
 
         call dein#end()
         call dein#save_state()
@@ -188,17 +179,6 @@ endif
 "call dein#install()
 
 let g:powerline_pycmd = "py3"
-"Shougo/deoplete.nvim
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#manual_complete()
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsListSnippets = '<c-tab>'
@@ -217,7 +197,6 @@ let g:pymode_lint_write = 0
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
 let g:tex_conceal='abdmg'
 "johnsyweb/vim-makeshift
 let g:makeshift_on_startup = 0
@@ -231,10 +210,6 @@ let g:makeshift_systems = {
     \'dodo.py ': 'doit',
     \'boost-build.jam ': 'b2',
     \}
-function! s:BuildFun(what2build)
-    execute 'Makeshift'
-    execute 'MakeshiftBuild '.a:what2build
-endfunction
 "scrooloose/nerdtree
 let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeShowHidden=1
@@ -263,6 +238,36 @@ let g:vebugger_view_source_cmd='edit'
 "rpuntaie/vim-barbaric
 let g:barbaric_default = 'xkb:us::eng'
 
+"coc
+let g:coc_global_extensions = [
+\ 'coc-dictionary',
+\ 'coc-tag',
+\ 'coc-word',
+\ 'coc-emoji',
+\ 'coc-omni',
+\ 'coc-syntax',
+\ 'coc-ultisnips',
+"\ 'coc-snippets',
+\ 'coc-python',
+\ 'coc-clangd',
+"\ 'coc-cmake',
+\ 'coc-json',
+"\ 'coc-tsserver',
+\ 'coc-sh',
+\ 'coc-html',
+\ 'coc-css',
+\ 'coc-svg',
+\ 'coc-vimlsp',
+"\ 'coc-godot',
+"\ 'coc-yaml',
+"\ 'coc-highlight',
+"\ 'coc-angular'
+\ ]
+let g:LanguageClient_serverCommands = {
+  \ 'cpp': ['clangd -background-index'],
+  \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
+  \ }
+"end coc
 
 if isdirectory($MY)
     cd $MY

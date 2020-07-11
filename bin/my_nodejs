@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-#installs to .local/var/npm
+#installs to ~/.local/var/lib/npm
 
 npm -g install express
 npm -g install express-session

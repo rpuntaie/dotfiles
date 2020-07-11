@@ -107,3 +107,15 @@ hi ColorColumn ctermbg=232 guibg=#080808
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 highlight Pmenu ctermbg=Black ctermfg=Green guibg=black
+"otherwise markdown replaces characters in lines, but the current
+set conceallevel=0
+"coc
+set updatetime=300
+set shortmess+=c
+set number
+if !has('nvim')
+  set signcolumn=number
+else
+  sign define numhl=
+endif
+
