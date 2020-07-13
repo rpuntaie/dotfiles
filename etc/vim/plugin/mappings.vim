@@ -188,14 +188,14 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-autocmd CursorHold * silent call CocActionAsync('highlight')
 """ `rn` rename
 nmap <leader>rn <Plug>(coc-rename)
 """ `lf` format
 xmap <leader>lf  <Plug>(coc-format-selected)
 nmap <leader>lf  <Plug>(coc-format-selected)
-augroup mygroup
+augroup cocau
   autocmd!
+  autocmd CursorHold * silent call CocActionAsync('highlight')
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end

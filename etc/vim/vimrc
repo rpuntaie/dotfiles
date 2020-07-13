@@ -240,34 +240,51 @@ let g:barbaric_default = 'xkb:us::eng'
 
 "coc
 let g:coc_global_extensions = [
-\ 'coc-dictionary',
-\ 'coc-tag',
-\ 'coc-word',
-\ 'coc-emoji',
-\ 'coc-omni',
-\ 'coc-syntax',
-\ 'coc-ultisnips',
-"\ 'coc-snippets',
-\ 'coc-python',
-\ 'coc-clangd',
-"\ 'coc-cmake',
-\ 'coc-json',
-"\ 'coc-tsserver',
-\ 'coc-sh',
-\ 'coc-html',
-\ 'coc-css',
-\ 'coc-svg',
-\ 'coc-vimlsp',
-"\ 'coc-godot',
-"\ 'coc-yaml',
-"\ 'coc-highlight',
-"\ 'coc-angular'
-\ ]
-let g:LanguageClient_serverCommands = {
-  \ 'cpp': ['clangd -background-index'],
-  \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
-  \ }
-"end coc
+      \ 'coc-dictionary',
+      \ 'coc-tag',
+      \ 'coc-word',
+      \ 'coc-emoji',
+      \ 'coc-omni',
+      \ 'coc-syntax',
+      \ 'coc-ultisnips',
+      "\ 'coc-snippets',
+      \ 'coc-python',
+      \ 'coc-clangd',
+      "\ 'coc-cmake',
+      \ 'coc-json',
+      \ 'coc-java',
+      \ 'coc-tsserver',
+      \ 'coc-sh',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-svg',
+      \ 'coc-vimlsp',
+      "\ 'coc-godot',
+      "\ 'coc-yaml',
+      "\ 'coc-highlight',
+      "\ 'coc-angular'
+      \ ]
+call coc#config('languageserver', {
+      \  'haskell': {
+      \    "command": "haskell-language-server-wrapper",
+      \    "args": ["--lsp"],
+      \    "rootPatterns": [
+      \      "*.cabal",
+      \      "stack.yaml",
+      \      "cabal.project",
+      \      "package.yaml"
+      \    ],
+      \    "filetypes": [
+      \      "hs",
+      \      "lhs",
+      \      "haskell"
+      \    ],
+      \    "initializationOptions": {
+      \      "languageServerHaskell": {
+      \      }
+      \    }
+      \  }
+      \})
 
 if isdirectory($MY)
     cd $MY
