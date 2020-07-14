@@ -110,7 +110,8 @@ highlight Pmenu ctermbg=Black ctermfg=Green guibg=black
 "otherwise markdown replaces characters in lines, but the current
 set conceallevel=0
 "coc
-set updatetime=300
+" not too small because see statusbar.vim
+set updatetime=1300
 set shortmess+=c
 set number
 if !has('nvim')
