@@ -44,8 +44,6 @@ nmap <leader>hh :help <C-R><C-W><CR>
 """ `,b{d w}`: delete/wipe buffer, but not window
 map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 map <leader>bw :bp<bar>sp<bar>bn<bar>bw<CR>
-""" `,ww`: look up in wordnet (wn needed)
-nmap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `,l{ramkj}`: load russian accents mathematic fntc english
 nmap <leader>lr :set keymap=russian-jcukenwin<cr>
 nmap <leader>la :set keymap=accents<cr>
@@ -57,6 +55,13 @@ nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos
 nmap <leader>ee :e $MYVIMRC<cr>
 nmap <leader>ep :e <C-R>=g:dein_path<cr>/../..<cr>
+"vim-scripts/vcscommand.vim
+""" `,tt`: google translate
+inoremap <silent> <leader>tt <ESC>:Trans<CR>
+nnoremap <silent> <leader>tt :Trans<CR>
+vnoremap <silent> <leader>tt :Trans<CR>
+""" `,ww`: look up in wordnet (wn needed)
+inoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `sc[c]`: (re)number
 vnoremap scc :'<'>!cat -n<cr>
 vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
@@ -126,6 +131,62 @@ endif
 """ `gx`: open browser (normally firefox) and search
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+""" `,vt{ bipgcrs(s)h}`: vert term Bash|Ipython|Perl|Ghci|Cling|R|(p)Sql|pHp|java
+"exit
+nnoremap <silent> <leader>v :vert term<CR>
+"exit
+nnoremap <silent> <leader>vb :vert term bash<CR>
+"? exit
+nnoremap <silent> <leader>vi :vert term ipython<CR>
+"C-d
+nnoremap <silent> <leader>vii :vert term irb<CR>
+"C-d
+nnoremap <silent> <leader>vp :vert term re.pl<CR>
+":? :q
+nnoremap <silent> <leader>vg :vert term ghci<CR>
+":help :quit
+nnoremap <silent> <leader>vgg :vert term gore<CR>
+".? .q
+nnoremap <silent> <leader>vc :vert term cling<CR>
+"help; quit;
+nnoremap <silent> <leader>vcc :vert term csharp<CR>
+"help() q()
+nnoremap <silent> <leader>vr :vert term R<CR>
+":h :q
+nnoremap <silent> <leader>vs :vert term scala<CR>
+":help :quit
+nnoremap <silent> <leader>vk :vert term kotlin<CR>
+".help .q
+nnoremap <silent> <leader>vq :vert term sqlite3<CR>
+"\? \q
+nnoremap <silent> <leader>vqq :vert term psql<CR>
+"help exit
+nnoremap <silent> <leader>vh :vert term psysh<CR>
+"? C-d
+nnoremap <silent> <leader>vj :vert term julia<CR>
+"/help /exit
+nnoremap <silent> <leader>vjj :vert term jshell<CR>
+"quit
+nnoremap <silent> <leader>vl :vert term planck<CR>
+"(quit)
+nnoremap <silent> <leader>vll :vert term lein repl<CR>
+"C-d
+nnoremap <silent> <leader>vn :vert term node<CR>
+"help doc quit
+nnoremap <silent> <leader>vo :vert term octave<CR>
+"C-c
+nnoremap <silent> <leader>vm :vert term ocaml<CR>
+"C-d (yay -S j9-git)
+nnoremap <silent> <leader>v9 :vert term j9 --console<CR>
+"C-d
+nnoremap <silent> <leader>va :vert term lua<CR>
+"C-c h() (elixir)
+nnoremap <silent> <leader>vx :vert term iex<CR>
+"<C-d> :help (yay -S evcxr_repl) (rust)
+nnoremap <silent> <leader>ve :vert term evcxr<CR>
+",help C-d
+nnoremap <silent> <leader>vu :vert term guile<CR>
+
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
 nnoremap <leader>mm yiw<C-W><C-W>echo $<C-W>""<CR><C-W><C-W>

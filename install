@@ -78,6 +78,18 @@ _clone_github_mine(){ #usrstuff
   bash ~/$DOTDIR/bin/githubmine
 }
 
+_perl_repl(){ #usrstuff
+  echo | cpan
+  cpanm Devel::REPL
+}
+
+_config_postgres(){
+  sudo -u postgres initdb -D /var/lib/postgres/data
+  sudo -u postgres createuser roland
+  systemctl enable --now postgresql
+  createdb roland -U postgres
+}
+
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
@@ -91,6 +103,9 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _dotfiles_weechat
     _dotfiles_email
     _clone_github_mine
+    _perl_repl
+    _config_postgres
+    go get -u github.com/motemen/gore/cmd/gore
   fi
   echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."

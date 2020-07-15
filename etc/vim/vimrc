@@ -131,7 +131,7 @@ function! s:Deinplugins()
     "dictionary
     call dein#add('mattn/webapi-vim')
 ""| |trans-usage| ,tt
-    call dein#add('rpuntaie/trans.vim')
+    call dein#add('echuraev/translate-shell.vim')
 ""| mathematic.vim (<leader>lm)
     call dein#add('Rykka/mathematic.vim')
 ""| |unicode-plugin| :UnicodeTable i: <C-X><C-G>
@@ -220,15 +220,8 @@ let g:netrw_altv = 1
 let g:netrw_preview = 1
 let g:netrw_list_hide = "^\\..*"
 let g:netrw_home = $XDG_STATE_HOME.'/vim'
-"vim-scripts/vcscommand.vim
 let g:VCSCommandMapPrefix = "<leader>z"
-"rpuntaie/trans.vim
-let g:trans_default_api='google'
-let g:trans_default_lang='ru'
-let g:trans_set_reg='*'
-let g:trans_set_echo=1
-let g:trans_replace=0
-let g:trans_has_python=3 "webapi.vim instead
+"echuraev/translate-shell.vim
 "Rykka/mathematic.vim
 let g:mathematic_user_dir = g:bundledir.
   \ '/repos/github.com/Rykka/mathematic.vim/keymap/mathematic.vim'
