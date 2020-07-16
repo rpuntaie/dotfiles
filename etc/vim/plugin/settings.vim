@@ -55,7 +55,7 @@ map <middlemouse> <nop>
 imap <middlemouse> <nop>
 nnoremap <X1Mouse> <C-O>
 nnoremap <X2Mouse> <C-I>
-set tags=./.tags;,.tags;
+set tags=./.tags;,.tags,./tags,tags;
 if filereadable($MY.'/.tags')
   set tags+=$MY/.tags
 endif

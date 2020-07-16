@@ -108,8 +108,8 @@ function! s:Deinplugins()
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 ""| |vebugger-gdb| :VBGstartGDB, ` for leader
     call dein#add('idanarye/vim-vebugger')
-""| |VdebugStart| <F5>pydbgp -d localhost:9000 x.py<F2><F3><F10><F6>
-    call dein#add('vim-vdebug/vdebug')
+""| |Vimspector| <F5> (needs .vimspector.json)
+    call dein#add('puremourning/vimspector')
 ""| |vimtex-default-mappings| for latex
     call dein#add('lervag/vimtex')
 ""| |makeshift| [:MM] builds the current project
@@ -230,8 +230,7 @@ let g:vebugger_leader='`'
 let g:vebugger_view_source_cmd='edit'
 "rpuntaie/vim-barbaric
 let g:barbaric_default = 'xkb:us::eng'
-
-"coc
+"coc.nvim
 let g:coc_global_extensions = [
       \ 'coc-dictionary',
       \ 'coc-tag',
@@ -278,12 +277,30 @@ call coc#config('languageserver', {
       \    }
       \  }
       \})
-
-if isdirectory($MY)
-    cd $MY
-endif
+"vimspector
+"./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all
+let g:vimspector_base_dir=expand('$XDG_STATE_HOME/vim/vimspector')
+nmap <F5>         <Plug>VimspectorContinue
+nmap <S-F5>       <Plug>VimspectorRestart
+nmap <F3>         <Plug>VimspectorStop
+"nmap <S-F3>       <Plug>VimspectorReset (not working: run via command line)
+nmap <F6>         <Plug>VimspectorPause
+nmap <F9>         <Plug>VimspectorToggleBreakpoint
+nmap <S-F9>       <Plug>VimspectorToggleConditionalBreakpoint
+nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
+nmap <F7>         <Plug>VimspectorStepOver
+nmap <F11>        <Plug>VimspectorStepInto
+nmap <F12>        <Plug>VimspectorStepOut
 
 runtime ftplugin/man.vim
 if has("gui_running")
     nnoremap K :<C-U>exe "Man" v:count "<C-R><C-W>"<CR><CR>
 endif
+
+packadd termdebug
+":Termdebug <app>
+
+if isdirectory($MY)
+    cd $MY
+endif
+

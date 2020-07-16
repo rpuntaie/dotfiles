@@ -217,16 +217,14 @@ map <leader>aa :Tab/
 """ `sn`: NERDTreeToggle
 nmap sn :NERDTreeToggle<CR>
 "coc
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+call coc#config('suggest.triggerCompletionWait', 500)
+"call coc#config('suggest.autoTrigger', "trigger")
+"inoremap <silent><expr> <c-space> coc#refresh()
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-inoremap <silent><expr> <c-space> coc#refresh()
 if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
