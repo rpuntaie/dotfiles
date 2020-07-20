@@ -20,6 +20,7 @@ _dotfiles_restowdots(){
   for DOTDIR in $(cd ~ && ls | grep dotfiles); do
     break
   done
+  DOTDIR=${DOTDIR:-.dotfiles}
   if [ -d $DOTDIR ]; then
     cd $DOTDIR
     if [ ! "$(git config --get remote.origin.url)" = "$dotfiles_url" ]; then
