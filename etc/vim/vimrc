@@ -291,14 +291,15 @@ nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
 nmap <F7>         <Plug>VimspectorStepOver
 nmap <F11>        <Plug>VimspectorStepInto
 nmap <F12>        <Plug>VimspectorStepOut
+"using gdb
+packadd termdebug
+":Termdebug <app>
 
 runtime ftplugin/man.vim
 if has("gui_running")
     nnoremap K :<C-U>exe "Man" v:count "<C-R><C-W>"<CR><CR>
 endif
 
-packadd termdebug
-":Termdebug <app>
 
 if isdirectory($MY)
     cd $MY

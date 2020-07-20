@@ -4,7 +4,6 @@
 # https://git.io/fjVcp
 
 dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
-DOTDIR=".dotfiles"
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
@@ -18,6 +17,9 @@ _dotfiles_check_packages(){
 
 _dotfiles_restowdots(){
   cd ~
+  for DOTDIR in $(cd ~ && ls | grep dotfiles); do
+    break
+  done
   if [ -d $DOTDIR ]; then
     cd $DOTDIR
     if [ ! "$(git config --get remote.origin.url)" = "$dotfiles_url" ]; then

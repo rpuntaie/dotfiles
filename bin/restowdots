@@ -54,7 +54,9 @@ vim --cmd "mkspell! ~/.local/etc/vim/spell/en.utf-8.add" --cmd q
 # dot files for programs not heeding XDG_Base_Directory are symlinked to ``~/$DOTDIR/home``
 # ~/.ledgerrc
 # ~/.pam_environment
-mv -f ~/.bashrc ~/org.bashrc
+if [ -f  ~/.bashrc ]; then
+    mv -f ~/.bashrc ~/org.bashrc
+fi
 cd ~/$DOTDIR
 stow home
 cd ~

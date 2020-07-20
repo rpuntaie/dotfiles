@@ -91,7 +91,7 @@
   lola     = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all
   lols     = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat
   lum      = pull upstream master
-  m        = merge
+  mm       = merge
   ma       = merge --abort
   mom      = merge origin/master
   mt       = mergetool --no-prompt
@@ -148,5 +148,5 @@
   upav     = pull --rebase --autostash -v
   upv      = pull --rebase -v
   wch      = whatchanged -p --abbrev-commit --pretty=medium
-
+  squash   = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
 # vim: ft=conf

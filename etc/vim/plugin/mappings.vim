@@ -57,11 +57,10 @@ nmap <leader>ee :e $MYVIMRC<cr>
 nmap <leader>ep :e <C-R>=g:dein_path<cr>/../..<cr>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
-inoremap <silent> <leader>tt <ESC>:Trans<CR>
 nnoremap <silent> <leader>tt :Trans<CR>
 vnoremap <silent> <leader>tt :Trans<CR>
 """ `,ww`: look up in wordnet (wn needed)
-inoremap <leader>ww :!wn <C-R><C-W> -over<CR>
+nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `sc[c]`: (re)number
 vnoremap scc :'<'>!cat -n<cr>
 vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
