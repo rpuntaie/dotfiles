@@ -58,6 +58,7 @@ if [ -f  ~/.bashrc ]; then
     mv -f ~/.bashrc ~/org.bashrc
 fi
 cd ~/$DOTDIR
+mkdir -p ~/Mail
 stow home
 cd ~
 

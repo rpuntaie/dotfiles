@@ -1,0 +1,22 @@
+[retriever]
+type = SimpleIMAPSSLRetriever
+server = imap.gmail.com
+username = puntaier.roland@gmail.com
+port = 993
+password_command = ("pass", "gmail/puntaier.roland@gmail.com")
+
+[destination]
+type = MDA_external
+path = /usr/bin/procmail
+arguments = ("-f", "%(sender)", "-m", "/home/roland/.dotfiles/etc/procmail/testrc")
+
+##getmail --rcfile=getmail_testrc --getmaildir=/home/roland/.dotfiles/etc/procmail
+
+# instead of
+#[destination]
+#type = Maildir
+#path = /home/roland/Mail/puntaier.roland@gmail.com/INBOX/
+
+[options]
+read_all = true
+delete = true
