@@ -39,22 +39,22 @@ command! Ff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submat
 nnoremap <leader>s :update<CR>
 """ `,S`: commit current buffer to git
 nnoremap <leader>S :Gw<CR>:Gcommit<CR>
-""" `,hh`: vim help for word under cursor
-nmap <leader>hh :help <C-R><C-W><CR>
 """ `,b{d w}`: delete/wipe buffer, but not window
 map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 map <leader>bw :bp<bar>sp<bar>bn<bar>bw<CR>
 """ `,l{ramkj}`: load russian accents mathematic fntc english
-nmap <leader>lr :set keymap=russian-jcukenwin<cr>
-nmap <leader>la :set keymap=accents<cr>
-nmap <leader>lm :set keymap=mathematic<cr>
-nmap <leader>lj :set keymap=<cr>
-nmap <leader>lk :set keymap=fntc<cr>
+nmap <leader>lr :set keymap=russian-jcukenwin<CR>
+nmap <leader>la :set keymap=accents<CR>
+nmap <leader>lm :set keymap=mathematic<CR>
+nmap <leader>lj :set keymap=<CR>
+nmap <leader>lk :set keymap=fntc<CR>
 """ `,ls`: load spelling
 nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos
-nmap <leader>ee :e $MYVIMRC<cr>
-nmap <leader>ep :e <C-R>=g:dein_path<cr>/../..<cr>
+nmap <leader>ee :e 
+nmap <leader>ev :e $MYVIMRC<CR>
+nmap <leader>ep :e <C-R>=g:dein_path<CR>/../..<CR>
+nmap <leader>em :e $MY<CR>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
 nnoremap <silent> <leader>tt :Trans<CR>
@@ -62,8 +62,8 @@ vnoremap <silent> <leader>tt :Trans<CR>
 """ `,ww`: look up in wordnet (wn needed)
 nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `sc[c]`: (re)number
-vnoremap scc :'<'>!cat -n<cr>
-vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<cr>
+vnoremap scc :'<'>!cat -n<CR>
+vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<CR>
 """ `sp`: yank current file full path
 nnoremap <silent> sp :let @* = expand("%:p")<CR>
 """ `m`: match in o v n mode
@@ -191,6 +191,9 @@ nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
 nnoremap <leader>mm yiw<C-W><C-W>echo $<C-W>""<CR><C-W><C-W>
 vnoremap <leader>m y<C-W><C-W><C-W>""<CR><C-W><C-W>gv<ESC>j
 vnoremap <leader>mm y<C-W><C-W>echo <C-W>""<CR><C-W><C-W>gv<ESC>
+""" `,hh`: haskell block
+vnoremap <leader>hh y<C-W><C-W>:{<CR><C-W>""<CR>:}<CR><C-W><C-W>gv<ESC>j
+nnoremap <leader>hh yiw<C-W><C-W>:hoogle <C-W>""<CR><C-W><C-W>
 """ `,j2`: to jira ("pip install rst2jira" needed}
 map <leader>j2 :py3 tojira()<CR>
 
@@ -217,17 +220,19 @@ map <leader>aa :Tab/
 nmap sn :NERDTreeToggle<CR>
 "coc
 
-call coc#config('suggest.triggerCompletionWait', 500)
-"call coc#config('suggest.autoTrigger', "trigger")
+nmap <leader>i :CocEnable<CR>
+nmap <leader>ii :CocDisable<CR>
+let g:coc_user_config['suggest.triggerCompletionWait'] = 500
+"let g:coc_user_config['suggest.autoTrigger'] = 'trigger'
 "inoremap <silent><expr> <c-space> coc#refresh()
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 """ `{[]}g` coc diagnostic next/prev
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -282,11 +287,11 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 "": `:OR` coc organize import
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 """ `<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>

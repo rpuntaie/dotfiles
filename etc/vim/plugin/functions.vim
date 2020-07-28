@@ -25,6 +25,11 @@ endfunction
 "": `:PrettyXML` format XML
 command! PrettyXML call <SID>DoPrettyXML()
 
+function! Edit(filepath)
+    execute "e ".fnameescape(a:filepath)
+endfunction
+command! -nargs=1 -complete=file E call Edit(<q-args>)
+
 function! s:VisualSelection(direction, ffilter) range
   let l:saved_reg = @"
   execute "normal! vgvy"

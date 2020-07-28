@@ -30,6 +30,7 @@ main = do
         }
     xmonad $ ewmh def{
         handleEventHook = handleEventHook def <+> fullscreenEventHook }
+
 mixKeys x = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
 newKeys x = [
         ((modMask x, xK_s), spawn "scrot")
