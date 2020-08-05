@@ -53,6 +53,10 @@ nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos
 nmap <leader>ee :e 
 nmap <leader>ev :e $MYVIMRC<CR>
+function! s:EditMappings()
+    execute "e ".fnamemodify(expand($MYVIMRC),':h') . '/plugin/mappings.vim'
+endfunction
+nmap <leader>evm :call <SID>EditMappings()<CR>
 nmap <leader>ep :e <C-R>=g:dein_path<CR>/../..<CR>
 nmap <leader>em :e $MY<CR>
 "vim-scripts/vcscommand.vim
@@ -194,6 +198,11 @@ vnoremap <leader>mm y<C-W><C-W>echo <C-W>""<CR><C-W><C-W>gv<ESC>
 """ `,hh`: haskell block
 vnoremap <leader>hh y<C-W><C-W>:{<CR><C-W>""<CR>:}<CR><C-W><C-W>gv<ESC>j
 nnoremap <leader>hh yiw<C-W><C-W>:hoogle <C-W>""<CR><C-W><C-W>
+""" `,{vv mv}`: vim eval
+vnoremap <leader>vv y:@"<CR>
+nnoremap <leader>vv yy:@"<CR>
+vnoremap <leader>mv y:echo <C-R>"<CR>
+nnoremap <leader>mv yiw:echo <C-R>"<CR>
 """ `,j2`: to jira ("pip install rst2jira" needed}
 map <leader>j2 :py3 tojira()<CR>
 

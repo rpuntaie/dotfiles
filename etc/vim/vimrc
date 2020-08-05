@@ -123,7 +123,7 @@ function! s:Deinplugins()
     "git tools
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
     call dein#add('tpope/vim-fugitive')
-""| |gitv-usage| :Gitv[!]
+
     call dein#add('gregsexton/gitv') " needs fugitive
     "other vcs
 ""| |vcscommand-mappings| works not only for git (<leader>z)

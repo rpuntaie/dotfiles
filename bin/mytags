@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+if (( $# == 1 )); then
+    cd $1
+fi
+
+HS=$(find . -name '*.hs' -and -type f | wc -l)
+if [ $HS -gt 0 ]; then
+    hasktags --ctags ~/msrc/ghc/libraries
+    hasktags -R -c --file -  . | LC_ALL=C sort -m tags - -o tags
+else
+    ctags -R
+fi
+
+#rstdoc, if run before, creates .tags. Merge:
+if [[ -x .tags ]]; then
+    cat .tags >> tags
+    rm .tags
+fi
+
+cd $CD
+
+

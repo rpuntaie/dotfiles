@@ -1,4 +1,5 @@
 set wildignore=
+set wildignore+=tags
 set wildignore+=**/build/**/*
 set wildignore+=**/dist/**/*
 set wildignore+=**/*egg-info/**/*
@@ -8,7 +9,7 @@ set wildignore+=**/_static/**/*
 set wildignore+=**/*doctree*
 "set wildignore+=**/temp/**/*
 set wildignore+=**/.git/**/*
-set wildignore+=**/*.csv
+"set wildignore+=**/*."csv
 set wildignore+=**/.hg/**/*
 set wildignore+=**/.svn/**/*
 set wildignore+=**/.vs/**/*

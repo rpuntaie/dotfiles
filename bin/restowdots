@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
-#Usage: [NOGDB=1] restowdots [-S]
+# Part of install: calls stow for these dotfiles
+# Usage: [NOGDB=1] restowdots [-S]
 
 # Note, the variables in .pam_environment cannot be used here
 
