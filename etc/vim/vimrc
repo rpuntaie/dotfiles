@@ -62,6 +62,8 @@ if !has('win32')
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
+
+let g:CocOverDeoplete=1
 function! s:Deinplugins()
     "download
     call dein#add('bogado/file-line') " open <file>:<line>
@@ -86,7 +88,10 @@ function! s:Deinplugins()
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
     call dein#add('andymass/vim-matchup')
 
-""| |deoplete-functions| complete using |deoplete-sources|
+if g:CocOverDeoplete
+    call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
+else
+    "UpdateRemotePlugins when switching
     call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
       call dein#add('roxma/nvim-yarp')
@@ -99,8 +104,7 @@ function! s:Deinplugins()
     call dein#add('Shougo/deoplete-clangx')
     call dein#add('davidhalter/jedi')
     call dein#add('deoplete-plugins/deoplete-jedi')
-"CD  ""| |coc| intellisense using language server protocol
-"CD      call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
+endif
 
     "snippets
 ""| |UltiSnips| snippets
@@ -192,20 +196,21 @@ endif
 "call dein#check_clean()
 "call dein#update()
 "call dein#install()
-"UpdateRemotePlugins
 
 let g:powerline_pycmd = "py3"
-"Shougo/deoplete.nvim
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#manual_complete()
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+if !g:CocOverDeoplete
+  "Shougo/deoplete.nvim
+  let g:deoplete#enable_at_startup = 1
+  call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
+  inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ deoplete#manual_complete()
+  function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+endif
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsListSnippets = '<c-tab>'
@@ -258,53 +263,55 @@ let g:vebugger_view_source_cmd='edit'
 "rpuntaie/vim-barbaric
 let g:barbaric_default = 'xkb:us::eng'
 
-"CD "coc.nvim
-"CD let g:coc_global_extensions = [
-"CD       \ 'coc-dictionary',
-"CD       \ 'coc-tag',
-"CD       \ 'coc-word',
-"CD       \ 'coc-emoji',
-"CD       \ 'coc-omni',
-"CD       \ 'coc-syntax',
-"CD       \ 'coc-ultisnips',
-"CD       "\ 'coc-snippets',
-"CD       \ 'coc-python',
-"CD       \ 'coc-clangd',
-"CD       "\ 'coc-cmake',
-"CD       \ 'coc-json',
-"CD       \ 'coc-java',
-"CD       \ 'coc-tsserver',
-"CD       \ 'coc-sh',
-"CD       \ 'coc-html',
-"CD       \ 'coc-css',
-"CD       \ 'coc-svg',
-"CD       \ 'coc-vimlsp',
-"CD       "\ 'coc-godot',
-"CD       "\ 'coc-yaml',
-"CD       "\ 'coc-highlight',
-"CD       "\ 'coc-angular'
-"CD       \ ]
-"CD call coc#config('languageserver', {
-"CD       \  'haskell': {
-"CD       \    "command": "haskell-language-server-wrapper",
-"CD       \    "args": ["--lsp"],
-"CD       \    "rootPatterns": [
-"CD       \      "*.cabal",
-"CD       \      "stack.yaml",
-"CD       \      "cabal.project",
-"CD       \      "package.yaml"
-"CD       \    ],
-"CD       \    "filetypes": [
-"CD       \      "hs",
-"CD       \      "lhs",
-"CD       \      "haskell"
-"CD       \    ],
-"CD       \    "initializationOptions": {
-"CD       \      "languageServerHaskell": {
-"CD       \      }
-"CD       \    }
-"CD       \  }
-"CD       \})
+if g:CocOverDeoplete
+    "coc.nvim
+    let g:coc_global_extensions = [
+          \ 'coc-dictionary',
+          \ 'coc-tag',
+          \ 'coc-word',
+          \ 'coc-emoji',
+          \ 'coc-omni',
+          \ 'coc-syntax',
+          \ 'coc-ultisnips',
+          "\ 'coc-snippets',
+          \ 'coc-python',
+          \ 'coc-clangd',
+          "\ 'coc-cmake',
+          \ 'coc-json',
+          \ 'coc-java',
+          \ 'coc-tsserver',
+          \ 'coc-sh',
+          \ 'coc-html',
+          \ 'coc-css',
+          \ 'coc-svg',
+          \ 'coc-vimlsp',
+          "\ 'coc-godot',
+          "\ 'coc-yaml',
+          "\ 'coc-highlight',
+          "\ 'coc-angular'
+          \ ]
+    call coc#config('languageserver', {
+          \  'haskell': {
+          \    "command": "haskell-language-server-wrapper",
+          \    "args": ["--lsp"],
+          \    "rootPatterns": [
+          \      "*.cabal",
+          \      "stack.yaml",
+          \      "cabal.project",
+          \      "package.yaml"
+          \    ],
+          \    "filetypes": [
+          \      "hs",
+          \      "lhs",
+          \      "haskell"
+          \    ],
+          \    "initializationOptions": {
+          \      "languageServerHaskell": {
+          \      }
+          \    }
+          \  }
+          \})
+endif
 
 "vimspector
 "./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all

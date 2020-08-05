@@ -110,14 +110,16 @@ highlight Pmenu ctermbg=Black ctermfg=Green guibg=black
 "otherwise markdown replaces characters in lines, but the current
 set conceallevel=0
 
-"CD "coc
-"CD " not too small because see statusbar.vim
-"CD set updatetime=1300
-"CD set shortmess+=c
-"CD set number
-"CD if !has('nvim')
-"CD   set signcolumn=number
-"CD else
-"CD   sign define numhl=
-"CD endif
+if g:CocOverDeoplete
+    "coc
+    " not too small because see statusbar.vim
+    set updatetime=1300
+    set shortmess+=c
+    set number
+    if !has('nvim')
+      set signcolumn=number
+    else
+      sign define numhl=
+    endif
+endif
 
