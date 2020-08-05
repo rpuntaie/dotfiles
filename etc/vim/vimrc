@@ -85,8 +85,23 @@ function! s:Deinplugins()
     call dein#add('Lokaltog/vim-easymotion') " <leader><leader>f
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
     call dein#add('andymass/vim-matchup')
-""| |coc| intellisense using language server protocol
-    call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
+
+""| |deoplete-functions| complete using |deoplete-sources|
+    call dein#add('Shougo/deoplete.nvim')
+    if !has('nvim')
+      call dein#add('roxma/nvim-yarp')
+      call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
+    "deoplete sources
+    call dein#add('prabirshrestha/vim-lsp')
+    call dein#add('lighttiger2505/deoplete-vim-lsp')
+    call dein#add('Shougo/neoinclude.vim')
+    call dein#add('Shougo/deoplete-clangx')
+    call dein#add('davidhalter/jedi')
+    call dein#add('deoplete-plugins/deoplete-jedi')
+"CD  ""| |coc| intellisense using language server protocol
+"CD      call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
+
     "snippets
 ""| |UltiSnips| snippets
     call dein#add('SirVer/ultisnips')
@@ -123,7 +138,7 @@ function! s:Deinplugins()
     "git tools
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
     call dein#add('tpope/vim-fugitive')
-
+""| |gitv-usage| :Gitv[!]
     call dein#add('gregsexton/gitv') " needs fugitive
     "other vcs
 ""| |vcscommand-mappings| works not only for git (<leader>z)
@@ -177,8 +192,20 @@ endif
 "call dein#check_clean()
 "call dein#update()
 "call dein#install()
+"UpdateRemotePlugins
 
 let g:powerline_pycmd = "py3"
+"Shougo/deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#manual_complete()
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsListSnippets = '<c-tab>'
@@ -230,53 +257,55 @@ let g:vebugger_leader='`'
 let g:vebugger_view_source_cmd='edit'
 "rpuntaie/vim-barbaric
 let g:barbaric_default = 'xkb:us::eng'
-"coc.nvim
-let g:coc_global_extensions = [
-      \ 'coc-dictionary',
-      \ 'coc-tag',
-      \ 'coc-word',
-      \ 'coc-emoji',
-      \ 'coc-omni',
-      \ 'coc-syntax',
-      \ 'coc-ultisnips',
-      "\ 'coc-snippets',
-      \ 'coc-python',
-      \ 'coc-clangd',
-      "\ 'coc-cmake',
-      \ 'coc-json',
-      \ 'coc-java',
-      \ 'coc-tsserver',
-      \ 'coc-sh',
-      \ 'coc-html',
-      \ 'coc-css',
-      \ 'coc-svg',
-      \ 'coc-vimlsp',
-      "\ 'coc-godot',
-      "\ 'coc-yaml',
-      "\ 'coc-highlight',
-      "\ 'coc-angular'
-      \ ]
-call coc#config('languageserver', {
-      \  'haskell': {
-      \    "command": "haskell-language-server-wrapper",
-      \    "args": ["--lsp"],
-      \    "rootPatterns": [
-      \      "*.cabal",
-      \      "stack.yaml",
-      \      "cabal.project",
-      \      "package.yaml"
-      \    ],
-      \    "filetypes": [
-      \      "hs",
-      \      "lhs",
-      \      "haskell"
-      \    ],
-      \    "initializationOptions": {
-      \      "languageServerHaskell": {
-      \      }
-      \    }
-      \  }
-      \})
+
+"CD "coc.nvim
+"CD let g:coc_global_extensions = [
+"CD       \ 'coc-dictionary',
+"CD       \ 'coc-tag',
+"CD       \ 'coc-word',
+"CD       \ 'coc-emoji',
+"CD       \ 'coc-omni',
+"CD       \ 'coc-syntax',
+"CD       \ 'coc-ultisnips',
+"CD       "\ 'coc-snippets',
+"CD       \ 'coc-python',
+"CD       \ 'coc-clangd',
+"CD       "\ 'coc-cmake',
+"CD       \ 'coc-json',
+"CD       \ 'coc-java',
+"CD       \ 'coc-tsserver',
+"CD       \ 'coc-sh',
+"CD       \ 'coc-html',
+"CD       \ 'coc-css',
+"CD       \ 'coc-svg',
+"CD       \ 'coc-vimlsp',
+"CD       "\ 'coc-godot',
+"CD       "\ 'coc-yaml',
+"CD       "\ 'coc-highlight',
+"CD       "\ 'coc-angular'
+"CD       \ ]
+"CD call coc#config('languageserver', {
+"CD       \  'haskell': {
+"CD       \    "command": "haskell-language-server-wrapper",
+"CD       \    "args": ["--lsp"],
+"CD       \    "rootPatterns": [
+"CD       \      "*.cabal",
+"CD       \      "stack.yaml",
+"CD       \      "cabal.project",
+"CD       \      "package.yaml"
+"CD       \    ],
+"CD       \    "filetypes": [
+"CD       \      "hs",
+"CD       \      "lhs",
+"CD       \      "haskell"
+"CD       \    ],
+"CD       \    "initializationOptions": {
+"CD       \      "languageServerHaskell": {
+"CD       \      }
+"CD       \    }
+"CD       \  }
+"CD       \})
+
 "vimspector
 "./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all
 let g:vimspector_base_dir=expand('$XDG_STATE_HOME/vim/vimspector')

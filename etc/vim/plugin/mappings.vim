@@ -227,84 +227,85 @@ map <leader>aa :Tab/
 "scrooloose/nerdtree
 """ `sn`: NERDTreeToggle
 nmap sn :NERDTreeToggle<CR>
-"coc
 
-nmap <leader>i :CocEnable<CR>
-nmap <leader>ii :CocDisable<CR>
-let g:coc_user_config['suggest.triggerCompletionWait'] = 500
-"let g:coc_user_config['suggest.autoTrigger'] = 'trigger'
-"inoremap <silent><expr> <c-space> coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-if exists('*complete_info')
-  inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-""" `{[]}g` coc diagnostic next/prev
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-""" `g{dyir}` coc go to definition/type/implementation/reference
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-""" `KK` coc documentation (K is man page)
-nnoremap <silent> KK :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-""" `rn` rename
-nmap <leader>rn <Plug>(coc-rename)
-""" `lf` format
-xmap <leader>lf  <Plug>(coc-format-selected)
-nmap <leader>lf  <Plug>(coc-format-selected)
-augroup cocau
-  autocmd!
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-""" `l{ac}` coc load codeaction for selected (a) or all (c)ode
-xmap <leader>la  <Plug>(coc-codeaction-selected)
-nmap <leader>la  <Plug>(coc-codeaction-selected)
-nmap <leader>lc  <Plug>(coc-codeaction)
-""" `lc` coc fix current
-nmap <leader>qf  <Plug>(coc-fix-current)
-""" `{ia}{fc}` coc select inside/outside function/class
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-""" `<C-s>` select next range
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-"": `:Format` coc format
-command! -nargs=0 Format :call CocAction('format')
-"": `:Fold` coc fold
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-"": `:OR` coc organize import
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-""" `<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-"end coc
+"CD = coc or deoplete
+"CD "coc
+"CD nmap <leader>i :CocEnable<CR>
+"CD nmap <leader>ii :CocDisable<CR>
+"CD let g:coc_user_config['suggest.triggerCompletionWait'] = 500
+"CD "let g:coc_user_config['suggest.autoTrigger'] = 'trigger'
+"CD "inoremap <silent><expr> <c-space> coc#refresh()
+"CD function! s:check_back_space() abort
+"CD   let col = col('.') - 1
+"CD   return !col || getline('.')[col - 1]  =~# '\s'
+"CD endfunction
+"CD if exists('*complete_info')
+"CD   inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"CD else
+"CD   inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"CD endif
+"CD """ `{[]}g` coc diagnostic next/prev
+"CD nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"CD nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"CD """ `g{dyir}` coc go to definition/type/implementation/reference
+"CD nmap <silent> gd <Plug>(coc-definition)
+"CD nmap <silent> gy <Plug>(coc-type-definition)
+"CD nmap <silent> gi <Plug>(coc-implementation)
+"CD nmap <silent> gr <Plug>(coc-references)
+"CD """ `KK` coc documentation (K is man page)
+"CD nnoremap <silent> KK :call <SID>show_documentation()<CR>
+"CD function! s:show_documentation()
+"CD   if (index(['vim','help'], &filetype) >= 0)
+"CD     execute 'h '.expand('<cword>')
+"CD   else
+"CD     call CocAction('doHover')
+"CD   endif
+"CD endfunction
+"CD """ `rn` rename
+"CD nmap <leader>rn <Plug>(coc-rename)
+"CD """ `lf` format
+"CD xmap <leader>lf  <Plug>(coc-format-selected)
+"CD nmap <leader>lf  <Plug>(coc-format-selected)
+"CD augroup cocau
+"CD   autocmd!
+"CD   autocmd CursorHold * silent call CocActionAsync('highlight')
+"CD   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"CD   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"CD augroup end
+"CD """ `l{ac}` coc load codeaction for selected (a) or all (c)ode
+"CD xmap <leader>la  <Plug>(coc-codeaction-selected)
+"CD nmap <leader>la  <Plug>(coc-codeaction-selected)
+"CD nmap <leader>lc  <Plug>(coc-codeaction)
+"CD """ `lc` coc fix current
+"CD nmap <leader>qf  <Plug>(coc-fix-current)
+"CD """ `{ia}{fc}` coc select inside/outside function/class
+"CD xmap if <Plug>(coc-funcobj-i)
+"CD omap if <Plug>(coc-funcobj-i)
+"CD xmap af <Plug>(coc-funcobj-a)
+"CD omap af <Plug>(coc-funcobj-a)
+"CD xmap ic <Plug>(coc-classobj-i)
+"CD omap ic <Plug>(coc-classobj-i)
+"CD xmap ac <Plug>(coc-classobj-a)
+"CD omap ac <Plug>(coc-classobj-a)
+"CD """ `<C-s>` select next range
+"CD nmap <silent> <C-s> <Plug>(coc-range-select)
+"CD xmap <silent> <C-s> <Plug>(coc-range-select)
+"CD "": `:Format` coc format
+"CD command! -nargs=0 Format :call CocAction('format')
+"CD "": `:Fold` coc fold
+"CD command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"CD "": `:OR` coc organize import
+"CD command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"CD """ `<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
+"CD nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
+"CD nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+"CD nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+"CD nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
+"CD nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
+"CD nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+"CD nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+"CD nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+"CD "end coc
 
 "": `:MM` build using Makeshift
 function! s:BuildFun(what2build)
