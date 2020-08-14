@@ -19,31 +19,26 @@ MAPPINGS                                                           *myvimmaps*
 `,gb`: vimgrep in buffers
 `,gg`: vimgrep specify or visual region
 `,gr`: specify replace for visual region
-`,hh`: vim help for word under cursor
+`,hh`: haskell block
 `,j2`: to jira ("pip install rst2jira" needed}
 `,ls`: load spelling
 `,l{ramkj}`: load russian accents mathematic fntc english
 `,m[m]`: run[echo] in term (two windows: one of them term)
 `,s`: save current buffer
+`,tt`: google translate
+`,vt{ bipgcrs(s)h}`: vert term Bash|Ipython|Perl|Ghci|Cling|R|(p)Sql|pHp|java
 `,ww`: look up in wordnet (wn needed)
+`,{vv mv}`: vim eval
 `<C-n>`: NERDTreeToggle
-`<C-s>` select next range
 `<C-{kjhl}>`: go to window
 `<M-V>|<M-C>`: copy|paste clipboard
-`<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
-`KK` coc documentation (K is man page)
 `SD`: cd to current symlinked file
 `SR`: Replace from default register without loosing it
 `SW`: fzf search for word under cursor
 `Y`: yank till end of line, like D
 `gx`: open browser (normally firefox) and search
 `gx{lngpw}`: open local, nonlocal; chromium google,python,wikipedia
-`g{dyir}` coc go to definition/type/implementation/reference
-`lc` coc fix current
-`lf` format
-`l{ac}` coc load codeaction for selected (a) or all (c)ode
 `m`: match in o v n mode
-`rn` rename
 `s`: <nop>, free for other mappings
 `sb`: fzf Buffers
 `sc[c]`: (re)number
@@ -54,8 +49,6 @@ MAPPINGS                                                           *myvimmaps*
 `sp`: yank current file full path
 `sx`: syntax fromstart
 `s{.;:/}`: fzf Buffer tags, tags, : or / history
-`{[]}g` coc diagnostic next/prev
-`{ia}{fc}` coc select inside/outside function/class
 `{jk}=g{jk}`: treat as break lines when wrap on
 `{sj sk}`: Insert empty line below|above
 `{ss SS}`: n insert char before|after
@@ -75,14 +68,13 @@ ABBREVIATIONS                                                       *myplugins*
 ==============================================================================
 COMMANDS                                                       *myvimcommands*
 
-`:Fold` coc fold
-`:Format` coc format
 `:F{Ff}` font size
 `:MM` build using Makeshift
-`:OR` coc organize import
 `:PrettyXML` format XML
+`:RR` insert RST tag based on current line
 `:Redir` either shell or vim command
 `:SD` cd to current file
+`:SS` stpl template tag line with RST tag
 `:SW` search for word under cursor and place into quickfix list
 `:TD` execute .local/bin/todo to quickfix list
 `:TrimSpaces` accepts range
@@ -98,10 +90,9 @@ mathematic.vim (<leader>lm)
 |NERDTreeMappings| [sn] file browser
 |Nvim-R-use| \rf \rq \d ... in R file
 |UltiSnips| snippets
-|VdebugStart| <F5>pydbgp -d localhost:9000 x.py<F2><F3><F10><F6>
+|Vimspector| <F5> (needs .vimspector.json)
 |barbaric-functions| (ibus) input method only in insert mode
 |bufexplorer| still needed to delete/copy
-|coc| intellisense using language server protocol
 |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
 |fugitive-commands| :Gxxx like :Gdiffsplit
 |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|

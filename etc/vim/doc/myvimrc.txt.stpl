@@ -6,19 +6,8 @@ Generated:
 
 <%
 from os.path import dirname as d, join as j
-lns=[]
-for filename in """vimrc
-plugin/autocommands.vim
-plugin/digraphs.vim
-plugin/functions.vim
-plugin/mappings.vim
-plugin/settings.vim
-plugin/statusbar.vim
-plugin/wildignore.vim
-""".splitlines():
-    with open(j(d(d(__file__)),filename)) as f:
-        lns += f.readlines()
-    end
+with open(j(d(d(__file__)),'vimrc')) as f:
+    lns = f.readlines()
 end
 %>
 %def collect(lnstartswith):
