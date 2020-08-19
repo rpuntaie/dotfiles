@@ -519,13 +519,15 @@ command! -nargs=1 -complete=file E call <SID>Edit(<q-args>)
 function! StplRstTag()
   let cpos = getpos('.')[1]
   let cline = getline(cpos)
-  let tcline = trim(cline,' .:,;?!')
+  let tcline = trim(cline,' .:,;?!}{')
+  call setpos('.',[0,1,1,0])
   let [lnum,lcol] = searchpos('^\.\. _','n')
   let tagfn = split(getline(lnum),'\W\+', 0)[1]
   let tagline = '% __'.tagfn.'("'.tcline.'")'
   let tagid = ".. _`".tagfn.join(split(tcline,'\W\+', 0),'')."`:"
   call setline(cpos,tagid)
   call append(cpos,tagline)
+  call setpos('.',[0,cpos,1,0])
 endfunction
 "": `:SS` stpl template tag line with RST tag
 command! SS call StplRstTag()
