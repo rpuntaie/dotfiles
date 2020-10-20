@@ -1,6 +1,3 @@
-
-
-
 ""
 " build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
@@ -58,6 +55,7 @@ if !has('win32')
   set directory=$XDG_STATE_HOME/vim,~/,/tmp
   set backupdir=$XDG_STATE_HOME/vim,~/,/tmp
   if !has('nvim')
+    " also history
     set viminfofile=$XDG_STATE_HOME/vim/viminfo
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
@@ -157,6 +155,7 @@ endif
     call dein#add('chrisbra/unicode.vim')
 ""| |barbaric-functions| (ibus) input method only in insert mode
     call dein#add('rpuntaie/vim-barbaric')
+"call dein#add('kovisoft/slimv')
 "'airblade/vim-gitgutter'
 "'editorconfig/editorconfig-vim'
 "'itchyny/lightline.vim'
@@ -195,7 +194,7 @@ if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
 endif
 "call dein#check_clean()
 "call dein#update()
-"call dein#install()
+"call dein#recache_runtimepath()
 
 let g:powerline_pycmd = "py3"
 if !g:CocOverDeoplete
@@ -314,6 +313,8 @@ if g:CocOverDeoplete
 endif
 
 "vimspector
+"in bash:
+"cd $XDG_STATE_HOME/vim/dein/repos/github.com/puremourning/vimspector
 "./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all
 let g:vimspector_base_dir=expand('$XDG_STATE_HOME/vim/vimspector')
 nmap <F5>         <Plug>VimspectorContinue
@@ -327,6 +328,9 @@ nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
 nmap <F7>         <Plug>VimspectorStepOver
 nmap <F11>        <Plug>VimspectorStepInto
 nmap <F12>        <Plug>VimspectorStepOut
+"   original:
+"   let g:vimspector_enable_mappings = 'HUMAN'
+"   packadd! vimspector
 "using gdb
 packadd termdebug
 ":Termdebug <app>
@@ -409,7 +413,7 @@ endif
 set diffopt+=iwhite
 syntax on
 set background=dark
-colorscheme murphy
+colorscheme murphy1
 if has("gui_running")
     set guicursor=n-c:block-Cursor/lCursor-blinkon0
     set guicursor+=i-ci:ver30-Cursor/lCursor-blinkon0
@@ -429,7 +433,11 @@ if has("gui_running")
             set guifont=FreeMono:h10:b:cANSI
         endif
     else
-        if filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
+        if filereadable($HOME."/.local/share/fonts/FreeMonoBoldAL1S.otf")
+          set guifont=FreeMono\ AL1S\ Bold\ 11
+        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoAL1S.ttf")
+          set guifont=DejaVu\ Sans\ Mono\ AL1S\ Bold\ 9
+        elseif filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
           set guifont=FreeMonoFO4\ Bold\ 11
         else
           set guifont=FreeMono\ Bold\ 11
@@ -448,19 +456,18 @@ highlight Pmenu ctermbg=Black ctermfg=Green guibg=black
 "otherwise markdown replaces characters in lines, but the current
 set conceallevel=0
 
+set number relativenumber
 if g:CocOverDeoplete
     "coc
     " not too small because see statusbar.vim
     set updatetime=1300
     set shortmess+=c
-    set number
     if !has('nvim')
       set signcolumn=number
     else
       sign define numhl=
     endif
 endif
-
 
 
 augroup rolandau
@@ -777,9 +784,11 @@ endif
 """ `gx`: open browser (normally firefox) and search
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-""" `,vt{ bipgcrs(s)h}`: vert term Bash|Ipython|Perl|Ghci|Cling|R|(p)Sql|pHp|java
+""" `,v{ tbipg(g)c(c)rs(s)hj(j)...}`: vert term Tmux|Bash|Ipython|Perl|Ghci|Go|Cling|C#|R|Scala|Kotlin|sQQl|pHp|Julia|JJava|...
 "exit
 nnoremap <silent> <leader>v :vert term<CR>
+"exit
+nnoremap <silent> <leader>vt :vert term tmux new-session -A -s vim<CR>
 "exit
 nnoremap <silent> <leader>vb :vert term bash<CR>
 "? exit
@@ -830,8 +839,13 @@ nnoremap <silent> <leader>va :vert term lua<CR>
 nnoremap <silent> <leader>vx :vert term iex<CR>
 "<C-d> :help (yay -S evcxr_repl) (rust)
 nnoremap <silent> <leader>ve :vert term evcxr<CR>
-",help C-d
+",help C-d (guile)
 nnoremap <silent> <leader>vu :vert term guile<CR>
+"(help) racket better
+nnoremap <silent> <leader>vw :vert term racket<CR>
+"C-d (d repl)
+nnoremap <silent> <leader>vd :vert term dub run drepl<CR>
+" free: vy vz
 
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-W>j
@@ -991,6 +1005,8 @@ iab YYY <C-R>=strftime("%Y%m%d%a")[:-2]<CR>
 iab iGU <C-R>=py3eval("str(uuid.uuid4()).upper()")<CR>
 ""i `iT t50282011072020`
 iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
+iab KK .. }}}<CR><ESC>I.. {{{
+
 
 dig ll 2113
 dig II 120129

@@ -44,7 +44,7 @@ if [[ -x $HOME/.screenlayout/$HOST.sh ]]; then
 fi
 
 if [[ $WM == xmonad ]]; then
-  feh --bg-scale /usr/share/backgrounds/gnome/Wood.jpg &
+  feh --bg-scale /usr/share/backgrounds/gnome/Dark_Ivy.jpg
 fi
 
 exec $WM

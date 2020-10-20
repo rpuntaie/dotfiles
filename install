@@ -53,6 +53,12 @@ _dotfiles_nodejs(){
   bash ~/$DOTDIR/bin/my_nodejs
 }
 
+_dotfiles_scheme(){
+  raco pkg install scheme-lib
+  raco pkg install r5rs-lib
+  raco pkg install cext-lib
+}
+
 _dotfiles_weechat(){
   # weechat: no symlink, because it changes the files
   if which weechat; then
@@ -103,6 +109,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _dotfiles_fonts
     _dotfiles_python
     _dotfiles_nodejs
+    _dotfiles_scheme
     _dotfiles_weechat
     _dotfiles_email
     _clone_github_mine
