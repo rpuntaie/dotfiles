@@ -41,3 +41,7 @@ hi Title		term=bold	   ctermfg=LightMagenta gui=bold	guifg=Pink
 hi WarningMsg	term=standout  ctermfg=LightRed   guifg=Red
 hi Visual		term=reverse   cterm=reverse	  gui=NONE		guifg=white guibg=darkgreen
 hi Folded		term=bold      cterm=bold   ctermbg=DarkGreen	  gui=NONE		guifg=white guibg=DarkGreen
+
+hi Pmenu ctermbg=Black ctermfg=Green guibg=black
+hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red guibg=DarkRed guifg=Black
+hi User2 term=inverse,bold cterm=inverse,bold ctermfg=blue guibg=DarkGreen guifg=Black

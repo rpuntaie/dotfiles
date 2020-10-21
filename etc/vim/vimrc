@@ -452,15 +452,15 @@ set colorcolumn=+1
 hi ColorColumn ctermbg=232 guibg=#080808
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
-highlight Pmenu ctermbg=Black ctermfg=Green guibg=black
+
 "otherwise markdown replaces characters in lines, but the current
 set conceallevel=0
 
 set number relativenumber
 if g:CocOverDeoplete
     "coc
-    " not too small because see statusbar.vim
-    set updatetime=1300
+    " not too small because see 6447 statusline issue
+    " set updatetime=1300
     set shortmess+=c
     if !has('nvim')
       set signcolumn=number
@@ -1068,10 +1068,8 @@ set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 "https://github.com/vim/vim/issues/6447: insert <CursorHold> after updatetime
-"set statusline+=%1*%{ShowUtf8Sequence()} " utf-8
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-:hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red guibg=DarkRed guifg=Black
-:hi User2 term=inverse,bold cterm=inverse,bold ctermfg=blue guibg=DarkGreen guifg=Black
+set statusline+=%1*%{ShowUtf8Sequence()} " utf-8
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set laststatus=2
 
 set wildignore=
