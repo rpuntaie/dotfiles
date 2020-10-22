@@ -26,7 +26,7 @@ MAPPINGS                                                           *myvimmaps*
 `,m[m]`: run[echo] in term (two windows: one of them term)
 `,s`: save current buffer
 `,tt`: google translate
-`,vt{ bipgcrs(s)h}`: vert term Bash|Ipython|Perl|Ghci|Cling|R|(p)Sql|pHp|java
+`,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinsQQlpHpJuliaJJava...
 `,ww`: look up in wordnet (wn needed)
 `,{vv mv}`: vim eval
 `<C-n>`: NERDTreeToggle
@@ -68,7 +68,9 @@ ABBREVIATIONS                                                       *myplugins*
 ==============================================================================
 COMMANDS                                                       *myvimcommands*
 
+`:E` same as `:e(dit)`
 `:F{Ff}` font size
+`:L` close window
 `:MM` build using Makeshift
 `:PrettyXML` format XML
 `:RR` insert RST tag based on current line
@@ -78,6 +80,7 @@ COMMANDS                                                       *myvimcommands*
 `:SW` search for word under cursor and place into quickfix list
 `:TD` execute .local/bin/todo to quickfix list
 `:TrimSpaces` accepts range
+`:VR` VimspectorReset
 
 ==============================================================================
 PLUGINS                                                            *myplugins*
@@ -101,7 +104,7 @@ mathematic.vim (<leader>lm)
 |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
 |plugin/02tlib.vim|  TScratch TBrowseOutput
 |quickfix-reflector| enable editing the quickfix to change more files
-|sandwich-keymappings| s{adr} dasX da<wait>s (https://github.com/machakann/vim-sandwich/issues/62)
+|sandwich-keymappings| s{adr} dasX da<wait>s
 |sleuth| detect tab settings heuristically, :Sleuth
 |trans-usage| ,tt
 |unicode-plugin| :UnicodeTable i: <C-X><C-G>

@@ -79,13 +79,14 @@ function! s:Deinplugins()
     call dein#add('tpope/vim-sleuth')
 ""| |:Tabularize| format (,aa)
     call dein#add('godlygeek/tabular')
-""| |sandwich-keymappings| s{adr} dasX da<wait>s (https://github.com/machakann/vim-sandwich/issues/62)
+""| |sandwich-keymappings| s{adr} dasX da<wait>s
+"   https://github.com/machakann/vim-sandwich/issues/62
     call dein#add('machakann/vim-sandwich')
 ""| |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
     call dein#add('Lokaltog/vim-easymotion') " <leader><leader>f
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
     call dein#add('andymass/vim-matchup')
-""| indentation guides
+"   indentation guides
     "call dein#add('nathanaelkane/vim-indent-guides')
     call dein#add('thaerkh/vim-indentguides')
 
@@ -331,8 +332,8 @@ nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
 nmap <F7>         <Plug>VimspectorStepOver
 nmap <F11>        <Plug>VimspectorStepInto
 nmap <F12>        <Plug>VimspectorStepOut
+"": `:VR` VimspectorReset
 command! VR :VimspectorReset<CR>
-command! L :close
 "   original:
 "   let g:vimspector_enable_mappings = 'HUMAN'
 "   packadd! vimspector
@@ -413,8 +414,9 @@ set errorformat+=%f:%l\\,\ E:%n:\ %m
 set errorformat+=\|\|\ %f:%l:%m
 "makeprg set by vim-makeshift
 if has("gui_running") || has('nvim')
-  "set shellcmdflag=-ic
-  "https://github.com/neovim/neovim/issues/13126
+  set shellcmdflag=-ic
+  " -i produces zsh zle warning on neovim system(), but not in vim
+  " https://github.com/neovim/neovim/issues/13126
 endif
 set diffopt+=iwhite
 syntax on
@@ -529,7 +531,11 @@ command! PrettyXML call <SID>DoPrettyXML()
 function! s:Edit(filepath)
     execute "e ".fnameescape(a:filepath)
 endfunction
+"": `:E` same as `:e(dit)`
 command! -nargs=1 -complete=file E call <SID>Edit(<q-args>)
+
+"": `:L` close window
+command! L :close
 
 function! StplRstTag()
   let cpos = getpos('.')[1]
@@ -792,7 +798,7 @@ endif
 """ `gx`: open browser (normally firefox) and search
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-""" `,v{ tbipg(g)c(c)rs(s)hj(j)...}`: vert term Tmux|Bash|Ipython|Perl|Ghci|Go|Cling|C#|R|Scala|Kotlin|sQQl|pHp|Julia|JJava|...
+""" `,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinsQQlpHpJuliaJJava...
 "exit
 nnoremap <silent> <leader>v :vert term<CR>
 "exit
