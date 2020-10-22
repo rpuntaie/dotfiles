@@ -457,7 +457,6 @@ let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
   \ "#42cf89", "#cfcfb0", "#78c2ff", "#ae81ff", "#85dc85", "#e2637f" ]
 "check width
 set colorcolumn=+1
-hi ColorColumn ctermbg=232 guibg=#080808
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
@@ -800,65 +799,65 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 """ `,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinsQQlpHpJuliaJJava...
 "exit
-nnoremap <silent> <leader>v :vert term<CR>
+nnoremap <silent> <leader>v :vert botright term<CR><C-W><C-W>
 "exit
-nnoremap <silent> <leader>vt :vert term tmux new-session -A -s vim<CR>
+nnoremap <silent> <leader>vt :vert botright term tmux new-session -A -s vim<CR><C-W><C-W>
 "exit
-nnoremap <silent> <leader>vb :vert term bash<CR>
+nnoremap <silent> <leader>vb :vert botright term bash<CR><C-W><C-W>
 "? exit
-nnoremap <silent> <leader>vi :vert term ipython<CR>
+nnoremap <silent> <leader>vi :vert botright term ipython<CR><C-W><C-W>
 "C-d
-nnoremap <silent> <leader>vii :vert term irb<CR>
+nnoremap <silent> <leader>vii :vert botright term irb<CR><C-W><C-W>
 "C-d
-nnoremap <silent> <leader>vp :vert term re.pl<CR>
+nnoremap <silent> <leader>vp :vert botright term re.pl<CR><C-W><C-W>
 ":? :q
-nnoremap <silent> <leader>vg :vert term ghci<CR>
+nnoremap <silent> <leader>vg :vert botright term ghci<CR><C-W><C-W>
 ":help :quit
-nnoremap <silent> <leader>vgg :vert term gore<CR>
+nnoremap <silent> <leader>vgg :vert botright term gore<CR><C-W><C-W>
 ".? .q
-nnoremap <silent> <leader>vc :vert term cling<CR>
+nnoremap <silent> <leader>vc :vert botright term cling<CR><C-W><C-W>
 "help; quit;
-nnoremap <silent> <leader>vcc :vert term csharp<CR>
+nnoremap <silent> <leader>vcc :vert botright term csharp<CR><C-W><C-W>
 "help() q()
-nnoremap <silent> <leader>vr :vert term R<CR>
+nnoremap <silent> <leader>vr :vert botright term R<CR><C-W><C-W>
 ":h :q
-nnoremap <silent> <leader>vs :vert term scala<CR>
+nnoremap <silent> <leader>vs :vert botright term scala<CR><C-W><C-W>
 ":help :quit
-nnoremap <silent> <leader>vk :vert term kotlin<CR>
+nnoremap <silent> <leader>vk :vert botright term kotlin<CR><C-W><C-W>
 ".help .q
-nnoremap <silent> <leader>vq :vert term sqlite3<CR>
+nnoremap <silent> <leader>vq :vert botright term sqlite3<CR><C-W><C-W>
 "\? \q
-nnoremap <silent> <leader>vqq :vert term psql<CR>
+nnoremap <silent> <leader>vqq :vert botright term psql<CR><C-W><C-W>
 "help exit
-nnoremap <silent> <leader>vh :vert term psysh<CR>
+nnoremap <silent> <leader>vh :vert botright term psysh<CR><C-W><C-W>
 "? C-d
-nnoremap <silent> <leader>vj :vert term julia<CR>
+nnoremap <silent> <leader>vj :vert botright term julia<CR><C-W><C-W>
 "/help /exit
-nnoremap <silent> <leader>vjj :vert term jshell<CR>
+nnoremap <silent> <leader>vjj :vert botright term jshell<CR><C-W><C-W>
 "quit
-nnoremap <silent> <leader>vl :vert term planck<CR>
+nnoremap <silent> <leader>vl :vert botright term planck<CR><C-W><C-W>
 "(quit)
-nnoremap <silent> <leader>vll :vert term lein repl<CR>
+nnoremap <silent> <leader>vll :vert botright term lein repl<CR><C-W><C-W>
 "C-d
-nnoremap <silent> <leader>vn :vert term node<CR>
+nnoremap <silent> <leader>vn :vert botright term node<CR><C-W><C-W>
 "help doc quit
-nnoremap <silent> <leader>vo :vert term octave<CR>
+nnoremap <silent> <leader>vo :vert botright term octave<CR><C-W><C-W>
 "C-c
-nnoremap <silent> <leader>vm :vert term ocaml<CR>
+nnoremap <silent> <leader>vm :vert botright term ocaml<CR><C-W><C-W>
 "C-d (yay -S j9-git)
-nnoremap <silent> <leader>v9 :vert term j9 --console<CR>
+nnoremap <silent> <leader>v9 :vert botright term j9 --console<CR><C-W><C-W>
 "C-d
-nnoremap <silent> <leader>va :vert term lua<CR>
+nnoremap <silent> <leader>va :vert botright term lua<CR><C-W><C-W>
 "C-c h() (elixir)
-nnoremap <silent> <leader>vx :vert term iex<CR>
+nnoremap <silent> <leader>vx :vert botright term iex<CR><C-W><C-W>
 "<C-d> :help (yay -S evcxr_repl) (rust)
-nnoremap <silent> <leader>ve :vert term evcxr<CR>
+nnoremap <silent> <leader>ve :vert botright term evcxr<CR><C-W><C-W>
 ",help C-d (guile)
-nnoremap <silent> <leader>vu :vert term guile<CR>
+nnoremap <silent> <leader>vu :vert botright term guile<CR><C-W><C-W>
 "(help) racket better
-nnoremap <silent> <leader>vw :vert term racket<CR>
+nnoremap <silent> <leader>vw :vert botright term racket<CR><C-W><C-W>
 "C-d (d repl)
-nnoremap <silent> <leader>vd :vert term dub run drepl<CR>
+nnoremap <silent> <leader>vd :vert botright term dub run drepl<CR><C-W><C-W>
 " free: vy vz
 
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
