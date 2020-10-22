@@ -19,6 +19,7 @@
   # usrstuff:
   name = Roland Puntaier
   email = roland.puntaier@gmail.com
+	signingkey = 43B86228
 [push]
   default = simple
 [gpg]

@@ -1,10 +1,3 @@
-" local syntax file - set colors on a per-machine basis:
-" vim: tw=0 ts=4 sw=4
-" Vim color file
-" Maintainer:	Ron Aaron <ron@ronware.org>
-" Last Change:	2003 May 02
-" Roland:	20201002 added Folded
-
 hi clear
 set background=dark
 if exists("syntax_on")
@@ -29,7 +22,7 @@ hi Cursor										  guifg=Orchid	guibg=fg
 hi Directory	term=bold	   ctermfg=LightCyan  guifg=Cyan
 hi ErrorMsg		term=standout  ctermbg=DarkRed	  ctermfg=White guibg=Red guifg=White
 hi IncSearch	term=reverse   cterm=reverse	  gui=reverse
-hi LineNr		term=underline ctermfg=Yellow					guifg=Yellow
+hi LineNr		term=underline ctermfg=DarkGray					guifg=DarkGray
 hi ModeMsg		term=bold	   cterm=bold		  gui=bold
 hi MoreMsg		term=bold	   ctermfg=LightGreen gui=bold		guifg=SeaGreen
 hi NonText		term=bold	   ctermfg=Blue		  gui=bold		guifg=Blue

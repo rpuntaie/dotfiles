@@ -85,6 +85,9 @@ function! s:Deinplugins()
     call dein#add('Lokaltog/vim-easymotion') " <leader><leader>f
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
     call dein#add('andymass/vim-matchup')
+""| indentation guides
+    "call dein#add('nathanaelkane/vim-indent-guides')
+    call dein#add('thaerkh/vim-indentguides')
 
 if g:CocOverDeoplete
     call dein#add('neoclide/coc.nvim', {'merged':0, 'build': 'yarn install --frozen-lockfile'})
@@ -328,6 +331,8 @@ nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
 nmap <F7>         <Plug>VimspectorStepOver
 nmap <F11>        <Plug>VimspectorStepInto
 nmap <F12>        <Plug>VimspectorStepOut
+command! VR :VimspectorReset<CR>
+command! L :close
 "   original:
 "   let g:vimspector_enable_mappings = 'HUMAN'
 "   packadd! vimspector
@@ -408,7 +413,8 @@ set errorformat+=%f:%l\\,\ E:%n:\ %m
 set errorformat+=\|\|\ %f:%l:%m
 "makeprg set by vim-makeshift
 if has("gui_running") || has('nvim')
-  set shellcmdflag=-ic
+  "set shellcmdflag=-ic
+  "https://github.com/neovim/neovim/issues/13126
 endif
 set diffopt+=iwhite
 syntax on
@@ -456,6 +462,8 @@ set grepformat=%f:%l:%c:%m
 "otherwise markdown replaces characters in lines, but the current
 set conceallevel=0
 
+"set cursorcolumn
+"set cursorline
 set number relativenumber
 if g:CocOverDeoplete
     "coc
