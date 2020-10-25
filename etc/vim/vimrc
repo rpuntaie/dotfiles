@@ -413,10 +413,10 @@ set errorformat+=%f(%l)\ :\ %m
 set errorformat+=%f:%l\\,\ E:%n:\ %m
 set errorformat+=\|\|\ %f:%l:%m
 "makeprg set by vim-makeshift
-if has("gui_running") || has('nvim')
-  set shellcmdflag=-ic
-  " -i produces zsh zle warning on neovim system(), but not in vim
+if has("gui_running") " || has('nvim')
+  " nvim -i produces zsh zle warning on neovim system(), but not in vim
   " https://github.com/neovim/neovim/issues/13126
+  set shellcmdflag=-ic
 endif
 set diffopt+=iwhite
 syntax on
@@ -497,8 +497,12 @@ augroup rolandau
     autocmd BufEnter *.go :set equalprg=gofmt
     autocmd BufEnter *.c :set equalprg=clang-format\ -i
     autocmd BufEnter *.cpp :set equalprg=clang-format\ -i
-
 augroup END
+"": `:JJ` for `:Autoformat`
+command! -bar -nargs=0 -range=% J :<line1>,<line2>Autoformat
+"": `:J` for `:AutoformatLine`
+command! -bar -nargs=0 JJ :AutoformatLine
+
 
 " trailing whitespaces:
 function! s:TrimSpaces() range
@@ -1121,8 +1125,4 @@ set wildignore+=**/*.cache
 set wildignore+=**/*.tlog
 set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
-
-if isdirectory($MY)
-    cd $MY
-endif
 
