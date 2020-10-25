@@ -15,6 +15,11 @@
 "   - rst2jira
 "   - waf
 "
+" "coc
+" cd ~/.local/var/lib/vim/dein/repos/github.com/neoclide/coc.nvim
+" git clean -xfd
+" yarn install --frozen-lockfile
+"
 " <ESC> mapped to <CAPSLOCK> in the OS
 "
 " doc/myvimrc.txt.stpl uses """, "": and ""| lines
