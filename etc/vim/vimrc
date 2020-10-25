@@ -1086,7 +1086,9 @@ set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 "https://github.com/vim/vim/issues/6447: insert <CursorHold> after updatetime
 set statusline+=%1*%{ShowUtf8Sequence()} " utf-8
+if g:CocOverDeoplete
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+endif
 set laststatus=2
 
 set wildignore=
