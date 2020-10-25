@@ -23,7 +23,7 @@ pip install --user komodo-python3-dbgp #debugging protocol for vim vdebug
 pip install --user pint #physical units
 #pip install --user face_recognition
 #nvim
-#pip install --user --no-binary :all: pynvim #neovim-python
+pip install --user pynvim #neovim-python
 pip install --user neovim-remote #nvr to start and use nvim server
 pip install --user solidpython #3d modelling (alternative: https://aur.archlinux.org/packages/blender-as-py-module/)
 pip install --user autopilot #easy package skeleton
