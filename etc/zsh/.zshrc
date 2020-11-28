@@ -44,6 +44,8 @@ zgen load zsh-users/zsh-autosuggestions
 zgen load zsh-users/zsh-completions
 zgen load zsh-users/zsh-syntax-highlighting
 
+zgen load Aloxaf/fzf-tab
+
 # insert mode emacs keys
 bindkey -M viins '^?'    backward-delete-char
 bindkey -M viins '^[[3~' delete-char
@@ -73,3 +75,6 @@ if [ -f '/home/roland/.local/google-cloud-sdk/path.zsh.inc' ]; then . '/home/rol
 if [ -f '/home/roland/.local/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/roland/.local/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# TAB fzf complete names in current folder (CTRL-T to fzf on full tree)
+enable-fzf-tab

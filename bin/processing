@@ -1,0 +1,19 @@
+#!/bin/bash
+while inotifywait -e modify $1; do
+ps cax | grep java > /dev/null
+if [ $? -eq 0 ]; then
+  killall java
+  exec -a processing /usr/bin/processing4-java --sketch=$1 --force --output=/tmp/$1/ --run &
+else
+  exec -a processing /usr/bin/processing4-java --sketch=$1 --force --output=/tmp/$1/ --run &
+fi
+done
+
+
+#base=${1%.pde}
+#p5path="/tmp/$base"
+#rm -rf $p5path
+#mkdir $p5path
+#ln -s "$(realpath data)" $p5path/data
+#ln -s "$(realpath $1)" $p5path/$1
+#processing-java --sketch=$p5path --run

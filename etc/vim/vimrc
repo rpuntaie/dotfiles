@@ -321,6 +321,9 @@ if g:CocOverDeoplete
           \})
 endif
 
+"": `:Sw` sudo write
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+
 "vimspector
 "in bash:
 "cd $XDG_STATE_HOME/vim/dein/repos/github.com/puremourning/vimspector
@@ -399,6 +402,7 @@ set nosmarttab
 set noautoindent
 set nosmartindent
 set indentexpr=
+filetype indent off
 set shiftwidth=4
 set tabstop=4
 set softtabstop=0
@@ -1027,8 +1031,7 @@ iab YYY <C-R>=strftime("%Y%m%d%a")[:-2]<CR>
 iab iGU <C-R>=py3eval("str(uuid.uuid4()).upper()")<CR>
 ""i `iT t50282011072020`
 iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
-iab KK .. }}}<CR><ESC>I.. {{{
-
+iab KK .. {{{<CR><ESC>0i.. }}}<ESC>kA
 
 dig ll 2113
 dig II 120129
@@ -1045,13 +1048,18 @@ dig @R 641 "ʁ vd uvular fricative
 dig @X 967 "χ vl uvular fricative
 dig @l 654 "ʎ italian gli, castillian ll
 
-function! ShowUtf8Sequence()
+function! ShowHex()
   let p = getpos('.')
-  redir => utfseq
-  silent normal! g8
+  redir => ucode
+  " silent normal! g8
+  silent normal! ga
   redir End
   call setpos('.',p)
-  return '['.trim(utfseq).']'
+  " return '['.trim(ucode).']'
+  try
+      return '['.trim(split(split(ucode,'Hex')[1],',')[0]).']'
+  catch
+  endtry
 endfunction
 function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
@@ -1090,7 +1098,7 @@ set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 "https://github.com/vim/vim/issues/6447: insert <CursorHold> after updatetime
-set statusline+=%1*%{ShowUtf8Sequence()} " utf-8
+set statusline+=%1*%{ShowHex()} " utf-8
 if g:CocOverDeoplete
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 endif
