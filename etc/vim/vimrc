@@ -474,7 +474,8 @@ set conceallevel=0
 
 "set cursorcolumn
 "set cursorline
-set number relativenumber
+"set relativenumber
+set number
 if g:CocOverDeoplete
     "coc
     " not too small because see 6447 statusline issue

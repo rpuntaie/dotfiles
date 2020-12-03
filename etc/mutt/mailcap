@@ -5,6 +5,8 @@ text/html; xdg-open %s &>/dev/null ; nametemplate=%s.html
 application/zip;    file-roller '%s'
 image/*; feh %s ;
 video/*; setsid mpv --quiet %s &;
+text/calendar; mutt-ics; copiousoutput
+application/ics; mutt-ics; copiousoutput
 application/pdf; xdg-open %s &>/dev/null ;
 application/pgp-encrypted; gpg -d '%s' ;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s'

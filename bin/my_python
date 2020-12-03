@@ -34,3 +34,4 @@ pip install --user doit #task automation
 pip install --user urlfetch #http client
 pip install --user tuna #.prof viewer
 pip install --user -U msgpack #for deoplete in vim
+pip install --user mutt-ics
