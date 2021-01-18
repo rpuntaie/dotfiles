@@ -164,6 +164,7 @@ endif
     call dein#add('chrisbra/unicode.vim')
 ""| |barbaric-functions| (ibus) input method only in insert mode
     call dein#add('rpuntaie/vim-barbaric')
+    call dein#add('goerz/jupytext.vim')
 "call dein#add('kovisoft/slimv')
 "'airblade/vim-gitgutter'
 "'editorconfig/editorconfig-vim'
@@ -450,10 +451,10 @@ if has("gui_running")
             set guifont=FreeMono:h10:b:cANSI
         endif
     else
-        if filereadable($HOME."/.local/share/fonts/FreeMonoBoldAL1S.otf")
-          set guifont=FreeMono\ AL1S\ Bold\ 11
-        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoAL1S.ttf")
-          set guifont=DejaVu\ Sans\ Mono\ AL1S\ Bold\ 9
+        if filereadable($HOME."/.local/share/fonts/FreeMonoOEL1S.otf")
+          set guifont=FreeMono\ OEL1S\ Bold\ 11
+        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoOEL2SD.ttf")
+          set guifont=DejaVu\ Sans\ Mono\ OEL2S\ Bold\ 9
         elseif filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
           set guifont=FreeMonoFO4\ Bold\ 11
         else
@@ -794,12 +795,12 @@ vnoremap <silent> gxn "cy:call netrw#BrowseX("<C-R>c",0)<CR><CR>
 nnoremap <silent> gxl :call netrw#BrowseX('<C-R>=expand("%:p:h")<CR>/<C-R>=expand("<cWORD>")<CR>',0)<CR>
 nnoremap <silent> gxn :call netrw#BrowseX('<C-R>=expand("<cWORD>")<CR>',0)<CR>
 if has("win32")
-vnoremap <silent> gxg "cy:!start /b cmd /c chromium "www.google.com/search?q=<C-R>c"<CR>
-vnoremap <silent> gxp "cy:!start /b cmd /c chromium "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR>
-vnoremap <silent> gxw "cy:!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"<CR>
-nnoremap <silent> gxg :!start /b cmd /c chromium "http://www.google.com/search?q=<cword>"<CR>
-nnoremap <silent> gxp :!start /b cmd /c chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"<CR>
-nnoremap <silent> gxw :!start /b cmd /c chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"<CR>
+vnoremap <silent> gxg "cy:!start /b cmd /c chrome "www.google.com/search?q=<C-R>c"<CR>
+vnoremap <silent> gxp "cy:!start /b cmd /c chrome "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR>
+vnoremap <silent> gxw "cy:!start /b cmd /c chrome "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"<CR>
+nnoremap <silent> gxg :!start /b cmd /c chrome "http://www.google.com/search?q=<cword>"<CR>
+nnoremap <silent> gxp :!start /b cmd /c chrome "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"<CR>
+nnoremap <silent> gxw :!start /b cmd /c chrome "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"<CR>
 else
 vnoremap <silent> gxg "cy:exe ':silent !chromium "www.google.com/search?q=<C-R>c"&'<CR>
 vnoremap <silent> gxp "cy:exe ':silent !chromium "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"&'<CR>
@@ -914,7 +915,7 @@ nmap sn :NERDTreeToggle<CR>
 
 if g:CocOverDeoplete
     "coc
-    nmap <leader>i :CocEnable<CR>
+    nmap <leader>i :CocEnable<CR>:autocmd! coc_nvim BufWritePre *<CR>:echom 'Coc Enabled'<CR>
     nmap <leader>ii :CocDisable<CR>
     let g:coc_user_config['suggest.triggerCompletionWait'] = 500
     "let g:coc_user_config['suggest.autoTrigger'] = 'trigger'
@@ -1089,9 +1090,9 @@ set statusline= " --------- left side ---------
 set statusline+=%1*[%n] " buffer number
 set statusline+=%m " modified
 set statusline+=%2*%{GitInfo()}
-set statusline+=%0*%{getcwd()}\> " dir
 set statusline+=%1*%f " file
 set statusline+=%=%< " --------- right side ---------
+set statusline+=%0*%{getcwd()}\> " dir
 set statusline+=%0*\[%{&ff}] " fileformat
 set statusline+=\[%{&fenc==\"\"?&enc:&fenc}] " (file) encoding
 set statusline+=%y " filetype

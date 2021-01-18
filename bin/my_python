@@ -35,3 +35,7 @@ pip install --user urlfetch #http client
 pip install --user tuna #.prof viewer
 pip install --user -U msgpack #for deoplete in vim
 pip install --user mutt-ics
+pip install --user jupytext
+pip install --user scikit-learn
+pip install --user zipper
+

@@ -9,11 +9,13 @@ alias r='ranger'
 alias cp='cp -i'
 alias grep='grep --color=auto'
 alias la='ls -lAh'
-alias ll='ls -lh --time-style=long-iso'
+alias ll='ls -lh --time-style=long-iso -tr'
 alias lsd='ls -d'
 alias ls='ls -A --color=auto --quoting-style=literal'
-alias lt='ll -t'
+alias lt='ls -tr'
 alias mv='mv -i'
+alias ol='chromium "$( lt | tail -n 1)"'
+alias chrome='chromium'
 
 alias pipiu='pip install --user'
 alias pipui='sudo pip uninstall'
@@ -34,6 +36,7 @@ alias poscc='gcc -std=c11 -pedantic -Wall -Wextra'
 alias ax='git annex'
 alias gmm='git merge'
 alias gms='git merge --squash'
+alias gtags="git tag -l --sort=-creatordate --format='%(creatordate:short):  %(refname:short)'"
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
@@ -49,4 +52,4 @@ alias xpdf='xpdf -rv'
 
 alias :e="$EDITOR"
 alias :q=exit
-
+alias wleech='wget -r -np -nc'

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+##example
+#rsmv folder1 folder2 dest
+##to move to dest/folder1 and dest/folder2
+rsync -aP --remove-source-files "$@" && rm -rf "${@:1:$#-1}"
+
