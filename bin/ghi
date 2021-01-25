@@ -1,9 +1,9 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 
 # e.g.
 # ghi rpuntaie/mailwizard ~/.local
 
-[ -n ${1} ] && [ -n ${2} ] || echo "'ghi x/y dest' with https://github.com/x/y"
+[ -n "${1}" ] && [ -n "${2}" ] || echo "'ghi x/y dest' with https://github.com/x/y"
 
 repo="${1}"
 dest="${2}"

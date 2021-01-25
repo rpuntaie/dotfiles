@@ -6,9 +6,19 @@
 # The sphinxcontrib packages lag behind sphinx.
 # I use rstdoc now, which keeps tikz and the like in separate files.
 
+# pip install --user git+https://bitbucket.org/philexander/tikz/src/master/
+# pip install --user git+https://github.com/prometheusresearch/sphinxcontrib-texfigure
+# pip install --user git+https://github.com/rpuntaie/sphinxcontrib-thm
+
 import re,os.path
 
-extensions = ['sphinx.ext.todo','sphinx.ext.autodoc', 'sphinx.ext.napoleon','sphinx.ext.mathjax','sphinxcontrib.tikz','sphinxcontrib.texfigure','sphinxcontrib.thm']
+extensions = ['sphinx.ext.todo',
+'sphinx.ext.autodoc',
+'sphinx.ext.napoleon',
+'sphinx.ext.mathjax',
+'sphinxcontrib.tikz',
+'sphinxcontrib.texfigure',
+'sphinxcontrib.thm']
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True

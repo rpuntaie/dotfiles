@@ -5,6 +5,10 @@ pip install --user rst2confluence #for jira
 pip install --user txdir #create directory tree from text file
 pip install --user remdups
 pip install --user base128
+#sphinxcontrib
+pip install --user git+https://bitbucket.org/philexander/tikz/src/master/
+pip install --user git+https://github.com/prometheusresearch/sphinxcontrib-texfigure
+pip install --user git+https://github.com/rpuntaie/sphinxcontrib-thm
 #other
 pip install --user restview
 pip install --user click-man #man pages for click apps
@@ -38,4 +42,6 @@ pip install --user mutt-ics
 pip install --user jupytext
 pip install --user scikit-learn
 pip install --user zipper
+pip install --user urlextract
+
 

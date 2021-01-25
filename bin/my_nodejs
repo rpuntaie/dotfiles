@@ -2,12 +2,13 @@
 
 #installs to ~/.local/var/lib/npm
 
-npm -g install express
-npm -g install express-session
-npm -g install express-generator
-npm -g install formidable
-npm -g install nodemailer
-npm -g install mysql
+#npm -g install express
+#npm -g install express-session
+#npm -g install express-generator
+#npm -g install formidable
+#npm -g install nodemailer
+#npm -g install mysql
+npm -g install npm-check-updates
 npm -g install js-beautify
 npm -g install komodo-debug
 npm -g install wikit

@@ -5,7 +5,7 @@
 cat ~/TODO 2> /dev/null
 cat ./TODO 2> /dev/null
 reporoot=$(git rev-parse --show-toplevel 2> /dev/null)
-if [[ -n $reporoot ]]; then
+if [[ -n "$reporoot" ]]; then
     cd $reporoot
     rg $1 -n "TODO|FIXME| XXX" --glob !*etc/sh/login --glob !*bin/todo `pwd`
     cd - &> /dev/null

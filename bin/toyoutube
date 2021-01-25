@@ -9,7 +9,7 @@ fi
 
 ytoutput="${1%.*}.yt.mkv"
 
-if [[ -n $2 ]];then
+if [[ -n "${2}" ]];then
     ytoutput="$2"
 fi
 

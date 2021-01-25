@@ -912,6 +912,7 @@ map <leader>aa :Tab/
 "scrooloose/nerdtree
 """ `sn`: NERDTreeToggle
 nmap sn :NERDTreeToggle<CR>
+command! CD exe 'cd '.system('git rev-parse --show-toplevel')
 
 if g:CocOverDeoplete
     "coc
@@ -1092,7 +1093,7 @@ set statusline+=%m " modified
 set statusline+=%2*%{GitInfo()}
 set statusline+=%1*%f " file
 set statusline+=%=%< " --------- right side ---------
-set statusline+=%0*%{getcwd()}\> " dir
+set statusline+=%2*%{getcwd()}\> " dir
 set statusline+=%0*\[%{&ff}] " fileformat
 set statusline+=\[%{&fenc==\"\"?&enc:&fenc}] " (file) encoding
 set statusline+=%y " filetype
@@ -1142,4 +1143,5 @@ set wildignore+=**/*.cache
 set wildignore+=**/*.tlog
 set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
+set wildignore+=**/node_modules/**/*
 

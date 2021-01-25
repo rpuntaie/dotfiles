@@ -17,11 +17,11 @@ if [[ "$srcdir" == "$inbase" ]]; then
 fi
 outdir="$XDG_DATA_HOME/sphinx/$inbase.out"
 
-if [[ -n $2 && "$2" != "-" ]]; then
+if [[ -n "$2" && "$2" != "-" ]]; then
     outdir="$2"
 fi
 
 [ $# == 0 ] || shift
 [ $# == 0 ] || shift
 
-sphinx-build $@ -c ~ -D source_suffix="."$inext -D master_doc=$inbase -D project=$inbase $srcdir $outdir
+echo "sphinx-build $@ -c ~ -D source_suffix="."$inext -D master_doc=$inbase -D project=$inbase $srcdir $outdir"
