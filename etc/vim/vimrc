@@ -906,6 +906,7 @@ map <silent> s. :BTags<CR>
 map <silent> s; :Tags<CR>
 map <silent> s: :History:<CR>
 map <silent> s/ :History/<CR>
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 "godlygeek/tabular
 """ `,aa`: :Tabular
 map <leader>aa :Tab/
@@ -1105,6 +1106,7 @@ set statusline+=%1*%{ShowHex()} " utf-8
 if g:CocOverDeoplete
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 endif
+set statusline+=%{&spelllang}
 set laststatus=2
 
 set wildignore=
