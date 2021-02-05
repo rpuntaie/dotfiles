@@ -43,7 +43,7 @@ else
   " to use vimrc in unconfigured system:
   " VIMINIT="so dotfiles/etc/vim/vimrc" vim
   if empty($XDG_CONFIG_HOME)
-    let $XDG_CONFIG_HOME=expand('~').'/dotfiles/etc'
+    let $XDG_CONFIG_HOME=expand('~').'/mine/dotfiles/etc'
   endif
   if empty($XDG_STATE_HOME)
     let $XDG_STATE_HOME=expand('~').'/.cache/vim'
@@ -66,7 +66,10 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-let g:CocOverDeoplete=1
+let g:CocOverDeoplete=0
+if match(&runtimepath,'Coc') != -1
+  let g:CocOverDeoplete=1
+endif
 function! s:Deinplugins()
     "download
     call dein#add('bogado/file-line') " open <file>:<line>
@@ -210,7 +213,7 @@ let g:powerline_pycmd = "py3"
 if !g:CocOverDeoplete
   "Shougo/deoplete.nvim
   let g:deoplete#enable_at_startup = 1
-  call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
+  silent! call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
   inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
   \ <SID>check_back_space() ? "\<TAB>" :

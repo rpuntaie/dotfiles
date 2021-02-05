@@ -20,7 +20,7 @@ _dotfiles_restowdots(){
   for DOTDIR in $(cd ~ && ls | grep dotfiles); do
     break
   done
-  DOTDIR=${DOTDIR:-.dotfiles}
+  DOTDIR=${DOTDIR:-mine/dotfiles}
   if [ -d $DOTDIR ]; then
     cd $DOTDIR
     if [ ! "$(git config --get remote.origin.url)" = "$dotfiles_url" ]; then
@@ -128,7 +128,7 @@ fi
 #DFN: CL=99
 #DFN: LA_NG="de_DE ru_RU"
 #DFN: ZONE=Vienna
-#DFN: AIP2=1.108
+#DFN: AIP2=1.106
 
 #rpuntaie-meta needs about 40GB disk space
 #rpuntaie-meta on https://github.com/rpuntaie/rollarch
@@ -138,6 +138,9 @@ fi
 ##else with less packages ##-># and add a # above
 ##PKG: base
 ##PKG: base-devel
+##PKG: linux
+##PKG: linux-firmware
+##PKG: mkinitcpio
 ##PKG: hwinfo
 ##PKG: nfs-utils
 ##PKG: devtools

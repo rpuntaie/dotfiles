@@ -17,16 +17,11 @@ Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for F
 :var/cache: ``XDG_CACHE_HOME``, cache for apps
 :var/lib:   ``XDG_STATE_HOME``, non-tracked automatically downloaded libraries for apps
 :var/log:   ``XDG_LOG_HOME``, app generated logs
-:opt: for not well integrated apps,
-      e.g for `altera <https://github.com/ayekat/dotfiles/blob/master/etc/sh/profile.d/40-altera.sh>`__
+:opt: for not well integrated apps
 :bin: user scripts
 :home: files symlinked from ``~`` for apps not honoring XDG
 :install: installation script according `rollarch`_
 :readme.rst: this file
-
-Inspired by and thanks to:
-`ayekat <https://github.com/ayekat/dotfiles>`__,
-`floure <https://gitlab.gnugen.ch/floure/dotfiles>`__ and others.
 
 Some files in these dotfiles reference separately managed directories,
 because they are actual user data.
@@ -93,16 +88,14 @@ Alternatively
 
 .. code:: sh
 
-   mkdir r
-   mount -t nfs 192.168.1.108:/home/roland/mine/rollarch r
-   cd r
+   mkdir mine
+   mount -t nfs -o nfsvers=3 192.168.1.108:/home/roland/mine mine
+   cd mine/rollarch
    DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash rollarch
 
 DSK IS FORMATTED. DON'T CHOOSE THE WRONG ONE.
 
-``-o nfsvers=3`` might be necessary for the ``mount`` command.
-
-The variables can be sourced from a file, of course.
+The variables can be sourced from a file.
 ``PW`` will be asked if omitted.
 
 After changing or adding a file to the ``dotfiles`` one must run
