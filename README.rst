@@ -90,8 +90,7 @@ Alternatively
 
    mkdir mine
    mount -t nfs -o nfsvers=3 192.168.1.108:/home/roland/mine mine
-   cd mine/rollarch
-   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash rollarch
+   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash mine/rollarch/rollarch
 
 DSK IS FORMATTED. DON'T CHOOSE THE WRONG ONE.
 
