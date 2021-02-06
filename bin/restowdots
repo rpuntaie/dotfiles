@@ -65,7 +65,7 @@ if [ -f  ~/.bashrc ]; then
 fi
 cd ~/$DOTDIR
 mkdir -p ~/Mail
-stow home
+stow -t ~ home
 cd ~
 
 if which xmonad; then
