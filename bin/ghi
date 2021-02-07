@@ -8,11 +8,11 @@
 repo="${1}"
 dest="${2}"
 
-Repo="https://github.com/$repo"
+RepoURL="https://github.com/$repo"
 
 tmpdir=$(mktemp -d)
 cd $tmpdir
-git clone $Repo $repo
+git clone $RepoURL $repo
 cd $repo
 
 if [ "$(sed -ne "s/^install:.*/install/p" Makefile)" = "install" ]; then

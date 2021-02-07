@@ -103,6 +103,12 @@ _config_postgres(){
   echo "postgresql installed"
 }
 
+_vim_dein_plugin(){
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein_s.sh
+  bash dein_s.sh "$XDG_STATE_HOME/vim/dein"
+  vim "+call dein#update()" "+qall"
+}
+
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
@@ -120,6 +126,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _perl_repl
     _config_postgres
     go get -u github.com/motemen/gore/cmd/gore
+    _vim_dein_plugin()
   fi
   echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."
