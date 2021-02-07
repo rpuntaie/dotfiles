@@ -90,13 +90,17 @@ _clone_github_mine(){ #usrstuff
 _perl_repl(){ #usrstuff
   echo | cpan
   cpanm Devel::REPL
+  echo "re.pl installed"
 }
 
 _config_postgres(){
   sudo -u postgres initdb -D /var/lib/postgres/data
   sudo -u postgres createuser roland
+  echo "systemctl enable --now postgresql"
   systemctl enable --now postgresql
+  echo "createdb roland -U postgres"
   createdb roland -U postgres
+  echo "postgresql installed"
 }
 
 #main
