@@ -177,7 +177,7 @@ endif
 "'tpope/vim-eunuch'
 "'severin-lemaignan/vim-minimap'
 "ctags based 'majutsushi/tagbar'
-"LSP based 'liuchengxu/vista.vim'
+    call dein#add('liuchengxu/vista.vim')
 endfunction
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
@@ -1008,6 +1008,7 @@ py3 << EOF
 import uuid
 import sys
 import os
+from argparse import Namespace
 from unittest import mock
 from math import *
 import locale

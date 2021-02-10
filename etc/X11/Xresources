@@ -21,10 +21,10 @@ URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 
 URxvt.allow_bold:           false
-URxvt.font:                 xft:DejaVu Sans Mono:autohint=true:size=12
-URxvt.boldFont:             xft:DejaVu Sans Mono:autohint=true:bold:size=12
-URxvt.italicFont:           xft:DejaVu Sans Mono:autohint=true:italic:size=12
-URxvt.boldItalicFont:       xft:DejaVu Sans Mono:autohint=true:bold:italic:size=12
+URxvt.font:                 xft:DejaVu Sans Mono OEL1S:autohint=true:size=12
+URxvt.boldFont:             xft:DejaVu Sans Mono OEL1S:autohint=true:bold:size=12
+URxvt.italicFont:           xft:DejaVu Sans Mono OEL1S:autohint=true:italic:size=12
+URxvt.boldItalicFont:       xft:DejaVu Sans Mono OEL1S:autohint=true:bold:italic:size=12
 
 ! Tango theme
 URxvt.background: #000000
