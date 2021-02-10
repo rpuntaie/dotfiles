@@ -448,8 +448,8 @@ if has("gui_running")
     if has("win32")
         "set guifont=DejaVu\ Sans\ Mono:h9:cANSI
         "set guifont=Inconsolata\ Bold\ 10
-        if filereadable("C:/Windows/Fonts/FreeMonoBoldFO4.ttf")
-            set guifont=FreeMonoFO4:h10:b:cANSI
+        if filereadable("C:/Windows/Fonts/FreeMonoBoldOEL1S.ttf")
+            set guifont=FreeMono\ OEL1S:h10:b:cANSI
         else
             set guifont=FreeMono:h10:b:cANSI
         endif
@@ -458,8 +458,6 @@ if has("gui_running")
           set guifont=FreeMono\ OEL1S\ Bold\ 11
         elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoOEL2SD.ttf")
           set guifont=DejaVu\ Sans\ Mono\ OEL2S\ Bold\ 9
-        elseif filereadable($HOME."/.local/share/fonts/FreeMonoBoldFO4.ttf")
-          set guifont=FreeMonoFO4\ Bold\ 11
         else
           set guifont=FreeMono\ Bold\ 11
         endif
