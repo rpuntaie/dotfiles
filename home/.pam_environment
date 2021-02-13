@@ -22,7 +22,7 @@ XDG_LIB_HOME          DEFAULT="${HOME}/.local/lib"
 XDG_BIN_HOME          DEFAULT="${HOME}/.local/bin"
 LD_LIBRARY_PATH       DEFAULT="${XDG_LIB_HOME}"
 
-# ibus-setup
+# ibus -> fcitx (to switch to fcitx)
 GTK_IM_MODULE=ibus
 QT_IM_MODULE=ibus
 XMODIFIERS=@im=ibus
@@ -60,3 +60,6 @@ NPM_CONFIG_PREFIX     DEFAULT="${XDG_STATE_HOME}/npm"
 PASSWORD_STORE_DIR    DEFAULT="${HOME}/.password-store"
 PYTHONPYCACHEPREFIX   DEFAULT="${XDG_CACHE_HOME}/__pycache__"
 CABAL_CONFIG          DEFAULT="${XDG_CONFIG_HOME}/cabal/config"
+XCOMPOSEFILE          DEFAULT="${XDG_CONFIG_HOME}/X11/XCompose"
+XCOMPOSECACHE         DEFAULT="${XDG_CACHE_HOME}/X11/XCompose"
+

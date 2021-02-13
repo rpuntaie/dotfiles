@@ -30,13 +30,15 @@ xrdb -load $XDG_CONFIG_HOME/X11/Xresources
 #needs to go before WM
 # dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
 
-ibus-daemon --xim -d -r &
+#-d daemonize, -r replace existing daemon
+ibus-daemon -d -r &
 #switch with (works with pluma)
 #ibus engine libpinyin
 #ibus engine xkb:us::eng
 
 #setxkbmap -option caps:escape
 setxkbmap -option caps:swapescape
+setxkbmap -option compose:ralt
 
 if [[ -x $HOME/.screenlayout/$HOST.sh ]]; then
   $HOME/.screenlayout/$HOST.sh

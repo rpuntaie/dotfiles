@@ -66,10 +66,7 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-let g:CocOverDeoplete=0
-if match(&runtimepath,'Coc') != -1
-  let g:CocOverDeoplete=1
-endif
+let g:CocOverDeoplete=1
 function! s:Deinplugins()
     "download
     call dein#add('bogado/file-line') " open <file>:<line>
@@ -275,6 +272,9 @@ let g:vebugger_view_source_cmd='edit'
 "rpuntaie/vim-barbaric
 let g:barbaric_default = 'xkb:us::eng'
 
+if match(&runtimepath,'Coc') == -1
+  let g:CocOverDeoplete=0
+endif
 if g:CocOverDeoplete
     "coc.nvim
     let g:coc_global_extensions = [

@@ -109,7 +109,25 @@ to update ``~/.local``.
 Help
 ====
 
-``wiki-search``: Help for Archlinux at command line.
+- ``man``, ``info``
+- ``wiki-search``: Help for Archlinux at command line.
+- ``wikit``: Wikipedia search on command line.
+
+Input
+=====
+
+``C- = CTRL-``, ``S- = SHIFT-``, ``M- = ALT-``, ``X- = WIN- = SUPER-`` (mod4Mask on Xmonad)
+
+- ``vim``: ``digraph``, ``keymap``
+- ``0setxkbmap`` wraps ``setxkbmap`` and defaults to ``en``.
+- ``ibus``: ``C-S-e`` emoji, ``C-S-u`` unicode, ``ibus-setup`` in terminal
+
+On X11 use ``xev`` to show keysym and keycode.
+Use ``ralt`` (etc/X11/xinitrc) as compose/ComposeKey/Multi_key for ``etc/X11/XCompose``
+
+On X11, ``showkey`` can't get a file descriptor referring to the console.
+``C-M-Fx`` to switch to real virtual terminal (VT).
+X11 uses one VT, e.g. F1: Use ``C-M-F1`` to go back to X11.
 
 Cleaning
 ========
@@ -137,9 +155,9 @@ Note for Windows: ``bash dotfiles/bin/restowdots`` only sets up vimfiles.
 Vim embeds Python and others and it has
 ``:term``:
 
-- ``[CTRL-w N]`` normal mode
-- ``[CTRL-w CTRL-w]`` switch window
-- ``[CTRL-w ""]`` paste ``"`` into term
+- ``[C-w N]`` normal mode
+- ``[C-w C-w]`` switch window
+- ``[C-w ""]`` paste ``"`` into term
 
 For Python and ``restructuredText`` (RST) I use
 
@@ -163,11 +181,11 @@ Therefore I use ``:term bash`` in vim to try solutions.
 
 Shortcuts:
 
-- copy/paste: ``C-M-c/v`` or ``C-M-x`` to enter ``urxvt-vim-scrollback``
+- copy/paste: ``C-M-c/v`` to copy/paste selected or ``C-M-x`` to enter ``urxvt-vim-scrollback``
 - edit command line with vim: ``ESC-v`` and ``ESC-:``
 - search:
-  ``CTRL-T`` for **fzf**
-  ``CTRL-g[f b t r h]`` `for git <https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236>`__
+  ``C-T`` for **fzf**
+  ``C-g[f b t r h]`` `for git <https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236>`__
 
 Commands:
 
@@ -178,7 +196,7 @@ Commands:
 CLI tools:
 
 - ``slock`` to lock screen via CLI
-- ``scrot`` to make screen shots via shortcuts ``M-s``, and ``M-u`` for current window.
+- ``scrot`` to make screen shots via shortcuts ``X-s``, and ``X-u`` for current window.
 - ``feh`` for images
 - ``ranger`` for files
 - ``w3m -dump <url>`` for text from URL
@@ -195,9 +213,9 @@ Window Manager: Xmonad
 I added little to the `defaults <https://xmonad.org/manpage.html>`__.
 See `xmonad.hs <https://github.com/rpuntaie/dotfiles/blob/master/etc/xmonad/xmonad.hs>`__.
 
-``M-s`` screenshot
-``M-u`` screenshot allowing seleection
-``M-S-p`` passmenu
+``X-s`` screenshot
+``X-u`` screenshot allowing seleection
+``X-S-p`` passmenu
 
 - no `display manager <https://wiki.archlinux.org/index.php/Display_manager>`__
 - ``startx`` defaults to ``xmonad``, but you could do ``WM=qtile startx`` to change WM

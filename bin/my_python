@@ -48,3 +48,5 @@ pip install --user scipy
 pip install --user statsmodels
 pip install --user seaborn
 
+pip install --user pynput
+
