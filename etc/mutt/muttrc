@@ -1,4 +1,4 @@
-set realname = "$NAME"
+set realname = "$REALNAME"
 
 # keep this line to avoid mailwizard from adding a new one
 # usrstuff: but change the home directory

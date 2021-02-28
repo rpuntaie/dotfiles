@@ -54,3 +54,5 @@ alias :e="$EDITOR"
 alias :q=exit
 alias wleech='wget -r -np -nc'
 alias ccm64='sudo ccm64'
+
+alias dc='docker-compose'

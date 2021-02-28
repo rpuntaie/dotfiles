@@ -15,25 +15,24 @@ _mine_one() {
 }
 
 _mine_one https://github.com/getmail6/ getmail6
+_mine_one https://github.com/rpuntaie/ ansible-arch-linux
+_mine_one https://github.com/rpuntaie/ rollarch
 _mine_one https://github.com/rpuntaie/ base128
 _mine_one https://github.com/rpuntaie/ blog
 _mine_one https://github.com/chcko/ chcko && git checkout develop
 _mine_one https://github.com/chcko/ chcko-r
-_mine_one https://github.com/rpuntaie/ econ && git checkout develop
+_mine_one https://github.com/econnet/ econ && git checkout develop
 _mine_one https://github.com/rpuntaie/ mailwizard && git checkout develop
 _mine_one https://github.com/rpuntaie/ pdfformulas
 _mine_one https://github.com/rpuntaie/ pdt
 _mine_one https://github.com/pyfca/ pyfca
 _mine_one https://github.com/rpuntaie/ remdups
-_mine_one https://github.com/rpuntaie/ resume
-_mine_one https://github.com/rpuntaie/ rollarch
-_mine_one https://github.com/rpuntaie/ rstdoc && git checkout develop
-_mine_one https://github.com/rpuntaie/ sphinxcontrib-thm
+_mine_one https://github.com/rstdoc/ rstdoc && git checkout develop
 _mine_one https://github.com/rpuntaie/ stpl
 _mine_one https://github.com/rpuntaie/ trans.vim
 _mine_one https://github.com/rpuntaie/ txdir
 _mine_one https://github.com/rpuntaie/ vim_py3_rst
 _mine_one https://github.com/rpuntaie/ rst2jira
-_mine_one https://github.com/mamchecker/ mamchecker
+_mine_one https://github.com/rpuntaie/ syncstart
 
 cd ~
