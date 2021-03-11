@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import scipy.io.wavfile as wavfile
+import noisereduce
+from noisereduce.utils import int16_to_float32, float32_to_int16
+
+def no_noise(wav,begin=0,end=1,out=None):
+  """Take --begin/-b - --end/-e sec as noise sample to remove noise of wav file.
+
+  Prepends 'nonoise' and saves.
+
+  aplay gopro.wav
+  nonoise gopro.wav
+  aplay nonoisegopro.wav
+
+  """
+  fs, data = wavfile.read(wav)
+  dta = int16_to_float32(data)
+  b,e = begin,end
+  noisy_part = dta[int(fs*b):int(fs*e)]
+  nonoisedata = noisereduce.reduce_noise(audio_clip=dta, noise_clip=noisy_part)#, verbose=True)
+  if out is None:
+    out = os.path.join(os.path.dirname(wav),'nonoise'+os.path.basename(wav))
+  wavfile.write(out,fs,float32_to_int16(nonoisedata))
+
+main = no_noise
+if __name__ == "__main__":
+  import argparse
+  parser = argparse.ArgumentParser(description=main.__doc__)
+  parser.add_argument('infile',help='Wav file')
+  parser.add_argument('-o','--out',dest='out',action='store', default=None)
+  parser.add_argument('-b','--begin',dest='begin',action='store', default=0)
+  parser.add_argument('-e','--end',dest='end',action='store', default=1)
+  args = parser.parse_args()
+  no_noise(args.infile,args.begin,args.end,args.out)

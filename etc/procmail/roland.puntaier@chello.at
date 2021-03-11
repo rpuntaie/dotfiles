@@ -1,0 +1,59 @@
+MAILDIR=$MAILDIR/roland.puntaier@chello.at
+DEFAULT=\$MAILDIR/INBOX
+
+:0
+* ^From.*@.*github\.com
+_/git/
+
+:0
+* ^List-I.*(vim_dev|vim_use)
+_/vim/
+
+:0
+* ^List_I.*@arch-
+_/arch/
+
+:0
+* ^List-I.*Boost
+_/boost/
+
+:0
+* ^List-I.*LFS
+_/LFS/
+
+:0
+* ^List-I.*python
+_/python/
+
+:0
+* ^List-I.*sphinx-dev
+_/sphinx/
+
+:0
+* ^From.*@.*paypal
+_/paypal/
+
+#social
+
+:0
+* ^From.*@.*couchsurfing\.com
+_/couchsurfing/
+
+:0
+* ^From.*@.*linkedin
+_/linkedin/
+
+:0
+* ^From.*@.*twitter
+_/twitter/
+
+:0
+* ^From.*@.*facebook
+_/facebook/
+
+:0
+* ^From.*@.*youtube\.com
+_/youtube/
+
+:0
+\$DEFAULT/
