@@ -1,5 +1,4 @@
-MAILDIR=$MAILDIR/roland.puntaier@gmail.com
-DEFAULT=\$MAILDIR/INBOX
+MAILDIR=/home/roland/Mail/roland.puntaier@gmail.com
 
 :0
 * ^From.*@.*youtube\.com
@@ -18,4 +17,4 @@ _/git/
 _/getmail/
 
 :0
-\$DEFAULT/
+INBOX/

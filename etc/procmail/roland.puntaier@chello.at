@@ -1,5 +1,4 @@
-MAILDIR=$MAILDIR/roland.puntaier@chello.at
-DEFAULT=\$MAILDIR/INBOX
+MAILDIR=/home/roland/Mail/roland.puntaier@chello.com
 
 :0
 * ^From.*@.*github\.com
@@ -56,4 +55,4 @@ _/facebook/
 _/youtube/
 
 :0
-\$DEFAULT/
+INBOX/

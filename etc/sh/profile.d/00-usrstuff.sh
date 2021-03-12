@@ -10,3 +10,6 @@ export REALNAME="Roland Puntaier"
 export EMAIL="roland.puntaier@gmail.com"
 export MYGPG="F85CB631327ED8DCD50C9FD3BC9A552643B86228"
 
+# mailwizard without notmuch call
+export MWNOTMUCHNEW=0
+

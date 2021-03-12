@@ -1,0 +1,44 @@
+#directly via getmail
+#getmail --rcfile=roland.puntaier@chello.at --getmaildir=/home/roland/.local/etc/getmail
+
+[retriever]
+type = SimplePOP3SSLRetriever
+server = mail.upcmail.at
+username = roland.puntaier@chello.at
+port = 995
+password_command = ("pass", "magenta.at/roland.puntaier@chello.at")
+
+# #MWNOTMUCHNEW=1 will call notmuch and afew to move mails to folders
+# [destination]
+# type = Maildir
+# path = /home/roland/Mail/roland.puntaier@chello.at/INBOX/
+
+# procmail moves mails to folder
+# else manually via e.g.
+# mv `rg -l From.*youtube.com` ../../_/youtube/cur/
+[destination]
+type = MDA_external
+path = /usr/bin/procmail
+arguments = ('-f', '%(sender)', '-m', '/home/roland/.local/etc/procmail/roland.puntaier@chello.at')
+
+[options]
+read_all = true
+delete = true
+#message_log = /home/roland/.local/var/log/getmail.log
+
+# #pacman -S spamassassin
+# [filter-1]
+# type = Filter_external
+# path = /usr/bin/vendor_perl/spamc
+# ignore_header_shrinkage = True
+#
+# #pacman -S clamav
+# [filter-2]
+# type = Filter_classifier
+# path = /usr/bin/clamscan
+# arguments = ("--stdout", "--no-summary",
+#     "--scan-mail", "--infected", "-")
+# exitcodes_drop = (1,)
+
+# vim: ft=conf
+

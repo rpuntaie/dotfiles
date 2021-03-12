@@ -76,10 +76,10 @@ _dotfiles_email(){
     ~/.local/bin/ghi rpuntaie/mailwizard ~/.local
     #setup email usrstuff:
     rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
-    a=roland.puntaier@chello.at mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
-    a=roland.puntaier@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
-    a=puntaier.roland@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add
-    a=dontbite71@gmail.com mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
+    a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
+    a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
+    a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add
+    a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
   fi
 }
 

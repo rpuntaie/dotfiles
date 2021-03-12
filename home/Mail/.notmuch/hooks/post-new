@@ -7,4 +7,6 @@ for fldr in $FOLDERS; do
 done
 
 afew -mn &>/dev/null
-afew -tn &>/dev/null
+
+# this is too slow:
+#afew -tn &>/dev/null
