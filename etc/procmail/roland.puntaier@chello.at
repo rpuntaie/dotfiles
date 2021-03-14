@@ -5,27 +5,27 @@ MAILDIR=/home/roland/Mail/roland.puntaier@chello.at
 _/git/
 
 :0
-* ^List-I.*(vim_dev|vim_use)
+* ^From.*(vim_dev|vim_use)
 _/vim/
 
 :0
-* ^List_I.*@arch-
+* ^From.*@arch-
 _/arch/
 
 :0
-* ^List-I.*Boost
+* ^From.*Boost
 _/boost/
 
 :0
-* ^List-I.*LFS
+* ^From.*LFS
 _/LFS/
 
 :0
-* ^List-I.*python
+* ^From.*python
 _/python/
 
 :0
-* ^List-I.*sphinx-dev
+* ^From.*sphinx-dev
 _/sphinx/
 
 :0
