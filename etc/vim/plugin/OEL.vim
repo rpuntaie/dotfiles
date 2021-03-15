@@ -12,8 +12,8 @@ try:
   oel_listen_space = Listener(
       on_press=oel_on_press_space,
       on_release=oel_on_release_space)
-except ModuleNotFoundError as e:
-  print("OEL plugin: ", e)
+except Exception as e:
+  pass #print("OEL plugin: ", e)
 EOF
 
 if exists("g:oelisspacepressed")

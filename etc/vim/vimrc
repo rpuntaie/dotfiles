@@ -878,9 +878,10 @@ nnoremap <silent> <leader>vd :vert botright term dub run drepl<CR><C-W><C-W>
 
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-P>j
-nnoremap <leader>mm yiw<C-W><C-W>echo $<C-W>""<CR><C-W><C-P>
+nnoremap <leader>mm 0dwyy<C-W><C-W><C-W>""<C-W><C-P>uj
+nnoremap <leader>me yiw<C-W><C-W>echo $<C-W>""<CR><C-W><C-P>
 vnoremap <leader>m y<C-W><C-W><C-W>""<CR><C-W><C-P>gv<ESC>j
-vnoremap <leader>mm y<C-W><C-W>echo <C-W>""<CR><C-W><C-P>gv<ESC>
+vnoremap <leader>me y<C-W><C-W>echo <C-W>""<CR><C-W><C-P>gv<ESC>
 """ `,hh`: haskell block
 vnoremap <leader>hh y<C-W><C-W>:{<CR><C-W>""<CR>:}<CR><C-W><C-W>gv<ESC>j
 nnoremap <leader>hh yiw<C-W><C-W>:hoogle <C-W>""<CR><C-W><C-W>

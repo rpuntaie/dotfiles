@@ -9,28 +9,24 @@ _/git/
 _/vim/
 
 :0
-* ^From.*@arch-
+* ^From.*@.*archlinux.org
 _/arch/
 
 :0
-* ^From.*Boost
+* ^From.*@.*boost.org
 _/boost/
 
 :0
-* ^From.*LFS
+* ^From.*@.*linuxfromscratch.org
 _/LFS/
 
 :0
-* ^From.*python
+* ^From.*@.*python.org
 _/python/
 
 :0
 * ^From.*sphinx-dev
 _/sphinx/
-
-:0
-* ^From.*@.*paypal
-_/paypal/
 
 #social
 
@@ -39,7 +35,7 @@ _/paypal/
 _/couchsurfing/
 
 :0
-* ^From.*@.*linkedin
+* ^From.*@.*linkedin.com
 _/linkedin/
 
 :0

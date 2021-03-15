@@ -1,6 +1,5 @@
 # Login shell configuration (sourced AFTER interactive configuration)
 # ------------------------------------------------------------------------------
-# SSH/TMUX {{{
 
 # If logged in via SSH, use tmux:
 if [ -n "$SSH_CONNECTION" ] \
