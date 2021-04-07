@@ -271,6 +271,8 @@ let g:vebugger_leader='`'
 let g:vebugger_view_source_cmd='edit'
 "rpuntaie/vim-barbaric
 let g:barbaric_default = 'xkb:us::eng'
+"scrooloose/nerdcommenter
+let g:NERDSpaceDelims=1
 
 if match(&runtimepath,'Coc') == -1
   let g:CocOverDeoplete=0
@@ -1054,6 +1056,19 @@ dig @c 658 "ʒ vd postalveolar fricative
 dig @R 641 "ʁ vd uvular fricative
 dig @X 967 "χ vl uvular fricative
 dig @l 654 "ʎ italian gli, castillian ll
+
+dig Ck 9812 "♔
+dig Cq 9813 "♕
+dig Cr 9814 "♖
+dig Cb 9815 "♗
+dig Cn 9816 "♘
+dig Cp 9817 "♙
+dig CK 9818 "♚
+dig CQ 9819 "♛
+dig CR 9820 "♜
+dig CB 9821 "♝
+dig CN 9822 "♞
+dig CP 9823 "♟︎
 
 function! ShowHex()
   let p = getpos('.')
