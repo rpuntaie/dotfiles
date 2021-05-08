@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+rand=$(tr -dc 'a-f0-9' < /dev/urandom | head -c 8)
+
+args=()
+while getopts "s:e:d:cnwl" opt
+do case "$opt" in
+    s) slice="$OPTARG";;
+    e) args+=("--setenv=$OPTARG");;
+    d) args+=("--working-directory=$OPTARG");;
+    c) args+=("--scope");;
+    n) args+=("--no-block");;
+    w) args+=("--wait");;
+    l) args+=("-p CPUQuota=10%");;
+    *) shift;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "$slice" ]; then
+    slice=app
+fi
+
+exec systemd-run \
+    --user \
+    --collect \
+    --slice="$slice" \
+    --unit="$slice-$1-$rand" \
+    ${args[@]} -- "$@"

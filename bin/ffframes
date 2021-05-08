@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# find the number of frames in a movie clip
+FMAYBE=$(ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 $1)
+let FMAYBE=$FMAYBE+1
+FEMPTY="-"
+while [ -n "$FEMPTY" ] ; do
+  let FMAYBE=$FMAYBE-1
+  echo "Trying $FMAYBE"
+  FEMPTY=$(ffmpeg -i $1 -vf select="between(n\,$FMAYBE\,$FMAYBE)" -vsync 0 /tmp/fmaybe%d.png 2>&1 | grep 'empty')
+done
+echo "Succeeds: $FMAYBE"

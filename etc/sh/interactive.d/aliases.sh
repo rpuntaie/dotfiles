@@ -4,7 +4,6 @@
 #alias urxvt='urxvt -bg black -fg white'
 #alias xterm='xterm -fa monaco -fs 10 -bg black -fg white'
 
-# Generic aliases:
 alias r='ranger'
 alias cp='cp -i'
 alias grep='grep --color=auto'
@@ -15,7 +14,11 @@ alias ls='ls -A --color=auto --quoting-style=literal'
 alias lt='ls -tr'
 alias mv='mv -i'
 alias ol='chromium "$( lt | tail -n 1)"'
-alias chrome='chromium'
+alias c='chromium'
+alias o='open'
+alias dc='docker-compose'
+alias t='mpv'
+alias trash='gio trash'
 
 alias pipiu='pip install --user'
 alias pipui='sudo pip uninstall'
@@ -55,4 +58,3 @@ alias :q=exit
 alias wleech='wget -r -np -nc'
 alias ccm64='sudo ccm64'
 
-alias dc='docker-compose'
