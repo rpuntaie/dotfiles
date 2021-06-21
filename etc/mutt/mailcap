@@ -1,6 +1,7 @@
 text/plain; $EDITOR %s ;
 text/x-diff;        $EDITOR '%s'
 text/x-shellscript; $EDITOR '%s'
+message/rfc822; $EDITOR '%s'
 text/html; xdg-open %s &>/dev/null ; nametemplate=%s.html
 application/zip;    file-roller '%s'
 image/*; feh %s ;

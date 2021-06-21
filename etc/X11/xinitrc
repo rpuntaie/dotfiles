@@ -49,5 +49,9 @@ if [[ $WM == xmonad ]]; then
   feh --bg-scale /usr/share/backgrounds/gnome/Dark_Ivy.jpg
 fi
 
+if [[ -x $HOME/.xbindkeysrc ]]; then
+  xbindkeys
+fi
+
 exec $WM
 
