@@ -66,7 +66,7 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-let g:CocOverDeoplete=1
+let g:CocOverDeoplete=0
 function! s:Deinplugins()
     "download
     call dein#add('bogado/file-line') " open <file>:<line>
