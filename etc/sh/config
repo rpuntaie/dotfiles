@@ -15,8 +15,8 @@ if [ "$TERM" = "rxvt-unicode-256color" ]; then
 fi
 
 # Default:
-export EDITOR='/usr/bin/vim'
-export VISUAL='/usr/bin/vim'
+export EDITOR='/usr/bin/nvim'
+export VISUAL='/usr/bin/nvim'
 export PAGER='/usr/bin/less'
 export BROWSER='/usr/bin/firefox'
 export MANPAGER='nvim +Man! -u /dev/null'
