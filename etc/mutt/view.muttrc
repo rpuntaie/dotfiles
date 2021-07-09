@@ -190,7 +190,7 @@ set abort_noattach = ask-yes
 set attach_keyword = "\\<attach(|ed|ments?)\\>"
 
 # Editor
-set editor = "vim -c 'normal! }' -c 'redraw' -c'setl ft=mail spell tw=100 cc=101 fo=ajqrw1'"
+set editor = "nvim -c 'normal! }' -c 'redraw' -c'setl ft=mail spell tw=100 cc=101 fo=ajqrw1'"
 set text_flowed
 set reflow_text
 set reflow_space_quotes
