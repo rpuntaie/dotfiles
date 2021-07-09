@@ -9,7 +9,8 @@ URxvt.urgentOnBell: True
 URxvt.cursorBlink: False
 
 ! Extensions
-URxvt.perl-ext-common: default,url-select,selection,vim-scrollback
+urxvt*perl-lib: ~/.local/lib/urxvt
+URxvt.perl-ext-common: default,url-select,selection,vim-scrollback,52-osc
 urxvt.vim-scrollback: C-M-x
 URxvt.keysym.M-u: perl:url-select:select_next
 
