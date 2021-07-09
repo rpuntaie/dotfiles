@@ -109,6 +109,10 @@ _vim_dein_plugin(){
   vim "+call dein#update()" "+qall"
 }
 
+_tmux_plugin(){
+git clone https://github.com/tmux-plugins/tpm $XDG_STATE_HOME/tmux/plugins/tpm
+}
+
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
@@ -126,7 +130,8 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _perl_repl
     _config_postgres
     go get -u github.com/motemen/gore/cmd/gore
-    _vim_dein_plugin()
+    _vim_dein_plugin
+    _tmux_plugin
   fi
   echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."

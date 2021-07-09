@@ -31,7 +31,7 @@ xrdb -load $XDG_CONFIG_HOME/X11/Xresources
 # dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
 
 #-d daemonize, -r replace existing daemon
-ibus-daemon -d -r &
+#### this seems to interfere with setxkbmap ### ibus-daemon -d -r &
 #switch with (works with pluma)
 #ibus engine libpinyin
 #ibus engine xkb:us::eng
