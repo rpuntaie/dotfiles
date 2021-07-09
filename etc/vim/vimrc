@@ -165,6 +165,7 @@ endif
 ""| |barbaric-functions| (ibus) input method only in insert mode
   call dein#add('rpuntaie/vim-barbaric',{'if':'!has("nvim")','merged':0})
   call dein#add('goerz/jupytext.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('ojroques/vim-oscyank',{'if':'!has("nvim")','merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
 "'editorconfig/editorconfig-vim'
