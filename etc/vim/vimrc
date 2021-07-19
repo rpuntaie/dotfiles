@@ -72,104 +72,105 @@ let g:CocOverDeoplete=0
 endif
 
 function! s:Deinplugins()
-  call dein#add('bogado/file-line',{'if':'!has("nvim")','merged':0}) " open <file>:<line>
-  call dein#add('chikamichi/mediawiki.vim',{'if':'!has("nvim")','merged':0}) " syntax .mw .wiki .mediawiki
+  let l:nn = !has("nvim")
+  call dein#add('bogado/file-line',{'if':l:nn,'merged':0}) " open <file>:<line>
+  call dein#add('chikamichi/mediawiki.vim',{'if':l:nn,'merged':0}) " syntax .mw .wiki .mediawiki
 ""| |plugin/02tlib.vim|  TScratch TBrowseOutput
   call dein#add('tomtom/tlib_vim',{'merged':0})
 ""| |quickfix-reflector| enable editing the quickfix to change more files
-  call dein#add('stefandtw/quickfix-reflector.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('stefandtw/quickfix-reflector.vim',{'if':l:nn,'merged':0})
 ""| |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf','merged':0 })
 ""| |bufexplorer| still needed to delete/copy
   call dein#add('jlanzarotta/bufexplorer',{'merged':0})
 ""| |sleuth| detect tab settings heuristically, :Sleuth
-  call dein#add('tpope/vim-sleuth',{'if':'!has("nvim")','merged':0})
+  call dein#add('tpope/vim-sleuth',{'if':l:nn,'merged':0})
 ""| |:Tabularize| format (,aa)
-  call dein#add('godlygeek/tabular',{'if':'!has("nvim")','merged':0})
+  call dein#add('godlygeek/tabular',{'if':l:nn,'merged':0})
 ""| |sandwich-keymappings| s{adr} dasX da<wait>s
 "   https://github.com/machakann/vim-sandwich/issues/62
-  call dein#add('machakann/vim-sandwich',{'if':'!has("nvim")','merged':0})
+  call dein#add('machakann/vim-sandwich',{'if':l:nn,'merged':0})
 ""| |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
-  call dein#add('Lokaltog/vim-easymotion',{'if':'!has("nvim")','merged':0}) " <leader><leader>f
+  call dein#add('Lokaltog/vim-easymotion',{'if':l:nn,'merged':0}) " <leader><leader>f
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
-  call dein#add('andymass/vim-matchup',{'if':'!has("nvim")','merged':0})
+  call dein#add('andymass/vim-matchup',{'if':l:nn,'merged':0})
 "   indentation guides
   "call dein#add('nathanaelkane/vim-indent-guides',{'merged':0})
-  call dein#add('thaerkh/vim-indentguides',{'if':'!has("nvim")','merged':0})
+  call dein#add('thaerkh/vim-indentguides',{'if':l:nn,'merged':0})
 
 if g:CocOverDeoplete
-  call dein#add('neoclide/coc.nvim', {'if':'!has("nvim")','merged':0, 'build': 'yarn install --frozen-lockfile'})
+  call dein#add('neoclide/coc.nvim', {'if':l:nn,'merged':0, 'build': 'yarn install --frozen-lockfile'})
 else
   "UpdateRemotePlugins when switching
-  call dein#add('Shougo/deoplete.nvim',{'if':'!has("nvim")','merged':0})
+  call dein#add('Shougo/deoplete.nvim',{'if':l:nn,'merged':0})
   if !has('nvim')
     call dein#add('roxma/nvim-yarp',{'merged':0})
     call dein#add('roxma/vim-hug-neovim-rpc',{'merged':0})
   endif
   "deoplete sources
-  call dein#add('prabirshrestha/vim-lsp',{'if':'!has("nvim")','merged':0})
-  call dein#add('mattn/vim-lsp-settings',{'if':'!has("nvim")','merged':0})
-  call dein#add('lighttiger2505/deoplete-vim-lsp',{'if':'!has("nvim")','merged':0})
-  call dein#add('Shougo/neoinclude.vim',{'if':'!has("nvim")','merged':0})
-  call dein#add('Shougo/deoplete-clangx',{'if':'!has("nvim")','merged':0})
-  call dein#add('davidhalter/jedi',{'if':'!has("nvim")','merged':0})
-  call dein#add('deoplete-plugins/deoplete-jedi',{'if':'!has("nvim")','merged':0})
+  call dein#add('prabirshrestha/vim-lsp',{'if':l:nn,'merged':0})
+  call dein#add('mattn/vim-lsp-settings',{'if':l:nn,'merged':0})
+  call dein#add('lighttiger2505/deoplete-vim-lsp',{'if':l:nn,'merged':0})
+  call dein#add('Shougo/neoinclude.vim',{'if':l:nn,'merged':0})
+  call dein#add('Shougo/deoplete-clangx',{'if':l:nn,'merged':0})
+  call dein#add('davidhalter/jedi',{'if':l:nn,'merged':0})
+  call dein#add('deoplete-plugins/deoplete-jedi',{'if':l:nn,'merged':0})
 endif
 
   "snippets
 ""| |UltiSnips| snippets
-  call dein#add('SirVer/ultisnips',{'if':'!has("nvim")','merged':0})
-  call dein#add('honza/vim-snippets',{'if':'!has("nvim")','merged':0})
+  call dein#add('SirVer/ultisnips',{'if':l:nn,'merged':0})
+  call dein#add('honza/vim-snippets',{'if':l:nn,'merged':0})
   "languages
   call dein#add('sheerun/vim-polyglot',{'merged':0})
-  call dein#add('neovimhaskell/haskell-vim',{'if':'!has("nvim")','merged':0})
-  call dein#add('Chiel92/vim-autoformat',{'if':'!has("nvim")','merged':0}) " :Autoformat
-  call dein#add('metakirby5/codi.vim',{'if':'!has("nvim")','merged':0}) " :Codi :Codi!
+  call dein#add('neovimhaskell/haskell-vim',{'if':l:nn,'merged':0})
+  call dein#add('Chiel92/vim-autoformat',{'if':l:nn,'merged':0}) " :Autoformat
+  call dein#add('metakirby5/codi.vim',{'if':l:nn,'merged':0}) " :Codi :Codi!
 ""| |AleToggle| linting (:ALEToggle)
-  call dein#add('w0rp/ale',{'if':'!has("nvim")','merged':0})
+  call dein#add('w0rp/ale',{'if':l:nn,'merged':0})
     "python
 ""| |vim_py3_rst| python and rst helpers
-  call dein#add('rpuntaie/vim_py3_rst',{'if':'!has("nvim")','merged':0})
+  call dein#add('rpuntaie/vim_py3_rst',{'if':l:nn,'merged':0})
     "call dein#add('python-mode/python-mode',{'merged':0})
 ""| |Nvim-R-use| \rf \rq \d ... in R file
-  call dein#add('jalvesaq/Nvim-R',{'if':'!has("nvim")','merged':0})
+  call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
 ""| |vimproc-commands| asynchronous execution
-  call dein#add('Shougo/vimproc.vim', {'if':'!has("nvim")','build': 'make','merged':0})
+  call dein#add('Shougo/vimproc.vim', {'if':l:nn,'build': 'make','merged':0})
 ""| |vebugger-gdb| :VBGstartGDB, ` for leader
-  call dein#add('idanarye/vim-vebugger',{'if':'!has("nvim")','merged':0})
+  call dein#add('idanarye/vim-vebugger',{'if':l:nn,'merged':0})
 ""| |Vimspector| <F5> (needs .vimspector.json)
-  call dein#add('puremourning/vimspector',{'if':'!has("nvim")','merged':0})
+  call dein#add('puremourning/vimspector',{'if':l:nn,'merged':0})
 ""| |vimtex-default-mappings| for latex
-  call dein#add('lervag/vimtex',{'if':'!has("nvim")','merged':0})
+  call dein#add('lervag/vimtex',{'if':l:nn,'merged':0})
 ""| |makeshift| [:MM] builds the current project
-  call dein#add('johnsyweb/vim-makeshift',{'if':'!has("nvim")','merged':0}) " Build
+  call dein#add('johnsyweb/vim-makeshift',{'if':l:nn,'merged':0}) " Build
 ""| |NERDTreeMappings| [sn] file browser
-  call dein#add('scrooloose/nerdtree',{'if':'!has("nvim")','merged':0})
-  call dein#add('tyru/open-browser.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('scrooloose/nerdtree',{'if':l:nn,'merged':0})
+  call dein#add('tyru/open-browser.vim',{'if':l:nn,'merged':0})
     "commenting
 ""| |NERDCommenterFunctionality| ,c{ cnmisy$Aalbu}
-  call dein#add('scrooloose/nerdcommenter',{'if':'!has("nvim")','merged':0})
+  call dein#add('scrooloose/nerdcommenter',{'if':l:nn,'merged':0})
     "git tools
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
-  call dein#add('tpope/vim-fugitive',{'if':'!has("nvim")','merged':0})
+  call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
 ""| |gitv-usage| :Gitv[!]
-  call dein#add('gregsexton/gitv',{'if':'!has("nvim")','merged':0}) " needs fugitive
+  call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
     "other vcs
 ""| |vcscommand-mappings| works not only for git (<leader>z)
-  call dein#add('vim-scripts/vcscommand.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('vim-scripts/vcscommand.vim',{'if':l:nn,'merged':0})
     "dictionary
-  call dein#add('mattn/webapi-vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('mattn/webapi-vim',{'if':l:nn,'merged':0})
 ""| |trans-usage| ,tt
-  call dein#add('echuraev/translate-shell.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('echuraev/translate-shell.vim',{'if':l:nn,'merged':0})
 ""| mathematic.vim (<leader>lm)
-  call dein#add('Rykka/mathematic.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('Rykka/mathematic.vim',{'if':l:nn,'merged':0})
 ""| |unicode-plugin| :UnicodeTable i: <C-X><C-G>
-  call dein#add('chrisbra/unicode.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('chrisbra/unicode.vim',{'if':l:nn,'merged':0})
 ""| |barbaric-functions| (ibus) input method only in insert mode
-  call dein#add('rpuntaie/vim-barbaric',{'if':'!has("nvim")','merged':0})
-  call dein#add('goerz/jupytext.vim',{'if':'!has("nvim")','merged':0})
-  call dein#add('ojroques/vim-oscyank',{'if':'!has("nvim")','merged':0})
+  call dein#add('rpuntaie/vim-barbaric',{'if':l:nn,'merged':0})
+  call dein#add('goerz/jupytext.vim',{'if':l:nn,'merged':0})
+  call dein#add('ojroques/vim-oscyank',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
 "'editorconfig/editorconfig-vim'
@@ -179,7 +180,7 @@ endif
 "'tpope/vim-eunuch'
 "'severin-lemaignan/vim-minimap'
 "ctags based 'majutsushi/tagbar' # replaced by vista
-  call dein#add('liuchengxu/vista.vim',{'if':'!has("nvim")','merged':0})
+  call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
 endfunction
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
@@ -922,6 +923,9 @@ map <leader>aa :Tab/
 "scrooloose/nerdtree
 """ `sn`: NERDTreeToggle
 nmap sn :NERDTreeToggle<CR>
+""" `sl`: Vista finder using fzf
+nmap sl :Vista finder<CR>
+"": `:CD` cd to root of repos
 command! CD exe 'cd '.system('git rev-parse --show-toplevel')
 
 if g:CocOverDeoplete
