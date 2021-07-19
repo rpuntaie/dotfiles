@@ -66,9 +66,12 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
+let g:CocOverDeoplete=1
+if has("nvim")
 let g:CocOverDeoplete=0
+endif
+
 function! s:Deinplugins()
-  let l:nn=!has('nvim')
   call dein#add('bogado/file-line',{'if':'!has("nvim")','merged':0}) " open <file>:<line>
   call dein#add('chikamichi/mediawiki.vim',{'if':'!has("nvim")','merged':0}) " syntax .mw .wiki .mediawiki
 ""| |plugin/02tlib.vim|  TScratch TBrowseOutput
@@ -106,6 +109,7 @@ else
   endif
   "deoplete sources
   call dein#add('prabirshrestha/vim-lsp',{'if':'!has("nvim")','merged':0})
+  call dein#add('mattn/vim-lsp-settings',{'if':'!has("nvim")','merged':0})
   call dein#add('lighttiger2505/deoplete-vim-lsp',{'if':'!has("nvim")','merged':0})
   call dein#add('Shougo/neoinclude.vim',{'if':'!has("nvim")','merged':0})
   call dein#add('Shougo/deoplete-clangx',{'if':'!has("nvim")','merged':0})
@@ -275,7 +279,7 @@ let g:barbaric_default = 'xkb:us::eng'
 "scrooloose/nerdcommenter
 let g:NERDSpaceDelims=1
 
-if match(&runtimepath,'Coc') == -1
+if match(&runtimepath,'coc') == -1
   let g:CocOverDeoplete=0
 endif
 if g:CocOverDeoplete
