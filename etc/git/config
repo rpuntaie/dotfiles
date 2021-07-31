@@ -150,6 +150,11 @@
   upv      = pull --rebase -v
   wch      = whatchanged -p --abbrev-commit --pretty=medium
   squash   = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+	pandiff = difftool -t pandiff -y
 # vim: ft=conf
 [init]
 	defaultBranch = main
+[difftool "pandiff"]
+	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
+[credential]
+	helper = !pass-git-helper $@

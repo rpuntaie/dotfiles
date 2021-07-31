@@ -13,6 +13,7 @@ npm -g install npm
 npm -g install npm-check-updates
 npm -g install js-beautify
 npm -g install wikit
+npm -g install pandiff
 #npm -g install auto-changelog
 #npm -g install @okta/oidc-middleware
 #npm -g install @okta/okta-sdk-nodej

@@ -821,7 +821,7 @@ endif
 """ `gx`: open browser (normally firefox) and search
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-""" `,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinsQQlpHpJuliaJJava...
+""" `,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinssQlpHpJuliaJava...
 "exit
 nnoremap <silent> <leader>v :vert botright term<CR><C-W><C-W>
 "exit
@@ -861,9 +861,12 @@ nnoremap <silent> <leader>vjj :vert botright term jshell<CR><C-W><C-W>
 "quit
 nnoremap <silent> <leader>vl :vert botright term planck<CR><C-W><C-W>
 "(quit)
-nnoremap <silent> <leader>vll :vert botright term lein repl<CR><C-W><C-W>
+nnoremap <silent> <leader>vll :vert botright term clj<CR><C-W><C-W>
+#nnoremap <silent> <leader>vll :vert botright term lein repl<CR><C-W><C-W>
 "C-d
 nnoremap <silent> <leader>vn :vert botright term node<CR><C-W><C-W>
+":q :a builtins
+nnoremap <silent> <leader>vnn :vert botright term nix repl<CR><C-W><C-W>
 "help doc quit
 nnoremap <silent> <leader>vo :vert botright term octave<CR><C-W><C-W>
 "C-c
