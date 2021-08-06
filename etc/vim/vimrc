@@ -862,7 +862,6 @@ nnoremap <silent> <leader>vjj :vert botright term jshell<CR><C-W><C-W>
 nnoremap <silent> <leader>vl :vert botright term planck<CR><C-W><C-W>
 "(quit)
 nnoremap <silent> <leader>vll :vert botright term clj<CR><C-W><C-W>
-#nnoremap <silent> <leader>vll :vert botright term lein repl<CR><C-W><C-W>
 "C-d
 nnoremap <silent> <leader>vn :vert botright term node<CR><C-W><C-W>
 ":q :a builtins
