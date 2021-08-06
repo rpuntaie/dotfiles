@@ -156,3 +156,5 @@
 	defaultBranch = main
 [difftool "pandiff"]
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
+[credential]
+	helper = /home/roland/.local/bin/git_credentials_from_pass $@
