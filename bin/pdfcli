@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+HTMLF=`mktemp --suffix .html`
+echo "$HTMLF"
+pdftohtml "$1" "$HTMLF"
+w3m "$HTMLF"

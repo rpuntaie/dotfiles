@@ -1,13 +1,15 @@
 text/plain; $EDITOR %s ;
-text/x-diff;        $EDITOR '%s'
-text/x-shellscript; $EDITOR '%s'
-message/rfc822; $EDITOR '%s'
-text/html; xdg-open %s &>/dev/null ; nametemplate=%s.html
+text/x-diff;        $EDITOR '%s' ;
+text/x-shellscript; $EDITOR '%s' ;
+message/rfc822; $EDITOR '%s' ;
+text/html; xdg-open %s &>/dev/null ; nametemplate=%s.html ;
+text/html; w3m -I %{charset} -T text/html; copiousoutput ;
 application/zip;    file-roller '%s'
-image/*; feh %s ;
-video/*; setsid mpv --quiet %s &;
-text/calendar; mutt-ics; copiousoutput
-application/ics; mutt-ics; copiousoutput
-application/pdf; xdg-open %s &>/dev/null ;
+image/*; feh '%s' ;
+video/*; setsid mpv --quiet '%s' & ;
+text/calendar; mutt-ics; copiousoutput ;
+application/ics; mutt-ics; copiousoutput ;
+application/pdf; xdg-open '%s' &>/dev/null ;
+application/pdf; pdfcli '%s' ;
 application/pgp-encrypted; gpg -d '%s' ;
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s'
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s' ;
