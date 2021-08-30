@@ -10,6 +10,9 @@ video/*; setsid mpv --quiet '%s' & ;
 text/calendar; mutt-ics; copiousoutput ;
 application/ics; mutt-ics; copiousoutput ;
 application/pdf; xdg-open '%s' &>/dev/null ;
-application/pdf; pdfcli '%s' ;
+application/pdf; pdftotext -layout '%s' -; copiousoutput ;
+#application/pdf; pdfcli '%s';
 application/pgp-encrypted; gpg -d '%s' ;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s' ;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; pandoc -f docx -t rst; copiousoutput ;
+application/vnd.oasis.opendocument.text; pandoc --from odt --to rst %s; copiousoutput
