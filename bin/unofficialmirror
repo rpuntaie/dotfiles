@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+: '
+
+example:
+    unofficialmirror https://192.168.1.108:8585/custom.db
+
+PKGDB=http://192.168.1.108:8585/custom.db
+
+'
+
+PKGDB="$1"
+curl -O $PKGDB
+for p in $(unofficialdb $PKGDB); do
+curl -O ${PKGDB%/*}/$p
+done
