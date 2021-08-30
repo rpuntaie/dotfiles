@@ -1,18 +1,17 @@
 text/plain; $EDITOR %s ;
-text/x-diff;        $EDITOR '%s' ;
+text/x-diff; $EDITOR '%s' ;
 text/x-shellscript; $EDITOR '%s' ;
 message/rfc822; $EDITOR '%s' ;
-text/html; xdg-open %s &>/dev/null ; nametemplate=%s.html ;
+text/html; xdg-open %s &>/dev/null ; nametemplate=%s.html ;  test=test -n "$DISPLAY"
 text/html; w3m -I %{charset} -T text/html; copiousoutput ;
 application/zip;    file-roller '%s'
 image/*; feh '%s' ;
 video/*; setsid mpv --quiet '%s' & ;
 text/calendar; mutt-ics; copiousoutput ;
 application/ics; mutt-ics; copiousoutput ;
-application/pdf; xdg-open '%s' &>/dev/null ;
+application/pdf; xdg-open '%s' &>/dev/null ; test=test -n "$DISPLAY"
 application/pdf; pdftotext -layout '%s' -; copiousoutput ;
-#application/pdf; pdfcli '%s';
 application/pgp-encrypted; gpg -d '%s' ;
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s' ;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice '%s' ;  test=test -n "$DISPLAY"
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; pandoc -f docx -t rst; copiousoutput ;
 application/vnd.oasis.opendocument.text; pandoc --from odt --to rst %s; copiousoutput
