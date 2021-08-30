@@ -54,6 +54,7 @@ _dotfiles_nodejs(){
 }
 
 _dotfiles_scheme(){
+  #https://pkgs.racket-lang.org/
   raco pkg install scheme-lib
   raco pkg install r5rs-lib
   raco pkg install cext-lib
@@ -132,11 +133,14 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     go get -u github.com/motemen/gore/cmd/gore
     _vim_dein_plugin
     _tmux_plugin
+
   fi
   echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."
 fi
 
+#run manually
+#my_aur
 
 #rollarch interprets lines starting with "^#PKG: ", "^#REPO: " and "^#DFN: ".
 

@@ -39,3 +39,5 @@ export GPG_TTY=$(tty)
 #make cmake generate compile_commands.json
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
+#XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOMEDIR/.config}"
+CFGFILE=${CFGFILE:-$HOMEDIR/.config/$PKG.conf}

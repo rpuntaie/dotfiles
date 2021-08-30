@@ -2,5 +2,5 @@
 if [ "${1##*/}" == "$1" ]; then
     (cd $1 && echo "pulling... " && git pull)
 else
-    git clone "$1" "$2" || (cd ${1##*/} && echo "pulling... " && git pull)
+    git clone --recursive $1 $2 || (cd ${1##*/} && echo "pulling... " && git pull)
 fi

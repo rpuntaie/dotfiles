@@ -145,6 +145,8 @@ endif
   call dein#add('lervag/vimtex',{'if':l:nn,'merged':0})
 ""| |makeshift| [:MM] builds the current project
   call dein#add('johnsyweb/vim-makeshift',{'if':l:nn,'merged':0}) " Build
+""| |cmake| :CMake[Generate,Build,Install] c[gbi]
+  call dein#add('cdelledonne/vim-cmake',{'if':l:nn,'merged':0}) " Build
 ""| |NERDTreeMappings| [sn] file browser
   call dein#add('scrooloose/nerdtree',{'if':l:nn,'merged':0})
   call dein#add('tyru/open-browser.vim',{'if':l:nn,'merged':0})
@@ -245,6 +247,15 @@ let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
+"cdelledonne/vim-cmake
+function! s:CBDL()
+let g:cmake_build_dir_location='../'.fnamemodify(trim(fnamemodify(cmake#GetSourceDir(),':p'),'/',2),':t').'_build'
+endfunction
+nmap SG :call <SID>CBDL()<CR><Plug>(CMakeGenerate)
+nmap SB :call <SID>CBDL()<CR><Plug>(CMakeBuild)
+"nmap SI :call <SID>CBDL()<CR><Plug>(CMakeInstall)
+nmap SH :call <SID>CBDL()<CR><Plug>(CMakeSwitch)
+nmap SQ :call <SID>CBDL()<CR><Plug>(CMakeClose)
 "johnsyweb/vim-makeshift
 let g:makeshift_on_startup = 0
 let g:makeshift_on_bufread = 0
@@ -838,8 +849,8 @@ nnoremap <silent> <leader>vp :vert botright term re.pl<CR><C-W><C-W>
 nnoremap <silent> <leader>vg :vert botright term ghci<CR><C-W><C-W>
 ":help :quit
 nnoremap <silent> <leader>vgg :vert botright term gore<CR><C-W><C-W>
-".? .q
-nnoremap <silent> <leader>vc :vert botright term cling<CR><C-W><C-W>
+".? .q (root opens cling)
+nnoremap <silent> <leader>vc :vert botright term root<CR><C-W><C-W>
 "help; quit;
 nnoremap <silent> <leader>vcc :vert botright term csharp<CR><C-W><C-W>
 "help() q()

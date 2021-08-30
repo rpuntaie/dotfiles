@@ -26,7 +26,7 @@ MAPPINGS                                                           *myvimmaps*
 `,m[m]`: run[echo] in term (two windows: one of them term)
 `,s`: save current buffer
 `,tt`: google translate
-`,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinsQQlpHpJuliaJJava...
+`,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinssQlpHpJuliaJava...
 `,ww`: look up in wordnet (wn needed)
 `,{vv mv}`: vim eval
 `<C-n>`: NERDTreeToggle
@@ -45,6 +45,7 @@ MAPPINGS                                                           *myvimmaps*
 `sf` : fzf Files GFiles
 `sg` : fzf GFiles
 `sh`: fzf History
+`sl`: Vista finder using fzf
 `sn`: NERDTreeToggle
 `sp`: yank current file full path
 `sx`: syntax fromstart
@@ -56,7 +57,7 @@ MAPPINGS                                                           *myvimmaps*
 ==============================================================================
 ABBREVIATIONS                                                       *myplugins*
 
-`FENC # encoding: utf-8`
+`FENC # -*- coding: utf-8 -*-
 `FENV #!/usr/bin/env`
 `VIML # vim: ts=4 sw=4 sts=4 et noai nocin nosi inde=`
 `YY 20200711`
@@ -68,8 +69,11 @@ ABBREVIATIONS                                                       *myplugins*
 ==============================================================================
 COMMANDS                                                       *myvimcommands*
 
+`:CD` cd to root of repos
 `:E` same as `:e(dit)`
 `:F{Ff}` font size
+`:JJ` for `:Autoformat`
+`:J` for `:AutoformatLine`
 `:L` close window
 `:MM` build using Makeshift
 `:PrettyXML` format XML
@@ -78,6 +82,7 @@ COMMANDS                                                       *myvimcommands*
 `:SD` cd to current file
 `:SS` stpl template tag line with RST tag
 `:SW` search for word under cursor and place into quickfix list
+`:Sw` sudo write
 `:TD` execute .local/bin/todo to quickfix list
 `:TrimSpaces` accepts range
 `:VR` VimspectorReset
@@ -96,6 +101,7 @@ mathematic.vim (<leader>lm)
 |Vimspector| <F5> (needs .vimspector.json)
 |barbaric-functions| (ibus) input method only in insert mode
 |bufexplorer| still needed to delete/copy
+|cmake| :CMake[Generate,Build,Install] c[gbi]
 |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
 |fugitive-commands| :Gxxx like :Gdiffsplit
 |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
