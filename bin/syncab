@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+#syncab a b
+comm <(ls $1) <(ls $2) -23 | while read f; do cp -r $1/$f $2; done

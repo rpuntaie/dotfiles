@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+#yay
+sudo rm -rf ~/.local/var/cache/yay
+cd ~/tmp
+rm -rf yay
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+yaysno(){
+yay -S --noconfirm $1
+}
+
+#python 
+yaysno erfa
+yaysno python-pyerfa #fails
+yaysno python-astropy
+#j language
+yaysno j9-git
+#rust
+yaysno evcxr_repl
+#nix
+yaysno archlinux-nix 
+#
+yaysno mimeo
+#R
+yaysno rstudio-desktop-bin
+#WAF
+yaysno waf-git
+#dictionary
+yaysno wordnet-cli
+#urxvt
+yaysno urxvt-vim-scrollback-git
+yaysno powerline-console-fonts
+#php REPL
+yaysno psysh
+#lein (clojure projects)
+yaysno leiningen
+#planck (clojure repl)
+yaysno planck-git
+#C/C++
+##'cling' repl is part of 'root'
+#yaysno cling-git
+#yaysno cling-jupyter-git
+yaysno include-what-you-use
+
+#C++ packages
+yaysno conan
+##installs also from AUR
+#python-node-semver
+#python-patch-ng
+#python-pluginbase
+
+#printer
+yaysno brother-hl2250dn
+#Logitech MX Master 3 mouse
+yaysno logiops-git
+
+#docker explore image
+yaysno dive-git
+#docker create image
+yaysno dockerize-git
+
+#.editorconfig
+yaysno eclint
+#processing
+yaysno processing4
+
+#git repo stats
+yaysno git-quick-stats
+
+# skype
+yaysno skypeforlinux-preview-bin
+
+# phonetic analysis
+# yaysno praat
+
+#build fast with tmpfs
+yaysno clean-chroot-manager
+
+#address book for mutt
+yaysno abook
+#show vcalendar attachment
+yaysno vcal
+
+#clang Build EAR
+#yaysno bear-git
+
+
+# # need multilib
+# openmodelica-git # modelica language
+# quartus-free # for Altera FPGA
+# intel-sde # Intel Software Development Emulator
+# microchip-mplabx-bin # https://aur.archlinux.org/microchip-mplabx-bin.git
+

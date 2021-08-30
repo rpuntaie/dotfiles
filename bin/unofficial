@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+
+"""
+Retrieve file lists from archlinux unofficial repositories:
+
+- Create or enter directory ``unofficial_user_repositories``
+- Create text file for each unofficial repository
+
+    file1-version-arch.pkg.tar.zst
+    file2-version-arch.pkg.tar.zst
+    ...
+
+It uses a separate ``unofficialdb`` which maps: url_db -> package list
+
+There are no parameters::
+
+    unofficial
+
+"""
+
+import sys
+import os
+import requests
+from lxml import html
+import re
+import configparser
+import posixpath
+from subprocess import run,PIPE
+from itertools import product
+
+UO='https://wiki.archlinux.org/title/unofficial_user_repositories'
+exts = list(sorted((''.join(x) for x in product(['.db','.files'],
+       ['','.tar','.tar.gz','.tar.bz2','.tar.xz','.tar.zst','.tar.Z'])),key=len))
+
+def main():
+    dr = UO.split('/')[-1]+'_package'
+    try:
+        os.mkdir(dr)
+    except FileExistsError:
+        pass
+    os.chdir(dr)
+    try:
+        page = requests.get(UO)
+        tree = html.fromstring(page.text)
+        server_conf=tree.xpath('//pre/text()')
+        cf=configparser.ConfigParser(strict=False)
+        cf.read_string('\n'.join(server_conf))
+        for sc in cf.sections():
+            err = None
+            for scs in cf.items(sc,'server'):
+                servername=scs[1].replace('$repo',sc).replace('$arch','x86_64')
+                filename=servername.replace(':','_').replace('/','+')
+                print(sc,':',servername,'=>',filename)
+                db_found = False
+                for ext in exts:
+                    dburl = posixpath.join(servername,sc+ext)
+                    print("trying:",dburl)
+                    try: os.remove(filename)
+                    except FileNotFoundError: pass
+                    cmd = 'unofficialdb '+dburl+' > '+filename
+                    r = run(cmd,shell=True,stderr=PIPE)
+                    if err is None and r.returncode != 0:
+                        err = r.stderr.decode()
+                    try: filesize = os.path.getsize(filename)
+                    except FileNotFoundError: filesize = 0
+                    if r.returncode == 0 and filesize > 0:
+                        db_found = True
+                        break
+                if not db_found:
+                    print('!%s: %s'%(sc,err),file=sys.stderr)
+                    continue
+    finally:
+        os.chdir('..')
+
+if __name__ == "__main__":
+    main()
+

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+: '
+List packages in an Archlinux repository database file (".db" file)
+
+Examples:
+unofficialdb https://repo.guldner.eu/repository/archlinux/x86_64/dasbaumwolltier.db
+unofficialdb https://pkgbuild.com/~alucryd/alucryd/x86_64/alucryd.db
+'
+
+usage(){
+	cmd=${0##*/}
+	printf -- "%s <URL of db file>\n\n" "$cmd"
+}
+
+if [[ -z $1 ]]; then
+	usage
+	exit 1
+fi
+
+case $1 in
+	-h|--help) usage; exit 0;;
+esac
+
+URL="$1"
+
+EXITC=0
+if pushd $(mktemp -d || echo BADTMPDIR) > /dev/null
+then
+	NAME=${URL##*/}
+	if curl --connect-timeout 3 -OLs $URL
+	then
+		mkdir db
+		if bsdtar -xf $NAME -C db 2> /dev/null
+		then
+			find db -iname 'desc' -exec sed -n '/%FILENAME%/ {n;p;q}' {} \;
+		else
+			echo >&2 "!"$NAME":"`sed -n '/40[34]/ {p;q}' $NAME`
+			EXITC=1
+		fi
+	else
+		echo >&2 "!"$NAME
+		EXITC=1
+	fi
+	rm -r $(pwd)
+	popd > /dev/null
+fi
+
+exit $EXITC
