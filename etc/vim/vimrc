@@ -218,7 +218,9 @@ endif
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
   call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
 ""| |gitv-usage| :Gitv[!]
-  call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
+" call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
+" call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
+  call dein#add('junegunn/gv.vim',{'if':l:nn,'merged':0}) " needs fugitive
     "other vcs
 ""| |vcscommand-mappings| works not only for git (<leader>z)
   call dein#add('vim-scripts/vcscommand.vim',{'if':l:nn,'merged':0})
@@ -244,6 +246,8 @@ endif
 "'severin-lemaignan/vim-minimap'
 "ctags based 'majutsushi/tagbar' # replaced by vista
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
+" C++
+" call dein#add('jackguo380/vim-lsp-cxx-highlight',{'if':l:nn,'merged':0})
 endfunction
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
@@ -1001,6 +1005,11 @@ nmap sn :NERDTreeToggle<CR>
 nmap sl :Vista finder<CR>
 "": `:CD` cd to root of repos
 command! CD exe 'cd '.system('git rev-parse --show-toplevel')
+function s:CG()
+  execute 'SD'
+  execute 'CD'
+endfunction
+command! -nargs=* CG :call <SID>CG()
 
 if g:CocOverDeoplete
     "coc

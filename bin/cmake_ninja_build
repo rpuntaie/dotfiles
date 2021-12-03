@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+[ -e CMakeLists.txt ] || ( echo "run from source dir" && exit 1 )
+
+export CMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+srcpath=$PWD
+bldpath=${srcpath}_build
+mkdir -p $bldpath
+cd $bldpath
+cmake -DCMAKE_BUILD_TYPE=Debug -GNinja ../${srcpath##*/}
+#cmake -GNinja ../${srcpath##*/}
+cp compile_commands.json $srcpath
+ninja $1
+

@@ -49,3 +49,5 @@ pip install --user ydiff
 
 pip install --user pynput
 pip install --user pytest-toolbox
+
+pip install --user base58

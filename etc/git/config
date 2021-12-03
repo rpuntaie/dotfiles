@@ -158,3 +158,8 @@
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
 [credential]
 	helper = /home/roland/.local/bin/git_credentials_from_pass $@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
