@@ -41,3 +41,5 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 #XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOMEDIR/.config}"
 CFGFILE=${CFGFILE:-$HOMEDIR/.config/$PKG.conf}
+
+export DISTCC_HOSTS='--randomize localhost red,cpp,lzo green,cpp,lzo blue,cpp,lzo'

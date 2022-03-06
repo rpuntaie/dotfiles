@@ -198,6 +198,8 @@ endif
   call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
 ""| |vimproc-commands| asynchronous execution
   call dein#add('Shougo/vimproc.vim', {'if':l:nn,'build': 'make','merged':0})
+""| |asyncrun| asynchronous execution of shell commands
+  call dein#add('skywind3000/asyncrun.vim', {'if':l:nn,'merged':0})
 ""| |vebugger-gdb| :VBGstartGDB, ` for leader
   call dein#add('idanarye/vim-vebugger',{'if':l:nn,'merged':0})
 ""| |Vimspector| <F5> (needs .vimspector.json)
@@ -218,7 +220,7 @@ endif
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
   call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
 ""| |gitv-usage| :Gitv[!]
-" call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
+  call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
 " call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
   call dein#add('junegunn/gv.vim',{'if':l:nn,'merged':0}) " needs fugitive
     "other vcs
@@ -248,6 +250,15 @@ endif
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
 " C++
 " call dein#add('jackguo380/vim-lsp-cxx-highlight',{'if':l:nn,'merged':0})
+" colorscheme (testing)
+  "if has('nvim')
+  "  call dein#add('nvim-treesitter/nvim-treesitter')
+  "  call dein#add('ChristianChiarulli/nvcode-color-schemes.vim')
+  "  " nvcode onedark nord aurora gruvbox palenight snazzy xoria
+  "endif
+  " call dein#add('ray-x/aurora')
+  " call dein#add('dracula/vim')
+  " call dein#add('sainnhe/sonokai')
 endfunction
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
@@ -437,6 +448,11 @@ command! VR :VimspectorReset<CR>
 packadd termdebug
 ":Termdebug <app>
 
+nnoremap L :m .+1<CR>==
+nnoremap H :m .-2<CR>==
+vnoremap L :m '>+1<CR>gv=gv
+vnoremap H :m '<-2<CR>gv=gv
+
 runtime ftplugin/man.vim
 if has("gui_running")
     nnoremap K :<C-U>exe "Man" v:count "<C-R><C-W>"<CR><CR>
@@ -519,6 +535,11 @@ set diffopt+=iwhite
 syntax on
 set background=dark
 colorscheme murphy1
+" set termguicolors            " 24 bit color
+" colorscheme aurora
+" colorscheme dracula
+" colorscheme sonokai
+" colorscheme snazzy    " nvcode
 if has("gui_running")
     set guicursor=n-c:block-Cursor/lCursor-blinkon0
     set guicursor+=i-ci:ver30-Cursor/lCursor-blinkon0
@@ -829,10 +850,10 @@ vnoremap <silent> <leader>tt :Trans<CR>
 """ `,ww`: look up in wordnet (wn needed)
 nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `sc[c]`: (re)number
-vnoremap scc :'<'>!cat -n<CR>
+vnoremap scc :!cat -n<CR>
 vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<CR>
 """ `sp`: yank current file full path
-nnoremap <silent> sp :let @* = expand("%:p")<CR>
+nnoremap <silent> spp :let @* = expand("%:p")<CR>
 """ `m`: match in o v n mode
 onoremap <silent>m //e<CR>
 vnoremap <silent>m //e<CR>
@@ -1162,6 +1183,7 @@ dig CB 9821 "♝
 dig CN 9822 "♞
 dig CP 9823 "♟︎
 
+if !has('nvim')
 function! ShowHex()
   let p = getpos('.')
   redir => ucode
@@ -1175,6 +1197,8 @@ function! ShowHex()
   catch
   endtry
 endfunction
+endif
+
 function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
     exe 'hi! StatusLine ctermfg=008'
@@ -1212,7 +1236,9 @@ set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 "https://github.com/vim/vim/issues/6447: insert <CursorHold> after updatetime
+if !has('nvim')
 set statusline+=%1*%{ShowHex()} " utf-8
+endif
 if g:CocOverDeoplete
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 endif

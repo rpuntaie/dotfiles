@@ -1,20 +1,5 @@
 # Login shell configuration (sourced BEFORE interactive configuration)
 
-
-path() {
-	test -d "$2" || return
-	case ":$PATH:" in
-		(*:"$2":*)
-			;;
-		(*)
-			case "$1" in
-				(prepend) PATH="$2:$PATH" ;;
-				(append) PATH="$PATH:$2" ;;
-			esac
-	esac
-}
-
-# Load profiles in profile.d:
 if [ -d "$XDG_CONFIG_HOME/sh/profile.d" ]; then
 	for profile in "$XDG_CONFIG_HOME/sh/profile.d/"*.sh; do
 		if [ -r "$profile" ]; then
@@ -23,7 +8,4 @@ if [ -d "$XDG_CONFIG_HOME/sh/profile.d" ]; then
 	done
 	unset profile
 fi
-
-unset -f path
-export PATH
 

@@ -26,7 +26,6 @@ rm /tmp/test_bin2c_py.dat
 """
 
 import sys
-import binascii
 
 c_str_literal = lambda d: '"{}"'.format(''.join(bytes_to_c_ascii_oct(d)))
 def bytes_to_c_ascii_oct(d):

@@ -31,7 +31,6 @@ pip install --user solidpython #3d modelling (alternative: https://aur.archlinux
 pip install --user autopilot #easy package skeleton
 pip install --user fs #pyfilesystem
 pip install --user path #https://pypi.org/project/path/
-pip install --user cookiecutter #directory templates (see txdir)
 pip install --user doit #task automation
 pip install --user urlfetch #http client
 pip install --user tuna #.prof viewer
@@ -51,3 +50,7 @@ pip install --user pynput
 pip install --user pytest-toolbox
 
 pip install --user base58
+pip install --user python-bitcoinlib
+pip install --user hdwallet
+pip install --user ecpy
+

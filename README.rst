@@ -297,12 +297,12 @@ A `Maildir <https://wiki2.dovecot.org/MailboxFormat>`__ ``mailbox``
 is a directory with `{cur,new,tmp}/<messagefiles>` as text files.
 It can be used by programming languages and tools:
 
-- for IMAP, ``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__
-  syncs between remote and local mailboxes.
+- ``isync``'s `mbsync <https://linux.die.net/man/1/mbsync>`__ supports IMAP.
+  It syncs between remote and local mailboxes.
   (Alternative to `offlineimap <https://wiki.archlinux.org/index.php/OfflineIMAP>`__,
   which still uses python2)
 
-- for POP mailboxes I use `getmail <https://wiki.archlinux.org/index.php/Getmail>`__
+- `getmail <https://wiki.archlinux.org/index.php/Getmail>`__ supports IMAP and POP.
 
 - ``msmtp`` sends mails, not just for ``mutt``,
   but also for the ``mail`` command (``s-nail`` and ``msmtp-mta`` packages)
@@ -329,7 +329,10 @@ It can be used by programming languages and tools:
   Specifically ``to:`` means ``To:`` and ``Cc:`` and accepts only
   `names or email addresses <https://notmuchmail.org/manpages/notmuch-search-terms-7/>`__.
 
-  My `afew setup <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/afew/config>`__
+  ``gm`` calls ``getmail/isync``, then ``notmuch``, which calls ``afew`` via the
+  ``~/Mail/.notmuch/hooks/post-new`` configuration.
+
+  My `afew config <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/etc/afew/config>`__
   folders similar mails into mailboxes with same name accross emails.
   Via `FolderNameFilter` they get the same tag and can be viewed/searched accross emails with ``alot``/``notmuch``.
 
