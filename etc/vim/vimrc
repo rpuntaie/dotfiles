@@ -392,13 +392,28 @@ if g:CocOverDeoplete
           \ 'coc-css',
           \ 'coc-svg',
           \ 'coc-vimlsp',
+          \ 'coc-sourcekit',
           "\ 'coc-godot',
           "\ 'coc-yaml',
           "\ 'coc-highlight',
           "\ 'coc-angular'
           \ ]
     call coc#config('languageserver', {
-          \  'haskell': {
+          \ 'sourcekit': {
+          \    "commandPath": "/usr/lib/swift/bin/sourcekit-lsp",
+          \    "command": "/usr/lib/swift/bin/sourcekit-lsp",
+          \    "rootPatterns": [
+          \      "Package.swift"
+          \    ],
+          \    "filetypes": [
+          \      "swift",
+          \    ],
+          \    "sourcekit.env": {
+          \       "SOURCEKIT_TOOLCHAIN_PATH": "/usr/lib/swift/",
+          \       "SOURCEKIT_LOGGING": "3"
+          \    }
+          \ },
+          \ 'haskell': {
           \    "command": "haskell-language-server-wrapper",
           \    "args": ["--lsp"],
           \    "rootPatterns": [
@@ -417,7 +432,7 @@ if g:CocOverDeoplete
           \      }
           \    }
           \  }
-          \})
+          \ })
 endif
 
 "": `:Sw` sudo write

@@ -27,6 +27,7 @@ PATH="$PATH:/usr/lib/swift/bin"
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/21.4.7075529
 export NDK_ROOT=$HOME/Android/Sdk/ndk/21.4.7075529
+export NDK_HOME=$HOME/Android/Sdk/ndk/21.4.7075529
 export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
 export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
 export PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin"

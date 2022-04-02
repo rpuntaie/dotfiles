@@ -6,7 +6,8 @@ type = SimplePOP3SSLRetriever
 server = mail.upcmail.at
 username = roland.puntaier@chello.at
 port = 995
-password_command = ("pass", "magenta.at/roland.puntaier@chello.at")
+password_command = ("getmail-gmail-xoauth-tokens", "/home/roland/roland.puntaier@gmail.com.json")
+#password_command = ("pass", "magenta.at/roland.puntaier@chello.at")
 
 # #MWNOTMUCHNEW=1 will call notmuch and afew to move mails to folders
 # [destination]
