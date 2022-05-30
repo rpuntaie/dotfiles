@@ -238,6 +238,8 @@ endif
   call dein#add('rpuntaie/vim-barbaric',{'if':l:nn,'merged':0})
   call dein#add('goerz/jupytext.vim',{'if':l:nn,'merged':0})
   call dein#add('ojroques/vim-oscyank',{'if':l:nn,'merged':0})
+  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
+  call dein#add('vyperlang/vim-vyper',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
 "'editorconfig/editorconfig-vim'
@@ -393,6 +395,8 @@ if g:CocOverDeoplete
           \ 'coc-svg',
           \ 'coc-vimlsp',
           \ 'coc-sourcekit',
+          \ 'coc-kotlin',
+          \ 'coc-solidity',
           "\ 'coc-godot',
           "\ 'coc-yaml',
           "\ 'coc-highlight',
@@ -412,6 +416,10 @@ if g:CocOverDeoplete
           \       "SOURCEKIT_TOOLCHAIN_PATH": "/usr/lib/swift/",
           \       "SOURCEKIT_LOGGING": "3"
           \    }
+          \ },
+          \ "kotlin": {
+          \     "command": "/usr/bin/kotlin-language-server",
+          \     "filetypes": ["kotlin"]
           \ },
           \ 'haskell': {
           \    "command": "haskell-language-server-wrapper",
@@ -879,10 +887,10 @@ command! SD cd %:p:h
 nnoremap <silent> SD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR>
 "": `:TD` execute .local/bin/todo to quickfix list
 command! TD :cexpr system('~/.local/bin/todo --vimgrep')
-""" `SW`: fzf search for word under cursor
-map <silent> SW :Rg <C-R><C-W><CR>
-"": `:SW` search for word under cursor and place into quickfix list
-command! SW :cexpr system('rg --vimgrep <C-R><C-W>')<CR>
+""" `SW`: fzf search for word under cursor and strings containing it
+map <silent> SW :call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>
+""" `SWW`: fzf search for word under cursor
+map <silent> SWW :call setreg('/','\<<C-R><C-W>\>')<CR>:Rg \b<C-R><C-W>\b<CR>
 " cscope
 set cscopetag
 if has("cscope")
