@@ -276,9 +276,9 @@ class UrlGrabSettings(UserDict):
         self.data['localcmd']=weechat.config_new_option(
             self.config_file, section_default,
             "localcmd", "string", """Local command to execute""", "", 0, 0,
-            "firefox '%s'", "firefox '%s'", 0, "", "", "", "", "", "")
+            "chromium '%s'", "chromium '%s'", 0, "", "", "", "", "", "")
 
-        remotecmd="ssh -x localhost -i ~/.ssh/id_rsa -C \"export DISPLAY=\":0.0\" &&  firefox '%s'\""
+        remotecmd="ssh -x localhost -i ~/.ssh/id_rsa -C \"export DISPLAY=\":0.0\" &&  chromium '%s'\""
         self.data['remotecmd']=weechat.config_new_option(
             self.config_file, section_default,
             "remotecmd", "string", remotecmd, "", 0, 0,

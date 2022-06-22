@@ -1,92 +1,4 @@
-""
-" build with python 3.x:
-" ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
-" --enable-gui=gtk2 --with-features=big --enable-netbeans --with-tlib=ncurses
-"
-" pacman --noconfirm -S \
-" vim-spell-en vim-spell-de vim-spell-it vim-spell-fr vim-spell-ru vim-spell-es
-"
-" system:
-"   https://github.com/rpuntaie/rollarch
-"   https://github.com/rpuntaie/dotfiles
-"   - python with vim_py3_rst
-"   - cscope
-"   - wordnet
-"   - rst2jira
-"   - waf
-"
-" "coc
-" cd ~/.local/var/lib/vim/dein/repos/github.com/neoclide/coc.nvim
-" git clean -xfd
-" yarn install --frozen-lockfile
-"
-" <ESC> mapped to <CAPSLOCK> in the OS
-"
-" doc/myvimrc.txt.stpl uses """, "": and ""| lines
-""
-
-
-"working versions
-"example: call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd5' })
-"andymass/vim-matchup               4cd3736a6869ab0b0a4b739dbde11f 1f6129beea
-"bogado/file-line                   559088afaf10124ea663ee0f4f73b1 de48fb1632
-"cdelledonne/vim-cmake              844b85677d52d932432eb115236d91 73ebe3664d
-"Chiel92/vim-autoformat             d616fcf8a747f86bd3b26004b83ea5 b7c7526df1
-"chikamichi/mediawiki.vim           26e5737264354be41cb11d16d48132 779795e168
-"chrisbra/unicode.vim               62f7a3558ee4402bcaaae8638e7682 68f1137a0f
-"davidhalter/jedi                   41652507b3de645a8a4329299e8e40 bff68c8da7
-"deoplete-plugins/deoplete-jedi     43058915007d92dc167b84dd5b8ada 2d2a057a82
-"echuraev/translate-shell.vim       d72a2eabd2a5466369df794777e662 ecc2d732e9
-"gfanto/fzf-lsp.nvim                6683718524adec3ce58c848706bcc7 f3aa6a09a1
-"godlygeek/tabular                  339091ac4dd1f17e225fe7d57b48af f55f99b23a
-"goerz/jupytext.vim                 a1433a11035169960a0342c1f79297 4765c5cfd8
-"gregsexton/gitv                    a73599c34202709eaa7da78f4fe32b 97c6ef83f8
-"honza/vim-snippets                 749460bc5b05b1f4015a041508031d 99b1b24982
-"idanarye/vim-vebugger              15ab930a6cfbcf8660ded98c3afd28 9bed7804b0
-"jalvesaq/Nvim-R                    a52eac4c9e8bf69ac4ebf0cbd24919 45f10cd73b
-"jlanzarotta/bufexplorer            99557c451ff6ed3bbb9b9f6215ad57 e919740635
-"johnsyweb/vim-makeshift            c088678c52821dceb763bcdbdb3a22 9d3d78aab6
-"junegunn/fzf                       7191ebb615f5d6ebbf51d598d8ec85 3a65e2274d
-"junegunn/fzf.vim                   e34f6c129d39b90db44df1107c8b7d facfd18946
-"lervag/vimtex                      c9b3b50427d97403e8a36b3fe2d636 d0a97db0d8
-"lighttiger2505/deoplete-vim-lsp    af5432f1e063fd4c3a5879aa8c2afe 82c17dc1c9
-"liuchengxu/vista.vim               d709462958f2167008c9653a9cbc9d e1067bfa2d
-"Lokaltog/vim-easymotion            d75d9591e415652b25d9e0a3669355 550325263d
-"machakann/vim-sandwich             9e6340affe9f53c11a6975a5f50b9b f48adb692c
-"mattn/vim-lsp-settings             609c40d4947c762bbe9009b8bcd89e 2c83be1dad
-"mattn/webapi-vim                   b09cbd3a27157a5baf0468403b392f 577adefe45
-"metakirby5/codi.vim                cf62681a4962ce1873e4b2a5e0bf40 1dcd42890f
-"nathanaelkane/vim-indent-guides    54d889a63716ee2f1818aa2ec5082d b47147147b
-"neoclide/coc.nvim                  41d77ab2ca842a777184b7b9f18d53 2357b87eba
-"neovimhaskell/haskell-vim          f35d02204b4813d1dbe8b0e98cc397 01a4b8e15e
-"ojroques/vim-oscyank               20fade09069cd35602387c2e7d2a7c d0f6cff8b0
-"prabirshrestha/vim-lsp             fb0a72306e1fc42c1ce8909aa1e420 ddfccf6fbf
-"puremourning/vimspector            aa0cddc0da5b2547d20551dcffe1d9 dc073b3904
-"roxma/nvim-yarp                    b710bf4daccb603a423754794fb446 e5fbb59576
-"roxma/vim-hug-neovim-rpc           93ae38792bc197c3bdffa2716ae493 c67a5e7957
-"rpuntaie/vim-barbaric              68b8fb2df159fd148cd3a5e820fb49 5aa5e0a5ae
-"rpuntaie/vim_py3_rst               91685a5dc259da770e1d907e3ee2d4 aae861e92d
-"Rykka/mathematic.vim               e57ec0d767fee83f95994b1a8d5cc8 2395198a49
-"scrooloose/nerdcommenter           a5d1663185bee20bfb120c9ab21214 4444514982
-"scrooloose/nerdtree                81f3eaba295b3fceb2d032db57e5ea e99ae480f8
-"sheerun/vim-polyglot               4f5388350be1052f610b830c8fce8f bc17370ec6
-"Shougo/dein.vim                    0deb1dd50b325f05d788ed41f2f89f 9e5f9e2125
-"Shougo/deoplete-clangx             0157512796f63d33091a98a19bbea8 b57e227a8f
-"Shougo/deoplete.nvim               6fc33bed8f5c75a08b14af285d7775 d893037cc4
-"Shougo/neoinclude.vim              954cfc9dfdb303f2c2fa867b9cf949 dd74512628
-"Shougo/vimproc.vim                 8f40d86ab938d5df8c1c9824320621 ae9f0d5609
-"SirVer/ultisnips                   aec91caefec10741722927cf073703 a528fe7a8f
-"stefandtw/quickfix-reflector.vim   8e9c05a110b80ab66fc8bc3d5fe9e6 fa168aada6
-"thaerkh/vim-indentguides           3152f3a0604089d545983b72e7cb67 6898bb7da1
-"tomtom/tlib_vim                    a071b6d41b20069a3520e0d101194a 752968973b
-"tpope/vim-fugitive                 8e0a8abf08318f91f63da510087b31 10f20e58bf
-"tpope/vim-sleuth                   38bd4010110614822cde523ebc5724 963312ab63
-"tyru/open-browser.vim              d6f1784685abdd86500fdb5fa2fbaf 2aab833f18
-"vim-scripts/vcscommand.vim         2fb32681361f37533455d20aaa7fc6 eb11b0fa4b
-"w0rp/ale                           e4ddd32c840c405b12abe76fefc860 062989e429
-
-
-""| Links to plugin mappings::
+" reduced vimrc works for archlinux iso boot
 
 set encoding=utf-8
 scriptencoding utf-8 " else listchars problem on Windows
@@ -126,141 +38,7 @@ if !has('win32')
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
-
-let g:CocOverDeoplete=1
-if has("nvim")
-let g:CocOverDeoplete=0
-endif
-
 function! s:Deinplugins()
-  let l:nn = !has("nvim")
-  call dein#add('bogado/file-line',{'if':l:nn,'merged':0}) " open <file>:<line>
-  call dein#add('chikamichi/mediawiki.vim',{'if':l:nn,'merged':0}) " syntax .mw .wiki .mediawiki
-""| |plugin/02tlib.vim|  TScratch TBrowseOutput
-  call dein#add('tomtom/tlib_vim',{'merged':0})
-""| |quickfix-reflector| enable editing the quickfix to change more files
-  call dein#add('stefandtw/quickfix-reflector.vim',{'if':l:nn,'merged':0})
-""| |fzf-vim-commands| :Snippets :Helptags :Marks |myvmimaps|
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf','merged':0 })
-""| |bufexplorer| still needed to delete/copy
-  call dein#add('jlanzarotta/bufexplorer',{'merged':0})
-""| |sleuth| detect tab settings heuristically, :Sleuth
-  call dein#add('tpope/vim-sleuth',{'if':l:nn,'merged':0})
-""| |:Tabularize| format (,aa)
-  call dein#add('godlygeek/tabular',{'if':l:nn,'merged':0})
-""| |sandwich-keymappings| s{adr} dasX da<wait>s
-"   https://github.com/machakann/vim-sandwich/issues/62
-  call dein#add('machakann/vim-sandwich',{'if':l:nn,'merged':0})
-""| |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
-  call dein#add('Lokaltog/vim-easymotion',{'if':l:nn,'merged':0}) " <leader><leader>f
-""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
-  call dein#add('andymass/vim-matchup',{'if':l:nn,'merged':0})
-"   indentation guides
-  "call dein#add('nathanaelkane/vim-indent-guides',{'merged':0})
-  call dein#add('thaerkh/vim-indentguides',{'if':l:nn,'merged':0})
-
-if g:CocOverDeoplete
-  call dein#add('neoclide/coc.nvim', {'if':l:nn,'merged':0, 'build': 'yarn install --frozen-lockfile'})
-else
-  "UpdateRemotePlugins when switching
-  call dein#add('Shougo/deoplete.nvim',{'if':l:nn,'merged':0})
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp',{'merged':0})
-    call dein#add('roxma/vim-hug-neovim-rpc',{'merged':0})
-  endif
-  "deoplete sources
-  call dein#add('prabirshrestha/vim-lsp',{'if':l:nn,'merged':0})
-  call dein#add('mattn/vim-lsp-settings',{'if':l:nn,'merged':0})
-  call dein#add('lighttiger2505/deoplete-vim-lsp',{'if':l:nn,'merged':0})
-  call dein#add('Shougo/neoinclude.vim',{'if':l:nn,'merged':0})
-  call dein#add('Shougo/deoplete-clangx',{'if':l:nn,'merged':0})
-  call dein#add('davidhalter/jedi',{'if':l:nn,'merged':0})
-  call dein#add('deoplete-plugins/deoplete-jedi',{'if':l:nn,'merged':0})
-endif
-
-  "snippets
-""| |UltiSnips| snippets
-  call dein#add('SirVer/ultisnips',{'if':l:nn,'merged':0})
-  call dein#add('honza/vim-snippets',{'if':l:nn,'merged':0})
-  "languages
-  call dein#add('sheerun/vim-polyglot',{'merged':0})
-  call dein#add('neovimhaskell/haskell-vim',{'if':l:nn,'merged':0})
-  call dein#add('Chiel92/vim-autoformat',{'if':l:nn,'merged':0}) " :Autoformat
-  call dein#add('metakirby5/codi.vim',{'if':l:nn,'merged':0}) " :Codi :Codi!
-""| |AleToggle| linting (:ALEToggle)
-  call dein#add('w0rp/ale',{'if':l:nn,'merged':0})
-    "python
-""| |vim_py3_rst| python and rst helpers
-  call dein#add('rpuntaie/vim_py3_rst',{'if':l:nn,'merged':0})
-    "call dein#add('python-mode/python-mode',{'merged':0})
-""| |Nvim-R-use| \rf \rq \d ... in R file
-  call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
-""| |vimproc-commands| asynchronous execution
-  call dein#add('Shougo/vimproc.vim', {'if':l:nn,'build': 'make','merged':0})
-""| |asyncrun| asynchronous execution of shell commands
-  call dein#add('skywind3000/asyncrun.vim', {'if':l:nn,'merged':0})
-""| |vebugger-gdb| :VBGstartGDB, ` for leader
-  call dein#add('idanarye/vim-vebugger',{'if':l:nn,'merged':0})
-""| |Vimspector| <F5> (needs .vimspector.json)
-  call dein#add('puremourning/vimspector',{'if':l:nn,'merged':0})
-""| |vimtex-default-mappings| for latex
-  call dein#add('lervag/vimtex',{'if':l:nn,'merged':0})
-""| |makeshift| [:MM] builds the current project
-  call dein#add('johnsyweb/vim-makeshift',{'if':l:nn,'merged':0}) " Build
-""| |cmake| :CMake[Generate,Build,Install] c[gbi]
-  call dein#add('cdelledonne/vim-cmake',{'if':l:nn,'merged':0}) " Build
-""| |NERDTreeMappings| [sn] file browser
-  call dein#add('scrooloose/nerdtree',{'if':l:nn,'merged':0})
-  call dein#add('tyru/open-browser.vim',{'if':l:nn,'merged':0})
-    "commenting
-""| |NERDCommenterFunctionality| ,c{ cnmisy$Aalbu}
-  call dein#add('scrooloose/nerdcommenter',{'if':l:nn,'merged':0})
-    "git tools
-""| |fugitive-commands| :Gxxx like :Gdiffsplit
-  call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
-""| |gitv-usage| :Gitv[!]
-  call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
-" call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
-  call dein#add('junegunn/gv.vim',{'if':l:nn,'merged':0}) " needs fugitive
-    "other vcs
-""| |vcscommand-mappings| works not only for git (<leader>z)
-  call dein#add('vim-scripts/vcscommand.vim',{'if':l:nn,'merged':0})
-    "dictionary
-  call dein#add('mattn/webapi-vim',{'if':l:nn,'merged':0})
-""| |trans-usage| ,tt
-  call dein#add('echuraev/translate-shell.vim',{'if':l:nn,'merged':0})
-""| mathematic.vim (<leader>lm)
-  call dein#add('Rykka/mathematic.vim',{'if':l:nn,'merged':0})
-""| |unicode-plugin| :UnicodeTable i: <C-X><C-G>
-  call dein#add('chrisbra/unicode.vim',{'if':l:nn,'merged':0})
-""| |barbaric-functions| (ibus) input method only in insert mode
-  call dein#add('rpuntaie/vim-barbaric',{'if':l:nn,'merged':0})
-  call dein#add('goerz/jupytext.vim',{'if':l:nn,'merged':0})
-  call dein#add('ojroques/vim-oscyank',{'if':l:nn,'merged':0})
-  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
-  call dein#add('vyperlang/vim-vyper',{'if':l:nn,'merged':0})
-"call dein#add('kovisoft/slimv',{'merged':0})
-"'airblade/vim-gitgutter'
-"'editorconfig/editorconfig-vim'
-"'itchyny/lightline.vim'
-"'mattn/emmet-vim'
-"'terryma/vim-multiple-cursors'
-"'tpope/vim-eunuch'
-"'severin-lemaignan/vim-minimap'
-"ctags based 'majutsushi/tagbar' # replaced by vista
-  call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
-" C++
-" call dein#add('jackguo380/vim-lsp-cxx-highlight',{'if':l:nn,'merged':0})
-" colorscheme (testing)
-  "if has('nvim')
-  "  call dein#add('nvim-treesitter/nvim-treesitter')
-  "  call dein#add('ChristianChiarulli/nvcode-color-schemes.vim')
-  "  " nvcode onedark nord aurora gruvbox palenight snazzy xoria
-  "endif
-  " call dein#add('ray-x/aurora')
-  " call dein#add('dracula/vim')
-  " call dein#add('sainnhe/sonokai')
 endfunction
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
@@ -293,19 +71,6 @@ endif
 "call dein#recache_runtimepath()
 
 let g:powerline_pycmd = "py3"
-if !g:CocOverDeoplete
-  "Shougo/deoplete.nvim
-  let g:deoplete#enable_at_startup = 1
-  silent! call deoplete#custom#option({'auto_complete': v:false,'smart_case': v:true})
-  inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ deoplete#manual_complete()
-  function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~ '\s'
-  endfunction
-endif
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsListSnippets = '<c-tab>'
@@ -388,79 +153,6 @@ let g:barbaric_default = 'xkb:us::eng'
 "scrooloose/nerdcommenter
 let g:NERDSpaceDelims=1
 
-if match(&runtimepath,'coc') == -1
-  let g:CocOverDeoplete=0
-endif
-if g:CocOverDeoplete
-    "coc.nvim
-    let g:coc_global_extensions = [
-          \ 'coc-dictionary',
-          \ 'coc-tag',
-          \ 'coc-word',
-          \ 'coc-emoji',
-          \ 'coc-omni',
-          \ 'coc-syntax',
-          \ 'coc-ultisnips',
-          "\ 'coc-snippets',
-          \ 'coc-python',
-          \ 'coc-clangd',
-          "\ 'coc-cmake',
-          \ 'coc-json',
-          \ 'coc-java',
-          \ 'coc-tsserver',
-          \ 'coc-sh',
-          \ 'coc-html',
-          \ 'coc-css',
-          \ 'coc-svg',
-          \ 'coc-vimlsp',
-          \ 'coc-sourcekit',
-          \ 'coc-kotlin',
-          \ 'coc-solidity',
-          "\ 'coc-godot',
-          "\ 'coc-yaml',
-          "\ 'coc-highlight',
-          "\ 'coc-angular'
-          \ ]
-    call coc#config('languageserver', {
-          \ 'sourcekit': {
-          \    "commandPath": "/usr/lib/swift/bin/sourcekit-lsp",
-          \    "command": "/usr/lib/swift/bin/sourcekit-lsp",
-          \    "rootPatterns": [
-          \      "Package.swift"
-          \    ],
-          \    "filetypes": [
-          \      "swift",
-          \    ],
-          \    "sourcekit.env": {
-          \       "SOURCEKIT_TOOLCHAIN_PATH": "/usr/lib/swift/",
-          \       "SOURCEKIT_LOGGING": "3"
-          \    }
-          \ },
-          \ "kotlin": {
-          \     "command": "/usr/bin/kotlin-language-server",
-          \     "filetypes": ["kotlin"]
-          \ },
-          \ 'haskell': {
-          \    "command": "haskell-language-server-wrapper",
-          \    "args": ["--lsp"],
-          \    "rootPatterns": [
-          \      "*.cabal",
-          \      "stack.yaml",
-          \      "cabal.project",
-          \      "package.yaml"
-          \    ],
-          \    "filetypes": [
-          \      "hs",
-          \      "lhs",
-          \      "haskell"
-          \    ],
-          \    "initializationOptions": {
-          \      "languageServerHaskell": {
-          \      }
-          \    }
-          \  }
-          \ })
-endif
 
 "": `:Sw` sudo write
 command! -nargs=0 Sw w !sudo tee % > /dev/null
@@ -576,7 +268,7 @@ endif
 set diffopt+=iwhite
 syntax on
 set background=dark
-colorscheme murphy1
+colorscheme murphy
 " set termguicolors            " 24 bit color
 " colorscheme aurora
 " colorscheme dracula
@@ -625,18 +317,6 @@ set conceallevel=0
 "set cursorline
 "set relativenumber
 set number
-if g:CocOverDeoplete
-    "coc
-    " not too small because see 6447 statusline issue
-    " set updatetime=1300
-    set shortmess+=c
-    if !has('nvim')
-      set signcolumn=number
-    else
-      sign define numhl=
-    endif
-endif
-
 
 augroup rolandau
     autocmd!
@@ -1074,85 +754,6 @@ function s:CG()
 endfunction
 command! -nargs=* CG :call <SID>CG()
 
-if g:CocOverDeoplete
-    "coc
-    nmap <leader>i :CocEnable<CR>:autocmd! coc_nvim BufWritePre *<CR>:echom 'Coc Enabled'<CR>
-    nmap <leader>ii :CocDisable<CR>
-    let g:coc_user_config['suggest.triggerCompletionWait'] = 500
-    "let g:coc_user_config['suggest.autoTrigger'] = 'trigger'
-    "inoremap <silent><expr> <c-space> coc#refresh()
-    function! s:check_back_space() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
-    if exists('*complete_info')
-      inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-    else
-      inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    endif
-    """ `{[]}g` coc diagnostic next/prev
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
-    """ `g{dyir}` coc go to definition/type/implementation/reference
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-    """ `KK` coc documentation (K is man page)
-    nnoremap <silent> KK :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
-    endfunction
-    """ `rn` rename
-    nmap <leader>rn <Plug>(coc-rename)
-    """ `lf` format
-    xmap <leader>lf  <Plug>(coc-format-selected)
-    nmap <leader>lf  <Plug>(coc-format-selected)
-    augroup cocau
-      autocmd!
-      autocmd CursorHold * silent call CocActionAsync('highlight')
-      autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
-    """ `l{ac}` coc load codeaction for selected (a) or all (c)ode
-    xmap <leader>la  <Plug>(coc-codeaction-selected)
-    nmap <leader>la  <Plug>(coc-codeaction-selected)
-    nmap <leader>lc  <Plug>(coc-codeaction)
-    """ `lc` coc fix current
-    nmap <leader>qf  <Plug>(coc-fix-current)
-    """ `{ia}{fc}` coc select inside/outside function/class
-    xmap if <Plug>(coc-funcobj-i)
-    omap if <Plug>(coc-funcobj-i)
-    xmap af <Plug>(coc-funcobj-a)
-    omap af <Plug>(coc-funcobj-a)
-    xmap ic <Plug>(coc-classobj-i)
-    omap ic <Plug>(coc-classobj-i)
-    xmap ac <Plug>(coc-classobj-a)
-    omap ac <Plug>(coc-classobj-a)
-    """ `<C-s>` select next range
-    nmap <silent> <C-s> <Plug>(coc-range-select)
-    xmap <silent> <C-s> <Plug>(coc-range-select)
-    "": `:Format` coc format
-    command! -nargs=0 Format :call CocAction('format')
-    "": `:Fold` coc fold
-    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-    "": `:OR` coc organize import
-    command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-    """ `<space>`X coc list (a)diagnostic/(e)xtension/(c)ommand/(o)utline/(s)ymbols (p)resume (j/k) next/prev
-    nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
-    nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
-    nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
-    nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
-    nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
-    nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-    nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-    nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-    "end coc
-endif
 
 "": `:MM` build using Makeshift
 function! s:BuildFun(what2build)
@@ -1280,9 +881,6 @@ set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 "https://github.com/vim/vim/issues/6447: insert <CursorHold> after updatetime
 if !has('nvim')
 set statusline+=%1*%{ShowHex()} " utf-8
-endif
-if g:CocOverDeoplete
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 endif
 set statusline+=%{&spelllang}
 set laststatus=2

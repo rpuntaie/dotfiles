@@ -36,7 +36,7 @@ MAPPINGS                                                           *myvimmaps*
 `SR`: Replace from default register without loosing it
 `SW`: fzf search for word under cursor
 `Y`: yank till end of line, like D
-`gx`: open browser (normally firefox) and search
+`gx`: open browser and search
 `gx{lngpw}`: open local, nonlocal; chromium google,python,wikipedia
 `m`: match in o v n mode
 `s`: <nop>, free for other mappings

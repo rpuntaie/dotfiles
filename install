@@ -7,10 +7,10 @@ dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
-      echo "you need to do: sudo pacman -S stow" >&2 && return 1
+      sudo pacman -S stow
   fi
   if [ ! -f /usr/bin/xdg-user-dirs-update ]; then
-      echo "you need to do: sudo pacman -S xdg-user-dirs" >&2 && return 1
+      sudo pacman -S xdg-user-dirs
   fi
   return 0
 }
@@ -46,23 +46,31 @@ _dotfiles_fonts(){
 }
 
 _dotfiles_python(){
+  if ! pacman -Qi python-pip; then
+    sudo pacman -S python-pip
+  fi
   bash ~/$DOTDIR/bin/my_python
 }
 
 _dotfiles_nodejs(){
+  if ! pacman -Qi npm; then
+    sudo pacman -S npm
+  fi
   bash ~/$DOTDIR/bin/my_nodejs
 }
 
 _dotfiles_scheme(){
-  #https://pkgs.racket-lang.org/
-  raco pkg install scheme-lib
-  raco pkg install r5rs-lib
-  raco pkg install cext-lib
+  if type raco; then
+    #https://pkgs.racket-lang.org/
+    raco pkg install scheme-lib
+    raco pkg install r5rs-lib
+    raco pkg install cext-lib
+  fi
 }
 
 _dotfiles_weechat(){
   # weechat: no symlink, because it changes the files
-  if which weechat; then
+  if type weechat; then
     rsync -a ~/$DOTDIR/etc/weechat/ ~/.local/var/lib/weechat/
     sed -i "s/WEENAME/rpuntaie/g" ~/.local/var/lib/weechat/irc.conf # usrstuff line
     mkdir -p ~/.local/var/lib/weechat/ssl
@@ -72,7 +80,7 @@ _dotfiles_weechat(){
 }
 
 _dotfiles_email(){
-  if which mutt; then
+  if type mutt; then
     # mw into ~/.local/bin
     ~/.local/bin/ghi rpuntaie/mailwizard ~/.local
     #setup email usrstuff:
@@ -95,13 +103,15 @@ _perl_repl(){ #usrstuff
 }
 
 _config_postgres(){
-  sudo -u postgres initdb -D /var/lib/postgres/data
-  sudo -u postgres createuser roland
-  echo "systemctl enable --now postgresql"
-  systemctl enable --now postgresql
-  echo "createdb roland -U postgres"
-  createdb roland -U postgres
-  echo "postgresql installed"
+  if type postgres; then
+    sudo -u postgres initdb -D /var/lib/postgres/data
+    sudo -u postgres createuser roland
+    echo "systemctl enable --now postgresql"
+    systemctl enable --now postgresql
+    echo "createdb roland -U postgres"
+    createdb roland -U postgres
+    echo "postgresql installed"
+  fi
 }
 
 _vim_dein_plugin(){
@@ -111,6 +121,9 @@ _vim_dein_plugin(){
 }
 
 _tmux_plugin(){
+if ! pacman -Qi tmux; then
+  sudo pacman -S tmux
+fi
 git clone https://github.com/tmux-plugins/tpm $XDG_STATE_HOME/tmux/plugins/tpm
 }
 
@@ -130,7 +143,9 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _clone_github_mine
     _perl_repl
     _config_postgres
-    go get -u github.com/motemen/gore/cmd/gore
+    if type go; then
+      go get -u github.com/motemen/gore/cmd/gore
+    fi
     _vim_dein_plugin
     _tmux_plugin
 

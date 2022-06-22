@@ -15,3 +15,10 @@ fkill() {
         echo $pid | xargs kill -${1:-9}
     fi
 }
+
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+       cd -P -- "$1"
+}
+

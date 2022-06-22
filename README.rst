@@ -60,7 +60,7 @@ The
 `install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
 script also installs user packages for python and nodejs or possibly
 AUR packages using `yay <https://github.com/Jguer/yay>`__,
-but the latter I have integrate into the ``rpuntaie-meta`` package (end of file),
+but the latter I have integrate into the ``rpuntaie-meta`` package (end of install),
 which I serve via a local archlinux proxy.
 
 A whole ArchLinux system, including these ``dotfiles``, can be installed with `rollarch`_.
@@ -73,7 +73,7 @@ Before installing with ``AIP2`` defined, do on the ``AIP2`` proxy:
 .. code:: sh
 
     cd ~/mine/rollarch
-    sudo bash ./build pkg/rpuntaie
+    sudo -E bash ./build pkg/rpuntaie
 
 Then
 
@@ -81,7 +81,7 @@ Then
 
     curl -OLs https://git.io/installarch
     # replace the defines at least in the first line
-    DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash installarch
+    DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=fjVcp bash installarch
     # log out and in
 
 Alternatively
@@ -90,7 +90,7 @@ Alternatively
 
    mkdir mine
    mount -t nfs -o nfsvers=3 192.168.1.108:/home/roland/mine mine
-   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 DOTS=fjVcp bash mine/rollarch/rollarch
+   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=fjVcp bash mine/rollarch/rollarch
 
 DSK IS FORMATTED. DON'T CHOOSE THE WRONG ONE.
 

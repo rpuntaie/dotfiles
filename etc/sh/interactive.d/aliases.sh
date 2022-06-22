@@ -63,5 +63,4 @@ alias ccm64='sudo -E ccm64'
 
 alias androidemu='emulator -avd $(emulator -list-avds)'
 
-scp1(){scp $2 roland@192.168.1.$1:/home/roland/tmp/}
-
+alias clndr='python -m calendar'

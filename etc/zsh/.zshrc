@@ -78,3 +78,9 @@ if [ -f '/home/roland/.local/google-cloud-sdk/completion.zsh.inc' ]; then . '/ho
 
 # TAB fzf complete names in current folder (CTRL-T to fzf on full tree)
 enable-fzf-tab
+
+export NPM_PACKAGES="${XDG_STATE_HOME}/npm"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+#unset MANPATH
+#export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
