@@ -24,7 +24,7 @@ set mailcap_path = "$XDG_CONFIG_HOME"/mutt/mailcap
 # Use GPG2 instead of gpg + PGP configuration
 source $XDG_CONFIG_HOME/mutt/pgp.muttrc
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = $MYGPG
+set pgp_sign_as = $GPGKEY
 set pgp_timeout = 3600
 set crypt_autosign = no
 set crypt_replyencrypt = yes

@@ -59,14 +59,12 @@ or, if cloned already, via:
 The
 `install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
 script also installs user packages for python and nodejs or possibly
-AUR packages using `yay <https://github.com/Jguer/yay>`__,
-but the latter I have integrate into the ``rpuntaie-meta`` package (end of install),
-which I serve via a local archlinux proxy.
+AUR packages using `yay <https://github.com/Jguer/yay>`__.
 
 A whole ArchLinux system, including these ``dotfiles``, can be installed with `rollarch`_.
 If ``AIP2`` is used, a local proxy must be prepared as described in `rollarch`_.
 
-In my case the ``~/dotfiles/install`` script defines: ``KM CL LA_NG ZONE AIP2``.
+In my case the ``~/dotfiles/install`` script defines: ``KM CL LA_NG AIP2``.
 
 Before installing with ``AIP2`` defined, do on the ``AIP2`` proxy:
 
