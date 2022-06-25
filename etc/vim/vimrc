@@ -500,6 +500,7 @@ if has("gui_running")
     nnoremap K :<C-U>exe "Man" v:count "<C-R><C-W>"<CR><CR>
 endif
 
+set path+=**
 set keymodel=startsel,stopsel
 set selection=exclusive
 set noswapfile

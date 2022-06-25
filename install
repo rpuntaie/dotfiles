@@ -117,6 +117,7 @@ _config_postgres(){
 _vim_dein_plugin(){
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein_s.sh
   bash dein_s.sh "$XDG_STATE_HOME/vim/dein"
+  vim "+call dein#build()" "+qall"
   vim "+call dein#update()" "+qall"
 }
 

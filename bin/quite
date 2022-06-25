@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+import pyaudio
+from math import pi
+import numpy as np
+p = pyaudio.PyAudio()
+stream = p.open(format=pyaudio.paFloat32, channels=1, rate=44100, output=1,)
+def make_sinewave(frequency, length, sample_rate=44100):
+  length = int(length * sample_rate)
+  factor = float(frequency) * (pi * 2) / sample_rate
+  waveform = np.sin(np.arange(length) * factor)*0
+  return waveform
+wave = make_sinewave(500, 1)
+

@@ -14,10 +14,13 @@ mykvm <img>
     #ssh-keygen on client first then from host:
     #ssh -o USERKnownHostsFile=/dev/null root@192.168.1.108 -p 10022
 
+
 mykvm <img> bridge <iso>
 mykvm <img> bridge
 
-    # lika another computer on the LAN
+    # like another computer on the LAN
+
+
 
 CTRL+ALT+2 => monitor
     help
@@ -26,8 +29,7 @@ CTRL+ALT+2 => monitor
     system_powerdown
     savevm/loadvm/delvm <name>
 CTRL+ALT+1 => back to vm
-#ssh from host ip:port to guest:
-ssh <host ip> -p 10022
+CTRL+ALT+F => fullscreen
 
 '
 
@@ -38,36 +40,39 @@ ISO=$3
 cd $HOME/myvm/kvm
 
 nicbr0() {
-    sudo ip link set dev $1 promisc on up
+    sudo ip link set dev $1 promisc on up &> /dev/null
     sudo ip addr flush dev $1 scope host &>/dev/null
     sudo ip addr flush dev $1 scope site &>/dev/null
     sudo ip addr flush dev $1 scope global &>/dev/null
-    sudo ip link set dev $1 master br0
+    sudo ip link set dev $1 master br0 &> /dev/null
+}
+_nicbr0() {
+    sudo ip link set $1 promisc off down &> /dev/null
+    sudo ip link set dev $1 nomaster &> /dev/null
 }
 
-printf -v MACADDR "52:54:%02x:%02x:%02x:%02x" $(( $RANDOM & 0xff)) $(( $RANDOM & 0xff )) $(( $RANDOM & 0xff)) $(( $RANDOM & 0xff ))
-QEMU="qemu-system-x86_64 -net nic,macaddr=$MACADDR,model=virtio"
-
 if [ "$NET" == "bridge" ]; then
-    NIC=$(ip link show | grep enp | grep 'state UP' | head -n 1 | cut -d":" -f 2 | xargs)
-    IPADDR=$(ip addr show | grep -o "inet 192.168\([\.0-9]*\)" | cut -d ' ' -f2)
-
-    sudo /usr/bin/ip link add name br0 type bridge
-    sudo /usr/bin/ip link set dev br0 up
+    HASBR0="$( ip link show | grep br0 )"
+    if [ -z $HASBR0 ] ; then
+        ROUTER="192.168.1.1"
+        SUBNET="192.168.1."
+        NIC=$(ip link show | grep enp | grep 'state UP' | head -n 1 | cut -d":" -f 2 | xargs)
+        IPADDR=$(ip addr show | grep -o "inet $SUBNET\([0-9]*\)" | cut -d ' ' -f2)
+        sudo ip link add name br0 type bridge &> /dev/null
+        sudo ip link set dev br0 up
+        sudo ip addr add $IPADDR/24 brd + dev br0
+        sudo ip route del default &> /dev/null
+        sudo ip route add default via $ROUTER dev br0 onlink
+        nicbr0 $NIC
+        sudo iptables -I FORWARD -m physdev --physdev-is-bridged -j ACCEPT
+    fi
 
     USERID=$(whoami)
-    precreationg=$(/usr/bin/ip tuntap list | /usr/bin/cut -d: -f1 | /usr/bin/sort)
-    sudo /usr/bin/ip tuntap add user $USERID mode tap
-    postcreation=$(/usr/bin/ip tuntap list | /usr/bin/cut -d: -f1 | /usr/bin/sort)
+    precreationg=$(ip tuntap list | cut -d: -f1 | sort)
+    sudo ip tuntap add user $USERID mode tap
+    postcreation=$(ip tuntap list | cut -d: -f1 | sort)
     TAP=$(comm -13 <(echo "$precreationg") <(echo "$postcreation"))
-
     nicbr0 $TAP
-    nicbr0 $NIC
-
-    sudo ip addr add $IPADDR/24 brd + dev br0
-    sudo ip route del default &> /dev/null
-    sudo ip route add default via 192.168.1.1 dev br0 onlink
-    sudo iptables -I FORWARD -m physdev --physdev-is-bridged -j ACCEPT
 
     NSTR="-net tap,ifname=$TAP,script=no,downscript=no,vhost=on"
 else
@@ -76,20 +81,25 @@ fi
 
 if ! [ -z "$ISO" ]; then
     WITHISO="-cdrom $ISO -boot order=d"
+else
+    : 'UEFI'
+    # WITHISO="-bios /usr/share/edk2-ovmf/x64/OVMF.fd"
 fi
 
-$QEMU $NSTR $WITHISO -name $IMG -drive file=${IMG},format=qcow2 -m 4G -enable-kvm -cpu host -smp 4
+printf -v MACADDR "52:54:%02x:%02x:%02x:%02x" $(( $RANDOM & 0xff)) $(( $RANDOM & 0xff )) $(( $RANDOM & 0xff)) $(( $RANDOM & 0xff ))
+qemu-system-x86_64 -net nic,macaddr=$MACADDR,model=virtio $NSTR $WITHISO -name $IMG -drive file=${IMG},format=qcow2 -m 4G -enable-kvm -cpu host -smp 4
 
-if [ "$NET" == "bridge" ]; then
-    sudo ip link set $TAP promisc off down
-    sudo ip link set dev $TAP nomaster
-    sudo ip link set dev $TAP down
-    sudo ip tuntap del $TAP mode tap
-    sudo ip addr del dev br0 $IPADDR/24
+_nicbr0 $TAP
+sudo ip link set dev $TAP down &> /dev/null
+sudo ip tuntap del $TAP mode tap
+
+if [ -z $HASBR0 ] ; then
+    _nicbr0 $NIC
+    sudo ip addr del dev br0 $IPADDR/24 &> /dev/null
     sudo ip link set dev br0 down
-    sudo ip link delete br0 type bridge
-    sudo ip route del default
-    sudo ip route add default via 192.168.1.1 dev $NIC onlink
+    sudo ip link delete br0 type bridge &> /dev/null
+    sudo ip route del default &> /dev/null
+    sudo ip link set dev $NIC up
+    sudo ip route add default via $ROUTER dev $NIC onlink &> /dev/null
 fi
-
 
