@@ -7,6 +7,7 @@ server = mail.upcmail.at
 username = roland.puntaier@chello.at
 port = 995
 password_command = ("pass", "magenta.at/roland.puntaier@chello.at")
+ssl_ciphers = AES256-SHA:AES128-SHA:DES-CBC3-SHA
 
 # #MWNOTMUCHNEW=1 will call notmuch and afew to move mails to folders
 # [destination]
@@ -24,6 +25,7 @@ arguments = ('-f', '%(sender)', '-m', '/home/roland/.local/etc/procmail/roland.p
 [options]
 read_all = true
 delete = true
+#to_oldmail_on_each_mail = true
 #message_log = /home/roland/.local/var/log/getmail.log
 
 # #pacman -S spamassassin

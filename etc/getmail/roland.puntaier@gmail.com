@@ -5,11 +5,10 @@
 type = SimpleIMAPSSLRetriever
 server = imap.gmail.com
 username = roland.puntaier@gmail.com
-port = 993
 #use_xoauth2 = True
 #password_command = ("getmail-gmail-xoauth-tokens", "/home/roland/roland.puntaier@gmail.com.json")
-#contains app password, available after activating Google 2-Step Verification:
-password_command = ("pass", "mailwizard-roland.puntaier@gmail.com")
+#password_command = ("pass", "gmail/roland.puntaier@gmail.com")
+password_command = ("pass", "google/app_password_gmail/roland.puntaier@gmail.com")
 
 # #MWNOTMUCHNEW=1 will call notmuch and afew to move mails to folders
 # [destination]
