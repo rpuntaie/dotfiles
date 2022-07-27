@@ -1,0 +1,29 @@
+#!/bin/bash
+
+: '
+
+gitdaemon
+gitdaemon newreponame
+cd ~/tmp
+git clone git://localhost/newreponame.git
+
+'
+
+
+if [[ "$1" == "--help"  || "$1" == "-h"  ]] ; then
+    echo "mgitdaemon"
+    echo "mgitdaemon newreponame"
+fi
+
+mkdir -p ${HOME}/mygit
+cd ${HOME}/mygit
+if [ -n "$1" ] ; then
+    mkdir $1.git
+    cd $1.git
+    git init --bare
+    touch git-daemon-export-ok
+    chmod 777 -R ~/mygit/$1.git
+fi
+
+git daemon --base-path=${HOME}/mygit --export-all --verbose --enable=receive-pack
+

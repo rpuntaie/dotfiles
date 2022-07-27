@@ -357,6 +357,7 @@ fi
 #PKG: git
 #PKG: tig
 #PKG: git-annex
+#PKG: git-filter-repo
 #PKG: repo
 #PKG: mercurial
 #PKG: subversion
@@ -985,6 +986,7 @@ fi
 #PKG: python-pydecor
 #PKG: python-pyvhdlmodel
 #PKG: python-pyghdl
+#PKG: arm-none-eabi-gdb
 #PKG: arm-none-eabi-gcc
 #PKG: arm-none-eabi-binutils
 #PKG: arm-none-eabi-newlib
@@ -1110,4 +1112,5 @@ fi
 #PKG: task
 #PKG: timew
 #PKG: ledger
+#PKG: font-manager
 
