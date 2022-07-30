@@ -1113,4 +1113,5 @@ fi
 #PKG: timew
 #PKG: ledger
 #PKG: font-manager
+#PKG: github-cli
 
