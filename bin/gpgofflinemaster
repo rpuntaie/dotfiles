@@ -14,10 +14,9 @@ echo $KEYGRIP
 # usrstuff:
 LABEL=${SECRET_KEY_DEVICE_LABEL:-ARCH_201512}
 KEYFILE=$USER/my-secret-key.asc
-
 device=$(findfs LABEL=$LABEL)
 if [ -n "$device" ]; then
-    part="$( blkid | grep $device | cut -d':' -f1 )"
+    part="$( sudo blkid | grep $device | cut -d':' -f1 )"
     udisksctl mount --block-device $part
     gpg2 --import /run/media/$USER/$(ls /run/media/$USER)/$KEYFILE
     udisksctl unmount --block-device $part

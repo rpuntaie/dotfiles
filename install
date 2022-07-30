@@ -221,6 +221,7 @@ fi
 #PKG: automake
 #PKG: binutils
 #PKG: bison
+#PKG: gperf
 #PKG: fakeroot
 #PKG: fakechroot
 #PKG: flex
