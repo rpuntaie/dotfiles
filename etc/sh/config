@@ -21,9 +21,6 @@ export PAGER='/usr/bin/less'
 export BROWSER='/usr/bin/chromium'
 export MANPAGER='nvim +Man! -u /dev/null'
 
-export IDF_PATH=/opt/esp-idf
-export ESPIDF=/opt/esp-idf
-
 # Colours for less:
 LESS_TERMCAP_me="$(printf '\033[0m')"
 LESS_TERMCAP_se="$(printf '\033[0m')"

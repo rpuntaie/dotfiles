@@ -41,8 +41,8 @@ alias ax='git annex'
 alias gmm='git merge'
 alias gms='git merge --squash'
 alias gtags="git tag -l --sort=-creatordate --format='%(creatordate:short):  %(refname:short)'"
-#back to git root
-alias ..g='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+#grt to go to git root
+alias ..g='git rev-parse --show-toplevel'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
@@ -64,3 +64,5 @@ alias ccm64='sudo -E ccm64'
 alias androidemu='emulator -avd $(emulator -list-avds)'
 
 alias clndr='python -m calendar'
+
+alias fh='find . -iname'
