@@ -50,6 +50,8 @@ alias venv='python -m venv --system-site-packages --symlinks'
 alias xtex='xelatex -interaction=nonstopmode'
 
 alias sp='sudo pacman'
+alias spsyu='sudo pacman -Sy; sudo pacman -S archlinux-keyring; sudo pacman -Su'
+
 alias mutt='neomutt'
 alias gm='mw'
 
@@ -66,3 +68,8 @@ alias androidemu='emulator -avd $(emulator -list-avds)'
 alias clndr='python -m calendar'
 
 alias fh='find . -iname'
+
+export IDF_PATH=$HOME/msrc/esp-idf
+alias espidf='export IDF_PATH=$HOME/msrc/esp-idf;
+. $IDF_PATH/export.sh'
+

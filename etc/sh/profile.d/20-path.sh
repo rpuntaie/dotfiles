@@ -33,5 +33,3 @@ export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
 export PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin"
 export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
 
-export IDF_PATH=$HOME/msrc/esp-idf
-
