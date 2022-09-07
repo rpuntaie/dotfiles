@@ -1,6 +1,10 @@
 #order: [.zshenv] [.zprofile if login] [.zshrc if interactive] [.zlogin if login]
 
-export ZGEN_DIR="$XDG_STATE_HOME/.zgen"
+if [ "$(uname)" == "Darwin" ] ; then
+  export ZGEN_DIR="$HOME/.cache/zgen"
+else
+  export ZGEN_DIR="$XDG_STATE_HOME/.zgen"
+fi
 if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then
   echo "Zgen not found, bootstrapping."
   mkdir -p "$ZGEN_DIR"

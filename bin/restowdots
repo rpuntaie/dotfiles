@@ -27,6 +27,11 @@ fi
 #bash dotfiles/bin/restowdots
 if [[ ! $(uname) =~ "Darwin" ]]; then
     rsync -av ~/$DOTDIR/etc/vim/ ~/.vim/
+    rsync -av ~/$DOTDIR/etc/ ~/.config/
+    cd $HOME
+    mv .zprofile zprofile_prev
+    ln -s $HOME/mine/dotfiles/etc/sh/profile
+    ln -s $HOME/mine/dotfiles/etc/zsh/zshrc .zshrc
     exit 0
 elif [[ ! $(uname) =~ "Linux" ]]; then
     rsync -av ~/$DOTDIR/etc/vim/ ~/vimfiles/
