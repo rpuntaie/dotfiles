@@ -25,7 +25,10 @@ fi
 
 #at least the vim config for Windows:
 #bash dotfiles/bin/restowdots
-if [[ ! $(uname) =~ "Linux" ]]; then
+if [[ ! $(uname) =~ "Darwin" ]]; then
+    rsync -av ~/$DOTDIR/etc/vim/ ~/.vim/
+    exit 0
+elif [[ ! $(uname) =~ "Linux" ]]; then
     rsync -av ~/$DOTDIR/etc/vim/ ~/vimfiles/
     exit 0
 fi

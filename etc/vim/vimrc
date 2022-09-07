@@ -100,6 +100,9 @@ noremap ` ,
 if has('win32')
   let g:localvimfiles=$HOME.'/vimfiles'
   let $MYVIMRC=g:localvimfiles.'/vimrc'
+elseif has('mac')
+  let g:localvimfiles=$HOME.'/.vim'
+  let $MYVIMRC=g:localvimfiles.'/vimrc'
 else
   " to use vimrc in unconfigured system:
   " VIMINIT="so dotfiles/etc/vim/vimrc" vim
@@ -112,7 +115,12 @@ else
   let $MYVIMRC=$XDG_CONFIG_HOME.'/vim/vimrc'
   let g:localvimfiles=$XDG_STATE_HOME.'/vim'
 endif
-let g:bundledir=g:localvimfiles.'/dein'
+if has('mac')
+  let g:bundledir=$HOME.'/.cache/dein'
+  let g:localvimfiles=$HOME.'/.vim'
+else
+  let g:bundledir=g:localvimfiles.'/dein'
+endif
 set undofile
 let &undodir=g:localvimfiles.'/undo'
 if !has('win32')
@@ -221,7 +229,7 @@ endif
   call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
 ""| |gitv-usage| :Gitv[!]
   call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
-" call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
+  call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
   call dein#add('junegunn/gv.vim',{'if':l:nn,'merged':0}) " needs fugitive
     "other vcs
 ""| |vcscommand-mappings| works not only for git (<leader>z)
@@ -238,8 +246,9 @@ endif
   call dein#add('rpuntaie/vim-barbaric',{'if':l:nn,'merged':0})
   call dein#add('goerz/jupytext.vim',{'if':l:nn,'merged':0})
   call dein#add('ojroques/vim-oscyank',{'if':l:nn,'merged':0})
-  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
+"  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
   call dein#add('vyperlang/vim-vyper',{'if':l:nn,'merged':0})
+"call dein#add('lifepillar/vim-colortemplate',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
 "'editorconfig/editorconfig-vim'
@@ -262,6 +271,9 @@ endif
   " call dein#add('dracula/vim')
   " call dein#add('sainnhe/sonokai')
 endfunction
+
+let g:Gitv_OpenHorizontal = 0
+
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
     if isdirectory(g:bundledir.'/repos')
@@ -577,7 +589,8 @@ endif
 set diffopt+=iwhite
 syntax on
 set background=dark
-colorscheme murphy1
+" colorscheme roland1  " much green
+colorscheme roland2
 " set termguicolors            " 24 bit color
 " colorscheme aurora
 " colorscheme dracula

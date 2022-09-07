@@ -610,6 +610,7 @@ fi
 #PKG: python-apipkg
 #PKG: python-imagesize
 #PKG: python-openpyxl
+#PKG: python-reedsolo
 #PKG: sqlite
 #PKG: mariadb
 #PKG: postgresql
@@ -673,6 +674,7 @@ fi
 #PKG: dtools
 #PKG: dub
 #PKG: ldc
+#PKG: dart
 #PKG: liblphobos
 #PKG: libphobos
 #PKG: xf86-input-libinput
@@ -1115,4 +1117,7 @@ fi
 #PKG: ledger
 #PKG: font-manager
 #PKG: github-cli
+#PKG: ext4magic
+#PKG: calibre
+
 

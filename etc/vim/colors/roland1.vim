@@ -3,7 +3,7 @@ set background=dark
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = "murphy1"
+let g:colors_name = "roland1"
 
 hi Normal		ctermbg=Black  ctermfg=lightgreen guibg=Black		 guifg=lightgreen
 hi Comment		term=bold	   ctermfg=LightRed   guifg=Orange
