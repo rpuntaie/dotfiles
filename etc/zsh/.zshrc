@@ -1,6 +1,6 @@
 #order: [.zshenv] [.zprofile if login] [.zshrc if interactive] [.zlogin if login]
 
-if [ "$(uname)" == "Darwin" ] ; then
+if [[ "$(uname)" == "Darwin" ]] ; then
   export ZGEN_DIR="$HOME/.cache/zgen"
 else
   export ZGEN_DIR="$XDG_STATE_HOME/.zgen"
