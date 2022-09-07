@@ -1,15 +1,5 @@
 # vim: syntax=zsh
-
-if [[ "$(uname)" == "Darwin" ]] ; then
-  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-  export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-  export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.cache}"
-  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.cache/share}"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-export HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
-
+#
 OS_NAME=''
 if [ -e /etc/os-release ]; then
 	OS_NAME="$(. /etc/os-release && echo "$ID")"
@@ -17,6 +7,19 @@ else
 	OS_NAME="$(uname)"
 fi
 export OS_NAME
+
+if [[ "$(uname)" == "Darwin" ]] ; then
+  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+  export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+  export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.cache}"
+  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.cache/share}"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  export GPG_TTY=$(tty)
+fi
+
+export HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
 
 if [ "$TERM" = "rxvt-unicode-256color" ]; then
   export TERM="rxvt-unicode"
@@ -39,10 +42,6 @@ LESS_TERMCAP_mb="$(printf '\033[34m')"
 LESS_TERMCAP_md="$(printf '\033[31m')"
 export LESS_TERMCAP_mb LESS_TERMCAP_md LESS_TERMCAP_me LESS_TERMCAP_se \
        LESS_TERMCAP_so LESS_TERMCAP_ue LESS_TERMCAP_us
-
-# gnupg
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-export GPG_TTY=$(tty)
 
 #make cmake generate compile_commands.json
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON
