@@ -30,10 +30,11 @@ if [[ $(uname) == "Darwin" ]]; then
     rsync -av ~/$DOTDIR/etc/ ~/.config/
     rsync -av ~/$DOTDIR/bin/ ~/bin/
     cd $HOME
+    rm -rf zprofile_prev
     mv .zprofile zprofile_prev
-    ln -s $HOME/mine/dotfiles/etc/sh/config .zshenv
-    ln -s $HOME/mine/dotfiles/etc/sh/profile .zshprofile
-    ln -s $HOME/mine/dotfiles/etc/zsh/.zshrc
+    ln -s -f $HOME/mine/dotfiles/etc/sh/config .zshenv
+    ln -s -f $HOME/mine/dotfiles/etc/sh/profile .zprofile
+    ln -s -f $HOME/mine/dotfiles/etc/zsh/.zshrc
     exit 0
 elif [[ ! $(uname) =~ "Linux" ]]; then
     rsync -av ~/$DOTDIR/etc/vim/ ~/vimfiles/
