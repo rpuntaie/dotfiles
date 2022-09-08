@@ -13,16 +13,21 @@ PATH="$PATH:$GOPATH/bin"
 
 PATH="$PATH:/usr/lib/jvm/java-11-openjdk/bin"
 
-PATH="$(readlink -f "$HOME/.local/bin"):$PATH"
-PATH="$(readlink -f "$HOME/.local/lib/python"):$PATH"
-PATH="$PATH:$(readlink -f "$HOME/.local/var/lib/npm/bin")"
-PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+if [[  "$(uname)" == "Darwin" ]] ; then
+    export SWIFT="/usr/bin/swift"
+    PATH="$HOME/bin:$PATH"
+else
+    #cd ${HOME}/tmp
+    #tar -xf /var/cache/pacman/pkg/icu-69.1-1-x86_64.pkg.tar.zst
+    export LD_LIBRARY_PATH=${HOME}/tmp/usr/lib
+    export SWIFT="/usr/lib/swift/bin/swift"
+    PATH="$PATH:/usr/lib/swift/bin"
 
-#cd ${HOME}/tmp
-#tar -xf /var/cache/pacman/pkg/icu-69.1-1-x86_64.pkg.tar.zst
-export LD_LIBRARY_PATH=${HOME}/tmp/usr/lib
-export SWIFT="/usr/lib/swift/bin/swift"
-PATH="$PATH:/usr/lib/swift/bin"
+    PATH="$(readlink -f "$HOME/.local/bin"):$PATH"
+    PATH="$(readlink -f "$HOME/.local/lib/python"):$PATH"
+    PATH="$PATH:$(readlink -f "$HOME/.local/var/lib/npm/bin")"
+    PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+fi
 
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/21.4.7075529
