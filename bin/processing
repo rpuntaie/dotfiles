@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env sh
+
 while inotifywait -e modify $1; do
 ps cax | grep java > /dev/null
 if [ $? -eq 0 ]; then

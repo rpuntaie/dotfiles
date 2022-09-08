@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env sh
 
 # Part of install: calls stow for these dotfiles
 # Usage: [NOGDB=1] restowdots [-S]

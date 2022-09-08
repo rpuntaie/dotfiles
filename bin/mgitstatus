@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # https://github.com/fboender/multi-git-status
 # https://raw.githubusercontent.com/fboender/multi-git-status/master/mgitstatus

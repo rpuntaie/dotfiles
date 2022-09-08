@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env sh
 
 [ -n "${1}" ] || echo "'npm_maybe pkg [version]' and possibly further npm arguments beyond -g"
 [ -n "${1}" ] || exit
