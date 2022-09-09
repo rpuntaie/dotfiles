@@ -72,3 +72,6 @@ export IDF_PATH=$HOME/msrc/esp-idf
 alias espidf='export IDF_PATH=$HOME/msrc/esp-idf;
 . $IDF_PATH/export.sh'
 
+if (command -v brew && brew list --formula | grep -c vim ) > /dev/null 2>&1; then
+    alias vim="$(brew --prefix vim)/bin/vim"
+fi

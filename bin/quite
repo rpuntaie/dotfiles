@@ -10,5 +10,7 @@ def make_sinewave(frequency, length, sample_rate=44100):
   factor = float(frequency) * (pi * 2) / sample_rate
   waveform = np.sin(np.arange(length) * factor)*0
   return waveform
-wave = make_sinewave(500, 1)
+while 1:
+  wave = make_sinewave(500, 1)
+
 
