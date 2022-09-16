@@ -43,6 +43,7 @@ alias gtags="git tag -l --sort=-creatordate --format='%(creatordate:short):  %(r
 #grt to go to git root
 alias ..g='git rev-parse --show-toplevel'
 alias glr='git pull --recurse-submodules'
+alias ghash='git rev-parse HEAD'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
