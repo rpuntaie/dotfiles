@@ -42,6 +42,7 @@ alias gms='git merge --squash'
 alias gtags="git tag -l --sort=-creatordate --format='%(creatordate:short):  %(refname:short)'"
 #grt to go to git root
 alias ..g='git rev-parse --show-toplevel'
+alias glr='git pull --recurse-submodules'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
