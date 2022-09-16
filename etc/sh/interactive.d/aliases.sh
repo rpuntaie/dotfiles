@@ -9,7 +9,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias grep='grep --color=auto'
 alias la='ls -lAh'
-alias ll='ls -lh --time-style=long-iso -tr'
+alias ll='ls -lh -tr'
 alias lsd='ls -d'
 alias lt='ls -tr'
 alias ltt='ls -tr | tail -n 1'
@@ -72,6 +72,6 @@ export IDF_PATH=$HOME/msrc/esp-idf
 alias espidf='export IDF_PATH=$HOME/msrc/esp-idf;
 . $IDF_PATH/export.sh'
 
-if (command -v brew && brew list --formula | grep -c vim ) > /dev/null 2>&1; then
-    alias vim="$(brew --prefix vim)/bin/vim"
+if command -v brew; then
+alias vim="$(brew --prefix vim)/bin/vim"
 fi
