@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 while inotifywait -e modify $1; do
 ps cax | grep java > /dev/null

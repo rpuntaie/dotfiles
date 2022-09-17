@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # switch between us, de layouts or the one provided
 
 if [ -n "$1" ]; then

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 urxvt --class Gvim -e vim "$@" &
 

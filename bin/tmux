@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # use XDG_CONFIG_HOME
 
 [ -f "$XDG_CONFIG_HOME"/tmux/tmux.conf ] ||
