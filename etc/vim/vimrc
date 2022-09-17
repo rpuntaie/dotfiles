@@ -162,7 +162,7 @@ function! s:Deinplugins()
 ""| |easymotion-default-mappings| ,,{fFtTwWbB(g)eEjknN}
   call dein#add('Lokaltog/vim-easymotion',{'if':l:nn,'merged':0}) " <leader><leader>f
 ""| |matchup-default-mappings|  % {gv[]zai(ds)(cs}%
-  call dein#add('andymass/vim-matchup',{'if':l:nn,'merged':0})
+  call dein#add('andymass/vim-matchup',{'if':l:nn,'merged':0,'rev':'4bbb22d'})
 "   indentation guides
   "call dein#add('nathanaelkane/vim-indent-guides',{'merged':0})
   call dein#add('thaerkh/vim-indentguides',{'if':l:nn,'merged':0})
@@ -225,7 +225,7 @@ endif
   call dein#add('scrooloose/nerdcommenter',{'if':l:nn,'merged':0})
     "git tools
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
-  call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
+  call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0, 'rev':'0840f00'})
 ""| |gitv-usage| :Gitv[!]
   call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
   call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
