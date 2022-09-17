@@ -10,8 +10,6 @@ cd ~
 echo paths
 umask 077
 mkdir -p ~/my
-mkdir -p ~/my/task
-mkdir -p ~/my/finance
 mkdir -p ~/.gnupg
 mkdir -p ~/.password-store
 

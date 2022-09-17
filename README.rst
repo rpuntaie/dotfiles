@@ -28,8 +28,7 @@ because they are actual user data.
 
 ``~/.password-store``
 ``~/.gnupg``
-``~/my/task``
-``~/my/finance``
+``~/my``
 ``~/Mail``
 
 .. note:: To free these dotfiles from user-specific things, grep for ``usrstuff``.
