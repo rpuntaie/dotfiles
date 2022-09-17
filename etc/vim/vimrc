@@ -40,7 +40,7 @@
 "( cd gfanto/fzf-lsp.nvim && ghash )               6683718 524adec3ce58c848706bcc7f3aa6a09a1
 "( cd godlygeek/tabular && ghash )                 339091a c4dd1f17e225fe7d57b48aff55f99b23a
 "( cd goerz/jupytext.vim && ghash )                a1433a1 1035169960a0342c1f792974765c5cfd8
-"( cd gregsexton/gitv && ghash )                   a73599c 34202709eaa7da78f4fe32b97c6ef83f8
+"( cd sankhesh/gitv && ghash )                   a73599c 34202709eaa7da78f4fe32b97c6ef83f8
 "( cd honza/vim-snippets && ghash )                ef4f418 e5326b2069ab767e4139b7bd3dfa5e0f0
 "( cd idanarye/vim-vebugger && ghash )             15ab930 a6cfbcf8660ded98c3afd289bed7804b0
 "( cd jalvesaq/Nvim-R && ghash )                   7289593 6c12e0c7f5c229916b07e63f16de72233
@@ -225,9 +225,9 @@ endif
   call dein#add('scrooloose/nerdcommenter',{'if':l:nn,'merged':0})
     "git tools
 ""| |fugitive-commands| :Gxxx like :Gdiffsplit
-  call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0, 'rev':'0840f00'})
+  call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0})
 ""| |gitv-usage| :Gitv[!]
-  call dein#add('gregsexton/gitv',{'if':l:nn,'merged':0}) " needs fugitive
+  call dein#add('sankhesh/gitv',{'if':l:nn,'merged':0}) " needs fugitive
   call dein#add('rbong/vim-flog',{'if':l:nn,'merged':0}) " needs fugitive
   call dein#add('junegunn/gv.vim',{'if':l:nn,'merged':0}) " needs fugitive
     "other vcs
