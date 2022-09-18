@@ -13,14 +13,15 @@ git config --global --get user.email
 email=$(git config --global --get user.email)
 topc=$1
 touser=${2:-$USER}
-echo "secret key .asc of $email"
-echo "is copied to $topc"
-echo "/home/$touser"
+thisip=$(ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep 192.168)
 
 if [ -z "$topc" ]
 then
     gpg2 --export-secret-keys -a -o $email.asc $email
-    echo "When done, remove the private key $email.asc"
+    echo "- On the other computer do"
+    echo "scp $USER@$thisip:$(pwd)/$email.asc ."
+    echo "gpg2 --import $email.asc && rm $email.asc"
+    echo "- When done, remove the private key $email.asc"
     exit 0
 fi
 
@@ -29,10 +30,10 @@ then
     gpg2 --export-secret-keys -a -o $email.asc $email
     scp $email.asc $touser@$topc:/home/$touser/$email.asc
 
-	rm -r $(pwd)
-    echo "on the other computer do"
+    rm -r $(pwd)
+    echo "- On the other computer do"
     echo "cd && gpg2 --import $email.asc && rm $email.asc"
-	popd > /dev/null
+    popd > /dev/null
     exit 0
 fi
 
