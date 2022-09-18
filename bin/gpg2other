@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+if [ $# == 0 ] ; then
+    echo "arguments:"
+    echo "ip of destination computer"
+    echo "optionally user on destination computer if different"
+    exit 0
+fi
+
+email=$(git config --global --get user.email)
+topc=${1}
+touser=${2:-$USER}
+echo "secret key .asc of $email"
+echo "is copied to $topc"
+echo "/home/$touser"
+
+if pushd $(mktemp -d || echo BADTMPDIR) > /dev/null
+then
+    gpg2 --export-secret-keys -a -o $email.asc $email
+    scp $email.asc $touser@$topc:/home/$touser/$email.asc
+
+    echo "removing local $(pwd)/$email.asc"
+	rm -r $(pwd)
+	popd > /dev/null
+fi
+
+echo "on the other computer do"
+echo "cd && gpg2 --import $email.asc && rm $email.asc"
+
