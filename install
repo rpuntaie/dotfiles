@@ -466,7 +466,6 @@ fi
 #PKG: python-tensorflow-estimator
 #PKG: python-tensorflow-serving-api
 #PKG: python-h5py
-#PKG: python-sip4
 #PKG: python-cffi
 #PKG: python-cairocffi
 #PKG: python-gammu

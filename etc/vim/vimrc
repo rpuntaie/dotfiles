@@ -1308,6 +1308,7 @@ set laststatus=2
 set wildignore=
 set wildignore+=tags
 set wildignore+=**/build/**/*
+set wildignore+=**/*prebuilt/**/*
 set wildignore+=**/dist/**/*
 set wildignore+=**/*egg-info/**/*
 set wildignore+=**/_links*

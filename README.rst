@@ -37,35 +37,17 @@ Installation
 ============
 
 Installation is handled by the ``install`` script according `rollarch`_.
-I chose
-`gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__ ``--no-folding``
-over directly cloning into ``.local``
-to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
-a nuisance when grep'ing.
-
-I install these my ``dotfiles`` on a machine already set-up, via:
-
-.. code:: sh
-
-   curl -Ls https://git.io/fjVcp | bash
-
-or, if cloned already, via:
-
-.. code:: sh
-
-    ~/dotfiles/install
 
 The
 `install <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/install>`__
-script also installs user packages for python and nodejs or possibly
+script has a list of all packages including user packages for python and nodejs or possibly
 AUR packages using `yay <https://github.com/Jguer/yay>`__.
 
 A whole ArchLinux system, including these ``dotfiles``, can be installed with `rollarch`_.
 If ``AIP2`` is used, a local proxy must be prepared as described in `rollarch`_.
 
-In my case the ``~/dotfiles/install`` script defines: ``KM CL LA_NG AIP2``.
 
-Before installing with ``AIP2`` defined, do on the ``AIP2`` proxy:
+On the ``AIP2`` proxy:
 
 .. code:: sh
 
@@ -87,7 +69,7 @@ Alternatively
 
    mkdir mine
    mount -t nfs -o nfsvers=3 192.168.1.108:/home/roland/mine mine
-   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=fjVcp bash mine/rollarch/rollarch
+   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=mine/dotfiles/install bash mine/rollarch/rollarch
 
 DSK IS FORMATTED. DON'T CHOOSE THE WRONG ONE.
 
@@ -102,6 +84,12 @@ After changing or adding a file to the ``dotfiles`` one must run
    #or ~/dotfiles/install
 
 to update ``~/.local``.
+
+I chose
+`gnu stow <https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow>`__ ``--no-folding``
+over directly cloning into ``.local``
+to keep the ``dotfiles`` repo clean from files filling up the ``.local`` FHS,
+a nuisance when grep'ing.
 
 Help
 ====
