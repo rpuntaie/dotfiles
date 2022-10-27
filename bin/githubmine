@@ -35,5 +35,7 @@ _mine_one https://github.com/rpuntaie/ vim_py3_rst
 _mine_one https://github.com/rpuntaie/ rst2jira
 _mine_one https://github.com/rpuntaie/ syncstart
 _mine_one https://github.com/rpuntaie/ c-examples
+_mine_one https://github.com/rpuntaie/ tensorflow_examples
+_mine_one https://github.com/rpuntaie/ sphinxcontrib-thm
 
 cd ~
