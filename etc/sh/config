@@ -49,3 +49,20 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 export DISTCC_HOSTS='--randomize localhost red,cpp,lzo green,cpp,lzo blue,cpp,lzo'
 
+export TASKRC="${XDG_CONFIG_HOME}/task/taskrc"
+export PYTHONSTARTUP="${XDG_LIB_HOME}/python/startup.py"
+export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/__pycache__"
+export NLTK_DATA="${XDG_STATE_HOME}/nltk"
+export R_ENVIRON_USER="${XDG_CONFIG_HOME}/R/.Renviron"
+export R_LIBS_USER="${XDG_LIB_HOME}/R"
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+export NMBGIT="${XDG_CACHE_HOME}/notmuch/nmbug"
+export NOTMUCH_CONFIG="${XDG_CONFIG_HOME}/notmuch/notmuchrc"
+export MAIL="${HOME}/Mail"
+export MAILDIR="${HOME}/Mail"
+export NPM_CONFIG_PREFIX="${XDG_STATE_HOME}/npm"
+export PASSWORD_STORE_DIR="${HOME}/.password-store"
+export CABAL_CONFIG="${XDG_CONFIG_HOME}/cabal/config"
+export XCOMPOSEFILE="${XDG_CONFIG_HOME}/X11/XCompose"
+export XCOMPOSECACHE="${XDG_CACHE_HOME}/X11/XCompose"
+

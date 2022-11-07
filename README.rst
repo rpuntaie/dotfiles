@@ -7,8 +7,6 @@ Dotfiles
 
 Uses `XDG <https://wiki.archlinux.org/index.php/XDG_Base_Directory>`__,
 reproducing `FHS <http://linux.die.net/man/7/hier>`__ under ``~/.local``.
-See
-`.pam_environment <https://raw.githubusercontent.com/rpuntaie/dotfiles/desktop/home/.pam_environment>`__.
 Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for FHS compliance.
 
 :etc:       ``XDG_CONFIG_HOME``, configurations for apps
