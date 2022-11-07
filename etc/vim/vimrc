@@ -247,6 +247,8 @@ endif
   call dein#add('ojroques/vim-oscyank',{'if':l:nn,'merged':0})
 "  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
   call dein#add('vyperlang/vim-vyper',{'if':l:nn,'merged':0})
+  call dein#add('inkarkat/vim-ingo-library',{'if':l:nn,'merged':0})
+  call dein#add('inkarkat/vim-ExtractMatches',{'if':l:nn,'merged':0})
 "call dein#add('lifepillar/vim-colortemplate',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'

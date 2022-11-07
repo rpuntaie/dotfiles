@@ -11,7 +11,8 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 GOPATH="$HOME/go"; export GOPATH
 PATH="$PATH:$GOPATH/bin"
 
-PATH="$PATH:/usr/lib/jvm/java-11-openjdk/bin"
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+PATH="$PATH:$JAVA_HOME/bin"
 
 if [[  "$(uname)" == "Darwin" ]] ; then
     export SWIFT="/usr/bin/swift"
@@ -29,10 +30,15 @@ else
     PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 fi
 
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/21.4.7075529
-export NDK_ROOT=$HOME/Android/Sdk/ndk/21.4.7075529
-export NDK_HOME=$HOME/Android/Sdk/ndk/21.4.7075529
+if [ -d /opt/android-sdk ] ; then
+    export ANDROID_SDK_ROOT=/opt/android-sdk
+else
+    export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+fi
+
+export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/21.4.7075529
+export NDK_ROOT=$ANDROID_NDK_ROOT
+export NDK_HOME=$ANDROID_NDK_ROOT
 export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
 export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
 export PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin"

@@ -20,7 +20,7 @@ quitWithWarning = do
     when (m == s) (io exitSuccess)
 
 main = do
-    xmonad $ defaultConfig {
+    xmonad $ def {
         modMask = mod4Mask, -- win-L would lock Windows, ranger modified to g1,g2,...
         -- terminal = "xterm -fa monaco -fs 10 -bg black -fg white",
         -- terminal = "alacritty",
@@ -28,10 +28,9 @@ main = do
         keys = mixKeys,
         layoutHook = Tall 1 (3/100) (1/2) ||| Full
         }
-    xmonad $ ewmh def{
-        handleEventHook = handleEventHook def <+> fullscreenEventHook }
+    xmonad $ ewmhFullscreen $ def
 
-mixKeys x = M.union (M.fromList (newKeys x)) (keys defaultConfig x)
+mixKeys x = M.union (M.fromList (newKeys x)) (keys def x)
 newKeys x = [
         ((modMask x, xK_s), spawn "scrot")
         , ((modMask x, xK_u), spawn "scrot -u")

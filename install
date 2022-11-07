@@ -36,9 +36,14 @@ _dotfiles_restowdots(){
   fi
 }
 
-#activate the variable defined in .pam_environment
 _dotfiles_pam_environment(){
-  eval "$(sed -n -e "s/DEFAULT=/=/p" .pam_environment | sed -n -e '/OVERRIDE\|@{\|:/!p' | sed "s/ //g" | sed "s/^.*/export \0/")"
+  #evaluate the variables defined in .pam_environment for the current shell
+  eval "$(sed -n -e "s/DEFAULT=/=/p" $DOTDIR/home/.pam_environment | sed -n -e '/OVERRIDE\|@{\|:/!p' | sed "s/ //g" | sed "s/^.*/export \0/")"
+  # ~/.pam_environment not sourced any more (FS#68945)
+  sudo mv /etc/security/pam_env.conf /etc/security/pam_env.conf.org # normally without defines
+  sudo cp $DOTDIR/home/.pam_environment /etc/security/pam_env.conf
+  sudo chown root:root /etc/security/pam_env.conf
+  export CFG=${XDG_CONFIG_HOME:-$HOME/config}
 }
 
 _dotfiles_fonts(){
@@ -71,24 +76,23 @@ _dotfiles_scheme(){
 _dotfiles_weechat(){
   # weechat: no symlink, because it changes the files
   if type weechat; then
-    rsync -a ~/$DOTDIR/etc/weechat/ ~/.local/var/lib/weechat/
-    sed -i "s/WEENAME/rpuntaie/g" ~/.local/var/lib/weechat/irc.conf # usrstuff line
-    mkdir -p ~/.local/var/lib/weechat/ssl
-    cd ~/.local/var/lib/weechat/ssl
+    rsync -a ~/$DOTDIR/etc/weechat/ $CFG/var/lib/weechat/
+    sed -i "s/WEENAME/rpuntaie/g" $CFG/var/lib/weechat/irc.conf # usrstuff line
+    mkdir -p $CFG/var/lib/weechat/ssl
+    cd $CFG/var/lib/weechat/ssl
     openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem -subj "/C=AT/ST=AT/L=AT/O=ME/OU=IT/CN=me.org"
   fi
 }
 
 _dotfiles_email(){
   if type mutt; then
-    # mw into ~/.local/bin
-    ~/.local/bin/ghi rpuntaie/mailwizard ~/.local
+    $CFG/bin/ghi rpuntaie/mailwizard $CFG
     #setup email usrstuff:
-    rm -rf ~/.local/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
-    a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" ~/.local/bin/mw add
-    a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" ~/.local/bin/mw add
-    a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" ~/.local/bin/mw add
-    a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" ~/.local/bin/mw add
+    rm -rf $CFG/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
+    a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" $CFG/bin/mw add
+    a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" $CFG/bin/mw add
+    a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" $CFG/bin/mw add
+    a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" $CFG/bin/mw add
   fi
 }
 
@@ -102,7 +106,7 @@ _perl_repl(){ #usrstuff
   echo "re.pl installed"
 }
 
-_config_postgres(){
+_config_postgres(){ #usrstuff
   if type postgres; then
     sudo -u postgres initdb -D /var/lib/postgres/data
     sudo -u postgres createuser roland
@@ -394,6 +398,7 @@ fi
 #PKG: gmtp
 #PKG: mtpfs
 #PKG: android-file-transfer
+#PKG: android-tools
 #PKG: gammu
 #PKG: dialog
 #PKG: openssh
