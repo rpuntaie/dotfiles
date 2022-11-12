@@ -521,6 +521,7 @@ fi
 #PKG: python-pathspec
 #PKG: python-pudb
 #PKG: python-grpcio
+#PKG: python-astropy
 #PKG: gunicorn
 #PKG: uwsgi
 #PKG: python-redis
@@ -634,6 +635,7 @@ fi
 #PKG: gradle
 #PKG: kotlin
 #PKG: clojure
+#PKG: leiningen
 #PKG: rlwrap
 #PKG: groovy
 #PKG: ant
@@ -648,6 +650,7 @@ fi
 #PKG: xmonad-utils
 #PKG: haskell-shake
 #PKG: haskell-haddock-library
+#PKG: haskell-language-server
 #PKG: nix
 #PKG: go
 #PKG: go-tools
@@ -1123,5 +1126,8 @@ fi
 #PKG: github-cli
 #PKG: ext4magic
 #PKG: calibre
+#PKG: waf
+#PKG: mkosi
+
 
 

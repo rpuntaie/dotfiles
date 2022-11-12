@@ -12,27 +12,20 @@ yaysno(){
 yay -S --noconfirm $1
 }
 
-#python 
-yaysno erfa
-yaysno python-pyerfa #fails
-yaysno python-astropy
 #j language
 yaysno j9-git
 #rust
 yaysno evcxr_repl
 #nix
-yaysno archlinux-nix 
+yaysno archlinux-nix
 #
 yaysno mimeo
-#R
-yaysno rstudio-desktop-bin
-#WAF
-yaysno waf-git
 #dictionary
 yaysno wordnet-cli
 #urxvt
 yaysno urxvt-vim-scrollback-git
 yaysno powerline-console-fonts
+yaysno perl-term-shellui.git
 #php REPL
 yaysno psysh
 #lein (clojure projects)
@@ -52,18 +45,14 @@ yaysno conan
 #python-patch-ng
 #python-pluginbase
 
-#printer
-yaysno brother-hl2250dn
 #Logitech MX Master 3 mouse
 yaysno logiops-git
 
 #docker explore image
 yaysno dive-git
-#docker create image
-yaysno dockerize-git
 
 #.editorconfig
-yaysno eclint
+# yaysno eclint
 #processing
 yaysno processing4
 
@@ -71,7 +60,7 @@ yaysno processing4
 yaysno git-quick-stats
 
 # skype
-yaysno skypeforlinux-preview-bin
+# yaysno skypeforlinux-preview-bin
 
 # phonetic analysis
 # yaysno praat
@@ -82,7 +71,7 @@ yaysno clean-chroot-manager
 #address book for mutt
 yaysno abook
 #show vcalendar attachment
-yaysno vcal
+#yaysno vcal
 
 #clang Build EAR
 #yaysno bear-git
