@@ -177,7 +177,7 @@ fi
 #DFN: KM=us
 #DFN: CL=99
 #DFN: LA_NG="de_DE es_ES fr_FR it_IT ru_RU"
-#DFN: AIP2=1.108
+#DFN: AIP2=1.106
 
 #PKG: bash
 #PKG: bzip2

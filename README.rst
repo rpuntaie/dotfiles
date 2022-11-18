@@ -67,7 +67,8 @@ Alternatively
 
    mkdir mine
    mount -t nfs -o nfsvers=3 192.168.1.108:/home/roland/mine mine
-   DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=mine/dotfiles/install bash mine/rollarch/rollarch
+   lsblk
+   DSK=/dev/sda SWAP=off USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=mine/dotfiles/install bash mine/rollarch/rollarch
 
 DSK IS FORMATTED. DON'T CHOOSE THE WRONG ONE.
 
