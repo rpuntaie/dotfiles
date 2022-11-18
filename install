@@ -4,10 +4,10 @@
 # https://git.io/fjVcp
 
 dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-/home/roland/.local/etc}
-export XDG_STATE_HOME=${XDG_STATE_HOME:-/home/roland/.local/var/lib}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-/home/roland/.local/var/cache}
-export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/tmp}
+export XDG_CONFIG_HOME=/home/roland/.local/etc
+export XDG_STATE_HOME=/home/roland/.local/var/lib
+export XDG_CACHE_HOME=/home/roland/.local/var/cache
+export XDG_RUNTIME_DIR=/tmp
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
