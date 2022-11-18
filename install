@@ -441,7 +441,6 @@ fi
 #PKG: cups-pdf
 #PKG: gutenprint
 #PKG: foomatic-db-gutenprint-ppds
-#PKG: wkhtmltopdf
 #PKG: cmake
 #PKG: ninja
 #PKG: meson
@@ -1002,10 +1001,6 @@ fi
 #PKG: arduino
 #PKG: arduino-docs
 #PKG: stlink
-#PKG: ghdl-gcc
-#PKG: python-pydecor
-#PKG: python-pyvhdlmodel
-#PKG: python-pyghdl
 #PKG: arm-none-eabi-gdb
 #PKG: arm-none-eabi-gcc
 #PKG: arm-none-eabi-binutils
@@ -1037,7 +1032,6 @@ fi
 #PKG: tesseract-data-eng
 #PKG: recoll
 #PKG: pdfgrep
-#PKG: tracker
 #PKG: lucene++
 #PKG: pandoc
 #PKG: asciidoc
