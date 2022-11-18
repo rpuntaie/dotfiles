@@ -4,6 +4,10 @@
 # https://git.io/fjVcp
 
 dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-/home/roland/.local/etc}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-/home/roland/.local/var/lib}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-/home/roland/.local/var/cache}
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/tmp}
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
@@ -110,7 +114,7 @@ _config_postgres(){ #usrstuff
 
 _vim_dein_plugin(){
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein_s.sh
-  bash dein_s.sh "$XDG_STATE_HOME/vim/dein"
+  bash /tmp/dein_s.sh "$XDG_STATE_HOME/vim/dein"
   vim "+call dein#build()" "+qall"
   vim "+call dein#update()" "+qall"
 }
@@ -123,12 +127,16 @@ git clone https://github.com/tmux-plugins/tpm $XDG_STATE_HOME/tmux/plugins/tpm
 }
 
 _nfs_exports(){ #usrstuff
-sudo cat > /etc/exports << EOF
+mkdir -p tmp
+cat > tmp/exports << EOF
 /home/roland/mine *(rw, sync)
 /home/roland/msrc *(rw, sync)
 # to reload:
 # exportfs -arv
 EOF
+sudo chown root:root tmp/exports
+sudo mv /etc/exports /etc/exports.orig
+sudo mv tmp/exports /etc/exports
 }
 
 #main
