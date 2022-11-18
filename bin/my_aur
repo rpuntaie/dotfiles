@@ -4,7 +4,7 @@
 sudo rm -rf ~/.local/var/cache/yay
 cd ~/tmp
 rm -rf yay
-git clone https://aur.archlinux.org/yay.git
+git clone https://aur.archlinux.org/yay-git.git
 cd yay
 makepkg -si
 
@@ -13,12 +13,10 @@ yay -S --noconfirm $1
 }
 
 #j language
-yaysno j9-git
+#yaysno j9-git
 #rust
 yaysno evcxr_repl
-#nix
-yaysno archlinux-nix
-#
+#Open files by MIME-type or file name using regular expressions
 yaysno mimeo
 #dictionary
 yaysno wordnet-cli
@@ -28,8 +26,6 @@ yaysno powerline-console-fonts
 yaysno perl-term-shellui.git
 #php REPL
 yaysno psysh
-#lein (clojure projects)
-yaysno leiningen
 #planck (clojure repl)
 yaysno planck-git
 #C/C++

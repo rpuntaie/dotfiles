@@ -132,6 +132,15 @@ fi
 git clone https://github.com/tmux-plugins/tpm $XDG_STATE_HOME/tmux/plugins/tpm
 }
 
+_nfs_exports(){ #usrstuff
+sudo cat > /etc/exports << EOF
+/home/roland/mine *(rw, sync)
+/home/roland/msrc *(rw, sync)
+# to reload:
+# exportfs -arv
+EOF
+}
+
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
@@ -139,6 +148,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   cd ~
   _dotfiles_pam_environment
   if [ -n "$dotfiles_new_install" ] && $dotfiles_new_install; then
+    _nfs_exports
     _dotfiles_fonts
     _dotfiles_python
     _dotfiles_nodejs
