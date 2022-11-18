@@ -36,16 +36,6 @@ _dotfiles_restowdots(){
   fi
 }
 
-_dotfiles_pam_environment(){
-  #evaluate the variables defined in .pam_environment for the current shell
-  eval "$(sed -n -e "s/DEFAULT=/=/p" $DOTDIR/home/.pam_environment | sed -n -e '/OVERRIDE\|@{\|:/!p' | sed "s/ //g" | sed "s/^.*/export \0/")"
-  # ~/.pam_environment not sourced any more (FS#68945)
-  sudo mv /etc/security/pam_env.conf /etc/security/pam_env.conf.org # normally without defines
-  sudo cp $DOTDIR/home/.pam_environment /etc/security/pam_env.conf
-  sudo chown root:root /etc/security/pam_env.conf
-  export CFG=${XDG_CONFIG_HOME:-$HOME/config}
-}
-
 _dotfiles_fonts(){
   fc-cache -fv
 }
@@ -146,7 +136,6 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   _dotfiles_check_packages || exit $?
   _dotfiles_restowdots
   cd ~
-  _dotfiles_pam_environment
   if [ -n "$dotfiles_new_install" ] && $dotfiles_new_install; then
     _nfs_exports
     _dotfiles_fonts
