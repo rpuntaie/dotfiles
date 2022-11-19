@@ -54,3 +54,7 @@ pip install --user python-bitcoinlib
 pip install --user hdwallet
 pip install --user ecpy
 
+pip install --user pipx
+pipx ensurepath
+pipx install vyper
+pipx install eth-brownie

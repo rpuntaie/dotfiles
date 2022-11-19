@@ -4,10 +4,11 @@
 # https://git.io/fjVcp
 
 dotfiles_url="https://github.com/rpuntaie/dotfiles" #usrstuff line
-export XDG_CONFIG_HOME=/home/roland/.local/etc
-export XDG_STATE_HOME=/home/roland/.local/var/lib
-export XDG_CACHE_HOME=/home/roland/.local/var/cache
-export XDG_RUNTIME_DIR=/tmp
+export CFG=/home/roland/.local
+export XDG_CONFIG_HOME=$CFG/etc
+export XDG_STATE_HOME=$CFG/var/lib
+export XDG_CACHE_HOME=$CFG/var/cache
+export PATH=$CFG/bin:$PATH
 
 _dotfiles_check_packages(){
   if [ ! -f /usr/bin/stow ]; then
@@ -55,15 +56,21 @@ _dotfiles_nodejs(){
   if ! pacman -Qi npm; then
     sudo pacman -S npm
   fi
+  npm config set prefix ${XDG_CACHE_HOME}/npm
+  npm config set cache ${XDG_CACHE_HOME}/npm
+  npm config set init-module ${XDG_CONFIG_HOME}/npm/npm-init.js
+  export PATH=$XDG_CACHE_HOME/npm/bin:$PATH
+
   bash ~/$DOTDIR/bin/my_nodejs
 }
 
 _dotfiles_scheme(){
   if type raco; then
     #https://pkgs.racket-lang.org/
-    raco pkg install scheme-lib
-    raco pkg install r5rs-lib
-    raco pkg install cext-lib
+    sudo raco setup
+    sudo raco pkg install scheme-lib
+    sudo raco pkg install r5rs-lib
+    sudo raco pkg install cext-lib
   fi
 }
 
@@ -1129,6 +1136,7 @@ fi
 #PKG: calibre
 #PKG: waf
 #PKG: mkosi
+#PKG: solidity
 
 
 

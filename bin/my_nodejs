@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#installs to ~/.local/var/lib/npm
-
 npm -g install npm
 
 #npm -g install express
@@ -17,3 +15,7 @@ npm -g install pandiff
 #npm -g install auto-changelog
 #npm -g install @okta/oidc-middleware
 #npm -g install @okta/okta-sdk-nodej
+
+
+npm -g install truffle
+npm -g install ganache

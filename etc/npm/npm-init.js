@@ -22,7 +22,8 @@ const json = {
   name: repo,
   description: '',
   version: '0.1.0',
-  author: 'Yuichi Tanikawa <kojole.jp@gmail.com> (https://kojole.jp)'
+  author: 'Roland Puntaier <roland.puntaier@gmail.com>'
+  // usrstuff
 };
 
 if (meta) {
