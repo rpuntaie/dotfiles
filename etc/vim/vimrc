@@ -924,7 +924,7 @@ command! TD :cexpr system('~/.local/bin/todo --vimgrep')
 """ `SW`: fzf search for word under cursor and strings containing it
 map <silent> SW :call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>
 """ `SWW`: fzf search for word under cursor
-map <silent> SWW :call setreg('/','\<<C-R><C-W>\>')<CR>:Rg \b<C-R><C-W>\b<CR>
+map <silent> SWW :call setreg('/','\b<C-R><C-W>\b')<CR>:Rg \b<C-R><C-W>\b<CR>
 cmap RG Rg
 " cscope
 set cscopetag
