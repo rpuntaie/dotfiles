@@ -3,14 +3,16 @@
 #yay
 sudo rm -rf ~/.local/var/cache/yay
 cd ~/tmp
-rm -rf yay
+rm -rf yay-git
 git clone https://aur.archlinux.org/yay-git.git
-cd yay
+cd yay-git
 makepkg -si
 
 yaysno(){
 yay -S --noconfirm $1
 }
+
+yaysno procmail # conflicts with msmtp-mta
 
 #j language
 #yaysno j9-git

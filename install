@@ -91,9 +91,9 @@ _dotfiles_email(){
     #setup email usrstuff:
     rm -rf $CFG/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
     a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" $CFG/bin/mw add
-    a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" $CFG/bin/mw add
-    a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" $CFG/bin/mw add
-    a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" $CFG/bin/mw add
+    a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" $CFG/bin/mw add
+    a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" $CFG/bin/mw add
+    a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" $CFG/bin/mw add
   fi
 }
 
@@ -500,6 +500,7 @@ fi
 #PKG: python-pillow
 #PKG: python-pip
 #PKG: python-pygal
+#PKG: python-pygame
 #PKG: python-pygments
 #PKG: python-pylint
 #PKG: python-whoosh
