@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if ip a | grep 192.168.1.110; then
+unison $MAILDIR ssh://192.168.1.107/$MAILDIR -batch
+else
+unison $MAILDIR ssh://192.168.1.110/$MAILDIR -batch
+fi
