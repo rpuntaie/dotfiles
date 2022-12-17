@@ -77,3 +77,5 @@ alias espidf='export IDF_PATH=$HOME/msrc/esp-idf;
 if command -v brew; then
 alias vim="$(brew --prefix vim)/bin/vim"
 fi
+
+alias mail_sync='unison $MAILDIR ssh://192.168.1.107/$MAILDIR -batch'
