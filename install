@@ -158,7 +158,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     _dotfiles_nodejs
     _dotfiles_scheme
     _dotfiles_weechat
-    _dotfiles_email
+    # _dotfiles_email # etc/mutt/mw_gen_mutt_accounts.muttrc,... checked in instead
     _clone_github_mine
     _perl_repl
     _config_postgres

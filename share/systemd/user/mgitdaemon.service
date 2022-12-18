@@ -1,0 +1,7 @@
+[Unit]
+Description=mgitdaemon
+After=network.target
+[Service]
+ExecStart=/home/roland/.local/bin/mgitdaemon
+[Install]
+WantedBy=default.target

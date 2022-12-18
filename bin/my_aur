@@ -12,7 +12,7 @@ yaysno(){
 yay -S --noconfirm $1
 }
 
-yaysno procmail # conflicts with msmtp-mta
+# yaysno procmail # conflicts with msmtp-mta: do manual
 
 #j language
 #yaysno j9-git
