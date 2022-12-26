@@ -249,6 +249,7 @@ endif
   call dein#add('vyperlang/vim-vyper',{'if':l:nn,'merged':0})
   call dein#add('inkarkat/vim-ingo-library',{'if':l:nn,'merged':0})
   call dein#add('inkarkat/vim-ExtractMatches',{'if':l:nn,'merged':0})
+  call dein#add('dart-lang/dart-vim-plugin',{'if':l:nn,'merged':0})
 "call dein#add('lifepillar/vim-colortemplate',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
@@ -429,10 +430,11 @@ if g:CocOverDeoplete
           \ 'coc-sourcekit',
           \ 'coc-kotlin',
           \ 'coc-solidity',
+          \ 'coc-flutter-tools',
           "\ 'coc-godot',
           "\ 'coc-yaml',
           "\ 'coc-highlight',
-          "\ 'coc-angular'
+          "\ 'coc-angular',
           \ ]
     call coc#config('languageserver', {
           \ 'sourcekit': {
@@ -477,6 +479,40 @@ endif
 
 "": `:Sw` sudo write
 command! -nargs=0 Sw w !sudo tee % > /dev/null
+
+
+""" `Sf,SF`: flutter
+nmap <silent> <Leader>Sfpg :CocCommand flutter.pub.get<CR>
+nmap <silent> <Leader>Sfd :CocCommand flutter.devices<CR>
+nmap <silent> <Leader>Sfa :CocCommand flutter.run<CR>
+nmap <silent> <Leader>Sfq :CocCommand flutter.dev.quit<CR>
+nmap <silent> <Leader>Sfl :CocCommand flutter.dev.openDevLog<CR>
+nmap <silent> <Leader>Sfcl :CocCommand flutter.dev.clearDevLog<CR>
+nmap <silent> <Leader>Sfr :CocCommand flutter.dev.hotReload<CR>
+nmap <silent> <Leader>SfR :CocCommand flutter.dev.hotRestart<CR>
+nmap <silent> <Leader>Sft :CocCommand flutter.dev.openDevToolsProfiler<CR>
+nmap <silent> <Leader>Sfp :CocCommand flutter.dev.openProfiler<CR>
+nmap <silent> <Leader>Sfpo :CocCommand flutter.dev.showPerformanceOverlay<CR>
+nmap <silent> <Leader>Sfio :CocCommand flutter.dev.showWidgetInspectorOverride<CR>
+nmap <silent> <Leader>Sfs :CocCommand flutter.dev.screenshot<CR>
+nmap <silent> <Leader>Sflr :CocCommand flutter.lsp.restart<CR>
+nmap <silent> <Leader>Sfcf :CocCommand workspace.renameCurrentFile<CR>
+" =
+nmap <silent> <Leader>SFpg :CocCommand flutter.pub.get<CR>
+nmap <silent> <Leader>SFd :CocCommand flutter.devices<CR>
+nmap <silent> <Leader>SFa :CocCommand flutter.run<CR>
+nmap <silent> <Leader>SFq :CocCommand flutter.dev.quit<CR>
+nmap <silent> <Leader>SFl :CocCommand flutter.dev.openDevLog<CR>
+nmap <silent> <Leader>SFcl :CocCommand flutter.dev.clearDevLog<CR>
+nmap <silent> <Leader>SFr :CocCommand flutter.dev.hotReload<CR>
+nmap <silent> <Leader>SFR :CocCommand flutter.dev.hotRestart<CR>
+nmap <silent> <Leader>SFt :CocCommand flutter.dev.openDevToolsProfiler<CR>
+nmap <silent> <Leader>SFp :CocCommand flutter.dev.openProfiler<CR>
+nmap <silent> <Leader>SFpo :CocCommand flutter.dev.showPerformanceOverlay<CR>
+nmap <silent> <Leader>SFio :CocCommand flutter.dev.showWidgetInspectorOverride<CR>
+nmap <silent> <Leader>SFs :CocCommand flutter.dev.screenshot<CR>
+nmap <silent> <Leader>SFlr :CocCommand flutter.lsp.restart<CR>
+nmap <silent> <Leader>SFcf :CocCommand workspace.renameCurrentFile<CR>
 
 "vimspector
 "in bash:
@@ -527,6 +563,7 @@ set foldmethod=marker
 set showtabline=0
 set scrolloff=1
 set wildmenu
+set wildoptions=pum
 set cmdheight=2
 set hidden
 set nobackup
@@ -1127,7 +1164,7 @@ if g:CocOverDeoplete
       if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
       else
-        call CocAction('doHover')
+        call CocActionAsync('doHover')
       endif
     endfunction
     """ `rn` rename
@@ -1305,6 +1342,7 @@ if g:CocOverDeoplete
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 endif
 set statusline+=%{&spelllang}
+set statusline+=%{strftime('%H:%M')}
 set laststatus=2
 
 set wildignore=
