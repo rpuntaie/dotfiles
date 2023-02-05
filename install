@@ -380,6 +380,7 @@ fi
 #PKG: repo
 #PKG: mercurial
 #PKG: subversion
+#PKG: fossil
 #PKG: stow
 #PKG: ripgrep
 #PKG: fd
@@ -668,6 +669,7 @@ fi
 #PKG: nix
 #PKG: go
 #PKG: go-tools
+#PKG: gopls
 #PKG: mono
 #PKG: dotnet-sdk
 #PKG: skia-sharp
@@ -1023,6 +1025,7 @@ fi
 #PKG: openshot
 #PKG: librecad
 #PKG: blender
+#PKG: meshroom
 #PKG: gimp
 #PKG: krita
 #PKG: inkscape
@@ -1138,6 +1141,7 @@ fi
 #PKG: waf
 #PKG: mkosi
 #PKG: solidity
+#PKG: gnuchess
 
 
 

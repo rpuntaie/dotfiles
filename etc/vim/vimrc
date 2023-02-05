@@ -272,6 +272,7 @@ endif
   " call dein#add('ray-x/aurora')
   " call dein#add('dracula/vim')
   " call dein#add('sainnhe/sonokai')
+  call dein#add('0xStabby/chatgpt-vim',{'if':l:nn,'merged':0})
 endfunction
 
 let g:Gitv_OpenHorizontal = 0
@@ -431,6 +432,7 @@ if g:CocOverDeoplete
           \ 'coc-kotlin',
           \ 'coc-solidity',
           \ 'coc-flutter-tools',
+          \ 'coc-go',
           "\ 'coc-godot',
           "\ 'coc-yaml',
           "\ 'coc-highlight',
