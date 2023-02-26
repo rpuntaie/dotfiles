@@ -46,6 +46,20 @@ exclude_patterns = ['_build']
 latex_engine = 'xelatex'
 latex_show_urls = 'footnote'
 
+_pandoc_latex_pdf = [
+    '--listings', '--number-sections', '--pdf-engine', 'xelatex', '-V',
+    'titlepage', '-V', 'papersize=a4', '-V', 'toc', '-V', 'toc-depth=3', '-V',
+    'geometry:margin=2.5cm'
+     , '-V', 'mainfont:DejaVuSerif'
+     , '-V', 'sansfont:DejaVuSans'
+     , '-V', 'monofont:DejaVuSansMono'
+]
+pandoc_opts = {
+    'pdf':_pandoc_latex_pdf,'latex':_pandoc_latex_pdf,
+    'docx':[],'odt':[],
+    'html':['--mathml','--highlight-style','pygments']
+}
+
 # usrstuff:
 copyright = '2019, Roland Puntaier'
 
