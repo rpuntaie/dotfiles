@@ -23,9 +23,17 @@
 " <ESC> mapped to <CAPSLOCK> in the OS
 "
 " doc/myvimrc.txt.stpl uses """, "": and ""| lines
-""
-
-"working versions
+"
+""minimal copy
+"nnoremap Y y$
+"let mapleader = ","
+"map <silent> s <nop>
+"map <silent> S <nop>
+"nnoremap <leader>s :update<CR>
+"nnoremap <silent> <leader>v :vert botright term<CR><C-W><C-W>
+"nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-P>j
+"
+""working versions
 "example: call dein#add('tpope/vim-fugitive',{'if':l:nn,'merged':0, 'rev':'0840f00'})
 "cd ~/.local/var/lib/vim/dein/repos/github.com
 "( cd andymass/vim-matchup && ghash)               4bbb22d 694e1ca1132a9bbee4f491b48041e1710
@@ -918,7 +926,9 @@ nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 "": `:F{Ff}` font size
 command! FF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+2)','g')
+command! FFF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+6)','g')
 command! Ff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-2)','g')
+command! Fff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-6)','g')
 """ `,s`: save current buffer
 nnoremap <leader>s :update<CR>
 """ `,S`: commit current buffer to git
