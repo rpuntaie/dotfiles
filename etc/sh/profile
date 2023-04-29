@@ -9,3 +9,4 @@ if [ -d "$XDG_CONFIG_HOME/sh/profile.d" ]; then
 	unset profile
 fi
 
+. "$HOME/.cargo/env"

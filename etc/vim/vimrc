@@ -1265,7 +1265,7 @@ iab YY <C-R>=strftime("%Y%m%d")<CR>
 iab YYY <C-R>=strftime("%Y%m%d%a")[:-2]<CR>
 ""i `iGU B6785F62-0A3B-4AFF-A5AA-0AFB2FEEF9F3`
 iab iGU <C-R>=py3eval("str(uuid.uuid4()).upper()")<CR>
-""i `iT t50282011072020`
+""i `t50282011072020`
 iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
 iab KK .. {{{<CR><ESC>0i.. }}}<ESC>kA
 

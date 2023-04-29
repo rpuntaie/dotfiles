@@ -30,3 +30,4 @@ __prompt_command() {
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

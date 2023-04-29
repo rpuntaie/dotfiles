@@ -197,6 +197,7 @@ fi
 #PKG: gawk
 #PKG: gcc-libs
 #PKG: gettext
+#PKG: help2man
 #PKG: glibc
 #PKG: grep
 #PKG: gzip
@@ -698,6 +699,7 @@ fi
 #PKG: dub
 #PKG: ldc
 #PKG: dart
+#PKG: protobuf-c
 #PKG: liblphobos
 #PKG: libphobos
 #PKG: xf86-input-libinput
