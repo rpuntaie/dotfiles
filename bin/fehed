@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-feh -F -R --action 'mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 30 %F' --action1 'mogrify -rotate 90 %F' --action2 'mogrify -rotate -90 %F' $1
+feh --draw-exif -G -d -F -R --action='mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 30 %F' --action1='mogrify -rotate 90 %F' --action2='mogrify -rotate -90 %F' --action3='rm %F' $@
 
