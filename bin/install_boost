@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+: '
+V=1.80.0
+install_boost 1.78.0
+
+'
+
+V=$1
+V_=${V//./_}
+
+cd "$HOME/tmp"
+wget -O "boost_$V_.tar.gz" "https://sourceforge.net/projects/boost/files/boost/$V/boost_$V_.tar.gz/download"
+tar xzvf "boost_$V_.tar.gz"
+cd "boost_$V_/"
+./bootstrap.sh --prefix=/usr/
+./b2
+sudo ./b2 install --prefix=/usr/
+

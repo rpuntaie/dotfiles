@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+: '
+
+https://wiki.blender.org/wiki/Building_Blender/Linux/Arch
+
+~/msrc/blender-git
+~/msrc/blender-git/bender
+~/msrc/blender-git/lib
+~/msrc/blender-git/build_linux
+~/msrc/blender-git/build_linux_bpy
+
+'
+
+cd ~/msrc/blender-git/blender
+git pull --recurse-submodules
+build_files/build_environment/install_linux_packages.py --all
+
+cd ~/msrc/blender-git
+if ! [ -d ~/msrc/blender-git/lib ]; then
+  mkdir -p lib
+  cd lib
+  svn checkout https://svn.blender.org/svnroot/bf-blender/trunk/lib/linux_x86_64_glibc_228
+else
+  cd lib/linux_x86_64_glibc_228
+  svn update
+fi
+
+cd ~/msrc/blender-git/blender
+make
+make bpy
+

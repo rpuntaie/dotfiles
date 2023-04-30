@@ -77,3 +77,6 @@ alias espidf='export IDF_PATH=$HOME/msrc/esp-idf;
 if command -v brew; then
 alias vim="$(brew --prefix vim)/bin/vim"
 fi
+
+alias blender=$HOME/msrc/blender-git/build_linux/bin/blender
+export PYTHONPATH=$HOME/msrc/blender-git/build_linux_bpy/bin
