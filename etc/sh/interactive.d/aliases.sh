@@ -80,3 +80,5 @@ fi
 
 alias blender=$HOME/msrc/blender-git/build_linux/bin/blender
 export PYTHONPATH=$HOME/msrc/blender-git/build_linux_bpy/bin
+export BLENDER_SYSTEM_SCRIPTS=$HOME/msrc/blender-git/blender/scripts
+export BLENDER_USER_CONFIG=$HOME/msrc/blender-git/blender/config

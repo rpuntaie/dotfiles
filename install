@@ -202,6 +202,7 @@ fi
 #PKG: grep
 #PKG: gzip
 #PKG: inetutils
+#PKG: net-tools
 #PKG: iproute2
 #PKG: iputils
 #PKG: jfsutils
@@ -632,6 +633,7 @@ fi
 #PKG: python-imagesize
 #PKG: python-openpyxl
 #PKG: python-reedsolo
+#PKG: python-pipx
 #PKG: sqlite
 #PKG: mariadb
 #PKG: postgresql
@@ -671,6 +673,7 @@ fi
 #PKG: go
 #PKG: go-tools
 #PKG: gopls
+#PKG: delve
 #PKG: mono
 #PKG: dotnet-sdk
 #PKG: skia-sharp

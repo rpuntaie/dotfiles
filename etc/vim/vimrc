@@ -285,6 +285,14 @@ endfunction
 
 let g:Gitv_OpenHorizontal = 0
 
+py3 << EOF
+import os
+try:
+  activate_this = os.path.expanduser('~/.virtualenvs/stable/bin/activate_this.py')
+  exec(open(activate_this).read(), { "__file__": activate_this })
+except: pass
+EOF
+
 let g:bundleinit=0
 if empty($NO_DEIN_INSTALL) && has('vim_starting') && executable('git')
     if isdirectory(g:bundledir.'/repos')
@@ -927,8 +935,10 @@ nmap <silent> <C-l> :wincmd l<CR>
 "": `:F{Ff}` font size
 command! FF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+2)','g')
 command! FFF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+6)','g')
+command! FFFF :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
 command! Ff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-2)','g')
 command! Fff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-6)','g')
+command! Ffff :let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)-8)','g')
 """ `,s`: save current buffer
 nnoremap <leader>s :update<CR>
 """ `,S`: commit current buffer to git
@@ -971,9 +981,9 @@ nnoremap <silent> SD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR
 "": `:TD` execute .local/bin/todo to quickfix list
 command! TD :cexpr system('~/.local/bin/todo --vimgrep')
 """ `SW`: fzf search for word under cursor and strings containing it
-map <silent> SW :call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>
+map <silent> SW :call histadd("cmd",'Rg <C-R><C-W>')<CR>:call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>
 """ `SWW`: fzf search for word under cursor
-map <silent> SWW :call setreg('/','\b<C-R><C-W>\b')<CR>:Rg \b<C-R><C-W>\b<CR>
+map <silent> SWW :call histadd("cmd",'Rg \b<C-R><C-W>\b')<CR>:call setreg('/','\b<C-R><C-W>\b')<CR>:Rg \b<C-R><C-W>\b<CR>
 cmap RG Rg
 " cscope
 set cscopetag
@@ -1077,7 +1087,7 @@ nnoremap <silent> <leader>vm :vert botright term ocaml<CR><C-W><C-W>
 "C-d (yay -S j9-git)
 nnoremap <silent> <leader>v9 :vert botright term j9 --console<CR><C-W><C-W>
 "C-d
-nnoremap <silent> <leader>va :vert botright term lua<CR><C-W><C-W>
+nnoremap <silent> <leader>va :vert botright term lua -i<CR><C-W><C-W>
 "C-c h() (elixir)
 nnoremap <silent> <leader>vx :vert botright term iex<CR><C-W><C-W>
 "<C-d> :help (yay -S evcxr_repl) (rust)
@@ -1088,7 +1098,9 @@ nnoremap <silent> <leader>vu :vert botright term guile<CR><C-W><C-W>
 nnoremap <silent> <leader>vw :vert botright term racket<CR><C-W><C-W>
 "C-d (d repl)
 nnoremap <silent> <leader>vd :vert botright term dub run drepl<CR><C-W><C-W>
-" free: vy vz
+"C-d (dart repl)
+nnoremap <silent> <leader>vy :vert botright term interactive<CR><C-W><C-W>
+" free: vz
 
 """ `,m[m]`: run[echo] in term (two windows: one of them term)
 nnoremap <leader>m yy<C-W><C-W><C-W>""<C-W><C-P>j
@@ -1268,6 +1280,7 @@ iab iGU <C-R>=py3eval("str(uuid.uuid4()).upper()")<CR>
 ""i `t50282011072020`
 iab iT t<C-R>=strftime("%S%M%H%d%m%Y")<CR>
 iab KK .. {{{<CR><ESC>0i.. }}}<ESC>kA
+iab TTT <C-R>=localtime()<CR>
 
 dig ll 2113
 dig II 120129
@@ -1395,4 +1408,6 @@ set wildignore+=**/*.tlog
 set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 set wildignore+=**/node_modules/**/*
+
+
 
