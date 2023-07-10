@@ -985,6 +985,10 @@ map <silent> SW :call histadd("cmd",'Rg <C-R><C-W>')<CR>:call setreg('/','<C-R><
 """ `SWW`: fzf search for word under cursor
 map <silent> SWW :call histadd("cmd",'Rg \b<C-R><C-W>\b')<CR>:call setreg('/','\b<C-R><C-W>\b')<CR>:Rg \b<C-R><C-W>\b<CR>
 cmap RG Rg
+""" `ST`: like TS but with 8 lines
+map <silent> ST :TS<CR>:resize 8<CR>
+""" `SE`: restore existing zsh on the right side 
+map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR> 
 " cscope
 set cscopetag
 if has("cscope")

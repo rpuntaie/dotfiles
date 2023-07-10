@@ -246,6 +246,7 @@ fi
 #PKG: fakechroot
 #PKG: flex
 #PKG: gcc
+#PKG: expect
 #PKG: groff
 #PKG: libtool
 #PKG: m4
