@@ -339,7 +339,20 @@ if !g:CocOverDeoplete
 endif
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsListSnippets = '<c-tab>'
+"let g:UltiSnipsListSnippets = '<c-tab>'
+inoremap <silent> <c-tab> <C-\><C-O>:Snippets<CR>
+"#https://github.com/junegunn/fzf.vim/issues/796
+"function! s:inject_snippet(line)
+"  let ve = &ve
+"  set ve=onemore
+"  let del = empty(matchstr(getline('.'), '\%' . (col('.') - 1) . 'c\S')) ? "" : "\<c-w>"
+"  let snip = split(a:line, "\t")[0]
+"  execute 'normal! i'.del.s:strip(snip)
+"  execute 'normal! l'
+"  call UltiSnips#CursorMoved()  " sync UltiSnips state after inserting text
+"  call UltiSnips#ExpandSnippet()
+"  let &ve = ve
+"endfunction
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 "sheerun/vim-polyglot
@@ -532,7 +545,7 @@ nmap <silent> <Leader>SFs :CocCommand flutter.dev.screenshot<CR>
 nmap <silent> <Leader>SFlr :CocCommand flutter.lsp.restart<CR>
 nmap <silent> <Leader>SFcf :CocCommand workspace.renameCurrentFile<CR>
 
-"vimspector
+"vimspector debugger
 "in bash:
 "cd $XDG_STATE_HOME/vim/dein/repos/github.com/puremourning/vimspector
 "./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all
@@ -968,8 +981,9 @@ nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `sc[c]`: (re)number
 vnoremap scc :!cat -n<CR>
 vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<CR>
-""" `sp`: yank current file full path
-nnoremap <silent> spp :let @* = expand("%:p")<CR>
+""" `sp, spp`: yank current file path or dir
+nnoremap <silent> sp :let @* = expand("%:p")<CR>
+nnoremap <silent> spp :let @* = expand("%:p:h")<CR>
 """ `m`: match in o v n mode
 onoremap <silent>m //e<CR>
 vnoremap <silent>m //e<CR>
@@ -987,8 +1001,9 @@ map <silent> SWW :call histadd("cmd",'Rg \b<C-R><C-W>\b')<CR>:call setreg('/','\
 cmap RG Rg
 """ `ST`: like TS but with 8 lines
 map <silent> ST :TS<CR>:resize 8<CR>
-""" `SE`: restore existing zsh on the right side 
-map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR> 
+""" `SE,SF`: restore existing zsh on the right side (with path of file)
+map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR>
+map <silent> SF spp:vsplit<CR><C-W><C-W>:b zsh<CR>cd <C-W>"*<CR>
 " cscope
 set cscopetag
 if has("cscope")
@@ -1412,6 +1427,4 @@ set wildignore+=**/*.tlog
 set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 set wildignore+=**/node_modules/**/*
-
-
 

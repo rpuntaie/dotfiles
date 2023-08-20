@@ -1047,6 +1047,7 @@ fi
 #PKG: recoll
 #PKG: pdfgrep
 #PKG: lucene++
+#PKG: shellcheck
 #PKG: pandoc
 #PKG: asciidoc
 #PKG: expat

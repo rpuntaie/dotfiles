@@ -44,9 +44,12 @@ alias gtags="git tag -l --sort=-creatordate --format='%(creatordate:short):  %(r
 alias ..g='git rev-parse --show-toplevel'
 alias glr='git pull --recurse-submodules'
 alias ghash='git rev-parse HEAD'
+alias gdst='git diff stash@{0} HEAD'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
+alias py='~/.virtualenvs/stable/bin/python'
+alias pyv='source ~/.virtualenvs/stable/bin/activate'
 
 alias xtex='xelatex -interaction=nonstopmode'
 
