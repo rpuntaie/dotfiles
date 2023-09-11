@@ -474,6 +474,7 @@ fi
 #PKG: twine
 #PKG: xonsh
 #PKG: yapf
+#PKG: httpie
 #PKG: autopep8
 #PKG: python-ipykernel
 #PKG: ansible
@@ -1149,6 +1150,10 @@ fi
 #PKG: mkosi
 #PKG: solidity
 #PKG: gnuchess
+#PKG: exfatprogs
+#PKG: fzy
+#PKG: xmlstarlet
+#PKG: jq
 
 
 
