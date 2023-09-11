@@ -1080,6 +1080,7 @@ fi
 #PKG: firefox
 #PKG: chromium
 #PKG: links
+#PKG: lynx
 #PKG: qutebrowser
 #PKG: w3m
 #PKG: browserpass
