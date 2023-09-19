@@ -90,7 +90,8 @@ setprompt () {
 
     ###
     # Finally, the prompt.
-    PS1='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
+    NEWLINE=$'\n'
+    PS1='${NEWLINE}$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
 $PR_MAGENTA%L($PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m:%l$PR_MAGENTA)\
 $PR_SHIFT_IN$PR_HBAR$PR_HBAR$PR_SHIFT_OUT\
 ($PR_YELLOW%D{%Y%m%d %H:%M}$PR_MAGENTA)\
