@@ -14,7 +14,6 @@
 -- Cabal library version: 3.2.0.0
 -- cabal-install version: 3.2.0.0
 
-
 repository hackage.haskell.org
   url: http://hackage.haskell.org/
   -- secure: True
@@ -40,7 +39,7 @@ store-dir: /home/roland/.local/var/cache/cabal/store
 -- with-hc-pkg:
 -- program-prefix:
 -- program-suffix:
-library-vanilla: True
+library-vanilla: False
 -- library-profiling:
 shared: True
 -- static:
