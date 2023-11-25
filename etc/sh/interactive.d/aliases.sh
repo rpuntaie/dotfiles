@@ -85,3 +85,9 @@ alias blender=$HOME/msrc/blender-git/build_linux/bin/blender
 export PYTHONPATH=$HOME/msrc/blender-git/build_linux_bpy/bin
 export BLENDER_SYSTEM_SCRIPTS=$HOME/msrc/blender-git/blender/scripts
 export BLENDER_USER_CONFIG=$HOME/msrc/blender-git/blender/config
+
+# scp1 110 x.y
+scp1(){scp $2 roland@192.168.1.$1:/home/roland/tmp/}
+alias b1='bluetoothctl connect F4:4E:FC:A6:B7:49'
+alias b0='bluetoothctl disconnect F4:4E:FC:A6:B7:49'
+

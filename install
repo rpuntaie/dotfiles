@@ -487,6 +487,7 @@ fi
 #PKG: java-runtime-common
 #PKG: java-environment-common
 #PKG: jdk-openjdk
+#PKG: openjdk-doc
 #PKG: yarn
 #PKG: npm
 #PKG: nodejs
@@ -993,6 +994,7 @@ fi
 #PKG: fzy
 #PKG: xmlstarlet
 #PKG: jq
+#PKG: pyenv
 #PKG: python-pip
 #PKG: python-pipx
 #PKG: python-virtualenv

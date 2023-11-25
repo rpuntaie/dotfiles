@@ -1,0 +1,11 @@
+--file ~/my/finance/main.ledger
+--price-db ~/my/finance/pricedb.ledger
+--date-format %Y.%m.%d
+--sort date
+; Using the --strict option will cause Ledger to complain if any accounts are not previously defined
+--strict
+; Set the start of the week on Mondays instead of the default Sunday
+--start-of-week=1
+--pedantic
+--exchange EUR
+

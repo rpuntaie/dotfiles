@@ -5,15 +5,24 @@
 https://wiki.blender.org/wiki/Building_Blender/Linux/Arch
 
 ~/msrc/blender-git
-~/msrc/blender-git/bender
-~/msrc/blender-git/lib
-~/msrc/blender-git/build_linux
-~/msrc/blender-git/build_linux_bpy
+rm -rf build_linux build_linux_bpy lib
+
+# ~/msrc/blender-git
+# ~/msrc/blender-git/bender
+
+buildblender
+
+# ~/msrc/blender-git/lib
+# ~/msrc/blender-git/build_linux
+# ~/msrc/blender-git/build_linux_bpy
 
 '
 
 cd ~/msrc/blender-git/blender
 git pull --recurse-submodules
+cd ~/msrc/blender-git/cycles
+git pull --recurse-submodules
+
 build_files/build_environment/install_linux_packages.py --all
 
 cd ~/msrc/blender-git

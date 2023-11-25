@@ -561,14 +561,100 @@ nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
 nmap <F7>         <Plug>VimspectorStepOver
 nmap <F11>        <Plug>VimspectorStepInto
 nmap <F12>        <Plug>VimspectorStepOut
+nnoremap SV :VimspectorReset<CR>
 "": `:VR` VimspectorReset
-command! VR :VimspectorReset<CR>
+command! SV :VimspectorReset
 "   original:
 "   let g:vimspector_enable_mappings = 'HUMAN'
 "   packadd! vimspector
 "using gdb
 packadd termdebug
 ":Termdebug <app>
+
+function! s:GdbVimSpector(cmd)
+py3 << EOF
+import json
+configurations=json.dumps({
+  "configurations": {
+    "gdb": {
+      "adapter": "vscode-cpptools",
+      "filetypes": ["c", "cpp", "objc", "rust", "zig"],
+      "default": True,
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/"+vim.eval('a:cmd'),
+        "args": [],
+        "cwd": "${workspaceRoot}",
+        "stopOnEntry": True,
+        "externalConsole": True,
+        "MIMode": "gdb",
+        "setupCommands": [
+              {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": True
+              }
+            ]
+      }
+    },
+  }
+})
+with open(".vimspector.json","w") as f:
+  f.write(configurations)
+EOF
+call vimspector#Continue()
+endfunction
+"": `:Gdb` create .vimspector.json and run vimspector
+" command! -nargs=+ -complete=command Gdb silent call <SID>GdbVimSpector(<q-args>)
+" !not stoping at main!
+command! -nargs=+ -complete=command Gdb silent call vimspector#LaunchWithConfigurations({
+\   "run": {
+\     "adapter": "vscode-cpptools",
+\     "configuration": {
+\       "request": "launch",
+\       "program": "${workspaceRoot}/".<f-args>,
+\       "args": [],
+\       "cwd": "${workspaceRoot}",
+\       "mode": "debug",
+\       "stopOnEntry": v:true,
+\       'console': 'integratedTerminal',
+\       "MIMode": "gdb",
+\       "setupCommands": [
+\             {
+\               "description": "Enable pretty-printing for gdb",
+\               "text": "-enable-pretty-printing",
+\               "ignoreFailures": v:true
+\             }
+\           ]
+\ }}}
+\ )
+" working
+command! -nargs=0 Pdb silent call vimspector#LaunchWithConfigurations({
+\    "run": {
+\      "adapter": "debugpy",
+\      "filetypes": [ "python" ],
+\      "default": v:true,
+\      "configuration": {
+\        "request": "launch",
+\        "program": "${file}",
+\        "cwd": "${workspaceRoot}"
+\      }
+\    }})
+" not working, just showing DAP server listening at: 127.0.0.1:39787
+command! -nargs=+ -complete=command Dlv silent call vimspector#LaunchWithConfigurations({
+\   "run": {
+\     "adapter": "delve",
+\     "filetypes": [ "go" ],
+\     "default": v:true,
+\     "configuration": {
+\       "request": "launch",
+\       "program": <f-args>,
+\       "cwd": "${workspaceRoot}",
+\       "mode": "debug",
+\       'trace': v:true,
+\       'env': { 'GO111MODULE': 'off' }
+\     }
+\   }})
 
 nnoremap L :m .+1<CR>==
 nnoremap H :m .-2<CR>==
@@ -1001,6 +1087,8 @@ map <silent> SWW :call histadd("cmd",'Rg \b<C-R><C-W>\b')<CR>:call setreg('/','\
 cmap RG Rg
 """ `ST`: like TS but with 8 lines
 map <silent> ST :TS<CR>:resize 8<CR>
+""" `SE`: restore existing zsh on the right side 
+map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR> 
 """ `SE,SF`: restore existing zsh on the right side (with path of file)
 map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR>
 map <silent> SF spp:vsplit<CR><C-W><C-W>:b zsh<CR>cd <C-W>"*<CR>
@@ -1155,6 +1243,8 @@ map <silent> sg SD:GFiles<CR>
 map <silent> sh :History<CR>
 """ `sb`: fzf Buffers
 map <silent> sb :Buffers<CR>
+""" `sl`: fzf Lines
+map <silent> sl :Lines<CR>
 """ `s{.;:/}`: fzf Buffer tags, tags, : or / history
 map <silent> s. :BTags<CR>
 map <silent> s; :Tags<CR>
@@ -1167,8 +1257,8 @@ map <leader>aa :Tab/
 "scrooloose/nerdtree
 """ `sn`: NERDTreeToggle
 nmap sn :NERDTreeToggle<CR>
-""" `sl`: Vista finder using fzf
-nmap sl :Vista finder<CR>
+""" `sv`: Vista finder using fzf
+nmap sv :Vista finder<CR>
 "": `:CD` cd to root of repos
 command! CD exe 'cd '.system('git rev-parse --show-toplevel')
 function s:CG()
@@ -1428,3 +1518,4 @@ set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 set wildignore+=**/node_modules/**/*
 
+let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
