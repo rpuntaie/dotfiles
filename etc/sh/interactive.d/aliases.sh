@@ -50,6 +50,8 @@ alias gdst='git diff stash@{0} HEAD'
 alias venv='python -m venv --system-site-packages --symlinks'
 alias py='~/.virtualenvs/stable/bin/python'
 alias pyv='source ~/.virtualenvs/stable/bin/activate'
+alias bpy='~/.virtualenvs/bpy/bin/python'
+alias bpyv='source ~/.virtualenvs/bpy/bin/activate'
 
 alias xtex='xelatex -interaction=nonstopmode'
 

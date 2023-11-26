@@ -219,10 +219,11 @@ endif
   call dein#add('idanarye/vim-vebugger',{'if':l:nn,'merged':0})
 ""| |Vimspector| <leader><F5> (needs .vimspector.json) or :Gdb, :Pdb, Dlv
   call dein#add('puremourning/vimspector',{'if':l:nn,'merged':0})
-""| |vim-dap| :Break :call dap#run('%')
-  call dein#add('dradtke/vim-dap',{'if':l:nn,'merged':0})
-  call dein#add('mfussenegger/nvim-dap',{'if':has("nvim"),'merged':0})
-  call dein#add('sebdah/vim-delve',{'if':l:nn,'merged':0})
+"     ""| |vim-dap| needs tmux (DebugRun DebugRunLast Break ClearBreakpoints ListBreakpoints Continue Restart Step StepIn StepOut)
+"       call dein#add('dradtke/vim-dap',{'if':l:nn,'merged':0})
+"       call dein#add('mfussenegger/nvim-dap',{'if':has("nvim"),'merged':0})
+" ""| |vim-delve| :DlvDebug :DlvTest :DlvExec
+"   call dein#add('sebdah/vim-delve',{'if':l:nn,'merged':0})
 ""| |vimtex-default-mappings| for latex
   call dein#add('lervag/vimtex',{'if':l:nn,'merged':0})
 ""| |makeshift| [:MM] builds the current project
@@ -552,6 +553,8 @@ nmap <silent> <Leader>SFcf :CocCommand workspace.renameCurrentFile<CR>
 
 ":Termdebug <app>
 packadd termdebug
+" go to <file>:<line> found further up in debugger terminal window
+nmap so ?:\d<CR>BvEy<C-W><C-W>:e <C-R>"<CR><C-W><C-W>i
 "vimspector debugger
 "in bash:
 "cd $XDG_STATE_HOME/vim/dein/repos/github.com/puremourning/vimspector
@@ -1511,5 +1514,6 @@ set wildignore+=**/*.tlog
 set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 set wildignore+=**/node_modules/**/*
+
 
 let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
