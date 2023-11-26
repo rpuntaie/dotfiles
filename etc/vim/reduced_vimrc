@@ -157,28 +157,6 @@ let g:NERDSpaceDelims=1
 "": `:Sw` sudo write
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
-"vimspector
-"in bash:
-"cd $XDG_STATE_HOME/vim/dein/repos/github.com/puremourning/vimspector
-"./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all
-let g:vimspector_base_dir=expand('$XDG_STATE_HOME/vim/vimspector')
-nmap <F5>         <Plug>VimspectorContinue
-nmap <S-F5>       <Plug>VimspectorRestart
-nmap <F3>         <Plug>VimspectorStop
-"nmap <S-F3>       <Plug>VimspectorReset (not working: run via command line)
-nmap <F6>         <Plug>VimspectorPause
-nmap <F9>         <Plug>VimspectorToggleBreakpoint
-nmap <S-F9>       <Plug>VimspectorToggleConditionalBreakpoint
-nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
-nmap <F7>         <Plug>VimspectorStepOver
-nmap <F11>        <Plug>VimspectorStepInto
-nmap <F12>        <Plug>VimspectorStepOut
-"": `:VR` VimspectorReset
-command! VR :VimspectorReset<CR>
-"   original:
-"   let g:vimspector_enable_mappings = 'HUMAN'
-"   packadd! vimspector
-"using gdb
 packadd termdebug
 ":Termdebug <app>
 

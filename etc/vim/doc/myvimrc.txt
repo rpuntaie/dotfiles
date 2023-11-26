@@ -26,15 +26,20 @@ MAPPINGS                                                           *myvimmaps*
 `,m[m]`: run[echo] in term (two windows: one of them term)
 `,s`: save current buffer
 `,tt`: google translate
-`,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGoClingC#RScalaKotlinssQlpHpJuliaJava...
+`,v{tbipg(g)c(c)rskq(q)hj(j)...}`: vert term TmuxBashIpythonPerlGhciGGoClingC#RScalaKotlinssQlpHpJuliaJava...
 `,ww`: look up in wordnet (wn needed)
 `,{vv mv}`: vim eval
 `<C-n>`: NERDTreeToggle
 `<C-{kjhl}>`: go to window
 `<M-V>|<M-C>`: copy|paste clipboard
 `SD`: cd to current symlinked file
+`SE,SF`: restore existing zsh on the right side (with path of file)
+`SE`: restore existing zsh on the right side
 `SR`: Replace from default register without loosing it
-`SW`: fzf search for word under cursor
+`ST`: like TS but with 8 lines
+`SWW`: fzf search for word under cursor
+`SW`: fzf search for word under cursor and strings containing it
+`Sf,SF`: flutter
 `Y`: yank till end of line, like D
 `gx`: open browser and search
 `gx{lngpw}`: open local, nonlocal; chromium google,python,wikipedia
@@ -45,9 +50,10 @@ MAPPINGS                                                           *myvimmaps*
 `sf` : fzf Files GFiles
 `sg` : fzf GFiles
 `sh`: fzf History
-`sl`: Vista finder using fzf
+`sl`: fzf Lines
 `sn`: NERDTreeToggle
-`sp`: yank current file full path
+`sp, spp`: yank current file path or dir
+`sv`: Vista finder using fzf
 `sx`: syntax fromstart
 `s{.;:/}`: fzf Buffer tags, tags, : or / history
 `{jk}=g{jk}`: treat as break lines when wrap on
@@ -64,7 +70,7 @@ ABBREVIATIONS                                                       *myplugins*
 `YYY 20200711Sa`
 `Ydate 2020-07-11`
 `iGU B6785F62-0A3B-4AFF-A5AA-0AFB2FEEF9F3`
-`iT t50282011072020`
+`t50282011072020`
 
 ==============================================================================
 COMMANDS                                                       *myvimcommands*
@@ -72,6 +78,7 @@ COMMANDS                                                       *myvimcommands*
 `:CD` cd to root of repos
 `:E` same as `:e(dit)`
 `:F{Ff}` font size
+`:Gdb` create .vimspector.json and run vimspector
 `:JJ` for `:Autoformat`
 `:J` for `:AutoformatLine`
 `:L` close window
@@ -81,11 +88,9 @@ COMMANDS                                                       *myvimcommands*
 `:Redir` either shell or vim command
 `:SD` cd to current file
 `:SS` stpl template tag line with RST tag
-`:SW` search for word under cursor and place into quickfix list
 `:Sw` sudo write
 `:TD` execute .local/bin/todo to quickfix list
 `:TrimSpaces` accepts range
-`:VR` VimspectorReset
 
 ==============================================================================
 PLUGINS                                                            *myplugins*
@@ -98,7 +103,8 @@ mathematic.vim (<leader>lm)
 |NERDTreeMappings| [sn] file browser
 |Nvim-R-use| \rf \rq \d ... in R file
 |UltiSnips| snippets
-|Vimspector| <F5> (needs .vimspector.json)
+|Vimspector| <leader><F5> (needs .vimspector.json) or :Gdb, :Pdb, Dlv
+|asyncrun| asynchronous execution of shell commands
 |barbaric-functions| (ibus) input method only in insert mode
 |bufexplorer| still needed to delete/copy
 |cmake| :CMake[Generate,Build,Install] c[gbi]
@@ -116,6 +122,7 @@ mathematic.vim (<leader>lm)
 |unicode-plugin| :UnicodeTable i: <C-X><C-G>
 |vcscommand-mappings| works not only for git (<leader>z)
 |vebugger-gdb| :VBGstartGDB, ` for leader
+|vim-dap| :Break :call dap#run('%')
 |vim_py3_rst| python and rst helpers
 |vimproc-commands| asynchronous execution
 |vimtex-default-mappings| for latex

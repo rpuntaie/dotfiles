@@ -217,8 +217,12 @@ endif
   call dein#add('skywind3000/asyncrun.vim', {'if':l:nn,'merged':0})
 ""| |vebugger-gdb| :VBGstartGDB, ` for leader
   call dein#add('idanarye/vim-vebugger',{'if':l:nn,'merged':0})
-""| |Vimspector| <F5> (needs .vimspector.json)
+""| |Vimspector| <leader><F5> (needs .vimspector.json) or :Gdb, :Pdb, Dlv
   call dein#add('puremourning/vimspector',{'if':l:nn,'merged':0})
+""| |vim-dap| :Break :call dap#run('%')
+  call dein#add('dradtke/vim-dap',{'if':l:nn,'merged':0})
+  call dein#add('mfussenegger/nvim-dap',{'if':has("nvim"),'merged':0})
+  call dein#add('sebdah/vim-delve',{'if':l:nn,'merged':0})
 ""| |vimtex-default-mappings| for latex
   call dein#add('lervag/vimtex',{'if':l:nn,'merged':0})
 ""| |makeshift| [:MM] builds the current project
@@ -271,7 +275,8 @@ endif
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
 " C++
 " call dein#add('jackguo380/vim-lsp-cxx-highlight',{'if':l:nn,'merged':0})
-" colorscheme (testing)
+" colorscheme
+  "call dein#add('rafi/awesome-vim-colorschemes')
   "if has('nvim')
   "  call dein#add('nvim-treesitter/nvim-treesitter')
   "  call dein#add('ChristianChiarulli/nvcode-color-schemes.vim')
@@ -280,7 +285,7 @@ endif
   " call dein#add('ray-x/aurora')
   " call dein#add('dracula/vim')
   " call dein#add('sainnhe/sonokai')
-  call dein#add('0xStabby/chatgpt-vim',{'if':l:nn,'merged':0})
+"  call dein#add('0xStabby/chatgpt-vim',{'if':l:nn,'merged':0})
 endfunction
 
 let g:Gitv_OpenHorizontal = 0
@@ -545,68 +550,19 @@ nmap <silent> <Leader>SFs :CocCommand flutter.dev.screenshot<CR>
 nmap <silent> <Leader>SFlr :CocCommand flutter.lsp.restart<CR>
 nmap <silent> <Leader>SFcf :CocCommand workspace.renameCurrentFile<CR>
 
+":Termdebug <app>
+packadd termdebug
 "vimspector debugger
 "in bash:
 "cd $XDG_STATE_HOME/vim/dein/repos/github.com/puremourning/vimspector
 "./install_gadget.py --basedir $XDG_STATE_HOME/vim/vimspector --all --force-all
 let g:vimspector_base_dir=expand('$XDG_STATE_HOME/vim/vimspector')
-nmap <F5>         <Plug>VimspectorContinue
-nmap <S-F5>       <Plug>VimspectorRestart
-nmap <F3>         <Plug>VimspectorStop
-"nmap <S-F3>       <Plug>VimspectorReset (not working: run via command line)
-nmap <F6>         <Plug>VimspectorPause
-nmap <F9>         <Plug>VimspectorToggleBreakpoint
-nmap <S-F9>       <Plug>VimspectorToggleConditionalBreakpoint
-nmap <F8>         <Plug>VimspectorAddFunctionBreakpoint
-nmap <F7>         <Plug>VimspectorStepOver
-nmap <F11>        <Plug>VimspectorStepInto
-nmap <F12>        <Plug>VimspectorStepOut
+let g:vimspector_enable_mappings = 'HUMAN'
+"~/msrc/vimspector/doc/vimspector.txt
 nnoremap SV :VimspectorReset<CR>
-"": `:VR` VimspectorReset
 command! SV :VimspectorReset
-"   original:
-"   let g:vimspector_enable_mappings = 'HUMAN'
-"   packadd! vimspector
-"using gdb
-packadd termdebug
-":Termdebug <app>
-
-function! s:GdbVimSpector(cmd)
-py3 << EOF
-import json
-configurations=json.dumps({
-  "configurations": {
-    "gdb": {
-      "adapter": "vscode-cpptools",
-      "filetypes": ["c", "cpp", "objc", "rust", "zig"],
-      "default": True,
-      "configuration": {
-        "request": "launch",
-        "program": "${workspaceRoot}/"+vim.eval('a:cmd'),
-        "args": [],
-        "cwd": "${workspaceRoot}",
-        "stopOnEntry": True,
-        "externalConsole": True,
-        "MIMode": "gdb",
-        "setupCommands": [
-              {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": True
-              }
-            ]
-      }
-    },
-  }
-})
-with open(".vimspector.json","w") as f:
-  f.write(configurations)
-EOF
-call vimspector#Continue()
-endfunction
+" these json entries come from vscode-cpptools or vscode-go and can be slightly different, e.g. stopAtEntry vs stopOnEntry
 "": `:Gdb` create .vimspector.json and run vimspector
-" command! -nargs=+ -complete=command Gdb silent call <SID>GdbVimSpector(<q-args>)
-" !not stoping at main!
 command! -nargs=+ -complete=command Gdb silent call vimspector#LaunchWithConfigurations({
 \   "run": {
 \     "adapter": "vscode-cpptools",
@@ -616,7 +572,7 @@ command! -nargs=+ -complete=command Gdb silent call vimspector#LaunchWithConfigu
 \       "args": [],
 \       "cwd": "${workspaceRoot}",
 \       "mode": "debug",
-\       "stopOnEntry": v:true,
+\       "stopAtEntry": v:true,
 \       'console': 'integratedTerminal',
 \       "MIMode": "gdb",
 \       "setupCommands": [
@@ -626,9 +582,16 @@ command! -nargs=+ -complete=command Gdb silent call vimspector#LaunchWithConfigu
 \               "ignoreFailures": v:true
 \             }
 \           ]
-\ }}}
+\ },
+\     "breakpoints": {
+\       "exception": {
+\         "all": "",
+\         "caught": "",
+\         "uncaught": "Y"
+\       }
+\     }
+\ }}
 \ )
-" working
 command! -nargs=0 Pdb silent call vimspector#LaunchWithConfigurations({
 \    "run": {
 \      "adapter": "debugpy",
@@ -640,21 +603,52 @@ command! -nargs=0 Pdb silent call vimspector#LaunchWithConfigurations({
 \        "cwd": "${workspaceRoot}"
 \      }
 \    }})
-" not working, just showing DAP server listening at: 127.0.0.1:39787
-command! -nargs=+ -complete=command Dlv silent call vimspector#LaunchWithConfigurations({
+command! -nargs=0 Dlv silent call vimspector#LaunchWithConfigurations({
 \   "run": {
-\     "adapter": "delve",
+\     "adapter": "vscode-go",
 \     "filetypes": [ "go" ],
 \     "default": v:true,
 \     "configuration": {
 \       "request": "launch",
-\       "program": <f-args>,
+\       "program": "${fileDirname}",
 \       "cwd": "${workspaceRoot}",
+\       "port": 36577,
+\       "stopOnEntry": v:true,
 \       "mode": "debug",
 \       'trace': v:true,
 \       'env': { 'GO111MODULE': 'off' }
 \     }
 \   }})
+" https://github.com/phoityne/hdx4vsc
+" stack install haskell-dap ghci-dap haskell-debug-adapter
+" (mkdir -p ~/tmp/stack_sh && cd ~/tmp/stack_sh && stack new sample --bare && stack test)
+" this is not working: it times out
+command! -nargs=0 Hsd silent call vimspector#LaunchWithConfigurations({
+\   "run-stack": {
+\     "adapter": {
+\       "command": [ "haskell-debug-adapter" ]
+\     },
+\     "configuration": {
+\       "type": "ghc",
+\       "request": "launch",
+\       "workspace": "${workspaceRoot}",
+\       "name": "haskell-debug-adapter",
+\       "internalConsoleOptions": "openOnSessionStart",
+\       "startup": "${workspaceRoot}/app/Main.hs",
+\       "startupFunc": "",
+\       "startupArgs": "",
+\       "stopOnEntry": v:true,
+\       "mainArgs": "",
+\       "ghciPrompt": "H>>= ",
+\       "ghciInitialPrompt": "Prelude>",
+\       "ghciCmd": "stack ghci --test --no-load --no-build --main-is TARGET",
+\       "ghciEnv": {},
+\       "logFile": "${workspaceRoot}/hdx4vim.log",
+\       "logLevel": "WARNING",
+\       "forceInspect": v:false
+\     }
+\   }
+\ })
 
 nnoremap L :m .+1<CR>==
 nnoremap H :m .-2<CR>==
@@ -1093,8 +1087,8 @@ map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR>
 map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR>
 map <silent> SF spp:vsplit<CR><C-W><C-W>:b zsh<CR>cd <C-W>"*<CR>
 " cscope
-set cscopetag
 if has("cscope")
+        set cscopetag
         set csprg=cscope
         set csto=0
         set cst
