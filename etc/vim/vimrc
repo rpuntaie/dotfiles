@@ -209,8 +209,8 @@ endif
 ""| |vim_py3_rst| python and rst helpers
   call dein#add('rpuntaie/vim_py3_rst',{'if':l:nn,'merged':0})
     "call dein#add('python-mode/python-mode',{'merged':0})
-""| |Nvim-R-use| \rf \rq \d ... in R file
-  call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
+"  ""| |Nvim-R-use| \rf \rq \d ... in R file
+"    call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
 ""| |vimproc-commands| asynchronous execution
   call dein#add('Shougo/vimproc.vim', {'if':l:nn,'build': 'make','merged':0})
 ""| |asyncrun| asynchronous execution of shell commands
@@ -487,6 +487,11 @@ if g:CocOverDeoplete
           \       "SOURCEKIT_TOOLCHAIN_PATH": "/usr/lib/swift/",
           \       "SOURCEKIT_LOGGING": "3"
           \    }
+          \ },
+          \ "go": {
+          \     "rootPatterns": [ "go", "gomod" ],
+          \     "disabledFeatures": [ "workspaceFolders" ],
+          \     "initializationOptions": { "completeUnimported": v:true }
           \ },
           \ "kotlin": {
           \     "command": "/usr/bin/kotlin-language-server",

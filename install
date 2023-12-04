@@ -326,7 +326,7 @@ fi
 #PKG: libnl
 #PKG: libnfnetlink
 #PKG: libnetfilter_conntrack
-#PKG: iptables
+#PKG: iptables-nft
 #PKG: kdb
 #PKG: libtermkey
 #PKG: libxpm
@@ -837,6 +837,9 @@ fi
 #PKG: docker
 #PKG: docker-compose
 #PKG: kubectl
+#PKG: kubeadm
+#PKG: kubelet
+#PKG: containerd
 #PKG: dnsmasq
 #PKG: kicad
 #PKG: kicad-library
