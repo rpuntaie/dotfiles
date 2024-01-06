@@ -1,0 +1,14 @@
+pkgs_dirs:
+ - $XDG_DATA_HOME/conda/pkgs
+envs_dirs:
+ - $XDG_DATA_HOME/conda/envs
+auto_activate_base: false
+channel_priority: strict
+channels:
+  - conda-forge
+  - defaults
+create_default_packages:
+  - pip
+  - ipython
+  - numpy
+  - scipy
