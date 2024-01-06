@@ -84,3 +84,29 @@ export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
 export PATH="$NPM_PACKAGES/bin:$PATH"
 #unset MANPATH
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+
+#curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+#bash Miniforge3-$(uname)-$(uname -m).sh
+condaa() {
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/roland/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/roland/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/roland/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/roland/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/home/roland/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "/home/roland/miniforge3/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+
+}

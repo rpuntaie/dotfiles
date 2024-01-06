@@ -7,7 +7,7 @@ show-keymap-hint no
 text-width 100
 
 # External programs.
-browser qutebrowser
+browser links
 player mpv
 
 # Vim-like keybindings.

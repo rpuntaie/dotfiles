@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+if [ -e $HOME/.config/emacs/bin/doom ]
+then
+    if [[ $# == 0 ]]
+    then
+        $HOME/.config/emacs/bin/doom run
+    else
+        $HOME/.config/emacs/bin/doom "$@"
+    fi
+else
+    mkdir -p $HOME/.config/emacs
+    git clone --depth 1 https://github.com/doomemacs/doomemacs $HOME/.config/emacs
+    $HOME/.config/emacs/bin/doom install
+fi

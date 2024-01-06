@@ -95,3 +95,6 @@ alias bs='bluetoothctl scan on'
 alias b1='bluetoothctl connect F4:4E:FC:A6:B7:49'
 alias b2='bluetoothctl connect 5C:FB:7C:E1:0D:D5'
 
+alias j='firejail --noprofile --net=none'
+
+

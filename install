@@ -477,6 +477,7 @@ fi
 #PKG: httpie
 #PKG: autopep8
 #PKG: ansible
+#PKG: terraform
 #PKG: gunicorn
 #PKG: uwsgi
 #PKG: sqlite
@@ -516,6 +517,7 @@ fi
 #PKG: go
 #PKG: go-tools
 #PKG: gopls
+#PKG: go-task
 #PKG: delve
 #PKG: mono
 #PKG: dotnet-sdk
@@ -836,9 +838,11 @@ fi
 #PKG: vagrant
 #PKG: docker
 #PKG: docker-compose
+#PKG: docker-buildx 
 #PKG: kubectl
 #PKG: kubeadm
 #PKG: kubelet
+#PKG: minikube
 #PKG: containerd
 #PKG: dnsmasq
 #PKG: kicad
@@ -873,6 +877,7 @@ fi
 #PKG: opencv-samples
 #PKG: povray
 #PKG: openshot
+#PKG: shotcut
 #PKG: librecad
 #PKG: blender
 #PKG: meshroom
@@ -1158,6 +1163,10 @@ fi
 #PKG: python-reedsolo
 #PKG: python-pdfminer
 #PKG: python-pyalsa
+#PKG: yt-dlp
+#PKG: ytfzf
+#PKG: newsboat
+#PKG: firejail
 #PKG: haskell-shake
 #PKG: haskell-haddock-library
 #PKG: haskell-language-server
