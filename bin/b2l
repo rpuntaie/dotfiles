@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+
+"""
+This takes the csv from the bank and converts it to the ledger cli format.
+
+CSV lines accepted:
+
+10.11.2023;"text goes here";09.11.2023;-12,34;EUR;10.11.2023 11:12:13:123
+"Nein";"01.02.2023";"02.02.2023";"text goes here";"-1,23";"";
+
+Alternatively, if the format is converted to:
+
+    date,amount,desc
+    26.05.2003,1.2,text goes here
+
+ledger convert bank.csv --input-date-format "%d.%m.%Y"
+"""
+
+import sys
+import csv
+import dateutil.parser
+import codecs
+
+class bankCSV(csv.Dialect):
+    delimiter = ';'
+    doublequote = True
+    quotechar = '"'
+    quoting = 0
+    skipinitialspace = False
+    lineterminator = '\r\n'
+csv.register_dialect("bankCSV",bankCSV)
+
+def date_de(d):
+    return str(dateutil.parser.parse(d,dayfirst=True)).split()[0].replace('-','.')
+
+def isPosting(rlines):
+    if len(rlines) == 0:
+        return False
+    rr = rlines[0]
+    rs = rr.split(';')
+    if len(rs) > 5:
+        return True
+    return False
+
+def fromPosting(rlines):
+    r = csv.reader(rlines,"bankCSV")
+    isstyle = 0
+    for rr in r:
+        try:
+            date = date_de(rr[isstyle].strip('"'))
+        except:
+            try:
+                date = date_de(rr[1].strip('"'))
+            except:
+                isstyle = 1
+                continue
+        if isstyle == 0:
+            amount = -float(rr[3].replace(',','.'))
+            desc = rr[1]
+        if isstyle == 1:
+            amount = -float(rr[4].replace(',','.'))
+            desc = rr[3]
+        entry = f"{date} * {desc}\n    Expenses:Unknown                             {amount}\n    Assets:Bank:Raika:Checking\n"
+        yield entry
+
+
+if __name__ == "__main__":
+    filename = sys.argv[1]
+    try:
+        with open(filename) as f:
+            rlines = f.readlines()
+    except UnicodeDecodeError:
+        with open(filename, "br") as f:
+            rtxt = f.read()
+            rlines = rtxt.decode(encoding='latin-1').splitlines()
+    if rlines[0][0].encode() == codecs.BOM_UTF8:
+        rlines[0] = rlines[0][1:]
+    if isPosting(rlines):
+        print('\n'.join([l for l in fromPosting(rlines)]))
+        exit(0)
+    while not isPosting(rlines):
+        rlines = rlines[1:]
+    print('\n'.join([l for l in fromPosting(rlines)]))
+
