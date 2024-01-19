@@ -1024,10 +1024,6 @@ nnoremap <kMultiply>  :tn<CR>
 nnoremap <kDivide>    :tp<CR>
 """ `sx`: syntax fromstart
 nnoremap sx <Esc>:syntax sync fromstart<CR>
-""" `<M-V>|<M-C>`: copy|paste clipboard
-nmap <M-v> "+gP
-imap <M-v> <ESC><M-v>i
-vmap <M-c> "+y
 """ `<C-{kjhl}>`: go to window
 nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-j> :wincmd j<CR>
@@ -1522,3 +1518,4 @@ set wildignore+=**/node_modules/**/*
 
 
 let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
+

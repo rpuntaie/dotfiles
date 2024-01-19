@@ -536,6 +536,8 @@ fi
 #PKG: elixir
 #PKG: typescript
 #PKG: ts-node
+#PKG: clisp
+#PKG: quicklisp
 #PKG: racket
 #PKG: guile
 #PKG: dcd
@@ -879,6 +881,7 @@ fi
 #PKG: openshot
 #PKG: shotcut
 #PKG: librecad
+#PKG: freecad
 #PKG: blender
 #PKG: meshroom
 #PKG: gimp
@@ -1018,7 +1021,7 @@ fi
 #PKG: python-tensorflow
 #PKG: python-tensorflow-estimator
 #PKG: python-tensorflow-serving-api
-#PKG: python-h5py
+#PKG: python-h5py-openmpi
 #PKG: python-cffi
 #PKG: python-cairocffi
 #PKG: python-gammu
@@ -1179,6 +1182,12 @@ fi
 #PKG: haskell-erf
 #PKG: haskell-random
 #PKG: haskell-splitmix
+#PKG: ihaskell
+#PKG: haskell-hw-hspec-hedgehog
+#PKG: haskell-unix-compat
+#PKG: haskell-shelly
+#PKG: haskell-ipython-kernel
+#PKG: haskell-ipynb
 
 
 

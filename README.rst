@@ -166,6 +166,7 @@ Therefore I use ``:term bash`` in vim to try solutions.
 Shortcuts:
 
 - copy/paste: ``C-M-c/v`` to copy/paste selected or ``C-M-x`` to enter ``urxvt-vim-scrollback``
+  Capital ``Y`` to yank into clipboard.
 - edit command line with vim: ``ESC-v`` and ``ESC-:``
 - search:
   ``C-T`` for **fzf**
