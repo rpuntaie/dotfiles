@@ -294,7 +294,7 @@ let g:Gitv_OpenHorizontal = 0
 py3 << EOF
 import os
 try:
-  activate_this = os.path.expanduser('~/.virtualenvs/stable/bin/activate_this.py')
+  activate_this = os.path.expanduser('~/.virtualenvs/pyv/bin/activate_this.py')
   exec(open(activate_this).read(), { "__file__": activate_this })
 except: pass
 EOF

@@ -436,6 +436,7 @@ fi
 #PKG: zsh-autosuggestions
 #PKG: zsh-completions
 #PKG: zsh-history-substring-search
+#PKG: fish
 #PKG: neovim
 #PKG: gvim
 #PKG: pluma
