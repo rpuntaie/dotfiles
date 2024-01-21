@@ -10,7 +10,8 @@ URxvt.cursorBlink: False
 
 ! Extensions
 urxvt*perl-lib: /home/roland/.local/lib/urxvt
-URxvt.perl-ext-common: default,url-select,selection,vim-scrollback,52-osc
+URxvt.perl-ext-common: default,resize-font,url-select,selection,vim-scrollback,52-osc
+! resize-font C-+, C--, C-=
 urxvt.vim-scrollback: C-M-x
 URxvt.keysym.M-u: perl:url-select:select_next
 

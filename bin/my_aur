@@ -26,6 +26,7 @@ yaysno wordnet-cli
 yaysno urxvt-vim-scrollback-git
 yaysno powerline-console-fonts
 yaysno perl-term-shellui.git
+yaysno urxvt-resize-font-git
 #php REPL
 yaysno psysh
 #planck (clojure repl)
