@@ -160,6 +160,7 @@
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
 [credential]
 	helper = !pass-git-helper $@
+	useHttpPath = true
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
