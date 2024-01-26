@@ -159,7 +159,7 @@
 [difftool "pandiff"]
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
 [credential]
-	helper = '!pass-git-helper $@'
+	helper = !pass-git-helper $@
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
