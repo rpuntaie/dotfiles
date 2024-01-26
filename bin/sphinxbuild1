@@ -3,7 +3,7 @@
 if [[ -z $1 ]]; then
     echo "sphinx on one file"
     echo "usage: ${0##*/} <infile> [<outdir>|-] [-b xxx]"
-    echo "default out dir: $XDG_DATA_HOME/sphinx/<infile>.out"
+    echo "default out dir: $HOME/tmp/sphinx/<infile>.out"
     exit
 fi
 
@@ -15,7 +15,7 @@ srcdir=${instem%/*}
 if [[ "$srcdir" == "$inbase" ]]; then
     srcdir="."
 fi
-outdir="$XDG_DATA_HOME/sphinx/$inbase.out"
+outdir="$HOME/tmp/sphinx/$inbase.out"
 
 if [[ -n "$2" && "$2" != "-" ]]; then
     outdir="$2"

@@ -42,10 +42,14 @@ def isPosting(rlines):
         return True
     return False
 
+bank = ['Raika', 'Dkb']
 def fromPosting(rlines):
     r = csv.reader(rlines,"bankCSV")
     isstyle = 0
     for rr in r:
+        # r = list(r)
+        # rr = r[1]
+        # rr
         try:
             date = date_de(rr[isstyle].strip('"'))
         except:
@@ -58,9 +62,12 @@ def fromPosting(rlines):
             amount = -float(rr[3].replace(',','.'))
             desc = rr[1]
         if isstyle == 1:
-            amount = -float(rr[4].replace(',','.'))
+            try:
+                amount = -float(rr[4].replace(',','.'))
+            except ValueError:
+                amount = -float(rr[5].replace(',','.'))
             desc = rr[3]
-        entry = f"{date} * {desc}\n    Expenses:Unknown                             {amount}\n    Assets:Bank:Raika:Checking\n"
+        entry = f"{date} * {desc}\n    Expenses:Unknown                             {amount}\n    Assets:Bank:{bank[isstyle]}:Checking\n"
         yield entry
 
 

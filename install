@@ -85,9 +85,22 @@ _dotfiles_weechat(){
   fi
 }
 
+_github_install() {
+  repo="${1}"
+  dest="${2}"
+  pushd $(mktemp -d)
+  git clone "https://github.com/$repo" $repo
+  pushd $repo
+  if [ "$(sed -ne "s/^install:.*/install/p" Makefile)" = "install" ]; then
+      PREFIX=$dest prefix=$dest make install
+  fi
+  popd
+  popd
+}
+
 _dotfiles_email(){
   if type mutt; then
-    $CFG/bin/ghi rpuntaie/mailwizard $CFG
+    _github_install rpuntaie/mailwizard $CFG
     #setup email usrstuff:
     rm -rf $CFG/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
     a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" $CFG/bin/mw add
@@ -98,7 +111,7 @@ _dotfiles_email(){
 }
 
 _clone_github_mine(){ #usrstuff
-  bash ~/$DOTDIR/bin/githubmine
+  bash ~/$DOTDIR/bin/my_github
 }
 
 _perl_repl(){ #usrstuff
@@ -996,6 +1009,7 @@ fi
 #PKG: ledger
 #PKG: font-manager
 #PKG: github-cli
+#PKG: glab
 #PKG: ext4magic
 #PKG: calibre
 #PKG: waf
@@ -1166,7 +1180,11 @@ fi
 #PKG: python-openpyxl
 #PKG: python-reedsolo
 #PKG: python-pdfminer
+#PKG: python-pdftotext
 #PKG: python-pyalsa
+#PKG: python-poetry
+#PKG: docx2txt
+#PKG: odt2txt
 #PKG: yt-dlp
 #PKG: ytfzf
 #PKG: newsboat

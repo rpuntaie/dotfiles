@@ -37,6 +37,8 @@ IMG=$1
 NET=$2
 ISO=$3
 
+mkdir -p $HOME/myvm/kvm
+
 cd $HOME/myvm/kvm
 
 nicbr0() {

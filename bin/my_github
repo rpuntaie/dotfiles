@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 mkdir -p ~/mine
 
 _mine_one() {

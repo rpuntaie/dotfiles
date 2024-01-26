@@ -468,6 +468,7 @@ if g:CocOverDeoplete
           \ 'coc-solidity',
           \ 'coc-flutter-tools',
           \ 'coc-go',
+          "\ 'coc-esbonio',
           "\ 'coc-godot',
           "\ 'coc-yaml',
           "\ 'coc-highlight',
@@ -1516,6 +1517,9 @@ set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 set wildignore+=**/node_modules/**/*
 
+autocmd BufReadPost *.odt :%!odt2txt %
+autocmd BufReadPost *.docx :%!docx2txt %
+autocmd BufReadPost *.pdf :%!pdf2txt.py %
 
 let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
 
