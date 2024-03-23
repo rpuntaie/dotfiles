@@ -1253,8 +1253,6 @@ map <silent> sh :History<CR>
 map <silent> sb :Buffers<CR>
 """ `sl`: fzf Lines
 map <silent> sl :Lines<CR>
-""" `SL`: fzf Locate
-map <silent> SL :Locate<CR>
 """ `s{.;:/}`: fzf Buffer tags, tags, : or / history
 map <silent> s. :BTags<CR>
 map <silent> s; :Tags<CR>
@@ -1282,12 +1280,10 @@ endfunction
 command! -nargs=* CG :call <SID>CG()
 
 command! SpecialSelection call fzf#run({
-            \'source': 'bash -c "for f in '.join(v:oldfiles, ' ').'; do if [ -d \$f ] ; then ag -l -g \"\" \$f; else ag -l -g \"\" \$(cd \${f%/*} && (git rev-parse --show-toplevel 2>/dev/null || echo \${f%/*})); fi; done | sort -u"',
-            \'sink' : 'e',
-            \'dir' : '~/my',
-            \'options' : '-e -m --reverse',
-            \'window' : 'enew',
-            \})
+      \'source': 'bash -c "for f in \$(cat $MY/dirs); do if [ -d \$f ] ; then ag -l -g \"\" \$f; else ag -l -g \"\" \$(cd \${f%/*} && (git rev-parse --show-toplevel 2>/dev/null || echo \${f%/*})); fi; done | sort -u"',
+      \'sink' : 'e',
+      \'dir' : '~/my',
+      \})
 
 if g:CocOverDeoplete
     "coc
