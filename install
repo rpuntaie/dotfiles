@@ -368,6 +368,7 @@ fi
 #PKG: pcre2
 #PKG: cronie
 #PKG: inotify-tools
+#PKG: entr
 #PKG: cpulimit
 #PKG: dpkg
 #PKG: tldr

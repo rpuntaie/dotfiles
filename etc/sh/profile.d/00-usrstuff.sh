@@ -19,3 +19,4 @@ export INVOKEAI_ROOT="$HOME/invokeai"
 
 export GH_TOKEN="$(pass show token_github.com/rpuntaie)"
 
+export COMPANY="vougee"

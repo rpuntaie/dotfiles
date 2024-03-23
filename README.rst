@@ -21,6 +21,8 @@ Non-standard ``XDG_LIB_HOME``, ``XDG_LOG_HOME`` and ``XDG_STATE_HOME`` are for F
 :install: installation script according `rollarch`_
 :readme.rst: this file
 
+`rollarch`_ fills `/etc/security/pam_env.conf` with XDG variables.
+
 Some files in these dotfiles reference separately managed directories,
 because they are actual user data.
 

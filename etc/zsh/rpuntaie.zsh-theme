@@ -23,7 +23,8 @@ function precmd {
 my_git_info() {
     __GIT_REMOTE="$(git remote get-url origin 2>/dev/null)"
     #__GIT_REMOTE="$(git remote get-url origin 2>/dev/null | sed -ne 's,https://[^/]\+/\([^/]*\)/\w\+\|\(.*\):/[^/].*,\1\2,p')"
-    echo "$(git_super_status)%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
+    echo "%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
+    #echo "$(git_super_status)%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
 }
 
 setopt extended_glob
@@ -101,7 +102,7 @@ $PR_SHIFT_IN$PR_HBAR${(e)PR_FILLBAR}$PR_HBAR$PR_SHIFT_OUT\
 % $PR_NO_COLOUR'
 
     #GITSUPER: RPS1='%j$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))$PR_MAGENTA(${(e)$(battery_pct_prompt)}$PR_MAGENTA)$(git_prompt_info)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
-    RPS1='$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))%j$PR_MAGENTA(${(e)$(battery_pct_prompt)}$PR_MAGENTA)$(my_git_info)$(svn_prompt_info)$(hg_prompt_info)$PR_NO_COLOUR'
+    RPS1='$(vi_mode_prompt_info)%(?..$PR_LIGHT_RED(%?%))%j$PR_MAGENTA(${(e)$(battery_pct_prompt)}$PR_MAGENTA)$(my_git_info)$PR_NO_COLOUR'
 
     PS2=''
     RPS2='$PR_MAGENTA($PR_GREEN%_$PR_MAGENTA)$PR_NO_COLOUR '

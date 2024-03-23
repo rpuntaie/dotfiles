@@ -3,7 +3,7 @@
 if [ -d "$XDG_CONFIG_HOME/sh/profile.d" ]; then
 	for profile in "$XDG_CONFIG_HOME/sh/profile.d/"*.sh; do
 		if [ -r "$profile" ]; then
-			. "$profile"
+			source "$profile"
 		fi
 	done
 	unset profile

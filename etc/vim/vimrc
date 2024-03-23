@@ -173,7 +173,7 @@ function! s:Deinplugins()
   call dein#add('andymass/vim-matchup',{'if':l:nn,'merged':0,'rev':'4bbb22d'})
 "   indentation guides
   "call dein#add('nathanaelkane/vim-indent-guides',{'merged':0})
-  call dein#add('thaerkh/vim-indentguides',{'if':l:nn,'merged':0})
+  "call dein#add('thaerkh/vim-indentguides',{'if':l:nn,'merged':0})
 
 if g:CocOverDeoplete
   call dein#add('neoclide/coc.nvim', {'if':l:nn,'merged':0, 'build': 'yarn install --frozen-lockfile'})
@@ -468,6 +468,7 @@ if g:CocOverDeoplete
           \ 'coc-solidity',
           \ 'coc-flutter-tools',
           \ 'coc-go',
+          \ 'coc-protobuf',
           "\ 'coc-esbonio',
           "\ 'coc-godot',
           "\ 'coc-yaml',
@@ -748,7 +749,8 @@ set diffopt+=iwhite
 syntax on
 set background=dark
 " colorscheme roland1  " much green
-colorscheme roland2
+" colorscheme roland2
+colorscheme murphy
 " set termguicolors            " 24 bit color
 " colorscheme aurora
 " colorscheme dracula
@@ -795,20 +797,26 @@ set conceallevel=0
 
 "set cursorcolumn
 "set cursorline
+
+" line number
 "set relativenumber
-set number
+
+
 if g:CocOverDeoplete
     "coc
     " not too small because see 6447 statusline issue
     " set updatetime=1300
     set shortmess+=c
     if !has('nvim')
-      set signcolumn=number
+      "set signcolumn=number
+      set signcolumn=yes
     else
       sign define numhl=
     endif
 endif
 
+"set number
+set signcolumn=yes
 
 augroup rolandau
     autocmd!
@@ -1005,9 +1013,6 @@ nnoremap Y y$
 """ `s`: <nop>, free for other mappings
 map <silent> s <nop>
 map <silent> S <nop>
-""" `{ss SS}`: n insert char before|after
-nnoremap ss :exec "normal i".nr2char(getchar())."\e"<CR>
-nnoremap SS :exec "normal a".nr2char(getchar())."\e"<CR>
 """ `{sj sk}`: Insert empty line below|above
 nnoremap <silent> sj o<ESC>k
 nnoremap <silent> sk O<ESC>j
@@ -1056,7 +1061,11 @@ nmap <leader>ls :setlocal spell spelllang=
 nmap <leader>ee :e 
 nmap <leader>ev :e $MYVIMRC<CR>
 nmap <leader>ep :e <C-R>=g:dein_path<CR>/../..<CR>
-nmap <leader>em :e $MY<CR>
+nmap <leader>em :cd $MY<CR>:Files<CR>
+nmap <leader>ei :e ~/mine/dotfiles/install<CR>
+nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
+nmap <leader>eh :e $MY/y24.rst<CR>
+nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
 nnoremap <silent> <leader>tt :Trans<CR>
@@ -1065,7 +1074,7 @@ vnoremap <silent> <leader>tt :Trans<CR>
 nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `sc[c]`: (re)number
 vnoremap scc :!cat -n<CR>
-vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d/let c=c+1\|s/\d/\=c<CR>
+vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d\+/let c=c+1\|s/\d\+/\=c<CR>
 """ `sp, spp`: yank current file path or dir
 nnoremap <silent> sp :let @* = expand("%:p")<CR>
 nnoremap <silent> spp :let @* = expand("%:p:h")<CR>
@@ -1244,12 +1253,18 @@ map <silent> sh :History<CR>
 map <silent> sb :Buffers<CR>
 """ `sl`: fzf Lines
 map <silent> sl :Lines<CR>
+""" `SL`: fzf Locate
+map <silent> SL :Locate<CR>
 """ `s{.;:/}`: fzf Buffer tags, tags, : or / history
 map <silent> s. :BTags<CR>
 map <silent> s; :Tags<CR>
 map <silent> s: :History:<CR>
 map <silent> s/ :History/<CR>
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+""" `ss`: fzf Snippets
+map <silent> ss :Snippets<CR>
+""" `SS`: fzf Files in repos of recent files
+map <silent> SS :SpecialSelection<CR>
 "godlygeek/tabular
 """ `,aa`: :Tabular
 map <leader>aa :Tab/
@@ -1265,6 +1280,14 @@ function s:CG()
   execute 'CD'
 endfunction
 command! -nargs=* CG :call <SID>CG()
+
+command! SpecialSelection call fzf#run({
+            \'source': 'bash -c "for f in '.join(v:oldfiles, ' ').'; do if [ -d \$f ] ; then ag -l -g \"\" \$f; else ag -l -g \"\" \$(cd \${f%/*} && (git rev-parse --show-toplevel 2>/dev/null || echo \${f%/*})); fi; done | sort -u"',
+            \'sink' : 'e',
+            \'dir' : '~/my',
+            \'options' : '-e -m --reverse',
+            \'window' : 'enew',
+            \})
 
 if g:CocOverDeoplete
     "coc
@@ -1472,7 +1495,7 @@ set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
 if g:CocOverDeoplete
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+# set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 endif
 set statusline+=%{&spelllang}
 set statusline+=%{strftime('%H:%M')}

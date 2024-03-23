@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+: '
+
+workondot somefile.dot
+
+'
+
+err() {
+echo "$1"
+exit
+}
+
+# requirements
+[ -z $1 ] && err "workondot xyz.dot"
+type dot > /dev/null || err "needs dot from graphviz"
+type entr > /dev/null || err "needs entr"
+type reload > /dev/null || err "npm install reload"
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+
+  tdot=$1
+  tdir=$(mktemp -d)
+  tsvg=$tdir/${tdot/.dot/.svg}
+  thtml=$tdir/index.html
+  tbash=${tsvg/.svg/.sh}
+  cat > $tbash << EOF
+dot -Tsvg $tdot -o $tsvg
+touch $thtml
+EOF
+  cat > $thtml << EOF
+<html>
+<body>
+<img src="${tdot/.dot/.svg}"\>
+</body>
+</html>
+EOF
+
+  bash $tbash
+  echo $tdot | entr bash $tbash &
+  tpid=$!
+
+  reload -b -d $tdir
+
+  kill $tpid > /dev/null
+
+  tdot=""
+  tdir=""
+  tsvg=""
+  tbash=""
+  thtml=""
+  tpid=""
+
+fi
+

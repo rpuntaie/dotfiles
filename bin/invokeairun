@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# not working currently
+
+cd ~/msrc/InvokeAI
+scripts/invokeai-web.py &
+
+cd ~/msrc/InvokeAI/invokeai/frontend/web
+pnpm dev
+

@@ -4,7 +4,7 @@
 if [ -d "$XDG_CONFIG_HOME/sh/interactive.d" ]; then
 	for snippet in "$XDG_CONFIG_HOME/sh/interactive.d/"*.sh; do
 		if [ -r "$snippet" ]; then
-			. "$snippet"
+			source "$snippet"
 		fi
 	done
 	unset snippet

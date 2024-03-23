@@ -1,0 +1,1 @@
+../profile.d/00-usrstuff.sh

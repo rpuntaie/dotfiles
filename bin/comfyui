@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source ~/.virtualenvs/pyv/bin/activate
+cd ~/msrc/ComfyUI
+python main.py

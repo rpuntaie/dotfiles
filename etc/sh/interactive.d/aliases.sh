@@ -91,7 +91,10 @@ export BLENDER_SYSTEM_SCRIPTS=$HOME/msrc/blender-git/blender/scripts
 export BLENDER_USER_CONFIG=$HOME/msrc/blender-git/blender/config
 
 # scp1 110 x.y
-scp1(){scp $2 roland@192.168.1.$1:/home/roland/tmp/}
+scp1(){
+  scp $2 roland@192.168.1.$1:/home/roland/tmp/
+}
+
 alias b0='bluetoothctl disconnect'
 alias bs='bluetoothctl scan on'
 alias b1='bluetoothctl connect F4:4E:FC:A6:B7:49'
