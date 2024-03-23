@@ -1,13 +1,12 @@
-snippet dltr "dear letter"
-Dear $1
-
-${VISUAL}
-
-YourName
-endsnippet
-
-snippet Pymain
+snippet pymain "python main not imported"
 if __name__ == "__main__":
   main()
 endsnippet
+
+snippet shmain "bash main not sourced"
+if [[ "${BASH_SOURCE[0]}" == "\${0}" ]]; then
+${1}
+fi
+endsnippet
+
 

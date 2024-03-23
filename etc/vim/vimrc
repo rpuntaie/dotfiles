@@ -258,11 +258,13 @@ endif
   call dein#add('rpuntaie/vim-barbaric',{'if':l:nn,'merged':0})
   call dein#add('goerz/jupytext.vim',{'if':l:nn,'merged':0})
   call dein#add('ojroques/vim-oscyank',{'if':l:nn,'merged':0})
-"  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
+  call dein#add('fatih/vim-go',{'if':l:nn,'merged':0})
   call dein#add('vyperlang/vim-vyper',{'if':l:nn,'merged':0})
   call dein#add('inkarkat/vim-ingo-library',{'if':l:nn,'merged':0})
   call dein#add('inkarkat/vim-ExtractMatches',{'if':l:nn,'merged':0})
   call dein#add('dart-lang/dart-vim-plugin',{'if':l:nn,'merged':0})
+  call dein#add('google/vim-maktaba',{'if':l:nn,'merged':0})
+  call dein#add('google/vim-codefmt',{'if':l:nn,'merged':0})
 "call dein#add('lifepillar/vim-colortemplate',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
@@ -841,7 +843,11 @@ augroup END
 command! -bar -nargs=0 -range=% J :<line1>,<line2>Autoformat
 "": `:J` for `:AutoformatLine`
 command! -bar -nargs=0 JJ :AutoformatLine
-
+""" `SC`: code format
+vmap <silent> SC :FormatLines<CR>
+nmap <silent> SC :FormatCode<CR>
+""" `ST`: trim spaces
+vmap <silent> ST :TrimSpaces<CR>
 
 " trailing whitespaces:
 function! s:TrimSpaces() range
@@ -871,9 +877,13 @@ endfunction
 command! PrettyXML call <SID>DoPrettyXML()
 
 function! s:Edit(filepath)
+  if isdirectory(a:filepath)
+    execute "FZF ".fnameescape(a:filepath)
+  else
     execute "e ".fnameescape(a:filepath)
+  endif
 endfunction
-"": `:E` same as `:e(dit)`
+"": `:E` use FZF
 command! -nargs=1 -complete=file E call <SID>Edit(<q-args>)
 
 "": `:L` close window
@@ -1060,9 +1070,11 @@ nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos
 nmap <leader>ee :e 
 nmap <leader>ev :e $MYVIMRC<CR>
-nmap <leader>ep :e <C-R>=g:dein_path<CR>/../..<CR>
+nmap <leader>ep :E <C-R>=g:dein_path<CR>/../..<CR>
 nmap <leader>em :cd $MY<CR>:Files<CR>
 nmap <leader>ei :e ~/mine/dotfiles/install<CR>
+nmap <leader>es :e ~/mine/dotfiles/etc/vim/UltiSnips/all.snippets<CR>
+map <silent> se :call UltiSnips#RefreshSnippets()<CR>
 nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
 nmap <leader>eh :e $MY/y24.rst<CR>
 nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
@@ -1088,13 +1100,23 @@ command! SD cd %:p:h
 nnoremap <silent> SD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR>
 "": `:TD` execute .local/bin/todo to quickfix list
 command! TD :cexpr system('~/.local/bin/todo --vimgrep')
+
+cmap RG Rg
 """ `SW`: fzf search for word under cursor and strings containing it
 map <silent> SW :call histadd("cmd",'Rg <C-R><C-W>')<CR>:call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>
 """ `SWW`: fzf search for word under cursor
 map <silent> SWW :call histadd("cmd",'Rg \b<C-R><C-W>\b')<CR>:call setreg('/','\b<C-R><C-W>\b')<CR>:Rg \b<C-R><C-W>\b<CR>
-cmap RG Rg
-""" `ST`: like TS but with 8 lines
-map <silent> ST :TS<CR>:resize 8<CR>
+command! -bang -nargs=* Rgg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+command! -bang -nargs=* -complete=file Rgf
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
+  \   fzf#vim#with_preview({
+  \     'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]
+  \   }), <bang>0)
+
+""" `TS`: like TS but with 8 lines
+map <silent> TS :TS<CR>:resize 8<CR>
 """ `SE`: restore existing zsh on the right side 
 map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR> 
 """ `SE,SF`: restore existing zsh on the right side (with path of file)
@@ -1280,7 +1302,7 @@ endfunction
 command! -nargs=* CG :call <SID>CG()
 
 command! SpecialSelection call fzf#run({
-      \'source': 'bash -c "for f in \$(cat $MY/dirs); do if [ -d \$f ] ; then ag -l -g \"\" \$f; else ag -l -g \"\" \$(cd \${f%/*} && (git rev-parse --show-toplevel 2>/dev/null || echo \${f%/*})); fi; done | sort -u"',
+      \'source': 'bash -c "for f in \$(cat $MY/dirs); do if [ -d \$f ] ; then ag -l -g \"\" \$f; else ag -l -g \"\" \$(git -C \${f%/*} rev-parse --show-toplevel 2>/dev/null || echo \${f%/*}); fi; done | sort -u"',
       \'sink' : 'e',
       \'dir' : '~/my',
       \})
@@ -1490,9 +1512,9 @@ set statusline+=%y " filetype
 set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
-if g:CocOverDeoplete
-# set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-endif
+"if g:CocOverDeoplete
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"endif
 set statusline+=%{&spelllang}
 set statusline+=%{strftime('%H:%M')}
 set laststatus=2
