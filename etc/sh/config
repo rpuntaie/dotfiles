@@ -66,4 +66,4 @@ export CABAL_CONFIG="${XDG_CONFIG_HOME}/cabal/config"
 export XCOMPOSEFILE="${XDG_CONFIG_HOME}/X11/XCompose"
 export XCOMPOSECACHE="${XDG_CACHE_HOME}/X11/XCompose"
 
-. "$HOME/.cargo/env"
+[ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

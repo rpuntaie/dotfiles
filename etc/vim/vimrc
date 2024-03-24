@@ -398,13 +398,10 @@ let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
 "cdelledonne/vim-cmake
 function! s:CBDL()
-let g:cmake_build_dir_location='../'.fnamemodify(trim(fnamemodify(cmake#GetSourceDir(),':p'),'/',2),':t').'_build'
+let g:cmake_build_dir_location='../'.fnamemodify(trim(fnamemodify(cmake#GetInfo().project_dir,':p'),'/',2),':t').'_build'
 endfunction
-nmap SG :call <SID>CBDL()<CR><Plug>(CMakeGenerate)
-nmap SB :call <SID>CBDL()<CR><Plug>(CMakeBuild)
-"nmap SI :call <SID>CBDL()<CR><Plug>(CMakeInstall)
-nmap SH :call <SID>CBDL()<CR><Plug>(CMakeSwitch)
-nmap SQ :call <SID>CBDL()<CR><Plug>(CMakeClose)
+nmap SBG :call <SID>CBDL()<CR><Plug>(CMakeGenerate)
+nmap SBB :call <SID>CBDL()<CR><Plug>(CMakeBuild)
 "johnsyweb/vim-makeshift
 let g:makeshift_on_startup = 0
 let g:makeshift_on_bufread = 0
@@ -1106,14 +1103,16 @@ cmap RG Rg
 map <silent> SW :call histadd("cmd",'Rg <C-R><C-W>')<CR>:call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>
 """ `SWW`: fzf search for word under cursor
 map <silent> SWW :call histadd("cmd",'Rg \b<C-R><C-W>\b')<CR>:call setreg('/','\b<C-R><C-W>\b')<CR>:Rg \b<C-R><C-W>\b<CR>
-command! -bang -nargs=* Rgg
-  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
-command! -bang -nargs=* -complete=file Rgf
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
-  \   fzf#vim#with_preview({
-  \     'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]
-  \   }), <bang>0)
+command! -bang -nargs=* -complete=file Rgg call <SID>Rgg(<f-args>)
+function! s:Rgg(...)
+  call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '.(a:0?join(a:000,' '):'.'), 1,
+        \ fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}))
+endfunction
+let g:MYDIRS=$MY.'/dirs'
+command! -nargs=* Rgs call <SID>Rgs(<f-args>)
+function! s:Rgs(...)
+  call fzf#vim#grep('xargs -d "\n" -a '.g:MYDIRS.' rg --column --line-number --no-heading --color=always --smart-case '.(a:0?join(a:000,' '):'.'), 1, fzf#vim#with_preview({}))
+endfunction
 
 """ `TS`: like TS but with 8 lines
 map <silent> TS :TS<CR>:resize 8<CR>
@@ -1284,7 +1283,8 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 """ `ss`: fzf Snippets
 map <silent> ss :Snippets<CR>
 """ `SS`: fzf Files in repos of recent files
-map <silent> SS :SpecialSelection<CR>
+map <silent> SS :Rgs<CR>
+map <silent> SG :Rgg<CR>
 "godlygeek/tabular
 """ `,aa`: :Tabular
 map <leader>aa :Tab/
@@ -1299,13 +1299,7 @@ function s:CG()
   execute 'SD'
   execute 'CD'
 endfunction
-command! -nargs=* CG :call <SID>CG()
-
-command! SpecialSelection call fzf#run({
-      \'source': 'bash -c "for f in \$(cat $MY/dirs); do if [ -d \$f ] ; then ag -l -g \"\" \$f; else ag -l -g \"\" \$(git -C \${f%/*} rev-parse --show-toplevel 2>/dev/null || echo \${f%/*}); fi; done | sort -u"',
-      \'sink' : 'e',
-      \'dir' : '~/my',
-      \})
+command! -nargs=0 CG :call <SID>CG()
 
 if g:CocOverDeoplete
     "coc
