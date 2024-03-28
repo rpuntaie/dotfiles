@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""
+
+tmpc <language> <cookiecutterlink>
+
+Creates template project in ~/tmp/c
+
+eg
+tmpc go gh:lacion/cookiecutter-golang
+tmpc py gh:audreyfeldroy/cookiecutter-pypackage
+tmpc cpp gh:ssciwr/cookiecutter-cpp-project
+tmpc c gh:lchsk/cookiecutter-c-project
+tmpc sh gh:TjWallas/bash-cookiecutter
+"""
+
+import sys
+import time
+import os
+import string
+import tempfile
+import json
+from cookiecutter.main import cookiecutter
+
+def timeid():
+    al=string.ascii_letters
+    sm=time.strftime("%M%S")
+    for c in 'ymH':
+        sm=al[int(time.strftime("%"+c))-1]+sm
+    return sm
+
+def init(language):
+    if language == 'go':
+        os.system('go mod tidy')
+    os.system('rm -rf .git')
+    os.system('git init')
+    os.system('git add .')
+    os.system('git commit -m "Initial commit"')
+
+def fldr_name(cookiecutterlink):
+    tdir = tempfile.mkdtemp()
+    os.chdir(tdir)
+    loc = cookiecutterlink.replace('gh:','https://github.com/')
+    if (not loc.startswith('https://') and not loc.startswith('/')):
+        locabs = os.path.expandvars('$XDG_STATE_HOME/cookiecutter/%s'%loc)
+        ccmd = 'cp -R '+locabs+' .'
+    else:
+        ccmd = 'git clone %s'%loc
+    os.system(ccmd)
+    repo=os.listdir('.')[0]
+    jsn=repo+'/cookiecutter.json'
+    jld=json.load(open(jsn))
+    n=next(x for x in os.listdir(repo) if x.startswith('{'))
+    name = n.split('.')[1].split('}')[0]
+    fldr=tdir+'/'+repo
+    return fldr,name
+
+def main(language,cookiecutterlink):
+    """
+    >>> language,cookiecutterlink = 'go','gh:lacion/cookiecutter-golang'
+    >>> main(language,cookiecutterlink)
+    >>> language,cookiecutterlink = 'py','gh:audreyfeldroy/cookiecutter-pypackage'
+    >>> main(language,cookiecutterlink)
+    """
+    newname='%s%s'%(language,timeid())
+    tgt=os.path.expanduser('~/tmp/c')
+    os.makedirs(tgt,exist_ok=True)
+    fldr,name = fldr_name(cookiecutterlink)
+    os.chdir(tgt)
+    cmd='cookiecutter --no-input %s %s=%s'%(
+            fldr,
+            name,
+            newname
+        )
+    os.system(cmd)
+    os.chdir(newname)
+    init(language)
+    print(os.getcwd())
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print(__doc__)
+        exit()
+    main(sys.argv[1],sys.argv[2])
+

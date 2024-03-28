@@ -9,4 +9,17 @@ ${1}
 fi
 endsnippet
 
+snippet gosignal "handle signal in go"
+go func() {
+  ${1}
+}
+ch := make(chan os.Signal, 1)
+signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+<-ch
+endsnippet
+
+snippet gotestcompile "compile with debug info"
+go test -c -gcflags '-N -l'
+endsnippet
+
 

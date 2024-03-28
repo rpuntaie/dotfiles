@@ -1050,6 +1050,7 @@ fi
 #PKG: python-docutils
 #PKG: python-gmpy2
 #PKG: python-jinja
+#PKG: python-jedi
 #PKG: python-matplotlib
 #PKG: python-pillow
 #PKG: python-pygal
@@ -1184,6 +1185,8 @@ fi
 #PKG: python-pdftotext
 #PKG: python-pyalsa
 #PKG: python-poetry
+#PKG: python-lsp-server
+#PKG: python-cookiecutter
 #PKG: docx2txt
 #PKG: odt2txt
 #PKG: yt-dlp

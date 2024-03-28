@@ -177,6 +177,8 @@ function! s:Deinplugins()
 
 if g:CocOverDeoplete
   call dein#add('neoclide/coc.nvim', {'if':l:nn,'merged':0, 'build': 'yarn install --frozen-lockfile'})
+  " also do: pip install jedi
+  call dein#add('davidhalter/jedi',{'if':l:nn,'merged':0})
 else
   "UpdateRemotePlugins when switching
   call dein#add('Shougo/deoplete.nvim',{'if':l:nn,'merged':0})
@@ -190,6 +192,7 @@ else
   call dein#add('lighttiger2505/deoplete-vim-lsp',{'if':l:nn,'merged':0})
   call dein#add('Shougo/neoinclude.vim',{'if':l:nn,'merged':0})
   call dein#add('Shougo/deoplete-clangx',{'if':l:nn,'merged':0})
+  " also do: pip install jedi
   call dein#add('davidhalter/jedi',{'if':l:nn,'merged':0})
   call dein#add('deoplete-plugins/deoplete-jedi',{'if':l:nn,'merged':0})
 endif
@@ -208,7 +211,7 @@ endif
     "python
 ""| |vim_py3_rst| python and rst helpers
   call dein#add('rpuntaie/vim_py3_rst',{'if':l:nn,'merged':0})
-    "call dein#add('python-mode/python-mode',{'merged':0})
+  call dein#add('python-mode/python-mode',{'merged':0})
 "  ""| |Nvim-R-use| \rf \rq \d ... in R file
 "    call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
 ""| |vimproc-commands| asynchronous execution
@@ -450,10 +453,9 @@ if g:CocOverDeoplete
           \ 'coc-omni',
           \ 'coc-syntax',
           \ 'coc-ultisnips',
-          "\ 'coc-snippets',
           \ 'coc-python',
           \ 'coc-clangd',
-          "\ 'coc-cmake',
+          \ 'coc-cmake',
           \ 'coc-json',
           \ 'coc-java',
           \ 'coc-tsserver',
@@ -493,6 +495,11 @@ if g:CocOverDeoplete
           \     "rootPatterns": [ "go", "gomod" ],
           \     "disabledFeatures": [ "workspaceFolders" ],
           \     "initializationOptions": { "completeUnimported": v:true }
+          \ },
+          \ "python": {
+          \     "command": "/usr/bin/pylsp",
+          \     "python.jediPath": "/usr/lib/python3.11/site-packages",
+          \     "filetypes": ["python"]
           \ },
           \ "kotlin": {
           \     "command": "/usr/bin/kotlin-language-server",
@@ -1267,7 +1274,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true
 """ `sf` : fzf Files GFiles
 map <silent> sf :Files<CR>
 """ `sg` : fzf GFiles
-map <silent> sg SD:GFiles<CR>
+map <silent> sg :CG<CR>:GFiles<CR>
 """ `sh`: fzf History
 map <silent> sh :History<CR>
 """ `sb`: fzf Buffers

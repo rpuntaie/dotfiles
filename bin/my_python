@@ -13,7 +13,6 @@ pip install --user restview
 pip install --user click-man #man pages for click apps
 pip install --user when-changed #... file/dir -c command
 pip install --user pygame #graphics
-pip install --user cookiecutter #template projects
 #pip install --user pymunk #2D physics engine
 #pip install --user python-gantt
 #pip install --user plotly #charting with html/js
