@@ -1,0 +1,16 @@
+{{project_name}}
+  ├ README.md
+      # {{project_name}}
+  ├ {{project_name}}.go
+      package main
+      import (
+      	"fmt"
+      )
+
+      func main() {
+      	fmt.Println("Hello")
+      }
+  └ go.mod
+      module github.com/rpuntaie/{{project_name}}
+
+      go 1.22

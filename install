@@ -1189,6 +1189,7 @@ fi
 #PKG: python-cookiecutter
 #PKG: docx2txt
 #PKG: odt2txt
+#PKG: kubo
 #PKG: yt-dlp
 #PKG: ytfzf
 #PKG: newsboat

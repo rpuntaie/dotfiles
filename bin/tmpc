@@ -1,16 +1,36 @@
 #!/usr/bin/env python3
 """
-
-tmpc <language> <cookiecutterlink>
+tmpc <link>
 
 Creates template project in ~/tmp/c
 
-eg
-tmpc go gh:lacion/cookiecutter-golang
-tmpc py gh:audreyfeldroy/cookiecutter-pypackage
-tmpc cpp gh:ssciwr/cookiecutter-cpp-project
-tmpc c gh:lchsk/cookiecutter-c-project
-tmpc sh gh:TjWallas/bash-cookiecutter
+- language
+
+tmpc go
+tmpc py
+tmpc cpp
+tmpc c
+tmpc sh
+tmpc rs
+
+- cookiecutter:
+tmpc gh:lacion/cookiecutter-golang
+tmpc gh:audreyfeldroy/cookiecutter-pypackage
+tmpc gh:ssciwr/cookiecutter-cpp-project
+tmpc gh:lchsk/cookiecutter-c-project
+tmpc gh:TjWallas/bash-cookiecutter
+tmpc gh:rnag/cookiecutter-rust
+
+- copier: the project should not have choices without default, except project_name
+tmpc gh:pdm-project/copier-pdm --trust
+tmpc gh:natir/copier-rust --trust
+
+- txdir file to directory tree
+tmpc go0
+
+- files
+tmpc bash
+
 """
 
 import sys
@@ -19,7 +39,9 @@ import os
 import string
 import tempfile
 import json
-from cookiecutter.main import cookiecutter
+import yaml
+
+j = os.path.join
 
 def timeid():
     al=string.ascii_letters
@@ -28,57 +50,98 @@ def timeid():
         sm=al[int(time.strftime("%"+c))-1]+sm
     return sm
 
-def init(language):
-    if language == 'go':
-        os.system('go mod tidy')
+def gitinit():
     os.system('rm -rf .git')
     os.system('git init')
     os.system('git add .')
     os.system('git commit -m "Initial commit"')
 
-def fldr_name(cookiecutterlink):
+def copier_required(repo):
+    s = open(j(repo,'copier.yml'))
+    y=yaml.safe_load(s)
+    for e in y.items():
+        if 'type' in e[1]:
+            if 'default' not in e[1]:
+                yield e[0]
+
+def mkcmd(link,name,*args):
+    extra = ""
+    if args:
+        extra = f'\'{" ".join(args)}\''
     tdir = tempfile.mkdtemp()
     os.chdir(tdir)
-    loc = cookiecutterlink.replace('gh:','https://github.com/')
-    if (not loc.startswith('https://') and not loc.startswith('/')):
-        locabs = os.path.expandvars('$XDG_STATE_HOME/cookiecutter/%s'%loc)
-        ccmd = 'cp -R '+locabs+' .'
+    loc = link.replace('gh:','https://github.com/')
+    if not loc.startswith('https://') and not os.path.isabs(loc):
+        locabs = os.path.expandvars(f'$XDG_CONFIG_HOME/templates/{loc}')
+        if os.path.isdir(locabs):
+            ccmd = 'cp -R '+locabs+' .'
+        else:
+            ccmd = 'cp '+locabs+' .'
     else:
-        ccmd = 'git clone %s'%loc
+        ccmd = f'git clone {loc}'
     os.system(ccmd)
-    repo=os.listdir('.')[0]
-    jsn=repo+'/cookiecutter.json'
-    jld=json.load(open(jsn))
-    n=next(x for x in os.listdir(repo) if x.startswith('{'))
-    name = n.split('.')[1].split('}')[0]
-    fldr=tdir+'/'+repo
-    return fldr,name
 
-def main(language,cookiecutterlink):
-    """
-    >>> language,cookiecutterlink = 'go','gh:lacion/cookiecutter-golang'
-    >>> main(language,cookiecutterlink)
-    >>> language,cookiecutterlink = 'py','gh:audreyfeldroy/cookiecutter-pypackage'
-    >>> main(language,cookiecutterlink)
-    """
-    newname='%s%s'%(language,timeid())
-    tgt=os.path.expanduser('~/tmp/c')
-    os.makedirs(tgt,exist_ok=True)
-    fldr,name = fldr_name(cookiecutterlink)
-    os.chdir(tgt)
-    cmd='cookiecutter --no-input %s %s=%s'%(
-            fldr,
-            name,
-            newname
-        )
-    os.system(cmd)
-    os.chdir(newname)
-    init(language)
-    print(os.getcwd())
+    files = os.listdir('.')
+    if not files:
+        print(f"Could not find template {link}")
+        return
+
+    repo=files[0]
+    tmpfldr=j(tdir,repo)
+    if 'copier' in link:
+        cr = list(copier_required(repo))
+        pname = cr[0] # assuming "project_name" or equivalent as first entry
+        vals = [''.join(x) for x in zip(cr,['_'+name]*len(cr))]
+        crvals = list(': '.join(x) for x in zip(cr,vals))
+        with open('c.yaml','w') as f:
+            f.write('\n'.join(crvals)+'\n')
+        data = j(tdir,'c.yaml')
+        cmd = f'copier copy --defaults  --data-file {data} {extra} {tmpfldr} {name}'
+        return cmd
+    elif 'cookiecutter' in link:
+        jsn=j(repo,'cookiecutter.json')
+        jld=json.load(open(jsn))
+        n=next(x for x in os.listdir(repo) if x.startswith('{'))
+        pname = n.split('.')[1].split('}')[0]
+        return f'cookiecutter --no-input {tmpfldr} {pname.strip()}={name} {extra}'
+    elif os.path.isdir(tmpfldr):
+        cmd = 'cp -R {tmpfldr} {name}'
+    else:
+        c = any(x in open(tmpfldr).read() for x in '├└')
+        if c:
+            cmd = f'cat {tmpfldr} | stpl - - \'project_name="{name}"\' {extra} | txdir - .'
+        else:
+            cmd = f'cp {tmpfldr} {name}'
+        return cmd
+
+def main(link, *args):
+    name=timeid()
+    cmd = mkcmd(link,name,*args)
+    if cmd:
+        tgt=os.path.expanduser('~/tmp/c')
+        os.makedirs(tgt,exist_ok=True)
+        os.chdir(tgt)
+        os.system(cmd)
+        try:
+            os.chdir(name)
+            gitinit()
+            print(os.getcwd())
+        except:
+            print(j(os.getcwd(),name))
+
+langs={ 'go':'gh:lacion/cookiecutter-golang'
+       ,'py':'gh:audreyfeldroy/cookiecutter-pypackage'
+       ,'cpp':'gh:ssciwr/cookiecutter-cpp-project'
+       ,'c':'gh:lchsk/cookiecutter-c-project'
+       ,'sh':'gh:TjWallas/bash-cookiecutter'
+       ,'rs':'gh:rnag/cookiecutter-rust'
+}
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print(__doc__)
         exit()
-    main(sys.argv[1],sys.argv[2])
+    link = sys.argv[1]
+    link = langs.get(link,link)
+    main(link,*sys.argv[2:])
 
