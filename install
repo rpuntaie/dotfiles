@@ -1051,6 +1051,7 @@ fi
 #PKG: python-gmpy2
 #PKG: python-jinja
 #PKG: python-jedi
+#PKG: jedi-language-server
 #PKG: python-matplotlib
 #PKG: python-pillow
 #PKG: python-pygal

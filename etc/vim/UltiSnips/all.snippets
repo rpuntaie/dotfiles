@@ -22,4 +22,19 @@ snippet gotestcompile "compile with debug info"
 go test -c -gcflags '-N -l'
 endsnippet
 
+snippet ledgbal "ledger balance"
+ledger -f ${1} balance
+endsnippet
+snippet ledgreg "ledger register"
+ledger -f ${1} register ${2}
+endsnippet
+snippet ledger "ledger price db"
+ledger --price-db ${1} -V balance ${2}
+endsnippet
+snippet ledger "ledger time period"
+ledger --begin 2008.01.01 --end 2008.01.14 bal ${1}
+endsnippet
 
+snippet ffpiece "take a piece out of a video/audio"
+ffmpeg -i ${1} -ss ${2} -t ${3} -c copy -y ${4}
+endsnippet

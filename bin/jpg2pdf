@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+convert $(ls -v *.jpg) ${PWD##*/}.pdf

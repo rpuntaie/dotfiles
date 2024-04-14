@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Blender needs bpy_externall installed and activated
+# github.com/djmonkeyuk/bpy_externall
+# make bl_info blender fit to actual blender version used, eg (4,1,0)
+
+tmpfile=$(mktemp -t bpy_externall.XXXXXX).py
+
+{
+	echo 'import bpy'
+	echo 'import addon_utils'
+	echo 'addon_utils.enable("bpy_externall")'
+	echo 'bpy.ops.wm.bpy_externall_server(speed=1, mode="start")'
+} >$tmpfile
+
+$HOME/msrc/blender-git/build_linux/bin/blender -P $tmpfile
+rm $tmpfile

@@ -268,6 +268,7 @@ endif
   call dein#add('dart-lang/dart-vim-plugin',{'if':l:nn,'merged':0})
   call dein#add('google/vim-maktaba',{'if':l:nn,'merged':0})
   call dein#add('google/vim-codefmt',{'if':l:nn,'merged':0})
+  call dein#add('sk1418/HowMuch',{'if':l:nn,'merged':0})
 "call dein#add('lifepillar/vim-colortemplate',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
@@ -443,6 +444,7 @@ let g:NERDSpaceDelims=1
 if match(&runtimepath,'coc') == -1
   let g:CocOverDeoplete=0
 endif
+
 if g:CocOverDeoplete
     "coc.nvim
     let g:coc_global_extensions = [
@@ -453,7 +455,7 @@ if g:CocOverDeoplete
           \ 'coc-omni',
           \ 'coc-syntax',
           \ 'coc-ultisnips',
-          \ 'coc-python',
+          \ 'coc-jedi',
           \ 'coc-clangd',
           \ 'coc-cmake',
           \ 'coc-json',
@@ -495,11 +497,6 @@ if g:CocOverDeoplete
           \     "rootPatterns": [ "go", "gomod" ],
           \     "disabledFeatures": [ "workspaceFolders" ],
           \     "initializationOptions": { "completeUnimported": v:true }
-          \ },
-          \ "python": {
-          \     "command": "/usr/bin/pylsp",
-          \     "python.jediPath": "/usr/lib/python3.11/site-packages",
-          \     "filetypes": ["python"]
           \ },
           \ "kotlin": {
           \     "command": "/usr/bin/kotlin-language-server",
@@ -1122,7 +1119,7 @@ function! s:Rgs(...)
 endfunction
 
 """ `TS`: like TS but with 8 lines
-map <silent> TS :TS<CR>:resize 8<CR>
+nnoremap <silent> TS :TS<CR>:resize 8<CR>
 """ `SE`: restore existing zsh on the right side 
 map <silent> SE :vsplit<CR><C-W><C-W>:b zsh<CR> 
 """ `SE,SF`: restore existing zsh on the right side (with path of file)
@@ -1564,4 +1561,37 @@ autocmd BufReadPost *.docx :%!docx2txt %
 autocmd BufReadPost *.pdf :%!pdf2txt.py %
 
 let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
+
+"HowMuch
+vmap S? <Plug>AutoCalcAppend
+vmap S?S <Plug>AutoCalcAppendWithSum
+vmap S?+ <Plug>AutoCalcAppendWithEq
+vmap S?++ <Plug>AutoCalcAppendWithEqAndSum
+vmap S?? <Plug>AutoCalcReplace
+vmap S??s <Plug>AutoCalcReplaceWithSum
+
+"use command `bpy` to run blender
+py3 << EOF
+def py3_current_range_to_blender():
+    global blendersession
+    global blendercmd
+    try:
+      blendercmd = f'{(int(blendercmd)+1):0>#4d}'
+    except NameError:
+      import tempfile
+      blendersession=tempfile.mkdtemp()
+      blendercmd = f'{0:0>#4d}'
+    tfn = os.path.join(blendersession,blendercmd)
+    print(tfn)
+    rngstr,_ = vim_current_range()
+    if len(rngstr) == 0:
+      rngstr = '\n'.join(vim.current.buffer)
+    rngstr = 'import bpy\n'+rngstr
+    if len(rngstr) > 0:
+      with open(tfn,'w') as f:
+        f.write(rngstr)
+      with open('/tmp/bpy_external.io','w') as tob:
+        tob.write(tfn)
+EOF
+map <silent> SB :py3 py3_current_range_to_blender()<CR>
 
