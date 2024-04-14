@@ -1572,9 +1572,15 @@ vmap S??s <Plug>AutoCalcReplaceWithSum
 
 "use command `bpy` to run blender
 py3 << EOF
+blenderimports='import bpy'
+def py3_blender_imports():
+    global blenderimports
+    rngstr,_ = vim_current_range()
+    blenderimports = rngstr
 def py3_current_range_to_blender():
     global blendersession
     global blendercmd
+    global blenderimports
     try:
       blendercmd = f'{(int(blendercmd)+1):0>#4d}'
     except NameError:
@@ -1586,7 +1592,7 @@ def py3_current_range_to_blender():
     rngstr,_ = vim_current_range()
     if len(rngstr) == 0:
       rngstr = '\n'.join(vim.current.buffer)
-    rngstr = 'import bpy\n'+rngstr
+    rngstr = f'import sys\nsys.path+=["{os.path.split(vim.current.buffer.name)[0]}"]\n{blenderimports}\n'+rngstr
     if len(rngstr) > 0:
       with open(tfn,'w') as f:
         f.write(rngstr)
@@ -1594,4 +1600,5 @@ def py3_current_range_to_blender():
         tob.write(tfn)
 EOF
 map <silent> SB :py3 py3_current_range_to_blender()<CR>
+map <silent> SI :py3 py3_blender_imports()<CR>
 
