@@ -2,8 +2,24 @@
 
 : '
 
-gitdaemon
-gitdaemon newreponame
+# newreponame on 192.168.1.110
+ssh 192.168.1.110
+gitdaemon --new newreponame
+
+# other LAN PC
+cd newreponame
+git remote set-url origin 192.168.1.110/newreponame.git
+#or edit .git/config
+git push
+
+# assuming already running, see
+# ../share/systemd/user/mgitdaemon.service
+
+# new newreponame locally
+gitdaemon --new newreponame
+gitdaemon --start
+
+# test:
 cd ~/tmp
 git clone git://localhost/newreponame.git
 
@@ -12,18 +28,27 @@ git clone git://localhost/newreponame.git
 
 if [[ "$1" == "--help"  || "$1" == "-h"  ]] ; then
     echo "mgitdaemon"
-    echo "mgitdaemon newreponame"
+    echo "mgitdaemon --help newreponame"
+    echo "mgitdaemon --new newreponame"
+    exit 0
 fi
 
-mkdir -p ${HOME}/mygit
-cd ${HOME}/mygit
-if [ -n "$1" ] ; then
-    mkdir $1.git
-    cd $1.git
-    git init --bare
-    touch git-daemon-export-ok
-    chmod 777 -R ~/mygit/$1.git
+if [[ "$1" == "--start"  || "$1" == "-s"  ]] ; then
+    git daemon --base-path=${HOME}/mygit --export-all --verbose --enable=receive-pack
+    exit 0
 fi
 
-git daemon --base-path=${HOME}/mygit --export-all --verbose --enable=receive-pack
+if [[ "$1" == "--new"  || "$1" == "-n"  ]] ; then
+    mkdir -p ${HOME}/mygit
+    cd ${HOME}/mygit
+    if [ -n "$2" ] ; then
+        mkdir $2.git
+        cd $2.git
+        git init --bare
+        touch git-daemon-export-ok
+        # chmod 777 -R ~/mygit/$2.git
+    fi
+    exit 0
+fi
 
+systemctl --user status mgitdaemon
