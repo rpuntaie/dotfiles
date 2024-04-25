@@ -38,6 +38,12 @@
              },
            },
          };
+   ├─ .gitignore
+         *.gz
+         *-lock.json
+         artifacts
+         node_modules
+         cache
    ├─ package.json
          {
            "name": "hardhat-project",
