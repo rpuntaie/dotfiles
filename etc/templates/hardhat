@@ -1,0 +1,74 @@
+{{project_name}}
+   ├─ README.md
+         # Sample Hardhat Project
+         Try running some of the following tasks:
+         ```shell
+         npm install
+         npx hardhat help
+         export HARDHAT_PRIVKEY=785db8be16e176b992b48504ab71e03ef0b886baef54a627bf54c5c2f3fb46d1
+         npx hardhat test
+         REPORT_GAS=true npx hardhat test
+         npx hardhat node
+         npx hardhat ignition deploy ./ignition/modules/Lock.js
+         ```
+   ├─ contracts/
+   │  └─ totest.sol
+            // SPDX-License-Identifier: MIT
+            pragma solidity 0.8.21;
+            contract ToTest {
+                uint public tempStorage;
+                function dosomething() external {}
+            }
+   ├─ hardhat.config.js
+         require("@nomicfoundation/hardhat-toolbox");
+         require("dotenv").config();
+         const PK = process.env.HARDHAT_PRIVKEY;
+         module.exports = {
+           solidity: {
+             version: "0.8.21",
+             settings: {
+               evmVersion: "istanbul",
+             },
+           },
+           defaultNetwork: "mydefaultnet",
+           networks: {
+             mydefaultnet: {
+               url: "http://127.0.0.1:8545",
+               accounts: [PK]
+             },
+           },
+         };
+   ├─ package.json
+         {
+           "name": "hardhat-project",
+           "devDependencies": {
+             "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
+             "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+             "hardhat": "^2.22.1"
+           },
+           "dependencies": {
+             "dotenv": "^16.4.5",
+             "solc": "^0.8.21"
+           }
+         }
+   └─ test/
+      └─ totest.test.js
+            const { expect } = require("chai");
+            const { ethers } = require("hardhat");
+   
+            describe("ToTest contract", function () {
+              let totest;
+              let owner;
+   
+              beforeEach(async function () {
+                const todeploy = await ethers.getContractFactory("ToTest");
+                [owner] = await ethers.getSigners();
+                totest = await todeploy.deploy();
+              });
+   
+              // dosomething function
+              it("should be able to call dosomething", async function () {
+                await expect(totest.dosomething()).to.not.be.reverted;
+              });
+   
+            });
