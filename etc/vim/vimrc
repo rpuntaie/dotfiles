@@ -527,7 +527,6 @@ endif
 "": `:Sw` sudo write
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
-
 """ `Sf,SF`: flutter
 nmap <silent> <Leader>Sfpg :CocCommand flutter.pub.get<CR>
 nmap <silent> <Leader>Sfd :CocCommand flutter.devices<CR>
@@ -887,6 +886,14 @@ endfunction
 "": `:E` use FZF
 command! -nargs=1 -complete=file E call <SID>Edit(<q-args>)
 
+function! HexEdit(filepath)
+  let l:tmpfile = fnameescape(tempname()).a:filepath
+  silent! execute '!xxd -ps '.a:filepath.' '.l:tmpfile
+  execute "e ".l:tmpfile
+endfunction
+"": `:HE` posix hex dump of a (binary) file
+command! -nargs=1 -complete=file HE  call HexEdit(<q-args>)
+
 "": `:L` close window
 command! L :close
 
@@ -915,7 +922,7 @@ endfunction
 "": `:RR` insert RST tag based on current line
 command! RR call RstTag()
 
-function! s:VisualSelection(direction, ffilter) range
+function! s:SearchThisVisual(direction, ffilter) range
   let l:saved_reg = @"
   execute "normal! vgvy"
   let l:pattern = escape(@", '\\/.*$^~[]')
@@ -945,15 +952,15 @@ function! s:VisualSelection(direction, ffilter) range
   let @" = l:saved_reg
 endfunction
 """ `*#`: search down|up for visual region
-vnoremap <silent> * :call <SID>VisualSelection('f', '')<CR>
-vnoremap <silent> # :call <SID>VisualSelection('b', '')<CR>
+vnoremap <silent> * :call <SID>SearchThisVisual('f', '')<CR>
+vnoremap <silent> # :call <SID>SearchThisVisual('b', '')<CR>
 """ `,gr`: specify replace for visual region
-vnoremap <leader>gr :call <SID>VisualSelection('replace', '')<CR>:<C-U><C-R>=@g<CR>
+vnoremap <leader>gr :call <SID>SearchThisVisual('replace', '')<CR>:<C-U><C-R>=@g<CR>
 """ `,gg`: vimgrep specify or visual region
 """ `,gb`: vimgrep in buffers
 nnoremap <leader>gg :vimgrep // **/*<C-B><S-right><right><right>
-vnoremap <leader>gg :call <SID>VisualSelection('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
-vnoremap <leader>gb :call <SID>VisualSelection('gv', '')<CR>:<C-U><C-R>=@g<CR><CR>
+vnoremap <leader>gg :call <SID>SearchThisVisual('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
+vnoremap <leader>gb :call <SID>SearchThisVisual('gv', '')<CR>:<C-U><C-R>=@g<CR><CR>
 
 
 " read from a ex or shell command into a new scratch buffer
@@ -1069,7 +1076,7 @@ nmap <leader>lk :set keymap=fntc<CR>
 """ `,ls`: load spelling
 nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos
-nmap <leader>ee :e 
+nmap <leader>ee :E ~/mine<CR>
 nmap <leader>ev :e $MYVIMRC<CR>
 nmap <leader>ep :E <C-R>=g:dein_path<CR>/../..<CR>
 nmap <leader>em :cd $MY<CR>:Files<CR>
@@ -1079,6 +1086,7 @@ map <silent> se :call UltiSnips#RefreshSnippets()<CR>
 nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
 nmap <leader>eh :e $MY/y24.rst<CR>
 nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
+nmap <leader>eM :E ~/mine<CR>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
 nnoremap <silent> <leader>tt :Trans<CR>
@@ -1601,4 +1609,11 @@ def py3_current_range_to_blender():
 EOF
 map <silent> SB :py3 py3_current_range_to_blender()<CR>
 map <silent> SI :py3 py3_blender_imports()<CR>
+
+function! TC(lang)
+  let l:res=system('tmpc '.a:lang)
+  let l:dir=split(l:res,"\n")[-1]
+  execute "e ".l:dir
+endfunction
+command! -nargs=1 -complete=file TC call TC(<q-args>)
 

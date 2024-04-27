@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+: '
+hex encoded string to bin file
+'
+
+echo $1 | xxd -ps -r
+
