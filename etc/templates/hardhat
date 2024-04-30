@@ -1,23 +1,73 @@
 {{project_name}}
+   ├─ Makefile
+         .PHONY: init
+         init:
+         	npm install --save-dev hardhat
+         	npm install --save-dev @nomicfoundation/hardhat-toolbox
+         	npm install --save-dev @nomicfoundation/hardhat-ignition-ethers
+         	npm install --save-dev @openzeppelin/hardhat-upgrades
+         	npm install @openzeppelin/contracts
+   
+         .PHONY: install
+         install:
+         	npm install
+   
+         .PHONY: test
+         test:
+         	npx hardhat test
+   
+         .PHONY: compile
+         compile:
+         	npx hardhat compile
+   
+         .PHONY: node
+         node:
+         	npx hardhat node
+   
+         .PHONY: help
+         help:
+         	npx hardhat help
+   
+         .PHONY: deploy
+         deploy:
+         	npx hardhat ignition deploy ignition/modules/ToTest.js --network local
+   ├─ .gitignore
+         *.gz
+         *-lock.json
+         artifacts
+         node_modules
+         cache
+         deployments
    ├─ README.md
          # Sample Hardhat Project
-         Try running some of the following tasks:
-         ```shell
-         npm install
-         npx hardhat help
-         export HARDHAT_PRIVKEY=785db8be16e176b992b48504ab71e03ef0b886baef54a627bf54c5c2f3fb46d1
-         npx hardhat test
-         REPORT_GAS=true npx hardhat test
-         npx hardhat node
-         npx hardhat ignition deploy ./ignition/modules/Lock.js
+
+         See Makefile for task to run.
+         Start with
+
+         ```sh
+         make install
+         make test
+         ```
+
+         Comment the [PK] line in hardhat.config.js to get the HARDHAT_PRIVKEY first:
+
+         ```sh
+         export HARDHAT_PRIVKEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+         make node
          ```
    ├─ contracts/
    │  └─ totest.sol
             // SPDX-License-Identifier: MIT
-            pragma solidity 0.8.21;
-            contract ToTest {
-                uint public tempStorage;
-                function dosomething() external {}
+            pragma solidity ^0.8.0;
+   
+            import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+            import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+   
+   
+            contract ToTest is ERC20, ERC20Burnable {
+                constructor() ERC20("ToTest", "Token ToTest") {
+                    _mint(msg.sender, 100_000_000_000 * 10**18 );
+                }
             }
    ├─ hardhat.config.js
          require("@nomicfoundation/hardhat-toolbox");
@@ -30,29 +80,36 @@
                evmVersion: "istanbul",
              },
            },
-           defaultNetwork: "mydefaultnet",
+           defaultNetwork: "hardhat",
+           // defaultNetwork: "local",
            networks: {
-             mydefaultnet: {
+             local: {
                url: "http://127.0.0.1:8545",
                accounts: [PK]
              },
            },
          };
-   ├─ .gitignore
-         *.gz
-         *-lock.json
-         artifacts
-         node_modules
-         cache
+   ├─ ignition/
+   │  └─ modules/
+   │     └─ ToTest.js
+               const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
+   
+               module.exports = buildModule("totest", (m) => {
+                 const totest = m.contract("ToTest", []);
+                 m.call(totest, "totalSupply", []);
+                 return { totest };
+               });
    ├─ package.json
          {
            "name": "hardhat-project",
            "devDependencies": {
-             "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
+             "@nomicfoundation/hardhat-ignition-ethers": "^0.15.1",
              "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-             "hardhat": "^2.22.1"
+             "@openzeppelin/hardhat-upgrades": "^3.1.0",
+             "hardhat": "^2.22.3"
            },
            "dependencies": {
+             "@openzeppelin/contracts": "^5.0.2",
              "dotenv": "^16.4.5",
              "solc": "^0.8.21"
            }
@@ -72,9 +129,8 @@
                 totest = await todeploy.deploy();
               });
    
-              // dosomething function
-              it("should be able to call dosomething", async function () {
-                await expect(totest.dosomething()).to.not.be.reverted;
+              it("should be able to call totalSupply", async function () {
+                await expect(totest.totalSupply()).to.not.be.reverted;
               });
    
             });

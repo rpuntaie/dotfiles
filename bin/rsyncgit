@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rsync -av $1/ ./ --exclude='.git/' --exclude='.github/'
