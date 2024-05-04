@@ -67,6 +67,10 @@ def fromPosting(rlines):
             except ValueError:
                 amount = -float(rr[5].replace(',','.'))
             desc = rr[3]
+            try:
+                desc += " "+rr[6]
+            except:
+                pass
         entry = f"{date} * {desc}\n    Expenses:Unknown                             {amount}\n    Assets:Bank:{bank[isstyle]}:Checking\n"
         yield entry
 

@@ -1086,7 +1086,6 @@ map <silent> se :call UltiSnips#RefreshSnippets()<CR>
 nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
 nmap <leader>eh :e $MY/y24.rst<CR>
 nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
-nmap <leader>eM :E ~/mine<CR>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
 nnoremap <silent> <leader>tt :Trans<CR>
@@ -1399,13 +1398,8 @@ function! s:BuildFun(what2build)
     execute 'MakeshiftBuild '.a:what2build
 endfunction
 command! -nargs=* MM :call <SID>BuildFun(<q-args>)
+py3file $PYTHONSTARTUP
 py3 << EOF
-import uuid
-import sys
-import os
-from argparse import Namespace
-from unittest import mock
-from math import *
 import locale
 locale.setlocale(locale.LC_ALL, '')
 if sys.path[0]!='.':
@@ -1604,7 +1598,7 @@ def py3_current_range_to_blender():
     if len(rngstr) > 0:
       with open(tfn,'w') as f:
         f.write(rngstr)
-      with open('/tmp/bpy_external.io','w') as tob:
+      with open('/tmp/bpy_externall.io','w') as tob:
         tob.write(tfn)
 EOF
 map <silent> SB :py3 py3_current_range_to_blender()<CR>

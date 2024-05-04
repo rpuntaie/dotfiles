@@ -13,7 +13,7 @@ tmpfile=$(mktemp -t bpy_externall.XXXXXX).py
 	echo 'bpy.ops.wm.bpy_externall_server(speed=1, mode="start")'
 } >$tmpfile
 
-rm /tmp/bpy_externall.io
+rm -rf /tmp/bpy_externall.io
 touch /tmp/bpy_externall.io
 
 $HOME/msrc/blender-git/build_linux/bin/blender "$@" -P $tmpfile
