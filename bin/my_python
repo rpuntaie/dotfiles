@@ -1,59 +1,80 @@
 #!/usr/bin/env bash
-#mine
-pip install --user rstdoc #documentation
-pip install --user rst2confluence #for jira
-pip install --user txdir #create directory tree from text file
-pip install --user remdups
-pip install --user base128
-#sphinxcontrib
-pip install --user git+https://bitbucket.org/philexander/tikz/src/master/
-pip install --user git+https://github.com/prometheusresearch/sphinxcontrib-texfigure
-#other
-pip install --user restview
-pip install --user click-man #man pages for click apps
-pip install --user when-changed #... file/dir -c command
-pip install --user pygame #graphics
-#pip install --user pymunk #2D physics engine
-#pip install --user python-gantt
-#pip install --user plotly #charting with html/js
-pip install --user nikola #static html generator
-pip install --user coloredlogs #color in python logging
-#pip install --user pybtex #citations for Rnoweb
-pip install --user git+https://github.com/pre-commit/pre-commit #add hooks to git repo
-#pip install --user aws-sam-cli #AWS Serverless Application Model
-pip install --user pint #physical units
-#pip install --user face_recognition
-#nvim
-pip install --user pynvim #neovim-python
-pip install --user neovim-remote #nvr to start and use nvim server
-pip install --user solidpython #3d modelling (alternative: https://aur.archlinux.org/packages/blender-as-py-module/)
-pip install --user autopilot #easy package skeleton
-pip install --user fs #pyfilesystem
-pip install --user path #https://pypi.org/project/path/
-pip install --user doit #task automation
-pip install --user urlfetch #http client
-pip install --user tuna #.prof viewer
-pip install --user msgpack #for deoplete in vim
-pip install --user mutt-ics
-pip install --user jupytext
-pip install --user scikit-learn
-pip install --user zipper
-pip install --user urlextract
-pip install --user pandas
-pip install --user scipy
-pip install --user statsmodels
-pip install --user seaborn
-pip install --user ydiff
 
-pip install --user pynput
-pip install --user pytest-toolbox
+set -e
 
-pip install --user base58
-pip install --user python-bitcoinlib
-pip install --user hdwallet
-pip install --user ecpy
+in_virtual_env() {
+if [[ $(which python) =~ .*virtualenvs.* ]] ; then
+    return 0
+else
+    return 1
+fi
+}
 
-pip install --user pipx
+userinstall=''
+if ! in_virtual_env ; then
+    userinstall='$userinstall'
+    pylib=$(python --version)
+    pylib=${pylib%.*}
+    pylib=python${pylib#* }
+    echo "not in .virtualenv: need sudo to mv /usr/lib/$pylib/EXTERNALLY-MANAGED"
+    sudo mv /usr/lib/$pylib/EXTERNALLY-MANAGED /usr/lib/$pylib/EXTERNALLY-MANAGED.old
+fi
+
+pip install $userinstall rstdoc #documentation
+pip install $userinstall rst2confluence #for jira
+pip install $userinstall txdir #create directory tree from text file
+pip install $userinstall remdups
+pip install $userinstall base128
+
+pip install $userinstall git+https://bitbucket.org/philexander/tikz/src/master/
+pip install $userinstall git+https://github.com/prometheusresearch/sphinxcontrib-texfigure
+
+pip install $userinstall restview
+pip install $userinstall click-man #man pages for click apps
+pip install $userinstall when-changed #... file/dir -c command
+pip install $userinstall pygame #graphics
+#pip install $userinstall pymunk #2D physics engine
+#pip install $userinstall python-gantt
+#pip install $userinstall plotly #charting with html/js
+pip install $userinstall nikola #static html generator
+pip install $userinstall coloredlogs #color in python logging
+#pip install $userinstall pybtex #citations for Rnoweb
+pip install $userinstall git+https://github.com/pre-commit/pre-commit #add hooks to git repo
+#pip install $userinstall aws-sam-cli #AWS Serverless Application Model
+pip install $userinstall pint #physical units
+#pip install $userinstall face_recognition
+
+pip install $userinstall pynvim #neovim-python
+pip install $userinstall neovim-remote #nvr to start and use nvim server
+
+pip install $userinstall solidpython #3d modelling (alternative: https://aur.archlinux.org/packages/blender-as-py-module/)
+pip install $userinstall autopilot #easy package skeleton
+pip install $userinstall fs #pyfilesystem
+pip install $userinstall path #https://pypi.org/project/path/
+pip install $userinstall doit #task automation
+pip install $userinstall urlfetch #http client
+pip install $userinstall tuna #.prof viewer
+pip install $userinstall msgpack #for deoplete in vim
+pip install $userinstall mutt-ics
+pip install $userinstall jupytext
+pip install $userinstall scikit-learn
+pip install $userinstall zipper
+pip install $userinstall urlextract
+pip install $userinstall pandas
+pip install $userinstall scipy
+pip install $userinstall statsmodels
+pip install $userinstall seaborn
+pip install $userinstall ydiff
+
+pip install $userinstall pynput
+pip install $userinstall pytest-toolbox
+
+pip install $userinstall base58
+pip install $userinstall python-bitcoinlib
+pip install $userinstall hdwallet
+pip install $userinstall ecpy
+
+pip install $userinstall pipx
 pipx ensurepath
 pipx install vyper
 pipx install eth-brownie

@@ -76,17 +76,6 @@ from itertools import *
 from math import *
 from datetime import datetime, date, timedelta
 
-import pip
-def invenv():
-    return sys.prefix != sys.base_prefix
-def pip_install(*packages):
-    """ Install packages directly in the shell """
-    for name in packages:
-        cmd = ["install", name]
-        if not invenv():
-            raise ValueError("Not in a virtualenv")
-        pip.main(cmd)
-
 try:
     import pendulum as pm
 except ImportError:

@@ -52,9 +52,10 @@ export DISTCC_HOSTS='--randomize localhost red,cpp,lzo green,cpp,lzo blue,cpp,lz
 export TASKRC="${XDG_CONFIG_HOME}/task/taskrc"
 export PYTHONWARNINGS=ignore
 export PYTHONSTARTUP="${XDG_LIB_HOME}/python/startup.py"
-export JUPYTERLAB_DIR="$HOME/.local/share/jupyter/lab"
+# jupyter not working properly with other paths
+# export JUPYTERLAB_DIR="$HOME/.local/share/jupyter/lab"
+# export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/jupyter"
 export IPYTHONDIR="${XDG_CONFIG_HOME:-$HOME/.config}/ipython"
-export JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/jupyter"
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/__pycache__"
 export NLTK_DATA="${XDG_STATE_HOME}/nltk"
 export R_ENVIRON_USER="${XDG_CONFIG_HOME}/R/.Renviron"
