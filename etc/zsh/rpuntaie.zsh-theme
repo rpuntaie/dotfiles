@@ -23,8 +23,8 @@ function precmd {
 my_git_info() {
     __GIT_REMOTE="$(git remote get-url origin 2>/dev/null)"
     #__GIT_REMOTE="$(git remote get-url origin 2>/dev/null | sed -ne 's,https://[^/]\+/\([^/]*\)/\w\+\|\(.*\):/[^/].*,\1\2,p')"
-    echo "%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
-    #echo "$(git_super_status)%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
+    #echo "%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
+    echo "$(git_super_status)%{$fg_bold[green]%}${__GIT_REMOTE#*//}%{${reset_color}%}"
 }
 
 setopt extended_glob

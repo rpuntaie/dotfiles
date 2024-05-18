@@ -4,7 +4,7 @@
 
 # newreponame on 192.168.1.110
 ssh 192.168.1.110
-gitdaemon --new newreponame
+mgitdaemon --new newreponame
 
 # other LAN PC
 cd newreponame
@@ -16,8 +16,8 @@ git push
 # ../share/systemd/user/mgitdaemon.service
 
 # new newreponame locally
-gitdaemon --new newreponame
-gitdaemon --start
+mgitdaemon --new newreponame
+mgitdaemon --start
 
 # test:
 cd ~/tmp

@@ -12,7 +12,7 @@ fi
 
 userinstall=''
 if ! in_virtual_env ; then
-    userinstall='$userinstall'
+    userinstall='--user'
     pylib=$(python --version)
     pylib=${pylib%.*}
     pylib=python${pylib#* }
@@ -70,9 +70,13 @@ pip install $userinstall pynput
 pip install $userinstall pytest-toolbox
 
 pip install $userinstall base58
+pip install $userinstall eth_account
+pip install $userinstall web3
+pip install $userinstall ecdsa
 pip install $userinstall python-bitcoinlib
 pip install $userinstall hdwallet
 pip install $userinstall ecpy
+
 
 pip install $userinstall pipx
 pipx ensurepath
