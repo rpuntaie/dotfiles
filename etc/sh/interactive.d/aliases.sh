@@ -97,4 +97,5 @@ alias b2='bluetoothctl connect 5C:FB:7C:E1:0D:D5'
 
 alias j='firejail --noprofile --net=none'
 
+alias gotestcompile='go test -gcflags '-N -l' -c'
 
