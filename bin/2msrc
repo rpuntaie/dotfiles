@@ -3,6 +3,4 @@
 cd ${HOME}/msrc || exit
 pwd
 
-if [ -n "$1" ]; then
-gitclo $1
-fi
+gitclo "$@"

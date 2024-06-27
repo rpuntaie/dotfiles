@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+rm -rf ~/.virtualenvs/pyv
+virtualenv --system-site-packages ~/.virtualenvs/pyv
+source ~/.virtualenvs/pyv/bin/activate
+my_python

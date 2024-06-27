@@ -1107,6 +1107,8 @@ nnoremap <silent>n //<CR>
 command! SD cd %:p:h
 """ `SD`: cd to current symlinked file
 nnoremap <silent> SD :cd <C-R>=fnamemodify(resolve(expand('%:p')),':p:h')<CR><CR>
+""" `sd`: cd to directory under cursor
+nnoremap <silent> sd yy:cd <C-R>"<BS><CR>
 "": `:TD` execute .local/bin/todo to quickfix list
 command! TD :cexpr system('~/.local/bin/todo --vimgrep')
 

@@ -20,3 +20,6 @@ export INVOKEAI_ROOT="$HOME/invokeai"
 export GH_TOKEN="$(pass show token_github.com/rpuntaie)"
 
 export COMPANY="vougee"
+
+export OLLAMA_HOST=0.0.0.0
+export OLLAMA_MODELS="/home/roland/msrc/models_manually"
