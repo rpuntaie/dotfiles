@@ -1,0 +1,14 @@
+{{project_name}}
+  ├ README.md
+      # {{project_name}}
+  ├ {{project_name}}.cpp
+      /*
+      g++ -std=c++23 -o {{project_name}} {{project_name}}.cpp
+      */
+
+      #include<bits/stdc++.h>
+
+      int main()
+      {
+       std::cout << "Hello";
+      }

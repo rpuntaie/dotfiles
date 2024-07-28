@@ -743,7 +743,6 @@ fi
 #PKG: geonkick
 #PKG: gigedit
 #PKG: gmsynth.lv2
-#PKG: helm
 #PKG: hexter
 #PKG: hydrogen
 #PKG: infamousplugins
@@ -855,11 +854,7 @@ fi
 #PKG: vagrant
 #PKG: docker
 #PKG: docker-compose
-#PKG: docker-buildx 
-#PKG: kubectl
-#PKG: kubeadm
-#PKG: kubelet
-#PKG: minikube
+#PKG: docker-buildx
 #PKG: containerd
 #PKG: dnsmasq
 #PKG: kicad
