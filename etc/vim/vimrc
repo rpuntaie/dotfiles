@@ -561,7 +561,8 @@ nmap <silent> <Leader>SFlr :CocCommand flutter.lsp.restart<CR>
 nmap <silent> <Leader>SFcf :CocCommand workspace.renameCurrentFile<CR>
 
 ":Termdebug <app>
-packadd termdebug
+"packadd termdebug
+"...already loaded
 " go to <file>:<line> found further up in debugger terminal window
 nmap so ?:\d<CR>BvEy<C-W><C-W>:e <C-R>"<CR><C-W><C-W>i
 "vimspector debugger
