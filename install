@@ -120,6 +120,12 @@ cpanm Devel::REPL
 echo "re.pl installed"
 }
 
+_go_repl(){
+if type go; then
+  go install github.com/x-motemen/gore/cmd/gore@latest
+fi
+}
+
 _config_postgres(){ #usrstuff
 if type postgres; then
   sudo -u postgres initdb -D /var/lib/postgres/data
@@ -129,6 +135,7 @@ if type postgres; then
   echo "createdb roland -U postgres"
   createdb roland -U postgres
   echo "postgresql installed"
+  echo "systemctl disable --now postgresql"
 fi
 }
 
@@ -184,10 +191,8 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     # _dotfiles_email # etc/mutt/mw_gen_mutt_accounts.muttrc,... checked in instead
     _clone_github_mine
     _perl_repl
+    _go_repl
     _config_postgres
-    if type go; then
-      go get -u github.com/motemen/gore/cmd/gore
-    fi
     _vim_dein_plugin
     _tmux_plugin
 
