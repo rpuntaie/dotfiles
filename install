@@ -1170,6 +1170,7 @@ fi
 #PKG: haskell-shelly
 #PKG: haskell-ipython-kernel
 #PKG: haskell-ipynb
+#PKG: iwd
 
 
 
