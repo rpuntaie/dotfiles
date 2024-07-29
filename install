@@ -11,132 +11,132 @@ export XDG_CACHE_HOME=$CFG/var/cache
 export PATH=$CFG/bin:$PATH
 
 _dotfiles_check_packages(){
-  if [ ! -f /usr/bin/stow ]; then
-      sudo pacman -S stow
-  fi
-  if [ ! -f /usr/bin/xdg-user-dirs-update ]; then
-      sudo pacman -S xdg-user-dirs
-  fi
-  return 0
+if [ ! -f /usr/bin/stow ]; then
+    sudo pacman -S stow
+fi
+if [ ! -f /usr/bin/xdg-user-dirs-update ]; then
+    sudo pacman -S xdg-user-dirs
+fi
+return 0
 }
 
 _dotfiles_restowdots(){
-  cd ~
-  for DOTDIR in $(cd ~ && ls | grep dotfiles); do
-    break
-  done
-  DOTDIR=${DOTDIR:-mine/dotfiles}
-  if [ -d $DOTDIR ]; then
-    cd $DOTDIR
-    if [ ! "$(git config --get remote.origin.url)" = "$dotfiles_url" ]; then
-      echo "This install script is for a different dotfiles" >&2
-      exit 1
-    fi
-    cd ~
-    bash $DOTDIR/bin/restowdots
-  else
-    dotfiles_new_install=true
-    git clone $dotfiles_url $DOTDIR
-    bash $DOTDIR/bin/restowdots -S
+cd ~
+for DOTDIR in $(cd ~ && ls | grep dotfiles); do
+  break
+done
+DOTDIR=${DOTDIR:-mine/dotfiles}
+if [ -d $DOTDIR ]; then
+  cd $DOTDIR
+  if [ ! "$(git config --get remote.origin.url)" = "$dotfiles_url" ]; then
+    echo "This install script is for a different dotfiles" >&2
+    exit 1
   fi
+  cd ~
+  bash $DOTDIR/bin/restowdots
+else
+  dotfiles_new_install=true
+  git clone $dotfiles_url $DOTDIR
+  bash $DOTDIR/bin/restowdots -S
+fi
 }
 
 _dotfiles_fonts(){
-  fc-cache -fv
+fc-cache -fv
 }
 
 _dotfiles_python(){
-  if ! pacman -Qi python-pip; then
-    sudo pacman -S python-pip
-  fi
-  bash ~/$DOTDIR/bin/my_python
+if ! pacman -Qi python-pip; then
+  sudo pacman -S python-pip
+fi
+bash ~/$DOTDIR/bin/my_python
 }
 
 _dotfiles_nodejs(){
-  if ! pacman -Qi npm; then
-    sudo pacman -S npm
-  fi
-  npm config set prefix ${XDG_CACHE_HOME}/npm
-  npm config set cache ${XDG_CACHE_HOME}/npm
-  npm config set init-module ${XDG_CONFIG_HOME}/npm/npm-init.js
-  export PATH=$XDG_CACHE_HOME/npm/bin:$PATH
+if ! pacman -Qi npm; then
+  sudo pacman -S npm
+fi
+npm config set prefix ${XDG_STATE_HOME}/npm
+npm config set cache ${XDG_STATE_HOME}/npm
+npm config set init-module ${XDG_CONFIG_HOME}/npm/npm-init.js
+export PATH=$XDG_STATE_HOME/npm/bin:$PATH
 
-  bash ~/$DOTDIR/bin/my_nodejs
+bash ~/$DOTDIR/bin/my_nodejs
 }
 
 _dotfiles_scheme(){
-  if type raco; then
-    #https://pkgs.racket-lang.org/
-    sudo raco setup
-    sudo raco pkg install scheme-lib
-    sudo raco pkg install r5rs-lib
-    sudo raco pkg install cext-lib
-  fi
+if type raco; then
+  #https://pkgs.racket-lang.org/
+  sudo raco setup
+  sudo raco pkg install scheme-lib
+  sudo raco pkg install r5rs-lib
+  sudo raco pkg install cext-lib
+fi
 }
 
 _dotfiles_weechat(){
-  # weechat: no symlink, because it changes the files
-  if type weechat; then
-    rsync -a ~/$DOTDIR/etc/weechat/ $CFG/var/lib/weechat/
-    sed -i "s/WEENAME/rpuntaie/g" $CFG/var/lib/weechat/irc.conf # usrstuff line
-    mkdir -p $CFG/var/lib/weechat/ssl
-    cd $CFG/var/lib/weechat/ssl
-    openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem -subj "/C=AT/ST=AT/L=AT/O=ME/OU=IT/CN=me.org"
-  fi
+# weechat: no symlink, because it changes the files
+if type weechat; then
+  rsync -a ~/$DOTDIR/etc/weechat/ $XDG_STATE_HOME/weechat/
+  sed -i "s/WEENAME/rpuntaie/g" $XDG_STATE_HOME/weechat/irc.conf # usrstuff line
+  mkdir -p $XDG_STATE_HOME/weechat/ssl
+  cd $XDG_STATE_HOME/weechat/ssl
+  openssl req -nodes -newkey rsa:2048 -keyout relay.pem -x509 -days 365 -out relay.pem -subj "/C=AT/ST=AT/L=AT/O=ME/OU=IT/CN=me.org"
+fi
 }
 
 _github_install() {
-  repo="${1}"
-  dest="${2}"
-  pushd $(mktemp -d)
-  git clone "https://github.com/$repo" $repo
-  pushd $repo
-  if [ "$(sed -ne "s/^install:.*/install/p" Makefile)" = "install" ]; then
-      PREFIX=$dest prefix=$dest make install
-  fi
-  popd
-  popd
+repo="${1}"
+dest="${2}"
+pushd $(mktemp -d)
+git clone "https://github.com/$repo" $repo
+pushd $repo
+if [ "$(sed -ne "s/^install:.*/install/p" Makefile)" = "install" ]; then
+    PREFIX=$dest prefix=$dest make install
+fi
+popd
+popd
 }
 
 _dotfiles_email(){
-  if type mutt; then
-    _github_install rpuntaie/mailwizard $CFG
-    #setup email usrstuff:
-    rm -rf $CFG/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
-    a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" $CFG/bin/mw add
-    a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" $CFG/bin/mw add
-    a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" $CFG/bin/mw add
-    a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" $CFG/bin/mw add
-  fi
+if type mutt; then
+  _github_install rpuntaie/mailwizard $CFG
+  #setup email usrstuff:
+  rm -rf $CFG/etc/{isync,msmtp,getmail,mutt/accounts,mutt/mw_*}
+  a=roland.puntaier@chello.at mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=magenta.at/$a mwserverinfo="chello.at,mail.upcmail.at,995,mail.upcmail.at,465" mwname="Roland Puntaier" $CFG/bin/mw add
+  a=roland.puntaier@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Roland Puntaier" $CFG/bin/mw add
+  a=puntaier.roland@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Puntaier Roland" $CFG/bin/mw add
+  a=dontbite71@gmail.com mwusegetmail=1 mwtype=offline mwaddr=$a mwlogin=$a mwpass=google/app_password_gmail/$a mwserverinfo="gmail.com,imap.gmail.com,993,smtp.gmail.com,587" mwname="Dont Bite" $CFG/bin/mw add
+fi
 }
 
 _clone_github_mine(){ #usrstuff
-  bash ~/$DOTDIR/bin/my_github
+bash ~/$DOTDIR/bin/my_github
 }
 
 _perl_repl(){ #usrstuff
-  echo | cpan
-  cpanm Devel::REPL
-  echo "re.pl installed"
+echo | cpan
+cpanm Devel::REPL
+echo "re.pl installed"
 }
 
 _config_postgres(){ #usrstuff
-  if type postgres; then
-    sudo -u postgres initdb -D /var/lib/postgres/data
-    sudo -u postgres createuser roland
-    echo "systemctl enable --now postgresql"
-    systemctl enable --now postgresql
-    echo "createdb roland -U postgres"
-    createdb roland -U postgres
-    echo "postgresql installed"
-  fi
+if type postgres; then
+  sudo -u postgres initdb -D /var/lib/postgres/data
+  sudo -u postgres createuser roland
+  echo "systemctl enable --now postgresql"
+  systemctl enable --now postgresql
+  echo "createdb roland -U postgres"
+  createdb roland -U postgres
+  echo "postgresql installed"
+fi
 }
 
 _vim_dein_plugin(){
-  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein_s.sh
-  bash /tmp/dein_s.sh "$XDG_STATE_HOME/vim/dein"
-  vim "+call dein#build()" "+qall"
-  vim "+call dein#update()" "+qall"
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein_s.sh
+bash /tmp/dein_s.sh "$XDG_STATE_HOME/vim/dein"
+vim "+call dein#build()" "+qall"
+vim "+call dein#update()" "+qall"
 }
 
 _tmux_plugin(){
@@ -161,6 +161,16 @@ sudo mv tmp/exports /etc/exports
 
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
+  mkdir -p ~/mnt
+  mkdir -p ~/mine
+  mkdir -p ~/msrc
+  mkdir -p ~/mx
+  mkdir -p ~/my
+  mkdir -p ~/myd
+  mkdir -p ~/myforks
+  mkdir -p ~/mygit
+  mkdir -p ~/myvm
+  ln -s ~/Downloads ~/mdo
   _dotfiles_check_packages || exit $?
   _dotfiles_restowdots
   cd ~
@@ -184,10 +194,11 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
   fi
   echo -e "\033[0;32mLog out and in, to activate the environment.
 First time vim and zsh will install plugins."
+else
+  DOTDIR=${DOTDIR:-mine/dotfiles}
 fi
 
-#run manually
-#my_aur
+#run manually ~/mine/dotfiles/bin/my_aur
 
 #rollarch interprets lines starting with "^#PKG: ", "^#REPO: " and "^#DFN: ".
 
@@ -1057,7 +1068,6 @@ fi
 #PKG: python-sphinxcontrib-jsmath
 #PKG: python-sphinxcontrib-newsfeed
 #PKG: python-sphinxcontrib-qthelp
-#PKG: python-sphinxcontrib-seqdiag
 #PKG: python-sphinxcontrib-serializinghtml
 #PKG: python-sphinxcontrib-trio
 #PKG: python-pyxdg
