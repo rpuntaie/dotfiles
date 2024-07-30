@@ -769,7 +769,7 @@ if has("gui_running")
     set columns=175
     winpos 0 0
     set guiheadroom=0
-    set guioptions=a
+    set guioptions=ak
     if has("win32")
         "set guifont=DejaVu\ Sans\ Mono:h9:cANSI
         "set guifont=Inconsolata\ Bold\ 10

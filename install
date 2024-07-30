@@ -1176,6 +1176,7 @@ fi
 #PKG: haskell-ipython-kernel
 #PKG: haskell-ipynb
 #PKG: iwd
+#PKG: brightnessctl
 
 
 
