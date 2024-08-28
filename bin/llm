@@ -3,7 +3,7 @@
 mdl=$1
 
 if [ -z $mdl ]; then
-mdl=llama3
+mdl=llama3.1:8b
 fi
 
 if ! ollama run $mdl ; then

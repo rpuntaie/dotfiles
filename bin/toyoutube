@@ -2,7 +2,7 @@
 
 if [[ -z $1 ]]; then
     echo "usage: ${0##*/} <infile> [<outfile>]"
-    echo "default outfile: <infile>.ut.mkv"
+    echo "default outfile: <infile>.yt.mkv"
     echo "outfile extension determins encoding: mkv or mp4"
     exit
 fi
