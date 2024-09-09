@@ -472,6 +472,7 @@ if g:CocOverDeoplete
           \ 'coc-flutter-tools',
           \ 'coc-go',
           \ 'coc-protobuf',
+          \ 'coc-rust-analyzer',
           "\ 'coc-esbonio',
           "\ 'coc-godot',
           "\ 'coc-yaml',
@@ -673,7 +674,6 @@ if has("gui_running")
     nnoremap K :<C-U>exe "Man" v:count "<C-R><C-W>"<CR><CR>
 endif
 
-set isfname+=@-@
 set path+=**
 set keymodel=startsel,stopsel
 set selection=exclusive
@@ -682,6 +682,7 @@ filetype plugin indent off
 set history=700
 set autoread
 set isfname-=: " to make gF open file:line 
+set isfname+=@-@ " adds @ to isfname
 set iskeyword=@,48-57,_,180-255 "word delimiters
 set fillchars+="fold: "
 set foldmethod=marker

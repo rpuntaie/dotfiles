@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $1 ]] ; then
-    convert -colorspace gray -fill white  -resize 480%  -sharpen 0x1 $1 $1.scan.jpg
+    magick convert -colorspace gray -fill white  -resize 480%  -sharpen 0x1 $1 $1.scan.jpg
     tesseract $1.scan.jpg $1.scan
     echo $1.scan.jpg $1.scan.txt
 fi

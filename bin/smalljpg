@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-convert $1 \
+magick convert $1 \
 -sampling-factor 4:2:0 \
 -strip \
 -quality 85 \
@@ -9,14 +9,14 @@ convert $1 \
 $1.1.jpg
 
 
-convert $1.1.jpg \
+magick convert $1.1.jpg \
 -strip \
 -interlace Plane \
 -gaussian-blur 0.05 \
 -quality 85% \
 $1.2.jpg
 
-convert $1.2.jpg \
+magick convert $1.2.jpg \
 -sampling-factor 4:2:0 \
 -strip \
 -quality 85 \

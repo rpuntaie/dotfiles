@@ -546,6 +546,7 @@ fi
 #PKG: skia-sharp
 #PKG: lua
 #PKG: rust
+#PKG: rust-analyzer
 #PKG: julia
 #PKG: gcc-fortran
 #PKG: gcc-objc
