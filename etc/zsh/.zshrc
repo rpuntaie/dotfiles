@@ -46,6 +46,8 @@ zgen load zsh-users/zsh-syntax-highlighting
 
 zgen load Aloxaf/fzf-tab
 
+zgen load akarzim/zsh-docker-aliases
+
 # insert mode emacs keys
 bindkey -M viins '^?'    backward-delete-char
 bindkey -M viins '^[[3~' delete-char
