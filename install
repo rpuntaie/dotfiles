@@ -900,6 +900,7 @@ fi
 #PKG: docbook-xsl
 #PKG: docbook-mathml
 #PKG: tidy
+#PKG: texlive-xelatex
 #PKG: texlive-bibtexextra
 #PKG: texlive-core
 #PKG: texlive-fontsextra
