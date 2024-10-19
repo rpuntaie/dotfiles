@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-feh -r --action 'mv %F '"$1"'' .
