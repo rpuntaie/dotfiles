@@ -10,7 +10,7 @@
   editor = vim
   autocrlf = input
 [diff]
-  tool = vimdiff
+	tool = vimdiff
 [merge]
   tool = vimdiff
 [pull]
@@ -170,3 +170,5 @@
 	directory = /home/roland/mnt/usb/my
 	directory = /opt/flutter
 	directory = /app
+[difftool]
+	prompt = false

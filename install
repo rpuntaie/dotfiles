@@ -669,6 +669,7 @@ fi
 #PKG: noto-fonts
 #PKG: noto-fonts-emoji
 #PKG: noto-fonts-extra
+#PKG: noto-fonts-cjk
 #PKG: ttf-liberation
 #PKG: ttf-bitstream-vera
 #PKG: ttf-fira-mono

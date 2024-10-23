@@ -30,6 +30,9 @@ xrdb -load $XDG_CONFIG_HOME/X11/Xresources
 #needs to go before WM
 # dex --environment $WM --autostart --search-paths $XDG_CONFIG_HOME/autostart
 
+# export LANG=zh_CN.UTF-8
+# export LANGUAGE=zh_CN:en_US
+
 #-d daemonize, -r replace existing daemon
 #### this seems to interfere with setxkbmap ### ibus-daemon -d -r &
 #switch with (works with pluma)
