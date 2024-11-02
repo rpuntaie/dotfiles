@@ -72,3 +72,5 @@ export XCOMPOSEFILE="${XDG_CONFIG_HOME}/X11/XCompose"
 export XCOMPOSECACHE="${XDG_CACHE_HOME}/X11/XCompose"
 
 [ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+export PATH="$PATH:/home/roland/.local/etc/.foundry/bin"

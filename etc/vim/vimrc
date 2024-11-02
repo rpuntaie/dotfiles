@@ -686,6 +686,7 @@ set isfname+=@-@ " adds @ to isfname
 set iskeyword=@,48-57,_,180-255 "word delimiters
 set fillchars+="fold: "
 set foldmethod=marker
+set foldmarker='++-,-++'
 set showtabline=0
 set scrolloff=1
 set wildmenu
@@ -1078,17 +1079,19 @@ nmap <leader>lj :set keymap=<CR>
 nmap <leader>lk :set keymap=fntc<CR>
 """ `,ls`: load spelling
 nmap <leader>ls :setlocal spell spelllang=
-""" `,e{ep}`: edit vimrc | dein repos
-nmap <leader>ee :E ~/mine<CR>
+""" `,e{ecdgfwvpmis}`: edit home|company|dotfiles|git|fork|workspace|vim|vimre(p)os|my|install|snippets
+nmap <leader>ee :e $MY/y24.rst<CR>
+nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
+nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
+nmap <leader>eg :E ~/mine<CR>
+nmap <leader>ef :E ~/myforks<CR>
+nmap <leader>ew :exe "FZF ".fnameescape(system('git rev-parse --show-toplevel')[:-2])."/.."<CR>
 nmap <leader>ev :e $MYVIMRC<CR>
 nmap <leader>ep :E <C-R>=g:dein_path<CR>/../..<CR>
 nmap <leader>em :cd $MY<CR>:Files<CR>
 nmap <leader>ei :e ~/mine/dotfiles/install<CR>
 nmap <leader>es :e ~/mine/dotfiles/etc/vim/UltiSnips/all.snippets<CR>
 map <silent> se :call UltiSnips#RefreshSnippets()<CR>
-nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
-nmap <leader>eh :e $MY/y24.rst<CR>
-nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
 nnoremap <silent> <leader>tt :Trans<CR>
@@ -1173,14 +1176,14 @@ if has("win32")
 vnoremap <silent> gxg "cy:!start /b cmd /c chrome "www.google.com/search?q=<C-R>c"<CR>
 vnoremap <silent> gxp "cy:!start /b cmd /c chrome "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"<CR>
 vnoremap <silent> gxw "cy:!start /b cmd /c chrome "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"<CR>
-nnoremap <silent> gxg :!start /b cmd /c chrome "http://www.google.com/search?q=<cword>"<CR>
+nnoremap <silent> gxg :!start /b cmd /c chrome "http://www.google.com/search?q=<C-R><C-L>"<CR>
 nnoremap <silent> gxp :!start /b cmd /c chrome "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"<CR>
 nnoremap <silent> gxw :!start /b cmd /c chrome "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"<CR>
 else
 vnoremap <silent> gxg "cy:exe ':silent !chromium "www.google.com/search?q=<C-R>c"&'<CR>
 vnoremap <silent> gxp "cy:exe ':silent !chromium "http://docs.python.org/3/search.html?q=<C-R>c&check_keywords=yes&area=default"&'<CR>
 vnoremap <silent> gxw "cy:exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<C-R>c"&'<CR>
-nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<cword>"&'<CR>
+nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<C-R><C-L>"&'<CR>
 nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
@@ -1270,6 +1273,9 @@ vnoremap <leader>mv y:echo <C-R>"<CR>
 nnoremap <leader>mv yiw:echo <C-R>"<CR>
 """ `,j2`: to jira ("pip install rst2jira" needed}
 map <leader>j2 :py3 tojira()<CR>
+""" `,bb`: run in bash
+nnoremap <leader>bb :.w !bash<CR>
+vnoremap <leader>bb y:!bash -c '<C-R>"'<CR>
 
 "" plugins
 "junegunn/fzf.vim

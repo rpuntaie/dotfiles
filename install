@@ -895,6 +895,7 @@ fi
 #PKG: lucene++
 #PKG: shellcheck
 #PKG: pandoc
+#PKG: typst
 #PKG: asciidoc
 #PKG: expat
 #PKG: docbook-xml
