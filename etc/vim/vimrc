@@ -754,6 +754,9 @@ endif
 set diffopt+=iwhite
 syntax on
 set background=dark
+
+set maxmempattern=2000000
+
 " colorscheme roland1  " much green
 " colorscheme roland2
 colorscheme murphy
