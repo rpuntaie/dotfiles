@@ -56,5 +56,9 @@ if [[ -x $HOME/.xbindkeysrc ]]; then
   xbindkeys
 fi
 
+if [[ $WM == qtile ]]; then
+exec $WM start
+else
 exec $WM
+fi
 

@@ -536,6 +536,7 @@ fi
 #PKG: xmonad-contrib
 #PKG: xmonad-utils
 #PKG: nix
+#PKG: qtile
 #PKG: go
 #PKG: go-tools
 #PKG: gopls
