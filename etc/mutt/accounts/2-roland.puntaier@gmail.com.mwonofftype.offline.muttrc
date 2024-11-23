@@ -7,7 +7,7 @@ set from = "roland.puntaier@gmail.com"
 
 macro index gm "<shell-escape>mw roland.puntaier@gmail.com<enter>" "sync mail roland.puntaier@gmail.com"
 
-set folder = "/home/roland/Mail/roland.puntaier@gmail.com"
+set folder = "$MAIL/roland.puntaier@gmail.com"
 folder-hook $folder '<sync-mailbox><enter-command>source /home/roland/.local/etc/mutt/accounts/2-roland.puntaier@gmail.com.mwonofftype.offline.muttrc<enter><change-folder>!<enter>;<check-stats>'
 
 set sendmail = "msmtp -a $from"
