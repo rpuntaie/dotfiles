@@ -14,6 +14,7 @@ DISABLE_AUTO_UPDATE=true
 export KEYTIMEOUT=1
 
 ZSH_THEME="rpuntaie"
+#ZSH_THEME="rpuntaiemin"
 ZSH_CUSTOM="${ZDOTDIR:-$HOME}"
 
 _Z_DATA=$XDG_CACHE_HOME/z
