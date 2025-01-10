@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+tagname=$(git tag | tail -n 1)
+tagmessage=$(git tag -n99 | tail -n 1 | cut -d ' ' -f2-)
+git tag -d $tagname
+git push origin :refs/tags/$tagname
+git tag $tagname -m $tagmessage
+git push origin $tagname

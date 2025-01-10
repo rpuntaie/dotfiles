@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+import sys
+import os.path
+import tempfile
+
+def main(pythonfile):
+    pf = os.path.expanduser(pythonfile)
+    if os.path.isabs(pf):
+        folder = os.path.dirname(pf)
+    else:
+        folder = os.path.realpath(os.getcwd()+os.path.dirname(pf))
+    tfn=tempfile.mktemp()+'.py'
+    with open(pf) as f:
+        pycode = f.read()
+    pyf = '\n'.join([
+        f'import sys',
+        f'sys.path+=["{folder}"]',
+        pycode
+    ])
+    with open(tfn,'w') as f:
+      f.write(pyf)
+    with open('/tmp/bpy_externall.io','w') as tob:
+      tob.write(tfn)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("usage: bpywatch <pythonfile>")
+    main(sys.argv[1])
