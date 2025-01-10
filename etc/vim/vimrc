@@ -510,12 +510,14 @@ if g:CocOverDeoplete
           \      "*.cabal",
           \      "stack.yaml",
           \      "cabal.project",
-          \      "package.yaml"
+          \      "package.yaml",
+          \      "hie.yaml"
           \    ],
           \    "filetypes": [
           \      "hs",
           \      "lhs",
           \      "haskell"
+          \      "lhaskell"
           \    ],
           \    "initializationOptions": {
           \      "languageServerHaskell": {
@@ -835,7 +837,10 @@ augroup rolandau
         \   exe "normal! g'\"" |
         \ endif
 
-    autocmd BufReadPre *.rest setlocal syntax=rst
+    autocmd BufReadPre *.rst setlocal suffixesadd=.rst
+    autocmd BufReadPre *.py setlocal suffixesadd=.py
+    autocmd BufReadPre *.yml setlocal suffixesadd=.yml
+
     autocmd BufEnter * :syntax sync fromstart
 
     autocmd BufEnter * :set equalprg=
@@ -1083,8 +1088,8 @@ nmap <leader>lk :set keymap=fntc<CR>
 """ `,ls`: load spelling
 nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ecdgfwvpmis}`: edit home|company|dotfiles|git|fork|workspace|vim|vimre(p)os|my|install|snippets
-nmap <leader>ee :e $MY/y24.rst<CR>
-nmap <leader>ec :e $HOME/$COMPANY/my/y2024.rst<CR>
+nmap <leader>ee :e $MY/y${Y2}.rst<CR>
+nmap <leader>ec :e $HOME/$COMPANY/my/y${Y4}.rst<CR>
 nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
 nmap <leader>eg :E ~/mine<CR>
 nmap <leader>ef :E ~/myforks<CR>
@@ -1609,11 +1614,10 @@ def py3_current_range_to_blender():
     if len(rngstr) == 0:
       rngstr = '\n'.join(vim.current.buffer)
     rngstr = f'import sys\nsys.path+=["{os.path.split(vim.current.buffer.name)[0]}"]\n{blenderimports}\n'+rngstr
-    if len(rngstr) > 0:
-      with open(tfn,'w') as f:
-        f.write(rngstr)
-      with open('/tmp/bpy_externall.io','w') as tob:
-        tob.write(tfn)
+    with open(tfn,'w') as f:
+      f.write(rngstr)
+    with open('/tmp/bpy_externall.io','w') as tob:
+      tob.write(tfn)
 EOF
 map <silent> SB :py3 py3_current_range_to_blender()<CR>
 map <silent> SI :py3 py3_blender_imports()<CR>

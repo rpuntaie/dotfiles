@@ -4,6 +4,7 @@
 #alias urxvt='urxvt -bg black -fg white'
 #alias xterm='xterm -fa monaco -fs 10 -bg black -fg white'
 
+alias onchange='git ls-files | entr bash -c '
 alias r='ranger'
 alias cp='cp -i'
 alias mv='mv -i'

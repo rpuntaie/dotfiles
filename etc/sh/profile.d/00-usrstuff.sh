@@ -5,6 +5,9 @@ export MY="${HOME}/my"
 export TASKDATA="${MY}/task"
 export FINANCE="${MY}/finance"
 
+export Y2="$(date +%y)"
+export Y4="$(date +%Y)"
+
 # environment variables usrstuff:
 export REALNAME="Roland Puntaier"
 export EMAIL="roland.puntaier@gmail.com"

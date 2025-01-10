@@ -8,9 +8,12 @@ mgitdaemon --new newreponame
 
 # other LAN PC
 cd newreponame
+git remote add origin 192.168.1.110/newreponame.git
+# or if origin existing already
 git remote set-url origin 192.168.1.110/newreponame.git
 #or edit .git/config
-git push
+#then
+git push --set-upstream orgin main
 
 # assuming already running, see
 # ../share/systemd/user/mgitdaemon.service

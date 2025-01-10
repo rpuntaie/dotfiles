@@ -38,3 +38,29 @@ endsnippet
 snippet ffpiece "take a piece out of a video/audio"
 ffmpeg -i ${1} -ss ${2} -t ${3} -c copy -y ${4}
 endsnippet
+
+
+snippet gotest "go testing code"
+import (
+	"fmt"
+	"os"
+	"testing"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+)
+func TestSomething(t *testing.T) {
+  t.Run("subtest", func(t *testing.T) {
+	assert.Equal(t, 123, 123, "they should be equal")
+	assert.NotEqual(t, 123, 456, "they should not be equal")
+	assert.Nil(t, object)
+	if assert.NotNil(t, object) {
+	  require.Equal(t, "Something", object.Value)
+	}
+  })
+}
+endsnippet
+
+snippet dir "directory of bash script"
+DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+endsnippet
+

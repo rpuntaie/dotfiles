@@ -2,9 +2,9 @@
 
 feh --draw-exif -r -G -d -F \
     --action1 'echo %F | xclip -i' \
-    --action2 ';mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 30 %F' \
-    --action3 ';mogrify -rotate 90 %F' \
-    --action4 ';mogrify -rotate -90 %F' \
+    --action2 ';magick mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 30 %F' \
+    --action3 ';magick mogrify -rotate 90 %F' \
+    --action4 ';magick mogrify -rotate -90 %F' \
     --action5 'rm %F' \
     --action6 'cp %F '"$1"'' \
     --action  'mv %F '"$1"'' .

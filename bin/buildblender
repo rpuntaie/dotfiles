@@ -3,39 +3,66 @@
 : '
 
 https://wiki.blender.org/wiki/Building_Blender/Linux/Arch
-
-~/msrc/blender-git
-rm -rf build_linux build_linux_bpy lib
-
-# ~/msrc/blender-git
-# ~/msrc/blender-git/bender
+sudo pacman -S python git git-lfs patchelf
 
 buildblender
+# or
+buildblender clean
 
-# ~/msrc/blender-git/lib
-# ~/msrc/blender-git/build_linux
-# ~/msrc/blender-git/build_linux_bpy
+~/msrc/blender-git/build_linux/bin
+~/msrc/blender-git/build_linux_bpy/bin
 
 '
 
-cd ~/msrc/blender-git/blender
-git pull --recurse-submodules
-cd ~/msrc/blender-git/cycles
-git pull --recurse-submodules
-
-build_files/build_environment/install_linux_packages.py --all
-
-cd ~/msrc/blender-git
-if ! [ -d ~/msrc/blender-git/lib ]; then
-  mkdir -p lib
-  cd lib
-  svn checkout https://svn.blender.org/svnroot/bf-blender/trunk/lib/linux_x86_64_glibc_228
-else
-  cd lib/linux_x86_64_glibc_228
-  svn update
+if [[ "$1" == "clean" ]]; then
+  cd ~/msrc/blender-git
+  rm -rf build_linux build_linux_bpy
 fi
 
 cd ~/msrc/blender-git/blender
+git pull --recurse-submodules
+
+if [[ "$1" == "clean" ]]; then
+  cd ~/msrc/blender-git/blender
+  build_files/build_environment/install_linux_packages.py --all
+  if [ $? -ne 0 ]; then
+    # CRITICAL:  Failed to find a matching mandatory python (withing versions range [3.11, 3.13[).
+    fixfile="$HOME/msrc/blender-git/blender/build_files/build_environment/install_linux_packages.py"
+    sed -i -e 's/version_mex="3.13"/version_mex="3.14"/g' $fixfile
+    build_files/build_environment/install_linux_packages.py --all
+  fi
+fi
+
+: ' alternatively
+sudo pacman -S base-devel subversion cmake libepoxy libxi libxcursor libxrandr libxinerama libxxf86vm python wayland-protocols libxkbcommon libdecor
+'
+
+cd ~/msrc/blender-git/blender
+./build_files/utils/make_update.py --use-linux-libraries
+# /home/roland/msrc/blender-git/blender/lib/linux_x64
+# GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/linux_x64
+# GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/macos_arm64
+# GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/macos_x64
+# GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/windows_x64
+# /home/roland/msrc/blender-git/blender/release/datafiles/assets
+# GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress tests/data
+# /home/roland/msrc/blender-git/blender/tests/data
+
+: ' alternatively
+make deps # not recomended
+'
+
+cd ~/msrc/blender-git/blender
+make update
 make
 make bpy
 
+cd /home/roland/.local/etc/blender
+f1=$(./blender --version | head -n 1 | cut -d' ' -f 2 | cut -d'.' -f 1)
+f2=$(./blender --version | head -n 1 | cut -d' ' -f 2 | cut -d'.' -f 2)
+mv $(ls | tail -n 1) "$f1.$f2"
+
+cd ~/msrc/blender-with-python/blender-addons
+git pull --recurse-submodules
+cd ~/msrc/blender-with-python/blender-addons-contrib
+git pull --recurse-submodules

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 for f in *.jpg; do
-    mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 30 $f
+    magick mogrify -strip -interlace Plane -gaussian-blur 0.05 -quality 30 $f
 done
 magick convert $(ls -v *.jpg) ${PWD##*/}.pdf
 
