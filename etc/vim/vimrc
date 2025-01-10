@@ -516,7 +516,7 @@ if g:CocOverDeoplete
           \    "filetypes": [
           \      "hs",
           \      "lhs",
-          \      "haskell"
+          \      "haskell",
           \      "lhaskell"
           \    ],
           \    "initializationOptions": {
