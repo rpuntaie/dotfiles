@@ -269,6 +269,12 @@ endif
   call dein#add('google/vim-maktaba',{'if':l:nn,'merged':0})
   call dein#add('google/vim-codefmt',{'if':l:nn,'merged':0})
   call dein#add('sk1418/HowMuch',{'if':l:nn,'merged':0})
+  call dein#add('hylang/vim-hy',{'if':l:nn,'merged':0})
+  call dein#add('jessekelighine/vindent.vim',{'if':l:nn,'merged':0})
+" " vim-clap still beta support treesitter in vim
+" call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0})
+" call dein#add('kana/vim-textobj-user',{'if':l:nn,'merged':0})
+" call dein#add('tpope/vim-unimpaired',{'if':l:nn,'merged':0})
 "call dein#add('lifepillar/vim-colortemplate',{'if':l:nn,'merged':0})
 "call dein#add('kovisoft/slimv',{'merged':0})
 "'airblade/vim-gitgutter'
@@ -286,6 +292,7 @@ endif
   "call dein#add('rafi/awesome-vim-colorschemes')
   "if has('nvim')
   "  call dein#add('nvim-treesitter/nvim-treesitter')
+  "  call dein#add('nvim-treesitter/nvim-treesitter-textobjects',{'if':l:nn,'merged':0})
   "  call dein#add('ChristianChiarulli/nvcode-color-schemes.vim')
   "  " nvcode onedark nord aurora gruvbox palenight snazzy xoria
   "endif

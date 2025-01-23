@@ -19,7 +19,9 @@ alias c='chromium'
 alias o='open'
 alias dc='docker-compose'
 alias t='mpv'
-alias trash='gio trash'
+alias rm=trash
+#~/.local/share/Trash/
+#command rm # for real rm
 
 alias pipiu='pip install --user'
 alias pipui='sudo pip uninstall'

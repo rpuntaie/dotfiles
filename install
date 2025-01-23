@@ -168,15 +168,18 @@ sudo mv tmp/exports /etc/exports
 
 #main
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
-  mkdir -p ~/mnt
-  mkdir -p ~/mine
-  mkdir -p ~/msrc
-  mkdir -p ~/mx
   mkdir -p ~/my
+  #mounts
+  # ~/Downloads
+  mkdir -p ~/mnt
   mkdir -p ~/myd
-  mkdir -p ~/myforks
+  mkdir -p ~/msrc
   mkdir -p ~/mygit
-  mkdir -p ~/myvm
+  mkdir -p ~/mine
+  mkdir -p ~/myvm/kvm
+  mkdir -p ~/myvm/virtualbox
+  mkdir -p ~/myforks
+  ln -s ~/myd/mx ~/mx
   ln -s ~/Downloads ~/mdo
   _dotfiles_check_packages || exit $?
   _dotfiles_restowdots
@@ -403,6 +406,7 @@ fi
 #PKG: mtr
 #PKG: socat
 #PKG: htop
+#PKG: btop
 #PKG: iotop
 #PKG: openbsd-netcat
 #PKG: strace
@@ -426,6 +430,8 @@ fi
 #PKG: unzip
 #PKG: unrar
 #PKG: bat
+#PKG: eza
+#PKG: ripgrep-all
 #PKG: ncdu
 #PKG: jshon
 #PKG: the_silver_searcher
@@ -434,6 +440,8 @@ fi
 #PKG: tree
 #PKG: p7zip
 #PKG: ranger
+#PKG: nnn
+#PKG: atuin
 #PKG: file-roller
 #PKG: mlocate
 #PKG: rmlint
@@ -496,6 +504,7 @@ fi
 #PKG: python
 #PKG: pypy3
 #PKG: ipython
+#PKG: trash-cli
 #PKG: jupyterlab
 #PKG: cython
 #PKG: twine
@@ -1006,6 +1015,7 @@ fi
 #PKG: fzy
 #PKG: xmlstarlet
 #PKG: jq
+#PKG: fq
 #PKG: pyenv
 #PKG: python-pip
 #PKG: python-pipx

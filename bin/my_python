@@ -77,7 +77,6 @@ pip install $userinstall python-bitcoinlib
 pip install $userinstall hdwallet
 pip install $userinstall ecpy
 
-
 pip install $userinstall pipx
 pipx ensurepath
 pipx install vyper

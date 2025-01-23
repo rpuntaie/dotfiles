@@ -61,6 +61,8 @@ bindkey -M viins '^R'    history-incremental-search-backward
 bindkey -M viins '^U'    backward-kill-line
 bindkey -M viins '^W'    backward-kill-word
 
+type atuin 2>&1 >> /dev/null && eval "$(atuin init zsh)"
+
 # avoid ZLE command line
 bindkey -M vicmd : edit-command-line
 
