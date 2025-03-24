@@ -32,7 +32,7 @@ main = do
 
 mixKeys x = M.union (M.fromList (newKeys x)) (keys def x)
 newKeys x = [
-        ((modMask x, xK_s), spawn "scrot")
+        ((modMask x, xK_s), spawn "scrot -s")
         , ((modMask x, xK_u), spawn "scrot -u")
         , ((modMask x .|. shiftMask,   xK_q), quitWithWarning)
         , ((modMask x .|. shiftMask,   xK_p), spawn "passmenu --type")

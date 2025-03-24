@@ -6,4 +6,5 @@ name="${filename%.*}"
 if [ $extension == "md" ] ; then
     extension="markdown"
 fi
-pandoc -f $extension -t pdf "$filename" -o ~/tmp/"${name}.pdf" -V papersize=a4 -V geometry:margin=2.5cm
+pandoc -f $extension -t pdf "$filename" -o ~/tmp/"${name}.pdf" -V papersize=a4 -V geometry:margin=2.5cm --pdf-engine=xelatex -V mainfont="Liberation Serif"
+

@@ -271,6 +271,8 @@ endif
   call dein#add('sk1418/HowMuch',{'if':l:nn,'merged':0})
   call dein#add('hylang/vim-hy',{'if':l:nn,'merged':0})
   call dein#add('jessekelighine/vindent.vim',{'if':l:nn,'merged':0})
+  call dein#add('thesis/vim-solidity',{'if':l:nn,'merged':0})
+
 " " vim-clap still beta support treesitter in vim
 " call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0})
 " call dein#add('kana/vim-textobj-user',{'if':l:nn,'merged':0})
@@ -1050,9 +1052,11 @@ nnoremap Y y$
 """ `s`: <nop>, free for other mappings
 map <silent> s <nop>
 map <silent> S <nop>
+map <silent> s2 :set number<CR>
+map <silent> s0 :set nonumber<CR>
 """ `{sj sk}`: Insert empty line below|above
-nnoremap <silent> sj o<ESC>k
-nnoremap <silent> sk O<ESC>j
+nnoremap <silent> sk o<ESC>k
+nnoremap <silent> sj O<ESC>j
 """ `SR`: Replace from default register without loosing it
 vnoremap SR "_c<C-R>"<esc>
 nnoremap SR "_ciw<C-R>"<esc>
@@ -1424,7 +1428,9 @@ function! s:BuildFun(what2build)
     execute 'MakeshiftBuild '.a:what2build
 endfunction
 command! -nargs=* MM :call <SID>BuildFun(<q-args>)
-py3file $PYTHONSTARTUP
+if !exists($PYTHONSTARTUP)
+  py3file $PYTHONSTARTUP
+endif
 py3 << EOF
 import locale
 locale.setlocale(locale.LC_ALL, '')

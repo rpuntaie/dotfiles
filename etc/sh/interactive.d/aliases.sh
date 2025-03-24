@@ -43,6 +43,7 @@ alias ax='git annex'
 alias gmm='git merge'
 alias gms='git merge --squash'
 alias gtags="git tag -l --sort=-creatordate --format='%(creatordate:short):  %(refname:short)'"
+alias glga="git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)'"
 #grt to go to git root
 alias ..g='git rev-parse --show-toplevel'
 alias glr='git pull --recurse-submodules'

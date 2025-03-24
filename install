@@ -441,7 +441,6 @@ fi
 #PKG: p7zip
 #PKG: ranger
 #PKG: nnn
-#PKG: atuin
 #PKG: file-roller
 #PKG: mlocate
 #PKG: rmlint

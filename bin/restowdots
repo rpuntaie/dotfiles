@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Part of install: calls stow for these dotfiles
-# Usage: [NOGDB=1] restowdots [-S]
+# Usage: [NOGPG=1] restowdots [-S]
 
 cd ~
 
@@ -37,8 +37,8 @@ elif [[ ! $(uname) =~ "Linux" ]]; then
     exit 0
 fi
 
-if [[ -z "$NOGDB" ]]; then
-    echo "gnupg (patience: migh take some time)"
+if [[ -z "$NOGPG" ]]; then
+    echo "gnupg (patience: might take some time)"
     #keep ~/.gnupg separate, just link the config file
     for gpgfile in $(ls ~/$DOTDIR/etc/gnupg); do
         ln -sf ~/$DOTDIR/etc/gnupg/$gpgfile ~/.gnupg/$gpgfile

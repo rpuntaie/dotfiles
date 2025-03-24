@@ -2,6 +2,8 @@
 
 : '
 
+~/msrc/blender-git/blender
+
 https://wiki.blender.org/wiki/Building_Blender/Linux/Arch
 sudo pacman -S python git git-lfs patchelf
 
@@ -39,14 +41,14 @@ sudo pacman -S base-devel subversion cmake libepoxy libxi libxcursor libxrandr l
 
 cd ~/msrc/blender-git/blender
 ./build_files/utils/make_update.py --use-linux-libraries
-# /home/roland/msrc/blender-git/blender/lib/linux_x64
+# ~/msrc/blender-git/blender/lib/linux_x64
 # GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/linux_x64
 # GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/macos_arm64
 # GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/macos_x64
 # GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress lib/windows_x64
-# /home/roland/msrc/blender-git/blender/release/datafiles/assets
+# ~/msrc/blender-git/blender/release/datafiles/assets
 # GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --progress tests/data
-# /home/roland/msrc/blender-git/blender/tests/data
+# ~/msrc/blender-git/blender/tests/data
 
 : ' alternatively
 make deps # not recomended
@@ -57,9 +59,12 @@ make update
 make
 make bpy
 
-cd /home/roland/.local/etc/blender
+cd ~/msrc/blender-git/build_linux/bin
 f1=$(./blender --version | head -n 1 | cut -d' ' -f 2 | cut -d'.' -f 1)
 f2=$(./blender --version | head -n 1 | cut -d' ' -f 2 | cut -d'.' -f 2)
+cd ~/.local/etc/blender
+echo "$f1.$f2"
+ls | tail -n 1
 mv $(ls | tail -n 1) "$f1.$f2"
 
 cd ~/msrc/blender-with-python/blender-addons
