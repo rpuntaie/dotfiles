@@ -1,4 +1,4 @@
-MAILDIR=$MAIL/roland.puntaier@chello.at
+MAILDIR=/home/roland/Mail/roland.puntaier@chello.at
 
 :0
 * ^From.*@.*github\.com

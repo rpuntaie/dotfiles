@@ -1,4 +1,4 @@
-MAILDIR=$MAIL/roland.puntaier@gmail.com
+MAILDIR=/home/roland/Mail/roland.puntaier@gmail.com
 
 :0
 * ^From.*@.*youtube\.com

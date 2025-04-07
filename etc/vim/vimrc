@@ -272,6 +272,7 @@ endif
   call dein#add('hylang/vim-hy',{'if':l:nn,'merged':0})
   call dein#add('jessekelighine/vindent.vim',{'if':l:nn,'merged':0})
   call dein#add('thesis/vim-solidity',{'if':l:nn,'merged':0})
+  call dein#add('kaarmu/typst.vim',{'if':l:nn,'merged':0})
 
 " " vim-clap still beta support treesitter in vim
 " call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0})
@@ -983,6 +984,7 @@ nnoremap <leader>gg :vimgrep // **/*<C-B><S-right><right><right>
 vnoremap <leader>gg :call <SID>SearchThisVisual('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
 vnoremap <leader>gb :call <SID>SearchThisVisual('gv', '')<CR>:<C-U><C-R>=@g<CR><CR>
 
+nnoremap <leader>gf :e <cfile><cr>
 
 " read from a ex or shell command into a new scratch buffer
 function! s:Redir(cmd)

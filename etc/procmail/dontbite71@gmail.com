@@ -1,4 +1,4 @@
-MAILDIR=$MAIL/dontbite71@gmail.com
+MAILDIR=/home/roland/Mail/dontbite71@gmail.com
 
 :0
 * ^From.*@.*youtube\.com
