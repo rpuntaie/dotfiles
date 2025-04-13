@@ -1138,6 +1138,9 @@ nnoremap <silent> sd yy:cd <C-R>"<BS><CR>
 "": `:TD` execute .local/bin/todo to quickfix list
 command! TD :cexpr system('~/.local/bin/todo --vimgrep')
 
+"": `:CC` vim_py3_rst CK then open quickfix list
+cabbrev CC exec 'py3 import rstdoc;vim_query_kws([],rstdoc.dcx.rexkw,False)'<bar>copen
+
 cmap RG Rg
 """ `SW`: fzf search for word under cursor and strings containing it
 map <silent> SW :call histadd("cmd",'Rg <C-R><C-W>')<CR>:call setreg('/','<C-R><C-W>')<CR>:Rg <C-R><C-W><CR>

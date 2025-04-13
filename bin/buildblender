@@ -59,15 +59,51 @@ make update
 make
 make bpy
 
+: '
+cd ~/.local/etc/blender
+rm -rf *
+ls
+'
+
 cd ~/msrc/blender-git/build_linux/bin
 f1=$(./blender --version | head -n 1 | cut -d' ' -f 2 | cut -d'.' -f 1)
 f2=$(./blender --version | head -n 1 | cut -d' ' -f 2 | cut -d'.' -f 2)
-cd ~/.local/etc/blender
 echo "$f1.$f2"
-ls | tail -n 1
-mv $(ls | tail -n 1) "$f1.$f2"
+mkdir -p ~/.local/etc/blender/$f1.$f2
+
+: '
+# stow --no-folding -R -t ~/.local/etc/blender/$f1.$f2 $f1.$f2 # already in bpy/blender python path
+HERE=$HOME/mine/dotfiles/bin
+echo $HERE
+'
+
+HERE="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+cd $HERE/../etc/blender/
+stow --no-folding -R -t ~/.local/etc/blender/$f1.$f2 .
+
+stownogit(){
+stow --ignore __pycache__ --ignore .gitea --ignore .github --ignore .git --ignore .gitignore --no-folding -R -t $1 $2
+}
+
+TGT=~/.local/etc/blender/$f1.$f2/scripts/addons
 
 cd ~/msrc/blender-with-python/blender-addons
 git pull --recurse-submodules
+ls $TGT
+stownogit $TGT .
+
 cd ~/msrc/blender-with-python/blender-addons-contrib
 git pull --recurse-submodules
+stownogit $TGT .
+ls $TGT
+
+# remove those already in 
+cd ~/msrc/blender-git/build_linux/bin/$f1.$f2/scripts/addons_core
+for addonfile in $(ls); do
+  echo $addonfile
+  if [ -e $TGT/$addonfile ]; then
+    echo "doing: rm -rf $TGT/$addonfile"
+    rm -rf $TGT/$addonfile
+  fi
+done
+
