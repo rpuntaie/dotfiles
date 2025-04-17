@@ -1195,6 +1195,16 @@ fi
 #PKG: haskell-ipynb
 #PKG: iwd
 #PKG: brightnessctl
+#PKG: tree-sitter
+#PKG: tree-sitter-bash
+#PKG: tree-sitter-c
+#PKG: tree-sitter-cli
+#PKG: tree-sitter-lua
+#PKG: tree-sitter-markdown
+#PKG: tree-sitter-python
+#PKG: tree-sitter-query
+#PKG: tree-sitter-vim
+#PKG: tree-sitter-vimdoc
 
 
 
