@@ -159,8 +159,8 @@
 [difftool "pandiff"]
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
 [credential]
-	# helper = !pass-git-helper -l $@
-	helper = !pass-git-helper $@
+	# helper = !pass-git-helper -l -m /home/roland/.password-store/git-pass-mapping.ini $@
+	helper = !pass-git-helper -m /home/roland/.password-store/git-pass-mapping.ini $@
 	useHttpPath = true
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
