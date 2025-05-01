@@ -159,6 +159,7 @@
 [difftool "pandiff"]
 	cmd = pandiff \"$LOCAL\" \"$REMOTE\" -f rst -o pandiff.html
 [credential]
+	# helper = !pass-git-helper -l $@
 	helper = !pass-git-helper $@
 	useHttpPath = true
 [filter "lfs"]

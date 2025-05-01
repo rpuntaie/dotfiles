@@ -1,6 +1,9 @@
 [Unit]
-Description=Mail synchronization
+Description=Run getmail
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/bin/mw
+ExecStart=/usr/bin/getmail --quiet
+
+[Install]
+WantedBy=default.target

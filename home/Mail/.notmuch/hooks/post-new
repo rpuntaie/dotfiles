@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-AFEWRC=$XDG_CONFIG_HOME/afew/config
-FOLDERS=$(sed -ne "s/^[A-z0-9\.@\/]\+ = \('[^']\+':\w\+.*\)\>/\1/p" $AFEWRC | sed -e "s/ '/\n'/g" | sed -ne "s/.*'://p" | sort -u)
-for fldr in $FOLDERS; do
-    mkdir -p $MAILDIR/$fldr/{cur,new,tmp}
-done
-
-afew -mn &>/dev/null
-
-# this is too slow:
-#afew -tn &>/dev/null
+#not_used: AFEWRC=$XDG_CONFIG_HOME/afew/config
+#not_used: FOLDERS=$(sed -ne "s/^[A-z0-9\.@\/]\+ = \('[^']\+':\w\+.*\)\>/\1/p" $AFEWRC | sed -e "s/ '/\n'/g" | sed -ne "s/.*'://p" | sort -u)
+#not_used: for fldr in $FOLDERS; do
+#not_used:     mkdir -p $MAILDIR/$fldr/{cur,new,tmp}
+#not_used: done
+#not_used: 
+#not_used: afew -mn &>/dev/null
+#not_used: 
+#not_used: # this is too slow:
+#not_used: #afew -tn &>/dev/null

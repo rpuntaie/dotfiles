@@ -1119,7 +1119,13 @@ nnoremap <leader>gg :vimgrep // **/*<C-B><S-right><right><right>
 vnoremap <leader>gg :call <SID>SearchThisVisual('gv', '**/*')<CR>:<C-U><C-R>=@g<CR>
 vnoremap <leader>gb :call <SID>SearchThisVisual('gv', '')<CR>:<C-U><C-R>=@g<CR><CR>
 
+""" `,gf`: make file under curser if it does not exist yet
 nnoremap <leader>gf :e <cfile><cr>
+""" `sgf`: open file with current line as name
+nnoremap sgf yy:call EfileInline("<C-R>"<BS>")<cr>
+function! EfileInline(filename)
+    :exe "e ". fnameescape(a:filename)
+endfu
 
 " read from a ex or shell command into a new scratch buffer
 function! s:Redir(cmd)
@@ -1353,7 +1359,7 @@ if has('nvim')
 tnoremap <ESC> <C-\><C-N>
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 else
-tnoremap <ESC> <C-W><C-N>
+" tnoremap <ESC> <C-W><C-N>
 tnoremap <C-R> <C-W>"
 endif
 tnoremap <A-h> <C-\><C-N><C-w>h
@@ -1757,9 +1763,9 @@ set wildignore+=**/*.VC.db
 set wildignore+=**/cscope.out
 set wildignore+=**/node_modules/**/*
 
-autocmd BufReadPost *.odt :%!odt2txt %
-autocmd BufReadPost *.docx :%!docx2txt %
-autocmd BufReadPost *.pdf :%!pdf2txt.py %
+autocmd BufReadPost *.odt :%!odt2txt "%"
+autocmd BufReadPost *.docx :%!docx2txt "%"
+autocmd BufReadPost *.pdf :%!pdf2txt.py "%"
 
 let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
 

@@ -2,7 +2,7 @@ set realname = "$REALNAME"
 
 # MW
 # keep this line to avoid mailwizard from adding a new one
-# usrstuff: but change the home directory
+# usrstuff: home directory
 source /home/roland/.local/share/mailwizard/mailwizard.muttrc
 
 # override defaults
@@ -40,5 +40,5 @@ source $XDG_CONFIG_HOME/mutt/view.muttrc
 macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 source $XDG_CONFIG_HOME/mutt/lists.muttrc
 
-# usrstuff: change home directory
+# usrstuff: home directory
 source /home/roland/.local/etc/mutt/mw_gen_mutt_accounts.muttrc # mailwizard-generated

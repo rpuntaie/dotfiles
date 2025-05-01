@@ -3,7 +3,7 @@ ignore = ~/.hgignore
 editor = vim
 
 # usrstuff:
-username = Roland Puntaier <roland.puntaier@chello.at>
+username = Roland Puntaier <roland.puntaier@gmail.com>
 
 [alias]
 a='add'

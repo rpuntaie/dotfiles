@@ -61,7 +61,7 @@ pandoc_opts = {
 }
 
 # usrstuff:
-copyright = '2019, Roland Puntaier'
+copyright = '2025, Roland Puntaier'
 
 numfig = True
 

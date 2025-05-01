@@ -8,11 +8,6 @@ username = dontbite71@gmail.com
 #use_xoauth2 = True
 password_command = ("pass", "google/app_password_gmail/dontbite71@gmail.com")
 
-# #MWNOTMUCHNEW=1 will call notmuch and afew to move mails to folders
-#[destination]
-#type = Maildir
-#path = /home/roland/Mail/dontbite71@gmail.com/INBOX/
-
 # procmail moves mails to folder
 # else manually via e.g.
 # mv `rg -l From.*youtube.com` ../../_/youtube/cur/
