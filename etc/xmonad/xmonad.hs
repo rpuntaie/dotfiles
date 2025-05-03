@@ -26,7 +26,7 @@ main = do
         -- terminal = "alacritty",
         terminal = "urxvt",
         keys = mixKeys,
-        layoutHook = Tall 1 (3/100) (1/2) ||| Full
+        layoutHook = Full ||| Tall 1 (3/100) (1/2)
         }
     xmonad $ ewmhFullscreen $ def
 
