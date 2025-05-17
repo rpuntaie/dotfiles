@@ -415,6 +415,7 @@ fi
 #PKG: tig
 #PKG: git-annex
 #PKG: git-filter-repo
+#PKG: jujutsu
 #PKG: repo
 #PKG: mercurial
 #PKG: subversion
@@ -1205,6 +1206,7 @@ fi
 #PKG: tree-sitter-query
 #PKG: tree-sitter-vim
 #PKG: tree-sitter-vimdoc
+#PKG: zoxide
 
 
 

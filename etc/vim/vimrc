@@ -523,7 +523,6 @@ let g:rst_syntax_code_list = {
     \ 'perl': ['perl'],
     \ 'sh': ['sh'],
     \ 'javascript': ['javascript'],
-    \ 'go': ['go'],
     \ 'rust': ['rust'],
     \ 'kotlin': ['kotlin'],
     \ 'html': ['html'],
@@ -532,6 +531,7 @@ let g:rst_syntax_code_list = {
     \ 'cs': ['cs'],
     \ 'lua': ['lua'],
     \ }
+"   'go': ['go'],
 let g:polyglot_disabled = ['latex']
 "w0rp/ale
 let g:ale_enabled=0 " :ALEToggle

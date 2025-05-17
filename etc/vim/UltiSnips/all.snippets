@@ -42,21 +42,21 @@ endsnippet
 
 snippet gotest "go testing code"
 import (
-	"fmt"
-	"os"
 	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
 func TestSomething(t *testing.T) {
-  t.Run("subtest", func(t *testing.T) {
-	assert.Equal(t, 123, 123, "they should be equal")
-	assert.NotEqual(t, 123, 456, "they should not be equal")
-	assert.Nil(t, object)
-	if assert.NotNil(t, object) {
-	  require.Equal(t, "Something", object.Value)
-	}
-  })
+	t.Run("subtest", func(t *testing.T) {
+		assert.Equal(t, 123, 123, "they should be equal")
+		assert.NotEqual(t, 123, 456, "they should not be equal")
+		var object *testing.T = nil
+		if assert.NotNil(t, object) {
+			require.Equal(t, "Something", object.TempDir())
+		}
+	})
 }
 endsnippet
 
