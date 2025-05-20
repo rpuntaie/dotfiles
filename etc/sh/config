@@ -30,7 +30,8 @@ fi
 export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 export PAGER='/usr/bin/less'
-export BROWSER='/usr/bin/chromium'
+#export BROWSER='/usr/bin/chromium'
+export BROWSER='/usr/bin/firefox'
 export MANPAGER='nvim +Man! -u /dev/null'
 
 # Colours for less:

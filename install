@@ -561,6 +561,7 @@ fi
 #PKG: lua
 #PKG: rust
 #PKG: rust-analyzer
+#PKG: rustup
 #PKG: julia
 #PKG: gcc-fortran
 #PKG: gcc-objc
@@ -910,6 +911,7 @@ fi
 #PKG: shellcheck
 #PKG: pandoc
 #PKG: typst
+#PKG: tinymist
 #PKG: asciidoc
 #PKG: expat
 #PKG: docbook-xml
@@ -1207,6 +1209,7 @@ fi
 #PKG: tree-sitter-vim
 #PKG: tree-sitter-vimdoc
 #PKG: zoxide
+#PKG: just
 
 
 

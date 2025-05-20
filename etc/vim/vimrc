@@ -860,9 +860,6 @@ set mousehide
 set nowrap
 set ffs=unix,dos,mac
 if has("multi_byte") " type '8g8' to find illegal utf8
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
   set encoding=utf-8
   setglobal fileencoding=utf-8
   set fileencodings=ucs-bom,utf-8,latin1,cp1251
