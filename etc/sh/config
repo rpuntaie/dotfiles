@@ -74,7 +74,7 @@ export CABAL_CONFIG="${XDG_CONFIG_HOME}/cabal/config"
 export XCOMPOSEFILE="${XDG_CONFIG_HOME}/X11/XCompose"
 export XCOMPOSECACHE="${XDG_CACHE_HOME}/X11/XCompose"
 
-if  [ -e "$HOME/.cargo/env" ] then;
+if  [[ -e "$HOME/.cargo/env" ]] ; then
 . "$HOME/.cargo/env"
 else
 export PATH="$PATH:${HOME}/.cargo/bin"

@@ -311,6 +311,7 @@ endif
 "call dein#recache_runtimepath()
 
 if has('nvim')
+" :call dein#install() first
 lua << EOF
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
