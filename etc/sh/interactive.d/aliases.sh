@@ -52,8 +52,8 @@ alias gdst='git diff stash@{0} HEAD'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
-alias py='~/.virtualenvs/pyv/bin/python'
 alias pyv='source ~/.virtualenvs/pyv/bin/activate'
+alias pyo='PYTHON_BASIC_REPL=1 python'
 
 alias xtex='xelatex -interaction=nonstopmode'
 
@@ -102,4 +102,5 @@ alias b2='bluetoothctl connect 5C:FB:7C:E1:0D:D5'
 alias j='firejail --noprofile --net=none'
 
 alias gotestcompile='go test -gcflags '-N -l' -c'
+
 

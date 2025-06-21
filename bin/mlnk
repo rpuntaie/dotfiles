@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+tfn="$(realpath "$1")"
+hhr="${$(sha256sum $tfn)::64}"
+for nshort in 1 2 3 4 5 6 7; do
+    hshort="${hhr::$nshort}"
+    lnpth="$HOME/m/$hshort"
+    if [[ -e $lnpth ]] ; then
+        if [[ $hhr == "${$(sha256sum $lnpth)::64}" ]] ; then
+            ln -sf "$tfn" $lnpth
+            echo $lnpth && exit 0
+        fi
+        continue
+    fi
+    ln -s "$tfn" $lnpth
+    echo $lnpth && exit 0
+done
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #yay
-sudo rm -rf ~/.local/var/cache/yay
+rm -rf ~/.local/var/cache/yay
 cd ~/tmp
 rm -rf yay-git
 git clone https://aur.archlinux.org/yay-git.git
@@ -12,73 +12,19 @@ yaysno(){
 yay -S --noconfirm $1
 }
 
-# yaysno procmail # conflicts with msmtp-mta: do manual
-
-#j language
-#yaysno j9-git
-#rust
-yaysno evcxr_repl
-#Open files by MIME-type or file name using regular expressions
-yaysno mimeo
-#dictionary
-yaysno wordnet-cli
-#urxvt
+yaysno procmail # conflicts with msmtp-mta: do manual
+yaysno janet-lang
+yaysno mimeo #Open files by MIME-type or file name using regular expressions
+yaysno wordnet-cli #dictionary
 yaysno urxvt-vim-scrollback-git
 yaysno powerline-console-fonts
 yaysno perl-term-shellui.git
 yaysno urxvt-resize-font-git
-#php REPL
-yaysno psysh
-#planck (clojure repl)
-yaysno planck-git
-#C/C++
-##'cling' repl is part of 'root'
-#yaysno cling-git
-#yaysno cling-jupyter-git
+yaysno psysh #php REPL
+yaysno planck-git #planck (clojure repl)
 yaysno include-what-you-use
-
-#C++ packages
-yaysno conan
-##installs also from AUR
-#python-node-semver
-#python-patch-ng
-#python-pluginbase
-
-#Logitech MX Master 3 mouse
-yaysno logiops-git
-
-#docker explore image
-yaysno dive-git
-
-#.editorconfig
-# yaysno eclint
-#processing
-yaysno processing4
-
-#git repo stats
-yaysno git-quick-stats
-
-# skype
-# yaysno skypeforlinux-preview-bin
-
-# phonetic analysis
-# yaysno praat
-
-#build fast with tmpfs
-yaysno clean-chroot-manager
-
-#address book for mutt
-yaysno abook
-#show vcalendar attachment
-#yaysno vcal
-
-#clang Build EAR
-#yaysno bear-git
-
-
-# # need multilib
-# openmodelica-git # modelica language
-# quartus-free # for Altera FPGA
-# intel-sde # Intel Software Development Emulator
-# microchip-mplabx-bin # https://aur.archlinux.org/microchip-mplabx-bin.git
-
+yaysno conan #C++ packages
+yaysno dive-git # docker explore image
+yaysno processing4 #processing
+yaysno git-quick-stats #git repo stats
+yaysno abook #address book for mutt

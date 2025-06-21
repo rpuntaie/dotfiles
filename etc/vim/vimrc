@@ -255,6 +255,7 @@ function! s:Deinplugins()
   call dein#add('thesis/vim-solidity',{'if':l:nn,'merged':0})
   call dein#add('kaarmu/typst.vim',{'if':l:nn,'merged':0})
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
+  call dein#add('github/copilot.vim',{'if':l:nn,'merged':0})
 "call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0}) " vim-clap still beta support treesitter in vim
 "call dein#add('kana/vim-textobj-user',{'if':l:nn,'merged':0})
 "call dein#add('tpope/vim-unimpaired',{'if':l:nn,'merged':0})
@@ -626,18 +627,22 @@ if g:CompleteJediViaCoc
           \ ]
     call coc#config('languageserver', {
           \ 'sourcekit': {
-          \    "commandPath": "/usr/lib/swift/bin/sourcekit-lsp",
-          \    "command": "/usr/lib/swift/bin/sourcekit-lsp",
-          \    "rootPatterns": [
-          \      "Package.swift"
-          \    ],
-          \    "filetypes": [
-          \      "swift",
-          \    ],
-          \    "sourcekit.env": {
-          \       "SOURCEKIT_TOOLCHAIN_PATH": "/usr/lib/swift/",
-          \       "SOURCEKIT_LOGGING": "3"
-          \    }
+          \     "commandPath": "/usr/lib/swift/bin/sourcekit-lsp",
+          \     "command": "/usr/lib/swift/bin/sourcekit-lsp",
+          \     "rootPatterns": [
+          \       "Package.swift"
+          \     ],
+          \     "filetypes": [
+          \       "swift",
+          \     ],
+          \     "sourcekit.env": {
+          \        "SOURCEKIT_TOOLCHAIN_PATH": "/usr/lib/swift/",
+          \        "SOURCEKIT_LOGGING": "3"
+          \     }
+          \ },
+          \ "tinymist": {
+          \     "command": "/usr/bin/tinymist",
+          \     "filetypes": ["typst"],
           \ },
           \ "go": {
           \     "rootPatterns": [ "go", "gomod" ],
