@@ -74,6 +74,13 @@ export CABAL_CONFIG="${XDG_CONFIG_HOME}/cabal/config"
 export XCOMPOSEFILE="${XDG_CONFIG_HOME}/X11/XCompose"
 export XCOMPOSECACHE="${XDG_CACHE_HOME}/X11/XCompose"
 
-[ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+if  [ -e "$HOME/.cargo/env" ] then;
+. "$HOME/.cargo/env"
+else
+export PATH="$PATH:${HOME}/.cargo/bin"
+fi
 
-export PATH="$PATH:/home/roland/.local/etc/.foundry/bin"
+if  [ -e "${HOME}/.local/etc/.foundry/" ] then;
+export PATH="$PATH:${HOME}/.local/etc/.foundry/bin"
+fi
+

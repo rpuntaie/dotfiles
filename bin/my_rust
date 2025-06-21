@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# rustup is that of archlinux
+
+rustup default stable
+rustup update
+rustup component add rust-src
+cargo install --locked evcxr_repl
+# cargo install --locked evcxr_jupyter
+cargo install --git https://github.com/foundry-rs/foundry --profile release --locked forge cast chisel anvil
+

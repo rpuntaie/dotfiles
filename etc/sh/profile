@@ -8,5 +8,3 @@ if [ -d "$XDG_CONFIG_HOME/sh/profile.d" ]; then
 	done
 	unset profile
 fi
-
-[ -e "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
