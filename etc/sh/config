@@ -80,7 +80,7 @@ else
 export PATH="$PATH:${HOME}/.cargo/bin"
 fi
 
-if  [ -e "${HOME}/.local/etc/.foundry/" ] then;
+if  [ -e "${HOME}/.local/etc/.foundry/" ] ; then
 export PATH="$PATH:${HOME}/.local/etc/.foundry/bin"
 fi
 

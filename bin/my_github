@@ -16,6 +16,7 @@ _mine_one() {
     cd ~/mine
 }
 
+_mine_one https://github.com/getmail6/ dotfiles
 _mine_one https://github.com/getmail6/ getmail6
 _mine_one https://github.com/rpuntaie/ ansible-arch-linux
 _mine_one https://github.com/rpuntaie/ rollarch
