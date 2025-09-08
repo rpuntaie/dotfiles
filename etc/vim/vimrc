@@ -1193,6 +1193,8 @@ if has('win32')
   endfunction
 endif
 
+""" wipe registers asdf
+command! WW for r in split('asdf') | silent! call setreg(r, []) | endfor
 """ `Y`: yank till end of line, like D
 nnoremap Y y$
 """ `s`: <nop>, free for other mappings
@@ -1684,18 +1686,6 @@ function! ShowHex()
 endfunction
 endif
 
-function! ChangeStatuslineColor()
-  if (mode() =~# '\v(n|no)')
-    exe 'hi! StatusLine ctermfg=008'
-  elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-    exe 'hi! StatusLine ctermfg=005'
-  elseif (mode() ==# 'i')
-    exe 'hi! StatusLine ctermfg=004'
-  else
-    exe 'hi! StatusLine ctermfg=006'
-  endif
-  return ''
-endfunction
 function! GitInfo()
   if !exists('fugitive#head')
     return ''
