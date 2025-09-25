@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [[ $2 == "mount" ]]; then
+    if [[ $1 =~ /dev/.*[[:digit:]] ]]; then
+        echo "sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1} ~/mnt/usb"
+    elif [[ $1 =~ /dev/.* ]]; then
+        if ! sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1}1 ~/mnt/usb ; then
+            if sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1} ~/mnt/usb ; then
+                echo "mounted without partition"
+            fi
+        fi
+    else
+        echo "provide /dev/sdX"
+    fi
+elif [[ $2 == "make" && $1 =~ /dev/.* ]]; then
+    DSK="${1%[[:digit:]]}"
+    echo "sudo dd if=/dev/zero of=$DSK bs=1M"
+    sudo dd if=/dev/zero of=$DSK bs=1M
+    echo "sudo parted --script $DSK mklabel msdos"
+    sudo parted --script $DSK mklabel msdos
+    echo "sudo parted --script --align optimal $DSK mkpart primary ntfs 0% 100%"
+    sudo parted --script --align optimal $DSK mkpart primary ntfs 0% 100%
+    echo "sudo partprobe $DSK"
+    sudo partprobe $DSK
+    echo "sudo mkfs.exfat ${DSK}1"
+    sudo mkfs.exfat ${DSK}1
+elif [[ $2 == "arch" && $1 =~ /dev/.* ]]; then
+    ISO="$(find ~/Downloads/archlinux* | tail -n 1)"
+    "sudo dd bs=4M if=$ISO of=$1 conv=fsync oflag=direct status=progress"
+    sudo dd bs=4M if=$ISO of=$1 conv=fsync oflag=direct status=progress
+else
+    echo "eg: usbstick /dev/sdf make"
+    echo "eg: usbstick /dev/sdf mount"
+    echo "eg: usbstick /dev/sdf arch"
+fi
+
+

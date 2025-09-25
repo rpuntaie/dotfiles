@@ -1,7 +1,7 @@
 
 # user data separate directories
 # ~/.gnupg, ~/.password-store, ~/my and these ~/dotfiles
-# export MY="${HOME}/my" # defined in /etc/security/pam_env.conf
+# export MY="${HOME}/my" # defined in /etc/security/pam_env.conf (which needs empty line at end of file)
 export $(envsubst < $MY/.env)
 
 export OPENAI_API_TOKEN="$(pass show platform.openai.com/apikey)"
