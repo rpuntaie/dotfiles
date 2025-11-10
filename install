@@ -888,6 +888,7 @@ fi
 #PKG: opencascade
 #PKG: opencv
 #PKG: opencv-samples
+#PKG: python-opencv
 #PKG: povray
 #PKG: openshot
 #PKG: shotcut
@@ -1164,6 +1165,12 @@ fi
 #PKG: python-poetry
 #PKG: python-lsp-server
 #PKG: python-cookiecutter
+#PKG: python-huggingface-hub
+#PKG: python-uv
+#PKG: python-openai-whisper
+#PKG: festival
+#PKG: festival-us
+#PKG: speech-dispatcher
 #PKG: docx2txt
 #PKG: odt2txt
 #PKG: kubo
@@ -1203,6 +1210,7 @@ fi
 #PKG: tree-sitter-vimdoc
 #PKG: zoxide
 #PKG: just
+#PKG: ollama
 
 
 

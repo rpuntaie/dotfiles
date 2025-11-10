@@ -2,10 +2,10 @@
 
 : '
 
-~/msrc/blender-git/blender
-
 https://wiki.blender.org/wiki/Building_Blender/Linux/Arch
 sudo pacman -S python git git-lfs patchelf
+
+~/msrc/blender-git/blender
 
 buildblender
 # or

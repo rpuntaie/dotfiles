@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+magick $1 -density 300 -resize 200% $1.print.jpg

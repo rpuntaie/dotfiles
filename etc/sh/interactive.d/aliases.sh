@@ -103,4 +103,7 @@ alias j='firejail --noprofile --net=none'
 
 alias gotestcompile='go test -gcflags '-N -l' -c'
 
+rust_debug_run() {
+     rustc -g --emit="obj,link" $1 && gdb ${1%.*}
+}
 
