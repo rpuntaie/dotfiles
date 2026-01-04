@@ -1,0 +1,10 @@
+[Unit]
+Description=run on shutdown
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStop=/home/roland/my/on_shutdown
+
+[Install]
+WantedBy=multi-user.target

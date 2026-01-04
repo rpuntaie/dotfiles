@@ -496,6 +496,9 @@ fi
 #PKG: lldb
 #PKG: boost
 #PKG: grpc
+#PKG: grpc-cli
+#PKG: python-grpcio
+#PKG: python-grpcio-tools
 #PKG: tbb
 #PKG: fmt
 #PKG: tensorflow
@@ -575,6 +578,7 @@ fi
 #PKG: typescript
 #PKG: ts-node
 #PKG: clisp
+#PKG: sbcl
 #PKG: quicklisp
 #PKG: racket
 #PKG: guile
@@ -593,6 +597,7 @@ fi
 #PKG: xf86-input-libinput
 #PKG: xf86-video-intel
 #PKG: nvidia-utils
+#PKG: nvidia-settings
 #PKG: nvidia
 #PKG: xorg-server
 #PKG: xorgproto
@@ -661,6 +666,8 @@ fi
 #PKG: ibus-libpinyin
 #PKG: m17n-lib
 #PKG: xdg-user-dirs
+#PKG: xdg-desktop-portal
+#PKG: xdg-desktop-portal-gtk
 #PKG: glfw-x11
 #PKG: xdotool
 #PKG: wmctrl
@@ -1004,6 +1011,7 @@ fi
 #PKG: glab
 #PKG: ext4magic
 #PKG: calibre
+#PKG: foliate
 #PKG: waf
 #PKG: mkosi
 #PKG: gnuchess
@@ -1168,6 +1176,8 @@ fi
 #PKG: python-huggingface-hub
 #PKG: python-uv
 #PKG: python-openai-whisper
+#PKG: python-hatch
+#PKG: mypy
 #PKG: festival
 #PKG: festival-us
 #PKG: speech-dispatcher
@@ -1211,7 +1221,21 @@ fi
 #PKG: zoxide
 #PKG: just
 #PKG: ollama
-
+#PKG: mdbook
+#PKG: mdserve
+#PKG: guvcview
+#PKG: V4l2loopback-dkms
+#PKG: V4l2loopback-utils
+#PKG: v4l-utils
+#PKG: baresip
+#PKG: fuse-zip
+#PKG: wasmtime
+#PKG: wasm-pack
+#PKG: wasm-tools
+#PKG: wabt
+#PKG: trunk
+#PKG: emscripten
+#PKG: mise
 
 
 

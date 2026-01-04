@@ -5,4 +5,5 @@ npm -g install wikit
 npm -g install pandiff
 npm -g install js-beautify
 npm -g install mocha
+npm -g install zx
 

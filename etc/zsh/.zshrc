@@ -96,3 +96,4 @@ condaa() {
 unalias z
 eval "$(zoxide init zsh)"
 
+eval "$(mise activate zsh)"

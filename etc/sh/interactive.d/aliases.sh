@@ -49,6 +49,9 @@ alias ..g='git rev-parse --show-toplevel'
 alias glr='git pull --recurse-submodules'
 alias ghash='git rev-parse HEAD'
 alias gdst='git diff stash@{0} HEAD'
+alias gu='git ls-files -o'
+alias gurm='git clean -Xdf'
+
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
@@ -103,7 +106,4 @@ alias j='firejail --noprofile --net=none'
 
 alias gotestcompile='go test -gcflags '-N -l' -c'
 
-rust_debug_run() {
-     rustc -g --emit="obj,link" $1 && gdb ${1%.*}
-}
-
+alias zipmount='fuse-zip -o ro'

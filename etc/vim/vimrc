@@ -569,7 +569,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeShowHidden=1
 let g:netrw_shq="'"
 let g:netrw_browsex_viewer= "xdg-open"
-let g:netrw_nogx=1 " disable netrw's gx mapping.
 let g:netrw_altv = 1
 let g:netrw_preview = 1
 let g:netrw_list_hide = "^\\..*"
@@ -620,7 +619,7 @@ if g:CompleteJediViaCoc
           \ 'coc-lua',
           \ 'coc-protobuf',
           \ 'coc-rust-analyzer',
-          "\ 'coc-esbonio',
+          "\ 'coc-esbonio', # buggy
           "\ 'coc-godot',
           "\ 'coc-yaml',
           "\ 'coc-highlight',
@@ -937,7 +936,7 @@ if has("gui_running")
         if filereadable($HOME."/.local/share/fonts/FreeMonoOEL1S.otf")
           set guifont=FreeMono\ OEL1S\ Bold\ 11
         elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoOEL2SD.ttf")
-          set guifont=DejaVu\ Sans\ Mono\ OEL2S\ Bold\ 9
+          set guifont=DejaVu\ Sans\ Mono\ OEL2S\ Bold\ 11
         else
           set guifont=FreeMono\ Bold\ 11
         endif
@@ -1244,7 +1243,7 @@ nmap <leader>lk :set keymap=fntc<CR>
 nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ecdgfwvpmis}`: edit home|company|dotfiles|git|fork|workspace|vim|vimre(p)os|my|install|snippets
 nmap <leader>ee :e $MY/y${Y2}.rst<CR>
-nmap <leader>ec :e $HOME/$COMPANY/my/y${Y4}.rst<CR>
+nmap <leader>ec :e $HOME/my/$COMPANY/y${Y2}.rst<CR>
 nmap <leader>ed :cd ~/mine/dotfiles<CR>:Files<CR>
 nmap <leader>eg :E ~/mine<CR>
 nmap <leader>ef :E ~/myforks<CR>
@@ -1261,6 +1260,8 @@ nnoremap <silent> <leader>tt :Trans<CR>
 vnoremap <silent> <leader>tt :Trans<CR>
 """ `,ww`: look up in wordnet (wn needed)
 nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
+""" `,we`: look up in wiki
+nnoremap <leader>we :vert botright term wikit <C-R><C-W><CR>
 """ `sc[c]`: (re)number
 vnoremap scc :!cat -n<CR>
 vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d\+/let c=c+1\|s/\d\+/\=c<CR>
@@ -1357,9 +1358,12 @@ nnoremap <silent> gxg :exe ':silent !chromium "http://www.google.com/search?q=<C
 nnoremap <silent> gxp :exe ':silent !chromium "http://docs.python.org/3/search.html?q=<cword>&check_keywords=yes&area=default"&'<CR>
 nnoremap <silent> gxw :exe ':silent !chromium "https://www.wikipedia.org/search-redirect.php?language=en&search=<cword>"&'<CR>
 endif
-""" `gx`: open browser and search
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
+""" `gxx`: open firefox and search line
+nmap gxx :exe ':silent !firefox "http://www.google.com/search?q=<C-R><C-L>"'<CR>
+" """ `gx`: open browser and search
+" let g:netrw_nogx=1 " disable netrw's gx mapping.
+" nmap gx <Plug>(openbrowser-smart-search)
+" vmap gx <Plug>(openbrowser-smart-search)
 if has('nvim')
 tnoremap <ESC> <C-\><C-N>
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
@@ -1760,8 +1764,6 @@ autocmd BufReadPost *.odt :%!odt2txt "%"
 autocmd BufReadPost *.docx :%!docx2txt "%"
 autocmd BufReadPost *.pdf :%!pdf2txt.py "%"
 
-let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
-
 "HowMuch
 vmap S? <Plug>AutoCalcAppend
 vmap S?S <Plug>AutoCalcAppendWithSum
@@ -1811,3 +1813,4 @@ command! -nargs=1 -complete=file TC call TC(<q-args>)
 " No color codes
 command! -nargs=0 Nc %s/\e\[[0-9;]*m//g
 
+"let &guifont=substitute(&guifont,'\(:h\| \)\@<=\d\+','\=eval(submatch(0)+8)','g')
