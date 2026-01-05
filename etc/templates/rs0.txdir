@@ -1,6 +1,6 @@
 {{project_name}}
-  ├ README.md
-      # {{project_name}}
+  ├─ README.md
+     # {{project_name}}
   ├─ Cargo.toml
         [package]
         name = "{{project_name}}"

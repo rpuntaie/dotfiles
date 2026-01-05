@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-export PYVHOME=$XDG_STATE_HOME/python/venv/pyv
 echo "removing and making new $PYVHOME"
 rm -rf $PYVHOME
 python -m venv $PYVHOME
