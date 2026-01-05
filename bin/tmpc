@@ -2,34 +2,41 @@
 """
 tmpc <link>
 
-Creates template project in ~/tmp/c
+Creates template project in ~/tmp/c with name generated from time (timeid).
+Project template one of
+- cookiecutter
+- copier
+- local .txdir file
+- local file or directory
 
-- language
+local:
+${XDG_CONFIG_HOME}/templates
+
+test:
 
 tmpc go
-tmpc py
-tmpc cpp
-tmpc c
-tmpc sh
-tmpc rs
-
-- cookiecutter:
 tmpc gh:lacion/cookiecutter-golang
+tmpc py
 tmpc gh:audreyfeldroy/cookiecutter-pypackage
+tmpc cpp
 tmpc gh:ssciwr/cookiecutter-cpp-project
+tmpc c
 tmpc gh:lchsk/cookiecutter-c-project
+tmpc sh
 tmpc gh:TjWallas/bash-cookiecutter
+tmpc rs
 tmpc gh:rnag/cookiecutter-rust
-
-- copier: the project should not have choices without default, except project_name
+# copier other
 tmpc gh:pdm-project/copier-pdm --trust
 tmpc gh:natir/copier-rust --trust
-
-- txdir file to directory tree
-tmpc go0
-
-- files
+# txdir
 tmpc bash
+tmpc go0
+tmpc go1
+tmpc cpp0
+tmpc hardhat0
+tmpc rs0
+
 
 """
 
@@ -73,6 +80,7 @@ def mkcmd(link,name,*args):
     loc = link.replace('gh:','https://github.com/')
     if not loc.startswith('https://') and not os.path.isabs(loc):
         locabs = os.path.expandvars(f'$XDG_CONFIG_HOME/templates/{loc}')
+        locabs = os.path.exists(locabs+".txdir") and locabs+".txdir" or locabs
         if os.path.isdir(locabs):
             ccmd = 'cp -R '+locabs+' .'
         else:
@@ -103,15 +111,16 @@ def mkcmd(link,name,*args):
         jld=json.load(open(jsn))
         n=next(x for x in os.listdir(repo) if x.startswith('{'))
         pname = n.split('.')[1].split('}')[0]
-        return f'cookiecutter --no-input {tmpfldr} {pname.strip()}={name} {extra}'
+        cmd = f'cookiecutter --no-input {tmpfldr} {pname.strip()}={name} {extra}'
+        return cmd
     elif os.path.isdir(tmpfldr):
         cmd = 'cp -R {tmpfldr} {name}'
+        return cmd
+    elif tmpfldr.endswith(".txdir"):
+        cmd = f'cat {tmpfldr} | stpl - - \'project_name="{name}"\' {extra} | txdir - .'
+        return cmd
     else:
-        c = any(x in open(tmpfldr).read() for x in '├└')
-        if c:
-            cmd = f'cat {tmpfldr} | stpl - - \'project_name="{name}"\' {extra} | txdir - .'
-        else:
-            cmd = f'cp {tmpfldr} {name}'
+        cmd = f'cp {tmpfldr} {name}'
         return cmd
 
 def main(link, *args):

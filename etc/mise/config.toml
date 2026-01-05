@@ -1,0 +1,3 @@
+[env]
+_.python.venv = "{{env.XDG_STATE_HOME}}/python/venv/pyv"
+

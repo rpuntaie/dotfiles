@@ -3,7 +3,7 @@
 set -e
 
 in_virtual_env() {
-if [[ $(which python) =~ .*virtualenvs.* ]] ; then
+if [[ $(which python) =~ .*env.* ]] ; then
     return 0
 else
     return 1
@@ -16,7 +16,7 @@ if ! in_virtual_env ; then
     pylib=$(python --version)
     pylib=${pylib%.*}
     pylib=python${pylib#* }
-    echo "not in .virtualenv: need sudo to mv /usr/lib/$pylib/EXTERNALLY-MANAGED"
+    echo "not in venv. need sudo to mv /usr/lib/$pylib/EXTERNALLY-MANAGED"
     sudo mv /usr/lib/$pylib/EXTERNALLY-MANAGED /usr/lib/$pylib/EXTERNALLY-MANAGED.old
 fi
 
@@ -77,7 +77,3 @@ pip install $userinstall python-bitcoinlib
 pip install $userinstall hdwallet
 pip install $userinstall ecpy
 
-pip install $userinstall pipx
-pipx ensurepath
-pipx install vyper
-pipx install eth-brownie

@@ -1020,11 +1020,8 @@ fi
 #PKG: xmlstarlet
 #PKG: jq
 #PKG: fq
-#PKG: pyenv
 #PKG: python-pip
 #PKG: python-pipx
-#PKG: python-virtualenv
-#PKG: python-pipenv
 #PKG: python-ipykernel
 #PKG: python-gobject
 #PKG: python-pyqt5
@@ -1177,6 +1174,7 @@ fi
 #PKG: python-uv
 #PKG: python-openai-whisper
 #PKG: python-hatch
+#PKG: python-pdm
 #PKG: mypy
 #PKG: festival
 #PKG: festival-us

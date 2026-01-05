@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-source ~/.virtualenvs/pyv/bin/activate
+source $PYVHOME/bin/activate
 cd ~/msrc/stable-diffusion-webui
 ./webui.sh

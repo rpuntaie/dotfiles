@@ -55,7 +55,7 @@ alias gurm='git clean -Xdf'
 
 #. <name>/bin/activate and deactivate to exit
 alias venv='python -m venv --system-site-packages --symlinks'
-alias pyv='source ~/.virtualenvs/pyv/bin/activate'
+alias pyv='source $PYVHOME/bin/activate'
 alias pyo='PYTHON_BASIC_REPL=1 python'
 
 alias xtex='xelatex -interaction=nonstopmode'

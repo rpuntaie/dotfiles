@@ -11,3 +11,4 @@ export INVOKEAI_ROOT="$HOME/invokeai"
 export GH_TOKEN="$(pass show token_github.com/rpuntaie)"
 export Y2="$(date +%y)"
 export Y4="$(date +%Y)"
+export PYVHOME=$XDG_STATE_HOME/python/venv/pyv

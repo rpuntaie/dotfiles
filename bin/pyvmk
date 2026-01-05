@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-rm -rf ~/.virtualenvs/pyv
-virtualenv --system-site-packages ~/.virtualenvs/pyv
-source ~/.virtualenvs/pyv/bin/activate
+export PYVHOME=$XDG_STATE_HOME/python/venv/pyv
+echo "removing and making new $PYVHOME"
+rm -rf $PYVHOME
+python -m venv $PYVHOME
+source $PYVHOME/bin/activate
 my_python

@@ -1,0 +1,15 @@
+{{project_name}}
+  ├ README.md
+      # {{project_name}}
+  ├─ Cargo.toml
+        [package]
+        name = "{{project_name}}"
+        version = "0.1.0"
+        edition = "2024"
+
+        [dependencies]
+  └─ src/
+     └─ main.rs
+           fn main() {
+               println!("Hello, world!");
+           }
