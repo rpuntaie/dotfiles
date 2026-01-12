@@ -1,0 +1,670 @@
+{{project_name}}
+  ├─ README.md
+        # {{project_name}}
+  ├─ Makefile
+        .PHONY=all
+        all:
+        	cargo test -- --nocapture
+  ├─ Cargo.toml
+        [package]
+        name = "{{project_name}}"
+        version = "0.1.0"
+        edition = "2024"
+
+        [dependencies]
+  └─ src/
+     └─ main.rs
+           macro_rules! count_exprs {
+               () => (0);
+               ($head:expr $(, $tail:expr)*) => (1 + count_exprs!($($tail),*));
+           }
+           macro_rules! recurrence {
+               ( $seq:ident [ $ind:ident ]: $sty:ty = $($inits:expr),+;$recur:expr ) => {
+                   {
+                       const MEMORY: usize = count_exprs!($($inits),+);
+                       struct Recurrence {
+                           mem: [$sty; MEMORY],
+                           pos: usize,
+                       }
+                       struct IndexOffset<'a> {
+                           slice: &'a [$sty; MEMORY],
+                           offset: usize,
+                       }
+                       impl<'a> std::ops::Index<usize> for IndexOffset<'a> {
+                           type Output = $sty;
+                           #[inline(always)]
+                           fn index<'b>(&'b self, index: usize) -> &'b $sty {
+                               let real_index = index - (self.offset - MEMORY);
+                               &self.slice[real_index]
+                           }
+                       }
+                       impl Iterator<> for Recurrence {
+                           type Item = $sty;
+                           #[inline]
+                           fn next(&mut self) -> Option<$sty> {
+                               if self.pos < MEMORY {
+                                   let next_val = self.mem[self.pos];
+                                   self.pos += 1;
+                                   Some(next_val)
+                               } else {
+                                   let next_val = {
+                                       let $ind = self.pos;
+                                       let $seq = IndexOffset { slice: &self.mem, offset: $ind };
+                                       $recur
+                                   };
+                                   {
+                                       use std::mem::swap;
+                                       let mut swap_tmp = next_val;
+                                       for i in (0..MEMORY).rev() {
+                                           swap(&mut swap_tmp, &mut self.mem[i]);
+                                       }
+                                   }
+                                   self.pos += 1;
+                                   Some(next_val)
+                               }
+                           }
+                       }
+                       Recurrence { mem: [$($inits),+], pos: 0 }
+                   }
+               };
+           }
+           fn main() {
+               let fib = recurrence![a[n]: u64 = 0, 1; a[n-1] + a[n-2]];
+               for e in fib.take(10) { println!("{}", e) }
+           }
+     └─ lib.rs
+           #![allow(unused)]
+           mod my_module{
+               type MyType = std::vec::Vec<i32>;
+               // else
+               // src/my_module.rs
+               // src/my_module/mod.rs
+               // mod my_module; // NEEDED in lib.rs or main.rs or any mod.rs for sub-modules
+               //                // ELSE file (eg my_module.rs) is unreferenced and not compiled
+               // crate root:
+               // src/main.rs
+               // src/lib.rs (compiled first, pub in it is API)
+               // ALTERNATIVELY many crates project:
+               // crates/{crate1,crate2,...} one of them with a main.rs
+               //
+               // std is one crate always available, others to make available via cargo.toml [dependencies]
+               // extern create NOT NEEDED ANY MORE
+           }
+
+           #[allow(dead_code)]
+           fn add2(x: i32, y: i32) -> i32 {
+               x + y
+           }
+           #[allow(unused_variables)]
+           #[allow(unused_assignments)]
+           #[allow(dead_code)]
+           fn basic_rust() {
+               let x: i32 = 1;
+               let y: i32 = 13i32;
+               let f: f64 = 1.3f64;
+               let implicit_x = 1;
+               let implicit_f = 1.3;
+               let sum = x + y + 13;
+               let mut mutable = 1;
+               mutable = 4;
+               mutable += 2;
+               let x: &str = "hello world!";
+               println!("{} {} -------------->{}", f, x, line!());
+               let s: String = "hello world".to_string();
+               let s_slice: &str = &s;
+               println!("{} {} -------------->{}", s, s_slice, line!());
+               let four_ints: [i32; 4] = [1, 2, 3, 4];
+               let mut vector: Vec<i32> = vec![1, 2, 3, 4];
+               vector.push(5);
+               let slice: &[i32] = &vector;
+               println!("{:?} {:?} -------------->{}", vector, slice, line!());
+               let x: (i32, &str, f64) = (1, "hello", 3.4);
+               let (a, b, c) = x;
+               println!("{} {} {} -------------->{}", a, b, c, line!());
+               println!("{} -------------->{}", x.1, line!());
+               struct Point {
+                   x: i32,
+                   y: i32,
+               }
+               let origin = Point { x: 0, y: 0 };
+               #[derive(std::fmt::Debug)]
+               struct Point2(i32, i32);
+               let mut origin2 = Point2(1, 1);
+               origin2.0=origin.x;
+               origin2.1=origin.y;
+               let Point{x: orgx, y: orgy} = origin;
+               println!("{:?}, orgx{} orgy{} -------------->{}", origin2, orgx, orgy, line!());
+               enum Direction {
+                   Left,
+                   Right,
+                   Up,
+                   Down,
+               }
+               let up = Direction::Up;
+               enum OptionalI32 {
+                   AnI32(i32),
+                   Nothing,
+               }
+               let two: OptionalI32 = OptionalI32::AnI32(2);
+               let nothing = OptionalI32::Nothing;
+               #[derive(std::fmt::Debug)]
+               enum Optional<T:std::fmt::Debug> {
+                   SomeVal(T),
+                   NoVal,
+               }
+               impl<T:std::fmt::Debug> Optional<T> {
+                   fn printit(self) {
+                       println!("{:?} -------------->{}",self, line!());
+                   }
+               }
+               Optional::SomeVal(()).printit();
+               struct Foo<T> { bar: T }
+               impl<T> Foo<T> {
+                   fn bar(&self) -> &T {
+                       &self.bar
+                   }
+                   fn bar_mut(&mut self) -> &mut T {
+                       &mut self.bar
+                   }
+                   fn into_bar(self) -> T {
+                       self.bar
+                   }
+               }
+               type TypeAlias = Foo<i32>;
+               let a_foo  = TypeAlias  { bar: 1 };
+               println!("{} -------------->{}", a_foo.bar(), line!());
+               trait Frobnicate<T> {
+                   fn frobnicate(self) -> Option<T>;
+               }
+               impl<T> Frobnicate<T> for Foo<T> {
+                   fn frobnicate(self) -> Option<T> {
+                       Some(self.bar)
+                   }
+               }
+               let another_foo = Foo { bar: 1 };
+               println!("{:?} -------------->{}", another_foo.frobnicate(), line!());
+               fn fibonacci(n: u32) -> u32 {
+                   match n {
+                       0 => 1,
+                       1 => 1,
+                       _ => fibonacci(n - 1) + fibonacci(n - 2),
+                   }
+               }
+               type FunctionPointer = fn(u32) -> u32;
+               let fib : FunctionPointer = fibonacci;
+               println!("Fib: {} -------------->{}", fib(4), line!());
+               let foo = OptionalI32::AnI32(1);
+               match foo {
+                   OptionalI32::AnI32(n) => println!("it’s an i32: {} -------------->{}", n, line!()),
+                   OptionalI32::Nothing  => println!("it’s nothing! -------------->{}", line!()),
+               }
+               struct FooBar { x: i32, y: OptionalI32 }
+               let bar = FooBar { x: 15, y: OptionalI32::AnI32(32) };
+               match bar {
+                   FooBar { x: 0, y: OptionalI32::AnI32(0) } =>
+                       println!("The numbers are zero! -------------->{}", line!()),
+                   FooBar { x: n, y: OptionalI32::AnI32(m) } if n == m =>
+                       println!("The numbers are the same -------------->{}", line!()),
+                   FooBar { x: n, y: OptionalI32::AnI32(m) } =>
+                       println!("Different numbers: {} {} -------------->{}", n, m, line!()),
+                   FooBar { x: _, y: OptionalI32::Nothing } =>
+                       println!("The second number is Nothing! -------------->{}", line!()),
+               }
+               let array = [1, 2];
+               let value = 5;
+               match value {
+                   ref r => println!("Got a reference to a value: {:?} -------------->{}", r, line!()),
+               }
+               let mut mut_value = 6;
+               match mut_value {
+                   ref mut m => {
+                       *m += 10;
+                       println!("We added 10. `mut_value`: {:?} -------------->{}", m, line!());
+                   },
+               }
+               let number: u8 = 4;
+               match number {
+                   i if i == 0 => println!("Zero -------------->{}", line!()),
+                   i if i > 0 => println!("Greater than zero -------------->{}", line!()),
+                   _ => unreachable!("_ is needed with guards")
+               }
+               fn some_number() -> Option<u32> {
+                   Some(42)
+               }
+               match some_number() {
+                   Some(n @ 42) => println!("The Answer: {}! -------------->{}", n, line!()),
+                   Some(n)      => println!("Not interesting... {} -------------->{}", n, line!()),
+                   _            => (),
+               }
+               if let Some(i) = some_number() {
+                   println!("The Answer: {}! -------------->{}", i, line!());
+               }
+               let Some(num) = some_number() else { panic!("what!"); };
+               for i in 0u32..10 {
+                   print!("{} ", i);
+               }
+               for i in 0u32..=10 {
+                   print!("{} ", i);
+               }
+               println!(" -------------->{}", line!());
+               if 1 == 1 {
+                   println!("Maths is working! -------------->{}", line!());
+               } else {
+                   println!("Oh no... -------------->{}", line!());
+               }
+               let value = if true {
+                   "good"
+               } else {
+                   "bad"
+               };
+               while 1 == 1 {
+                   println!("The universe is operating normally. -------------->{}", line!());
+                   break
+               }
+               let mut counter = 0;
+               let result = loop {
+                   counter += 1;
+                   if counter==10 {
+                       break counter*2;
+                   }
+               };
+               println!("counter: {} -> {} -------------->{}", counter, result, line!());
+               'outer: loop {
+                   if counter < 10 {
+                       break;
+                   }
+                   'inner: loop {
+                       if counter >= 10 {
+                           counter = 9;
+                           break 'outer;
+                       }
+                   }
+               }
+               let mut mine: Box<i32> = Box::new(3);
+               *mine = 5;
+               let mut now_its_mine = mine;
+               *now_its_mine += 2;
+               println!("{} -------------->{}", now_its_mine, line!());
+               let mut var = 4;
+               var = 3;
+               let ref_var: &i32 = &var;
+               println!("{} -------------->{}", var, line!());
+               println!("{} -------------->{}", *ref_var, line!());
+               ref_var;
+               var = 2;
+               let mut var2 = 4;
+               let ref_var2: &mut i32 = &mut var2;
+               *ref_var2 += 2;
+               println!("{} -------------->{}", *ref_var2, line!());
+
+               let x = 1u8;
+               println!("size of `x` in bytes: {} -------------->{}", std::mem::size_of_val(&x), line!());
+           }
+
+           use crate::List::*;
+           enum List {
+               Nxt(String, Box<List>),
+               End,
+           }
+           impl List {
+               fn new() -> List {
+                   List::End
+               }
+               fn prepend(self, s: String) -> List{
+                   List::Nxt(s, Box::new(self))
+               }
+               fn len(&self) -> i32 {
+                   match self {
+                       Nxt(_, tail) => 1 + tail.len(),
+                       End => 0,
+                   }
+               }
+               fn stringify(&self) -> String {
+                   match self {
+                       Nxt(s,tail) => {
+                           format!("{} {}", s, tail.stringify())
+                       },
+                       End => String::from(""),
+                   }
+               }
+           }
+           fn linked_list() {
+               let mut l = List::new();
+               l = l.prepend(String::from("eins"));
+               l = l.prepend(String::from("null"));
+               println!("{} in {} -------------->{}",l.len(), l.stringify(), line!());
+           }
+
+           fn conversion_with_as() {
+               let decimal = 65.4321_f32;
+               // let integer: u8 = decimal; // but explicit works ..
+               let integer = decimal as u8;
+               let character = integer as char;
+               // let character = decimal as char; // does not work
+               println!("Casting: {} -> {} -> {} -------------->{}", decimal, integer, character, line!());
+               println!("1000 as a u16 is: {} -------------->{}", 1000 as u16, line!());
+               // println!("1000 as a u8 is : {} -------------->{}", 1000 as u8, line!());
+               println!("  -1 as a u8 is : {} -------------->{}", (-1i8) as u8, line!());
+               println!("1000 mod 256 is : {} -------------->{}", 1000 % 256, line!());
+               println!(" 128 as a i16 is: {} -------------->{}", 128 as i16, line!());
+               //println!(" 128 as a i8 is : {} -------------->{}", 128 as i8, line!());
+               //println!("1000 as a u8 is : {} -------------->{}", 1000 as u8, line!());
+               //println!(" 232 as a i8 is : {} -------------->{}", 232 as i8, line!());
+               println!(" 300.0 as u8 is : {} -------------->{}", 300.0_f32 as u8, line!());
+               // -100.0 as u8 is 0
+               println!("-100.0 as u8 is : {} -------------->{}", -100.0_f32 as u8, line!());
+               // nan as u8 is 0
+               println!("   nan as u8 is : {} -------------->{}", f32::NAN as u8, line!());
+               unsafe {
+                   // 300.0 as u8 is 44
+                   println!(" 300.0 as u8 is : {} -------------->{}", 300.0_f32.to_int_unchecked::<u8>(), line!());
+                   // -100.0 as u8 is 156
+                   println!("-100.0 as u8 is : {} -------------->{}", (-100.0_f32).to_int_unchecked::<u8>(), line!());
+                   // nan as u8 is 0
+                   println!("   nan as u8 is : {} -------------->{}", f32::NAN.to_int_unchecked::<u8>(), line!());
+               }
+           }
+
+
+           #[derive(std::fmt::Debug)]
+           struct I32Wrap(i32);
+           impl std::convert::From<i32> for I32Wrap {
+               fn from(i: i32) -> Self {
+                   I32Wrap(i)
+               }
+           }
+           fn conversion_from_into() {
+               let i = 9i32;
+               let is1 = I32Wrap::from(i);
+               let is2: I32Wrap = i.into();
+           }
+           // similar: std::convert::{TryFrom,TryInto}
+
+           #[derive(Debug)]
+           struct Circle(i32);
+           impl std::fmt::Display for Circle {
+               fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                   write!(f, "C({})", self.0)
+               }
+           }
+           impl std::str::FromStr for Circle {
+               type Err = std::num::ParseIntError;
+               fn from_str(s: &str) -> Result<Self,Self::Err> {
+                   match s.trim().parse() {
+                       Ok(num) => Ok(Circle(num)),
+                       Err(e) => Err(e),
+                   }
+               }
+           }
+           fn to_from_string() {
+               let c = Circle(222);
+               let p: i32 = "5".parse().unwrap();
+               let pp = "5".parse::<i32>().unwrap();
+               println!("{} {} {} -------------->{}",c, p, pp, line!());
+           }
+
+           fn functions_closures() {
+               let outer_var = 42;
+               let closure_annotated = |i: i32| -> i32 { i + outer_var };
+               let closure_inferred  = |i     |          i + outer_var  ;
+               println!("closure: {} {} -------------->{}", closure_annotated(1) ,closure_inferred(2), line!());
+               let movable = Box::new(3);
+               let consume = || {
+                   println!("`movable`: {:?} -------------->{}", movable, line!());
+                   std::mem::drop(movable);
+               };
+               consume();
+               //consume();
+               fn apply_to_3<F>(f: F) -> i32 where F: Fn(i32) -> i32 {
+                   f(3)
+               }
+               let double = |x| 2 * x;
+               println!("3 doubled: {} -------------->{}", apply_to_3(double), line!());
+               fn apply<F>(f: F) where F: FnOnce() {
+                   f();
+               }
+               apply(||{println!("{} ------------------->{}", double(9), line!());});
+               fn create_fn() -> impl Fn() {
+                   let text = "Fn".to_owned();
+                   move || println!("This is a: {} ----------------->{}", text, line!())
+               }
+               fn create_fnmut() -> impl FnMut() {
+                   let text = "FnMut".to_owned();
+                   move || println!("This is a: {} ----------------->{}", text, line!())
+               }
+               fn create_fnonce() -> impl FnOnce() {
+                   let text = "FnOnce".to_owned();
+                   move || println!("This is a: {} ----------------->{}", text, line!())
+               }
+               let fn_plain = create_fn();
+               let mut fn_mut = create_fnmut();
+               let fn_once = create_fnonce();
+               fn_plain();
+               fn_mut();
+               fn_once();
+           }
+
+           fn iter() {
+               let array = [1, 2];
+               array.iter().for_each(|&i|{println!("{} -------------->{}", i, line!());});
+               array.into_iter().for_each(|i|{println!("{} -------------->{}", i, line!());});
+               let mut mutarray = [1,2];
+               for i in mutarray.iter_mut() {
+                   *i += 1;
+               }
+               let with_2 = mutarray.iter().any(|&x| x==2);
+               let found2 = mutarray.iter().find(|&x| *x==2).unwrap();
+               let pos2 = mutarray.iter().position(|&x| x==2).unwrap();
+               println!("with_2: {} found2: {} pos2: {} ----------------->{}", with_2, found2, pos2, line!());
+           }
+
+           fn generic() {
+               struct Empty;
+               let empty = Empty;
+               trait Red {}
+               impl Red for Empty {}
+               fn red<T: Red>(_:&T) -> &'static str {"red"}
+               println!("Empty {} ----------------->{}", red(&empty), line!());
+               //
+               struct Null;
+               let null  = Null;
+               trait DoubleDrop<T> {
+                   fn double_drop(self, _: T);
+               }
+               // Implement `DoubleDrop<T>` for any generic parameter `T` and caller `U`.
+               impl<T, U> DoubleDrop<T> for U {
+                   fn double_drop(self, _: T) {}
+               }
+               empty.double_drop(null);
+               struct Container(i32, i32);
+               trait Contains {
+                   type A;
+                   type B;
+                   fn contains(&self, _: &Self::A, _: &Self::B) -> bool;
+                   fn first(&self) -> i32;
+                   fn last(&self) -> i32;
+               }
+               impl Contains for Container {
+                   type A = i32;
+                   type B = i32;
+                   fn contains(&self, number_1: &Self::A, number_2: &Self::B) -> bool {
+                       (&self.0 == number_1) && (&self.1 == number_2)
+                   }
+                   fn first(&self) -> Self::A{ self.0 }
+                   fn last(&self) -> Self::B { self.1 }
+               }
+               fn difference<C: Contains>(container: &C) -> i32 {
+                   container.last() - container.first()
+               }
+               let number_1 = 3;
+               let number_2 = 10;
+               let container = Container(number_1, number_2);
+               println!("Does container contain {} and {}: {} ----------------->{}",
+                   &number_1, &number_2, container.contains(&number_1, &number_2), line!());
+           }
+
+           fn traits() {
+               struct ToDrop;
+               impl Drop for ToDrop {
+                   fn drop(&mut self) {
+                       println!("getting out: drop");
+                   }
+               }
+               let x = ToDrop;
+               #[derive(PartialEq, PartialOrd)]
+               struct Centimeters(f64);
+               trait Animal {
+                   fn noise(&self) -> &'static str;
+               }
+               struct Sheep;
+               impl Animal for Sheep {
+                   fn noise(&self) -> &'static str {
+                       "meeh"
+                   }
+               }
+               fn random_animal(random_number: f64) -> Box<dyn Animal> {
+                   Box::new(Sheep{})
+               }
+               struct Foo;
+               struct Bar;
+               #[derive(Debug)]
+               struct FooBar;
+               impl std::ops::Add<Bar> for Foo {
+                   type Output = FooBar;
+                   fn add(self, _rhs: Bar) -> FooBar {
+                       println!("> Foo.add(Bar) was called ------------------>{}", line!());
+                       FooBar
+                   }
+               }
+               println!("Foo + Bar = {:?} ------------------>{}", Foo + Bar, line!());
+               fn make_adder_function(y: i32) -> impl Fn(i32) -> i32 {
+                   let closure = move |x: i32| { x + y };
+                   closure
+               }
+               let plus_one = make_adder_function(1);
+               println!("plus_one{} ------------------>{}", plus_one(2), line!());
+               #[derive(Debug, Clone, Copy)]
+               struct Unit;
+               let unit = Unit;
+               let copied_unit = unit;
+               // Both `Unit`s can be used independently
+               println!("original: {:?} ------------------>{}", unit, line!());
+               println!("copy: {:?} ------------------>{}", copied_unit, line!());
+               #[derive(Clone, Debug)]
+               struct Pair(Box<i32>, Box<i32>);
+               let pair = Pair(Box::new(1), Box::new(2));
+               println!("original: {:?} ------------------>{}", pair, line!());
+               // Move `pair` into `moved_pair`, moves resources
+               let moved_pair = pair;
+               println!("moved: {:?} ------------------>{}", moved_pair, line!());
+               // Error! `pair` has lost its resources
+               //println!("original: {:?} ------------------>{}", pair, line!());
+               // TODO ^ Try uncommenting this line
+               // Clone `moved_pair` into `cloned_pair` (resources are included)
+               let cloned_pair = moved_pair.clone();
+               // Drop the moved original pair using std::mem::drop
+               drop(moved_pair);
+               // Error! `moved_pair` has been dropped
+               //println!("moved and dropped: {:?} ------------------>{}", moved_pair, line!());
+               // TODO ^ Try uncommenting this line
+               // The result from .clone() can still be used!
+               println!("clone: {:?} ------------------>{}", cloned_pair, line!());
+               trait Person { fn name(&self) -> String; }
+               trait Student: Person { fn university(&self) -> String; }
+               trait Programmer { fn fav_language(&self) -> String; }
+               trait CompSciStudent: Programmer + Student { fn git_username(&self) -> String; }
+               fn comp_sci_student_greeting(student: &dyn CompSciStudent) -> String {
+                   format!("My name is {} and I attend {}. My favorite language is {}. My Git username is {}",
+                       student.name(), student.university(), student.fav_language(), student.git_username()
+                   )}
+           }
+
+           fn owner_move(){
+               let im_x = Box::new(1i32);
+               let mut m_x = im_x;
+               // let ImmutableX2 = &im_x; // fails as moved already
+               *m_x = 4;
+               #[derive(Debug)]
+               struct Person{
+                   name: String,
+                   age: Box<u8>,
+               }
+               let p = Person{name:String::from("John"),age:Box::new(20)};
+               let Person{name, ref age} =  p; //ref on left side = & on right side
+               fn mover<T: std::fmt::Debug> (p: T) {
+                   println!("moved? {:?} ------------------>{}", p, line!());
+               }
+               // mover(p); //fails because partially moved
+               let pp = Person{name:String::from("John"),age:Box::new(20)};
+               mover(pp);
+               // println!("moved? {:?} ------------------>{}", pp, line!()); //fails, because no Copy trait
+               let i = 9i32;
+               mover(i);
+               println!("moved? {:?} ------------------>{}", i, line!()); //succeeds, because with Copy trait
+           }
+
+           fn life_time(){
+               // only for borrow
+               fn print_refs<'a, 'b>(x: &'a i32, y: &'b i32) { //parameter life >= function life
+                   // let k = 12i32; let kk:&'a i32 = &k; // 'a longer than the body
+                   println!("x is {} and y is {} ------------------>{}", x, y, line!());
+               }
+               let (four,nine) = (4,9);
+               print_refs(&four,&nine);
+               fn choose_first<'a: 'b, // 'a >= 'b, required because returning 'b lifetime but first in is 'a
+                       'b>(first: &'a i32, _: &'b i32) -> &'b i32 { first }
+               let first = 2; // Longer lifetime
+               {
+                   let second = 3; // Shorter lifetime
+                   println!("{} is the first", choose_first(&first, &second));
+               }
+               static NUM: i32 = 18;
+               fn coerce_static<'a>(_: &'a i32) -> &'a i32 { &NUM }
+               #[derive(Debug)]
+               struct NamedBorrowed<'a> {
+                   x: &'a i32,
+                   y: &'a i32,
+               }
+           }
+
+           fn iterator() {
+               struct Fibonacci {
+                   curr: u32,
+                   next: u32,
+               }
+               impl Iterator for Fibonacci {
+                   type Item = u32;
+                   fn next(&mut self) -> Option<Self::Item> {
+                       let current = self.curr;
+                       self.curr = self.next;
+                       self.next = current + self.next;
+                       Some(current)
+                   }
+               }
+               fn fibonacci() -> Fibonacci {
+                   Fibonacci { curr: 0, next: 1 }
+               }
+               for i in fibonacci().skip(4).take(4) {
+                   println!("> {} ------------------>{}", i, line!());
+               }
+           }
+
+           #[cfg(test)]
+           mod tests {
+               use super::*;
+               #[test]
+               fn test_some() {
+                   basic_rust();
+                   linked_list();
+                   conversion_with_as();
+                   conversion_from_into();
+                   to_from_string();
+                   functions_closures();
+                   iter();
+                   generic();
+                   traits();
+                   owner_move();
+                   life_time();
+                   iterator();
+               }
+           }

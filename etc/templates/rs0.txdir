@@ -1,6 +1,10 @@
 {{project_name}}
   ├─ README.md
      # {{project_name}}
+  ├─ Makefile
+        .PHONY=all
+        all:
+        	cargo run
   ├─ Cargo.toml
         [package]
         name = "{{project_name}}"
@@ -11,5 +15,17 @@
   └─ src/
      └─ main.rs
            fn main() {
+               {{project_name}}::greet();
+           }
+     └─ lib.rs
+           pub fn greet() {
                println!("Hello, world!");
+           }
+
+           #[cfg(test)]
+           mod tests {
+               use super::*;
+               #[test]
+               fn test_some() {
+               }
            }

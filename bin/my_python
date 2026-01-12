@@ -20,6 +20,10 @@ if ! in_virtual_env ; then
     sudo mv /usr/lib/$pylib/EXTERNALLY-MANAGED /usr/lib/$pylib/EXTERNALLY-MANAGED.old
 fi
 
+pip install $userinstall build
+pip install $userinstall wheel
+pip install $userinstall pyxdg
+
 pip install $userinstall git+https://github.com/rpuntaie/rstdoc #documentation
 pip install $userinstall rst2confluence #for jira
 pip install $userinstall txdir #create directory tree from text file

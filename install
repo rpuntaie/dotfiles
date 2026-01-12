@@ -1234,6 +1234,7 @@ fi
 #PKG: trunk
 #PKG: emscripten
 #PKG: mise
+#PKG: ddcutil
 
 
 
