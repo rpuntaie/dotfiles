@@ -97,3 +97,6 @@ unalias z
 eval "$(zoxide init zsh)"
 
 eval "$(mise activate zsh)"
+eval "$(mise completion zsh)"
+
+eval "$(uv generate-shell-completion zsh)"

@@ -1233,6 +1233,7 @@ fi
 #PKG: wabt
 #PKG: trunk
 #PKG: emscripten
+#PKG: usage
 #PKG: mise
 #PKG: ddcutil
 
