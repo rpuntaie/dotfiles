@@ -79,6 +79,7 @@ alias androidemu='emulator -avd $(emulator -list-avds)'
 alias clndr='python -m calendar'
 
 alias fh='find . -iname'
+alias ishdd='lsblk -o NAME,ROTA'
 
 export IDF_PATH=$HOME/msrc/esp-idf
 alias espidf='export IDF_PATH=$HOME/msrc/esp-idf;

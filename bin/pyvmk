@@ -5,3 +5,7 @@ rm -rf $PYVHOME
 python -m venv $PYVHOME
 source $PYVHOME/bin/activate
 my_python
+
+# pacman -Qo /usr/lib/python3.{10,11,12,13}/site-packages/
+
+

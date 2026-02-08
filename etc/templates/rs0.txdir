@@ -12,10 +12,35 @@
         edition = "2024"
 
         [dependencies]
+        thiserror = "2.0.18"
   └─ src/
      └─ main.rs
+           use std::io::Read;
+           use std::{fs, io};
+           use thiserror::Error;
+
+           #[derive(Debug, Error)]
+           enum ReadUsernameError {
+               #[error("where is the file {0}?")]
+               IoError(#[from]io::Error),
+               #[error("file there but username?")]
+               EmptyUsername(String),
+           }
+
+           fn read_username(path: &str) -> Result<String, ReadUsernameError> {
+               let mut username = String::with_capacity(100);
+               fs::File::open(path)?.read_to_string(&mut username)?;
+               if username.is_empty() {
+                   return Err(ReadUsernameError::EmptyUsername(String::from(path)));
+               }
+               Ok(username)
+           }
+
            fn main() {
                {{project_name}}::greet();
+               //std::fs::write("config.dat", "").unwrap();
+               let username = read_username("config.dat");
+               println!("username or error: {username:?}");
            }
      └─ lib.rs
            pub fn greet() {

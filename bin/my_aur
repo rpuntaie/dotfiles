@@ -27,7 +27,6 @@ yaysno conan #C++ packages
 yaysno dive-git # docker explore image
 yaysno processing4 #processing
 yaysno git-quick-stats #git repo stats
-yaysno abook #address book for mutt
 
 : '
 sudo pacman -R neovim tree-sitter emacs

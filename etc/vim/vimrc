@@ -255,7 +255,7 @@ function! s:Deinplugins()
   call dein#add('thesis/vim-solidity',{'if':l:nn,'merged':0})
   call dein#add('kaarmu/typst.vim',{'if':l:nn,'merged':0})
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
-  call dein#add('github/copilot.vim',{'if':l:nn,'merged':0})
+"""" call dein#add('github/copilot.vim',{'if':l:nn,'merged':0})
 "call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0}) " vim-clap still beta support treesitter in vim
 "call dein#add('kana/vim-textobj-user',{'if':l:nn,'merged':0})
 "call dein#add('tpope/vim-unimpaired',{'if':l:nn,'merged':0})
@@ -1201,6 +1201,8 @@ map <silent> s <nop>
 map <silent> S <nop>
 map <silent> s2 :set number<CR>
 map <silent> s0 :set nonumber<CR>
+map <silent> su :Cp<CR>
+map <silent> si :Cn<CR>
 """ `{sj sk}`: Insert empty line below|above
 nnoremap <silent> sk o<ESC>k
 nnoremap <silent> sj O<ESC>j

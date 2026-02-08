@@ -88,6 +88,8 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 #unset MANPATH
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
+[ -e /home/roland/msrc/flutter/bin ] && export PATH="/home/roland/msrc/flutter/bin:$PATH"
+
 # yay -S miniconda3
 condaa() {
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh

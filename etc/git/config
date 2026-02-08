@@ -168,8 +168,5 @@
 	required = true
 	clean = git-lfs clean -- %f
 [safe]
-	directory = /home/roland/mnt/usb/my
-	directory = /opt/flutter
-	directory = /app
 [difftool]
 	prompt = false
