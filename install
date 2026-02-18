@@ -989,7 +989,6 @@ fi
 #PKG: octave
 #PKG: sagemath
 #PKG: r
-#PKG: geogebra
 #PKG: root
 #PKG: gnuplot
 #PKG: coq
