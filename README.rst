@@ -24,7 +24,7 @@ Full system installation with `rollarch`_:
 
     curl -OLs https://git.io/installarch
     # !replace the defines!
-    DSK=/dev/sda USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=fjVcp bash installarch
+    DSK=/dev/sda USR=roland PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=fjVcp bash installarch
     # log out and in
 
 Alternatively
@@ -34,7 +34,7 @@ Alternatively
    mkdir mine
    mount -t nfs -o nfsvers=3 192.168.1.108:/home/roland/mine mine
    lsblk
-   DSK=/dev/sda SWAP=off USR=u PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=mine/dotfiles/install bash mine/rollarch/rollarch
+   DSK=/dev/sda SWAP=off USR=roland PW=p HST=u121 IP2=1.121 ZONE=Vienna DOTS=mine/dotfiles/install bash mine/rollarch/rollarch
 
 To update ``~/.local`` after changes:
 
