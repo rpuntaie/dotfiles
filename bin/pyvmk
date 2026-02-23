@@ -2,7 +2,8 @@
 
 echo "removing and making new $PYVHOME"
 rm -rf $PYVHOME
-python -m venv $PYVHOME
+python -m venv --system-site-packages $PYVHOME
+# $PYVHOME/pyvenv.cfg
 source $PYVHOME/bin/activate
 my_python
 

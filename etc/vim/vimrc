@@ -15,7 +15,7 @@
 "   - rst2jira
 "   - waf
 "
-" "coc
+" " system requirement coc
 " cd ~/.local/var/lib/vim/dein/repos/github.com/neoclide/coc.nvim
 " git clean -xfd
 " yarn install --frozen-lockfile
@@ -141,9 +141,16 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-let g:CompleteJediViaCoc=1
-if has("nvim")
-let g:CompleteJediViaCoc=1
+" system requirement coc: yarn install --frozen-lockfile
+let g:HasCoc=1
+if match(&runtimepath,'coc') == -1
+  let g:HasCoc=0
+endif
+
+" system requirement: pip install jedi
+let g:HasJedi=1
+if match(&runtimepath,'jedi') == -1
+let g:HasJedi=1
 endif
 
 function! s:Deinplugins()
@@ -174,8 +181,8 @@ function! s:Deinplugins()
 "   indentation guides
   "call dein#add('nathanaelkane/vim-indent-guides',{'merged':0})
   "call dein#add('thaerkh/vim-indentguides',{'if':l:nn,'merged':0})
-  call dein#add('neoclide/coc.nvim', {'if':g:CompleteJediViaCoc,'merged':0, 'build': 'yarn install --frozen-lockfile'})
-  call dein#add('davidhalter/jedi',{'if':g:CompleteJediViaCoc,'merged':0}) " also do: pip install jedi
+  call dein#add('neoclide/coc.nvim', {'if':g:HasCoc,'merged':0, 'build': 'yarn install --frozen-lockfile'})
+  call dein#add('davidhalter/jedi',{'if':g:HasJedi,'merged':0})
   "snippets
 ""| |UltiSnips| snippets
   call dein#add('SirVer/ultisnips',{'if':l:nn,'merged':0})
@@ -586,11 +593,7 @@ let g:barbaric_default = 'xkb:us::eng'
 "scrooloose/nerdcommenter
 let g:NERDSpaceDelims=1
 
-if match(&runtimepath,'coc') == -1
-  let g:CompleteJediViaCoc=0
-endif
-
-if g:CompleteJediViaCoc
+if g:HasCoc
     "coc.nvim
     let g:coc_global_extensions = [
           \ 'coc-dictionary',
@@ -959,8 +962,7 @@ set conceallevel=0
 " line number
 "set relativenumber
 
-
-if g:CompleteJediViaCoc
+if g:HasCoc
     "coc
     " not too small because see 6447 statusline issue
     " set updatetime=1300
@@ -1526,7 +1528,7 @@ function s:CG()
 endfunction
 command! -nargs=0 CG :call <SID>CG()
 
-if g:CompleteJediViaCoc
+if g:HasCoc
     "coc
     nmap <leader>i :CocEnable<CR>:autocmd! coc_nvim BufWritePre *<CR>:echom 'Coc Enabled'<CR>
     nmap <leader>ii :CocDisable<CR>
@@ -1716,7 +1718,7 @@ set statusline+=%y " filetype
 set statusline+=%r " readonly flag
 set statusline+=%w " preview flag
 set statusline+=%2*%p%%(%L)%04v,%04l " c, l = % (total lines)
-"if g:CompleteJediViaCoc
+"if g:HasCoc
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "endif
 set statusline+=%{&spelllang}
