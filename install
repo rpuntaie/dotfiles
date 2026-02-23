@@ -708,7 +708,6 @@ fi
 #PKG: emacs
 #PKG: code
 #PKG: lazarus
-#PKG: pycharm-community-edition
 #PKG: nginx
 #PKG: php
 #PKG: xdebug
