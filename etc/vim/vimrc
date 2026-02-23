@@ -1129,7 +1129,9 @@ nnoremap <leader>gf :e <cfile><cr>
 nnoremap sgf yy:call EfileInline("<C-R>"<BS>")<cr>
 function! EfileInline(filename)
     :exe "e ". fnameescape(a:filename)
-endfu
+endfunction
+""" `sgh`: ai explain current line
+nmap sgh :Redir !gh models run openai/gpt-4o-mini "Please explain: <C-R><C-L>"<CR>
 
 " read from a ex or shell command into a new scratch buffer
 function! s:Redir(cmd)

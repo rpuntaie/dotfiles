@@ -214,6 +214,10 @@ fi
 #DFN: CL=99
 #DFN: LA_NG="de_DE es_ES fr_FR it_IT ru_RU"
 
+#PKG: grub
+#PKG: erofs-utils
+#PKG: squashfs-tools
+#PKG: mtools
 #PKG: bash
 #PKG: bats
 #PKG: bats-assert
@@ -562,7 +566,6 @@ fi
 #PKG: dotnet-sdk
 #PKG: skia-sharp
 #PKG: lua
-##PKG: rust
 #PKG: rustup
 #PKG: rust-analyzer
 #PKG: julia
@@ -706,7 +709,6 @@ fi
 #PKG: cantarell-fonts
 #PKG: emacs
 #PKG: code
-#PKG: intellij-idea-community-edition
 #PKG: lazarus
 #PKG: pycharm-community-edition
 #PKG: nginx
