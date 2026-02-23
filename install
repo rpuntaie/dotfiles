@@ -215,6 +215,7 @@ fi
 #DFN: LA_NG="de_DE es_ES fr_FR it_IT ru_RU"
 
 #PKG: grub
+#PKG: edk2-ovmf
 #PKG: erofs-utils
 #PKG: squashfs-tools
 #PKG: mtools

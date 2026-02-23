@@ -4,8 +4,12 @@
 
 Usage:
 
-mykvm <img> - <iso>
-mykvm <img>
+IMG=newarch # for file newarch.qcow2
+mykvm ${IMG} - /home/roland/mdo/archlinux-2026.02.01-x86_64.iso
+# mykvm ${IMG} bridge /home/roland/mdo/archlinux-2026.02.01-x86_64.iso
+
+mykvm ${img}
+# mykvm <img> - <iso>
 
     #samba from guest:
     #mkdir roland
@@ -63,17 +67,17 @@ if [ "$NET" == "bridge" ]; then
         sudo ip link add name br0 type bridge &> /dev/null
         sudo ip link set dev br0 up
         sudo ip addr add $IPADDR/24 brd + dev br0
-        sudo ip route del default &> /dev/null
+        sudo ip route del default dev br0 &> /dev/null
         sudo ip route add default via $ROUTER dev br0 onlink
         nicbr0 $NIC
         sudo iptables -I FORWARD -m physdev --physdev-is-bridged -j ACCEPT
     fi
 
     USERID=$(whoami)
-    precreationg=$(ip tuntap list | cut -d: -f1 | sort)
+    precreation=$(ip tuntap list | cut -d: -f1 | sort)
     sudo ip tuntap add user $USERID mode tap
     postcreation=$(ip tuntap list | cut -d: -f1 | sort)
-    TAP=$(comm -13 <(echo "$precreationg") <(echo "$postcreation"))
+    TAP=$(comm -13 <(echo "$precreation") <(echo "$postcreation"))
     nicbr0 $TAP
 
     NSTR="-net tap,ifname=$TAP,script=no,downscript=no,vhost=on"
@@ -81,27 +85,32 @@ else
     NSTR="-nic user,net=192.168.0.0/24,hostfwd=tcp::10022-:22,smb=/home/roland"
 fi
 
-if ! [ -z "$ISO" ]; then
+if [ -n "$ISO" ]; then
     WITHISO="-cdrom $ISO -boot order=d"
-else
-    : 'UEFI'
-    # WITHISO="-bios /usr/share/edk2-ovmf/x64/OVMF.fd"
+fi
+
+if ! [ -e ${IMG}.qcow2 ]; then
+qemu-img create -f qcow2 ${IMG}.qcow2 400G
+echo "New image: ${IMG}.qcow2"
 fi
 
 printf -v MACADDR "52:54:%02x:%02x:%02x:%02x" $(( $RANDOM & 0xff)) $(( $RANDOM & 0xff )) $(( $RANDOM & 0xff)) $(( $RANDOM & 0xff ))
-qemu-system-x86_64 -net nic,macaddr=$MACADDR,model=virtio $NSTR $WITHISO -name $IMG -drive file=${IMG},format=qcow2 -m 4G -enable-kvm -cpu host -smp 4
+echo "qemu-system-x86_64 -net nic,macaddr=$MACADDR,model=virtio $NSTR $WITHISO -name $IMG -drive file=${IMG}.qcow2,format=qcow2 -m 4G -enable-kvm -cpu host -smp 4"
+qemu-system-x86_64 -net nic,macaddr=$MACADDR $NSTR $WITHISO -name $IMG -drive file=${IMG}.qcow2,format=qcow2 -m 4G -enable-kvm -cpu host -smp 4
 
-_nicbr0 $TAP
-sudo ip link set dev $TAP down &> /dev/null
-sudo ip tuntap del $TAP mode tap
+if [ "$NET" == "bridge" ]; then
+    _nicbr0 $TAP
+    sudo ip link set dev $TAP down &> /dev/null
+    sudo ip tuntap del $TAP mode tap
 
-if [ -z $HASBR0 ] ; then
-    _nicbr0 $NIC
-    sudo ip addr del dev br0 $IPADDR/24 &> /dev/null
-    sudo ip link set dev br0 down
-    sudo ip link delete br0 type bridge &> /dev/null
-    sudo ip route del default &> /dev/null
-    sudo ip link set dev $NIC up
-    sudo ip route add default via $ROUTER dev $NIC onlink &> /dev/null
+    if [ -z $HASBR0 ] ; then
+        _nicbr0 $NIC
+        sudo ip addr del dev br0 $IPADDR/24 &> /dev/null
+        sudo ip link set dev br0 down
+        sudo ip link delete br0 type bridge &> /dev/null
+        sudo ip route del default dev br0 &> /dev/null
+        sudo ip link set dev $NIC up
+        sudo ip route add default via $ROUTER dev $NIC onlink &> /dev/null
+    fi
 fi
 
