@@ -264,7 +264,6 @@ fi
 #PKG: cpanminus
 #PKG: procps-ng
 #PKG: psmisc
-#PKG: reiserfsprogs
 #PKG: s-nail
 #PKG: sed
 #PKG: shadow
@@ -449,7 +448,6 @@ fi
 #PKG: nnn
 #PKG: file-roller
 #PKG: mlocate
-#PKG: rmlint
 #PKG: arch-install-scripts
 #PKG: devtools
 #PKG: pacman-contrib
@@ -602,7 +600,7 @@ fi
 #PKG: xf86-video-intel
 #PKG: nvidia-utils
 #PKG: nvidia-settings
-#PKG: nvidia
+#PKG: nvidia-open
 #PKG: xorg-server
 #PKG: xorgproto
 #PKG: libxext
@@ -684,7 +682,6 @@ fi
 #PKG: urxvt-perls
 #PKG: xorg-xinit
 #PKG: dmenu
-#PKG: gmrun
 #PKG: scrot
 #PKG: slock
 #PKG: libnotify
@@ -798,7 +795,6 @@ fi
 #PKG: osc2midi
 #PKG: padthv1
 #PKG: patchmatrix
-#PKG: patroneo
 #PKG: pd
 #PKG: pd-lua
 #PKG: polyphone
@@ -860,13 +856,11 @@ fi
 #PKG: qemu-full
 #PKG: libvirt
 #PKG: virt-manager
-#PKG: bridge-utils
 #PKG: picocom
 #PKG: ddrescue
 #PKG: virtualbox-guest-utils
 #PKG: virtualbox-host-modules-arch
 #PKG: virtualbox
-#PKG: vagrant
 #PKG: docker
 #PKG: docker-compose
 #PKG: docker-buildx
@@ -900,7 +894,6 @@ fi
 #PKG: opencv-samples
 #PKG: python-opencv
 #PKG: povray
-#PKG: openshot
 #PKG: shotcut
 #PKG: librecad
 #PKG: freecad
@@ -1011,7 +1004,6 @@ fi
 #PKG: font-manager
 #PKG: github-cli
 #PKG: glab
-#PKG: ext4magic
 #PKG: calibre
 #PKG: foliate
 #PKG: waf
@@ -1030,10 +1022,8 @@ fi
 #PKG: python-numpy
 #PKG: python-numpydoc
 #PKG: python-scipy
-#PKG: python-ipdb
 #PKG: python-sympy
 #PKG: python-tensorflow
-#PKG: python-tensorflow-estimator
 #PKG: python-tensorflow-serving-api
 #PKG: python-h5py-openmpi
 #PKG: python-cffi
@@ -1093,7 +1083,6 @@ fi
 #PKG: python-sphinxcontrib-devhelp
 #PKG: python-sphinxcontrib-htmlhelp
 #PKG: python-sphinxcontrib-jsmath
-#PKG: python-sphinxcontrib-newsfeed
 #PKG: python-sphinxcontrib-qthelp
 #PKG: python-sphinxcontrib-serializinghtml
 #PKG: python-sphinxcontrib-trio
@@ -1118,7 +1107,6 @@ fi
 #PKG: python-cairosvg
 #PKG: python-click
 #PKG: python-click-log
-#PKG: python-click-repl
 #PKG: python-webencodings
 #PKG: python-colorama
 #PKG: python-fuse
@@ -1131,10 +1119,8 @@ fi
 #PKG: python-flask-appconfig
 #PKG: python-flask-babel
 #PKG: python-distro
-#PKG: python-flask-babelex
 #PKG: python-flask-caching
 #PKG: python-flask-debug
-#PKG: python-flask-gravatar
 #PKG: python-flask-login
 #PKG: python-flask-mail
 #PKG: python-flask-marshmallow
@@ -1224,8 +1210,6 @@ fi
 #PKG: mdbook
 #PKG: mdserve
 #PKG: guvcview
-#PKG: V4l2loopback-dkms
-#PKG: V4l2loopback-utils
 #PKG: v4l-utils
 #PKG: baresip
 #PKG: fuse-zip
