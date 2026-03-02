@@ -15,11 +15,6 @@
 "   - rst2jira
 "   - waf
 "
-" " system requirement coc
-" cd ~/.local/var/lib/vim/dein/repos/github.com/neoclide/coc.nvim
-" git clean -xfd
-" yarn install --frozen-lockfile
-"
 " <ESC> mapped to <CAPSLOCK> in the OS
 "
 " doc/myvimrc.txt.stpl uses """, "": and ""| lines
@@ -141,20 +136,17 @@ if !has('win32')
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
-" system requirement coc: yarn install --frozen-lockfile
+" " system requirement coc
+" cd ~/.local/var/lib/vim/dein/repos/github.com/neoclide/coc.nvim
+" git clean -xfd
+" yarn install --frozen-lockfile
 let g:HasCoc=1
-if match(&runtimepath,'coc') == -1
-  let g:HasCoc=0
-endif
-
-" system requirement: pip install jedi
+" " system requirement: jedi
+" pip install jedi
 let g:HasJedi=1
-if match(&runtimepath,'jedi') == -1
-let g:HasJedi=1
-endif
 
 function! s:Deinplugins()
-  let l:nn = !has("nvim") || has("nvim")
+  let l:nn = !has("nvim")
   let l:nv = has("nvim")
   call dein#add('bogado/file-line',{'if':l:nn,'merged':0}) " open <file>:<line>
   call dein#add('chikamichi/mediawiki.vim',{'if':l:nn,'merged':0}) " syntax .mw .wiki .mediawiki

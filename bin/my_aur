@@ -15,7 +15,7 @@ yay -S --noconfirm $1
 yaysno procmail # conflicts with msmtp-mta: do manual
 yaysno janet-lang
 yaysno mimeo #Open files by MIME-type or file name using regular expressions
-yaysno wordnet-cli #dictionary
+yaysno wordnet-common #dictionary
 yaysno urxvt-vim-scrollback-git
 yaysno powerline-console-fonts
 yaysno perl-term-shellui.git
