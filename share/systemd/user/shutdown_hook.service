@@ -1,9 +1,10 @@
 [Unit]
-Description=run on shutdown
+Description=run on startup/shutdown
 
 [Service]
 Type=oneshot
 RemainAfterExit=true
+ExecStart=/home/roland/my/on_startup
 ExecStop=/home/roland/my/on_shutdown
 
 [Install]
