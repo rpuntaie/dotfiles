@@ -55,6 +55,10 @@ if [[ -x $HOME/.xbindkeysrc ]]; then
   xbindkeys
 fi
 
+/usr/lib/xdg-desktop-portal-gtk &
+/usr/lib/xdg-desktop-portal &
+export XDG_CURRENT_DESKTOP=GNOME
+
 if [[ $WM == qtile ]]; then
 exec $WM start
 else

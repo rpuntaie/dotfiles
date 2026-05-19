@@ -1,4 +1,7 @@
 ""
+" nvim minimal plugin to keep it fast
+" vim load all
+"
 " build with python 3.x:
 " ./configure --enable-pythoninterp --enable-python3interp --enable-cscope \
 " --enable-gui=gtk2 --with-features=big --enable-netbeans --with-tlib=ncurses
@@ -129,13 +132,16 @@ if !has('win32')
   " https://tlvince.com/vim-respect-xdg
   set directory=$XDG_STATE_HOME/vim,~/,/tmp
   set backupdir=$XDG_STATE_HOME/vim,~/,/tmp
-  if !has('nvim')
+  if has('nvim')
+    set viminfofile=$XDG_STATE_HOME/vim/viminfo_nvim
+  else
     " also history
     set viminfofile=$XDG_STATE_HOME/vim/viminfo
   endif
   set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM/vimfiles,$VIMRUNTIME
 endif
 
+if !has("nvim")
 " " system requirement coc
 " cd ~/.local/var/lib/vim/dein/repos/github.com/neoclide/coc.nvim
 " git clean -xfd
@@ -144,6 +150,12 @@ let g:HasCoc=1
 " " system requirement: jedi
 " pip install jedi
 let g:HasJedi=1
+else
+let g:HasCoc=0
+" " system requirement: jedi
+" pip install jedi
+let g:HasJedi=0
+endif
 
 function! s:Deinplugins()
   let l:nn = !has("nvim")
@@ -180,7 +192,7 @@ function! s:Deinplugins()
   call dein#add('SirVer/ultisnips',{'if':l:nn,'merged':0})
   call dein#add('honza/vim-snippets',{'if':l:nn,'merged':0})
   "languages
-  call dein#add('sheerun/vim-polyglot',{'merged':0})
+  call dein#add('sheerun/vim-polyglot',{'if':l:nn,'merged':0})
   call dein#add('neovimhaskell/haskell-vim',{'if':l:nn,'merged':0})
   call dein#add('Chiel92/vim-autoformat',{'if':l:nn,'merged':0}) " :Autoformat
   call dein#add('metakirby5/codi.vim',{'if':l:nn,'merged':0}) " :Codi :Codi!
@@ -188,8 +200,8 @@ function! s:Deinplugins()
   call dein#add('w0rp/ale',{'if':l:nn,'merged':0})
     "python
 ""| |vim_py3_rst| python and rst helpers
-  call dein#add('rpuntaie/vim_py3_rst',{'if':l:nn,'merged':0})
-  call dein#add('python-mode/python-mode',{'merged':0})
+  call dein#add('rpuntaie/vim_py3_rst',{'merged':0})
+  call dein#add('python-mode/python-mode',{'if':l:nn,'merged':0})
 "  ""| |Nvim-R-use| \rf \rq \d ... in R file
 "    call dein#add('jalvesaq/Nvim-R',{'if':l:nn,'merged':0})
 ""| |vimproc-commands| asynchronous execution
@@ -1195,8 +1207,10 @@ nnoremap Y y$
 """ `s`: <nop>, free for other mappings
 map <silent> s <nop>
 map <silent> S <nop>
+""" `{s2,s0}`: set number or unset
 map <silent> s2 :set number<CR>
 map <silent> s0 :set nonumber<CR>
+""" `{su,si}`: go up/previous or down/next keyword line (vim_py3_rst :Cp :Cn)
 map <silent> su :Cp<CR>
 map <silent> si :Cn<CR>
 """ `{sj sk}`: Insert empty line below|above
@@ -1478,13 +1492,6 @@ endif
 
 "" plugins
 "junegunn/fzf.vim
-let g:fzf_layout = { 'window': 'enew' }
-
-" - Popup window (center of the current window)
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
-
-" - Popup window (anchored to the bottom of the current window)
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
 """ `sf` : fzf Files GFiles
 map <silent> sf :Files<CR>
 """ `sg` : fzf GFiles

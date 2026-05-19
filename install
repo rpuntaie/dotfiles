@@ -256,7 +256,6 @@ fi
 #PKG: man-db
 #PKG: man-pages
 #PKG: mdadm
-#PKG: nano
 #PKG: netctl
 #PKG: pacman
 #PKG: pciutils
@@ -474,8 +473,11 @@ fi
 #PKG: zsh-completions
 #PKG: zsh-history-substring-search
 #PKG: fish
+#PKG: nano
+#PKG: micro
 #PKG: neovim
 #PKG: gvim
+#PKG: helix
 #PKG: pluma
 #PKG: astyle
 #PKG: arch-wiki-lite
@@ -1221,6 +1223,3 @@ fi
 #PKG: usage
 #PKG: mise
 #PKG: ddcutil
-
-
-

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+bash $MY/on_shutdown
+shutdown
