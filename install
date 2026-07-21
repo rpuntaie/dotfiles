@@ -567,6 +567,7 @@ fi
 #PKG: dotnet-sdk
 #PKG: skia-sharp
 #PKG: lua
+#PKG: lua-language-server
 #PKG: rustup
 #PKG: rust-analyzer
 #PKG: julia
@@ -709,7 +710,7 @@ fi
 #PKG: cantarell-fonts
 #PKG: emacs
 #PKG: code
-#PKG: lazarus
+#PKG: lazarus-qt5
 #PKG: nginx
 #PKG: php
 #PKG: xdebug

@@ -285,9 +285,11 @@ function! s:Deinplugins()
 call dein#add('nvim-treesitter/nvim-treesitter',{'if':l:nv,'merged':0,'do': ':TSUpdate'})
 call dein#add('nvim-treesitter/nvim-treesitter-textobjects',{'if':l:nv,'merged':0})
 call dein#add('akinsho/toggleterm.nvim',{'if':l:nv,'merged':0})
+"
 call dein#add('nvim-mini/mini.nvim',{'if':l:nv,'merged':0})
 call dein#add('nvim-lua/plenary.nvim',{'if':l:nv,'merged':0})
 call dein#add('olimorris/codecompanion.nvim',{'if':l:nv,'merged':0})
+"
 "call dein#add('ChristianChiarulli/nvcode-color-schemes.vim',{'if':l:nv,'merged':0}) " nvcode onedark nord aurora gruvbox palenight snazzy xoria
 "call dein#add('ray-x/aurora')
 "call dein#add('dracula/vim')
@@ -496,6 +498,24 @@ require("nvim-treesitter").setup({
         },
     },
 })
+require("codecompanion").setup({
+      strategies = {
+        chat = { adapter = "ollama" },
+        inline = { adapter = "ollama" },
+        cmd = { adapter = "ollama" },
+      },
+      adapters = {
+        ollama = function()
+          return require("codecompanion.adapters").extend("ollama", {
+            schema = {
+              model = {
+                default = "llama3.1:8b",
+              },
+            },
+          })
+        end,
+      },
+    })
 EOF
 endif
 
