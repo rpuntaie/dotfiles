@@ -266,6 +266,8 @@ function! s:Deinplugins()
   call dein#add('thesis/vim-solidity',{'if':l:nn,'merged':0})
   call dein#add('kaarmu/typst.vim',{'if':l:nn,'merged':0})
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
+  " do :Ollama enable when "ollama serve" running
+  " ~/.vim/config/ollama.vim
   call dein#add('gergap/vim-ollama',{'if':l:nn,'merged':0})
 """" call dein#add('github/copilot.vim',{'if':l:nn,'merged':0})
 "call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0}) " vim-clap still beta support treesitter in vim
@@ -498,6 +500,7 @@ require("nvim-treesitter").setup({
         },
     },
 })
+-- CodeCompanionChat submit with Ctrl+s, "ollama serve" must be running
 require("codecompanion").setup({
       strategies = {
         chat = { adapter = "ollama" },
