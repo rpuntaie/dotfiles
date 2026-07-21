@@ -266,6 +266,7 @@ function! s:Deinplugins()
   call dein#add('thesis/vim-solidity',{'if':l:nn,'merged':0})
   call dein#add('kaarmu/typst.vim',{'if':l:nn,'merged':0})
   call dein#add('liuchengxu/vista.vim',{'if':l:nn,'merged':0})
+  call dein#add('gergap/vim-ollama',{'if':l:nn,'merged':0})
 """" call dein#add('github/copilot.vim',{'if':l:nn,'merged':0})
 "call dein#add('liuchengxu/vim-clap',{'if':l:nn,'merged':0}) " vim-clap still beta support treesitter in vim
 "call dein#add('kana/vim-textobj-user',{'if':l:nn,'merged':0})
@@ -284,6 +285,9 @@ function! s:Deinplugins()
 call dein#add('nvim-treesitter/nvim-treesitter',{'if':l:nv,'merged':0,'do': ':TSUpdate'})
 call dein#add('nvim-treesitter/nvim-treesitter-textobjects',{'if':l:nv,'merged':0})
 call dein#add('akinsho/toggleterm.nvim',{'if':l:nv,'merged':0})
+call dein#add('nvim-mini/mini.nvim',{'if':l:nv,'merged':0})
+call dein#add('nvim-lua/plenary.nvim',{'if':l:nv,'merged':0})
+call dein#add('olimorris/codecompanion.nvim',{'if':l:nv,'merged':0})
 "call dein#add('ChristianChiarulli/nvcode-color-schemes.vim',{'if':l:nv,'merged':0}) " nvcode onedark nord aurora gruvbox palenight snazzy xoria
 "call dein#add('ray-x/aurora')
 "call dein#add('dracula/vim')
@@ -324,8 +328,8 @@ endif
 if has('nvim')
 " :call dein#install() first
 lua << EOF
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
+require("nvim-treesitter").setup({
+    ensure_install = {
     "ada",
     "agda",
     "arduino",
@@ -499,10 +503,32 @@ let g:Gitv_OpenHorizontal = 0
 
 py3 << EOF
 import os
-try:
-  activate_this = os.path.expandvars('$PYVHOME/bin/activate_this.py')
-  exec(open(activate_this).read(), { "__file__": activate_this })
-except: pass
+activate_this_file = os.path.expandvars('$PYVHOME/bin/activate_this.py')
+activate_this_content = """
+import sys
+import os
+old_os_path = os.environ['PATH']
+base = os.path.dirname(os.path.abspath(__file__))
+if os.path.exists(base):
+  os.environ['PATH'] = base + os.pathsep + old_os_path
+  if sys.platform == 'win32':
+      site_packages = os.path.join(base, 'Lib', 'site-packages')
+  else:
+      site_packages = os.path.join(base, 'lib', 'python%s' % sys.version[:4], 'site-packages')
+  prev_sys_path = list(sys.path)
+  import site
+  site.addsitedir(site_packages)
+  sys.real_prefix = sys.prefix
+  sys.prefix = base
+  # Move the added items to the front of the path:
+  new_sys_path = []
+  for item in list(sys.path):
+      if item not in prev_sys_path:
+          new_sys_path.append(item)
+          sys.path.remove(item)
+  sys.path[:0] = new_sys_path
+"""
+exec(activate_this_content, { "__file__": activate_this_file })
 EOF
 
 let g:powerline_pycmd = "py3"
@@ -613,7 +639,6 @@ if g:HasCoc
           \ 'coc-json',
           \ 'coc-java',
           \ 'coc-tsserver',
-          \ 'coc-sh',
           \ 'coc-html',
           \ 'coc-css',
           \ 'coc-svg',
@@ -626,6 +651,7 @@ if g:HasCoc
           \ 'coc-lua',
           \ 'coc-protobuf',
           \ 'coc-rust-analyzer',
+          "\ 'coc-sh',
           "\ 'coc-esbonio', # buggy
           "\ 'coc-godot',
           "\ 'coc-yaml',

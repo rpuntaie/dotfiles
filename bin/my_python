@@ -80,5 +80,4 @@ pip install $userinstall ecdsa
 pip install $userinstall python-bitcoinlib
 pip install $userinstall hdwallet
 pip install $userinstall ecpy
-pip install $userinstall pdm
 

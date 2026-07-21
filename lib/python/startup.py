@@ -30,7 +30,8 @@ import atexit
 ########################### options
 try:
     from IPython import get_ipython
-    sys.path.append('/usr/lib/python3.11/site-packages')
+    usrlibpython=f'/usr/lib/python{sys.version_info[0]}.{sys.version_info[1]}/site-packages'
+    sys.path.append(usrlibpython)
     ipython = get_ipython()
     if ipython:
         # ipython.run_line_magic("doctest_mode", "")

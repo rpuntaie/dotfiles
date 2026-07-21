@@ -1063,6 +1063,7 @@ fi
 #PKG: python-django
 #PKG: python-tornado
 #PKG: python-tox
+#PKG: python-typer
 #PKG: python-packaging
 #PKG: python-pandas
 #PKG: python-pandas-datareader
@@ -1162,8 +1163,9 @@ fi
 #PKG: python-huggingface-hub
 #PKG: python-uv
 #PKG: python-openai-whisper
-#PKG: python-hatch
-#PKG: python-pdm
+#PKG: python-cupy
+#PKG: python-pytoch-opt-cuda
+#PKG: python-httpx
 #PKG: mypy
 #PKG: festival
 #PKG: festival-us
@@ -1172,7 +1174,8 @@ fi
 #PKG: odt2txt
 #PKG: kubo
 #PKG: yt-dlp
-#PKG: ytfzf
+#PKG: rofi
+#PKG: ueberzugpp
 #PKG: newsboat
 #PKG: firejail
 #PKG: haskell-shake
@@ -1208,6 +1211,7 @@ fi
 #PKG: zoxide
 #PKG: just
 #PKG: ollama
+#PKG: llama-cpp
 #PKG: mdbook
 #PKG: mdserve
 #PKG: guvcview
@@ -1223,3 +1227,8 @@ fi
 #PKG: usage
 #PKG: mise
 #PKG: ddcutil
+#PKG: jekyll
+#PKG: supervisor
+#PKG: meld
+#PKG: zig
+#PKG: zls
