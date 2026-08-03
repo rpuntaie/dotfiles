@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
 
-mdl=$1
-
-if [ -z $mdl ]; then
-mdl=llama3.1:8b
+if [ -z $1 ]; then
+    llama-cli --reasoning-budget 0 -m /home/roland/msrc/models_manually/gemma-4-12B-it-heretic-Q4_K_M.gguf
+    exit
 fi
+
+if [[ $1 == "list" ]]; then
+    ollama list
+    exit
+fi
+
+if [[ $1 == "llama" ]]; then
+    mdl="llama3.1:8b"
+elif [[ $1 == "qwen" ]]; then
+    mdl="Qwen3:8B"
+elif [[ $1 == "code" ]]; then
+    mdl="codellama:7b-python"
+else
+    mdl="$1"
+fi
+
 
 if ! ollama run $mdl ; then
     (ollama serve &> /dev/null) &

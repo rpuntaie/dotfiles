@@ -582,6 +582,7 @@ fi
 #PKG: elixir
 #PKG: typescript
 #PKG: ts-node
+#PKG: bun
 #PKG: clisp
 #PKG: sbcl
 #PKG: quicklisp
@@ -1102,6 +1103,7 @@ fi
 #PKG: python-decorator
 #PKG: python-pyparsing
 #PKG: python-nltk
+#PKG: nltk-data
 #PKG: python-pycparser
 #PKG: python-pycurl
 #PKG: python-requests
