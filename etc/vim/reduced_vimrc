@@ -530,12 +530,11 @@ nnoremap <leader>S :Gw<CR>:Gcommit<CR>
 """ `,b{d w}`: delete/wipe buffer, but not window
 map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 map <leader>bw :bp<bar>sp<bar>bn<bar>bw<CR>
-""" `,l{ramkj}`: load russian accents mathematic fntc english
+""" `,l{ramkj}`: load russian accents mathematic english
 nmap <leader>lr :set keymap=russian-jcukenwin<CR>
 nmap <leader>la :set keymap=accents<CR>
 nmap <leader>lm :set keymap=mathematic<CR>
 nmap <leader>lj :set keymap=<CR>
-nmap <leader>lk :set keymap=fntc<CR>
 """ `,ls`: load spelling
 nmap <leader>ls :setlocal spell spelllang=
 """ `,e{ep}`: edit vimrc | dein repos

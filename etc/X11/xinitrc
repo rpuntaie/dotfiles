@@ -43,6 +43,9 @@ xrdb -load $XDG_CONFIG_HOME/X11/Xresources
 setxkbmap -option caps:swapescape
 setxkbmap -option compose:ralt
 
+# ~/.local/etc/keymapper.conf
+keymapper -u &
+
 if [[ -x $HOME/.screenlayout/$HOST.sh ]]; then
   $HOME/.screenlayout/$HOST.sh
 fi

@@ -983,16 +983,16 @@ if has("gui_running")
     if has("win32")
         "set guifont=DejaVu\ Sans\ Mono:h9:cANSI
         "set guifont=Inconsolata\ Bold\ 10
-        if filereadable("C:/Windows/Fonts/FreeMonoBoldOEL1S.ttf")
-            set guifont=FreeMono\ OEL1S:h10:b:cANSI
+        if filereadable("C:/Windows/Fonts/FreeMonoBoldBY1.ttf")
+            set guifont=FreeMono\ BY1:h10:b:cANSI
         else
             set guifont=FreeMono:h10:b:cANSI
         endif
     else
-        if filereadable($HOME."/.local/share/fonts/FreeMonoOEL1S.otf")
-          set guifont=FreeMono\ OEL1S\ Bold\ 11
-        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoOEL2SD.ttf")
-          set guifont=DejaVu\ Sans\ Mono\ OEL2S\ Bold\ 11
+        if filereadable($HOME."/.local/share/fonts/FreeMonoBYS1.otf")
+          set guifont=FreeMono\ BY1\ Bold\ 11
+        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoBY2SD.ttf")
+          set guifont=DejaVu\ Sans\ Mono\ BY2SD\ Bold\ 11
         else
           set guifont=FreeMono\ Bold\ 11
         endif
@@ -1073,6 +1073,12 @@ function! s:TrimSpaces() range
 endfunction
 "": `:TrimSpaces` accepts range
 command! -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call <SID>TrimSpaces()
+
+" format paragraph into lines at punctuation
+function! s:PLines() range
+    silent execute a:firstline.','.a:lastline.'s/[,.!?]\zs\s*/\r/ge'
+endfunction
+command! -bar -nargs=0 -range=% PLines <line1>,<line2>call <SID>PLines()
 
 function! s:DoPrettyXML()
   let l:origft = &ft
@@ -1294,7 +1300,7 @@ nnoremap <leader>S :Gw<CR>:Gcommit<CR>
 """ `,b{d w}`: delete/wipe buffer, but not window
 map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 map <leader>bw :bp<bar>sp<bar>bn<bar>bw<CR>
-""" `,l{ramkj}`: load russian accents mathematic fntc english
+""" `,l{ramkj}`: load russian accents mathematic english
 nmap <leader>lr :set keymap=russian-jcukenwin<CR>
 nmap <leader>la :set keymap=accents<CR>
 nmap <leader>lm :set keymap=mathematic<CR>
@@ -1326,9 +1332,11 @@ nnoremap <leader>we :vert botright term wikit <C-R><C-W><CR>
 """ `sc[c]`: (re)number
 vnoremap scc :!cat -n<CR>
 vnoremap sc :<bs><bs><bs><bs><bs>let c=0\|'<,'>g/^\s*\d\+/let c=c+1\|s/\d\+/\=c<CR>
-""" `sp, spp`: yank current file path or dir
-nnoremap <silent> sp :let @* = expand("%:p")<CR>
-nnoremap <silent> spp :let @* = expand("%:p:h")<CR>
+""" `sw`: yank file name where we are
+nnoremap <silent> sw :let @+ = expand("%:p")<CR>
+""" `sy,sp`: yank,paste from + register
+nnoremap <silent> sp :set paste<CR>"+p:set nopaste<CR>
+vnoremap <silent> sy "+y
 """ `m`: match in o v n mode
 onoremap <silent>m //e<CR>
 vnoremap <silent>m //e<CR>

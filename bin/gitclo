@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
-if [ "${1##*/}" == "$1" ]; then
-    (cd $1 && echo "pulling... " && git pull)
+localdir=${1##*/}
+if git ls-remote "$1" &>/dev/null; then
+    if [ "${1##*/}" == "$1" ]; then
+        (cd $1 && echo "pulling... " && git pull)
+    else
+        git clone --recursive "$1" $2  || (cd ${localdir%.*} && echo "pulling... " && git pull)
+    fi
 else
-    localdir=${1##*/}
-    git clone --recursive $1 $2 || (cd ${localdir%.*} && echo "pulling... " && git pull)
+    if [ "${1##*/}" == "$1" ]; then
+        (cd $1 && echo "pulling... " && hg pull)
+    else
+        hg clone "$1" || (cd ${localdir%.*} && echo "pulling... " && hg pull)
+    fi
 fi

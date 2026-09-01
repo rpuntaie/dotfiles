@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
+
 # switch between us, de layouts or the one provided
+: '
+/usr/share/X11/locale/en_US.UTF-8/Compose
+xmodmap -pke | grep "dead_acute"
+grep -rn "dead_acute" /usr/share/X11/xkb/symbols
+setxkbmap -print -verbose 10
+grep "compose:" /usr/share/X11/xkb/rules/evdev.lst
+xkbcomp $DISPLAY ~/tmp/current_layout.xkb
+
+../etc/keymapper.conf
+
+./setesc
+'
 
 if [ -n "$1" ]; then
     setxkbmap $1
@@ -16,5 +29,6 @@ else
 fi
 
 setxkbmap -option caps:swapescape
+setxkbmap -option compose:ralt
 
 exit 0

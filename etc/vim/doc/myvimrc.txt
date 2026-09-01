@@ -22,7 +22,7 @@ MAPPINGS                                                           *myvimmaps*
 `,hh`: haskell block
 `,j2`: to jira ("pip install rst2jira" needed}
 `,ls`: load spelling
-`,l{ramkj}`: load russian accents mathematic fntc english
+`,l{ramkj}`: load russian accents mathematic english
 `,m[m]`: run[echo] in term (two windows: one of them term)
 `,s`: save current buffer
 `,tt`: google translate

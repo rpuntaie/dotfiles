@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+sudo udevadm trigger --subsystem-match=input --action=change
 setxkbmap -option caps:swapescape
+setxkbmap -option compose:ralt

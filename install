@@ -393,6 +393,7 @@ fi
 #PKG: cronie
 #PKG: inotify-tools
 #PKG: entr
+#PKG: watchexec
 #PKG: dpkg
 #PKG: tldr
 #PKG: mkosi
@@ -1165,9 +1166,12 @@ fi
 #PKG: python-cookiecutter
 #PKG: python-huggingface-hub
 #PKG: python-uv
-#PKG: python-openai-whisper
 #PKG: python-cupy
+#PKG: python-safetensors
+#PKG: cuda
 #PKG: python-pytoch-opt-cuda
+#PKG: python-torchvision-cuda
+#PKG: python-openai-whisper
 #PKG: python-httpx
 #PKG: mypy
 #PKG: festival
