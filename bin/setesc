@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+: '
 sudo udevadm trigger --subsystem-match=input --action=change
-setxkbmap -option caps:swapescape
-setxkbmap -option compose:ralt
+sudo localectl --no-convert set-x11-keymap us "" "" "caps:swapescape,compose:rwin"
+# ../etc/keymapper.conf
+# must not have CapsLock mapped
+'
+
+setxkbmap -option
+sleep 1
+setxkbmap -option caps:swapescape,compose:rwin

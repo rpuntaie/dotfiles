@@ -41,7 +41,7 @@ xrdb -load $XDG_CONFIG_HOME/X11/Xresources
 
 #setxkbmap -option caps:escape
 setxkbmap -option caps:swapescape
-setxkbmap -option compose:ralt
+setxkbmap -option compose:rwin
 
 # ~/.local/etc/keymapper.conf
 keymapper -u &

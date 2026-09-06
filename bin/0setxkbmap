@@ -10,6 +10,7 @@ grep "compose:" /usr/share/X11/xkb/rules/evdev.lst
 xkbcomp $DISPLAY ~/tmp/current_layout.xkb
 
 ../etc/keymapper.conf
+# must not have CapsLock mapped
 
 ./setesc
 '
@@ -28,7 +29,6 @@ else
     esac
 fi
 
-setxkbmap -option caps:swapescape
-setxkbmap -option compose:ralt
+setxkbmap -option caps:swapescape,compose:rwin
 
 exit 0
