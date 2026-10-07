@@ -246,7 +246,7 @@ fi
 #PKG: iproute2
 #PKG: iputils
 #PKG: jfsutils
-#PKG: less
+#PKG: moor
 #PKG: licenses
 #PKG: linux
 #PKG: linux-headers

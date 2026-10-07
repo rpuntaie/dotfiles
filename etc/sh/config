@@ -29,7 +29,8 @@ fi
 # Default:
 export EDITOR='/usr/bin/xvim'
 export VISUAL='/usr/bin/xvim'
-export PAGER='/usr/bin/less'
+export PAGER='/usr/bin/moor'
+#export PAGER='/usr/bin/more'
 #export BROWSER='/usr/bin/chromium'
 export BROWSER='/usr/bin/firefox'
 # export MANPAGER='vim +Man! -u /dev/null'

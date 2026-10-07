@@ -8,7 +8,8 @@
   verbose = true
 [core]
   editor = xvim
-  # pager = delta --line-numbers --side-by-side
+  #pager = delta --line-numbers --side-by-side
+  pager = more
   autocrlf = input
 [diff]
   tool = vimdiff

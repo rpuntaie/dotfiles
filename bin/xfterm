@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # ../etc/xfce4/terminal/terminalrc
-xfce4-terminal --font "DejaVu Sans Mono BY2D BY2SB 14" --disable-server --hide-scrollbar &> /dev/null
+xfce4-terminal --font="DejaVu Sans Mono BY2D BY2SB 14" --disable-server --hide-scrollbar --color-bg=black &> /dev/null
