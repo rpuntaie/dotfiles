@@ -980,23 +980,9 @@ if has("gui_running")
     winpos 0 0
     set guiheadroom=0
     set guioptions=ak
-    if has("win32")
-        "set guifont=DejaVu\ Sans\ Mono:h9:cANSI
-        "set guifont=Inconsolata\ Bold\ 10
-        if filereadable("C:/Windows/Fonts/FreeMonoBoldBY1.ttf")
-            set guifont=FreeMono\ BY1:h10:b:cANSI
-        else
-            set guifont=FreeMono:h10:b:cANSI
-        endif
-    else
-        if filereadable($HOME."/.local/share/fonts/FreeMonoBYS1.otf")
-          set guifont=FreeMono\ BY1\ Bold\ 11
-        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoBY2SD.ttf")
-          set guifont=DejaVu\ Sans\ Mono\ BY2SD\ Bold\ 11
-        else
-          set guifont=FreeMono\ Bold\ 11
-        endif
-    endif
+    set guifont=DejaVu\ Sans\ Mono\ BY2D\ BY2SB\ Bold\ 13
+    " set guifont=FreeMono\ BY2D\ BY2SB\ Bold\ 11
+    " set guifont=FreeMono\ Bold\ 11
   endif
 let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
   \ "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782",
@@ -1073,12 +1059,6 @@ function! s:TrimSpaces() range
 endfunction
 "": `:TrimSpaces` accepts range
 command! -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call <SID>TrimSpaces()
-
-" format paragraph into lines at punctuation
-function! s:PLines() range
-    silent execute a:firstline.','.a:lastline.'s/[,.!?]\zs\s*/\r/ge'
-endfunction
-command! -bar -nargs=0 -range=% PLines <line1>,<line2>call <SID>PLines()
 
 function! s:DoPrettyXML()
   let l:origft = &ft
@@ -1834,7 +1814,7 @@ vmap S?++ <Plug>AutoCalcAppendWithEqAndSum
 vmap S?? <Plug>AutoCalcReplace
 vmap S??s <Plug>AutoCalcReplaceWithSum
 
-"use command `bpy` to run blender
+" use command `bpy` to run blender
 py3 << EOF
 blenderimports='import bpy'
 def py3_blender_imports():
@@ -1865,6 +1845,72 @@ EOF
 map <silent> SB :py3 py3_current_range_to_blender()<CR>
 map <silent> SI :py3 py3_blender_imports()<CR>
 
+" format paragraph into lines at punctuation
+py3 << EOF
+import re, string
+def PLines(rngstr,which):
+  # rngstr = open("/home/roland/tmp/plines.txt").read()
+  ll = rngstr.splitlines()
+  oi = None
+  lns = []
+  indent = ""
+  for l in ll:
+    notempty = l.strip()
+    if oi is not None and not notempty:
+      break
+    if notempty:
+      i = 0
+      while l[i] in '-+ ': i = i+1
+      if oi is None:
+        oi = i
+        indent = l[:i]
+        lns.append(l[i:])
+      elif oi != i or indent != l[:i]:
+        break
+      else:
+        lns.append(l[i:])
+  org = ' '.join(lns)
+  skip = [("n't",'αnT'),("'s\>",'αsS'),("'ve\>","αvE"),('(?<=\w)-(?=\w)','αhH')]
+  skipback = [('αnT',"n't"),('αsS',"'s"),("αvE","'ve"),('αhH','-')]
+  for s in skip:
+    org = re.sub(*s,org)
+  ##### !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+  pp = string.punctuation+"—" # 7 or default
+  if which == 8:
+    pp = "."
+  if which == 9:
+    pp = ".,!?:"
+  p = re.compile("[" + re.escape(pp) + "]")
+  tt = p.split(org)
+  reslns = []
+  for at in tt:
+    if not at:
+      break
+    ats = org.find(at)
+    ate = ats+len(at)
+    oate = org[ate:]
+    so = p.search(oate)
+    if so:
+      a,b = so.span()
+      punct = oate[a:b]
+      reslns.append(at.strip()+punct)
+  #####
+  for i,t in enumerate(reslns):
+    for s in skipback:
+      reslns[i] = re.sub(*s,t)
+  reslns[0] = indent+reslns[0]
+  for i in range(1,len(reslns)):
+    reslns[i] = ' '*oi + reslns[i]
+  return reslns
+def py3_PLines(which):
+  rngstr,_ = vim_current_range()
+  vim.current.range[:]= PLines(rngstr,which)
+EOF
+map <silent> s7 :py3 py3_PLines(7)<CR>
+map <silent> s8 :py3 py3_PLines(8)<CR>
+map <silent> s9 :py3 py3_PLines(9)<CR>
+
+" temporary code tmpc
 function! TC(lang)
   let l:res=system('tmpc '.a:lang)
   let l:dir=split(l:res,"\n")[-1]

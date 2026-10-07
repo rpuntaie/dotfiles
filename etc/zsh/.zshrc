@@ -34,6 +34,7 @@ zgen oh-my-zsh plugins/git
 ORPROMPT=$RPS1
 zgen oh-my-zsh plugins/git-prompt
 RPROMPT=$ORPROMPT
+zgen load wfxr/forgit
 
 zgen oh-my-zsh plugins/mercurial
 zgen oh-my-zsh plugins/svn
@@ -84,7 +85,7 @@ enable-fzf-tab
 
 export NPM_PACKAGES="${XDG_STATE_HOME}/npm"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
-export PATH="$NPM_PACKAGES/bin:$PATH"
+export PATH="$NPM_PACKAGES/bin:$PATH:$XDG_STATE_HOME/zgen/forgit/bin"
 #unset MANPATH
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 

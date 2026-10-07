@@ -262,23 +262,9 @@ if has("gui_running")
     winpos 0 0
     set guiheadroom=0
     set guioptions=a
-    if has("win32")
-        "set guifont=DejaVu\ Sans\ Mono:h9:cANSI
-        "set guifont=Inconsolata\ Bold\ 10
-        if filereadable("C:/Windows/Fonts/FreeMonoBoldOEL1S.ttf")
-            set guifont=FreeMono\ OEL1S:h10:b:cANSI
-        else
-            set guifont=FreeMono:h10:b:cANSI
-        endif
-    else
-        if filereadable($HOME."/.local/share/fonts/FreeMonoOEL1S.otf")
-          set guifont=FreeMono\ OEL1S\ Bold\ 11
-        elseif filereadable($HOME."/.local/share/fonts/DejaVuSansMonoOEL2SD.ttf")
-          set guifont=DejaVu\ Sans\ Mono\ OEL2S\ Bold\ 9
-        else
-          set guifont=FreeMono\ Bold\ 11
-        endif
-    endif
+    set guifont=DejaVu\ Sans\ Mono\ BY2D\ BY2SB\ Bold\ 13
+    " set guifont=FreeMono\ BY2D\ BY2SB\ Bold\ 11
+    " set guifont=FreeMono\ Bold\ 11
   endif
 let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
   \ "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782",

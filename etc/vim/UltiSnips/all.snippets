@@ -78,3 +78,22 @@ main()
 		process.exit(1);
 });
 endsnippet
+
+snippet typst "typst file header"
+/*
+typst watch ./${1}.typ ~/tmp/${1}.pdf
+zathura ~/tmp/${1}.pdf
+pandoc -f typst -t rst ${1}.typ -o ~/tmp/${1}.rst
+rstdoc ~/tmp/${1}.rst ~/tmp/${1}.html
+*/
+#import "@preview/note-me:0.6.0": *
+// #note["text here"]
+#set quote(block: true)
+// #quote(attribution: [Google AI])[AI says this]
+#set heading(numbering: "1")
+// {spacetime_lagrangian particle variable layer}
+#set document(
+title:[title]
+)
+#title()
+endsnippet

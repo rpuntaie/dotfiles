@@ -22,13 +22,13 @@ fi
 
 export HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
 
-if [ "$TERM" = "rxvt-unicode-256color" ]; then
-  export TERM="rxvt-unicode"
+if [[ "$TERM" == "rxvt-unicode-256color" ]]; then
+   export TERM="rxvt-unicode"
 fi
 
 # Default:
-export EDITOR='/usr/bin/vim'
-export VISUAL='/usr/bin/vim'
+export EDITOR='/usr/bin/xvim'
+export VISUAL='/usr/bin/xvim'
 export PAGER='/usr/bin/less'
 #export BROWSER='/usr/bin/chromium'
 export BROWSER='/usr/bin/firefox'
@@ -73,6 +73,9 @@ export PASSWORD_STORE_DIR="${HOME}/.password-store"
 export CABAL_CONFIG="${XDG_CONFIG_HOME}/cabal/config"
 export XCOMPOSEFILE="${XDG_CONFIG_HOME}/X11/XCompose"
 export XCOMPOSECACHE="${XDG_CACHE_HOME}/X11/XCompose"
+
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+
 
 if  [[ -e "$HOME/.cargo/env" ]] ; then
 . "$HOME/.cargo/env"

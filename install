@@ -394,6 +394,7 @@ fi
 #PKG: inotify-tools
 #PKG: entr
 #PKG: watchexec
+#PKG: b3sum
 #PKG: dpkg
 #PKG: tldr
 #PKG: mkosi
@@ -419,6 +420,7 @@ fi
 #PKG: tig
 #PKG: git-annex
 #PKG: git-filter-repo
+#PKG: git-delta
 #PKG: jujutsu
 #PKG: repo
 #PKG: mercurial
@@ -441,6 +443,7 @@ fi
 #PKG: jshon
 #PKG: the_silver_searcher
 #PKG: rtorrent
+#PKG: transmission-cli
 #PKG: qbittorrent
 #PKG: tree
 #PKG: p7zip
@@ -1173,6 +1176,8 @@ fi
 #PKG: python-torchvision-cuda
 #PKG: python-openai-whisper
 #PKG: python-httpx
+#PKG: harfbuzz
+#PKG: python-uharfbuzz
 #PKG: mypy
 #PKG: festival
 #PKG: festival-us

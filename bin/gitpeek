@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+: ' take a file out of git at certain commit
+echo "gitpeek <hash> <path>"
+'
+
+set -e
+if [[ "$#" == 2 ]]; then
+    tmp_file=$(mktemp /tmp/git_peek.XXXXXX)
+    git show "$1:$2" > "$tmp_file"
+    echo "$tmp_file"
+    xvim "$tmp_file"
+else
+    echo "gitpeek <hash> <path>"
+fi

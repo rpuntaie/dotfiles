@@ -23,10 +23,17 @@ URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 
 URxvt.allow_bold:           false
-URxvt.font:                 xft:DejaVu Sans Mono OEL1S:autohint=true:size=12
-URxvt.boldFont:             xft:DejaVu Sans Mono OEL1S:autohint=true:bold:size=12
-URxvt.italicFont:           xft:DejaVu Sans Mono OEL1S:autohint=true:italic:size=12
-URxvt.boldItalicFont:       xft:DejaVu Sans Mono OEL1S:autohint=true:bold:italic:size=12
+URxvt.font:                 xft:DejaVu Sans Mono BY2D BY2SB:autohint=true:size=12
+URxvt.boldFont:             xft:DejaVu Sans Mono BY2D BY2SB:autohint=true:bold:size=12
+URxvt.italicFont:           xft:DejaVu Sans Mono BY2D BY2SB:autohint=true:italic:size=12
+URxvt.boldItalicFont:       xft:DejaVu Sans Mono BY2D BY2SB:autohint=true:bold:italic:size=12
+
+! Ctrl+Shift => unicode mode while pressed and pressing U leaves it
+! not Ctrl+Shift+U key release then unicode hex then space like GTK does it
+! so turn it off
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+! xrdb -merge ~/mine/dotfiles/etc/X11/Xresources
 
 ! Tango theme
 URxvt.background: #000000

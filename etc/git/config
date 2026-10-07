@@ -7,10 +7,11 @@
   gpgsign = false
   verbose = true
 [core]
-  editor = vim
+  editor = xvim
+  # pager = delta --line-numbers --side-by-side
   autocrlf = input
 [diff]
-	tool = vimdiff
+  tool = vimdiff
 [merge]
   tool = vimdiff
 [pull]

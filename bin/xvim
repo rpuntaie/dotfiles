@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
 
-urxvt --class Gvim -e vim "$@" &
+# nvr
+# for nvim
+
+# xvim for vim
+#urxvt --class Gvim -e vim "$@" &
+
+if [[ "$#" == "0" ]]; then
+    gvim --servername gvim &
+else
+    gvim --servername gvim --remote "$@"
+fi
 

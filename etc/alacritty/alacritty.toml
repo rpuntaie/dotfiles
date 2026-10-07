@@ -565,7 +565,16 @@ print_events = false
 render_timer = false
 
 [font]
-size = 11.0
+size = 12.0
+
+[font.normal]
+family = "DejaVu Sans Mono BY2D BY2SB"
+[font.bold]
+family = "DejaVu Sans Mono BY2D BY2SB"
+[font.italic]
+family = "DejaVu Sans Mono BY2D BY2SB"
+[font.bold_italic]
+family = "DejaVu Sans Mono BY2D BY2SB"
 
 [font.glyph_offset]
 x = 0
