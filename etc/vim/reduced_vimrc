@@ -262,9 +262,9 @@ if has("gui_running")
     winpos 0 0
     set guiheadroom=0
     set guioptions=a
-    set guifont=DejaVu\ Sans\ Mono\ BY2D\ BY2SB\ Bold\ 13
-    " set guifont=FreeMono\ BY2D\ BY2SB\ Bold\ 11
-    " set guifont=FreeMono\ Bold\ 11
+    set guifont=DejaVu\ Sans\ Mono\ BY2SB\ BY2D\ 14
+    " set guifont=FreeMono\ BY2SB\ BY2D\ Bold\ 14
+    " set guifont=FreeMono\ Bold\ 14
   endif
 let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
   \ "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782",

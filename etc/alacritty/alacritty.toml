@@ -568,13 +568,13 @@ render_timer = false
 size = 12.0
 
 [font.normal]
-family = "DejaVu Sans Mono BY2D BY2SB"
+family = "DejaVu Sans Mono BY2SB BY2D"
 [font.bold]
-family = "DejaVu Sans Mono BY2D BY2SB"
+family = "DejaVu Sans Mono BY2SB BY2D"
 [font.italic]
-family = "DejaVu Sans Mono BY2D BY2SB"
+family = "DejaVu Sans Mono BY2SB BY2D"
 [font.bold_italic]
-family = "DejaVu Sans Mono BY2D BY2SB"
+family = "DejaVu Sans Mono BY2SB BY2D"
 
 [font.glyph_offset]
 x = 0

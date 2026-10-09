@@ -980,9 +980,9 @@ if has("gui_running")
     winpos 0 0
     set guiheadroom=0
     set guioptions=ak
-    set guifont=DejaVu\ Sans\ Mono\ BY2D\ BY2SB\ Bold\ 13
-    " set guifont=FreeMono\ BY2D\ BY2SB\ Bold\ 11
-    " set guifont=FreeMono\ Bold\ 11
+    set guifont=DejaVu\ Sans\ Mono\ BY2SB\ BY2D\ 14
+    " set guifont=FreeMono\ BY2SB\ BY2D\ Bold\ 12
+    " set guifont=FreeMono\ Bold\ 12
   endif
 let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
   \ "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782",
@@ -1854,32 +1854,32 @@ def PLines(rngstr,which):
   oi = None
   lns = []
   indent = ""
-  for l in ll:
+  for il, l in enumerate(ll):
     notempty = l.strip()
     if oi is not None and not notempty:
       break
     if notempty:
       i = 0
-      while l[i] in '-+ ': i = i+1
+      while (l[i] in '•.*-+ ') or l[i].isdigit() or l[i]=='\t': i = i+1
       if oi is None:
         oi = i
         indent = l[:i]
         lns.append(l[i:])
-      elif oi != i or indent != l[:i]:
+      elif oi != i or (l[:i].strip() != "" and indent != l[:i]):
         break
       else:
         lns.append(l[i:])
+  unprocessed = ll[il:]
   org = ' '.join(lns)
   skip = [("n't",'αnT'),("'s\>",'αsS'),("'ve\>","αvE"),('(?<=\w)-(?=\w)','αhH')]
   skipback = [('αnT',"n't"),('αsS',"'s"),("αvE","'ve"),('αhH','-')]
   for s in skip:
     org = re.sub(*s,org)
-  ##### !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-  pp = string.punctuation+"—" # 7 or default
+  pp = ")]}!?,.:;\—" # 7 or default
   if which == 8:
-    pp = "."
-  if which == 9:
     pp = ".,!?:"
+  if which == 9:
+    pp = "."
   p = re.compile("[" + re.escape(pp) + "]")
   tt = p.split(org)
   reslns = []
@@ -1894,13 +1894,11 @@ def PLines(rngstr,which):
       a,b = so.span()
       punct = oate[a:b]
       reslns.append(at.strip()+punct)
-  #####
   for i,t in enumerate(reslns):
     for s in skipback:
       reslns[i] = re.sub(*s,t)
-  reslns[0] = indent+reslns[0]
-  for i in range(1,len(reslns)):
-    reslns[i] = ' '*oi + reslns[i]
+  for i,t in enumerate(reslns):
+    reslns[i] = (i==0 and indent or ' '*oi) + t
   return reslns
 def py3_PLines(which):
   rngstr,_ = vim_current_range()

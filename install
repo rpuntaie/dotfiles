@@ -364,8 +364,6 @@ fi
 #PKG: libnfnetlink
 #PKG: libnetfilter_conntrack
 #PKG: iptables-nft
-#PKG: kdb
-#PKG: libtermkey
 #PKG: libxpm
 #PKG: libyuv
 #PKG: libde265
@@ -779,7 +777,6 @@ fi
 #PKG: hydrogen
 #PKG: infamousplugins
 #PKG: jaaa
-#PKG: jack_capture
 #PKG: jacktrip
 #PKG: jalv
 #PKG: japa
@@ -866,7 +863,6 @@ fi
 #PKG: picocom
 #PKG: ddrescue
 #PKG: virtualbox-guest-utils
-#PKG: virtualbox-host-modules-arch
 #PKG: virtualbox
 #PKG: docker
 #PKG: docker-compose
@@ -1087,7 +1083,6 @@ fi
 #PKG: python-redis
 #PKG: python-sphinxcontrib-applehelp
 #PKG: python-sphinxcontrib-autoprogram
-#PKG: python-sphinxcontrib-bibtex
 #PKG: python-sphinxcontrib-devhelp
 #PKG: python-sphinxcontrib-htmlhelp
 #PKG: python-sphinxcontrib-jsmath
@@ -1139,7 +1134,6 @@ fi
 #PKG: python-flask-principal
 #PKG: python-retrying
 #PKG: python-toml
-#PKG: python-flask-restful
 #PKG: python-flask-security
 #PKG: python-ply
 #PKG: python-flask-socketio
@@ -1147,8 +1141,6 @@ fi
 #PKG: python-flask-talisman
 #PKG: python-flask-wtf
 #PKG: python-black
-#PKG: python-pybtex
-#PKG: python-pybtex-docutils
 #PKG: python-service-identity
 #PKG: python-aws-sam-translator
 #PKG: python-aws-xray-sdk
@@ -1172,7 +1164,7 @@ fi
 #PKG: python-cupy
 #PKG: python-safetensors
 #PKG: cuda
-#PKG: python-pytoch-opt-cuda
+#PKG: python-pytorch-opt-cuda
 #PKG: python-torchvision-cuda
 #PKG: python-openai-whisper
 #PKG: python-httpx
