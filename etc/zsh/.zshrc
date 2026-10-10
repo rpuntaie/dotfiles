@@ -1,54 +1,47 @@
 #order: [.zshenv] [.zprofile if login] [.zshrc if interactive] [.zlogin if login]
 
-export ZGEN_DIR="$XDG_STATE_HOME/zgen"
-if [[ ! -s "$ZGEN_DIR/zgen.zsh" ]]; then
-  echo "Zgen not found, bootstrapping."
-  mkdir -p "$ZGEN_DIR"
-  curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > "$ZGEN_DIR/zgen.zsh"
-fi
-source "$ZGEN_DIR/zgen.zsh"
-
 DISABLE_AUTO_TITLE=true
 DISABLE_AUTO_UPDATE=true
-
 export KEYTIMEOUT=1
 
 ZSH_THEME="rpuntaie"
 #ZSH_THEME="rpuntaiemin"
 ZSH_CUSTOM="${ZDOTDIR:-$HOME}"
 
-_Z_DATA=$XDG_CACHE_HOME/z
+export ZGEN_DIR="$XDG_STATE_HOME/zgenom"
+if [[ ! -s "$ZGEN_DIR/zgenom.zsh" ]]; then
+  echo "zgenom not found, bootstrapping."
+  git clone https://github.com/jandamm/zgenom.git "$ZGEN_DIR"
+fi
+source "$ZGEN_DIR/zgenom.zsh"
 
-# after a change do: $ zgen reset
-zgen oh-my-zsh
-
-zgen oh-my-zsh plugins/vi-mode
-zgen oh-my-zsh plugins/vim-interaction
-
-zgen oh-my-zsh plugins/history-substring-search
-zgen oh-my-zsh plugins/history
-zgen oh-my-zsh plugins/z
-zgen oh-my-zsh plugins/fzf
-
-zgen oh-my-zsh plugins/git
 ORPROMPT=$RPS1
-zgen oh-my-zsh plugins/git-prompt
 RPROMPT=$ORPROMPT
-zgen oh-my-zsh plugins/mercurial
-zgen oh-my-zsh plugins/svn
 
-zgen oh-my-zsh plugins/battery
-zgen oh-my-zsh plugins/bgnotify
+zgenom autoupdate
 
-zgen load zsh-users/zsh-autosuggestions
-zgen load zsh-users/zsh-completions
-zgen load zsh-users/zsh-syntax-highlighting
-
-zgen load Aloxaf/fzf-tab
-
-zgen load akarzim/zsh-docker-aliases
-
-zgen load wfxr/forgit --branch main
+if ! zgenom saved; then
+  # after a change do: $ zgenom reset
+  zgenom ohmyzsh
+  zgenom ohmyzsh plugins/vi-mode
+  zgenom ohmyzsh plugins/vim-interaction
+  zgenom ohmyzsh plugins/history-substring-search
+  zgenom ohmyzsh plugins/history
+  zgenom ohmyzsh plugins/z
+  zgenom ohmyzsh plugins/fzf
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/git-prompt
+  zgenom ohmyzsh plugins/mercurial
+  zgenom ohmyzsh plugins/svn
+  zgenom ohmyzsh plugins/battery
+  zgenom ohmyzsh plugins/bgnotify
+  zgenom load zsh-users/zsh-autosuggestions
+  zgenom load zsh-users/zsh-completions
+  zgenom load zsh-users/zsh-syntax-highlighting
+  zgenom load Aloxaf/fzf-tab
+  zgenom load akarzim/zsh-docker-aliases
+  zgenom load wfxr/forgit
+fi
 
 # insert mode emacs keys
 bindkey -M viins '^?'    backward-delete-char
@@ -85,7 +78,7 @@ enable-fzf-tab
 
 export NPM_PACKAGES="${XDG_STATE_HOME}/npm"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
-export PATH="$NPM_PACKAGES/bin:$PATH:$XDG_STATE_HOME/zgen/forgit/bin"
+export PATH="$NPM_PACKAGES/bin:$PATH:$XDG_STATE_HOME/zgenom/forgit/bin"
 #unset MANPATH
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
