@@ -34,8 +34,6 @@ zgen oh-my-zsh plugins/git
 ORPROMPT=$RPS1
 zgen oh-my-zsh plugins/git-prompt
 RPROMPT=$ORPROMPT
-zgen load wfxr/forgit
-
 zgen oh-my-zsh plugins/mercurial
 zgen oh-my-zsh plugins/svn
 
@@ -49,6 +47,8 @@ zgen load zsh-users/zsh-syntax-highlighting
 zgen load Aloxaf/fzf-tab
 
 zgen load akarzim/zsh-docker-aliases
+
+zgen load wfxr/forgit --branch main
 
 # insert mode emacs keys
 bindkey -M viins '^?'    backward-delete-char
