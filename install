@@ -560,6 +560,10 @@ fi
 #PKG: xmonad-utils
 #PKG: nix
 #PKG: qtile
+#PKG: xfce4-terminal
+##PKG: xfce4
+##PKG: lightdm
+##PKG: lightdm-gtk-greeter
 #PKG: go
 #PKG: go-tools
 #PKG: gopls
@@ -603,6 +607,7 @@ fi
 #PKG: liblphobos
 #PKG: libphobos
 #PKG: xf86-input-libinput
+#PKG: xf86-video-amdgpu
 #PKG: xf86-video-intel
 #PKG: nvidia-utils
 #PKG: nvidia-settings
