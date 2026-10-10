@@ -89,8 +89,11 @@ condaa() {
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 }
 
+#zoxide
 unalias z
+$ZSHZ_DATA=$XDG_CACHE_HOME/z
 eval "$(zoxide init zsh)"
+
 
 eval "$(mise activate zsh)"
 eval "$(mise completion zsh)"

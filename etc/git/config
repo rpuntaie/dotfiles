@@ -9,7 +9,7 @@
 [core]
   editor = xvim
   #pager = delta --line-numbers --side-by-side
-  pager = more
+  pager = moor
   autocrlf = input
 [diff]
   tool = vimdiff
