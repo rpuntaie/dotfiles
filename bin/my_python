@@ -36,17 +36,10 @@ pip install $userinstall git+https://github.com/prometheusresearch/sphinxcontrib
 pip install $userinstall restview
 pip install $userinstall click-man #man pages for click apps
 pip install $userinstall when-changed #... file/dir -c command
-pip install $userinstall pygame #graphics
-#pip install $userinstall pymunk #2D physics engine
-#pip install $userinstall python-gantt
-#pip install $userinstall plotly #charting with html/js
 pip install $userinstall nikola #static html generator
 pip install $userinstall coloredlogs #color in python logging
-#pip install $userinstall pybtex #citations for Rnoweb
 pip install $userinstall git+https://github.com/pre-commit/pre-commit #add hooks to git repo
-#pip install $userinstall aws-sam-cli #AWS Serverless Application Model
 pip install $userinstall pint #physical units
-#pip install $userinstall face_recognition
 
 pip install $userinstall pynvim #neovim-python
 pip install $userinstall neovim-remote #nvr to start and use nvim server

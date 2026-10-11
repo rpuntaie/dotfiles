@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-npm -g install npm
 npm -g install wikit
 npm -g install pandiff
 npm -g install js-beautify

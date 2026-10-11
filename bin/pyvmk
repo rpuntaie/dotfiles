@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
-echo "removing and making new $PYVHOME"
-rm -rf $PYVHOME
+: '
+echo "manually remove $PYVHOME"
+cd $PYVHOME
+cd ..
+sudo \rm -rf pyv
+'
+
+if [ -e $PYVHOME ]; then
+    echo "first manually remove $PYVHOME" && exit 0
+fi
+
 python -m venv --system-site-packages $PYVHOME
 # $PYVHOME/pyvenv.cfg
 source $PYVHOME/bin/activate
+pip install numpy --index https://urob.github.io/numpy-mkl
+pip install scipy
 my_python
 
 # pacman -Qo /usr/lib/python3.{10,11,12,13}/site-packages/

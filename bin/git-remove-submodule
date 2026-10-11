@@ -13,6 +13,10 @@
 #  3) Clean up the .gitmodules file
 #
 
+[ -z "$1" ] && echo "no argument" && exit 1
+
+git status || exit 1
+
 submodule_name=$(echo "$1" | sed 's/\/$//'); shift
 
 exit_err() {

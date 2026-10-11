@@ -91,7 +91,6 @@ condaa() {
 
 #zoxide
 unalias z
-$ZSHZ_DATA=$XDG_CACHE_HOME/z
 eval "$(zoxide init zsh)"
 
 
