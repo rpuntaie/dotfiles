@@ -11,6 +11,8 @@ fi
 # Cursor
 xsetroot -cursor_name left_ptr
 
+xset +fp /home/roland/.local/share/fonts
+
 # Dunst notification daemon
 dunst &
 

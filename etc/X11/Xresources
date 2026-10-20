@@ -23,10 +23,10 @@ URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 
 URxvt.allow_bold:           false
-URxvt.font:                 xft:DejaVu Sans Mono BY2SB BY2D:autohint=true:size=12
-URxvt.boldFont:             xft:DejaVu Sans Mono BY2SB BY2D:autohint=true:bold:size=12
-URxvt.italicFont:           xft:DejaVu Sans Mono BY2SB BY2D:autohint=true:italic:size=12
-URxvt.boldItalicFont:       xft:DejaVu Sans Mono BY2SB BY2D:autohint=true:bold:italic:size=12
+URxvt.font:                 xft:DejaVu Sans Mono:autohint=true:size=12
+URxvt.boldFont:             xft:DejaVu Sans Mono:autohint=true:bold:size=12
+URxvt.italicFont:           xft:DejaVu Sans Mono:autohint=true:italic:size=12
+URxvt.boldItalicFont:       xft:DejaVu Sans Mono:autohint=true:bold:italic:size=12
 
 ! Ctrl+Shift => unicode mode while pressed and pressing U leaves it
 ! not Ctrl+Shift+U key release then unicode hex then space like GTK does it

@@ -49,6 +49,7 @@ alias ..g='git rev-parse --show-toplevel'
 alias glr='git pull --recurse-submodules'
 alias ghash='git rev-parse HEAD'
 alias gdst='git diff stash@{0} HEAD'
+alias gdd='git diff'
 alias gu='git ls-files -o'
 alias gurm='git clean -Xdf'
 

@@ -980,9 +980,7 @@ if has("gui_running")
     winpos 0 0
     set guiheadroom=0
     set guioptions=ak
-    set guifont=DejaVu\ Sans\ Mono\ BY2SB\ BY2D\ 14
-    " set guifont=FreeMono\ BY2SB\ BY2D\ Bold\ 12
-    " set guifont=FreeMono\ Bold\ 12
+    set guifont=DejaVu\ Sans\ Mono\ 14
   endif
 let g:terminal_ansi_colors = [ "#373c40", "#ff5454", "#8cc85f", "#e3c78a",
   \ "#80a0ff", "#ce76e8", "#7ee0ce", "#de935f", "#f09479", "#f74782",
@@ -1880,20 +1878,20 @@ def PLines(rngstr,which):
     pp = ".,!?:"
   if which == 9:
     pp = "."
-  p = re.compile("[" + re.escape(pp) + "]")
+  p = re.compile("[" + re.escape(pp) + "]+ ")
   tt = p.split(org)
   reslns = []
   for at in tt:
     if not at:
-      break
+      continue
     ats = org.find(at)
     ate = ats+len(at)
-    oate = org[ate:]
-    so = p.search(oate)
+    org = org[ate:]
+    so = p.search(org)
     if so:
       a,b = so.span()
-      punct = oate[a:b]
-      reslns.append(at.strip()+punct)
+      punct = org[a:b]
+      reslns.append(at.strip()+org[a:b])
   for i,t in enumerate(reslns):
     for s in skipback:
       reslns[i] = re.sub(*s,t)

@@ -1,6 +1,6 @@
 # https://docs.xfce.org/apps/terminal/4.14/advanced
 [Configuration]
-FontName=DejaVu Sans Mono BY2SB BY2D 14
+FontName=DejaVu Sans Mono 14
 MiscAlwaysShowTabs=FALSE
 MiscShowTabs=FALSE
 MiscCycleTabs=FALSE
