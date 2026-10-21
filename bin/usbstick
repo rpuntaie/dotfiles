@@ -2,7 +2,7 @@
 
 if [[ $2 == "mount" ]]; then
     if [[ $1 =~ /dev/.*[[:digit:]] ]]; then
-        echo "sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1} ~/mnt/usb"
+        sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1} ~/mnt/usb
     elif [[ $1 =~ /dev/.* ]]; then
         if ! sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1}1 ~/mnt/usb ; then
             if sudo mount -t exfat -o rw,users,uid=$(id -u),gid=$(id -g) ${1} ~/mnt/usb ; then

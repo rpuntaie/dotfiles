@@ -1,0 +1,218 @@
+#!/usr/bin/env python
+
+"""
+# in a (temporary) folder
+facesearch /path/to/an/image/folder # first call with path to index
+# add image to the created ref subfolder
+facesearch /path/to/an/image/folder # subsequent calls search the ref
+# find search result in the created found subfolder
+facesearch /path/to/another/image/folder # first call with path to index
+facesearch /path/to/another/image/folder # subsequent calls to search
+...
+"""
+
+import sys
+import faiss
+import json
+import numpy as np
+import os
+from pathlib import Path
+from hashlib import sha3_256
+from tqdm import tqdm
+import cv2
+from insightface.app import FaceAnalysis
+from numpy.linalg import norm
+import shutil
+import glob
+
+def hashname(x):
+    sha3 = sha3_256()
+    if not isinstance(x, tuple):
+        c=(x,)
+    else:
+        c = x
+    for cc in c:
+        try:
+            c3 = cc.encode()
+        except AttributeError:
+            c3 = cc
+        sha3.update(c3)
+    d = sha3.digest()
+    return ''.join(f'{b:02x}' for b in d[:3])
+
+
+BASE_DIR = os.getcwd()
+REFS_DIR = BASE_DIR / "refs"
+FOUND_DIR = BASE_DIR / "found"
+DATA_DIR = BASE_DIR / "faiss"
+os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(REFS_DIR, exist_ok=True)
+os.makedirs(FOUND_DIR, exist_ok=True)
+
+MODEL_NAME = 'buffalo_l'
+
+DET_SIZE = (640, 640)
+VECTOR_DIM = 512
+
+# Cosine similarity threshold (0.6 to 0.7 is standard for ArcFace)
+SIMILARITY_THRESHOLD = 0.4
+
+class FaceEmbedder:
+    @staticmethod
+    def normalize(embedding):
+        """
+        L2-normalizes the vector so that dot product equals cosine similarity.
+        embedding: numpy array of shape (512,)
+        """
+        input_norm = norm(embedding)
+        if input_norm == 0:
+            return embedding
+        return embedding / input_norm
+
+class FaceDetector:
+    def __init__(self, ctx_id=0):
+        """
+        ctx_id=0 uses the first GPU. Set to -1 for CPU.
+        """
+        #self.app = FaceAnalysis(name=MODEL_NAME, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
+        self.app = FaceAnalysis(name=MODEL_NAME, providers=['CPUExecutionProvider'])
+        self.app.prepare(ctx_id=ctx_id, det_size=DET_SIZE)
+    def detect(self, image_path):
+        """
+        Reads an image and returns a list of InsightFace objects.
+        Each object contains .bbox, .kps (landmarks), and .embedding.
+        """
+        stream = open(image_path, "rb")
+        bytes = bytearray(stream.read())
+        numpyarray = np.asarray(bytes, dtype=np.uint8)
+        img = cv2.imdecode(numpyarray, cv2.IMREAD_UNCHANGED)
+        if img is None:
+            print(f"Warning: Could not read {image_path}")
+            return []
+        faces = self.app.get(img)
+        return faces
+detector = FaceDetector()
+
+class FaissIndexer:
+    def __init__(self, photodir):
+        hphotos = hashname(str(photodir))
+        self.faissbin = DATA_DIR/(hphotos+'.bin')
+        self.faissjson = DATA_DIR/(hphotos+'.json')
+        if self.faissbin.exists():
+            raise ValueError(f"{self.faissbin} exists and is the index for {photodir}")
+        self.dimension = VECTOR_DIM
+        self.current_id = 0
+        self.metadata = {}  # Maps ID -> {path, bbox}
+        self.index = faiss.IndexFlatIP(self.dimension)
+    def add_vector(self, embedding, image_path, bbox):
+        """
+        Adds a single normalized vector to the index.
+        """
+        vector_matrix = np.array([embedding], dtype=np.float32)
+        self.index.add(vector_matrix)
+        self.metadata[str(self.current_id)] = {
+            "path": str(image_path),
+            "bbox": [int(x) for x in bbox] # Convert numpy floats to standard ints
+        }
+        self.current_id += 1
+    def save(self):
+        faiss.write_index(self.index, str(self.faissbin))
+        with open(self.faissjson, 'w') as f:
+            json.dump(self.metadata, f)
+        print(f"Saved index with {self.current_id} faces.")
+    def load(self):
+        if os.path.exists(self.index) and os.path.exists(self.faissjson):
+            self.index = faiss.read_index(str(self.faissbin))
+            with open(self.faissjson, 'r') as f:
+                self.metadata = json.load(f)
+            self.current_id = self.index.ntotal
+            print(f"Loaded index with {self.current_id} faces.")
+        else:
+            print("No existing index found. Starting fresh.")
+
+def all_images(d):
+    extensions = ['*.jpg', '*.jpeg', '*.png', '*.JPG', '*.JPEG', '*.PNG']
+    for ext in extensions:
+        yield from glob.glob(str(d)+'/'+ext)
+    for ext in extensions:
+        yield from glob.glob(str(d)+'/**/'+ext)
+
+def index_photos(photodir):
+    indexer = FaissIndexer(photodir)
+    image_paths = list(all_images(photodir))
+    if not image_paths:
+        return {"message": "No images found in data/raw_photos"}
+    print(f"Found {len(image_paths)} images. Starting ingestion...")
+    count = 0
+    for img_path in tqdm(image_paths, desc="Indexing Photos", unit="img"):
+        try:
+            faces = detector.detect(img_path)
+            for face in faces:
+                normed_emb = FaceEmbedder.normalize(face.embedding)
+                indexer.add_vector(normed_emb, img_path, face.bbox)
+                count += 1
+        except Exception as e:
+            tqdm.write(f"Error processing {img_path}: {e}")
+            continue
+    indexer.save()
+    return {"status": "success", "faces_indexed": count, "images_scanned": len(image_paths)}
+
+class FaceSearcher:
+    def __init__(self, photodir):
+        hphotos = hashname(str(photodir))
+        self.faissbin = DATA_DIR/(hphotos+'.bin')
+        self.faissjson = DATA_DIR/(hphotos+'.json')
+        self.index = faiss.read_index(str(self.faissbin))
+        with open(self.faissjson, 'r') as f:
+            self.metadata = json.load(f)
+    def search(self, query_embedding, k=10):
+        """
+        Finds the top k closest faces.
+        """
+        query_norm = FaceEmbedder.normalize(query_embedding)
+        query_matrix = np.array([query_norm], dtype=np.float32)
+        distances, indices = self.index.search(query_matrix, k)
+        results = []
+        for score, idx in zip(distances[0], indices[0]):
+            if idx != -1 and score >= SIMILARITY_THRESHOLD:
+                results.append({
+                    "score": float(score),
+                    "match_info": self.metadata.get(str(idx))
+                })
+        return results
+
+def cpfound(foundfile):
+    ff = FOUND_DIR/Path(str(foundfile)).name
+    if not os.path.exists(ff):
+        shutil.copyfile(str(foundfile), ff)
+
+def search_photos(photodir):
+    refs = list(all_images(REFS_DIR))
+    for aref in refs:
+        faces = detector.detect(aref)
+        if len(faces) == 0:
+            raise ValueError("No face found in the ref image.")
+        target_face = faces[0]
+        normed_emb = FaceEmbedder.normalize(target_face.embedding)
+        searcher = FaceSearcher(photodir)
+        matches = searcher.search(normed_emb, k=100)
+        for match in matches:
+            matchpath = match['match_info']['path']
+            yield {
+                "ref": Path(aref).name,
+                "score": match['score'],
+                "filename": matchpath,
+            }
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print(__doc__)
+        exit(0)
+    try:
+        index_photos(sys.argv[1]) # will skip if data/xyz.bin for dir found
+    except ValueError:
+        pass
+    for found in search_photos(sys.argv[1]):
+        cpfound(found['filename'])
+
+

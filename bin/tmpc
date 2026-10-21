@@ -10,7 +10,7 @@ Project template one of
 - local file or directory
 
 local:
-${XDG_CONFIG_HOME}/templates
+${XDG_DATA_HOME}/templates
 
 test:
 
@@ -79,7 +79,7 @@ def mkcmd(link,name,*args):
     os.chdir(tdir)
     loc = link.replace('gh:','https://github.com/')
     if not loc.startswith('https://') and not os.path.isabs(loc):
-        locabs = os.path.expandvars(f'$XDG_CONFIG_HOME/templates/{loc}')
+        locabs = os.path.expandvars(f'$XDG_DATA_HOME/templates/{loc}')
         locabs = os.path.exists(locabs+".txdir") and locabs+".txdir" or locabs
         if os.path.isdir(locabs):
             ccmd = 'cp -R '+locabs+' .'
