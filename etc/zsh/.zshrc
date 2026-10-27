@@ -26,8 +26,10 @@ if ! zgenom saved; then
   zgenom ohmyzsh plugins/history
   zgenom ohmyzsh plugins/z
   zgenom ohmyzsh plugins/fzf
+  # ~/.local/var/lib/zgenom/ohmyzsh/ohmyzsh/___/plugins/git-prompt/git-prompt.plugin.zsh
+  # to comment RPROMPT
+  zgenom ohmyzsh plugins/git-prompt
   zgenom ohmyzsh plugins/git
-  #zgenom ohmyzsh plugins/git-prompt
   zgenom ohmyzsh plugins/mercurial
   zgenom ohmyzsh plugins/svn
   zgenom ohmyzsh plugins/battery
