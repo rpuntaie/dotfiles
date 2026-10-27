@@ -15,9 +15,6 @@ if [[ ! -s "$ZGEN_DIR/zgenom.zsh" ]]; then
 fi
 source "$ZGEN_DIR/zgenom.zsh"
 
-ORPROMPT=$RPS1
-RPROMPT=$ORPROMPT
-
 zgenom autoupdate
 
 if ! zgenom saved; then
@@ -30,7 +27,7 @@ if ! zgenom saved; then
   zgenom ohmyzsh plugins/z
   zgenom ohmyzsh plugins/fzf
   zgenom ohmyzsh plugins/git
-  zgenom ohmyzsh plugins/git-prompt
+  #zgenom ohmyzsh plugins/git-prompt
   zgenom ohmyzsh plugins/mercurial
   zgenom ohmyzsh plugins/svn
   zgenom ohmyzsh plugins/battery
