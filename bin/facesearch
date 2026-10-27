@@ -41,7 +41,7 @@ def hashname(x):
     return ''.join(f'{b:02x}' for b in d[:3])
 
 
-BASE_DIR = os.getcwd()
+BASE_DIR = Path()
 REFS_DIR = BASE_DIR / "refs"
 FOUND_DIR = BASE_DIR / "found"
 DATA_DIR = BASE_DIR / "faiss"
