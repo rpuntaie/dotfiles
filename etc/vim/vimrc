@@ -554,7 +554,6 @@ if os.path.exists(base):
 exec(activate_this_content, { "__file__": activate_this_file })
 EOF
 
-let g:powerline_pycmd = "py3"
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 "let g:UltiSnipsListSnippets = '<c-tab>'
@@ -729,6 +728,12 @@ if g:HasCoc
           \      "languageServerHaskell": {
           \      }
           \    }
+          \  },
+          \  "neocmake": {
+          \    "command": "neocmakelsp",
+          \    "args": ["stdio"],
+          \    "filetypes": ["cmake"],
+          \    "rootPatterns": ["CMakeLists.txt", ".git", "build", "cmake"]
           \  }
           \ })
 endif
@@ -1847,7 +1852,6 @@ map <silent> SI :py3 py3_blender_imports()<CR>
 py3 << EOF
 import re, string
 def PLines(rngstr,which):
-  # rngstr = open("/home/roland/tmp/plines.txt").read()
   ll = rngstr.splitlines()
   oi = None
   lns = []
@@ -1862,42 +1866,38 @@ def PLines(rngstr,which):
       if oi is None:
         oi = i
         indent = l[:i]
-        lns.append(l[i:])
+        lns.append(l[i:].strip())
       elif oi != i or (l[:i].strip() != "" and indent != l[:i]):
         break
       else:
-        lns.append(l[i:])
-  unprocessed = ll[il:]
+        lns.append(l[i:].strip())
+  unprocessed = ll[il+1:]
   org = ' '.join(lns)
   skip = [("n't",'αnT'),("'s\>",'αsS'),("'ve\>","αvE"),('(?<=\w)-(?=\w)','αhH')]
   skipback = [('αnT',"n't"),('αsS',"'s"),("αvE","'ve"),('αhH','-')]
   for s in skip:
-    org = re.sub(*s,org)
+    tail = re.sub(*s,org)
   pp = ")]}!?,.:;\—" # 7 or default
   if which == 8:
     pp = ".,!?:"
   if which == 9:
     pp = "."
-  p = re.compile("[" + re.escape(pp) + "]+ ")
-  tt = p.split(org)
   reslns = []
-  for at in tt:
-    if not at:
-      continue
-    ats = org.find(at)
-    ate = ats+len(at)
-    org = org[ate:]
-    so = p.search(org)
-    if so:
-      a,b = so.span()
-      punct = org[a:b]
-      reslns.append(at.strip()+org[a:b])
+  p = re.compile("[" + re.escape(pp) + "]+ ")
+  while True:
+    m = p.search(tail)
+    if not m:
+      reslns.append(tail.strip())
+      break
+    (a,b) = m.span()
+    reslns.append(tail[:a].strip()+tail[a:b])
+    tail = tail[b:]
   for i,t in enumerate(reslns):
     for s in skipback:
       reslns[i] = re.sub(*s,t)
   for i,t in enumerate(reslns):
-    reslns[i] = (i==0 and indent or ' '*oi) + t
-  return reslns
+    reslns[i] = (i==0 and indent or ' '*oi) + t.strip()
+  return reslns + unprocessed
 def py3_PLines(which):
   rngstr,_ = vim_current_range()
   vim.current.range[:]= PLines(rngstr,which)

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 pacman -Sy --needed archlinux-keyring && pacman -Su
+my_rust
 my_aur
 my_nodejs
 pyvmk # my_python

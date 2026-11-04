@@ -12,14 +12,11 @@ yaysno(){
 yay -S --noconfirm $1
 }
 
+yaysno pass-git-helper
 yaysno procmail # conflicts with msmtp-mta: do manual
 yaysno janet-lang
 yaysno mimeo #Open files by MIME-type or file name using regular expressions
 yaysno wordnet-common #dictionary
-yaysno urxvt-vim-scrollback-git
-yaysno powerline-console-fonts
-yaysno perl-term-shellui.git
-yaysno urxvt-resize-font-git
 yaysno psysh #php REPL
 yaysno planck-git #planck (clojure repl)
 yaysno include-what-you-use
@@ -27,7 +24,6 @@ yaysno conan #C++ packages
 yaysno dive-git # docker explore image
 yaysno processing4 #processing
 yaysno git-quick-stats #git repo stats
-yaysno pass-git-helper
 
 : '
 sudo pacman -R neovim tree-sitter emacs

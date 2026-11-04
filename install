@@ -467,8 +467,6 @@ fi
 #PKG: gnupg
 #PKG: pass
 #PKG: mkcert
-#PKG: powerline
-#PKG: powerline-fonts
 #PKG: awesome-terminal-fonts
 #PKG: zsh
 #PKG: zsh-syntax-highlighting

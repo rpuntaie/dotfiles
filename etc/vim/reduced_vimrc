@@ -70,7 +70,6 @@ endif
 "call dein#update()
 "call dein#recache_runtimepath()
 
-let g:powerline_pycmd = "py3"
 "SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsListSnippets = '<c-tab>'

@@ -22,9 +22,6 @@ quitWithWarning = do
 main = do
     xmonad $ def {
         modMask = mod4Mask, -- win-L would lock Windows, ranger modified to g1,g2,...
-        -- terminal = "xterm -fa monaco -fs 10 -bg black -fg white",
-        -- terminal = "alacritty",
-        -- terminal = "urxvt",
         terminal = "xfterm",
         keys = mixKeys,
         layoutHook = Full ||| Tall 1 (3/100) (1/2)
