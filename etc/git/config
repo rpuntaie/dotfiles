@@ -7,7 +7,7 @@
   gpgsign = false
   verbose = true
 [core]
-  editor = xvim
+  editor = /usr/bin/vim
   #pager = delta --line-numbers --side-by-side
   #pager = moor
   pager = less

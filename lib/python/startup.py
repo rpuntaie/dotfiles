@@ -44,7 +44,7 @@ except ImportError:
 try:
     import readline
     readline.parse_and_bind("tab: complete")
-    python_history = os.environ.get('XDG_STATE_HOME')+'/python_history'
+    python_history = os.environ.get('XDG_CACHE_HOME')+'/python_history'
     if os.path.exists(python_history):
         readline.read_history_file(python_history)
     atexit.unregister(readline.write_history_file)

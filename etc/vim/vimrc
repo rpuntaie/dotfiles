@@ -111,7 +111,7 @@ else
     let $XDG_CONFIG_HOME=expand('~').'/mine/dotfiles/etc'
   endif
   if empty($XDG_STATE_HOME)
-    let $XDG_STATE_HOME=expand('~').'/.cache/vim'
+    let $XDG_STATE_HOME=expand('~').'/.local/var/lib'
   endif
   let $MYVIMRC=$XDG_CONFIG_HOME.'/vim/vimrc'
   let g:localvimfiles=$XDG_STATE_HOME.'/vim'

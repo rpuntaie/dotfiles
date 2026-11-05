@@ -9,26 +9,26 @@ fi
 export OS_NAME
 
 if [[ "$(uname)" == "Darwin" ]] ; then
-  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-  export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-  export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.cache}"
-  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.cache/share}"
-  export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/bin}"
+  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.local/etc}"
+  export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.local/var/cache}"
+  export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/var/lib}"
+  export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+  export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
   export GPG_TTY=$(tty)
 fi
 
-export HISTFILE="${XDG_STATE_HOME:-$HOME}/.sh_history"
+export HISTFILE="${XDG_CACHE_HOME:-$HOME}/.sh_history"
 
 if [[ "$TERM" == "rxvt-unicode-256color" ]]; then
    export TERM="rxvt-unicode"
 fi
 
 # Default:
-export EDITOR='/usr/bin/xvim'
-export VISUAL='/usr/bin/xvim'
+export EDITOR='/usr/bin/vim'
+export VISUAL='/usr/bin/vim'
 export PAGER='/usr/bin/moor'
 #export PAGER='/usr/bin/more'
 #export BROWSER='/usr/bin/chromium'
