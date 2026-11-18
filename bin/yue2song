@@ -1,0 +1,58 @@
+#!/home/roland/msrc/YuE/.venv/bin/python
+
+"""
+831001
+full
+unused lines up to [ ... e.g. for alternatives styles ...
+English, warm piano pop, expressive female voice, acoustic piano, rounded bass and light drums, lyrical memorable melody, unhurried phrasing, 88 BPM
+[Verse]
+Neon fades along the lane
+Footsteps keep the time of rain
+Fold the night and leave it here
+Morning has a sky to clear
+[Chorus]
+Let the day come into view
+Every road begins with you
+Hold a little room for light
+We will sing beyond the night
+"""
+
+import json
+import sys
+from pathlib import Path
+from datetime import datetime
+from time import time
+from yue2 import YuE2Pipeline
+if len(sys.argv) != 2:
+    print("yue2song song.txt")
+    exit(1)
+txt = sys.argv[1]
+#txt = "~/tmp/gabilaura.txt"
+#txt = "/home/roland/tmp/yue2laura31lili.json"
+inp=Path(txt).expanduser()
+with open(inp) as ff:
+    ll = ff.readlines()
+if ll[0].startswith('{'):
+    request = json.loads(''.join(ll))
+else:
+    lyrics = next((i for i,s in enumerate(ll) if s.startswith('[')),-1)
+    request =  {
+        "id": f"{inp.stem}",
+        "seed": int(ll[0].strip()),
+        "cot": f"{ll[1].strip()}",
+        "style": ll[lyrics-1].strip(),
+        "lyrics": '\n'.join(l.strip() for l in ll[lyrics:]),
+        }
+oup=Path("~/tmp/YuE_"+str(int(time()))).expanduser()
+oup.mkdir(parents=True,exist_ok=True)
+with YuE2Pipeline.from_pretrained("m-a-p/YuE2-3B",vae="m-a-p/YuE2-Vae",device="auto") as pipe:
+    song = pipe(**request)
+    song.save_artifacts(oup)
+    (oup / "yue2song.txt").write_text('\n'.join(ll))
+    print(json.dumps({"audio": str(oup / "audio.flac"), "truncated": song.truncated}))
+    if any(song.truncated.values()):
+        raise SystemExit(1)
+    else:
+        raise SystemExit(0)
+
+

@@ -72,7 +72,7 @@ def fromPosting(rlines):
                 desc += " "+rr[6]
             except:
                 pass
-        entry = f"{date} * {desc}\n    Expenses:Unknown                             {amount}\n    Assets:Bank:{bank[isstyle]}:{type[isstyle]}\n"
+        entry = f"{date} * {desc}\n    Expenses:Unknown                             {amount:.2f}\n    Assets:Bank:{bank[isstyle]}:{type[isstyle]}\n"
         yield entry
 
 

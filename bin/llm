@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 if [ -z $1 ]; then
-    llama-cli --reasoning-budget 0 -m /home/roland/msrc/models_manually/gemma-4-12B-it-heretic-Q4_K_M.gguf
+    llama-cli --reasoning-budget 0 -m $HOME/msrc/models_manually/gemma-4-12B-it-heretic-Q4_K_M.gguf
+    exit
+fi
+
+if [[ $1 == "server" ]]; then
+    taskset -c 8-16 llama-server --host 127.0.0.1 --port 8080 --models-preset $XDG_CONFIG_HOME/ai/llama.ini --models-max 1 --jinja --mcp-servers-config $XDG_CONFIG_HOME/ai/mcp.config.json -m $HOME/msrc/models_manually/gemma-4-12B-it-heretic-Q4_K_M.gguf -t 8 -np 2
     exit
 fi
 

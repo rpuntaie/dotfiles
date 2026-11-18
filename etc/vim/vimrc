@@ -1306,8 +1306,8 @@ nmap <leader>es :e ~/mine/dotfiles/etc/vim/UltiSnips/all.snippets<CR>
 map <silent> se :call UltiSnips#RefreshSnippets()<CR>
 "vim-scripts/vcscommand.vim
 """ `,tt`: google translate
-nnoremap <silent> <leader>tt :Trans<CR>
-vnoremap <silent> <leader>tt :Trans<CR>
+nnoremap <silent> <leader>tt :Trans<CR><C-W><C-W>
+vnoremap <silent> <leader>tt :Trans<CR><C-W><C-W>
 """ `,ww`: look up in wordnet (wn needed)
 nnoremap <leader>ww :!wn <C-R><C-W> -over<CR>
 """ `,we`: look up in wiki

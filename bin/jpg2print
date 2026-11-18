@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-magick $1 -density 300 -resize 200% $1.print.jpg
+#magick $1 -density 300 -resize 200% $1.print.jpg
+#magick $1 -auto-orient -level 15%,85% -resize 1654x2339 -strip -quality 80 $1.print.jpg
+magick $1 -auto-orient -resize 1654x2339 -density 150 -strip -quality 80 $1.print.jpg
+
+

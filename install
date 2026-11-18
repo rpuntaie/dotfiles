@@ -418,6 +418,7 @@ fi
 #PKG: git
 #PKG: tig
 #PKG: git-annex
+#PKG: git-lfs
 #PKG: git-filter-repo
 #PKG: git-delta
 #PKG: jujutsu
